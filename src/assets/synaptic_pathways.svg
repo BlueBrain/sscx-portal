@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 382.3 566.9" style="enable-background:new 0 0 382.3 566.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2;}
+	.st1{fill:#120085;}
+	.st2{fill:#FFA86B;}
+	.st3{fill:#14A5FC;}
+	.st4{fill:#FFFFFF;}
+	.st5{font-family:'ArialRoundedMTBold';}
+	.st6{font-size:11.7086px;}
+	.st7{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
+</style>
+<g id="shadow">
+	<g id="Synapticshadow" class="st0">
+		
+			<image style="overflow:visible;" width="200" height="105" xlink:href="79C40BEAB39D19EB.png"  transform="matrix(1 0 0 1 88.4884 332)">
+		</image>
+	</g>
+</g>
+<g id="Plain_background">
+	<polygon id="Synpaticback" class="st1" points="229.9,141.9 166.1,141.9 134.3,157.6 134.4,157.8 134.4,191.8 134.4,191.8 
+		134.4,256.7 134.4,256.8 134.4,257.5 134.4,291.1 134.4,291.1 134.4,291.8 134.4,325.5 134.4,325.5 134.4,326.2 134.4,359.5 
+		166.1,375.1 229.9,375.1 261.6,359.5 261.6,326.2 261.6,325.5 261.6,325.5 261.6,291.8 261.6,291.1 261.6,291.1 261.6,257.5 
+		261.6,256.8 261.6,256.7 261.6,191.8 261.6,191.8 261.6,157.8 261.7,157.6 	"/>
+</g>
+<g id="Fill">
+	<polygon id="l1postfill" class="st2" points="229.9,207.4 261.6,191.8 261.6,191.8 261.6,157.8 261.7,157.6 229.9,173.2 	"/>
+	<polygon id="l1prefill" class="st3" points="166.1,173.2 134.3,157.6 166.1,141.9 134.3,157.6 134.4,157.8 134.4,191.8 
+		134.4,191.8 166.1,207.4 	"/>
+	<polygon id="l2postfill" class="st2" points="261.6,191.8 229.9,207.4 229.9,272.3 261.6,256.8 261.6,256.7 	"/>
+	<polygon id="l2prefill" class="st3" points="166.1,207.4 134.4,191.8 134.4,256.7 134.4,256.8 166.1,272.3 	"/>
+	<polygon id="l5postfill" class="st2" points="229.9,341.1 261.6,325.5 261.6,325.5 261.6,291.8 261.6,291.1 229.9,306.7 	"/>
+	<polygon id="l6postfill" class="st2" points="229.9,375.1 261.6,359.5 261.6,326.2 261.6,325.5 229.9,341.1 	"/>
+	<polygon id="l4postfill" class="st2" points="229.9,306.7 261.6,291.1 261.6,291.1 261.6,257.5 261.6,256.8 229.9,272.3 	"/>
+	<polygon id="l4prefill" class="st3" points="166.1,272.3 134.4,256.8 134.4,257.5 134.4,291.1 134.4,291.1 166.1,306.7 	"/>
+	<polygon id="l6prefill" class="st3" points="134.4,325.5 134.4,326.2 134.4,359.5 166.1,375.1 166.1,341.1 	"/>
+	<polygon id="l5prefill" class="st3" points="166.1,306.7 134.4,291.1 134.4,291.8 134.4,325.5 134.4,325.5 166.1,341.1 	"/>
+</g>
+<g id="Lines__x2B__text">
+	<g id="Synapticlines">
+		<g>
+			<text transform="matrix(1 0 0 1 192.9253 194.5336)" class="st4 st5 st6">L1</text>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 190.5019 245.6801)" class="st4 st5 st6">L23</text>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 192.9253 294.2406)" class="st4 st5 st6">L4</text>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 192.9253 327.9047)" class="st4 st5 st6">L5</text>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 192.9253 361.4379)" class="st4 st5 st6">L6</text>
+		</g>
+		<g>
+			<polygon class="st7" points="261.8,157.6 229.9,141.9 166.1,141.9 134.3,157.6 134.4,157.8 134.4,359.5 166.1,375.1 229.9,375.1 
+				261.6,359.5 261.6,157.8 			"/>
+			<polygon class="st7" points="134.4,191.8 134.4,256.3 166.1,272 229.9,272 261.6,256.3 261.6,191.8 229.7,207.2 166.3,207.2 			
+				"/>
+			<polygon class="st7" points="229.9,141.9 166.1,141.9 134.3,157.6 166.1,173.2 229.9,173.2 261.8,157.6 			"/>
+			<polyline class="st7" points="134.3,191.8 166.1,207.4 229.9,207.4 261.8,191.8 			"/>
+			<line class="st7" x1="166.1" y1="173.4" x2="166.1" y2="207.4"/>
+			<line class="st7" x1="229.9" y1="173.4" x2="229.9" y2="207.4"/>
+			<line class="st7" x1="261.6" y1="157.8" x2="261.6" y2="191.8"/>
+			<line class="st7" x1="134.4" y1="157.8" x2="134.4" y2="191.8"/>
+			<polyline class="st7" points="134.3,256.7 166.1,272.4 229.9,272.4 261.8,256.7 			"/>
+			<path class="st7" d="M166.1,272.4"/>
+			<path class="st7" d="M166.1,238.4"/>
+			<path class="st7" d="M229.9,272.4"/>
+			<path class="st7" d="M229.9,238.4"/>
+			<line class="st7" x1="261.6" y1="191.8" x2="261.6" y2="256.7"/>
+			<line class="st7" x1="229.9" y1="207" x2="229.9" y2="272.8"/>
+			<line class="st7" x1="134.4" y1="191.8" x2="134.4" y2="256.7"/>
+			<line class="st7" x1="166.1" y1="207" x2="166.1" y2="272.4"/>
+			<polyline class="st7" points="134.3,291.1 166.1,306.7 229.9,306.7 261.8,291.1 			"/>
+			<line class="st7" x1="166.1" y1="272.7" x2="166.1" y2="306.7"/>
+			<line class="st7" x1="229.9" y1="272.7" x2="229.9" y2="306.7"/>
+			<line class="st7" x1="261.6" y1="257.5" x2="261.6" y2="291.1"/>
+			<line class="st7" x1="229.9" y1="272.7" x2="229.9" y2="275.4"/>
+			<line class="st7" x1="134.4" y1="257.5" x2="134.4" y2="291.1"/>
+			<line class="st7" x1="166.1" y1="272.7" x2="166.1" y2="275.4"/>
+			<polyline class="st7" points="134.3,325.5 166.1,341.1 229.9,341.1 261.8,325.5 			"/>
+			<line class="st7" x1="166.1" y1="307.1" x2="166.1" y2="341.1"/>
+			<line class="st7" x1="229.9" y1="307.1" x2="229.9" y2="341.1"/>
+			<line class="st7" x1="261.6" y1="291.8" x2="261.6" y2="325.5"/>
+			<line class="st7" x1="229.9" y1="307.1" x2="229.9" y2="309.8"/>
+			<line class="st7" x1="134.4" y1="291.8" x2="134.4" y2="325.5"/>
+			<line class="st7" x1="166.1" y1="307.1" x2="166.1" y2="309.8"/>
+			<polyline class="st7" points="134.3,359.8 166.1,375.5 229.9,375.5 261.8,359.8 			"/>
+			<line class="st7" x1="166.1" y1="341.5" x2="166.1" y2="375.5"/>
+			<line class="st7" x1="229.9" y1="341.5" x2="229.9" y2="375.5"/>
+			<line class="st7" x1="261.6" y1="326.2" x2="261.6" y2="359.8"/>
+			<line class="st7" x1="229.9" y1="341.5" x2="229.9" y2="344.2"/>
+			<line class="st7" x1="134.4" y1="326.2" x2="134.4" y2="359.8"/>
+			<line class="st7" x1="166.1" y1="341.5" x2="166.1" y2="344.2"/>
+		</g>
+	</g>
+</g>
+</svg>
