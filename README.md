@@ -1,3 +1,1 @@
-# SSCx Portal
-
-> Work in progress...
+![SSCx illustration](./doc/sscx.png)
