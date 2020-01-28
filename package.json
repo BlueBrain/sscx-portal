@@ -6,8 +6,9 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "jest",
-    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "start": "parcel -p 8080 watch src/index.html",
+    "build": "parcel build src/index.html",
+    "parcel": "^1.12.4",
     "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\"",
     "style": "prettier --check \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\""
   },
@@ -23,17 +24,14 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-html": "^6.0.0",
-    "html-webpack-plugin": "^3.2.0",
     "husky": "^4.2.1",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.3",
+    "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
     "ts-jest": "^25.0.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "typescript": "^3.7.5"
   },
   "dependencies": {
     "react": "^16.12.0",
