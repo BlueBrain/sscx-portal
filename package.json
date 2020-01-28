@@ -3,7 +3,7 @@
     "test": "jest",
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
-    "lint": "eslint src/**",
+    "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\"",
     "style": "prettier --check \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\""
   },
   "devDependencies": {
@@ -42,8 +42,8 @@
   },
   "lint-staged": {
     "*.{ts, tsx, js, jsx, html, css}": [
-      "prettier --write",
-      "eslint --fix src/**"
+      "yarn style --write",
+      "yarn lint --fix"
     ]
   }
 }

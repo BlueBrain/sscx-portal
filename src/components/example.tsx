@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default () => <p>hello</p>;
+export default () => <h1>SSCx portal</h1>;
