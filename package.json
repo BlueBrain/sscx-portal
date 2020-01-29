@@ -9,7 +9,7 @@
     "start": "parcel -p 8080 watch src/index.html",
     "build": "parcel build src/index.html",
     "parcel": "^1.12.4",
-    "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx,less,html}\"",
+    "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
     "style": "prettier --check \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\""
   },
   "devDependencies": {
