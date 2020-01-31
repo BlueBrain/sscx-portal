@@ -6,7 +6,7 @@ import './layer_anatomy.css';
 const classPrefix = 'layer_anatomy_svg__';
 const layers: Layer[] = ['L1', 'L23', 'L4', 'L5', 'L6'];
 
-type Layer = 'L1' | 'L23' | 'L4' | 'L5' | 'L6';
+export type Layer = 'L1' | 'L23' | 'L4' | 'L5' | 'L6';
 
 type LayerAnatomySelectProps = {
   defaultActiveLayer?: Layer;
@@ -42,7 +42,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
           current && current.classList.remove('active');
           layerEl.classList.add('active');
           // callback prop
-          onLayerSelected(layer);
+          onLayerSelected && onLayerSelected(layer);
           // set new active layer
           setActiveLayer(layer);
         });
