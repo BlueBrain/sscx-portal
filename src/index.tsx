@@ -1,24 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import Example from './components/example';
-import BrainRegionsSelector from './components/BrainRegionsSelector';
-import LayerAnatomySelector from './components/LayerAnatomySelector';
+import routes from './routes';
+import MainLayout from './layouts/MainLayout';
 
 ReactDOM.render(
-  <>
-    <div>
-      <LayerAnatomySelector
-        defaultActiveLayer="L23"
-        onLayerSelected={l => console.log('active layer', l)}
-      />
-    </div>
-    <div>
-      <BrainRegionsSelector
-        defaultActiveBrainRegion="S1HL"
-        onBrainRegionSelected={r => console.log('active region', r)}
-      />
-    </div>
-  </>,
+  <BrowserRouter>
+    <MainLayout>
+      {routes.map(props => (
+        <Route key={props.path as string} {...props} />
+      ))}
+    </MainLayout>
+  </BrowserRouter>,
   document.getElementById('app'),
 );

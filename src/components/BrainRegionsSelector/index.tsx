@@ -6,7 +6,7 @@ import './brain_regions.css';
 const classPrefix = 'brain_regions_svg__';
 const brainRegions: BrainRegion[] = ['S1FL', 'S1Sh', 'S1HL', 'S1Tr'];
 
-type BrainRegion = 'S1FL' | 'S1Sh' | 'S1HL' | 'S1Tr';
+export type BrainRegion = 'S1FL' | 'S1Sh' | 'S1HL' | 'S1Tr';
 type BrainRegionSelectProps = {
   defaultActiveBrainRegion?: BrainRegion;
   onBrainRegionSelected?: (brainRegion: BrainRegion) => void;
@@ -46,7 +46,7 @@ const BrainRegionSelector: React.FC<BrainRegionSelectProps> = ({
           current && current.classList.remove('active');
           regionEl.classList.add('active');
           // callback prop
-          onBrainRegionSelected(region);
+          onBrainRegionSelected && onBrainRegionSelected(region);
           // set new active layer
           setActiveRegion(region);
         });
