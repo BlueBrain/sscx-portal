@@ -1,0 +1,30 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+.scroll-to__base {
+  display: block;
+  width: 100%;
+  font-weight: 400;
+  font-size: #fontSize[large];
+  color: #basePalette[white];
+  text-decoration: none;
+  text-align: center;
+  padding: 15px;
+}
+
+.scroll-to__warm {
+  .scroll-to__base();
+  background-color: #warmPalette[dark];
+}
+
+.scroll-to__cool {
+  .scroll-to__base();
+  background-color: #coolPalette[light];
+}
+
+.scroll-to__direction {
+  display: block;
+  font-size: 2rem;
+  height: 1.5rem;
+  margin-top: -0.25rem;
+}
