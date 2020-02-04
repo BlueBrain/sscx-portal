@@ -1,42 +1,23 @@
 import React from 'react';
 
 import './style.less';
+import { FaExpandArrowsAlt, IoMdDownload } from 'react-icons/all';
 
-const classPrefix = 'info-box__';
+const classPrefix = 'image-viewer__';
 
-type InfoBoxProps = {
-  title?: string;
-  text: string;
-  maxChars?: number
+type ImageViewerProps = {
+  src: string;
+  alt?: string;
+  canDownload?: boolean;
+  canExpand?: boolean;
 };
 
-const isShorter = (text: string, maxChars: number): boolean => text.length <= maxChars
-
-const truncate = (text: string, maxChars: number): string => {
-  if (isShorter(text, maxChars)) return text;
-  const words = text.trim().split(' ');
-  let truncatedText = '';
-  let i = 0;
-  while (isShorter(truncatedText, maxChars)) {
-    truncatedText += ' ' + words[i];
-    i++;
-  }
-  return truncatedText + '…';
-};
-
-const InfoBox: React.FC<InfoBoxProps> = ({ title, text, maxChars = 200 }) => {
-  const [expanded, setExpanded] = React.useState(false);
-  const [currentText, setCurrentText] = React.useState(text);
-
-  React.useEffect(() => {
-    setCurrentText(expanded ? text : truncate(text, maxChars));
-  }, [expanded]);
-
+const ImageViewer: React.FC<ImageViewerProps> = ({ src, alt, canDownload = true, canExpand = true }) => {
   return <div className={`${classPrefix}basis`}>
-    {title && <h3>{title}</h3>}
-    <p>{currentText}</p>
-    {!isShorter(text, maxChars) && <span onClick={() => setExpanded(!expanded)}>Read {expanded ? 'less' : 'more…'}</span>}
+    <img src={src} alt={alt}/>
+    {canExpand && <a href={src} className='icon-button__expand'><FaExpandArrowsAlt/></a>}
+    {canDownload && <button className='icon-button__download'><IoMdDownload/></button>}
   </div>;
 };
 
-export default InfoBox;
+export default ImageViewer;

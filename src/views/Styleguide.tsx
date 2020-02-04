@@ -6,6 +6,7 @@ import Collapsible from '../components/Collapsible';
 import InfoBox from '../components/InfoBox';
 import List from '../components/List';
 import Pills from '../components/Pills';
+import ImageViewer from '../components/ImageViewer';
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
@@ -99,6 +100,8 @@ const Styleguide: React.FC = () => {
         <br />
         <InfoBox text={`This one has no title o_0\n${lorem}`} />
         <h3>Image viewer</h3>
+        <p><em>TODO: Make expand function work properly</em></p>
+        <ImageViewer src={require('../assets/images/cassowary.jpg')} alt='cassowary' />
       </section>
 
       <br />
