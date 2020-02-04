@@ -1,0 +1,37 @@
+@import "../../assets/styles/config/_colors";
+@import "../../assets/styles/config/_fonts";
+
+@height: 40px;
+@borderWidth: 2px;
+
+.button__base {
+  .font-default();
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #basePalette[white];
+  background-color: transparent;
+  height: @height;
+  border-radius: @height;
+  line-height: @height;
+  border: @borderWidth solid #basePalette[white];
+  padding: 0 15px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button__primary {
+  .button__base();
+  border: none;
+  line-height: @height + ( 2 * @borderWidth );
+}
+
+.button__warm {
+  .button__primary();
+  background: #warmPalette[dark];
+}
+
+.button__cool {
+  .button__primary();
+  background: #coolPalette[dark];
+}
