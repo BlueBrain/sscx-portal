@@ -13,7 +13,7 @@ const Styleguide: React.FC = () => {
     <>
       <h1 role="title">Styleguide</h1>
 
-      <section id="top" />
+      <section id="top"/>
 
       <section role="section">
         <h2>Buttons</h2>
@@ -48,21 +48,38 @@ const Styleguide: React.FC = () => {
           Return to filters
         </ScrollTo>
         <p>Scroll to top</p>
-        <ScrollTop anchor="top" />
+        <ScrollTop anchor="top"/>
       </section>
 
       <section role="section">
         <h2>Content</h2>
         <p>Collapse</p>
         <Collapsible title="Murderous Bird on the Loose">
-          <img src="/" alt="cassowary" />
+          <>
+            <img src={require('../assets/images/cassowary.jpg')} alt="cassowary"/>
+            <p>A cassowary escapes from the local zoo!</p>
+          </>
         </Collapsible>
         <p>Read more</p>
         <p>List</p>
         <p>Pills</p>
       </section>
 
-      <section id="bottom" />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <section id="bottom"/>
     </>
   );
 };

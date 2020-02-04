@@ -1,19 +1,51 @@
 @import '../../assets/styles/config/_colors';
 @import '../../assets/styles/config/_fonts';
 
-@size: 6rem;
+@padding: 20px 30px;
 
-.scroll-top__base {
-  display: inline-block;
-  background-color: #coolPalette[light];
-  color: #basePalette[white];
-  text-decoration: none;
-  text-align: center;
-  border-radius: @size;
-  width: @size;
-  height: @size;
-  font-size: ( 2 / 3 ) * @size;
-  & svg {
-    padding-top: 0.75rem;
+.collapsible__basis {
+  border-radius: 3px;
+  overflow: hidden;
+  .header {
+    background-color: #coolPalette[dark];
+    font-size: #fontSize[large];
+    font-weight: 400;
+    padding: @padding;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .arrow {
+    float: right;
+    margin-top: 0.25rem;
+    transition: all 0.5s;
+  }
+  .content {
+    background-color: #basePalette[white];
+    color: #basePalette[black];
+    padding: @padding;
+    overflow: hidden;
+  }
+}
+
+.collapsible__expanded {
+  .collapsible__basis();
+  .content {
+    max-height: 10000px;
+    transition: max-height 1s, padding 0.3s;
+  }
+}
+
+.collapsible__collapsed {
+  .collapsible__basis();
+  .arrow {
+    transform: rotate(180deg);
+    margin-top: -0.25rem;
+  }
+  .content {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: max-height 0.3s, padding 0.3s 0.2s;
   }
 }
