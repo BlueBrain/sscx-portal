@@ -12,8 +12,10 @@ const Styleguide: React.FC = () => (
       <Button primary="cool" onClick={() => { console.log('click'); }}>primary cool</Button>
       <p>Regular</p>
       <Button onClick={() => { console.log('click'); }}>good ol' button</Button>
-      <p>Negative</p>
-      <p>Notifications (count)</p>
+      <p>Active</p>
+      <Button active onClick={() => { console.log('click'); }}>I'm sooo active</Button>
+      <p>With notifications</p>
+      <Button notifications={7} onClick={() => { console.log('click'); }}>I'm sooo active</Button>
     </section>
     <section role="section">
       <h2>Initial</h2>
