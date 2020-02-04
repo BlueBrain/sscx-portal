@@ -20,9 +20,9 @@ const Styleguide: React.FC = () => {
 
   return (
     <>
-      <h1 role="title">Styleguide</h1>
-
       <section id="top"/>
+
+      <h1 role="title">Styleguide</h1>
 
       <section>
         <h2>Buttons</h2>
@@ -65,15 +65,16 @@ const Styleguide: React.FC = () => {
 
       <section>
         <h2>Navigation</h2>
-        <p>Scroll down, warm color palette</p>
-        <ScrollTo anchor="bottom" palette="warm" direction="down">
-          View data
-        </ScrollTo>
-        <p>Scroll up, cool color palette</p>
+        <h3>Scroll to anchor</h3>
+        <p><em>TODO: Responsive design</em></p>
         <ScrollTo anchor="top" palette="cool" direction="up">
           Return to filters
         </ScrollTo>
-        <p>Scroll to top</p>
+        <br />
+        <ScrollTo anchor="bottom" palette="warm" direction="down">
+          View data
+        </ScrollTo>
+        <h3>Scroll top</h3>
         <ScrollTop anchor="top"/>
       </section>
 
@@ -104,20 +105,6 @@ const Styleguide: React.FC = () => {
         <ImageViewer src={require('../assets/images/cassowary.jpg')} alt='cassowary' />
       </section>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <section id="bottom"/>
     </>
   );
