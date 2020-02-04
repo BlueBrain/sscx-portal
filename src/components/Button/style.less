@@ -1,5 +1,5 @@
-@import "../../assets/styles/config/_colors";
-@import "../../assets/styles/config/_fonts";
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
 
 @height: 40px;
 @borderWidth: 2px;
@@ -20,7 +20,7 @@
   line-height: @height;
   border: @borderWidth solid #basePalette[white];
   padding: 0 15px;
-  box-shadow: 4px 1px 4px 0 rgba(0,0,0,0.3);
+  box-shadow: 4px 1px 4px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
   position: relative;
   &:hover {
@@ -40,7 +40,7 @@
 .button__primary {
   .button__base();
   border: none;
-  line-height: @height + ( 2 * @borderWidth );
+  line-height: @height + (2 * @borderWidth);
   &:active {
     color: inherit;
   }
@@ -51,7 +51,11 @@
   background: #warmPalette[dark];
   background: linear-gradient(90deg, #warmPalette[dark], #warmPalette[light]);
   &:active {
-    background: linear-gradient(90deg, #warmPalette[dark-min-1], #warmPalette[light-min-1]);
+    background: linear-gradient(
+      90deg,
+      #warmPalette[dark-min-1],
+      #warmPalette[light-min-1]
+    );
   }
 }
 
@@ -60,7 +64,11 @@
   background: #coolPalette[dark];
   background: linear-gradient(90deg, #coolPalette[light], #coolPalette[dark]);
   &:active {
-    background: linear-gradient(90deg, #coolPalette[light-min-1], #coolPalette[dark-min-1]);
+    background: linear-gradient(
+      90deg,
+      #coolPalette[light-min-1],
+      #coolPalette[dark-min-1]
+    );
   }
 }
 

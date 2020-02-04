@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../components/Button';
-import Icon from '../components/Icon';
 import ScrollTo from '../components/ScrollTo';
+import ScrollTop from '../components/ScrollTop';
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
@@ -46,19 +46,8 @@ const Styleguide: React.FC = () => {
         <ScrollTo anchor="top" palette="cool" direction="up">
           Return to filters
         </ScrollTo>
-      </section>
-
-      <section role="section">
-        <h2>Initial</h2>
-        <p>Warm</p>
-        <Icon background="warm" color="white">
-          E
-        </Icon>
-        <p>Cold</p>
-        <Icon background="cool" color="white">
-          M
-        </Icon>
-        <p>Background</p>
+        <p>Scroll to top</p>
+        <ScrollTop anchor="top" />
       </section>
 
       <section role="section">
