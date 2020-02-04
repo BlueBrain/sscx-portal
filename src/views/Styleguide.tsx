@@ -23,29 +23,46 @@ const Styleguide: React.FC = () => {
 
       <section id="top"/>
 
-      <section role="section">
+      <section>
         <h2>Buttons</h2>
-        <p>Primary warm</p>
+        <h3>Primary</h3>
         <Button primary palette="warm" onClick={dummyFn}>
           hellfire
         </Button>
-        <p>Primary cool</p>
+        <br/>
+        <br/>
         <Button primary palette="cool" onClick={dummyFn}>
           cool as a cucumber
         </Button>
-        <p>Regular (cool palette)</p>
-        <Button palette="cool" onClick={dummyFn}>good ol' button</Button>
-        <p>Active (warm palette)</p>
+        <h3>Active</h3>
         <Button active palette="warm" onClick={dummyFn}>
-          Sooo active
+          Hot and Active
         </Button>
-        <p>With notifications (cool palette)</p>
+        <br/>
+        <br/>
+        <Button active palette="cool" onClick={dummyFn}>
+          Winter Sports
+        </Button>
+        <h3>Regular</h3>
+        <Button palette="warm" onClick={dummyFn}>good ol' button</Button>
+        <h3>Notifications</h3>
         <Button palette="cool" notifications={7} onClick={dummyFn}>
           Duly notified
         </Button>
       </section>
 
-      <section role="section">
+      <section>
+        <h2>Select</h2>
+        <h3>List</h3>
+        <List title='1. Pick a dino 🦕🦕🦕 (warm palette)' list={dinos} palette='warm' selected={dinos[2]} onSelect={dummyFnStr}/>
+        <br/>
+        <List title='1a. The dinos got cooler 😎' list={dinos.slice(0, 3)} palette='cool' selected={dinos[1]} onSelect={dummyFnStr}/>
+        <h3>Pills</h3>
+        <p><em>NB: I inverted the styles for selected and not-selected, to match the logic of the other buttons – it was weird otherwise)</em></p>
+        <Pills title='1. Select a dino pill 🦖💊🦖💊' list={dinos.slice(0, 3)} palette='cool' selected={dinos[2]} onSelect={dummyFnStr}/>
+      </section>
+
+      <section>
         <h2>Navigation</h2>
         <p>Scroll down, warm color palette</p>
         <ScrollTo anchor="bottom" palette="warm" direction="down">
@@ -59,9 +76,9 @@ const Styleguide: React.FC = () => {
         <ScrollTop anchor="top"/>
       </section>
 
-      <section role="section">
+      <section>
         <h2>Content</h2>
-        <p>Collapsible</p>
+        <h3>Collapsible</h3>
         <Collapsible title="Murderous Bird on the Loose">
           <>
             <img src={require('../assets/images/cassowary.jpg')} alt="cassowary"/>
@@ -75,20 +92,13 @@ const Styleguide: React.FC = () => {
             <p>Newsflash: the escaped cassowary has been safely apprehended earlier this afternoon. He is facing the most severe charges.</p>
           </>
         </Collapsible>
-        <p>Info box</p>
+        <h3>Info box</h3>
         <InfoBox title='Short Text' text='No need to show the read more link.' />
         <br />
         <InfoBox title='Longer Text' text={lorem} />
         <br />
         <InfoBox text={`This one has no title o_0\n${lorem}`} />
-        <p>List</p>
-        <List title='Our dinos 🦕🦕🦕 (warm palette)' list={dinos} palette='warm' selected={dinos[2]} onSelect={dummyFnStr}/>
-        <br/>
-        <List title='The dinos got cooler 😎' list={dinos.slice(0, 3)} palette='cool' selected={dinos[1]} onSelect={dummyFnStr}/>
-        <p>Pills (NB: I inverted the styles for selected and not-selected, to match the logic of the other buttons – it was weird otherwise)</p>
-        <br />
-        <Pills title='Dinos pills 🦖💊🦖💊' list={dinos.slice(0, 3)} palette='cool' selected={dinos[2]} onSelect={dummyFnStr}/>
-        <p>Image (download/expand icons)</p>
+        <h3>Image viewer</h3>
       </section>
 
       <br />
