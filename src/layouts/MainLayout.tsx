@@ -38,6 +38,15 @@ const MainLayout: React.FC = ({ children }) => {
               </li>
             </ul>
           </li>
+          <li>
+            <ul>
+              <li>
+                <NavLink to="/styleguide" activeClassName="selected">
+                  Styleguide
+                </NavLink>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
       {children}

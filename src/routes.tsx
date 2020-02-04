@@ -6,11 +6,17 @@ import LayerAnatomy from './views/experimental/LayerAnatomy';
 import NeuronMorphology from './views/experimental/NeuronMorphology';
 import NeuronElectrophysiology from './views/experimental/NeuronElectrophysiology';
 import BrainRegions from './views/reconstruction/BrainRegions';
+import Styleguide from './views/Styleguide';
 
 const routes: RouteProps[] = [
   {
     path: '/',
     component: Home,
+    exact: true,
+  },
+  {
+    path: '/styleguide',
+    component: Styleguide,
     exact: true,
   },
   {
