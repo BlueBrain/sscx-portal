@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../components/Button';
 import ScrollTo from '../components/ScrollTo';
 import ScrollTop from '../components/ScrollTop';
+import Collapsible from '../components/Collapsible';
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
@@ -28,7 +29,7 @@ const Styleguide: React.FC = () => {
         <Button palette="cool" onClick={dummyFn}>good ol' button</Button>
         <p>Active (warm palette)</p>
         <Button active palette="warm" onClick={dummyFn}>
-          I'm sooo active
+          Sooo active
         </Button>
         <p>With notifications (cool palette)</p>
         <Button palette="cool" notifications={7} onClick={dummyFn}>
@@ -37,12 +38,12 @@ const Styleguide: React.FC = () => {
       </section>
 
       <section role="section">
-        <h2>Scroll To</h2>
-        <p>Bottom, warm color scheme</p>
+        <h2>Navigation</h2>
+        <p>Scroll down, warm color palette</p>
         <ScrollTo anchor="bottom" palette="warm" direction="down">
           View data
         </ScrollTo>
-        <p>Top, cool color scheme</p>
+        <p>Scroll up, cool color palette</p>
         <ScrollTo anchor="top" palette="cool" direction="up">
           Return to filters
         </ScrollTo>
@@ -53,9 +54,12 @@ const Styleguide: React.FC = () => {
       <section role="section">
         <h2>Content</h2>
         <p>Collapse</p>
+        <Collapsible title="Murderous Bird on the Loose">
+          <img src="/" alt="cassowary" />
+        </Collapsible>
         <p>Read more</p>
-        <p>Modal</p>
         <p>List</p>
+        <p>Pills</p>
       </section>
 
       <section id="bottom" />
