@@ -4,9 +4,18 @@
 @height: 40px;
 @borderWidth: 2px;
 
-.button__colors-active {
-  color: #coolPalette[dark];
+.button__active {
   background-color: #basePalette[white];
+}
+
+.button__active--warm {
+  color: #warmPalette[dark];
+  .button__active();
+}
+
+.button__active--cool {
+  color: #coolPalette[dark];
+  .button__active();
 }
 
 .button__base {
@@ -27,14 +36,30 @@
     cursor: pointer;
     box-shadow: none;
   }
+}
+
+.button__warm {
+  .button__base();
   &:active {
-    .button__colors-active();
+    .button__active--warm();
   }
 }
 
-.button__active {
+.button__cool {
   .button__base();
-  .button__colors-active();
+  &:active {
+    .button__active--cool();
+  }
+}
+
+.button__warm-active {
+  .button__base();
+  .button__active--warm();
+}
+
+.button__cool-active {
+  .button__base();
+  .button__active--cool();
 }
 
 .button__primary {
@@ -46,7 +71,7 @@
   }
 }
 
-.button__warm {
+.button__warm-primary {
   .button__primary();
   background: #warmPalette[dark];
   background: linear-gradient(90deg, #warmPalette[dark], #warmPalette[light]);
@@ -59,7 +84,7 @@
   }
 }
 
-.button__cool {
+.button__cool-primary {
   .button__primary();
   background: #coolPalette[dark];
   background: linear-gradient(90deg, #coolPalette[light], #coolPalette[dark]);
@@ -81,5 +106,14 @@
   border-radius: 1rem;
   line-height: 1.2rem;
   padding: 0 0.3rem;
-  .button__colors-active();
+}
+
+.button__warm-notifications {
+  .button__notifications();
+  .button__active--warm();
+}
+
+.button__cool-notifications {
+  .button__notifications();
+  .button__active--cool();
 }

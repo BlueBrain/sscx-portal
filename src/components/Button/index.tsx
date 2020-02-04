@@ -6,7 +6,8 @@ import { Palette } from '../../types';
 const classPrefix = 'button__';
 
 type ButtonProps = {
-  primary?: Palette;
+  primary?: boolean;
+  palette: Palette;
   active?: boolean;
   notifications?: number;
   onClick: () => void;
@@ -14,20 +15,21 @@ type ButtonProps = {
 };
 
 const Button: React.FC<ButtonProps> = ({
-  primary,
-  active,
-  notifications,
-  onClick,
-  children,
-}) => {
+                                         primary,
+                                         palette,
+                                         active,
+                                         notifications,
+                                         onClick,
+                                         children,
+                                       }) => {
   return (
     <button
       onClick={onClick}
-      className={`${classPrefix}${primary || (active ? 'active' : 'base')}`}
+      className={`${classPrefix}${palette}${primary ? '-primary' : ''}${active ? '-active' : ''}`}
     >
       {children}
       {notifications && (
-        <span className={`${classPrefix}notifications`}>{notifications}</span>
+        <span className={`${classPrefix}${palette}-notifications`}>{notifications}</span>
       )}
     </button>
   );

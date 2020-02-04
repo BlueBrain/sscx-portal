@@ -17,21 +17,21 @@ const Styleguide: React.FC = () => {
       <section role="section">
         <h2>Buttons</h2>
         <p>Primary warm</p>
-        <Button primary="warm" onClick={dummyFn}>
+        <Button primary palette="warm" onClick={dummyFn}>
           hellfire
         </Button>
-        <p>Primary cold</p>
-        <Button primary="cool" onClick={dummyFn}>
+        <p>Primary cool</p>
+        <Button primary palette="cool" onClick={dummyFn}>
           cool as a cucumber
         </Button>
-        <p>Regular</p>
-        <Button onClick={dummyFn}>good ol' button</Button>
-        <p>Active</p>
-        <Button active onClick={dummyFn}>
+        <p>Regular (cool palette)</p>
+        <Button palette="cool" onClick={dummyFn}>good ol' button</Button>
+        <p>Active (warm palette)</p>
+        <Button active palette="warm" onClick={dummyFn}>
           I'm sooo active
         </Button>
-        <p>With notifications</p>
-        <Button notifications={7} onClick={dummyFn}>
+        <p>With notifications (cool palette)</p>
+        <Button palette="cool" notifications={7} onClick={dummyFn}>
           Duly notified
         </Button>
       </section>
