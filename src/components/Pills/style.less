@@ -1,0 +1,54 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+.pills__basis {
+  p {
+    font-weight: 400;
+    margin: 0;
+  }
+  .elements {
+    margin-top: 8px;
+  }
+}
+
+.pill__basis {
+  display: inline-block;
+  color: #basePalette[white];
+  border: 2px solid #basePalette[white];
+  box-shadow: 4px 1px 4px 0 rgba(0, 0, 0, 0.3);
+  margin-right: 10px;
+  border-radius: 7px;
+  text-align: center;
+  padding: 5px 20px;
+  font-weight: 400;
+  cursor: pointer;
+  &:hover {
+    box-shadow: none;
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pill__selected {
+  font-weight: 700;
+  box-shadow: none;
+  background-color: #basePalette[white];
+}
+
+.pill__cool, .pill__warm {
+  .pill__basis();
+}
+
+.pill__cool-selected {
+  .pill__selected();
+  color: #coolPalette[medium];
+}
+
+.pill__warm-selected {
+  .pill__selected();
+  color: #warmPalette[medium];
+}

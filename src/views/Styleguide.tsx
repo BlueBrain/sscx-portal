@@ -5,6 +5,7 @@ import ScrollTop from '../components/ScrollTop';
 import Collapsible from '../components/Collapsible';
 import InfoBox from '../components/InfoBox';
 import List from '../components/List';
+import Pills from '../components/Pills';
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
@@ -75,7 +76,7 @@ const Styleguide: React.FC = () => {
           </>
         </Collapsible>
         <p>Info box</p>
-        <InfoBox title='Short Text' text='It is what it is.' />
+        <InfoBox title='Short Text' text='No need to show the read more link.' />
         <br />
         <InfoBox title='Longer Text' text={lorem} />
         <br />
@@ -84,7 +85,10 @@ const Styleguide: React.FC = () => {
         <List title='Our dinos 🦕🦕🦕 (warm palette)' list={dinos} palette='warm' selected={dinos[2]} onSelect={dummyFnStr}/>
         <br/>
         <List title='The dinos got cooler 😎' list={dinos.slice(0, 3)} palette='cool' selected={dinos[1]} onSelect={dummyFnStr}/>
-        <p>Pills</p>
+        <p>Pills (NB: I inverted the styles for selected and not-selected, to match the logic of the other buttons – it was weird otherwise)</p>
+        <br />
+        <Pills title='Dinos pills 🦖💊🦖💊' list={dinos.slice(0, 3)} palette='cool' selected={dinos[2]} onSelect={dummyFnStr}/>
+        <p>Image (download/expand icons)</p>
       </section>
 
       <br />
