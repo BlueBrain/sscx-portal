@@ -3,11 +3,13 @@ import Button from '../components/Button';
 import ScrollTo from '../components/ScrollTo';
 import ScrollTop from '../components/ScrollTop';
 import Collapsible from '../components/Collapsible';
+import InfoBox from '../components/InfoBox';
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
     console.log('click');
   };
+  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
   return (
     <>
@@ -60,7 +62,10 @@ const Styleguide: React.FC = () => {
             <p>A cassowary escapes from the local zoo!</p>
           </>
         </Collapsible>
-        <p>Read more</p>
+        <p>Info box</p>
+        <InfoBox title='Short Text' text='It is what it is.' />
+        <br />
+        <InfoBox title='Longer Text' text={lorem} />
         <p>List</p>
         <p>Pills</p>
       </section>

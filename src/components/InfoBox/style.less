@@ -1,0 +1,29 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+@width: 480px;
+@padding: 30px;
+
+.info-box__basis {
+  width: @width;
+  padding: @padding;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  overflow: hidden;
+  h3 {
+    margin: 0;
+  }
+  p, span {
+    margin-top: 15px;
+    font-size: #fontSize[small];
+    line-height: 1.5;
+  }
+  p {
+    font-weight: 700;
+  }
+  span {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+  }
+}
+
