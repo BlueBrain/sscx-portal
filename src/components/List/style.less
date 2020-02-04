@@ -1,0 +1,74 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+@maxHeight: 190px;
+@width: 360px;
+@padding: 15px 30px;
+
+.list__basis {
+  width: @width;
+  padding: @padding;
+  background-color: #basePalette[grey];
+  border-radius: 15px;
+  overflow: hidden;
+  p {
+    font-weight: 400;
+    margin: 0;
+  }
+  .elements {
+    margin: 8px 0;
+    max-height: @maxHeight;
+    overflow: scroll;
+  }
+}
+
+.list-element__basis {
+  background-color: #basePalette[white];
+  margin: 8px 30px 8px 10px;
+  border-radius: 3px;
+  text-align: center;
+  padding: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: #basePalette[white];
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.list-element__warm {
+  .list-element__basis();
+  color: #basePalette[grey];
+  &:hover {
+    background-color: #warmPalette[light-min-1];
+  }
+  &:active {
+    background-color: #warmPalette[light];
+  }
+}
+
+.list-element__warm-selected {
+  color: #basePalette[white];
+  background-color: #warmPalette[light];
+}
+
+.list-element__cool {
+  .list-element__basis();
+  color: #coolPalette[medium];
+  &:hover {
+    background-color: #coolPalette[light-min-1];
+  }
+  &:active {
+    background-color: #coolPalette[light];
+  }
+}
+
+.list-element__cool-selected {
+  color: #basePalette[white];
+  background-color: #coolPalette[light];
+}

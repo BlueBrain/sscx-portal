@@ -33,7 +33,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({ title, text, maxChars = 200 }) => {
   }, [expanded]);
 
   return <div className={`${classPrefix}basis`}>
-    <h3>{title}</h3>
+    {title && <h3>{title}</h3>}
     <p>{currentText}</p>
     {!isShorter(text, maxChars) && <span onClick={() => setExpanded(!expanded)}>Read {expanded ? 'less' : 'more…'}</span>}
   </div>;

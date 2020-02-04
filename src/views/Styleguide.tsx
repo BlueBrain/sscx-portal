@@ -4,12 +4,17 @@ import ScrollTo from '../components/ScrollTo';
 import ScrollTop from '../components/ScrollTop';
 import Collapsible from '../components/Collapsible';
 import InfoBox from '../components/InfoBox';
+import List from '../components/List';
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
     console.log('click');
   };
-  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+  const dummyFnStr = (str) => {
+    console.log(str);
+  };
+  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+  const dinos = ['T-Rex', 'Stegosaurus', 'Triceratops', 'Brontosaurus', 'Pterodactyl', 'Velociraptor', 'Cassowary'];
 
   return (
     <>
@@ -55,18 +60,30 @@ const Styleguide: React.FC = () => {
 
       <section role="section">
         <h2>Content</h2>
-        <p>Collapse</p>
+        <p>Collapsible</p>
         <Collapsible title="Murderous Bird on the Loose">
           <>
             <img src={require('../assets/images/cassowary.jpg')} alt="cassowary"/>
-            <p>A cassowary escapes from the local zoo!</p>
+            <p>A cassowary escapes from the local zoo. Already 482 have suffered from his lethal kick.</p>
+          </>
+        </Collapsible>
+        <br />
+        <Collapsible title="Murderous Bird on Lockdown" collapsed={true}>
+          <>
+            <img src={require('../assets/images/cassowary.jpg')} alt="cassowary"/>
+            <p>Newsflash: the escaped cassowary has been safely apprehended earlier this afternoon. He is facing the most severe charges.</p>
           </>
         </Collapsible>
         <p>Info box</p>
         <InfoBox title='Short Text' text='It is what it is.' />
         <br />
         <InfoBox title='Longer Text' text={lorem} />
+        <br />
+        <InfoBox text={`This one has no title o_0\n${lorem}`} />
         <p>List</p>
+        <List title='Our dinos 🦕🦕🦕 (warm palette)' list={dinos} palette='warm' selected={dinos[2]} onSelect={dummyFnStr}/>
+        <br/>
+        <List title='The dinos got cooler 😎' list={dinos.slice(0, 3)} palette='cool' selected={dinos[1]} onSelect={dummyFnStr}/>
         <p>Pills</p>
       </section>
 
