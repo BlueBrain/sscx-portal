@@ -9,8 +9,9 @@ type ButtonProps = {
   primary?: boolean;
   palette: Palette;
   active?: boolean;
+  discrete?: boolean;
   notifications?: number;
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactChild | ReactFragment;
 };
 
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
                                          primary,
                                          palette,
                                          active,
+                                         discrete,
                                          notifications,
                                          onClick,
                                          children,
@@ -25,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`${classPrefix}${palette}${primary ? '-primary' : ''}${active ? '-active' : ''}`}
+      className={`${classPrefix}${palette}${primary ? '-primary' : ''}${discrete ? '-discrete' : ''}${active ? '-active' : ''}`}
     >
       {children}
       {notifications && (

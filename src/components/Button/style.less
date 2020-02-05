@@ -19,7 +19,7 @@
 }
 
 .button__base {
-  font-weight: 400;
+  font-weight: 700;
   text-transform: uppercase;
   background-color: transparent;
   height: @height;
@@ -30,13 +30,26 @@
   box-shadow: 4px 1px 4px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
   position: relative;
+
   &:hover {
     box-shadow: none;
   }
 }
 
+.button__discrete {
+  border: none;
+  box-shadow: none;
+  opacity: 0.7;
+  padding: 0;
+}
+
+.button__discrete-active {
+  opacity: 1;
+}
+
 .button__warm {
   .button__base();
+
   &:active {
     .button__active--warm();
   }
@@ -44,17 +57,20 @@
 
 .button__cool {
   .button__base();
+
   &:active {
     .button__active--cool();
   }
 }
 
-.button__warm-active {
+.button__warm-active,
+.active .button__warm {
   .button__base();
   .button__active--warm();
 }
 
-.button__cool-active {
+.button__cool-active,
+.active .button__cool {
   .button__base();
   .button__active--cool();
 }
@@ -63,6 +79,7 @@
   .button__base();
   border: none;
   line-height: @height + (2 * @borderWidth);
+
   &:active {
     color: inherit;
   }
@@ -72,12 +89,11 @@
   .button__primary();
   background: #warmPalette[dark];
   background: linear-gradient(90deg, #warmPalette[dark], #warmPalette[light]);
+
   &:active {
-    background: linear-gradient(
-      90deg,
+    background: linear-gradient(90deg,
       #warmPalette[dark-min-1],
-      #warmPalette[light-min-1]
-    );
+      #warmPalette[light-min-1]);
   }
 }
 
@@ -85,14 +101,32 @@
   .button__primary();
   background: #coolPalette[dark];
   background: linear-gradient(90deg, #coolPalette[light], #coolPalette[dark]);
+
   &:active {
-    background: linear-gradient(
-      90deg,
+    background: linear-gradient(90deg,
       #coolPalette[light-min-1],
-      #coolPalette[dark-min-1]
-    );
+      #coolPalette[dark-min-1]);
   }
 }
+
+.button__warm-discrete,
+.button__cool-discrete {
+  .button__base();
+  .button__discrete();
+  &:active, &:hover {
+    .button__discrete-active();
+  }
+}
+
+.button__warm-discrete-active,
+.active .button__warm-discrete,
+.button__cool-discrete-active,
+.active .button__cool-discrete {
+  .button__base();
+  .button__discrete();
+  .button__discrete-active();
+}
+
 
 .button__notifications {
   position: absolute;

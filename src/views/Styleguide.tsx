@@ -46,6 +46,8 @@ const Styleguide: React.FC = () => {
         </Button>
         <h3>Regular</h3>
         <Button palette="warm" onClick={dummyFn}>good ol' button</Button>
+        <h3>Discrete</h3>
+        <Button palette="cool" discrete onClick={dummyFn}>I'm rather shy</Button>
         <h3>Notifications</h3>
         <Button palette="cool" notifications={7} onClick={dummyFn}>
           Duly notified
