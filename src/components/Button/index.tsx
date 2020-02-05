@@ -10,8 +10,9 @@ type ButtonProps = {
   palette: Palette;
   active?: boolean;
   discrete?: boolean;
+  width?: number;
   notifications?: number;
-  onClick?: () => void;
+  onClick?: (any) => void;
   children: ReactChild | ReactFragment;
 };
 
@@ -20,12 +21,14 @@ const Button: React.FC<ButtonProps> = ({
                                          palette,
                                          active,
                                          discrete,
+                                         width,
                                          notifications,
                                          onClick,
                                          children,
                                        }) => {
   return (
     <button
+      style={{ width: width }}
       onClick={onClick}
       className={`${classPrefix}${palette}${primary ? '-primary' : ''}${discrete ? '-discrete' : ''}${active ? '-active' : ''}`}
     >

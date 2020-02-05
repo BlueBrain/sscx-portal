@@ -2,9 +2,11 @@
 @import '../../assets/styles/config/_fonts';
 
 .nav__basis {
+  display: flex;
+  align-items: center;
   ul {
     list-style: none;
-    margin: 0;
+    margin: 0 0 0 auto;
     padding: 0;
   }
   li {
@@ -12,6 +14,25 @@
     margin-right: 40px;
     &:last-child {
       margin-right: 0;
+    }
+  }
+}
+
+.nav__basis .secondary-nav {
+  position: absolute;
+  background: #basePalette[white];
+  top: 60px;
+  border-radius: 15px;
+  padding: 15px;
+  a {
+    display: inline-block;
+    color: #coolPalette[medium];
+    font-size: #fontSize[small];
+    font-weight: 700;
+    text-decoration: none;
+    margin: 10px 0;
+    &:hover {
+      color: #coolPalette[dark];
     }
   }
 }

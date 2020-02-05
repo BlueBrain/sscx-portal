@@ -5,7 +5,6 @@ import Navigation from './Navigation';
 const MainLayout: React.FC = ({ children }) => {
   return (
     <>
-      <Brand />
       <Navigation />
       {children}
     </>
