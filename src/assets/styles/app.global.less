@@ -5,9 +5,20 @@
 html {
   .font-default();
   color: #basePalette[white];
-  background-color: #coolPalette[medium];
-  // TODEL
-  padding: 50px;
+  background-color: #basePalette[navy-4];
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+html,
+body,
+div {
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -15,15 +26,22 @@ button {
   color: #basePalette[white];
 }
 
-button, a {
+button,
+a {
   cursor: pointer;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   @media @small {
     font-size: 1.2rem;
   }
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 h3 {
@@ -43,4 +61,3 @@ a {
 section {
   padding: 40px 0;
 }
-

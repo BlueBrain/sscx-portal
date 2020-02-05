@@ -1,31 +1,16 @@
 @import '../../assets/styles/config/_colors';
 @import '../../assets/styles/config/_fonts';
 
-.scroll-to__base {
+.scroll-to__basis {
   display: block;
   width: 100%;
   font-weight: 400;
   font-size: #fontSize[large];
+  background-color: #basePalette[navy-3];
   color: #basePalette[white];
   text-decoration: none;
   text-align: center;
   padding: 15px;
-}
-
-.scroll-to__warm {
-  .scroll-to__base();
-  background-color: #warmPalette[dark];
-  &:hover {
-    background-color: #warmPalette[dark-min-1];
-  }
-}
-
-.scroll-to__cool {
-  .scroll-to__base();
-  background-color: #coolPalette[light];
-  &:hover {
-    background-color: #coolPalette[light-min-1];
-  }
 }
 
 .scroll-to__direction {

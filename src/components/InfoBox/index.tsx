@@ -7,10 +7,12 @@ const classPrefix = 'info-box__';
 type InfoBoxProps = {
   title?: string;
   text: string;
-  maxChars?: number
+  color?: string;
+  maxChars?: number;
 };
 
-const isShorter = (text: string, maxChars: number): boolean => text.length <= maxChars
+const isShorter = (text: string, maxChars: number): boolean =>
+  text.length <= maxChars;
 
 const truncate = (text: string, maxChars: number): string => {
   if (isShorter(text, maxChars)) return text;
@@ -24,7 +26,12 @@ const truncate = (text: string, maxChars: number): string => {
   return truncatedText + '…';
 };
 
-const InfoBox: React.FC<InfoBoxProps> = ({ title, text, maxChars = 200 }) => {
+const InfoBox: React.FC<InfoBoxProps> = ({
+  title,
+  text,
+  color,
+  maxChars = 200,
+}) => {
   const [expanded, setExpanded] = React.useState(false);
   const [currentText, setCurrentText] = React.useState(text);
 
@@ -32,11 +39,17 @@ const InfoBox: React.FC<InfoBoxProps> = ({ title, text, maxChars = 200 }) => {
     setCurrentText(expanded ? text : truncate(text, maxChars));
   }, [expanded]);
 
-  return <div className={`${classPrefix}basis`}>
-    {title && <h3>{title}</h3>}
-    <p>{currentText}</p>
-    {!isShorter(text, maxChars) && <span onClick={() => setExpanded(!expanded)}>Read {expanded ? 'less' : 'more…'}</span>}
-  </div>;
+  return (
+    <div className={`${classPrefix}basis`} style={{ backgroundColor: color }}>
+      {title && <h3>{title}</h3>}
+      <p>{currentText}</p>
+      {!isShorter(text, maxChars) && (
+        <span onClick={() => setExpanded(!expanded)}>
+          Read {expanded ? 'less' : 'more…'}
+        </span>
+      )}
+    </div>
+  );
 };
 
 export default InfoBox;

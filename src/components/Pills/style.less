@@ -3,7 +3,7 @@
 
 .pills__basis {
   p {
-    font-weight: 400;
+    font-weight: 700;
     margin: 0;
   }
   .elements {
@@ -15,15 +15,15 @@
   display: inline-block;
   color: #basePalette[white];
   border: 2px solid #basePalette[white];
-  box-shadow: 4px 1px 4px 0 rgba(0, 0, 0, 0.3);
   margin-right: 10px;
   border-radius: 7px;
   text-align: center;
   padding: 5px 20px;
   font-weight: 400;
   cursor: pointer;
-  &:hover {
-    box-shadow: none;
+  &:hover:not(.pill__selected) {
+    background-color: #basePalette[navy-1];
+    color: #basePalette[white];
   }
   &:first-child {
     margin-top: 0;
@@ -35,20 +35,7 @@
 
 .pill__selected {
   font-weight: 700;
-  box-shadow: none;
   background-color: #basePalette[white];
-}
-
-.pill__cool, .pill__warm {
-  .pill__basis();
-}
-
-.pill__cool-selected {
-  .pill__selected();
-  color: #coolPalette[medium];
-}
-
-.pill__warm-selected {
-  .pill__selected();
-  color: #warmPalette[medium];
+  color: #basePalette[navy-4];
+  cursor: initial;
 }

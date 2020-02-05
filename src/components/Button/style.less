@@ -27,7 +27,7 @@
   line-height: @height;
   border: @borderWidth solid #basePalette[white];
   padding: 0 15px;
-  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 4px 0 rgba(59, 65, 101, 0.5);
   transition: all 0.2s;
   position: relative;
 
@@ -91,9 +91,11 @@
   background: linear-gradient(90deg, #warmPalette[dark], #warmPalette[light]);
 
   &:active {
-    background: linear-gradient(90deg,
+    background: linear-gradient(
+      90deg,
       #warmPalette[dark-min-1],
-      #warmPalette[light-min-1]);
+      #warmPalette[light-min-1]
+    );
   }
 }
 
@@ -103,9 +105,11 @@
   background: linear-gradient(90deg, #coolPalette[light], #coolPalette[dark]);
 
   &:active {
-    background: linear-gradient(90deg,
+    background: linear-gradient(
+      90deg,
       #coolPalette[light-min-1],
-      #coolPalette[dark-min-1]);
+      #coolPalette[dark-min-1]
+    );
   }
 }
 
@@ -113,7 +117,8 @@
 .button__cool-discrete {
   .button__base();
   .button__discrete();
-  &:active, &:hover {
+  &:active,
+  &:hover {
     .button__discrete-active();
   }
 }
@@ -126,7 +131,6 @@
   .button__discrete();
   .button__discrete-active();
 }
-
 
 .button__notifications {
   position: absolute;

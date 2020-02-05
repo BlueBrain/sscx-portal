@@ -1,0 +1,30 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+@import '../../assets/styles/config/_queries';
+
+.filters__basis {
+  padding: 100px 60px 80px;
+  min-height: calc(100vh - 180px);
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #basePalette[navy-4];
+
+  .center {
+    margin: 0 auto;
+    max-width: 1080px;
+    display: flex;
+  }
+
+  .center-col {
+    flex: 50%;
+  }
+
+  .scroll-to {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+  }
+}

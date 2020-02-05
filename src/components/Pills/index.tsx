@@ -11,34 +11,43 @@ type PillsProps = {
   list: string[];
   selected: string;
   onSelect?: (string) => void;
-  palette: Palette;
 };
 
 type PillProps = {
   element: string;
   selected: boolean;
   onSelect?: (string) => void;
-  palette: Palette;
 };
 
-const Pill: React.FC<PillProps> = ({ element, selected, onSelect, palette }) => {
-  return <div className={`${classPrefixPill}${palette} ${selected ? `${classPrefixPill}${palette}-selected` : ''}`}
-              onClick={() => onSelect(element)}>
-    {element}
-  </div>;
-};
-
-const Pills: React.FC<PillsProps> = ({ title, list, selected, onSelect, palette }) => {
-  return <div className={`${classPrefixPills}basis`}>
-    {title && <p>{title}</p>}
-    <div className='elements'>
-      {list.map((el, i) => <Pill key={i}
-                                 element={el}
-                                 selected={selected === el}
-                                 onSelect={onSelect}
-                                 palette={palette}/>)}
+const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
+  return (
+    <div
+      className={`${classPrefixPill}basis ${
+        selected ? `${classPrefixPill}selected` : ''
+      }`}
+      onClick={() => onSelect(element)}
+    >
+      {element}
     </div>
-  </div>;
+  );
+};
+
+const Pills: React.FC<PillsProps> = ({ title, list, selected, onSelect }) => {
+  return (
+    <div className={`${classPrefixPills}basis`}>
+      {title && <p>{title}</p>}
+      <div className="elements">
+        {list.map((el, i) => (
+          <Pill
+            key={i}
+            element={el}
+            selected={selected === el}
+            onSelect={onSelect}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Pills;

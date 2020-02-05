@@ -8,19 +8,23 @@ const classPrefix = 'scroll-to__';
 
 type ScrollToProps = {
   anchor: string;
-  palette: Palette;
   direction: Direction;
   children: ReactChild | ReactFragment;
+  color?: string;
 };
 
 const ScrollTo: React.FC<ScrollToProps> = ({
   anchor,
-  palette,
   direction,
   children,
+  color,
 }) => {
   return (
-    <a href={`#${anchor}`} className={`${classPrefix}${palette}`}>
+    <a
+      href={`#${anchor}`}
+      className={`${classPrefix}basis`}
+      style={{ backgroundColor: color }}
+    >
       {children}
       <span className={`${classPrefix}direction`}>
         {direction === 'up' && <IoIosArrowUp />}
