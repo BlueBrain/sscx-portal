@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Brand from './Brand';
 
 const MainLayout: React.FC = ({ children }) => {
   return (
     <>
+      <Brand />
       <div role="navigation">
         <ul>
           <li>

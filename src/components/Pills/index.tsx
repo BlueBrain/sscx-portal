@@ -32,10 +32,11 @@ const Pills: React.FC<PillsProps> = ({ title, list, selected, onSelect, palette 
   return <div className={`${classPrefixPills}basis`}>
     {title && <p>{title}</p>}
     <div className='elements'>
-      {list.map(el => <Pill element={el}
-                            selected={selected === el}
-                            onSelect={onSelect}
-                            palette={palette}/>)}
+      {list.map((el, i) => <Pill key={i}
+                                 element={el}
+                                 selected={selected === el}
+                                 onSelect={onSelect}
+                                 palette={palette}/>)}
     </div>
   </div>;
 };

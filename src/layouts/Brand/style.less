@@ -1,0 +1,28 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+.brand__basis {
+  .svg, h1 {
+    display: inline-block;
+  }
+  .svg {
+    width: 85px;
+    padding-right: 12px;
+    position: relative;
+  }
+  .svg:after {
+    content: ' ';
+    height: 26px;
+    width: 3px;
+    display: block;
+    background: #basePalette[white];
+    position: absolute;
+    top: 0;
+    right: -2px;
+  }
+  h1 {
+    font-weight: 400;
+    padding-left: 12px;
+  }
+}
+
