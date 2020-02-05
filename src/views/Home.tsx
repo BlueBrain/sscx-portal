@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Filters from '../layouts/Header';
 
 const Home: React.FC = () => (
   <>

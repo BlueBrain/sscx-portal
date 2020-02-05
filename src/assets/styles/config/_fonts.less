@@ -1,3 +1,5 @@
+@import "_queries";
+
 @font-face {
   font-family: 'SuisseIntl';
   font-weight: 300;
@@ -15,8 +17,11 @@
 }
 
 .font-default {
-  font-size: 16px;
   font-family: 'SuisseIntl', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  @media @small {
+    font-size: 14px;
+  }
 }
 
 #fontSize() {
