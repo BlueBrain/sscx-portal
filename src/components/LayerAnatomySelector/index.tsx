@@ -1,16 +1,16 @@
 import React, { ReactChild, ReactFragment } from 'react';
+import { Layer } from '../../types';
 
 import './style.less';
 
 const classPrefix = 'layer_anatomy_svg__';
-export type Layer = 'L1' | 'L23' | 'L4' | 'L5' | 'L6';
 
 type LayerProps = {
   layer: Layer;
   onSelect: (layer: Layer) => void;
   activeLayer?: Layer;
   children: ReactChild | ReactFragment;
-}
+};
 
 type LayerAnatomySelectProps = {
   color: string;
@@ -18,19 +18,26 @@ type LayerAnatomySelectProps = {
   onLayerSelected?: (layer: Layer) => void;
 };
 
-const Layer: React.FC<LayerProps> = ({ layer, activeLayer, onSelect, children }) => (
-  <g id={`${classPrefix}${layer}fill_1_`}
-     className={activeLayer === layer ? 'active' : ''}
-     onClick={() => onSelect(layer)}>
+const Layer: React.FC<LayerProps> = ({
+  layer,
+  activeLayer,
+  onSelect,
+  children,
+}) => (
+  <g
+    id={`${classPrefix}${layer}-fill`}
+    className={activeLayer === layer ? 'active' : ''}
+    onClick={() => onSelect(layer)}
+  >
     {children}
   </g>
 );
 
 const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
-                                                                   color,
-                                                                   defaultActiveLayer,
-                                                                   onLayerSelected,
-                                                                 }) => {
+  color,
+  defaultActiveLayer,
+  onLayerSelected,
+}) => {
   const [activeLayer, setActiveLayer] = React.useState<Layer>(
     defaultActiveLayer,
   );
@@ -45,11 +52,10 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
       x={0}
       y={0}
       viewBox="0 0 382.3 393.9"
-      xmlSpace="preserve">
+      xmlSpace="preserve"
+    >
       <style>
-        {
-          `#layer_anatomy_svg__layers path:hover, #layer_anatomy_svg__layers g.active path{fill:${color}}`
-        }
+        {`#layer_anatomy_svg__layers path:hover, #layer_anatomy_svg__layers g.active path{fill:${color}}`}
       </style>
       <path
         id="layer_anatomy_svg__Shadow"
@@ -71,14 +77,14 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
           y2={1199.638}
           gradientTransform="translate(0 -512.11)"
         >
-          <stop offset={0} stopColor="#fff"/>
-          <stop offset={0.1} stopColor="#fffefa"/>
-          <stop offset={0.226} stopColor="#fffaea"/>
-          <stop offset={0.366} stopColor="#fff5d0"/>
-          <stop offset={0.515} stopColor="#ffedac"/>
-          <stop offset={0.673} stopColor="#ffe27e"/>
-          <stop offset={0.836} stopColor="#ffd646"/>
-          <stop offset={0.999} stopColor="#ffc807"/>
+          <stop offset={0} stopColor="#fff" />
+          <stop offset={0.1} stopColor="#fffefa" />
+          <stop offset={0.226} stopColor="#fffaea" />
+          <stop offset={0.366} stopColor="#fff5d0" />
+          <stop offset={0.515} stopColor="#ffedac" />
+          <stop offset={0.673} stopColor="#ffe27e" />
+          <stop offset={0.836} stopColor="#ffd646" />
+          <stop offset={0.999} stopColor="#ffc807" />
         </linearGradient>
         <path
           d="M363.5 357.3H51.9c-8.5 0-15.5-7-15.5-15.5V30.2c0-8.5 7-15.5 15.5-15.5h311.6c8.5 0 15.5 7 15.5 15.5v311.6c0 8.5-7 15.5-15.5 15.5z"
@@ -99,32 +105,52 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
           />
 
           <g id="layer_anatomy_svg__layers">
-            <Layer layer={'L1'} onSelect={selectLayer} activeLayer={activeLayer}>
+            <Layer
+              layer={'L1'}
+              onSelect={selectLayer}
+              activeLayer={activeLayer}
+            >
               <path
                 className="layer_anatomy_svg__st5"
                 d="M324.7 119.9C276 96 216.8 79.7 147.1 82c-1.2 0-2.3-.8-2.5-2l-4.5-26.2c0-1.3.8-2.5 2.3-2.7 15.2-2 99.9-10.5 195.2 37.2l-12.9 31.6z"
               />
             </Layer>
-            <Layer layer={'L23'} onSelect={selectLayer} activeLayer={activeLayer}>
+            <Layer
+              layer={'L23'}
+              onSelect={selectLayer}
+              activeLayer={activeLayer}
+            >
               <path
                 className="layer_anatomy_svg__st5"
                 d="M319.2 131.7c-89.9-46-166.5-41-181.2-39.5-1.3 0-2.3 1.3-2 2.5l9.8 66c0 1.2 1.2 2 2.3 2 53.7.2 101 13.5 141.2 32 10-21 20-42 29.9-63"
               />
             </Layer>
-            <Layer layer={'L4'} onSelect={selectLayer} activeLayer={activeLayer}>
+            <Layer
+              layer={'L4'}
+              onSelect={selectLayer}
+              activeLayer={activeLayer}
+            >
               <path
                 className="layer_anatomy_svg__st5"
                 d="M262.5 250.1c-34.3-15.7-73.9-27.7-117.2-29.8-1.2 0-2-.8-2.3-2l-6.8-41.7c-.5-1.3.5-2.7 2-2.7 13-.7 72.4-1.5 144.9 33l-20.6 43.2z"
               />
             </Layer>
-            <Layer layer={'L5'} onSelect={selectLayer} activeLayer={activeLayer}>
+            <Layer
+              layer={'L5'}
+              onSelect={selectLayer}
+              activeLayer={activeLayer}
+            >
               <path
                 id="layer_anatomy_svg__L5fill_1_"
                 className="layer_anatomy_svg__st5"
                 d="M242.5 292.1c-28.3-10.5-61.3-17.7-98.4-17.2-1.3 0-2.5-.7-2.5-2l-5.7-42.3c-.2-1.7.8-2.7 2.5-2.7 12.2.5 60.7 4.5 119.4 30.8l-15.3 33.4z"
               />
             </Layer>
-            <Layer layer={'L6'} onSelect={selectLayer} activeLayer={activeLayer}>
+            <Layer
+              layer={'L6'}
+              onSelect={selectLayer}
+              activeLayer={activeLayer}
+            >
               <path
                 id="layer_anatomy_svg__L6fill_1_"
                 className="layer_anatomy_svg__st5"

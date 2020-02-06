@@ -1,6 +1,65 @@
-import React from 'react';
+import React, { ReactChild, ReactFragment } from 'react';
 
-function SvgSynapticPathways(props) {
+import './style.less';
+import { Layer } from '../../types';
+
+const prePrefix = 'pre_pathway_svg__';
+const postPrefix = 'post_pathway_svg__';
+
+type PathwayPointProps = {
+  layer: Layer;
+  onSelect: (layer: Layer) => void;
+  activeLayer?: Layer;
+  children: ReactChild | ReactFragment;
+  cssPrefix: string;
+};
+
+type SynapticPathwaySelectProps = {
+  color: string;
+  defaultActivePreLayer?: Layer;
+  onPreLayerSelected?: (layer: Layer) => void;
+  defaultActivePostLayer?: Layer;
+  onPostLayerSelected?: (layer: Layer) => void;
+};
+
+const PathwayPoint: React.FC<PathwayPointProps> = ({
+  layer,
+  activeLayer,
+  onSelect,
+  children,
+  cssPrefix,
+}) => (
+  <g
+    id={`${cssPrefix}${layer}-fill`}
+    className={activeLayer === layer ? 'active' : ''}
+    onClick={() => onSelect(layer)}
+  >
+    {children}
+  </g>
+);
+
+const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
+  color,
+  defaultActivePreLayer,
+  onPreLayerSelected,
+  defaultActivePostLayer,
+  onPostLayerSelected,
+}) => {
+  const [activePreLayer, setActivePreLayer] = React.useState<Layer>(
+    defaultActivePreLayer,
+  );
+  const [activePostLayer, setActivePostLayer] = React.useState<Layer>(
+    defaultActivePostLayer,
+  );
+  const selectPreLayer = (l: Layer): void => {
+    setActivePreLayer(l);
+    onPreLayerSelected(l);
+  };
+  const selectPostLayer = (l: Layer): void => {
+    setActivePostLayer(l);
+    onPostLayerSelected(l);
+  };
+
   return (
     <svg
       id="synaptic_pathways_svg__Layer_1"
@@ -8,12 +67,9 @@ function SvgSynapticPathways(props) {
       y={0}
       viewBox="0 0 302.3 566.9"
       xmlSpace="preserve"
-      {...props}
     >
       <style>
-        {
-          '.synaptic_pathways_svg__st2{fill:none}.synaptic_pathways_svg__st3{enable-background:new}.synaptic_pathways_svg__st4{fill:#fff}.synaptic_pathways_svg__st5{fill:none;stroke:#fff;stroke-width:2.1629;stroke-miterlimit:10}'
-        }
+        {`#pre_pathway_svg__layers path:hover, #pre_pathway_svg__layers g.active path{fill:${color}} #post_pathway_svg__layers path:hover, #post_pathway_svg__layers g.active path{fill:#ed8048}`}
       </style>
       <g id="synaptic_pathways_svg__shadow">
         <path
@@ -33,57 +89,120 @@ function SvgSynapticPathways(props) {
           d="M230.8 3.9h-138L24 37.9l.3.4v73.5h0v214.8h0V401h0v73.5l68.5 33.8h138l68.6-33.8V401h0v-74.4h0V111.8h0V38.3l.2-.4z"
         />
       </g>
-      <g id="synaptic_pathways_svg__Fill">
-        <path
-          id="synaptic_pathways_svg__l1postfill"
-          className="synaptic_pathways_svg__st2"
-          d="M230.8 145.6l68.6-33.8V38.3l.2-.4-68.8 33.7z"
-        />
-        <path
-          id="synaptic_pathways_svg__l1prefill"
-          className="synaptic_pathways_svg__st2"
-          d="M92.8 71.6L24 37.9l68.8-34-68.8 34 .3.4v73.5l68.5 33.8z"
-        />
-        <path
-          id="synaptic_pathways_svg__l23postfill"
-          className="synaptic_pathways_svg__st2"
-          d="M299.4 111.8l-68.6 33.8v140.3l68.6-33.5v-.2z"
-        />
-        <path
-          id="synaptic_pathways_svg__l23prefill"
-          className="synaptic_pathways_svg__st2"
-          d="M92.8 145.6l-68.5-33.8v140.6l68.5 33.5z"
-        />
-        <path
-          id="synaptic_pathways_svg__l5postfill"
-          className="synaptic_pathways_svg__st2"
-          d="M230.8 434.7l68.6-33.7v-74.4l-68.6 33.7z"
-        />
-        <path
-          id="synaptic_pathways_svg__l6postfill"
-          className="synaptic_pathways_svg__st2"
-          d="M230.8 508.3l68.6-33.8V401l-68.6 33.7z"
-        />
-        <path
-          id="synaptic_pathways_svg__l4postfill"
-          className="synaptic_pathways_svg__st2"
-          d="M230.8 360.3l68.6-33.7v-74.2l-68.6 33.5z"
-        />
-        <path
-          id="synaptic_pathways_svg__l4prefill"
-          className="synaptic_pathways_svg__st2"
-          d="M92.8 285.9l-68.5-33.5v74.2l68.5 33.7z"
-        />
-        <path
-          id="synaptic_pathways_svg__l6prefill"
-          className="synaptic_pathways_svg__st2"
-          d="M24.3 401v73.5l68.5 33.8v-73.6z"
-        />
-        <path
-          id="synaptic_pathways_svg__l5prefill"
-          className="synaptic_pathways_svg__st2"
-          d="M92.8 360.3l-68.5-33.7V401l68.5 33.7z"
-        />
+      <g id="pre_pathway_svg__layers">
+        <PathwayPoint
+          layer="L1"
+          onSelect={selectPreLayer}
+          cssPrefix={prePrefix}
+          activeLayer={activePreLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M92.8 71.6L24 37.9l68.8-34-68.8 34 .3.4v73.5l68.5 33.8z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L23"
+          onSelect={selectPreLayer}
+          cssPrefix={prePrefix}
+          activeLayer={activePreLayer}
+        >
+          PathwayPoint>
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M92.8 145.6l-68.5-33.8v140.6l68.5 33.5z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L4"
+          onSelect={selectPreLayer}
+          cssPrefix={prePrefix}
+          activeLayer={activePreLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M92.8 285.9l-68.5-33.5v74.2l68.5 33.7z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L5"
+          onSelect={selectPreLayer}
+          cssPrefix={prePrefix}
+          activeLayer={activePreLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M92.8 360.3l-68.5-33.7V401l68.5 33.7z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L6"
+          onSelect={selectPreLayer}
+          cssPrefix={prePrefix}
+          activeLayer={activePreLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M24.3 401v73.5l68.5 33.8v-73.6z"
+          />
+        </PathwayPoint>
+      </g>
+      <g id="post_pathway_svg__layers">
+        <PathwayPoint
+          layer="L1"
+          onSelect={selectPostLayer}
+          cssPrefix={postPrefix}
+          activeLayer={activePostLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M230.8 145.6l68.6-33.8V38.3l.2-.4-68.8 33.7z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L23"
+          onSelect={selectPostLayer}
+          cssPrefix={postPrefix}
+          activeLayer={activePostLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M299.4 111.8l-68.6 33.8v140.3l68.6-33.5v-.2z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L4"
+          onSelect={selectPostLayer}
+          cssPrefix={postPrefix}
+          activeLayer={activePostLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M230.8 360.3l68.6-33.7v-74.2l-68.6 33.5z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L5"
+          onSelect={selectPostLayer}
+          cssPrefix={postPrefix}
+          activeLayer={activePostLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M230.8 434.7l68.6-33.7v-74.4l-68.6 33.7z"
+          />
+        </PathwayPoint>
+        <PathwayPoint
+          layer="L6"
+          onSelect={selectPostLayer}
+          cssPrefix={postPrefix}
+          activeLayer={activePostLayer}
+        >
+          <path
+            className="synaptic_pathways_svg__st2"
+            d="M230.8 508.3l68.6-33.8V401l-68.6 33.7z"
+          />
+        </PathwayPoint>
       </g>
       <g id="synaptic_pathways_svg__Lines__x2B__text">
         <g id="synaptic_pathways_svg__Synapticlines">
@@ -133,6 +252,6 @@ function SvgSynapticPathways(props) {
       </g>
     </svg>
   );
-}
+};
 
-export default SvgSynapticPathways;
+export default SynapticPathwaySelector;

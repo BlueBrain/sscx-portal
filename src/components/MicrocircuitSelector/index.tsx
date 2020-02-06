@@ -1,40 +1,47 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
 import './style.less';
+import { Layer } from '../../types';
 
 const classPrefix = 'microcircuit_svg__';
-export type MicrocircuitLayer = 'L1' | 'L23' | 'L4' | 'L5' | 'L6';
 
 type MicrocircuitProps = {
-  layer: MicrocircuitLayer;
-  onSelect: (layer: MicrocircuitLayer) => void;
-  activeLayer?: MicrocircuitLayer;
+  layer: Layer;
+  onSelect: (layer: Layer) => void;
+  activeLayer?: Layer;
   children: ReactChild | ReactFragment;
-}
+};
 
 type MicrocircuitSelectProps = {
   color: string;
-  defaultActiveLayer?: MicrocircuitLayer;
-  onLayerSelected?: (layer: MicrocircuitLayer) => void;
+  defaultActiveLayer?: Layer;
+  onLayerSelected?: (layer: Layer) => void;
 };
 
-const Layer: React.FC<MicrocircuitProps> = ({ layer, activeLayer, onSelect, children }) => (
-  <g id={`${classPrefix}${layer}fill_1_`}
-     className={activeLayer === layer ? 'active' : ''}
-     onClick={() => onSelect(layer)}>
+const Layer: React.FC<MicrocircuitProps> = ({
+  layer,
+  activeLayer,
+  onSelect,
+  children,
+}) => (
+  <g
+    id={`${classPrefix}${layer}-fill`}
+    className={activeLayer === layer ? 'active' : ''}
+    onClick={() => onSelect(layer)}
+  >
     {children}
   </g>
 );
 
 const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
-                                                                   color,
-                                                                   defaultActiveLayer,
-                                                                   onLayerSelected,
-                                                                 }) => {
-  const [activeLayer, setActiveLayer] = React.useState<MicrocircuitLayer>(
+  color,
+  defaultActiveLayer,
+  onLayerSelected,
+}) => {
+  const [activeLayer, setActiveLayer] = React.useState<Layer>(
     defaultActiveLayer,
   );
-  const selectLayer = (l: MicrocircuitLayer): void => {
+  const selectLayer = (l: Layer): void => {
     setActiveLayer(l);
     onLayerSelected(l);
   };
@@ -48,9 +55,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
       xmlSpace="preserve"
     >
       <style>
-        {
-          `#microcircuit_svg__layers path:hover, #microcircuit_svg__layers g.active path{fill:${color}}`
-        }
+        {`#microcircuit_svg__layers path:hover, #microcircuit_svg__layers g.active path{fill:${color}}`}
       </style>
       <g id="microcircuit_svg__shadow_1_">
         <path
@@ -71,31 +76,31 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
         />
       </g>
       <g id="microcircuit_svg__layers">
-        <Layer layer='L1' onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer layer="L1" onSelect={selectLayer} activeLayer={activeLayer}>
           <path
             className="microcircuit_svg__st2"
             d="M224.7 71.8H87.5L19.2 38.3 87.5 4.5 19.2 38.3l.2.4v73.1l68.1 33.5h137.2l68.1-33.5V38.7l.2-.4z"
           />
         </Layer>
-        <Layer layer='L23' onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer layer="L23" onSelect={selectLayer} activeLayer={activeLayer}>
           <path
             className="microcircuit_svg__st2"
             d="M224.7 145.3H87.5l-68.1-33.5v139.6l68.1 33.4v.2h137.2v-.2l68.1-33.4V111.8z"
           />
         </Layer>
-        <Layer layer='L4' onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer layer="L4" onSelect={selectLayer} activeLayer={activeLayer}>
           <path
             className="microcircuit_svg__st2"
             d="M224.7 284.8v.2H87.5v-.2l-68.1-33.4v73.8l68.1 33.5h137.2l68.1-33.5v-73.8z"
           />
         </Layer>
-        <Layer layer='L5' onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer layer="L5" onSelect={selectLayer} activeLayer={activeLayer}>
           <path
             className="microcircuit_svg__st2"
             d="M224.7 358.7H87.5l-68.1-33.5v73.9l68.1 33.5h137.2l68.1-33.5v-73.9z"
           />
         </Layer>
-        <Layer layer='L6' onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer layer="L6" onSelect={selectLayer} activeLayer={activeLayer}>
           <path
             className="microcircuit_svg__st2"
             d="M224.7 432.6H87.5l-68.1-33.5v73.1l68.1 33.5h137.2l68.1-33.5v-73.1z"

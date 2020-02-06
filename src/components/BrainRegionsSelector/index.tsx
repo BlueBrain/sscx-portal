@@ -11,7 +11,7 @@ type BrainRegionProps = {
   onSelect: (region: BrainRegion) => void;
   activeRegion?: BrainRegion;
   children: ReactChild | ReactFragment;
-}
+};
 
 type BrainRegionsSelectProps = {
   defaultActiveBrainRegion?: BrainRegion;
@@ -19,19 +19,26 @@ type BrainRegionsSelectProps = {
   color: string;
 };
 
-const Region: React.FC<BrainRegionProps> = ({ region, activeRegion, onSelect, children }) => (
-  <g id={`${classPrefix}${region}fill_1_`}
-     className={activeRegion === region ? 'active' : ''}
-     onClick={() => onSelect(region)}>
+const Region: React.FC<BrainRegionProps> = ({
+  region,
+  activeRegion,
+  onSelect,
+  children,
+}) => (
+  <g
+    id={`${classPrefix}${region}-fill`}
+    className={activeRegion === region ? 'active' : ''}
+    onClick={() => onSelect(region)}
+  >
     {children}
   </g>
 );
 
 const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
-                                                                  defaultActiveBrainRegion,
-                                                                  onBrainRegionSelected,
-                                                                  color,
-                                                                }) => {
+  defaultActiveBrainRegion,
+  onBrainRegionSelected,
+  color,
+}) => {
   const [activeRegion, setActiveRegion] = React.useState<BrainRegion>(
     defaultActiveBrainRegion,
   );
@@ -50,9 +57,7 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
       xmlSpace="preserve"
     >
       <style>
-        {
-          `#brain_regions_svg__Fill path:hover, #brain_regions_svg__Fill g.active path{fill:${color}}`
-        }
+        {`#brain_regions_svg__Fill path:hover, #brain_regions_svg__Fill g.active path{fill:${color}}`}
       </style>
       <path
         id="brain_regions_svg__Shadow"
@@ -75,8 +80,8 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
             y2={1200.525}
             gradientTransform="translate(0 -512.11)"
           >
-            <stop offset={0} stopColor="#e4e9f5"/>
-            <stop offset={0.999} stopColor="#7ea6de"/>
+            <stop offset={0} stopColor="#e4e9f5" />
+            <stop offset={0.999} stopColor="#7ea6de" />
           </linearGradient>
           <path
             d="M362.1 356.3H48.7c-8.7 0-15.7-7-15.7-15.7V27.3c0-8.7 7-15.7 15.7-15.7H362c8.7 0 15.7 7 15.7 15.7v313.3c0 8.7-7 15.7-15.6 15.7z"
@@ -101,24 +106,41 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
         </g>
       </g>
       <g id="brain_regions_svg__Fill">
-        <Region region='S1Tr' onSelect={selectRegion} activeRegion={activeRegion}>
-          <path className="brain_regions_svg__st6"
-                d="M178.9 324.5c-81.7 10.2-99.5-39-99.5-39l2.3.7c2.2 1 4.3 1.7 6.7 2 8.3 1.3 17.7 1.5 23.3-2l35.2 5.5c.5.8 8.5 23.3 26.7 30.8.5.1 5.1 2 5.3 2z"
+        <Region
+          region="S1Tr"
+          onSelect={selectRegion}
+          activeRegion={activeRegion}
+        >
+          <path
+            className="brain_regions_svg__st6"
+            d="M178.9 324.5c-81.7 10.2-99.5-39-99.5-39l2.3.7c2.2 1 4.3 1.7 6.7 2 8.3 1.3 17.7 1.5 23.3-2l35.2 5.5c.5.8 8.5 23.3 26.7 30.8.5.1 5.1 2 5.3 2z"
           />
         </Region>
-        <Region region='S1FL' onSelect={selectRegion} activeRegion={activeRegion}>
+        <Region
+          region="S1FL"
+          onSelect={selectRegion}
+          activeRegion={activeRegion}
+        >
           <path
             className="brain_regions_svg__st6"
             d="M237.4 82.6V83.5c0 2.3-.2 4.8-.5 7.2-.2 2.2-.3 4.2-.5 6.3 0 0 0 .3-.2.8-2 19.2-6.3 36.5-16 33-.3 0-.8-.2-1.2-.5-.8-.3-1.7-.8-2.5-1.3-1.3-.7-2.5-1.3-3.3-1.8s-1.5-.8-1.5-.8c-3.3-2.2-6.3-4.5-8.8-6.8-2.5-2.5-4.5-5-6.2-7.7-3-5-4.2-10.5-4.2-16.8v-1.3c0-.5 0-1.2.2-1.8v-1c0-.7.2-1.3.2-1.8v-.7c0-.7.2-1 .2-1 1.8-12.8 7-33.3 10.7-46.8 3.2-11.8 18.7-15 26-5.2.8 1.2 1.7 2.3 2.3 3.5v.2c.6 1.4 4 22.3 5.3 43.4z"
           />
         </Region>
-        <Region region='S1Sh' onSelect={selectRegion} activeRegion={activeRegion}>
+        <Region
+          region="S1Sh"
+          onSelect={selectRegion}
+          activeRegion={activeRegion}
+        >
           <path
             className="brain_regions_svg__st6"
             d="M202.9 119.1c-1.8-.8-3.5-1.5-5.2-1.8-5-1.2-9 0-11.5 4.8-.8 1.5-1 3.2-.7 5 2.3 11.8 13.2 68.5-.5 88.8-7.5 11.3-19 26.7-27.5 40.8-.8 1.7-1.8 3.2-2.7 4.7H151c-5-.2-9.8-.8-14.7-2h-.2c-1.2-.3-2.5-.7-3.7-1l-7.2-2.5-7.2-2.8c.2-1.7.3-3.5.5-5.3.8-7.7 1.8-16 3-24.3.3-2.3.7-4.7 1-7 2-13.3 4.3-26.2 6.7-36 .2-1 .5-2 .8-3 .7-2.5 1.2-4.7 1.8-6.7 6.8-20.7 13.7-47.5 15-52.3l.2-.8s15.8-40 46.2-30.3c0 0 0 .3-.2 1 0 .8-.2 2.2-.3 3.5-.2.7-.2 1.3-.2 1.8V95c0 6.3 1.3 11.8 4.2 16.8 1.7 2.5 3.7 5 6.2 7.3z"
           />
         </Region>
-        <Region region='S1HL' onSelect={selectRegion} activeRegion={activeRegion}>
+        <Region
+          region="S1HL"
+          onSelect={selectRegion}
+          activeRegion={activeRegion}
+        >
           <path
             className="brain_regions_svg__st6"
             d="M147.2 117.8l-.2.8c-1.2 4.8-8 31.7-15 52.3-5.2 15.5-10.3 49-13.2 75.7-.2 2.3-.3 4.5-.7 6.7-.8 9.5-1.3 17.8-1.3 23.7 0 4.7-1.8 7.7-5 9.7h-.2c-5.7 3.5-15 3.3-23.3 2-2.3-.3-4.7-1-6.7-2-7.8-3.5-13.8-10.7-15-19.3-5-34.5 10.7-73.2 23.5-92.5 15.5-22.9 57.1-57.1 57.1-57.1z"

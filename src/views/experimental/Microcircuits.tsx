@@ -5,18 +5,19 @@ import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import { primaryColor } from './config';
 import Selector from '../../components/Selector';
-import MicrocircuitSelector, { MicrocircuitLayer } from '../../components/MicrocircuitSelector';
+import MicrocircuitSelector from '../../components/MicrocircuitSelector';
 import useQuery from '../../hooks/useQuery';
 import { useHistory } from 'react-router';
+import { Layer } from '../../types';
 
 const Microcircuits: React.FC = () => {
   const query = useQuery();
   const history = useHistory();
 
-  const setLayerQuery = (layer: MicrocircuitLayer) => {
+  const setLayerQuery = (layer: Layer) => {
     history.push(`?layer=${layer}`);
   };
-  const currentLayer: MicrocircuitLayer = query.get('layer') as MicrocircuitLayer;
+  const currentLayer: Layer = query.get('layer') as Layer;
 
   return (
     <Filters primaryColor={primaryColor} backgroundAlt hasData={!!currentLayer}>
@@ -27,11 +28,13 @@ const Microcircuits: React.FC = () => {
           subtitle="Experimental Data"
           hint="Select a microcircuit of interest."
         />
-        {!!currentLayer && (<div>
-          <InfoBox title="Longer Text" text={lorem} />
-          <br />
-          <InfoBox text={`This one has no title o_0\n${lorem}`} />
-        </div>)}
+        {!!currentLayer && (
+          <div>
+            <InfoBox title="Longer Text" text={lorem} />
+            <br />
+            <InfoBox text={`This one has no title o_0\n${lorem}`} />
+          </div>
+        )}
       </div>
       <div className="center-col">
         <Selector title="Choose a layer" column>
