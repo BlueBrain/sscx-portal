@@ -12,7 +12,7 @@ type ScrollTopProps = {
 const ScrollTop: React.FC<ScrollTopProps> = ({ anchor }) => {
   return (
     <a href={`#${anchor}`} className={`${classPrefix}base`}>
-        <IoIosArrowUp />
+      <IoIosArrowUp />
     </a>
   );
 };

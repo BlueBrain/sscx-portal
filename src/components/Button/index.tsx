@@ -17,24 +17,28 @@ type ButtonProps = {
 };
 
 const Button: React.FC<ButtonProps> = ({
-                                         primary,
-                                         palette,
-                                         active,
-                                         discrete,
-                                         width,
-                                         notifications,
-                                         onClick,
-                                         children,
-                                       }) => {
+  primary,
+  palette,
+  active,
+  discrete,
+  width,
+  notifications,
+  onClick,
+  children,
+}) => {
   return (
     <button
       style={{ width: width }}
       onClick={onClick}
-      className={`${classPrefix}${palette}${primary ? '-primary' : ''}${discrete ? '-discrete' : ''}${active ? '-active' : ''}`}
+      className={`${classPrefix}${palette}${primary ? '-primary' : ''}${
+        discrete ? '-discrete' : ''
+      }${active ? '-active' : ''}`}
     >
       {children}
       {notifications && (
-        <span className={`${classPrefix}${palette}-notifications`}>{notifications}</span>
+        <span className={`${classPrefix}${palette}-notifications`}>
+          {notifications}
+        </span>
       )}
     </button>
   );

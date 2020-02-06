@@ -11,16 +11,24 @@ type CollapsibleProps = {
   children: ReactChild | ReactFragment;
 };
 
-const Collapsible: React.FC<CollapsibleProps> = ({ collapsed, title, children }) => {
+const Collapsible: React.FC<CollapsibleProps> = ({
+  collapsed,
+  title,
+  children,
+}) => {
   const [isCollapsed, setCollapsed] = React.useState(collapsed);
 
-  return <div className={`${classPrefix}${isCollapsed ? 'collapsed' : 'expanded'}`}>
-    <div onClick={() => setCollapsed(!isCollapsed)} className='header'>
-      {title}
-      <span className='arrow'><IoIosArrowUp /></span>
+  return (
+    <div className={`${classPrefix}${isCollapsed ? 'collapsed' : 'expanded'}`}>
+      <div onClick={() => setCollapsed(!isCollapsed)} className="header">
+        {title}
+        <span className="arrow">
+          <IoIosArrowUp />
+        </span>
+      </div>
+      <div className="content">{children}</div>
     </div>
-    <div className='content'>{children}</div>
-  </div>;
+  );
 };
 
 export default Collapsible;

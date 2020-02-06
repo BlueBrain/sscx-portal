@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BrainRegionsSVG from './brain_regions.svg';
+// import BrainRegionsSVG from './brain_regions.svg';
 import './brain_regions.css';
 
 const classPrefix = 'brain_regions_svg__';
@@ -16,7 +16,7 @@ const BrainRegionSelector: React.FC<BrainRegionSelectProps> = ({
   defaultActiveBrainRegion,
   onBrainRegionSelected,
 }) => {
-  const [activeRegion, setActiveRegion] = React.useState<BrainRegion>(
+  /*const [activeRegion, setActiveRegion] = React.useState<BrainRegion>(
     defaultActiveBrainRegion,
   );
   const svg = React.useRef<SVGElement>();
@@ -63,9 +63,9 @@ const BrainRegionSelector: React.FC<BrainRegionSelectProps> = ({
         }
       });
     };
-  }, [activeRegion]);
+  }, [activeRegion]);*/
 
-  return <BrainRegionsSVG ref={svg} />;
+  return <div>Brain regions</div>;
 };
 
 export default BrainRegionSelector;

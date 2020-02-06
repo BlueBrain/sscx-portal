@@ -4,15 +4,23 @@
 
 .filters__basis {
   padding: 100px 60px 80px;
-  min-height: calc(100vh - 180px);
+  min-height: 100vh;
   width: 100%;
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
   background-color: #basePalette[navy-4];
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(../../assets/images/background.svg);
+  background-size: cover;
+
+  &.background-alt {
+    background-image: url(../../assets/images/background-alt.svg);
+  }
 
   .center {
-    margin: 0 auto;
+    margin: 0 auto 60px;
     max-width: 1080px;
     display: flex;
   }

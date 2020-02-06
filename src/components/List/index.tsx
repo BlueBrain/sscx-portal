@@ -21,25 +21,47 @@ type ListElementProps = {
   palette: Palette;
 };
 
-const ListElement: React.FC<ListElementProps> = ({ element, selected, onSelect, palette }) => {
-  return <div
-    className={`${classPrefixListElement}${palette} ${selected ? `${classPrefixListElement}${palette}-selected` : ''}`}
-    onClick={() => onSelect(element)}>
-    {element}
-  </div>;
+const ListElement: React.FC<ListElementProps> = ({
+  element,
+  selected,
+  onSelect,
+  palette,
+}) => {
+  return (
+    <div
+      className={`${classPrefixListElement}${palette} ${
+        selected ? `${classPrefixListElement}${palette}-selected` : ''
+      }`}
+      onClick={() => onSelect(element)}
+    >
+      {element}
+    </div>
+  );
 };
 
-const List: React.FC<ListProps> = ({ title, list, selected, onSelect, palette }) => {
-  return <div className={`${classPrefixList}basis`}>
-    {title && <p>{title}</p>}
-    <div className='elements'>
-      {list.map((el, i) => <ListElement key={i}
-                                        element={el}
-                                        selected={selected === el}
-                                        onSelect={onSelect}
-                                        palette={palette}/>)}
+const List: React.FC<ListProps> = ({
+  title,
+  list,
+  selected,
+  onSelect,
+  palette,
+}) => {
+  return (
+    <div className={`${classPrefixList}basis`}>
+      {title && <p>{title}</p>}
+      <div className="elements">
+        {list.map((el, i) => (
+          <ListElement
+            key={i}
+            element={el}
+            selected={selected === el}
+            onSelect={onSelect}
+            palette={palette}
+          />
+        ))}
+      </div>
     </div>
-  </div>;
+  );
 };
 
 export default List;

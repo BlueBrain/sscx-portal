@@ -1,7 +1,6 @@
 import React from 'react';
 
-import LayerAnatomySVG from './layer_anatomy.svg';
-import './layer_anatomy.css';
+import './style.less';
 
 const classPrefix = 'layer_anatomy_svg__';
 const layers: Layer[] = ['L1', 'L23', 'L4', 'L5', 'L6'];
@@ -17,7 +16,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
   defaultActiveLayer,
   onLayerSelected,
 }) => {
-  const [activeLayer, setActiveLayer] = React.useState<Layer>(
+  /*const [activeLayer, setActiveLayer] = React.useState<Layer>(
     defaultActiveLayer,
   );
   const svg = React.useRef<SVGElement>();
@@ -59,9 +58,9 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
         }
       });
     };
-  }, [activeLayer]);
+  }, [activeLayer]); */
 
-  return <LayerAnatomySVG ref={svg} />;
+  return <div>Layer anatomy</div>;
 };
 
 export default LayerAnatomySelector;

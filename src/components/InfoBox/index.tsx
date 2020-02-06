@@ -30,7 +30,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   title,
   text,
   color,
-  maxChars = 200,
+  maxChars = 150,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
   const [currentText, setCurrentText] = React.useState(text);

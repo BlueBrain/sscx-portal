@@ -20,7 +20,7 @@ const LayerAnatomy: React.FC = props => {
   };
 
   return (
-    <Filters primaryColor={primaryColor}>
+    <Filters primaryColor={primaryColor} backgroundAlt>
       <div className="center-col">
         <Title
           primaryColor={primaryColor}

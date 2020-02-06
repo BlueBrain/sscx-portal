@@ -33,152 +33,149 @@ const Styleguide: React.FC = () => {
   };
 
   return (
-    <Filters primaryColor={color}>
-      <div>
-        <div id="top" role="title">
-          <Title
-            title="Styleguide"
-            subtitle="SSCx Portal"
-            hint="A collection of useful elements"
-            primaryColor={color}
-          />
-        </div>
-
-        <section>
-          <h3>Buttons</h3>
-          <h4>Primary</h4>
-          <Button primary palette="warm" onClick={dummyFn}>
-            hellfire
-          </Button>
-          <br />
-          <br />
-          <Button primary palette="cool" onClick={dummyFn}>
-            cool as a cucumber
-          </Button>
-          <h4>Active</h4>
-          <Button active palette="warm" onClick={dummyFn}>
-            Hot and Active
-          </Button>
-          <br />
-          <br />
-          <Button active palette="cool" onClick={dummyFn}>
-            Winter Sports
-          </Button>
-          <h4>Regular</h4>
-          <Button palette="warm" onClick={dummyFn}>
-            good ol' button
-          </Button>
-          <h4>Discrete</h4>
-          <Button palette="cool" discrete onClick={dummyFn}>
-            I'm rather shy
-          </Button>
-          <h4>Notifications</h4>
-          <Button palette="cool" notifications={7} onClick={dummyFn}>
-            Duly notified
-          </Button>
-        </section>
-
-        <section>
-          <h3>Select</h3>
-          <h4>List</h4>
-          <List
-            title="1. Pick a dino 🦕🦕🦕 (warm palette)"
-            list={dinos}
-            palette="warm"
-            selected={dinos[2]}
-            onSelect={dummyFnStr}
-          />
-          <br />
-          <List
-            title="1a. The dinos got cooler 😎"
-            list={dinos.slice(0, 3)}
-            palette="cool"
-            selected={dinos[1]}
-            onSelect={dummyFnStr}
-          />
-          <h4>Pills</h4>
-          <p>
-            <em>
-              NB: I inverted the styles for selected and not-selected, to match
-              the logic of the other buttons – it was weird otherwise)
-            </em>
-          </p>
-          <Pills
-            title="1. Select a dino pill 🦖💊🦖💊"
-            list={dinos.slice(0, 3)}
-            palette="cool"
-            selected={dinos[2]}
-            onSelect={dummyFnStr}
-          />
-        </section>
-
-        <section>
-          <h3>Navigation</h3>
-          <h4>Scroll to anchor</h4>
-          <p>
-            <em>TODO: Responsive design</em>
-          </p>
-          <ScrollTo anchor="top" direction="up">
-            Return to filters
-          </ScrollTo>
-          <br />
-          <ScrollTo anchor="bottom" direction="down">
-            View data
-          </ScrollTo>
-          <h4>Scroll top</h4>
-          <ScrollTop anchor="top" />
-        </section>
-
-        <section>
-          <h3>Content</h3>
-          <h4>Collapsible</h4>
-          <Collapsible title="Murderous Bird on the Loose">
-            <>
-              <img
-                src={require('../assets/images/cassowary.jpg')}
-                alt="cassowary"
-              />
-              <p>
-                A cassowary escapes from the local zoo. Already 482 have
-                suffered from his lethal kick.
-              </p>
-            </>
-          </Collapsible>
-          <br />
-          <Collapsible title="Murderous Bird on Lockdown" collapsed={true}>
-            <>
-              <img
-                src={require('../assets/images/cassowary.jpg')}
-                alt="cassowary"
-              />
-              <p>
-                Newsflash: the escaped cassowary has been safely apprehended
-                earlier this afternoon. He is facing the most severe charges.
-              </p>
-            </>
-          </Collapsible>
-          <h4>Info box</h4>
-          <InfoBox
-            title="Short Text"
-            text="No need to show the read more link."
-          />
-          <br />
-          <InfoBox title="Longer Text" text={lorem} />
-          <br />
-          <InfoBox text={`This one has no title o_0\n${lorem}`} />
-          <h4>Image viewer</h4>
-          <p>
-            <em>TODO: Make expand function work properly</em>
-          </p>
-          <ImageViewer
-            src={require('../assets/images/cassowary.jpg')}
-            alt="cassowary"
-          />
-        </section>
-
-        <section id="bottom" />
+    <div style={{ padding: '60px' }}>
+      <div id="top" role="title">
+        <Title
+          title="Styleguide"
+          subtitle="SSCx Portal"
+          hint="A collection of useful elements"
+          primaryColor={color}
+        />
       </div>
-    </Filters>
+
+      <section>
+        <h3>Buttons</h3>
+        <h4>Primary</h4>
+        <Button primary palette="warm" onClick={dummyFn}>
+          hellfire
+        </Button>
+        <br/>
+        <br/>
+        <Button primary palette="cool" onClick={dummyFn}>
+          cool as a cucumber
+        </Button>
+        <h4>Active</h4>
+        <Button active palette="warm" onClick={dummyFn}>
+          Hot and Active
+        </Button>
+        <br/>
+        <br/>
+        <Button active palette="cool" onClick={dummyFn}>
+          Winter Sports
+        </Button>
+        <h4>Regular</h4>
+        <Button palette="warm" onClick={dummyFn}>
+          good ol' button
+        </Button>
+        <h4>Discrete</h4>
+        <Button palette="cool" discrete onClick={dummyFn}>
+          I'm rather shy
+        </Button>
+        <h4>Notifications</h4>
+        <Button palette="cool" notifications={7} onClick={dummyFn}>
+          Duly notified
+        </Button>
+      </section>
+
+      <section>
+        <h3>Select</h3>
+        <h4>List</h4>
+        <List
+          title="1. Pick a dino 🦕🦕🦕 (warm palette)"
+          list={dinos}
+          palette="warm"
+          selected={dinos[2]}
+          onSelect={dummyFnStr}
+        />
+        <br/>
+        <List
+          title="1a. The dinos got cooler 😎"
+          list={dinos.slice(0, 3)}
+          palette="cool"
+          selected={dinos[1]}
+          onSelect={dummyFnStr}
+        />
+        <h4>Pills</h4>
+        <p>
+          <em>
+            NB: I inverted the styles for selected and not-selected, to match
+            the logic of the other buttons – it was weird otherwise)
+          </em>
+        </p>
+        <Pills
+          title="1. Select a dino pill 🦖💊🦖💊"
+          list={dinos.slice(0, 3)}
+          selected={dinos[2]}
+          onSelect={dummyFnStr}
+        />
+      </section>
+
+      <section>
+        <h3>Navigation</h3>
+        <h4>Scroll to anchor</h4>
+        <p>
+          <em>TODO: Responsive design</em>
+        </p>
+        <ScrollTo anchor="top" direction="up">
+          Return to filters
+        </ScrollTo>
+        <br/>
+        <ScrollTo anchor="bottom" direction="down">
+          View data
+        </ScrollTo>
+        <h4>Scroll top</h4>
+        <ScrollTop anchor="top"/>
+      </section>
+
+      <section>
+        <h3>Content</h3>
+        <h4>Collapsible</h4>
+        <Collapsible title="Murderous Bird on the Loose">
+          <>
+            <img
+              src={require('../assets/images/cassowary.jpg')}
+              alt="cassowary"
+            />
+            <p>
+              A cassowary escapes from the local zoo. Already 482 have
+              suffered from his lethal kick.
+            </p>
+          </>
+        </Collapsible>
+        <br/>
+        <Collapsible title="Murderous Bird on Lockdown" collapsed={true}>
+          <>
+            <img
+              src={require('../assets/images/cassowary.jpg')}
+              alt="cassowary"
+            />
+            <p>
+              Newsflash: the escaped cassowary has been safely apprehended
+              earlier this afternoon. He is facing the most severe charges.
+            </p>
+          </>
+        </Collapsible>
+        <h4>Info box</h4>
+        <InfoBox
+          title="Short Text"
+          text="No need to show the read more link."
+        />
+        <br/>
+        <InfoBox title="Longer Text" text={lorem}/>
+        <br/>
+        <InfoBox text={`This one has no title o_0\n${lorem}`}/>
+        <h4>Image viewer</h4>
+        <p>
+          <em>TODO: Make expand function work properly</em>
+        </p>
+        <ImageViewer
+          src={require('../assets/images/cassowary.jpg')}
+          alt="cassowary"
+        />
+      </section>
+
+      <section id="bottom"/>
+    </div>
   );
 };
 
