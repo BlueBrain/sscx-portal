@@ -1,5 +1,4 @@
 import React from 'react';
-import EpflLogo from '../../assets/images/epfl-logo.svg';
 
 import './style.less';
 
@@ -8,9 +7,9 @@ const classPrefix = 'brand__';
 const Brand: React.FC = () => {
   return (
     <div className={`${classPrefix}basis`}>
-      <div className="svg">
+      <div className="logo">
         <a href="https://www.epfl.ch/">
-          <EpflLogo />
+          <img src={require('../../assets/images/epfl-logo.svg')} alt='EPFL logo' />
         </a>
       </div>
       <a href="/">

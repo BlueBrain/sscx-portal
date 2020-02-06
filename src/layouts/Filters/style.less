@@ -12,21 +12,27 @@
   background-color: #basePalette[navy-4];
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url(../../assets/images/background.svg);
+  background-image: url(../../assets/images/backgrounds/default.svg);
   background-size: cover;
 
   &.background-alt {
-    background-image: url(../../assets/images/background-alt.svg);
+    background-image: url(../../assets/images/backgrounds/alt.svg);
   }
 
   .center {
-    margin: 0 auto 60px;
+    margin: 60px auto 60px;
     max-width: 1080px;
     display: flex;
   }
 
   .center-col {
     flex: 50%;
+    &:first-child {
+      margin-right: 60px;
+    }
+    &:last-child {
+      margin-left: 60px;
+    }
   }
 
   .scroll-to {

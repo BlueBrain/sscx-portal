@@ -1,54 +1,18 @@
-import React, { ReactChild, ReactFragment } from 'react';
+import React from 'react';
 
-import './style.less';
-
-const classPrefix = 'layer_anatomy_svg__';
-export type Layer = 'L1' | 'L23' | 'L4' | 'L5' | 'L6';
-
-type LayerProps = {
-  layer: Layer;
-  onSelect: (layer: Layer) => void;
-  activeLayer?: Layer;
-  children: ReactChild | ReactFragment;
-}
-
-type LayerAnatomySelectProps = {
-  color: string,
-  defaultActiveLayer?: Layer;
-  onLayerSelected?: (layer: Layer) => void;
-};
-
-const Layer: React.FC<LayerProps> = ({ layer, activeLayer, onSelect, children }) => (
-  <g id={`layer_anatomy_svg__${layer}fill_1_`}
-     className={activeLayer === layer ? 'active' : ''}
-     onClick={() => onSelect(layer)}>
-    {children}
-  </g>
-);
-
-const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
-                                                                   color,
-                                                                   defaultActiveLayer,
-                                                                   onLayerSelected,
-                                                                 }) => {
-  const [activeLayer, setActiveLayer] = React.useState<Layer>(
-    defaultActiveLayer,
-  );
-  const selectLayer = (l: Layer): void => {
-    setActiveLayer(l);
-    onLayerSelected(l);
-  };
-
+function SvgLayerAnatomy(props) {
   return (
     <svg
       id="layer_anatomy_svg__Layer_1"
       x={0}
       y={0}
       viewBox="0 0 382.3 393.9"
-      xmlSpace="preserve">
+      xmlSpace="preserve"
+      {...props}
+    >
       <style>
         {
-          `#layer_anatomy_svg__layers path:hover, #layer_anatomy_svg__layers g.active path{fill:${color}}`
+          '.layer_anatomy_svg__st3{fill:#050a30}.layer_anatomy_svg__st4{fill:#52617d}.layer_anatomy_svg__st5{fill:#303354;stroke:#fff;stroke-width:1.6671;stroke-miterlimit:10}.layer_anatomy_svg__st6{fill:none}.layer_anatomy_svg__st7{enable-background:new}.layer_anatomy_svg__st8{fill:#fff}.layer_anatomy_svg__st9{fill:#ffc807}.layer_anatomy_svg__st10{fill:none;stroke:#fff;stroke-width:1.6671;stroke-miterlimit:10}'
         }
       </style>
       <path
@@ -71,14 +35,14 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
           y2={1199.638}
           gradientTransform="translate(0 -512.11)"
         >
-          <stop offset={0} stopColor="#fff"/>
-          <stop offset={0.1} stopColor="#fffefa"/>
-          <stop offset={0.226} stopColor="#fffaea"/>
-          <stop offset={0.366} stopColor="#fff5d0"/>
-          <stop offset={0.515} stopColor="#ffedac"/>
-          <stop offset={0.673} stopColor="#ffe27e"/>
-          <stop offset={0.836} stopColor="#ffd646"/>
-          <stop offset={0.999} stopColor="#ffc807"/>
+          <stop offset={0} stopColor="#fff" />
+          <stop offset={0.1} stopColor="#fffefa" />
+          <stop offset={0.226} stopColor="#fffaea" />
+          <stop offset={0.366} stopColor="#fff5d0" />
+          <stop offset={0.515} stopColor="#ffedac" />
+          <stop offset={0.673} stopColor="#ffe27e" />
+          <stop offset={0.836} stopColor="#ffd646" />
+          <stop offset={0.999} stopColor="#ffc807" />
         </linearGradient>
         <path
           d="M363.5 357.3H51.9c-8.5 0-15.5-7-15.5-15.5V30.2c0-8.5 7-15.5 15.5-15.5h311.6c8.5 0 15.5 7 15.5 15.5v311.6c0 8.5-7 15.5-15.5 15.5z"
@@ -97,41 +61,20 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
             className="layer_anatomy_svg__st4"
             d="M139.8 51.7l-13.2-9.8c-.5.5-.5-1.3-.5-.8l5.7 31.8 13.2 9.5-5.2-30.7zM135.6 92.4l-13.8-10c-.5.5-.5-1.3-.5-.8l11 71 13.8 10.5-10.5-70.7zM135.6 173.9l-13.2-12.3c-.5.5-.5.8-.5 1.3l7 45.3 14.2 11.7-7.5-46zM135.6 227.7l-14.2-12.3c-.5.5 7 50 7 50l13.5 9.5-6.3-47.2zM135.1 283.1l-13.8-12.5c-.5.5-.7.8-.5 1.7l8.2 47.3 13.8 12.3-7.7-48.8z"
           />
-
-          <g id="layer_anatomy_svg__layers">
-            <Layer layer={'L1'} onSelect={selectLayer} activeLayer={activeLayer}>
-              <path
-                className="layer_anatomy_svg__st5"
-                d="M324.7 119.9C276 96 216.8 79.7 147.1 82c-1.2 0-2.3-.8-2.5-2l-4.5-26.2c0-1.3.8-2.5 2.3-2.7 15.2-2 99.9-10.5 195.2 37.2l-12.9 31.6z"
-              />
-            </Layer>
-            <Layer layer={'L23'} onSelect={selectLayer} activeLayer={activeLayer}>
-              <path
-                className="layer_anatomy_svg__st5"
-                d="M319.2 131.7c-89.9-46-166.5-41-181.2-39.5-1.3 0-2.3 1.3-2 2.5l9.8 66c0 1.2 1.2 2 2.3 2 53.7.2 101 13.5 141.2 32 10-21 20-42 29.9-63"
-              />
-            </Layer>
-            <Layer layer={'L4'} onSelect={selectLayer} activeLayer={activeLayer}>
-              <path
-                className="layer_anatomy_svg__st5"
-                d="M262.5 250.1c-34.3-15.7-73.9-27.7-117.2-29.8-1.2 0-2-.8-2.3-2l-6.8-41.7c-.5-1.3.5-2.7 2-2.7 13-.7 72.4-1.5 144.9 33l-20.6 43.2z"
-              />
-            </Layer>
-            <Layer layer={'L5'} onSelect={selectLayer} activeLayer={activeLayer}>
-              <path
-                id="layer_anatomy_svg__L5fill_1_"
-                className="layer_anatomy_svg__st5"
-                d="M242.5 292.1c-28.3-10.5-61.3-17.7-98.4-17.2-1.3 0-2.5-.7-2.5-2l-5.7-42.3c-.2-1.7.8-2.7 2.5-2.7 12.2.5 60.7 4.5 119.4 30.8l-15.3 33.4z"
-              />
-            </Layer>
-            <Layer layer={'L6'} onSelect={selectLayer} activeLayer={activeLayer}>
-              <path
-                id="layer_anatomy_svg__L6fill_1_"
-                className="layer_anatomy_svg__st5"
-                d="M137.6 283.1c-1.2 0-2.3 1.2-2 2.7l6.8 43.5c.2 1.3 1.3 2 2.5 2 8.3-.8 38.5-3 76.2 6.5 5.7-12.3 11.3-24.8 17.2-37.2-28.8-11-62.5-18.4-100.7-17.5z"
-              />
-            </Layer>
-          </g>
+          <path
+            className="layer_anatomy_svg__st5"
+            d="M324.7 119.9C276 96 216.8 79.7 147.1 82c-1.2 0-2.3-.8-2.5-2l-4.5-26.2c0-1.3.8-2.5 2.3-2.7 15.2-2 99.9-10.5 195.2 37.2l-12.9 31.6zM242.5 292.1c-28.3-10.5-61.3-17.7-98.4-17.2-1.3 0-2.5-.7-2.5-2l-5.7-42.3c-.2-1.7.8-2.7 2.5-2.7 12.2.5 60.7 4.5 119.4 30.8l-15.3 33.4zM262.5 250.1c-34.3-15.7-73.9-27.7-117.2-29.8-1.2 0-2-.8-2.3-2l-6.8-41.7c-.5-1.3.5-2.7 2-2.7 13-.7 72.4-1.5 144.9 33l-20.6 43.2z"
+          />
+          <path
+            id="layer_anatomy_svg__L23fill_1_"
+            className="layer_anatomy_svg__st5"
+            d="M319.2 131.7c-89.9-46-166.5-41-181.2-39.5-1.3 0-2.3 1.3-2 2.5l9.8 66c0 1.2 1.2 2 2.3 2 53.7.2 101 13.5 141.2 32 10-21 20-42 29.9-63"
+          />
+          <path
+            id="layer_anatomy_svg__L6fill_1_"
+            className="layer_anatomy_svg__st5"
+            d="M137.6 283.1c-1.2 0-2.3 1.2-2 2.7l6.8 43.5c.2 1.3 1.3 2 2.5 2 8.3-.8 38.5-3 76.2 6.5 5.7-12.3 11.3-24.8 17.2-37.2-28.8-11-62.5-18.4-100.7-17.5z"
+          />
         </g>
       </g>
       <g id="layer_anatomy_svg__fill">
@@ -209,6 +152,6 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
       </g>
     </svg>
   );
-};
+}
 
-export default LayerAnatomySelector;
+export default SvgLayerAnatomy;

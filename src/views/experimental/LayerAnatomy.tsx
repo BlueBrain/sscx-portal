@@ -10,6 +10,7 @@ import Title from '../../layouts/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import { primaryColor } from './config';
+import Selector from '../../components/Selector';
 
 const LayerAnatomy: React.FC = props => {
   const query = useQuery();
@@ -18,6 +19,8 @@ const LayerAnatomy: React.FC = props => {
   const setLayerQuery = (layer: Layer) => {
     history.push(`?layer=${layer}`);
   };
+  const currentLayer: Layer = query.get('layer') as Layer;
+
 
   return (
     <Filters primaryColor={primaryColor} backgroundAlt>
@@ -28,17 +31,20 @@ const LayerAnatomy: React.FC = props => {
           subtitle="Experimental Data"
           hint="Select a layer of interest in the S1 of the rat brain."
         />
-        <div>
-          <InfoBox title="Longer Text" text={lorem} />
-          <br />
-          <InfoBox text={`This one has no title o_0\n${lorem}`} />
-        </div>
+        {!!currentLayer && (<div role="information">
+          <InfoBox title="Longer Text" text={lorem}/>
+          <br/>
+          <InfoBox text={`This one has no title o_0\n${lorem}`}/>
+        </div>)}
       </div>
       <div className="center-col">
-        <LayerAnatomySelector
-          defaultActiveLayer={query.get('layer') as Layer}
-          onLayerSelected={setLayerQuery}
-        />
+        <Selector title="Choose a layer">
+          <LayerAnatomySelector
+            color={primaryColor}
+            defaultActiveLayer={currentLayer}
+            onLayerSelected={setLayerQuery}
+          />
+        </Selector>
       </div>
     </Filters>
   );
