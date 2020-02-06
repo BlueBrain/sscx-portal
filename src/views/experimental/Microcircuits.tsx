@@ -19,7 +19,7 @@ const Microcircuits: React.FC = () => {
   const currentLayer: MicrocircuitLayer = query.get('layer') as MicrocircuitLayer;
 
   return (
-    <Filters primaryColor={primaryColor} backgroundAlt>
+    <Filters primaryColor={primaryColor} backgroundAlt hasData={!!currentLayer}>
       <div className="center-col">
         <Title
           primaryColor={primaryColor}

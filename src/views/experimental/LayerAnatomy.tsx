@@ -23,7 +23,7 @@ const LayerAnatomy: React.FC = () => {
 
 
   return (
-    <Filters primaryColor={primaryColor} backgroundAlt>
+    <Filters primaryColor={primaryColor} backgroundAlt hasData={!!currentLayer}>
       <div className="center-col">
         <Title
           primaryColor={primaryColor}
