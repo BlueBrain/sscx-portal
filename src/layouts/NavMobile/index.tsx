@@ -3,6 +3,7 @@ import React from 'react';
 import './style.less';
 import { NavLink, withRouter } from 'react-router-dom';
 import { IoIosMenu, MdClose } from 'react-icons/all';
+import { SecondaryNav, HomeNav } from '../Navigation';
 
 const classPrefix = 'nav-mobile__';
 
@@ -17,33 +18,8 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
       <div className="close-icon" onClick={onClose}>
         <MdClose />
       </div>
-      <ul>
-        <li>
-          <NavLink to="/experimental" activeClassName="selected">
-            Experiments
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/reconstruction" activeClassName="selected">
-            Reconstruction
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/validation" activeClassName="selected">
-            Validation
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/validation" activeClassName="selected">
-            Predictions
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/styleguide" activeClassName="selected">
-            Styleguide
-          </NavLink>
-        </li>
-      </ul>
+      <HomeNav />
+      <SecondaryNav />
     </div>
   </div>
 );
@@ -63,13 +39,13 @@ const NavMobile = withRouter(({ location }) => {
         </div>
         <ul>
           <li>
-            <NavLink to="/experimental" activeClassName="active">
-              Validation
+            <NavLink to="/downloads" activeClassName="active">
+              Downloads
             </NavLink>
           </li>
           <li>
-            <NavLink to="/reconstruction" activeClassName="active">
-              Reconstruction
+            <NavLink to="/literature" activeClassName="active">
+              Literature
             </NavLink>
           </li>
           <li>

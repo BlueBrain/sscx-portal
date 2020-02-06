@@ -1,10 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-
-import BrainRegionsSelector, {
-  BrainRegion,
-} from '../../components/BrainRegionsSelector';
-import useQuery from '../../hooks/useQuery';
 import Title from '../../layouts/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
@@ -13,19 +7,12 @@ import { primaryColor } from './config';
 import Pills from '../../components/Pills';
 
 const BrainRegions: React.FC = () => {
-  const query = useQuery();
-  const history = useHistory();
-
-  const setBrainRegionQuery = (brainRegion: BrainRegion) => {
-    history.push(`?brain_region=${brainRegion}`);
-  };
-
   return (
     <Filters primaryColor={primaryColor}>
       <div className="center-col">
         <Title
           primaryColor={primaryColor}
-          title="Brain Regions"
+          title="Synaptic Pathways"
           subtitle="Reconstruction Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
@@ -41,10 +28,7 @@ const BrainRegions: React.FC = () => {
         </div>
       </div>
       <div className="center-col">
-        <BrainRegionsSelector
-          defaultActiveBrainRegion={query.get('brain_region') as BrainRegion}
-          onBrainRegionSelected={setBrainRegionQuery}
-        />
+        <span>TODO: Synaptic pathways selector</span>
       </div>
     </Filters>
   );

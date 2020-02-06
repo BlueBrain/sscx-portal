@@ -3,6 +3,7 @@ import React from 'react';
 import './style.less';
 import { NavLink, withRouter } from 'react-router-dom';
 import Button from '../../components/Button';
+import { SecondaryNav } from '../Navigation';
 
 const classPrefix = 'nav-desktop__';
 const palette = 'cool';
@@ -25,7 +26,7 @@ const NavButton: React.FC<NavButtonProps> = ({
   onClick,
 }) => {
   return (
-    <NavLink to={path} activeClassName="active" exact={home}>
+    <NavLink to={path} exact={home}>
       <Button
         palette={palette}
         width={highlight || home ? 140 : null}
@@ -38,31 +39,6 @@ const NavButton: React.FC<NavButtonProps> = ({
     </NavLink>
   );
 };
-
-const SecondaryNav: React.FC = () => (
-  <ul className="secondary-nav">
-    <li>
-      <NavLink to="/experimental" activeClassName="selected">
-        Experimental Data
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to="/reconstruction" activeClassName="selected">
-        Reconstruction Data
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to="/validation" activeClassName="selected">
-        Validation Data
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to="/predictions" activeClassName="selected">
-        Predictions
-      </NavLink>
-    </li>
-  </ul>
-);
 
 const NavDesktop = withRouter(({ location }) => {
   const [secondaryNav, setSecondaryNav] = React.useState(false);
@@ -87,14 +63,14 @@ const NavDesktop = withRouter(({ location }) => {
       </li>
       <li>
         <NavButton
-          path="/experimental"
+          path="/downloads"
           name="Downloads"
           notifications={7}
           highlight
         />
       </li>
       <li>
-        <NavButton path="/reconstruction" name="Litterature" />
+        <NavButton path="/literature" name="Literature" />
       </li>
       <li>
         <NavButton path="/styleguide" name="Styleguide" />
