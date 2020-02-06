@@ -9,10 +9,10 @@
   width: @width;
   padding: @padding;
   background-color: #basePalette[navy-1];
-  border-radius: 15px;
+  border-radius: 5px;
   overflow: hidden;
   p {
-    font-weight: 400;
+    font-weight: 700;
     margin: 0;
   }
   .elements {
@@ -24,6 +24,7 @@
 
 .list-element__basis {
   background-color: #basePalette[white];
+  color: #basePalette[navy-1];
   margin: 8px 30px 8px 10px;
   border-radius: 3px;
   text-align: center;
@@ -31,7 +32,7 @@
   font-weight: 700;
   cursor: pointer;
   &:hover {
-    color: #basePalette[white];
+    color:  #basePalette[navy-4];
   }
   &:first-child {
     margin-top: 0;
@@ -39,36 +40,9 @@
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-.list-element__warm {
-  .list-element__basis();
-  color: #basePalette[navy-1];
-  &:hover {
-    background-color: #warmPalette[light-min-1];
+  &.selected {
+    color: #basePalette[white];
+    background-color: #basePalette[navy-3];
+    cursor: initial;
   }
-  &:active {
-    background-color: #warmPalette[light];
-  }
-}
-
-.list-element__warm-selected {
-  color: #basePalette[white];
-  background-color: #warmPalette[light];
-}
-
-.list-element__cool {
-  .list-element__basis();
-  color: #coolPalette[medium];
-  &:hover {
-    background-color: #coolPalette[light-min-1];
-  }
-  &:active {
-    background-color: #coolPalette[light];
-  }
-}
-
-.list-element__cool-selected {
-  color: #basePalette[white];
-  background-color: #coolPalette[light];
 }

@@ -8,6 +8,7 @@ const classPrefix = 'image-viewer__';
 type ImageViewerProps = {
   src: string;
   alt?: string;
+  color?: string;
   canDownload?: boolean;
   canExpand?: boolean;
 };
@@ -15,19 +16,20 @@ type ImageViewerProps = {
 const ImageViewer: React.FC<ImageViewerProps> = ({
   src,
   alt,
+  color,
   canDownload = true,
-  canExpand = true,
+  canExpand = true
 }) => {
   return (
     <div className={`${classPrefix}basis`}>
       <img src={src} alt={alt} />
       {canExpand && (
-        <a href={src} className="icon-button__expand">
+        <a href={src} className="icon-button__expand" style={{ backgroundColor: color }}>
           <FaExpandArrowsAlt />
         </a>
       )}
       {canDownload && (
-        <button className="icon-button__download">
+        <button className="icon-button__download" style={{ backgroundColor: color }}>
           <IoMdDownload />
         </button>
       )}

@@ -11,28 +11,28 @@ type ListProps = {
   list: string[];
   selected: string;
   onSelect?: (string) => void;
-  palette: Palette;
+  color?: string;
 };
 
 type ListElementProps = {
   element: string;
   selected: boolean;
   onSelect?: (string) => void;
-  palette: Palette;
+  color?: string;
 };
 
 const ListElement: React.FC<ListElementProps> = ({
   element,
   selected,
   onSelect,
-  palette,
+  color
 }) => {
   return (
     <div
-      className={`${classPrefixListElement}${palette} ${
-        selected ? `${classPrefixListElement}${palette}-selected` : ''
-      }`}
+      className={`${classPrefixListElement}basis ${
+        selected ? 'selected' : ''}`}
       onClick={() => onSelect(element)}
+      style={{ backgroundColor: selected && color }}
     >
       {element}
     </div>
@@ -44,7 +44,7 @@ const List: React.FC<ListProps> = ({
   list,
   selected,
   onSelect,
-  palette,
+  color
 }) => {
   return (
     <div className={`${classPrefixList}basis`}>
@@ -56,7 +56,7 @@ const List: React.FC<ListProps> = ({
             element={el}
             selected={selected === el}
             onSelect={onSelect}
-            palette={palette}
+            color={color}
           />
         ))}
       </div>

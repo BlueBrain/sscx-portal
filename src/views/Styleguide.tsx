@@ -71,19 +71,11 @@ const Styleguide: React.FC = () => {
         <h3>Select</h3>
         <h4>List</h4>
         <List
-          title="1. Pick a dino 🦕🦕🦕 (warm palette)"
+          title="1. Pick a dino 🦕🦕🦕"
           list={dinos}
-          palette="warm"
           selected={dinos[2]}
           onSelect={dummyFnStr}
-        />
-        <br/>
-        <List
-          title="1a. The dinos got cooler 😎"
-          list={dinos.slice(0, 3)}
-          palette="cool"
-          selected={dinos[1]}
-          onSelect={dummyFnStr}
+          color={color}
         />
         <h4>Pills</h4>
         <p>
@@ -97,6 +89,7 @@ const Styleguide: React.FC = () => {
           list={dinos.slice(0, 3)}
           selected={dinos[2]}
           onSelect={dummyFnStr}
+          color={color}
         />
       </section>
 
@@ -106,7 +99,7 @@ const Styleguide: React.FC = () => {
         <p>
           <em>TODO: Responsive design</em>
         </p>
-        <ScrollTo anchor="top" direction="up">
+        <ScrollTo anchor="top" direction="up" color={color}>
           Return to filters
         </ScrollTo>
         <br/>
@@ -161,6 +154,7 @@ const Styleguide: React.FC = () => {
         <ImageViewer
           src={require('../assets/images/cassowary.jpg')}
           alt="cassowary"
+          color={color}
         />
       </section>
 
