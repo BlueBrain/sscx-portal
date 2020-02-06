@@ -3,7 +3,7 @@ import React from 'react';
 import './style.less';
 import { NavLink, withRouter } from 'react-router-dom';
 import Button from '../../components/Button';
-import { SecondaryNav } from '../Navigation';
+import { HomeNav, SecondaryNav } from '../Navigation';
 
 const classPrefix = 'nav-desktop__';
 const palette = 'cool';
@@ -59,7 +59,10 @@ const NavDesktop = withRouter(({ location }) => {
             Home
           </Button>
         )}
-        {secondaryNav && <SecondaryNav />}
+        {secondaryNav && (<div className='flyout'>
+          <HomeNav />
+          <SecondaryNav />
+        </div>)}
       </li>
       <li>
         <NavButton

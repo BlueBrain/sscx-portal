@@ -1,4 +1,6 @@
 @import '../../assets/styles/config/_queries';
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
 
 .nav__basis {
   display: flex;
@@ -10,6 +12,32 @@
   z-index: 1;
   @media @small {
     justify-content: center;
+  }
+
+  .home-nav, .secondary-nav {
+    &, ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    li {
+      text-transform: uppercase;
+    }
+    li > ul > li {
+      text-transform: none;
+    }
+
+    a {
+      display: inline-block;
+      color: #basePalette[navy-1];
+      font-size: #fontSize[medium];
+      font-weight: 700;
+      text-decoration: none;
+      margin: 10px 0;
+      &:hover {
+        color: #basePalette[navy-3];
+      }
+    }
   }
 }
 

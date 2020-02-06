@@ -18,25 +18,32 @@
       margin-right: 0;
     }
   }
-}
 
-.nav-desktop__basis .secondary-nav {
-  position: absolute;
-  background: #basePalette[white];
-  top: 60px;
-  border-radius: 15px;
-  padding: 15px;
+  .flyout {
+    position: absolute;
+    background: #basePalette[white];
+    top: 60px;
+    border-radius: 15px;
+    padding: 20px 30px 60px;
 
-  a {
-    display: inline-block;
-    color: #coolPalette[medium];
-    font-size: #fontSize[small];
-    font-weight: 700;
-    text-decoration: none;
-    margin: 10px 0;
+    a {
+      color: #basePalette[navy-1];
+      white-space: nowrap;
+    }
+  }
 
-    &:hover {
-      color: #coolPalette[dark];
+  .home-nav {
+    border-bottom: 2px solid #basePalette[grey];
+    margin-bottom: 10px;
+  }
+
+  .secondary-nav {
+    display: flex;
+    li {
+      padding-right: 10px;
+    }
+    li > ul > li {
+      padding-right: inherit;
     }
   }
 }

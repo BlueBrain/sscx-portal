@@ -19,6 +19,7 @@
     font-size: 2rem;
     height: 2rem;
     padding: 0.5rem 1.5rem;
+    cursor: pointer;
 
     &.open {
       background-color: #basePalette[navy-1];
@@ -76,33 +77,7 @@
     color: #basePalette[navy-1];
     padding: 10px;
     font-size: 1.5rem;
-  }
-
-  a {
-    display: inline-block;
-    color: #basePalette[navy-1];
-    font-size: #fontSize[medium];
-    font-weight: 700;
-    text-decoration: none;
-    margin: 10px 0;
-    opacity: 0.7;
-    &.active {
-      opacity: 1;
-    }
-  }
-
-  .home-nav, .secondary-nav {
-    &, ul {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-    li {
-      text-transform: uppercase;
-    }
-    li > ul > li {
-      text-transform: none;
-    }
+    cursor: pointer;
   }
 
   .home-nav {
