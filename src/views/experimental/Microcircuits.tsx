@@ -34,7 +34,7 @@ const Microcircuits: React.FC = () => {
         </div>)}
       </div>
       <div className="center-col">
-        <Selector title="Choose a layer">
+        <Selector title="Choose a layer" column>
           <MicrocircuitSelector
             color={primaryColor}
             defaultActiveLayer={currentLayer}

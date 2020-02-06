@@ -5,9 +5,15 @@
   width: 100%;
   max-width: 420px;
   transition: all 0.2s;
+  &.column {
+    max-width: 240px;
+    padding-top: 40px;
+  }
   p {
     text-align: center;
     font-weight: 700;
-    margin-bottom: 0;
+    :not(& .column) {
+      margin-bottom: 0;
+    }
   }
 }
