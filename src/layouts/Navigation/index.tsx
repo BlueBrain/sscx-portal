@@ -36,7 +36,7 @@ export const SecondaryNav: React.FC = () => (
           </NavLink>
         </li>
         <li>
-          <NavLink to="/experimental/microcircuit">
+          <NavLink to="/experimental/microcircuits">
             Microcircuits
           </NavLink>
         </li>

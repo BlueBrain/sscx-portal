@@ -12,7 +12,7 @@ import { lorem } from '../Styleguide';
 import { primaryColor } from './config';
 import Selector from '../../components/Selector';
 
-const LayerAnatomy: React.FC = props => {
+const LayerAnatomy: React.FC = () => {
   const query = useQuery();
   const history = useHistory();
 

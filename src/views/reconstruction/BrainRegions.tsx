@@ -11,6 +11,7 @@ import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
 import { primaryColor } from './config';
 import Pills from '../../components/Pills';
+import Selector from '../../components/Selector';
 
 const BrainRegions: React.FC = () => {
   const query = useQuery();
@@ -19,6 +20,7 @@ const BrainRegions: React.FC = () => {
   const setBrainRegionQuery = (brainRegion: BrainRegion) => {
     history.push(`?brain_region=${brainRegion}`);
   };
+  const currentRegion = query.get('brain_region') as BrainRegion;
 
   return (
     <Filters primaryColor={primaryColor}>
@@ -29,22 +31,25 @@ const BrainRegions: React.FC = () => {
           subtitle="Reconstruction Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
-        <div>
-          <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
-          <br />
+        {!!currentRegion && (<div>
+          <InfoBox title="Longer Text" text={lorem} color={primaryColor}/>
+          <br/>
           <Pills
             title="1. Select a brain layer"
             list={['L1', 'L23', 'L4', 'L5', 'L6']}
             selected="L23"
             onSelect={() => undefined}
           />
-        </div>
+        </div>)}
       </div>
       <div className="center-col">
-        <BrainRegionsSelector
-          defaultActiveBrainRegion={query.get('brain_region') as BrainRegion}
-          onBrainRegionSelected={setBrainRegionQuery}
-        />
+        <Selector title="Choose a subregion">
+          <BrainRegionsSelector
+            color={primaryColor}
+            defaultActiveBrainRegion={currentRegion}
+            onBrainRegionSelected={setBrainRegionQuery}
+          />
+        </Selector>
       </div>
     </Filters>
   );

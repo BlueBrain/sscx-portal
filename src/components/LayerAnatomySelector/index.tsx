@@ -13,13 +13,13 @@ type LayerProps = {
 }
 
 type LayerAnatomySelectProps = {
-  color: string,
+  color: string;
   defaultActiveLayer?: Layer;
   onLayerSelected?: (layer: Layer) => void;
 };
 
 const Layer: React.FC<LayerProps> = ({ layer, activeLayer, onSelect, children }) => (
-  <g id={`layer_anatomy_svg__${layer}fill_1_`}
+  <g id={`${classPrefix}${layer}fill_1_`}
      className={activeLayer === layer ? 'active' : ''}
      onClick={() => onSelect(layer)}>
     {children}
