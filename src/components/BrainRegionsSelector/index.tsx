@@ -1,9 +1,8 @@
 import React from 'react';
 
-import './brain_regions.css';
+import './style.less';
 
 const classPrefix = 'brain_regions_svg__';
-const brainRegions: BrainRegion[] = ['S1FL', 'S1Sh', 'S1HL', 'S1Tr'];
 
 export type BrainRegion = 'S1FL' | 'S1Sh' | 'S1HL' | 'S1Tr';
 type BrainRegionSelectProps = {
