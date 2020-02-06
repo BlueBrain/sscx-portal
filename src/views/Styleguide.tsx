@@ -46,33 +46,23 @@ const Styleguide: React.FC = () => {
       <section>
         <h3>Buttons</h3>
         <h4>Primary</h4>
-        <Button primary palette="warm" onClick={dummyFn}>
-          hellfire
-        </Button>
-        <br/>
-        <br/>
-        <Button primary palette="cool" onClick={dummyFn}>
-          cool as a cucumber
+        <Button primary onClick={dummyFn}>
+          Buy 3 for 2!
         </Button>
         <h4>Active</h4>
-        <Button active palette="warm" onClick={dummyFn}>
-          Hot and Active
-        </Button>
-        <br/>
-        <br/>
-        <Button active palette="cool" onClick={dummyFn}>
-          Winter Sports
+        <Button active onClick={dummyFn}>
+          Look at me
         </Button>
         <h4>Regular</h4>
-        <Button palette="warm" onClick={dummyFn}>
+        <Button onClick={dummyFn}>
           good ol' button
         </Button>
         <h4>Discrete</h4>
-        <Button palette="cool" discrete onClick={dummyFn}>
+        <Button discrete onClick={dummyFn}>
           I'm rather shy
         </Button>
         <h4>Notifications</h4>
-        <Button palette="cool" notifications={7} onClick={dummyFn}>
+        <Button notifications={7} onClick={dummyFn}>
           Duly notified
         </Button>
       </section>

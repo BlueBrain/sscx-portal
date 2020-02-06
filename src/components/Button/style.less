@@ -4,21 +4,7 @@
 @height: 40px;
 @borderWidth: 2px;
 
-.button__active {
-  background-color: #basePalette[white];
-}
-
-.button__active--warm {
-  color: #warmPalette[dark];
-  .button__active();
-}
-
-.button__active--cool {
-  color: #coolPalette[dark];
-  .button__active();
-}
-
-.button__base {
+.button__basis {
   font-weight: 700;
   text-transform: uppercase;
   background-color: transparent;
@@ -27,112 +13,41 @@
   line-height: @height;
   border: @borderWidth solid #basePalette[white];
   padding: 0 15px;
-  box-shadow: 4px 4px 4px 0 rgba(59, 65, 101, 0.5);
+  box-shadow: 4px 4px 4px 0 rgba(59, 65, 101, 0.6);
   transition: all 0.2s;
   position: relative;
 
   &:hover {
     box-shadow: none;
+    background-color: #basePalette[navy-3];
+  }
+
+  .active &, &:active, &.active {
+    background-color: #basePalette[white];
+    color: #basePalette[navy-4];
+  }
+
+  &.discrete {
+    border: none;
+    box-shadow: none;
+    opacity: 0.7;
+    padding: 0;
+    .active &, &:active, &:hover, &.active {
+      opacity: 1;
+      color: #basePalette[white];
+      background-color: #basePalette[navy-4];
+    }
+  }
+
+  &.primary {
+    border: none;
+    line-height: @height + (2 * @borderWidth);
+    background: #basePalette[yellow-2];
+    background: linear-gradient(90deg, #basePalette[yellow-1], #basePalette[yellow-2]);
   }
 }
 
-.button__discrete {
-  border: none;
-  box-shadow: none;
-  opacity: 0.7;
-  padding: 0;
-}
-
-.button__discrete-active {
-  opacity: 1;
-}
-
-.button__warm {
-  .button__base();
-
-  &:active {
-    .button__active--warm();
-  }
-}
-
-.button__cool {
-  .button__base();
-
-  &:active {
-    .button__active--cool();
-  }
-}
-
-.button__warm-active,
-.active .button__warm {
-  .button__base();
-  .button__active--warm();
-}
-
-.button__cool-active,
-.active .button__cool {
-  .button__base();
-  .button__active--cool();
-}
-
-.button__primary {
-  .button__base();
-  border: none;
-  line-height: @height + (2 * @borderWidth);
-
-  &:active {
-    color: inherit;
-  }
-}
-
-.button__warm-primary {
-  .button__primary();
-  background: #warmPalette[dark];
-  background: linear-gradient(90deg, #warmPalette[dark], #warmPalette[light]);
-
-  &:active {
-    background: linear-gradient(
-      90deg,
-      #warmPalette[dark-min-1],
-      #warmPalette[light-min-1]
-    );
-  }
-}
-
-.button__cool-primary {
-  .button__primary();
-  background: #coolPalette[dark];
-  background: linear-gradient(90deg, #coolPalette[light], #coolPalette[dark]);
-
-  &:active {
-    background: linear-gradient(
-      90deg,
-      #coolPalette[light-min-1],
-      #coolPalette[dark-min-1]
-    );
-  }
-}
-
-.button__warm-discrete,
-.button__cool-discrete {
-  .button__base();
-  .button__discrete();
-  &:active,
-  &:hover {
-    .button__discrete-active();
-  }
-}
-
-.button__warm-discrete-active,
-.active .button__warm-discrete,
-.button__cool-discrete-active,
-.active .button__cool-discrete {
-  .button__base();
-  .button__discrete();
-  .button__discrete-active();
-}
-
-.button__notifications {
+.button__basis .notifications {
   position: absolute;
   top: -10px;
   right: 0;
@@ -141,14 +56,6 @@
   border-radius: 1rem;
   line-height: 1.2rem;
   padding: 0 0.3rem;
-}
-
-.button__warm-notifications {
-  .button__notifications();
-  .button__active--warm();
-}
-
-.button__cool-notifications {
-  .button__notifications();
-  .button__active--cool();
+  background-color: #basePalette[white];
+  color: #basePalette[navy-4];
 }
