@@ -1,0 +1,48 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+@maxHeight: 120px;
+@width: 250px;
+@padding: 10px 10px 10px 20px;
+
+.list__basis {
+  width: @width;
+  padding: @padding;
+  background-color: #basePalette[navy-1];
+  border-radius: 5px;
+  overflow: hidden;
+  p {
+    font-weight: 700;
+    margin: 0;
+  }
+  .elements {
+    margin: 8px 0;
+    max-height: @maxHeight;
+    overflow-y: scroll;
+  }
+}
+
+.list-element__basis {
+  background-color: #basePalette[white];
+  color: #basePalette[navy-1];
+  margin: 8px 30px 8px 10px;
+  border-radius: 3px;
+  text-align: center;
+  padding: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: #basePalette[navy-4];
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &.selected {
+    color: #basePalette[white];
+    background-color: #basePalette[navy-3];
+    cursor: initial;
+  }
+}

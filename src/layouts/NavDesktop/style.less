@@ -1,0 +1,51 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+@import '../../assets/styles/config/_queries';
+
+.nav-desktop__basis {
+  list-style: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+  @media @small {
+    display: none;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 40px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .flyout {
+    position: absolute;
+    background: #basePalette[white];
+    top: 60px;
+    border-radius: 15px;
+    padding: 20px 30px 60px;
+    box-shadow: 4px 4px 4px 0 rgba(59, 65, 101, 0.6);
+
+    a {
+      font-size: #fontSize[small];
+      color: #basePalette[navy-1];
+      white-space: nowrap;
+    }
+  }
+
+  .home-nav {
+    border-bottom: 2px solid #basePalette[grey];
+    margin-bottom: 10px;
+  }
+
+  .secondary-nav {
+    display: flex;
+    li {
+      padding-right: 10px;
+    }
+    li > ul > li {
+      padding-right: inherit;
+    }
+  }
+}

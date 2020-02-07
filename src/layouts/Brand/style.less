@@ -1,0 +1,42 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+@import '../../assets/styles/config/_queries';
+
+.brand__basis {
+  .logo,
+  h1 {
+    display: inline-block;
+  }
+
+  .logo {
+    width: 60px;
+    padding-right: 12px;
+    position: relative;
+    @media @small {
+      width: 42px;
+      padding-right: 10px;
+    }
+  }
+
+  .logo:after {
+    content: ' ';
+    height: 20px;
+    width: 2px;
+    display: block;
+    background: #basePalette[white];
+    position: absolute;
+    top: 0;
+    right: -2px;
+    @media @small {
+      height: 1rem;
+    }
+  }
+
+  h1 {
+    font-weight: 400;
+    padding-left: 12px;
+    @media @small {
+      padding-left: 10px;
+    }
+  }
+}

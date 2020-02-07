@@ -1,0 +1,42 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+.pills__basis {
+  p {
+    font-weight: 700;
+    margin: 0;
+  }
+  .elements {
+    margin-top: 8px;
+  }
+}
+
+.pill__basis {
+  display: inline-block;
+  color: #basePalette[white];
+  border: 2px solid #basePalette[white];
+  background-color: #basePalette[navy-4];
+  margin-right: 10px;
+  border-radius: 7px;
+  text-align: center;
+  padding: 5px 20px;
+  font-weight: 400;
+  cursor: pointer;
+  &:hover:not(.pill__selected) {
+    background-color: #basePalette[navy-1];
+    color: #basePalette[white];
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pill__selected {
+  font-weight: 700;
+  background-color: #basePalette[white];
+  color: #basePalette[navy-4];
+  cursor: initial;
+}

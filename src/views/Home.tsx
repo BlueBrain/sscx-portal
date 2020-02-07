@@ -1,18 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FullPage from '../layouts/FullPage';
+import Title from '../layouts/Title';
+import Button from '../components/Button';
+import { accentColors } from '../config';
+
+const accentColor = accentColors.yellow;
 
 const Home: React.FC = () => (
-  <>
-    <h1 role="title">Somatosensory Cortex Portal</h1>
+  <FullPage>
+    <Title
+      title="Somatosensory Cortext Portal"
+      subtitle="Explore our datasets"
+      hint="Explore model data of the rat brain, both in vitro and in silico."
+      primaryColor={accentColor}
+    />
     <div role="navigation">
-      <button>
-        <Link to="/experimental">Experiments</Link>
-      </button>
-      <button>
-        <Link to="/reconstruction">Reconstruction</Link>
-      </button>
+      <Link to="/experimental">
+        <Button primary>Get started</Button>
+      </Link>
+      <br />
+      <br />
+      <Link to="/styleguide">
+        <Button>Project styleguide</Button>
+      </Link>
     </div>
-  </>
+  </FullPage>
 );
 
 export default Home;

@@ -2,10 +2,11 @@ import React from 'react';
 import { RouteProps, Redirect } from 'react-router';
 
 import Home from './views/Home';
-import LayerAnatomy from './views/experimental/LayerAnatomy';
-import NeuronMorphology from './views/experimental/NeuronMorphology';
-import NeuronElectrophysiology from './views/experimental/NeuronElectrophysiology';
-import BrainRegions from './views/reconstruction/BrainRegions';
+import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
+import ExpMicrocircuits from './views/experimental/Microcircuits';
+import RecBrainRegions from './views/reconstruction/BrainRegions';
+import RecSynapticPathways from './views/reconstruction/SynapticPathways';
+import Styleguide from './views/Styleguide';
 
 const routes: RouteProps[] = [
   {
@@ -14,33 +15,38 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
+    path: '/styleguide',
+    component: Styleguide,
+    exact: true,
+  },
+  {
     path: '/experimental',
-    component: () => <Redirect to="/experimental/layeranatomy" />,
+    component: () => <Redirect to="/experimental/layer-anatomy" />,
     exact: true,
   },
   {
-    path: '/experimental/layeranatomy',
-    component: LayerAnatomy,
+    path: '/experimental/layer-anatomy',
+    component: ExpLayerAnatomy,
     exact: true,
   },
   {
-    path: '/experimental/neuronmorphology',
-    component: NeuronMorphology,
-    exact: true,
-  },
-  {
-    path: '/experimental/neuronelectrophysiology',
-    component: NeuronElectrophysiology,
+    path: '/experimental/microcircuits',
+    component: ExpMicrocircuits,
     exact: true,
   },
   {
     path: '/reconstruction',
-    component: () => <Redirect to="/reconstruction/brainregions" />,
+    component: () => <Redirect to="/reconstruction/brain-regions" />,
     exact: true,
   },
   {
-    path: '/reconstruction/brainregions',
-    component: BrainRegions,
+    path: '/reconstruction/brain-regions',
+    component: RecBrainRegions,
+    exact: true,
+  },
+  {
+    path: '/reconstruction/synaptic-pathways',
+    component: RecSynapticPathways,
     exact: true,
   },
 ];

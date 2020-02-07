@@ -1,0 +1,69 @@
+@import 'config/_colors';
+@import 'config/_fonts';
+@import 'config/_queries';
+
+html {
+  .font-default();
+  color: #basePalette[white];
+  background-color: #basePalette[navy-4];
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+html,
+body,
+div {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @media @small {
+    padding-bottom: 3rem;
+  }
+}
+
+button {
+  .font-default();
+  color: #basePalette[white];
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 1.5rem;
+  @media @small {
+    font-size: 1.2rem;
+  }
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: #fontSize[large];
+  font-weight: 400;
+}
+
+p {
+  font-weight: 300;
+}
+
+a {
+  color: #basePalette[white];
+  font-weight: 400;
+}
+
+section {
+  padding: 40px 0;
+}
