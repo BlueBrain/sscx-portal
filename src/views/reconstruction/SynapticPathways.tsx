@@ -31,7 +31,8 @@ const BrainRegions: React.FC = () => {
   const setPreTypeQuery = (layer: Layer) => addParam('pretype', layer);
   const setPostTypeQuery = (layer: Layer) => addParam('posttype', layer);
 
-  const hasData = currentPreLayer && currentPostLayer && currentPreType && currentPostType;
+  const hasData =
+    currentPreLayer && currentPostLayer && currentPreType && currentPostType;
 
   return (
     <Filters primaryColor={primaryColor} hasData={!!hasData}>
@@ -44,8 +45,8 @@ const BrainRegions: React.FC = () => {
         />
         {!!hasData && (
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={primaryColor}/>
-            <br/>
+            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+            <br />
             <Pills
               title="3. Select a brain layer (optional)"
               list={['L1', 'L23', 'L4', 'L5', 'L6']}
@@ -68,7 +69,8 @@ const BrainRegions: React.FC = () => {
           onPostTypeSelect={setPostTypeQuery}
           onPreTypeSelect={setPreTypeQuery}
           selectedPreType={currentPreType}
-          selectedPostType={currentPostType}/>
+          selectedPostType={currentPostType}
+        />
       </div>
     </Filters>
   );
