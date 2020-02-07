@@ -22,7 +22,9 @@
     background-color: #basePalette[navy-3];
   }
 
-  .active &, &:active, &.active {
+  .active &,
+  &:active,
+  &.active {
     background-color: #basePalette[white];
     color: #basePalette[navy-4];
   }
@@ -32,7 +34,11 @@
     box-shadow: none;
     opacity: 0.7;
     padding: 0;
-    .active &, &:active, &:hover, &.active {
+
+    .active &,
+    &:active,
+    &:hover,
+    &.active {
       opacity: 1;
       color: #basePalette[white];
       background-color: #basePalette[navy-4];
@@ -43,7 +49,18 @@
     border: none;
     line-height: @height + (2 * @borderWidth);
     background: #basePalette[yellow-2];
-    background: linear-gradient(90deg, #basePalette[yellow-1], #basePalette[yellow-2]);
+    background: linear-gradient(
+      90deg,
+      #basePalette[yellow-1],
+      #basePalette[yellow-2]
+    );
+
+    .active &,
+    &:active,
+    &:hover,
+    &.active {
+      color: #basePalette[white];
+    }
   }
 }
 

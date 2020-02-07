@@ -9,14 +9,14 @@ const classPrefixListElement = 'list-element__';
 type ListProps = {
   title?: string;
   list: string[];
-  selected: string;
+  selected?: string;
   onSelect?: (string) => void;
   color?: string;
 };
 
 type ListElementProps = {
   element: string;
-  selected: boolean;
+  selected?: boolean;
   onSelect?: (string) => void;
   color?: string;
 };
@@ -25,12 +25,11 @@ const ListElement: React.FC<ListElementProps> = ({
   element,
   selected,
   onSelect,
-  color
+  color,
 }) => {
   return (
     <div
-      className={`${classPrefixListElement}basis ${
-        selected ? 'selected' : ''}`}
+      className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
       onClick={() => onSelect(element)}
       style={{ backgroundColor: selected && color }}
     >
@@ -44,7 +43,7 @@ const List: React.FC<ListProps> = ({
   list,
   selected,
   onSelect,
-  color
+  color,
 }) => {
   return (
     <div className={`${classPrefixList}basis`}>

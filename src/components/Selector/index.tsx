@@ -10,11 +10,7 @@ type SelectorProps = {
   column?: boolean;
 };
 
-const Selector: React.FC<SelectorProps> = ({
-                                             title,
-                                             children,
-                                             column,
-                                           }) => (
+const Selector: React.FC<SelectorProps> = ({ title, children, column }) => (
   <div className={`${classPrefix}basis ${column ? 'column' : ''}`}>
     {title && <p>{title}</p>}
     {children}

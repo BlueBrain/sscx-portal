@@ -31,16 +31,19 @@ const BrainRegions: React.FC = () => {
           subtitle="Reconstruction Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
-        {!!currentRegion && (<div>
-          <InfoBox title="Longer Text" text={lorem} color={primaryColor}/>
-          <br/>
-          <Pills
-            title="1. Select a brain layer"
-            list={['L1', 'L23', 'L4', 'L5', 'L6']}
-            selected="L23"
-            onSelect={() => undefined}
-          />
-        </div>)}
+        {!!currentRegion && (
+          <div>
+            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+            <br />
+            <Pills
+              title="1. Select a brain layer"
+              list={['L1', 'L23', 'L4', 'L5', 'L6']}
+              selected="L23"
+              onSelect={() => undefined}
+              color={primaryColor}
+            />
+          </div>
+        )}
       </div>
       <div className="center-col">
         <Selector title="Choose a subregion">

@@ -32,11 +32,7 @@ const Button: React.FC<ButtonProps> = ({
       } ${active ? 'active' : ''}`}
     >
       {children}
-      {notifications && (
-        <span className='notifications'>
-          {notifications}
-        </span>
-      )}
+      {notifications && <span className="notifications">{notifications}</span>}
     </button>
   );
 };

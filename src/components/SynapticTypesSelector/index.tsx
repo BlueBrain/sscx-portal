@@ -1,0 +1,72 @@
+import React from 'react';
+
+import './style.less';
+import Selector from '../Selector';
+import SynapticPathwaySelector, {
+  SynapticPathwaySelectProps,
+} from '../SynapticPathwaySelector';
+import List from '../List';
+
+const cssPrefix = 'synaptic-types-selector__';
+
+interface SynapticTypesProps extends SynapticPathwaySelectProps {
+  synapticTypes: string[];
+  synapticTypesName: string;
+  onPreTypeSelect: (string) => void;
+  onPostTypeSelect: (string) => void;
+  selectedPreType?: string;
+  selectedPostType?: string;
+}
+
+const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
+  synapticTypes,
+  color,
+  defaultActivePreLayer,
+  onPreLayerSelected,
+  defaultActivePostLayer,
+  onPostLayerSelected,
+  onPreTypeSelect,
+  onPostTypeSelect,
+  selectedPreType,
+  selectedPostType,
+  synapticTypesName,
+}) => {
+  return (
+    <div className={`${cssPrefix}basis`}>
+      <Selector title="1. Choose two layers" column>
+        <SynapticPathwaySelector
+          color={color}
+          defaultActivePreLayer={defaultActivePreLayer}
+          onPreLayerSelected={onPreLayerSelected}
+          defaultActivePostLayer={defaultActivePostLayer}
+          onPostLayerSelected={onPostLayerSelected}
+        />
+      </Selector>
+      {(defaultActivePreLayer || defaultActivePostLayer) && (
+        <p className="synaptic-types-header">
+          2. Choose your {synapticTypesName}
+        </p>
+      )}
+      <div className={`list-pre ${defaultActivePreLayer ? 'open' : ''}`}>
+        <List
+          title={`Presynaptic ${synapticTypesName}`}
+          list={synapticTypes}
+          selected={selectedPreType}
+          onSelect={onPreTypeSelect}
+          color={color}
+        />
+      </div>
+      <div className={`list-post ${defaultActivePostLayer ? 'open' : ''}`}>
+        <List
+          title={`Postsynaptic ${synapticTypesName}`}
+          list={synapticTypes}
+          selected={selectedPostType}
+          onSelect={onPostTypeSelect}
+          color="#ed8048"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default SynapticTypesSelector;

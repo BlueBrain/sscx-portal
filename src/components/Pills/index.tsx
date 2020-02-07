@@ -28,14 +28,24 @@ const Pill: React.FC<PillProps> = ({ element, selected, onSelect, color }) => {
         selected ? `${classPrefixPill}selected` : ''
       }`}
       onClick={() => onSelect(element)}
-      style={{ backgroundColor: selected && color, border: selected && color && `2px solid ${color}`, color: selected && color && 'white' }}
+      style={{
+        backgroundColor: selected && color,
+        border: selected && color && `2px solid ${color}`,
+        color: selected && color && 'white',
+      }}
     >
       {element}
     </div>
   );
 };
 
-const Pills: React.FC<PillsProps> = ({ title, list, selected, onSelect, color }) => {
+const Pills: React.FC<PillsProps> = ({
+  title,
+  list,
+  selected,
+  onSelect,
+  color,
+}) => {
   return (
     <div className={`${classPrefixPills}basis`}>
       {title && <p>{title}</p>}

@@ -26,31 +26,21 @@ export const HomeNav: React.FC = () => (
 export const SecondaryNav: React.FC = () => (
   <ul className="secondary-nav">
     <li>
-      <NavLink to="/experimental">
-        Experimental Data
-      </NavLink>
+      <NavLink to="/experimental">Experimental Data</NavLink>
       <ul>
         <li>
-          <NavLink to="/experimental/layer-anatomy">
-            Layer Anatomy
-          </NavLink>
+          <NavLink to="/experimental/layer-anatomy">Layer Anatomy</NavLink>
         </li>
         <li>
-          <NavLink to="/experimental/microcircuits">
-            Microcircuits
-          </NavLink>
+          <NavLink to="/experimental/microcircuits">Microcircuits</NavLink>
         </li>
       </ul>
     </li>
     <li>
-      <NavLink to="/reconstruction">
-        Reconstruction Data
-      </NavLink>
+      <NavLink to="/reconstruction">Reconstruction Data</NavLink>
       <ul>
         <li>
-          <NavLink to="/reconstruction/brain-regions">
-            Brain Regions
-          </NavLink>
+          <NavLink to="/reconstruction/brain-regions">Brain Regions</NavLink>
         </li>
         <li>
           <NavLink to="/reconstruction/synaptic-pathways">

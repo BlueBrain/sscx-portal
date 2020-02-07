@@ -7,8 +7,8 @@ import InfoBox from '../components/InfoBox';
 import List from '../components/List';
 import Pills from '../components/Pills';
 import ImageViewer from '../components/ImageViewer';
-import Filters from '../layouts/Filters';
 import Title from '../layouts/Title';
+import FullPage from '../layouts/FullPage';
 
 export const lorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
@@ -33,7 +33,7 @@ const Styleguide: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '60px' }}>
+    <FullPage>
       <div id="top" role="title">
         <Title
           title="Styleguide"
@@ -54,9 +54,7 @@ const Styleguide: React.FC = () => {
           Look at me
         </Button>
         <h4>Regular</h4>
-        <Button onClick={dummyFn}>
-          good ol' button
-        </Button>
+        <Button onClick={dummyFn}>good ol' button</Button>
         <h4>Discrete</h4>
         <Button discrete onClick={dummyFn}>
           I'm rather shy
@@ -102,12 +100,12 @@ const Styleguide: React.FC = () => {
         <ScrollTo anchor="top" direction="up" color={color}>
           Return to filters
         </ScrollTo>
-        <br/>
+        <br />
         <ScrollTo anchor="bottom" direction="down">
           View data
         </ScrollTo>
         <h4>Scroll top</h4>
-        <ScrollTop anchor="top"/>
+        <ScrollTop anchor="top" />
       </section>
 
       <section>
@@ -120,12 +118,12 @@ const Styleguide: React.FC = () => {
               alt="cassowary"
             />
             <p>
-              A cassowary escapes from the local zoo. Already 482 have
-              suffered from his lethal kick.
+              A cassowary escapes from the local zoo. Already 482 have suffered
+              from his lethal kick.
             </p>
           </>
         </Collapsible>
-        <br/>
+        <br />
         <Collapsible title="Murderous Bird on Lockdown" collapsed={true}>
           <>
             <img
@@ -143,10 +141,10 @@ const Styleguide: React.FC = () => {
           title="Short Text"
           text="No need to show the read more link."
         />
-        <br/>
-        <InfoBox title="Longer Text" text={lorem}/>
-        <br/>
-        <InfoBox text={`This one has no title o_0\n${lorem}`}/>
+        <br />
+        <InfoBox title="Longer Text" text={lorem} />
+        <br />
+        <InfoBox text={`This one has no title o_0\n${lorem}`} />
         <h4>Image viewer</h4>
         <p>
           <em>TODO: Make expand function work properly</em>
@@ -158,8 +156,8 @@ const Styleguide: React.FC = () => {
         />
       </section>
 
-      <section id="bottom"/>
-    </div>
+      <section id="bottom" />
+    </FullPage>
   );
 };
 

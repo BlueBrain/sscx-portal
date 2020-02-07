@@ -59,10 +59,12 @@ const NavDesktop = withRouter(({ location }) => {
             Home
           </Button>
         )}
-        {secondaryNav && (<div className='flyout'>
-          <HomeNav />
-          <SecondaryNav />
-        </div>)}
+        {secondaryNav && (
+          <div className="flyout">
+            <HomeNav />
+            <SecondaryNav />
+          </div>
+        )}
       </li>
       <li>
         <NavButton

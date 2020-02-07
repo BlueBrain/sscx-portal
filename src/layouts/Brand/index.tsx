@@ -9,7 +9,10 @@ const Brand: React.FC = () => {
     <div className={`${classPrefix}basis`}>
       <div className="logo">
         <a href="https://www.epfl.ch/">
-          <img src={require('../../assets/images/epfl-logo.svg')} alt='EPFL logo' />
+          <img
+            src={require('../../assets/images/epfl-logo.svg')}
+            alt="EPFL logo"
+          />
         </a>
       </div>
       <a href="/">

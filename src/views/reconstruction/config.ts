@@ -1,1 +1,3 @@
-export const primaryColor = '#84BBF8';
+import { accentColors } from '../../config';
+
+export const primaryColor = accentColors.blue;

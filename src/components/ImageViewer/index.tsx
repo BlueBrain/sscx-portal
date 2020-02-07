@@ -18,18 +18,25 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   alt,
   color,
   canDownload = true,
-  canExpand = true
+  canExpand = true,
 }) => {
   return (
     <div className={`${classPrefix}basis`}>
       <img src={src} alt={alt} />
       {canExpand && (
-        <a href={src} className="icon-button__expand" style={{ backgroundColor: color }}>
+        <a
+          href={src}
+          className="icon-button__expand"
+          style={{ backgroundColor: color }}
+        >
           <FaExpandArrowsAlt />
         </a>
       )}
       {canDownload && (
-        <button className="icon-button__download" style={{ backgroundColor: color }}>
+        <button
+          className="icon-button__download"
+          style={{ backgroundColor: color }}
+        >
           <IoMdDownload />
         </button>
       )}

@@ -48,7 +48,7 @@ const routes: RouteProps[] = [
     path: '/reconstruction/synaptic-pathways',
     component: RecSynapticPathways,
     exact: true,
-  }
+  },
 ];
 
 export default routes;

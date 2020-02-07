@@ -1,1 +1,3 @@
-export const primaryColor = '#FFC500';
+import { accentColors } from '../../config';
+
+export const primaryColor = accentColors.yellow;

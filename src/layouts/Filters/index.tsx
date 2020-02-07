@@ -12,17 +12,27 @@ type FiltersProps = {
   backgroundAlt?: boolean;
 };
 
-const Filters: React.FC<FiltersProps> = ({ primaryColor, children, hasData, backgroundAlt }) => {
-
+const Filters: React.FC<FiltersProps> = ({
+  primaryColor,
+  children,
+  hasData,
+  backgroundAlt,
+}) => {
   return (
     <>
-      <div className={`${classPrefix}basis ${backgroundAlt ? 'background-alt' : ''}`}>
+      <div
+        className={`${classPrefix}basis ${
+          backgroundAlt ? 'background-alt' : ''
+        }`}
+      >
         <div className="center">{children}</div>
-        { !!hasData && (<div className="scroll-to">
-          <ScrollTo anchor="bottom" color={primaryColor} direction="down">
-            View data
-          </ScrollTo>
-        </div>) }
+        {!!hasData && (
+          <div className="scroll-to">
+            <ScrollTo anchor="bottom" color={primaryColor} direction="down">
+              View data
+            </ScrollTo>
+          </div>
+        )}
       </div>
     </>
   );

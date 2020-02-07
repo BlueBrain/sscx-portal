@@ -5,34 +5,34 @@ import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
 import { primaryColor } from './config';
 import Pills from '../../components/Pills';
-import Selector from '../../components/Selector';
-import SynapticPathwaySelector from '../../components/SynapticPathwaySelector';
 import useQuery from '../../hooks/useQuery';
 import { useHistory } from 'react-router';
 import { Layer } from '../../types';
+import SynapticTypesSelector from '../../components/SynapticTypesSelector';
+
+const mTypes = ['a', 'b', 'c', 'd', 'e', 'f'];
 
 const BrainRegions: React.FC = () => {
   const query = useQuery();
+
+  console.log(query);
+
   const history = useHistory();
 
-  const currentPreLayer: Layer = query.get('pre') as Layer;
-  const currentPostLayer: Layer = query.get('post') as Layer;
+  const currentPreLayer: Layer = query.get('prelayer') as Layer;
+  const currentPostLayer: Layer = query.get('postlayer') as Layer;
+  const currentPreType: string = query.get('pretype');
+  const currentPostType: string = query.get('posttype');
 
   const setPreLayerQuery = (layer: Layer) => {
     history.push(
       `?${new URLSearchParams({
-        pre: layer,
-        post: currentPostLayer,
+        prelayer: layer,
       }).toString()}`,
     );
   };
   const setPostLayerQuery = (layer: Layer) => {
-    history.push(
-      `?${new URLSearchParams({
-        pre: currentPreLayer,
-        post: layer,
-      }).toString()}`,
-    );
+    query.append('postlayer', layer);
   };
 
   const hasData = currentPreLayer && currentPostLayer;
@@ -60,15 +60,15 @@ const BrainRegions: React.FC = () => {
         )}
       </div>
       <div className="center-col">
-        <Selector title="1. Choose two layers" column>
-          <SynapticPathwaySelector
-            color={primaryColor}
-            defaultActivePreLayer={currentPreLayer}
-            onPreLayerSelected={setPreLayerQuery}
-            defaultActivePostLayer={currentPostLayer}
-            onPostLayerSelected={setPostLayerQuery}
-          />
-        </Selector>
+        <SynapticTypesSelector
+          color={primaryColor}
+          defaultActivePreLayer={currentPreLayer}
+          onPreLayerSelected={setPreLayerQuery}
+          defaultActivePostLayer={currentPostLayer}
+          onPostLayerSelected={setPostLayerQuery}
+          synapticTypes={mTypes}
+          synapticTypesName="M-types"
+        />
       </div>
     </Filters>
   );
