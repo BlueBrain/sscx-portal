@@ -16,6 +16,10 @@
   background-image: url(../../assets/images/backgrounds/default.svg);
   background-size: cover;
 
+  @media @small {
+    padding: 60px 20px;
+  }
+
   &.background-alt {
     background-image: url(../../assets/images/backgrounds/alt.svg);
   }
@@ -24,6 +28,9 @@
     margin: 60px auto 60px;
     max-width: 1080px;
     display: flex;
+    @media @small {
+      flex-direction: column;
+    }
   }
 
   .center-col {
@@ -33,6 +40,14 @@
     }
     &:last-child {
       margin-left: 60px;
+    }
+    @media @small {
+      &:first-child {
+        margin-right: 0;
+      }
+      &:last-child {
+        margin-left: 0;
+      }
     }
   }
 
