@@ -14,28 +14,24 @@ const mTypes = ['a', 'b', 'c', 'd', 'e', 'f'];
 
 const BrainRegions: React.FC = () => {
   const query = useQuery();
-
-  console.log(query);
-
   const history = useHistory();
+
+  const addParam = (key: string, value: string): void => {
+    query.set(key, value);
+    history.push(`?${query.toString()}`);
+  };
 
   const currentPreLayer: Layer = query.get('prelayer') as Layer;
   const currentPostLayer: Layer = query.get('postlayer') as Layer;
   const currentPreType: string = query.get('pretype');
   const currentPostType: string = query.get('posttype');
 
-  const setPreLayerQuery = (layer: Layer) => {
-    history.push(
-      `?${new URLSearchParams({
-        prelayer: layer,
-      }).toString()}`,
-    );
-  };
-  const setPostLayerQuery = (layer: Layer) => {
-    query.append('postlayer', layer);
-  };
+  const setPreLayerQuery = (layer: Layer) => addParam('prelayer', layer);
+  const setPostLayerQuery = (layer: Layer) => addParam('postlayer', layer);
+  const setPreTypeQuery = (layer: Layer) => addParam('pretype', layer);
+  const setPostTypeQuery = (layer: Layer) => addParam('posttype', layer);
 
-  const hasData = currentPreLayer && currentPostLayer;
+  const hasData = currentPreLayer && currentPostLayer && currentPreType && currentPostType;
 
   return (
     <Filters primaryColor={primaryColor} hasData={!!hasData}>
@@ -48,13 +44,14 @@ const BrainRegions: React.FC = () => {
         />
         {!!hasData && (
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
-            <br />
+            <InfoBox title="Longer Text" text={lorem} color={primaryColor}/>
+            <br/>
             <Pills
-              title="1. Select a brain layer"
+              title="3. Select a brain layer (optional)"
               list={['L1', 'L23', 'L4', 'L5', 'L6']}
               selected="L23"
               onSelect={() => undefined}
+              color={primaryColor}
             />
           </div>
         )}
@@ -68,7 +65,10 @@ const BrainRegions: React.FC = () => {
           onPostLayerSelected={setPostLayerQuery}
           synapticTypes={mTypes}
           synapticTypesName="M-types"
-        />
+          onPostTypeSelect={setPostTypeQuery}
+          onPreTypeSelect={setPreTypeQuery}
+          selectedPreType={currentPreType}
+          selectedPostType={currentPostType}/>
       </div>
     </Filters>
   );
