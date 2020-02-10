@@ -6,6 +6,7 @@ import SynapticPathwaySelector, {
   SynapticPathwaySelectProps,
 } from '../SynapticPathwaySelector';
 import List from '../List';
+import { accentColors } from '../../config';
 
 const cssPrefix = 'synaptic-types-selector__';
 
@@ -62,7 +63,7 @@ const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
           list={synapticTypes}
           selected={selectedPostType}
           onSelect={onPostTypeSelect}
-          color="#ed8048"
+          color={accentColors.orange}
         />
       </div>
     </div>
