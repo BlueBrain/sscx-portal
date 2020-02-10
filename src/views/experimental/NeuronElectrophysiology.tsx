@@ -1,16 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+import LayerAnatomySelector from '../../components/LayerAnatomySelector';
+import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
 import Title from '../../layouts/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import { primaryColor } from './config';
 import Selector from '../../components/Selector';
-import MicrocircuitSelector from '../../components/MicrocircuitSelector';
-import useQuery from '../../hooks/useQuery';
-import { useHistory } from 'react-router';
 import { Layer } from '../../types';
 
-const Microcircuits: React.FC = () => {
+const LayerAnatomy: React.FC = () => {
   const query = useQuery();
   const history = useHistory();
 
@@ -24,12 +25,12 @@ const Microcircuits: React.FC = () => {
       <div className="center-col">
         <Title
           primaryColor={primaryColor}
-          title="Microcircuits"
+          title="Neuron Electrophysiology"
           subtitle="Experimental Data"
-          hint="Select a microcircuit of interest."
+          hint="Select a layer of interest in the S1 of the rat brain."
         />
         {!!currentLayer && (
-          <div>
+          <div role="information">
             <InfoBox title="Longer Text" text={lorem} />
             <br />
             <InfoBox text={`This one has no title o_0\n${lorem}`} />
@@ -37,8 +38,8 @@ const Microcircuits: React.FC = () => {
         )}
       </div>
       <div className="center-col">
-        <Selector title="Choose a layer" column>
-          <MicrocircuitSelector
+        <Selector title="Choose a layer">
+          <LayerAnatomySelector
             color={primaryColor}
             defaultActiveLayer={currentLayer}
             onLayerSelected={setLayerQuery}
@@ -49,4 +50,4 @@ const Microcircuits: React.FC = () => {
   );
 };
 
-export default Microcircuits;
+export default LayerAnatomy;
