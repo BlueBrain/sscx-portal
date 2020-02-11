@@ -10,7 +10,6 @@ import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
 import { primaryColor } from './config';
-import Pills from '../../components/Pills';
 import Selector from '../../components/Selector';
 
 const BrainRegions: React.FC = () => {
@@ -20,11 +19,6 @@ const BrainRegions: React.FC = () => {
   const setBrainRegionQuery = (brainRegion: BrainRegion) => {
     history.push(`?brain_region=${brainRegion}`);
   };
-
-  const setBrainLayerQuery = (brainLayer: string) => {
-    // history.push(`?brain_layer=${brainLayer}`);
-  };
-
   const currentRegion = query.get('brain_region') as BrainRegion;
 
   return (
@@ -39,14 +33,6 @@ const BrainRegions: React.FC = () => {
         {!!currentRegion && (
           <div>
             <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
-            <br />
-            <Pills
-              title="1. Select a brain layer"
-              list={['L1', 'L23', 'L4', 'L5', 'L6']}
-              defaultValue="L23"
-              onSelect={brainLayer => setBrainLayerQuery(brainLayer)}
-              color={primaryColor}
-            />
           </div>
         )}
       </div>

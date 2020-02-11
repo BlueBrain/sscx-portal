@@ -9,7 +9,7 @@ const classPrefixPill = 'pill__';
 type PillsProps = {
   title?: string;
   list: string[];
-  defaultValue: string;
+  defaultValue?: string;
   onSelect?: (string) => void;
   color?: string;
 };

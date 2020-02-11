@@ -10,7 +10,6 @@ import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
 import { primaryColor } from './config';
-import Pills from '../../components/Pills';
 import Selector from '../../components/Selector';
 
 const BrainRegions: React.FC = () => {
@@ -34,14 +33,6 @@ const BrainRegions: React.FC = () => {
         {!!currentRegion && (
           <div>
             <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
-            <br />
-            <Pills
-              title="1. Select a brain layer"
-              list={['L1', 'L23', 'L4', 'L5', 'L6']}
-              defaultValue="L23"
-              onSelect={() => undefined}
-              color={primaryColor}
-            />
           </div>
         )}
       </div>

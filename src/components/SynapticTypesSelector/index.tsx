@@ -34,7 +34,7 @@ const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
 }) => {
   return (
     <div className={`${cssPrefix}basis`}>
-      <Selector title="1. Choose two layers" column>
+      <Selector title="2. Choose two layers" column>
         <SynapticPathwaySelector
           color={color}
           defaultActivePreLayer={defaultActivePreLayer}
@@ -45,7 +45,7 @@ const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
       </Selector>
       {(defaultActivePreLayer || defaultActivePostLayer) && (
         <p className="synaptic-types-header">
-          2. Choose your {synapticTypesName}
+          3. Choose your {synapticTypesName}
         </p>
       )}
       <div className={`list-pre ${defaultActivePreLayer ? 'open' : ''}`}>

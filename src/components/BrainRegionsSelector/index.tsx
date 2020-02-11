@@ -26,6 +26,9 @@ const Region: React.FC<BrainRegionProps> = ({
   children,
 }) => (
   <g
+    role="radio"
+    aria-checked={activeRegion === region}
+    tabIndex={0}
     id={`${classPrefix}${region}-fill`}
     className={activeRegion === region ? 'active' : ''}
     onClick={() => onSelect(region)}
@@ -105,7 +108,7 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
           />
         </g>
       </g>
-      <g id="brain_regions_svg__Fill">
+      <g id="brain_regions_svg__Fill" role="radiogroup">
         <Region
           region="S1Tr"
           onSelect={selectRegion}

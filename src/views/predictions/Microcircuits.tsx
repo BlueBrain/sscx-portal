@@ -9,18 +9,30 @@ import MicrocircuitSelector from '../../components/MicrocircuitSelector';
 import useQuery from '../../hooks/useQuery';
 import { useHistory } from 'react-router';
 import { Layer } from '../../types';
+import Pills from '../../components/Pills';
+import { BrainRegion } from 'src/components/BrainRegionsSelector';
 
 const Microcircuits: React.FC = () => {
   const query = useQuery();
   const history = useHistory();
 
-  const setLayerQuery = (layer: Layer) => {
-    history.push(`?layer=${layer}`);
+  const addParam = (key: string, value: string): void => {
+    query.set(key, value);
+    history.push(`?${query.toString()}`);
   };
+
+  const currentRegion: BrainRegion = query.get('brain_region') as BrainRegion;
   const currentLayer: Layer = query.get('layer') as Layer;
 
+  const setRegion = (region: BrainRegion) => addParam('brain_region', region);
+  const setLayer = (layer: Layer) => addParam('layer', layer);
+
   return (
-    <Filters primaryColor={primaryColor} backgroundAlt hasData={!!currentLayer}>
+    <Filters
+      primaryColor={primaryColor}
+      backgroundAlt
+      hasData={!!currentLayer && !!currentRegion}
+    >
       <div className="center-col">
         <Title
           primaryColor={primaryColor}
@@ -28,20 +40,25 @@ const Microcircuits: React.FC = () => {
           subtitle="Predictions"
           hint="Select a microcircuit of interest."
         />
-        {!!currentLayer && (
-          <div>
-            <InfoBox title="Longer Text" text={lorem} />
-            <br />
-            <InfoBox text={`This one has no title o_0\n${lorem}`} />
-          </div>
-        )}
+        <div>
+          <InfoBox title="Longer Text" text={lorem} />
+          <br />
+          <Pills
+            title="1. Select a subregion"
+            list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
+            defaultValue={currentRegion}
+            onSelect={setRegion}
+            color={primaryColor}
+          />
+        </div>
       </div>
       <div className="center-col">
-        <Selector title="Choose a layer" column>
+        <Selector title="2. Choose a layer" column>
           <MicrocircuitSelector
             color={primaryColor}
             defaultActiveLayer={currentLayer}
-            onLayerSelected={setLayerQuery}
+            onLayerSelected={setLayer}
+            disabled={!currentRegion}
           />
         </Selector>
       </div>
