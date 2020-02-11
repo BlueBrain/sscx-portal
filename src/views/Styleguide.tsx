@@ -71,7 +71,7 @@ const Styleguide: React.FC = () => {
         <List
           title="1. Pick a dino 🦕🦕🦕"
           list={dinos}
-          selected={dinos[2]}
+          defaultValue={dinos[2]}
           onSelect={dummyFnStr}
           color={color}
         />
@@ -85,7 +85,7 @@ const Styleguide: React.FC = () => {
         <Pills
           title="1. Select a dino pill 🦖💊🦖💊"
           list={dinos.slice(0, 3)}
-          selected={dinos[2]}
+          defaultValue={dinos[2]}
           onSelect={dummyFnStr}
           color={color}
         />

@@ -9,7 +9,7 @@ const classPrefixListElement = 'list-element__';
 type ListProps = {
   title?: string;
   list: string[];
-  selected?: string;
+  defaultValue?: string;
   onSelect?: (string) => void;
   color?: string;
 };
@@ -29,6 +29,9 @@ const ListElement: React.FC<ListElementProps> = ({
 }) => {
   return (
     <div
+      role="radio"
+      aria-checked={selected}
+      tabIndex={0}
       className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
       onClick={() => onSelect(element)}
       style={{ backgroundColor: selected && color }}
@@ -41,20 +44,35 @@ const ListElement: React.FC<ListElementProps> = ({
 const List: React.FC<ListProps> = ({
   title,
   list,
-  selected,
+  defaultValue,
   onSelect,
   color,
 }) => {
+  const [activeElement, setActiveElement] = React.useState<string>(
+    defaultValue,
+  );
+
+  const handleSelectedElement = (element: string) => {
+    setActiveElement(element);
+    onSelect && onSelect(element);
+  };
+
+  const id = title ? title.replace(/\s/g, '') : 'no_title';
+
   return (
-    <div className={`${classPrefixList}basis`}>
+    <div
+      className={`${classPrefixList}basis`}
+      role="radiogroup"
+      aria-labelledby={`${classPrefixList}${id}`}
+    >
       {title && <p>{title}</p>}
       <div className="elements">
-        {list.map((el, i) => (
+        {list.map(el => (
           <ListElement
-            key={i}
+            key={`${el}`}
             element={el}
-            selected={selected === el}
-            onSelect={onSelect}
+            selected={activeElement === el}
+            onSelect={handleSelectedElement}
             color={color}
           />
         ))}

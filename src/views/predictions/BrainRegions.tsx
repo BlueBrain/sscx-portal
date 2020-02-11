@@ -38,7 +38,7 @@ const BrainRegions: React.FC = () => {
             <Pills
               title="1. Select a brain layer"
               list={['L1', 'L23', 'L4', 'L5', 'L6']}
-              selected="L23"
+              defaultValue="L23"
               onSelect={() => undefined}
               color={primaryColor}
             />

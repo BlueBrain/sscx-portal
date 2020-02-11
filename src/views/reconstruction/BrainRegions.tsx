@@ -20,6 +20,11 @@ const BrainRegions: React.FC = () => {
   const setBrainRegionQuery = (brainRegion: BrainRegion) => {
     history.push(`?brain_region=${brainRegion}`);
   };
+
+  const setBrainLayerQuery = (brainLayer: string) => {
+    // history.push(`?brain_layer=${brainLayer}`);
+  };
+
   const currentRegion = query.get('brain_region') as BrainRegion;
 
   return (
@@ -38,8 +43,8 @@ const BrainRegions: React.FC = () => {
             <Pills
               title="1. Select a brain layer"
               list={['L1', 'L23', 'L4', 'L5', 'L6']}
-              selected="L23"
-              onSelect={() => undefined}
+              defaultValue="L23"
+              onSelect={brainLayer => setBrainLayerQuery(brainLayer)}
               color={primaryColor}
             />
           </div>

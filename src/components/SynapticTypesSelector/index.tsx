@@ -52,7 +52,7 @@ const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
         <List
           title={`Presynaptic ${synapticTypesName}`}
           list={synapticTypes}
-          selected={selectedPreType}
+          defaultValue={selectedPreType}
           onSelect={onPreTypeSelect}
           color={color}
         />
@@ -61,7 +61,7 @@ const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
         <List
           title={`Postsynaptic ${synapticTypesName}`}
           list={synapticTypes}
-          selected={selectedPostType}
+          defaultValue={selectedPostType}
           onSelect={onPostTypeSelect}
           color={accentColors.orange}
         />
