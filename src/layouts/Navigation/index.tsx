@@ -44,6 +44,25 @@ export const SecondaryNav: React.FC = () => (
       </ul>
     </li>
     <li>
+      <NavLink to="/extrapolation">Extrapolation Data</NavLink>
+      <ul>
+        <li>
+          <NavLink to="/extrapolation/brain-regions">Brain Regions</NavLink>
+        </li>
+        <li>
+          <NavLink to="/extrapolation/layer-anatomy">Layer Anatomy</NavLink>
+        </li>
+        <li>
+          <NavLink to="/extrapolation/synaptic-pathways">
+            Synaptic Pathways
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/extrapolation/microcircuits">Microcircuits</NavLink>
+        </li>
+      </ul>
+    </li>
+    <li>
       <NavLink to="/reconstruction">Reconstruction Data</NavLink>
       <ul>
         <li>

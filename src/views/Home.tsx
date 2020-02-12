@@ -10,7 +10,7 @@ const accentColor = accentColors.yellow;
 const Home: React.FC = () => (
   <FullPage>
     <Title
-      title="Somatosensory Cortext Portal"
+      title="Somatosensory Cortex Portal"
       subtitle="Explore our datasets"
       hint="Explore model data of the rat brain, both in vitro and in silico."
       primaryColor={accentColor}

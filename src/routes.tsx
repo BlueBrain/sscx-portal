@@ -6,6 +6,11 @@ import Home from './views/Home';
 import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
 import ExpNeuronMorpho from './views/experimental/NeuronMorphology';
 import ExpNeuronElectro from './views/experimental/NeuronElectrophysiology';
+// Extrapolation
+import ExtBrainRegions from './views/extrapolation/BrainRegions';
+import ExtLayerAnatomy from './views/extrapolation/LayerAnatomy';
+import ExtSynapticPathways from './views/extrapolation/SynapticPathways';
+import ExtMicrocircuits from './views/extrapolation/Microcircuits';
 // Reconstruction
 import RecBrainRegions from './views/reconstruction/BrainRegions';
 import RecLayerAnatomy from './views/reconstruction/LayerAnatomy';
@@ -53,6 +58,32 @@ const routes: RouteProps[] = [
   {
     path: '/experimental/neuron-electrophysiology',
     component: ExpNeuronElectro,
+    exact: true,
+  },
+  // Extrapolation
+  {
+    path: '/extrapolation',
+    component: () => <Redirect to="/reconstruction/brain-regions" />,
+    exact: true,
+  },
+  {
+    path: '/extrapolation/brain-regions',
+    component: ExtBrainRegions,
+    exact: true,
+  },
+  {
+    path: '/extrapolation/layer-anatomy',
+    component: ExtLayerAnatomy,
+    exact: true,
+  },
+  {
+    path: '/extrapolation/synaptic-pathways',
+    component: ExtSynapticPathways,
+    exact: true,
+  },
+  {
+    path: '/extrapolation/microcircuits',
+    component: ExtMicrocircuits,
     exact: true,
   },
   // Reconstruction

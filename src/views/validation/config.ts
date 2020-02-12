@@ -1,3 +1,3 @@
 import { accentColors } from '../../config';
 
-export const primaryColor = accentColors.lavender;
+export const primaryColor = accentColors.green;
