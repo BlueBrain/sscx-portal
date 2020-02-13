@@ -23,7 +23,7 @@ const BrainRegions: React.FC = () => {
   const currentRegion = query.get('brain_region') as BrainRegion;
 
   return (
-    <Filters primaryColor={primaryColor} hasData={!!currentRegion}>
+    <Filters primaryColor={colorName} hasData={!!currentRegion}>
       <div className="center-col">
         <Title
           primaryColor={primaryColor}

@@ -35,7 +35,7 @@ const BrainRegions: React.FC = () => {
     currentPreLayer && currentPostLayer && currentPreType && currentPostType;
 
   return (
-    <Filters primaryColor={primaryColor} hasData={!!hasData}>
+    <Filters primaryColor={colorName} hasData={!!hasData}>
       <div className="center-col">
         <Title
           primaryColor={primaryColor}

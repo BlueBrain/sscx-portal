@@ -29,7 +29,7 @@ const Microcircuits: React.FC = () => {
 
   return (
     <Filters
-      primaryColor={primaryColor}
+      primaryColor={colorName}
       backgroundAlt
       hasData={!!currentLayer && !!currentRegion}
     >

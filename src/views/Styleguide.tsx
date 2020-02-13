@@ -105,7 +105,7 @@ const Styleguide: React.FC = () => {
         <p>
           <em>TODO: Responsive design</em>
         </p>
-        <ScrollTo anchor="top" direction="up" color={color}>
+        <ScrollTo anchor="top" direction="up" color={colorName}>
           Return to filters
         </ScrollTo>
         <br />

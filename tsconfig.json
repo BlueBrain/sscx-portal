@@ -21,9 +21,6 @@
     "allowSyntheticDefaultImports": true,
     "types": ["node", "jest"]
   },
-  "parcelTsPluginOptions": {
-    "transpileOnly": false
-  },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "tmp"],
   "files": ["custom.d.ts"]
