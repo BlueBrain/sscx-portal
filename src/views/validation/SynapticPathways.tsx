@@ -40,7 +40,7 @@ const BrainRegions: React.FC = () => {
         <Title
           primaryColor={primaryColor}
           title="Synaptic Pathways"
-          subtitle="Reconstruction Data"
+          subtitle="Validation Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
         {!!hasData && (

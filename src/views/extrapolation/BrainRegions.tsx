@@ -27,7 +27,7 @@ const BrainRegions: React.FC = () => {
         <Title
           primaryColor={primaryColor}
           title="Brain Regions"
-          subtitle="Reconstruction Data"
+          subtitle="Extrapolated Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
         {!!currentRegion && (

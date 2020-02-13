@@ -15,6 +15,7 @@ type MicrocircuitProps = {
 type MicrocircuitSelectProps = {
   color: string;
   defaultActiveLayer?: Layer;
+  disabled?: boolean;
   onLayerSelected?: (layer: Layer) => void;
 };
 
@@ -36,6 +37,7 @@ const Layer: React.FC<MicrocircuitProps> = ({
 const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
   color,
   defaultActiveLayer,
+  disabled = false,
   onLayerSelected,
 }) => {
   const [activeLayer, setActiveLayer] = React.useState<Layer>(
@@ -75,32 +77,55 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
           d="M224.7 4.5H87.5L19.2 38.3l.2.4v73.1h0V325.2h0v73.9h0v73.1l68.1 33.5h137.2l68.1-33.5v-73.1h0v-73.9h0V111.8h0V38.7l.2-.4z"
         />
       </g>
-      <g id="microcircuit_svg__layers">
-        <Layer layer="L1" onSelect={selectLayer} activeLayer={activeLayer}>
+      <g
+        id="microcircuit_svg__layers"
+        className={disabled ? 'disabled' : 'enabled'}
+      >
+        <Layer
+          layer="L1"
+          onSelect={!disabled && selectLayer}
+          activeLayer={activeLayer}
+        >
           <path
             className="microcircuit_svg__st2"
             d="M224.7 71.8H87.5L19.2 38.3 87.5 4.5 19.2 38.3l.2.4v73.1l68.1 33.5h137.2l68.1-33.5V38.7l.2-.4z"
           />
         </Layer>
-        <Layer layer="L23" onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer
+          layer="L23"
+          onSelect={!disabled && selectLayer}
+          activeLayer={activeLayer}
+        >
           <path
             className="microcircuit_svg__st2"
             d="M224.7 145.3H87.5l-68.1-33.5v139.6l68.1 33.4v.2h137.2v-.2l68.1-33.4V111.8z"
           />
         </Layer>
-        <Layer layer="L4" onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer
+          layer="L4"
+          onSelect={!disabled && selectLayer}
+          activeLayer={activeLayer}
+        >
           <path
             className="microcircuit_svg__st2"
             d="M224.7 284.8v.2H87.5v-.2l-68.1-33.4v73.8l68.1 33.5h137.2l68.1-33.5v-73.8z"
           />
         </Layer>
-        <Layer layer="L5" onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer
+          layer="L5"
+          onSelect={!disabled && selectLayer}
+          activeLayer={activeLayer}
+        >
           <path
             className="microcircuit_svg__st2"
             d="M224.7 358.7H87.5l-68.1-33.5v73.9l68.1 33.5h137.2l68.1-33.5v-73.9z"
           />
         </Layer>
-        <Layer layer="L6" onSelect={selectLayer} activeLayer={activeLayer}>
+        <Layer
+          layer="L6"
+          onSelect={!disabled && selectLayer}
+          activeLayer={activeLayer}
+        >
           <path
             className="microcircuit_svg__st2"
             d="M224.7 432.6H87.5l-68.1-33.5v73.1l68.1 33.5h137.2l68.1-33.5v-73.1z"

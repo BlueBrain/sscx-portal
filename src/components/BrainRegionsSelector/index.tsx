@@ -26,6 +26,9 @@ const Region: React.FC<BrainRegionProps> = ({
   children,
 }) => (
   <g
+    role="radio"
+    aria-checked={activeRegion === region}
+    tabIndex={0}
     id={`${classPrefix}${region}-fill`}
     className={activeRegion === region ? 'active' : ''}
     onClick={() => onSelect(region)}
@@ -57,7 +60,7 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
       xmlSpace="preserve"
     >
       <style>
-        {`#brain_regions_svg__Fill path:hover, #brain_regions_svg__Fill g.active path{fill:${color}}`}
+        {`#brain_regions_svg__Fill g:hover path, #brain_regions_svg__Fill g.active path{fill:${color}}`}
       </style>
       <path
         id="brain_regions_svg__Shadow"
@@ -80,8 +83,8 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
             y2={1200.525}
             gradientTransform="translate(0 -512.11)"
           >
-            <stop offset={0} stopColor="#e4e9f5" />
-            <stop offset={0.999} stopColor="#7ea6de" />
+            <stop offset={0} stopColor="#fff" />
+            <stop offset={0.999} stopColor={color} />
           </linearGradient>
           <path
             d="M362.1 356.3H48.7c-8.7 0-15.7-7-15.7-15.7V27.3c0-8.7 7-15.7 15.7-15.7H362c8.7 0 15.7 7 15.7 15.7v313.3c0 8.7-7 15.7-15.6 15.7z"
@@ -93,7 +96,7 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
           />
           <path
             d="M171.9 321.3c-81.7 10.2-99.5-39.5-99.5-39.5l2.5 1.2c2.2 1 4.3 1.7 6.7 2 8.3 1.3 17.7 1.5 23.3-2l35.2 5.5c.5.8 8.5 23.3 26.7 30.8.3.3 4.9 2 5.1 2z"
-            fill="#7ea6de"
+            fill={color}
           />
           <path
             className="brain_regions_svg__st3"
@@ -105,7 +108,7 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
           />
         </g>
       </g>
-      <g id="brain_regions_svg__Fill">
+      <g id="brain_regions_svg__Fill" role="radiogroup">
         <Region
           region="S1Tr"
           onSelect={selectRegion}
@@ -124,6 +127,11 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
           <path
             className="brain_regions_svg__st6"
             d="M237.4 82.6V83.5c0 2.3-.2 4.8-.5 7.2-.2 2.2-.3 4.2-.5 6.3 0 0 0 .3-.2.8-2 19.2-6.3 36.5-16 33-.3 0-.8-.2-1.2-.5-.8-.3-1.7-.8-2.5-1.3-1.3-.7-2.5-1.3-3.3-1.8s-1.5-.8-1.5-.8c-3.3-2.2-6.3-4.5-8.8-6.8-2.5-2.5-4.5-5-6.2-7.7-3-5-4.2-10.5-4.2-16.8v-1.3c0-.5 0-1.2.2-1.8v-1c0-.7.2-1.3.2-1.8v-.7c0-.7.2-1 .2-1 1.8-12.8 7-33.3 10.7-46.8 3.2-11.8 18.7-15 26-5.2.8 1.2 1.7 2.3 2.3 3.5v.2c.6 1.4 4 22.3 5.3 43.4z"
+          />
+          <path
+            className="brain_regions_svg__st6"
+            d="M147.1,291.6l-35.2-5.5c3-1.8,5-5,5-9.7c0-5.8,0.5-14.2,1.3-23.7l8,3.2
+			c8.8,3.5,18.2,5.3,27.7,5.3h0.8C147.9,273.8,143.7,284.8,147.1,291.6z"
           />
         </Region>
         <Region
@@ -196,6 +204,7 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
           <g className="brain_regions_svg__st8">
             <path
               className="brain_regions_svg__st10"
+              fill={color}
               d="M71.2 51c0 1.7-.5 3.2-1.3 4.5-.8 1.3-2.2 2.3-3.8 3.2s-3.7 1.2-5.8 1.2c-2.7 0-5-.5-6.7-1.5-1.2-.7-2.3-1.7-3-3-.8-1.2-1.2-2.5-1.2-3.7 0-.7.2-1.3.7-1.7.5-.5 1-.7 1.8-.7.7 0 1 .2 1.5.5.3.3.8 1 1 1.7.3.8.7 1.7 1.2 2.2.3.7 1 1 1.7 1.5s1.7.5 2.8.5c1.7 0 3-.3 4-1.2 1-.8 1.5-1.7 1.5-2.8 0-.8-.3-1.7-.8-2.2s-1.3-1-2.2-1.3-2-.7-3.5-1c-2-.5-3.7-1-5-1.7S51.7 44 50.9 43c-.8-1-1.2-2.3-1.2-4 0-1.5.3-2.8 1.2-4 .8-1.2 2-2 3.5-2.7 1.5-.7 3.3-1 5.5-1 1.7 0 3.2.2 4.3.7 1.2.5 2.2 1 3 1.7.8.7 1.3 1.5 1.8 2.2.5.7.5 1.5.5 2.2 0 .7-.2 1.3-.7 1.8s-1 .8-1.8.8c-.7 0-1.2-.2-1.5-.5-.3-.3-.7-.8-1-1.5-.5-1-1.2-1.8-1.8-2.5-.7-.5-1.8-.8-3.3-.8-1.5 0-2.7.3-3.5 1-.8.7-1.3 1.3-1.3 2.3 0 .5.2 1 .5 1.5s.7.7 1.2 1c.5.3 1 .5 1.7.7.5.2 1.5.3 2.7.7 1.5.3 3 .8 4.2 1.2 1.3.5 2.3 1 3.2 1.7.8.7 1.5 1.3 2 2.3 1 .7 1.1 1.8 1.1 3.2zM83.7 56.6v-17c-3.2 2.5-5.3 3.7-6.3 3.7-.5 0-1-.2-1.3-.7-.3-.5-.7-.8-.7-1.5s.2-1.2.7-1.3 1.2-.7 2.2-1.2c1.5-.7 2.7-1.5 3.7-2.2.8-.8 1.7-1.7 2.3-2.7s1.2-1.5 1.3-1.8c.2-.3.7-.3 1.2-.3.7 0 1.2.3 1.7.8s.7 1.2.7 2.2V56c0 2.5-.8 3.8-2.5 3.8-.8 0-1.3-.3-1.8-.8-.7-.5-1.2-1.4-1.2-2.4z"
             />
           </g>

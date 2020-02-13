@@ -27,10 +27,11 @@ const BrainRegions: React.FC = () => {
         <Title
           primaryColor={primaryColor}
           title="Brain Regions"
-          subtitle="Reconstruction Data"
+          subtitle="Validation Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
-        {!!currentRegion && (
+
+        {currentRegion && (
           <div>
             <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
           </div>

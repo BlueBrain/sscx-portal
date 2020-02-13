@@ -9,9 +9,15 @@ import Pills from '../components/Pills';
 import ImageViewer from '../components/ImageViewer';
 import Title from '../layouts/Title';
 import FullPage from '../layouts/FullPage';
+import BrainRegionSelector from '../components/BrainRegionsSelector';
+import { accentColors } from '../config';
+import LayerAnatomySelector from '../components/LayerAnatomySelector';
+import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
+import MicrocircuitSelector from '../components/MicrocircuitSelector';
 
 export const lorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
 export const dinos = [
   'T-Rex',
   'Stegosaurus',
@@ -22,7 +28,7 @@ export const dinos = [
   'Cassowary',
 ];
 
-const color = 'red';
+const color = accentColors.lavender;
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
@@ -71,7 +77,7 @@ const Styleguide: React.FC = () => {
         <List
           title="1. Pick a dino 🦕🦕🦕"
           list={dinos}
-          selected={dinos[2]}
+          defaultValue={dinos[2]}
           onSelect={dummyFnStr}
           color={color}
         />
@@ -85,7 +91,7 @@ const Styleguide: React.FC = () => {
         <Pills
           title="1. Select a dino pill 🦖💊🦖💊"
           list={dinos.slice(0, 3)}
-          selected={dinos[2]}
+          defaultValue={dinos[2]}
           onSelect={dummyFnStr}
           color={color}
         />
@@ -154,6 +160,30 @@ const Styleguide: React.FC = () => {
           alt="cassowary"
           color={color}
         />
+      </section>
+
+      <section>
+        <h3>Visual selectors</h3>
+
+        <h4>Brain Regions</h4>
+        <div style={{ width: 400 }}>
+          <BrainRegionSelector color={accentColors.blue} />
+        </div>
+
+        <h4>Layer Anatomy</h4>
+        <div style={{ width: 400 }}>
+          <LayerAnatomySelector color={accentColors.blue} />
+        </div>
+
+        <h4>Synaptic Pathways</h4>
+        <div style={{ width: 400 }}>
+          <SynapticPathwaySelector color={accentColors.blue} />
+        </div>
+
+        <h4>Microcircuits</h4>
+        <div style={{ width: 400 }}>
+          <MicrocircuitSelector color={accentColors.blue} />
+        </div>
       </section>
 
       <section id="bottom" />

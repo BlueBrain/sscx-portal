@@ -9,6 +9,7 @@ import useQuery from '../../hooks/useQuery';
 import { useHistory } from 'react-router';
 import { Layer } from '../../types';
 import SynapticTypesSelector from '../../components/SynapticTypesSelector';
+import { BrainRegion } from '../../components/BrainRegionsSelector';
 
 const mTypes = ['a', 'b', 'c', 'd', 'e', 'f'];
 
@@ -21,11 +22,13 @@ const BrainRegions: React.FC = () => {
     history.push(`?${query.toString()}`);
   };
 
+  const currentRegion: BrainRegion = query.get('brain_region') as BrainRegion;
   const currentPreLayer: Layer = query.get('prelayer') as Layer;
   const currentPostLayer: Layer = query.get('postlayer') as Layer;
   const currentPreType: string = query.get('pretype');
   const currentPostType: string = query.get('posttype');
 
+  const setRegion = (region: BrainRegion) => addParam('brain_region', region);
   const setPreLayerQuery = (layer: Layer) => addParam('prelayer', layer);
   const setPostLayerQuery = (layer: Layer) => addParam('postlayer', layer);
   const setPreTypeQuery = (layer: Layer) => addParam('pretype', layer);
@@ -40,22 +43,20 @@ const BrainRegions: React.FC = () => {
         <Title
           primaryColor={primaryColor}
           title="Synaptic Pathways"
-          subtitle="Reconstruction Data"
+          subtitle="Extrapolated Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
-        {!!hasData && (
-          <div>
-            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
-            <br />
-            <Pills
-              title="3. Select a brain layer (optional)"
-              list={['L1', 'L23', 'L4', 'L5', 'L6']}
-              defaultValue="L23"
-              onSelect={() => undefined}
-              color={primaryColor}
-            />
-          </div>
-        )}
+        <div>
+          <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+          <br />
+          <Pills
+            title="1. Select a subregion"
+            list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
+            defaultValue={currentRegion}
+            onSelect={setRegion}
+            color={primaryColor}
+          />
+        </div>
       </div>
       <div className="center-col">
         <SynapticTypesSelector
@@ -65,7 +66,7 @@ const BrainRegions: React.FC = () => {
           defaultActivePostLayer={currentPostLayer}
           onPostLayerSelected={setPostLayerQuery}
           synapticTypes={mTypes}
-          synapticTypesName="M-types"
+          synapticTypesName="mtypes"
           onPostTypeSelect={setPostTypeQuery}
           onPreTypeSelect={setPreTypeQuery}
           selectedPreType={currentPreType}
