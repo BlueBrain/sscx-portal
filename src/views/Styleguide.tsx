@@ -109,8 +109,12 @@ const Styleguide: React.FC = () => {
           Return to filters
         </ScrollTo>
         <br />
-        <ScrollTo anchor="bottom" direction="down">
+        <ScrollTo anchor="bottom" direction="down" color="yellow">
           View data
+        </ScrollTo>
+        <br />
+        <ScrollTo anchor="bottom" direction="down" color="green">
+          View data in green
         </ScrollTo>
         <h4>Scroll top</h4>
         <ScrollTop anchor="top" />
