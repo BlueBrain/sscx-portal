@@ -31,7 +31,7 @@ const LayerAnatomy: React.FC = () => {
         />
         {!!currentLayer && (
           <div role="information">
-            <InfoBox title="Longer Text" text={lorem} />
+            <InfoBox title="Longer Text" text={lorem} color="yellow" />
             <br />
             <InfoBox text={`This one has no title o_0\n${lorem}`} />
           </div>

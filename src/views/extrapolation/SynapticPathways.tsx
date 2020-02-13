@@ -3,7 +3,7 @@ import Title from '../../layouts/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
-import { primaryColor } from './config';
+import { primaryColor, colorName } from './config';
 import Pills from '../../components/Pills';
 import useQuery from '../../hooks/useQuery';
 import { useHistory } from 'react-router';
@@ -47,7 +47,7 @@ const BrainRegions: React.FC = () => {
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
         <div>
-          <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+          <InfoBox title="Longer Text" text={lorem} color={colorName} />
           <br />
           <Pills
             title="1. Select a subregion"

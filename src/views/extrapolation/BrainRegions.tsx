@@ -9,7 +9,7 @@ import Title from '../../layouts/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
-import { primaryColor } from './config';
+import { primaryColor, colorName } from './config';
 import Selector from '../../components/Selector';
 
 const BrainRegions: React.FC = () => {
@@ -32,7 +32,7 @@ const BrainRegions: React.FC = () => {
         />
         {!!currentRegion && (
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+            <InfoBox title="Longer Text" text={lorem} color={colorName} />
           </div>
         )}
       </div>

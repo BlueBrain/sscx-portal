@@ -151,6 +151,14 @@ const Styleguide: React.FC = () => {
         <InfoBox title="Longer Text" text={lorem} />
         <br />
         <InfoBox text={`This one has no title o_0\n${lorem}`} />
+        <br />
+        <InfoBox title="Green box" text="I am green" color="green" />
+        <br />
+        <InfoBox
+          title="Yellow box"
+          text="I am yellow (and I exist in blue, lavender and grey too)"
+          color="yellow"
+        />
         <h4>Image viewer</h4>
         <p>
           <em>TODO: Make expand function work properly</em>
