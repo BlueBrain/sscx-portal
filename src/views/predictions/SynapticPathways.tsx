@@ -54,7 +54,7 @@ const BrainRegions: React.FC = () => {
             list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
             defaultValue={currentRegion}
             onSelect={setRegion}
-            color={primaryColor}
+            color={colorName}
           />
         </div>
       </div>

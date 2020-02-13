@@ -3,7 +3,7 @@ import Title from '../../layouts/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
-import { primaryColor } from './config';
+import { primaryColor, colorName } from './config';
 import Pills from '../../components/Pills';
 import useQuery from '../../hooks/useQuery';
 import { useHistory } from 'react-router';
@@ -45,14 +45,14 @@ const BrainRegions: React.FC = () => {
         />
         {!!hasData && (
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+            <InfoBox title="Longer Text" text={lorem} color={colorName} />
             <br />
             <Pills
               title="3. Select a brain layer (optional)"
               list={['L1', 'L23', 'L4', 'L5', 'L6']}
               defaultValue="L23"
               onSelect={() => undefined}
-              color={primaryColor}
+              color={colorName}
             />
           </div>
         )}

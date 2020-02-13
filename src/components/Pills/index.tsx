@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './style.less';
-import { Palette } from '../../types';
+import { Color } from '../../types';
 
 const classPrefixPills = 'pills__';
 const classPrefixPill = 'pill__';
@@ -11,17 +11,16 @@ type PillsProps = {
   list: string[];
   defaultValue?: string;
   onSelect?: (string) => void;
-  color?: string;
+  color?: Color;
 };
 
 type PillProps = {
   element: string;
   selected: boolean;
   onSelect?: (string) => void;
-  color?: string;
 };
 
-const Pill: React.FC<PillProps> = ({ element, selected, onSelect, color }) => {
+const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
   return (
     <div
       role="radio"
@@ -31,11 +30,6 @@ const Pill: React.FC<PillProps> = ({ element, selected, onSelect, color }) => {
         selected ? `${classPrefixPill}selected` : ''
       }`}
       onClick={() => onSelect && onSelect(element)}
-      style={{
-        backgroundColor: selected && color,
-        border: selected && color && `2px solid ${color}`,
-        color: selected && color && 'white',
-      }}
     >
       {element}
     </div>
@@ -47,7 +41,7 @@ const Pills: React.FC<PillsProps> = ({
   list,
   defaultValue,
   onSelect,
-  color,
+  color = '',
 }) => {
   const [activePill, setActivePill] = React.useState<string>(defaultValue);
 
@@ -59,7 +53,7 @@ const Pills: React.FC<PillsProps> = ({
   const id = title ? title.replace(/\s/g, '') : 'no_title';
 
   return (
-    <div className={`${classPrefixPills}basis`}>
+    <div className={`${classPrefixPills}basis ${color}`}>
       {title && <p id={`${classPrefixPill}${id}`}>{title}</p>}
       <div
         className="elements"
@@ -72,7 +66,6 @@ const Pills: React.FC<PillsProps> = ({
             element={el}
             selected={activePill === el}
             onSelect={handleSelectedPill}
-            color={color}
           />
         ))}
       </div>

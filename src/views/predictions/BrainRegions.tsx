@@ -11,6 +11,7 @@ import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
 import { primaryColor } from './config';
 import Selector from '../../components/Selector';
+import { colorName } from '../extrapolation/config';
 
 const BrainRegions: React.FC = () => {
   const query = useQuery();
@@ -32,7 +33,7 @@ const BrainRegions: React.FC = () => {
         />
         {!!currentRegion && (
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+            <InfoBox title="Longer Text" text={lorem} color={colorName} />
           </div>
         )}
       </div>
