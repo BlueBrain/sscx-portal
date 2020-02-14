@@ -22,6 +22,33 @@
   padding: 5px 20px;
   font-weight: 400;
   cursor: pointer;
+  &.pill__selected {
+    .yellow & {
+      background-color: #accentPalette[yellow];
+      border: 2px solid #accentPalette[yellow];
+      color: #fff;
+    }
+    .blue & {
+      background-color: #accentPalette[blue];
+      border: 2px solid #accentPalette[blue];
+      color: #fff;
+    }
+    .lavender & {
+      background-color: #accentPalette[lavender];
+      border: 2px solid #accentPalette[lavender];
+      color: #fff;
+    }
+    .green & {
+      background-color: #accentPalette[green];
+      border: 2px solid #accentPalette[green];
+      color: #fff;
+    }
+    .grey & {
+      background-color: #accentPalette[grey];
+      border: 2px solid #accentPalette[grey];
+      color: #fff;
+    }
+  }
   &:hover:not(.pill__selected) {
     background-color: #basePalette[navy-1];
     color: #basePalette[white];

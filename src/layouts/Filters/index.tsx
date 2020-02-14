@@ -1,12 +1,13 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
-import './style.less';
 import ScrollTo from '../../components/ScrollTo';
+import { Color } from '../../types';
+import './style.less';
 
 const classPrefix = 'filters__';
 
 type FiltersProps = {
-  primaryColor: string;
+  primaryColor: Color;
   children: ReactChild | ReactFragment;
   hasData?: boolean;
   backgroundAlt?: boolean;

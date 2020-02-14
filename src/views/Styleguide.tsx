@@ -7,13 +7,14 @@ import InfoBox from '../components/InfoBox';
 import List from '../components/List';
 import Pills from '../components/Pills';
 import ImageViewer from '../components/ImageViewer';
-import Title from '../layouts/Title';
+import Title from '../components/Title';
 import FullPage from '../layouts/FullPage';
 import BrainRegionSelector from '../components/BrainRegionsSelector';
 import { accentColors } from '../config';
 import LayerAnatomySelector from '../components/LayerAnatomySelector';
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import MicrocircuitSelector from '../components/MicrocircuitSelector';
+import { Color } from '../types';
 
 export const lorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
@@ -28,7 +29,8 @@ export const dinos = [
   'Cassowary',
 ];
 
-const color = accentColors.lavender;
+const colorName: Color = 'lavender';
+const color = accentColors[colorName];
 
 const Styleguide: React.FC = () => {
   const dummyFn = () => {
@@ -45,7 +47,7 @@ const Styleguide: React.FC = () => {
           title="Styleguide"
           subtitle="SSCx Portal"
           hint="A collection of useful elements"
-          primaryColor={color}
+          primaryColor={colorName}
         />
       </div>
 
@@ -79,7 +81,7 @@ const Styleguide: React.FC = () => {
           list={dinos}
           defaultValue={dinos[2]}
           onSelect={dummyFnStr}
-          color={color}
+          color={colorName}
         />
         <h4>Pills</h4>
         <p>
@@ -93,7 +95,7 @@ const Styleguide: React.FC = () => {
           list={dinos.slice(0, 3)}
           defaultValue={dinos[2]}
           onSelect={dummyFnStr}
-          color={color}
+          color={colorName}
         />
       </section>
 
@@ -103,12 +105,16 @@ const Styleguide: React.FC = () => {
         <p>
           <em>TODO: Responsive design</em>
         </p>
-        <ScrollTo anchor="top" direction="up" color={color}>
+        <ScrollTo anchor="top" direction="up" color={colorName}>
           Return to filters
         </ScrollTo>
         <br />
-        <ScrollTo anchor="bottom" direction="down">
+        <ScrollTo anchor="bottom" direction="down" color="yellow">
           View data
+        </ScrollTo>
+        <br />
+        <ScrollTo anchor="bottom" direction="down" color="green">
+          View data in green
         </ScrollTo>
         <h4>Scroll top</h4>
         <ScrollTop anchor="top" />
@@ -151,6 +157,14 @@ const Styleguide: React.FC = () => {
         <InfoBox title="Longer Text" text={lorem} />
         <br />
         <InfoBox text={`This one has no title o_0\n${lorem}`} />
+        <br />
+        <InfoBox title="Green box" text="I am green" color="green" />
+        <br />
+        <InfoBox
+          title="Yellow box"
+          text="I am yellow (and I exist in blue, lavender and grey too)"
+          color="yellow"
+        />
         <h4>Image viewer</h4>
         <p>
           <em>TODO: Make expand function work properly</em>

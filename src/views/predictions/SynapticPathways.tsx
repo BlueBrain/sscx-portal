@@ -1,9 +1,9 @@
 import React from 'react';
-import Title from '../../layouts/Title';
+import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
-import { primaryColor } from './config';
+import { primaryColor, colorName } from './config';
 import Pills from '../../components/Pills';
 import useQuery from '../../hooks/useQuery';
 import { useHistory } from 'react-router';
@@ -38,29 +38,29 @@ const BrainRegions: React.FC = () => {
     currentPreLayer && currentPostLayer && currentPreType && currentPostType;
 
   return (
-    <Filters primaryColor={primaryColor} hasData={!!hasData}>
+    <Filters primaryColor={colorName} hasData={!!hasData}>
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Synaptic Pathways"
           subtitle="Predictions"
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
         <div>
-          <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+          <InfoBox title="Longer Text" text={lorem} color={colorName} />
           <br />
           <Pills
             title="1. Select a subregion"
             list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
             defaultValue={currentRegion}
             onSelect={setRegion}
-            color={primaryColor}
+            color={colorName}
           />
         </div>
       </div>
       <div className="center-col">
         <SynapticTypesSelector
-          color={primaryColor}
+          color={colorName}
           defaultActivePreLayer={currentPreLayer}
           onPreLayerSelected={setPreLayerQuery}
           defaultActivePostLayer={currentPostLayer}

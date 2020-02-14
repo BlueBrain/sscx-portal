@@ -28,7 +28,6 @@ const NavButton: React.FC<NavButtonProps> = ({
   return (
     <NavLink to={path} exact={home}>
       <Button
-        palette={palette}
         width={highlight || home ? 140 : null}
         discrete={!highlight && !home}
         onClick={onClick}
@@ -52,7 +51,6 @@ const NavDesktop = withRouter(({ location }) => {
         ) : (
           <Button
             width={140}
-            palette={palette}
             active={location.pathname === '/'}
             onClick={() => setSecondaryNav(true)}
           >

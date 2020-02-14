@@ -4,10 +4,10 @@ import { useHistory } from 'react-router-dom';
 import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
-import Title from '../../layouts/Title';
+import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
-import { primaryColor } from './config';
+import { primaryColor, colorName } from './config';
 import Selector from '../../components/Selector';
 import { Layer } from '../../types';
 
@@ -21,10 +21,10 @@ const LayerAnatomy: React.FC = () => {
   const currentLayer: Layer = query.get('layer') as Layer;
 
   return (
-    <Filters primaryColor={primaryColor} backgroundAlt hasData={!!currentLayer}>
+    <Filters primaryColor={colorName} backgroundAlt hasData={!!currentLayer}>
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Layer Anatomy"
           subtitle="Validation Data"
           hint="Select a layer of interest in the S1 of the rat brain."

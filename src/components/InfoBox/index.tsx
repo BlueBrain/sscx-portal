@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Color } from '../../types';
 import './style.less';
 
 const classPrefix = 'info-box__';
@@ -7,7 +8,7 @@ const classPrefix = 'info-box__';
 type InfoBoxProps = {
   title?: string;
   text: string;
-  color?: string;
+  color?: Color;
   maxChars?: number;
 };
 
@@ -29,7 +30,7 @@ const truncate = (text: string, maxChars: number): string => {
 const InfoBox: React.FC<InfoBoxProps> = ({
   title,
   text,
-  color,
+  color = 'default',
   maxChars = 150,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
@@ -40,7 +41,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   }, [expanded]);
 
   return (
-    <div className={`${classPrefix}basis`} style={{ backgroundColor: color }}>
+    <div className={`${classPrefix}basis ${color}`}>
       {title && <h3>{title}</h3>}
       <p>{currentText}</p>
       {!isShorter(text, maxChars) && (

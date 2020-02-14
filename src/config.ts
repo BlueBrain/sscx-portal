@@ -1,4 +1,4 @@
-export const accentColors = {
+export const accentColors: { [key: string]: string } = {
   yellow: '#ffc500',
   blue: '#84bbf8',
   lavender: '#657be1',

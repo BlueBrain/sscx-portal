@@ -5,11 +5,11 @@ import BrainRegionsSelector, {
   BrainRegion,
 } from '../../components/BrainRegionsSelector';
 import useQuery from '../../hooks/useQuery';
-import Title from '../../layouts/Title';
+import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';
-import { primaryColor } from './config';
+import { primaryColor, colorName } from './config';
 import Selector from '../../components/Selector';
 
 const BrainRegions: React.FC = () => {
@@ -22,10 +22,10 @@ const BrainRegions: React.FC = () => {
   const currentRegion = query.get('brain_region') as BrainRegion;
 
   return (
-    <Filters primaryColor={primaryColor} hasData={!!currentRegion}>
+    <Filters primaryColor={colorName} hasData={!!currentRegion}>
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Brain Regions"
           subtitle="Validation Data"
           hint="Select a subregion of interest in the S1 of the rat brain."
@@ -33,7 +33,7 @@ const BrainRegions: React.FC = () => {
 
         {currentRegion && (
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={primaryColor} />
+            <InfoBox title="Longer Text" text={lorem} color={colorName} />
           </div>
         )}
       </div>

@@ -7,8 +7,7 @@
   "scripts": {
     "test": "jest",
     "start": "parcel -p 8080 watch src/index.html",
-    "build": "parcel build src/index.html",
-    "parcel": "^1.12.4",
+    "build": "tsc --noEmit && parcel build src/index.html",
     "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
     "style": "prettier --check \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\""
   },

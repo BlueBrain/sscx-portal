@@ -1,9 +1,9 @@
 import React from 'react';
 import Filters from '../../layouts/Filters';
-import Title from '../../layouts/Title';
+import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
-import { primaryColor } from './config';
+import { primaryColor, colorName } from './config';
 import Selector from '../../components/Selector';
 import MicrocircuitSelector from '../../components/MicrocircuitSelector';
 import useQuery from '../../hooks/useQuery';
@@ -20,10 +20,10 @@ const Microcircuits: React.FC = () => {
   const currentLayer: Layer = query.get('layer') as Layer;
 
   return (
-    <Filters primaryColor={primaryColor} backgroundAlt hasData={!!currentLayer}>
+    <Filters primaryColor={colorName} backgroundAlt hasData={!!currentLayer}>
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Microcircuits"
           subtitle="Reconstruction Data"
           hint="Select a microcircuit of interest."
