@@ -35,7 +35,7 @@ const Microcircuits: React.FC = () => {
     >
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Microcircuits"
           subtitle="Predictions"
           hint="Select a microcircuit of interest."

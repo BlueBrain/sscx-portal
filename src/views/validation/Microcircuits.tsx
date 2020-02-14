@@ -23,7 +23,7 @@ const Microcircuits: React.FC = () => {
     <Filters primaryColor={colorName} backgroundAlt hasData={!!currentLayer}>
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Microcircuits"
           subtitle="Validation Data"
           hint="Select a microcircuit of interest."

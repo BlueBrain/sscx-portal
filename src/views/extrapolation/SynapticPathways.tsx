@@ -41,7 +41,7 @@ const BrainRegions: React.FC = () => {
     <Filters primaryColor={colorName} hasData={!!hasData}>
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Synaptic Pathways"
           subtitle="Extrapolated Data"
           hint="Select a subregion of interest in the S1 of the rat brain."

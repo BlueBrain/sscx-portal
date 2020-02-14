@@ -24,7 +24,7 @@ const LayerAnatomy: React.FC = () => {
     <Filters primaryColor={colorName} backgroundAlt hasData={!!currentLayer}>
       <div className="center-col">
         <Title
-          primaryColor={primaryColor}
+          primaryColor={colorName}
           title="Neuron Electrophysiology"
           subtitle="Experimental Data"
           hint="Select a layer of interest in the S1 of the rat brain."

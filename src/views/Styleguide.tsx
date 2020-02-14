@@ -47,7 +47,7 @@ const Styleguide: React.FC = () => {
           title="Styleguide"
           subtitle="SSCx Portal"
           hint="A collection of useful elements"
-          primaryColor={color}
+          primaryColor={colorName}
         />
       </div>
 

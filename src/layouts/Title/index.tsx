@@ -1,11 +1,12 @@
 import React from 'react';
 
+import { Color } from '../../types';
 import './style.less';
 
 const classPrefix = 'title__';
 
 type TitleProps = {
-  primaryColor: string;
+  primaryColor: Color;
   subtitle?: string;
   title: string;
   hint?: string;
@@ -18,11 +19,9 @@ const Title: React.FC<TitleProps> = ({
   hint,
 }) => {
   return (
-    <div className={`${classPrefix}basis`}>
-      {subtitle && <h4 style={{ color: primaryColor }}>{subtitle}</h4>}
-      <h2 role="title" style={{ borderLeft: `4px solid ${primaryColor}` }}>
-        {title}
-      </h2>
+    <div className={`${classPrefix}basis ${primaryColor}`}>
+      {subtitle && <h4>{subtitle}</h4>}
+      <h2 role="title">{title}</h2>
       {hint && <h3>{hint}</h3>}
     </div>
   );
