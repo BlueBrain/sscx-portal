@@ -60,7 +60,7 @@ const BrainRegions: React.FC = () => {
       </div>
       <div className="center-col">
         <SynapticTypesSelector
-          color={primaryColor}
+          color={colorName}
           defaultActivePreLayer={currentPreLayer}
           onPreLayerSelected={setPreLayerQuery}
           defaultActivePostLayer={currentPostLayer}

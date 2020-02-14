@@ -81,7 +81,7 @@ const Styleguide: React.FC = () => {
           list={dinos}
           defaultValue={dinos[2]}
           onSelect={dummyFnStr}
-          color={color}
+          color={colorName}
         />
         <h4>Pills</h4>
         <p>
@@ -191,7 +191,7 @@ const Styleguide: React.FC = () => {
 
         <h4>Synaptic Pathways</h4>
         <div style={{ width: 400 }}>
-          <SynapticPathwaySelector color={accentColors.blue} />
+          <SynapticPathwaySelector color={colorName} />
         </div>
 
         <h4>Microcircuits</h4>

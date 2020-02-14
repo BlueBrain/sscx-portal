@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './style.less';
-import { Palette } from '../../types';
+import { Color } from '../../types';
 
 const classPrefixList = 'list__';
 const classPrefixListElement = 'list-element__';
@@ -11,21 +11,19 @@ type ListProps = {
   list: string[];
   defaultValue?: string;
   onSelect?: (string) => void;
-  color?: string;
+  color?: Color;
 };
 
 type ListElementProps = {
   element: string;
   selected?: boolean;
   onSelect?: (string) => void;
-  color?: string;
 };
 
 const ListElement: React.FC<ListElementProps> = ({
   element,
   selected,
   onSelect,
-  color,
 }) => {
   return (
     <div
@@ -34,7 +32,6 @@ const ListElement: React.FC<ListElementProps> = ({
       tabIndex={0}
       className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
       onClick={() => onSelect(element)}
-      style={{ backgroundColor: selected && color }}
     >
       {element}
     </div>
@@ -61,7 +58,7 @@ const List: React.FC<ListProps> = ({
 
   return (
     <div
-      className={`${classPrefixList}basis`}
+      className={`${classPrefixList}basis ${color}`}
       role="radiogroup"
       aria-labelledby={`${classPrefixList}${id}`}
     >
@@ -73,7 +70,6 @@ const List: React.FC<ListProps> = ({
             element={el}
             selected={activeElement === el}
             onSelect={handleSelectedElement}
-            color={color}
           />
         ))}
       </div>

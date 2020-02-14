@@ -1,7 +1,7 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
 import './style.less';
-import { Layer } from '../../types';
+import { Layer, Color } from '../../types';
 import { accentColors } from '../../config';
 
 const prePrefix = 'pre_pathway_svg__';

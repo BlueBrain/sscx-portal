@@ -7,6 +7,7 @@ import SynapticPathwaySelector, {
 } from '../SynapticPathwaySelector';
 import List from '../List';
 import { accentColors } from '../../config';
+import { Color } from '../../types';
 
 const cssPrefix = 'synaptic-types-selector__';
 
@@ -17,6 +18,7 @@ interface SynapticTypesProps extends SynapticPathwaySelectProps {
   onPostTypeSelect: (string) => void;
   selectedPreType?: string;
   selectedPostType?: string;
+  color: Color;
 }
 
 const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
@@ -36,7 +38,7 @@ const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
     <div className={`${cssPrefix}basis`}>
       <Selector title="2. Choose two layers" column>
         <SynapticPathwaySelector
-          color={color}
+          color={accentColors[color]}
           defaultActivePreLayer={defaultActivePreLayer}
           onPreLayerSelected={onPreLayerSelected}
           defaultActivePostLayer={defaultActivePostLayer}
@@ -63,7 +65,7 @@ const SynapticTypesSelector: React.FC<SynapticTypesProps> = ({
           list={synapticTypes}
           defaultValue={selectedPostType}
           onSelect={onPostTypeSelect}
-          color={accentColors.orange}
+          color="orange"
         />
       </div>
     </div>
