@@ -7,7 +7,7 @@ import InfoBox from '../components/InfoBox';
 import List from '../components/List';
 import Pills from '../components/Pills';
 import ImageViewer from '../components/ImageViewer';
-import Title from '../layouts/Title';
+import Title from '../components/Title';
 import FullPage from '../layouts/FullPage';
 import BrainRegionSelector from '../components/BrainRegionsSelector';
 import { accentColors } from '../config';

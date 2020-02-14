@@ -5,7 +5,7 @@ import BrainRegionsSelector, {
   BrainRegion,
 } from '../../components/BrainRegionsSelector';
 import useQuery from '../../hooks/useQuery';
-import Title from '../../layouts/Title';
+import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import Filters from '../../layouts/Filters';

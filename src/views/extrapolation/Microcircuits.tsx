@@ -1,6 +1,6 @@
 import React from 'react';
 import Filters from '../../layouts/Filters';
-import Title from '../../layouts/Title';
+import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import { primaryColor, colorName } from './config';

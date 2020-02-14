@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
-import Title from '../../layouts/Title';
+import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import { primaryColor, colorName } from './config';

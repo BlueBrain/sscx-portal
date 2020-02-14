@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FullPage from '../layouts/FullPage';
-import Title from '../layouts/Title';
+import Title from '../components/Title';
 import Button from '../components/Button';
 
 const Home: React.FC = () => (
