@@ -6,17 +6,17 @@ import './style.less';
 const classPrefix = 'title__';
 
 type TitleProps = {
-  primaryColor: Color;
-  subtitle?: string;
   title: string;
+  subtitle?: string;
+  primaryColor?: Color;
   hint?: string;
 };
 
 const Title: React.FC<TitleProps> = ({
-  primaryColor,
-  subtitle,
   title,
+  subtitle,
   hint,
+  primaryColor = '',
 }) => {
   return (
     <div className={`${classPrefix}basis ${primaryColor}`}>
