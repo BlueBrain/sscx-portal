@@ -191,7 +191,7 @@ const Styleguide: React.FC = () => {
 
         <h4>Synaptic Pathways</h4>
         <div style={{ width: 400 }}>
-          <SynapticPathwaySelector color={colorName} />
+          <SynapticPathwaySelector color={accentColors.blue} />
         </div>
 
         <h4>Microcircuits</h4>
