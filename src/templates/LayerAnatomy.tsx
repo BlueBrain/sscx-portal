@@ -13,9 +13,13 @@ import { lorem } from '../views/Styleguide';
 
 export type LayerAnatomyTemplateProps = {
   color: Color;
+  sectionTitle: string;
 };
 
-const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({ color }) => {
+const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
+  color,
+  sectionTitle,
+}) => {
   const query = useQuery();
   const history = useHistory();
 
@@ -30,7 +34,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({ color }) => {
         <Title
           primaryColor={color}
           title="Layer Anatomy"
-          subtitle="Experimental Data"
+          subtitle={sectionTitle}
           hint="Select a layer of interest in the S1 of the rat brain."
         />
         {!!currentLayer && (

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import LayerAnatomyTemplate from '../../templates/LayerAnatomy';
-import { colorName } from './config';
+import { colorName, sectionTitle } from './config';
 
-export default () => <LayerAnatomyTemplate color={colorName} />;
+export default () => (
+  <LayerAnatomyTemplate color={colorName} sectionTitle={sectionTitle} />
+);

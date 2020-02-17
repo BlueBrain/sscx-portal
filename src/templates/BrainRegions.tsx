@@ -15,9 +15,13 @@ import { accentColors } from '../config';
 
 export type BrainRegionTemplateProps = {
   color: Color;
+  sectionTitle: string;
 };
 
-const BrainRegions: React.FC<BrainRegionTemplateProps> = ({ color }) => {
+const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
+  color,
+  sectionTitle,
+}) => {
   const query = useQuery();
   const history = useHistory();
 
@@ -32,7 +36,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({ color }) => {
         <Title
           primaryColor={color}
           title="Brain Regions"
-          subtitle="Extrapolated Data"
+          subtitle={sectionTitle}
           hint="Select a subregion of interest in the S1 of the rat brain."
         />
         {!!currentRegion && (
