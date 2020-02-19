@@ -37,6 +37,8 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "@bbp/nexus-sdk": "^1.2.1",
+    "@bbp/react-nexus": "^1.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-icons": "^3.9.0",
