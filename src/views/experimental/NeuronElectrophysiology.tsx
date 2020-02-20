@@ -1,15 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
-import { primaryColor, colorName } from './config';
+import { colorName } from './config';
 import Selector from '../../components/Selector';
 import { Layer } from '../../types';
+import List from '../../components/List';
+import ComboSelector from '../../components/ComboSelector';
+
+const eTypes = ['bSTUT', 'cNAC', 'dNAC', 'cintAC'];
+const instances = ['instance 1', 'instance 2'];
 
 const LayerAnatomy: React.FC = () => {
   const query = useQuery();
@@ -31,20 +35,22 @@ const LayerAnatomy: React.FC = () => {
         />
         {!!currentLayer && (
           <div role="information">
-            <InfoBox title="Longer Text" text={lorem} />
-            <br />
-            <InfoBox text={`This one has no title o_0\n${lorem}`} />
+            <InfoBox title="Longer Text" text={lorem} color={colorName} />
           </div>
         )}
       </div>
       <div className="center-col">
-        <Selector title="Choose a layer">
-          <LayerAnatomySelector
-            color={primaryColor}
-            defaultActiveLayer={currentLayer}
-            onLayerSelected={setLayerQuery}
-          />
-        </Selector>
+        <ComboSelector
+          selector={
+            <img
+              src={require('../../assets/images/electroIllustration.svg')}
+              alt="EPFL logo"
+            />
+          }
+          list1={<List title="e-type" list={eTypes} color={colorName} />}
+          list2={<List title="e-type" list={instances} color={colorName} />}
+          listsTitle="Select cell type"
+        />
       </div>
     </Filters>
   );
