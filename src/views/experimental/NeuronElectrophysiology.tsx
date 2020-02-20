@@ -19,13 +19,27 @@ const LayerAnatomy: React.FC = () => {
   const query = useQuery();
   const history = useHistory();
 
-  const setLayerQuery = (layer: Layer) => {
-    history.push(`?layer=${layer}`);
+  const addParam = (key: string, value: string): void => {
+    query.set(key, value);
+    history.push(`?${query.toString()}`);
   };
-  const currentLayer: Layer = query.get('layer') as Layer;
+
+  const setEtype = (etype: string) => {
+    addParam('etype', etype);
+  };
+  const setInstance = (instance: string) => {
+    addParam('etype_instance', instance);
+  };
+
+  const currentEtype: string = query.get('etype');
+  const currentInstance: string = query.get('etype_instance');
 
   return (
-    <Filters primaryColor={colorName} backgroundAlt hasData={!!currentLayer}>
+    <Filters
+      primaryColor={colorName}
+      backgroundAlt
+      hasData={!!currentEtype && !!currentInstance}
+    >
       <div className="center-col">
         <Title
           primaryColor={colorName}
@@ -33,7 +47,7 @@ const LayerAnatomy: React.FC = () => {
           subtitle="Experimental Data"
           hint="Select a layer of interest in the S1 of the rat brain."
         />
-        {!!currentLayer && (
+        {!!currentEtype && (
           <div role="information">
             <InfoBox title="Longer Text" text={lorem} color={colorName} />
           </div>
@@ -47,9 +61,26 @@ const LayerAnatomy: React.FC = () => {
               alt="EPFL logo"
             />
           }
-          list1={<List title="e-type" list={eTypes} color={colorName} />}
-          list2={<List title="e-type" list={instances} color={colorName} />}
+          list1={
+            <List
+              title="e-type"
+              list={eTypes}
+              color={colorName}
+              onSelect={setEtype}
+              defaultValue={currentEtype}
+            />
+          }
+          list2={
+            <List
+              title="e-type"
+              list={instances}
+              color={colorName}
+              onSelect={setInstance}
+              defaultValue={currentInstance}
+            />
+          }
           listsTitle="Select cell type"
+          list2Open={!!currentEtype}
         />
       </div>
     </Filters>
