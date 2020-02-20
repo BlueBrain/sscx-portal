@@ -15,6 +15,7 @@ import LayerAnatomySelector from '../components/LayerAnatomySelector';
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import MicrocircuitSelector from '../components/MicrocircuitSelector';
 import { Color } from '../types';
+import ComboSelector from '../components/ComboSelector';
 
 export const lorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
@@ -190,13 +191,22 @@ const Styleguide: React.FC = () => {
         </div>
 
         <h4>Synaptic Pathways</h4>
-        <div style={{ width: 400 }}>
+        <div style={{ width: 300 }}>
           <SynapticPathwaySelector color={accentColors.blue} />
         </div>
 
         <h4>Microcircuits</h4>
-        <div style={{ width: 400 }}>
+        <div style={{ width: 300 }}>
           <MicrocircuitSelector color={accentColors.blue} />
+        </div>
+
+        <h4>Combo selector (with side lists)</h4>
+        <div style={{ width: 300 }}>
+          <ComboSelector
+            selector={<MicrocircuitSelector color={accentColors.blue} />}
+            list1={<List list={dinos} color={colorName} />}
+            list2={<List list={dinos} color="orange" />}
+          />
         </div>
       </section>
 
