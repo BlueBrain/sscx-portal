@@ -1,0 +1,45 @@
+.combo-selector__basis {
+  position: relative;
+
+  p.combo-boxes-header {
+    position: absolute;
+    font-weight: 700;
+    top: 80px;
+    left: 300px;
+    white-space: nowrap;
+  }
+
+  .list-1,
+  .list-2 {
+    position: absolute;
+    left: 279px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    max-width: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: all 0.4s;
+
+    &.open {
+      padding: 5px;
+      max-width: 400px;
+    }
+  }
+
+  .list-1 {
+    top: 127px;
+
+    &.open {
+      padding-left: 20px;
+    }
+  }
+
+  .list-2 {
+    bottom: 93px;
+
+    &.open {
+      padding-left: 40px;
+    }
+  }
+}
