@@ -1,6 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useNexus } from '@bbp/react-nexus';
 
+import { sscx } from '../../config';
+import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
@@ -33,6 +36,21 @@ const LayerAnatomy: React.FC = () => {
 
   const currentEtype: string = query.get('etype');
   const currentInstance: string = query.get('etype_instance');
+
+  useNexus(nexus =>
+    nexus.View.elasticSearchQuery(
+      sscx.org,
+      sscx.project,
+      sscx.expNeuronElectroViewId,
+      {
+        query: {
+          term: {
+            _deprecated: false,
+          },
+        },
+      },
+    ),
+  );
 
   return (
     <Filters
