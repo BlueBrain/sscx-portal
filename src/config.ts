@@ -6,3 +6,11 @@ export const accentColors: { [key: string]: string } = {
   grey: '#b2b3b3',
   orange: '#ed8048',
 };
+
+export const sscx = {
+  org: 'public',
+  project: 'sscx',
+  expNeuronElectroViewId: encodeURIComponent(
+    'https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset',
+  ),
+};

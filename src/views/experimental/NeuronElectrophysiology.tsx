@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useNexus } from '@bbp/react-nexus';
 
+import { sscx } from '../../config';
 import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
@@ -19,6 +21,21 @@ const LayerAnatomy: React.FC = () => {
     history.push(`?layer=${layer}`);
   };
   const currentLayer: Layer = query.get('layer') as Layer;
+
+  useNexus(nexus =>
+    nexus.View.elasticSearchQuery(
+      sscx.org,
+      sscx.project,
+      sscx.expNeuronElectroViewId,
+      {
+        query: {
+          term: {
+            _deprecated: false,
+          },
+        },
+      },
+    ),
+  );
 
   return (
     <Filters primaryColor={colorName} backgroundAlt hasData={!!currentLayer}>
