@@ -8,8 +8,11 @@ import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
-import SynapticTypesSelector from '../components/SynapticTypesSelector';
 import { BrainRegion } from '../components/BrainRegionsSelector';
+import ComboSelector from '../components/ComboSelector';
+import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
+import List from '../components/List';
+import { accentColors } from '../config';
 
 const mTypes = ['a', 'b', 'c', 'd', 'e', 'f'];
 
@@ -67,18 +70,38 @@ const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
         </div>
       </div>
       <div className="center-col">
-        <SynapticTypesSelector
-          color={color}
-          defaultActivePreLayer={currentPreLayer}
-          onPreLayerSelected={setPreLayerQuery}
-          defaultActivePostLayer={currentPostLayer}
-          onPostLayerSelected={setPostLayerQuery}
-          synapticTypes={mTypes}
-          synapticTypesName="Pre and post-synaptio"
-          onPostTypeSelect={setPostTypeQuery}
-          onPreTypeSelect={setPreTypeQuery}
-          selectedPreType={currentPreType}
-          selectedPostType={currentPostType}
+        <ComboSelector
+          selector={
+            <SynapticPathwaySelector
+              color={accentColors[color]}
+              defaultActivePreLayer={currentPreLayer}
+              onPreLayerSelected={setPreLayerQuery}
+              defaultActivePostLayer={currentPostLayer}
+              onPostLayerSelected={setPostLayerQuery}
+            />
+          }
+          list1={
+            <List
+              title="m-type pre-synaptic"
+              list={mTypes}
+              defaultValue={currentPreType}
+              onSelect={setPreTypeQuery}
+              color={color}
+            />
+          }
+          list2={
+            <List
+              title="m-type post-synaptic"
+              list={mTypes}
+              defaultValue={currentPostType}
+              onSelect={setPostTypeQuery}
+              color="orange"
+            />
+          }
+          selectorTitle="2. Choose two layers"
+          listsTitle="3. Choose Pre and Post-synaptio"
+          list1Open={!!currentPreLayer}
+          list2Open={!!currentPostLayer}
         />
       </div>
     </Filters>

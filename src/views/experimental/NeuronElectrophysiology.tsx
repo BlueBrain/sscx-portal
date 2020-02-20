@@ -9,18 +9,33 @@ import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
-import { primaryColor, colorName } from './config';
+import { colorName } from './config';
 import Selector from '../../components/Selector';
 import { Layer } from '../../types';
+import List from '../../components/List';
+import ComboSelector from '../../components/ComboSelector';
+
+const eTypes = ['bSTUT', 'cNAC', 'dNAC', 'cintAC'];
+const instances = ['instance 1', 'instance 2'];
 
 const LayerAnatomy: React.FC = () => {
   const query = useQuery();
   const history = useHistory();
 
-  const setLayerQuery = (layer: Layer) => {
-    history.push(`?layer=${layer}`);
+  const addParam = (key: string, value: string): void => {
+    query.set(key, value);
+    history.push(`?${query.toString()}`);
   };
-  const currentLayer: Layer = query.get('layer') as Layer;
+
+  const setEtype = (etype: string) => {
+    addParam('etype', etype);
+  };
+  const setInstance = (instance: string) => {
+    addParam('etype_instance', instance);
+  };
+
+  const currentEtype: string = query.get('etype');
+  const currentInstance: string = query.get('etype_instance');
 
   useNexus(nexus =>
     nexus.View.elasticSearchQuery(
@@ -38,7 +53,11 @@ const LayerAnatomy: React.FC = () => {
   );
 
   return (
-    <Filters primaryColor={colorName} backgroundAlt hasData={!!currentLayer}>
+    <Filters
+      primaryColor={colorName}
+      backgroundAlt
+      hasData={!!currentEtype && !!currentInstance}
+    >
       <div className="center-col">
         <Title
           primaryColor={colorName}
@@ -46,22 +65,41 @@ const LayerAnatomy: React.FC = () => {
           subtitle="Experimental Data"
           hint="Select a layer of interest in the S1 of the rat brain."
         />
-        {!!currentLayer && (
+        {!!currentEtype && (
           <div role="information">
-            <InfoBox title="Longer Text" text={lorem} />
-            <br />
-            <InfoBox text={`This one has no title o_0\n${lorem}`} />
+            <InfoBox title="Longer Text" text={lorem} color={colorName} />
           </div>
         )}
       </div>
       <div className="center-col">
-        <Selector title="Choose a layer">
-          <LayerAnatomySelector
-            color={primaryColor}
-            defaultActiveLayer={currentLayer}
-            onLayerSelected={setLayerQuery}
-          />
-        </Selector>
+        <ComboSelector
+          selector={
+            <img
+              src={require('../../assets/images/electroIllustration.svg')}
+              alt="EPFL logo"
+            />
+          }
+          list1={
+            <List
+              title="e-type"
+              list={eTypes}
+              color={colorName}
+              onSelect={setEtype}
+              defaultValue={currentEtype}
+            />
+          }
+          list2={
+            <List
+              title="e-type"
+              list={instances}
+              color={colorName}
+              onSelect={setInstance}
+              defaultValue={currentInstance}
+            />
+          }
+          listsTitle="Select cell type"
+          list2Open={!!currentEtype}
+        />
       </div>
     </Filters>
   );
