@@ -13,51 +13,7 @@ import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import ScrollTo from '../../components/ScrollTo';
-
-const eTypes = [
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738199',
-    label: 'bAC',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738206',
-    label: 'bIR',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738203',
-    label: 'bNAC',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738200',
-    label: 'bSTUT',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738197',
-    label: 'cAC',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738204',
-    label: 'cIR',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738201',
-    label: 'cNAC',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738198',
-    label: 'cSTUT',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738205',
-    label: 'dNAC',
-  },
-  {
-    id: 'http://uri.interlex.org/base/ilx_0738202',
-    label: 'dSTUT',
-  },
-];
-
-const instances = ['instance 1', 'instance 2'];
+import eTypes from '../../__generated__/experimentalData.json';
 
 const LayerAnatomy: React.FC = () => {
   const query = useQuery();
@@ -77,6 +33,8 @@ const LayerAnatomy: React.FC = () => {
 
   const currentEtype: string = query.get('etype');
   const currentInstance: string = query.get('etype_instance');
+  const etypeData = eTypes.find(etype => etype.label === currentEtype);
+  const instances = etypeData ? etypeData.experiments.map(e => e.label) : [];
 
   useNexus(nexus =>
     nexus.View.elasticSearchQuery(
@@ -85,13 +43,49 @@ const LayerAnatomy: React.FC = () => {
       sscx.expNeuronElectroViewId,
       {
         query: {
-          term: {
-            _deprecated: false,
+          nested: {
+            path: 'annotation.hasBody',
+            query: {
+              bool: {
+                must: [{ match: { 'annotation.hasBody.label': 'cSTUT' } }],
+              },
+            },
           },
         },
       },
     ),
   );
+
+  const anotherQuery = {
+    query: {
+      bool: {
+        must: [
+          {
+            nested: {
+              path: 'annotation.hasBody',
+              query: {
+                bool: {
+                  must: { match: { 'annotation.hasBody.label': 'bAC' } },
+                },
+              },
+            },
+          },
+          {
+            nested: {
+              path: 'derivation.entity',
+              query: {
+                bool: {
+                  must: {
+                    match: { 'derivation.entity.name': 'C020502C-MT-C1' },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  };
 
   return (
     <>
