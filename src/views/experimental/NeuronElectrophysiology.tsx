@@ -12,7 +12,6 @@ import { colorName } from './config';
 import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
-import ScrollTo from '../../components/ScrollTo';
 import eTypes from '../../__generated__/experimentalData.json';
 
 const LayerAnatomy: React.FC = () => {
