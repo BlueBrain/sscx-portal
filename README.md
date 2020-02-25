@@ -48,7 +48,7 @@ yarn build
 
 ### ENV variables list at build time
 
-- `SA_TOKEN`: The Service Account Token the portal will use to query the data from Nexus. No token by default
+- `NEXUS_TOKEN`: The Service Account Token the portal will use to query the data from Nexus. No token by default
 
 ## Docker image
 
