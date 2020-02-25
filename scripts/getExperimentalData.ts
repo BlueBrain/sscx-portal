@@ -1,6 +1,6 @@
 import { NexusClient, SelectQueryResponse } from '@bbp/nexus-sdk';
 import { sscx } from '../src/config';
-import { listEtypes, listEtypesExperiments } from './sparqlQueries';
+import { listEtypes, listEtypesExperiments } from '../src/queries/sparql';
 
 // build a list of e-types and their experiments
 export default async (nexus: NexusClient) => {

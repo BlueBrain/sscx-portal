@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useNexus } from '@bbp/react-nexus';
 
-import { sscx } from '../../config';
+import Data from '../../layouts/Data';
+import { electroPhysiologyDataQuery } from '../../queries/es';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
@@ -36,57 +36,6 @@ const LayerAnatomy: React.FC = () => {
   const etypeData = eTypes.find(etype => etype.label === currentEtype);
   const instances = etypeData ? etypeData.experiments.map(e => e.label) : [];
 
-  useNexus(nexus =>
-    nexus.View.elasticSearchQuery(
-      sscx.org,
-      sscx.project,
-      sscx.expNeuronElectroViewId,
-      {
-        query: {
-          nested: {
-            path: 'annotation.hasBody',
-            query: {
-              bool: {
-                must: [{ match: { 'annotation.hasBody.label': 'cSTUT' } }],
-              },
-            },
-          },
-        },
-      },
-    ),
-  );
-
-  const anotherQuery = {
-    query: {
-      bool: {
-        must: [
-          {
-            nested: {
-              path: 'annotation.hasBody',
-              query: {
-                bool: {
-                  must: { match: { 'annotation.hasBody.label': 'bAC' } },
-                },
-              },
-            },
-          },
-          {
-            nested: {
-              path: 'derivation.entity',
-              query: {
-                bool: {
-                  must: {
-                    match: { 'derivation.entity.name': 'C020502C-MT-C1' },
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    },
-  };
-
   return (
     <>
       <Filters
@@ -94,7 +43,7 @@ const LayerAnatomy: React.FC = () => {
         backgroundAlt
         hasData={!!currentEtype && !!currentInstance}
       >
-        <div id="top" className="center-col">
+        <div className="center-col">
           <Title
             primaryColor={colorName}
             title="Neuron Electrophysiology"
@@ -112,7 +61,7 @@ const LayerAnatomy: React.FC = () => {
             selector={
               <img
                 src={require('../../assets/images/electroIllustration.svg')}
-                alt="EPFL logo"
+                alt="Electro-physiology"
               />
             }
             list1={
@@ -126,7 +75,7 @@ const LayerAnatomy: React.FC = () => {
             }
             list2={
               <List
-                title="Experiment instance"
+                title={`Experiment instance (${instances.length})`}
                 list={instances}
                 color={colorName}
                 onSelect={setInstance}
@@ -138,122 +87,20 @@ const LayerAnatomy: React.FC = () => {
           />
         </div>
       </Filters>
-      {!!currentEtype && !!currentInstance && (
-        <>
-          <div
-            id="bottom"
-            className="data-result__basis"
-            style={{
-              backgroundColor: '#E5E9F4',
-              display: 'flex',
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: '#E5E9F4',
-                margin: '60px auto 60px',
-                maxWidth: 1080,
-              }}
+      <Data
+        hasData={!!currentEtype && !!currentInstance}
+        query={electroPhysiologyDataQuery(currentEtype, currentInstance)}
+      >
+        {data => (
+          <>
+            <Collapsible
+              title={`Raw query result for ${currentEtype}_${currentInstance}`}
             >
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-              <Collapsible title="Murderous Bird on Lockdown">
-                <>
-                  <p>
-                    Newsflash: the escaped cassowary has been safely apprehended
-                    earlier this afternoon. He is facing the most severe
-                    charges.
-                  </p>
-                </>
-              </Collapsible>
-              <br />
-            </div>
-          </div>
-          <div className="scroll-to">
-            <ScrollTo anchor="top" direction="up">
-              Return to filters
-            </ScrollTo>
-          </div>
-        </>
-      )}
+              <code>{JSON.stringify(data, null, 2)}</code>
+            </Collapsible>
+          </>
+        )}
+      </Data>
     </>
   );
 };
