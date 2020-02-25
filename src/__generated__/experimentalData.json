@@ -1,0 +1,876 @@
+[
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738199",
+    "label": "bAC",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/9ee242e8-e7ef-433c-bc5b-b012e6b13c09",
+        "label": "C010600C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e48caab3-043c-423e-b273-39b476831ed6",
+        "label": "C020502C-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e28e27fe-ca65-40ce-bba7-55874e94e13e",
+        "label": "C020600B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e730d8c5-87fa-4c87-967e-65cd0e67776d",
+        "label": "C030502A-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/51cff8ed-62a9-4b04-92a6-7e64bcee5374",
+        "label": "C050401A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f96c3e3f-2549-47e0-b7e3-76a49ec15de6",
+        "label": "C070502C-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/3cda82dc-167f-4de3-8961-a293e5e4ff26",
+        "label": "C100501A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/d11687f5-de78-4d44-bfd5-20a27373fc5e",
+        "label": "C100501B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/55d7cfd2-302a-481e-ac52-b3a1eb2a9d12",
+        "label": "C130501B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/22c51816-6617-4601-8b4f-62c162ce1294",
+        "label": "C170101B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/39f6ae93-cced-4111-8c71-3b39fd53c073",
+        "label": "C170501A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/90db8bf1-e43d-4f92-8154-6c0fcbc5b9ab",
+        "label": "C190101A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/5cd9c6dd-9d2e-4949-b120-0740cf5b5609",
+        "label": "C201200C-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/479c73ed-fd28-45a8-811e-ebecea44fa93",
+        "label": "C210301B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ec44a74b-bfef-4131-9253-2ef5cbd18ef8",
+        "label": "C230501A4-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/5d3ca7fc-f5a4-4fb7-bb39-fdf0907e1c17",
+        "label": "C240300C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/2cb8bd4c-40bd-4f9f-9461-46437b83cb27",
+        "label": "C240300C2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/d51deecc-d15c-42f6-8ffc-65b220b011f8",
+        "label": "C240501B4-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/fc430649-6cf9-42e8-a191-9994b4722360",
+        "label": "C250800D-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/6440afd8-1cf5-46c6-9da8-010836af057e",
+        "label": "C280301B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c0ee0a62-239e-43fc-a117-18b4f59c7f6a",
+        "label": "C301001C-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e71808a8-bf67-4187-8647-3c9bf81570a9",
+        "label": "C310301B2-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738206",
+    "label": "bIR",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/a1b691d4-84f8-4cf3-82a8-9ba28e197635",
+        "label": "C020600A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e5888208-db47-478a-8bfa-c472bc369030",
+        "label": "C040401A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/753702ff-1a48-4f7c-8f52-50fdca2605bb",
+        "label": "C060401C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/da00e853-cf77-4898-8573-d7394dba5a2a",
+        "label": "C110501B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e05746f8-6243-45bb-bf7b-40122a53c5ee",
+        "label": "C170101A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ac313614-a8f4-4ae0-b59e-bfecda375bf1",
+        "label": "C180101B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/5f9bbcf6-750a-45d1-abe0-a1e49bbf8d42",
+        "label": "C190101B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/5195d7fc-8588-40ac-b2c0-32112efa673d",
+        "label": "C190101B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c81e25b8-e2a2-4d92-9771-7205d5e64399",
+        "label": "C220601B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/75558836-deb7-46d5-89a2-0b4b3572724b",
+        "label": "C250402C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/5f792527-48c7-42d8-a543-c6d3cab5468e",
+        "label": "C250501A-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/03e9025f-35ab-42ca-ac4a-5da2701b93f3",
+        "label": "C251001B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/2c422daf-e463-4fbe-8b45-813521e4b23f",
+        "label": "C291101B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/306d03b5-3687-4b8a-8ce9-44208226230a",
+        "label": "C310301A3-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738203",
+    "label": "bNAC",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/fb9d6106-2540-4ef6-a7cf-3d725f5ce76e",
+        "label": "C040600B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/6483f5d4-67c7-47c1-912c-7d98c3e3b6bb",
+        "label": "C050600B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/0bac3860-f922-4f1f-ba78-07f92b39278d",
+        "label": "C060400B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/4fca54c5-16ac-421d-84d9-54aed0997371",
+        "label": "C070301A-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/23f15250-11c1-447e-a70c-2e6e5da1ed14",
+        "label": "C080301A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ea117817-54a7-48ca-a043-90daf3ae6f7f",
+        "label": "C080301B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/3ab2159b-3f61-4cce-b4c5-6dca76620229",
+        "label": "C100300C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f82ca2b9-b096-4673-8d31-9a249c2da3ae",
+        "label": "C130501B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/1930647a-4c68-4fef-a7f2-06828655eb6f",
+        "label": "C140201A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/cde82504-0137-4bbb-ad7f-77eb2e58c8ab",
+        "label": "C140201A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/9b7c6b0c-d028-49e9-8d86-c5bf6c25d175",
+        "label": "C140201B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/bcaca7e1-3787-41ce-8720-43cfa9ee74a7",
+        "label": "C140201C-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/04e5f081-26fb-49ea-9d38-da7ef49d9e9f",
+        "label": "C161001B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/9d786491-613a-4dde-b6fa-c3bd7ed03a96",
+        "label": "C161001B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/83a95cab-c918-4fcc-987e-b031200196c2",
+        "label": "C171001A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/7210330b-2c19-4ef0-a04d-7db6848fe053",
+        "label": "C171001A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/82fe7074-5f2f-4e18-8dd3-d9487965edd1",
+        "label": "C171001B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/73077a46-74f8-4e16-b69b-b55f60a5ffec",
+        "label": "C180101B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/245f4ceb-e133-4b7f-971a-9929caa7da8b",
+        "label": "C190101A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/4ec738d9-8406-42d4-9d88-8dc7fb129575",
+        "label": "C201200B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/8671eff7-8675-4c6e-b981-66982f5daf02",
+        "label": "C210601B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/45897689-64e6-44a6-98fe-09f9dc602b41",
+        "label": "C210601B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/baf78197-ac31-497d-ae7d-b04202a79520",
+        "label": "C230501A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/048bf2a9-c3e4-4401-bb1e-61f5fcacb85b",
+        "label": "C240300A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/7d0f406e-1a2a-4969-9a9e-e3035903c196",
+        "label": "C240402B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/946cdd15-30db-4733-a7e8-3a1509da3523",
+        "label": "C280600A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/2d6e5b67-e47a-4461-8bcd-053fc3ac48f5",
+        "label": "C280600A2-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738200",
+    "label": "bSTUT",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/871ff656-b4f3-4635-b5bc-5641bd21dccd",
+        "label": "C011101B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/1219b359-519d-4838-8bc4-da92f0ef82de",
+        "label": "C050401B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e2b1826c-c353-4375-9651-686a648a0f08",
+        "label": "C060401B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/6b935b54-9ef5-4b0b-9571-fd2c7a3bc7c9",
+        "label": "C090501A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/365c24df-eaeb-4382-a41e-4a4e96a8f0ef",
+        "label": "C180101E-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/08825325-0a84-4924-839b-baabcd9bdbb8",
+        "label": "C230402B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ffb4112d-5c31-43e8-885c-3817f1f3d620",
+        "label": "C291001B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/4ac50f20-24f2-4063-bc9a-800df49458d8",
+        "label": "C301001A3-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/ilx_0738442",
+    "label": "cACint",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/2edcd53b-f130-4b8e-9e3e-7e89863a6000",
+        "label": "C011101D2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/16ec6160-9fd7-44a6-be2d-317112419921",
+        "label": "C020502F-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/d723a2c2-b95e-4831-ab0e-6bbcbed42e38",
+        "label": "C020600C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/1c349464-bf9c-499b-a0f7-621db10f05f9",
+        "label": "C040401A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/276696d4-d48a-46d5-9372-8bc753173760",
+        "label": "C040401A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/22530376-fc61-4299-9016-c9f28777bbf2",
+        "label": "C050401A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b0f27ee5-81dd-4152-998b-b03f3be67d88",
+        "label": "C060400A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/1a680a5c-edcc-4c07-b84e-511d8770084c",
+        "label": "C080300A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/a0b77fa4-f96d-402c-b76d-076da2b6abf9",
+        "label": "C080300B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/d81c1f4d-2698-4372-ab47-9432148ee9a1",
+        "label": "C120501B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c7b19010-54a0-44b6-9d2c-d29514218c89",
+        "label": "C170501A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/0b0b84be-7861-466e-828c-ed297e6100c7",
+        "label": "C230402A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/519072d5-2e4b-4a01-8714-527c54b22612",
+        "label": "C240501B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/59760314-ee5f-4a47-a638-a1269c24cf44",
+        "label": "C290301A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f89b693e-0008-4d34-b575-4a55bbc24eae",
+        "label": "C300301A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/0a55f781-1c10-405b-bd76-a7bc62de14bb",
+        "label": "C301001A2-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/ilx_0738441",
+    "label": "cADpyr",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/a4126fdc-6eb4-4d51-b808-1001fa21c004",
+        "label": "C050600A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/9f3b92c1-491f-41fb-b1fd-386b3b559f5b",
+        "label": "C050800E1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/3863ff6d-aa70-4dc7-a472-6fbd32c97104",
+        "label": "C060109A1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/298730ee-43f5-45ea-be80-18ebe6453bdf",
+        "label": "C060109A2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/d24b14e9-33a5-4f21-a71a-8f3e8a81e309",
+        "label": "C060109A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f1db92a7-5560-4f27-bb76-fd1723b203d0",
+        "label": "C060110A2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ee87e415-4096-4723-b847-a1bf77bd73df",
+        "label": "C060110A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/a66a1573-8552-4195-9fa0-4ef3137ef0c6",
+        "label": "C060110A5-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/d5efd4b2-b926-4b5d-8a26-f0e573514590",
+        "label": "C060112A1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ab6c9ce4-34bd-44a0-b394-afb0399b3048",
+        "label": "C060112A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/fd5fce29-6328-4fd7-8781-0145235e0a4b",
+        "label": "C060112A4-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/77f77996-d8c9-4bd0-b920-3ac718dc875c",
+        "label": "C060112A6-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/64a5ad9a-89a3-49d1-a73e-5f21443f4121",
+        "label": "C060112A7-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/9d02b560-40da-4c4c-b8f2-ddc9f8382daf",
+        "label": "C060114A2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/8d1e4900-cda8-4ad2-a649-f55a65903499",
+        "label": "C060114A4-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/cb2e97c6-4128-4020-9577-8db0ab738d33",
+        "label": "C060114A5-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/4faa54dc-12ad-4469-b849-97c2b90d8e12",
+        "label": "C060114A6-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e8833aca-a295-4632-b252-b9e23ac91e7a",
+        "label": "C060114A7-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/83b31ab0-655e-4e3f-a8e1-bba7dc948fd0",
+        "label": "C060116A1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/574acd8b-6367-4c49-937c-32ae1880a242",
+        "label": "C060116A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/36fd1483-7579-4001-9ce9-b5c4916f5797",
+        "label": "C060116A4-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/5fc1e5d3-efa6-4ace-b722-7eb1112fcd09",
+        "label": "C060116A5-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b69790c4-2b4c-4acc-825e-369b4c491410",
+        "label": "C060116A6-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b0278b13-669a-4ee5-b44c-4f341d4ce2c7",
+        "label": "C060116A7-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c527efeb-016d-4741-a7ac-7c76209c4a0a",
+        "label": "C060202A1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/a7bec85f-9b1c-4dc4-bdf1-5aa75e3ea170",
+        "label": "C060202A2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e62e7c93-6eba-45aa-ad53-a3bfd9b5150a",
+        "label": "C060202A4-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/633111ed-13d9-4af5-bdad-930aba711533",
+        "label": "C060202A5-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c4317bab-bc11-4a13-8511-fbd003854802",
+        "label": "C060202A6-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/8ff832c6-bd56-48f9-b452-77449245c6de",
+        "label": "C060209A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c806396c-3ddc-475d-927f-f7007912393f",
+        "label": "C061121A1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f1d7c266-35c7-4018-83b6-6d8b3520834f",
+        "label": "C061128A1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/d9772c42-8187-4d00-a42f-b3ef28b40d11",
+        "label": "C061128A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/abc2a7b0-2a15-4b11-9978-68e24a05299a",
+        "label": "C061128A4-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b8c52c8e-9e9e-4a85-b6d3-c66bc7305b22",
+        "label": "C061128A5-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/183d5e3f-bb47-4084-a249-c274898a1358",
+        "label": "C061128B1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f32680ee-556c-4b3d-b210-f94e12be06d9",
+        "label": "C061128B2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/8c697e8e-5997-41c3-befc-0fad2bb95221",
+        "label": "C061129A1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/50998119-9bc8-4b2c-ab3d-8fd4101ad52d",
+        "label": "C061129A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c6addd94-ea4b-47f3-9ff9-fc224ef4d3cf",
+        "label": "C061208A2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/72e029d6-6416-42fe-b9aa-262a68d8a309",
+        "label": "C061208A3-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f8dc41e8-a950-465d-b2f8-1f289cf483f7",
+        "label": "C061208B1-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/52447aec-69d8-457c-a764-2af54e893230",
+        "label": "C061208B2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/35702278-7048-4e0e-83c0-894b3ba2d4ef",
+        "label": "C070109A4-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/1ed7c4de-54fc-47b8-adce-12dd9dd3880d",
+        "label": "C070301B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/1f31ccf8-f155-447c-9fff-8a0a2ad804b8",
+        "label": "C070301C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e3aa0411-2586-4d28-9ac5-2b42f5e146df",
+        "label": "C080501A5-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/7f81c46b-dcdd-4101-9ae3-7df409aa1310",
+        "label": "C080501B2-SR-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/439fe8e7-d2bd-4338-a3fc-d3d26a2a53c6",
+        "label": "C090401A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/da4c336a-7596-42bc-b322-3405c05db06e",
+        "label": "C120501B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/7fc2ddb5-2ccb-4385-bc6a-7053cefbd86e",
+        "label": "C120800E1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b04fcd9f-35ed-4e46-a239-961ff05a1748",
+        "label": "C140401A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/538ae73e-e6dd-4fd5-92a5-8c5943f30d4e",
+        "label": "C141200C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/6f1f502e-ab0c-407c-aef9-e13ad98835f1",
+        "label": "C171001A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/55292724-36be-4995-9778-8b4975a736e6",
+        "label": "C181001A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b14f3dcf-29ca-47ec-91d0-3c06d8910bff",
+        "label": "C191200B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/adec119c-0468-469c-ba67-ebad16a33a41",
+        "label": "C200301A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/89f05b29-ebd5-4994-a00a-81e746f1783c",
+        "label": "C200301B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/669bc0ea-057b-46dd-8b68-f25506df0095",
+        "label": "C221001A-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/949b61e5-f70b-4ec0-a110-b310272b6934",
+        "label": "C221001B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e46d603e-d19f-42bb-b339-ef421ca835aa",
+        "label": "C231100A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/316acd93-6526-4933-aa52-e847b6b30b46",
+        "label": "C301101A1-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738204",
+    "label": "cIR",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/89f7c8a0-717a-422e-ad17-8ce5b92b49a1",
+        "label": "C170101A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c3579cdb-f03a-47d9-ab1f-64ee560b6c3d",
+        "label": "C170101C-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/a9357739-9e82-4494-8cf0-61fcca144d49",
+        "label": "C210601B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c264e939-6c14-4cbe-b4d5-3b207b68a583",
+        "label": "C230501A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/bad32275-644b-4cda-b044-d86c593102ae",
+        "label": "C301001B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/2421ce19-f5c5-4451-aefd-50055d940ff4",
+        "label": "C311001B2-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738201",
+    "label": "cNAC",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/fb04ca21-e6f3-47ff-a2c8-41e660fd7774",
+        "label": "C010600A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b588c959-8c5f-468c-9739-3737e214bba8",
+        "label": "C020600B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/661db460-78d8-492d-92ca-322fe2439f4b",
+        "label": "C050600B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/92128cd4-5734-4d49-9c4a-59740b1e3c59",
+        "label": "C060400C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/da34a02d-a886-430c-b56d-9d3afc3b09f7",
+        "label": "C070301C2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e47c9763-0fe9-4d19-b607-f8212848cae4",
+        "label": "C080301A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/3d3ee0af-b084-4d41-bd4f-022ca3f3721e",
+        "label": "C090300B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/75ee5aa3-7795-45e4-8c63-ed26c64b1136",
+        "label": "C090300C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/804f089b-f6dc-4608-8069-493b50dcb202",
+        "label": "C151001B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/1ab7a89a-85f8-4509-8bc8-0610f59cb883",
+        "label": "C180800C3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b54abb6b-16d0-46b5-9647-47f2c57ab3d0",
+        "label": "C230402A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e3686bff-5274-4878-8e3e-5d9e3a384e68",
+        "label": "C231001B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/e837980a-7de0-4fa4-b454-45574c2eb5e8",
+        "label": "C231100B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/9e532864-e92f-4fdf-9c85-c337902a7702",
+        "label": "C240300B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/5c2df4c1-9ff5-4433-8af6-e0fbf7e3d91d",
+        "label": "C240501B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/0dab771d-e647-45a3-8048-66d83406c163",
+        "label": "C280301A-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/4fb855fa-2f3c-47f0-ac1e-57413ffafe92",
+        "label": "C280600A3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/7c9d97f3-2109-487a-9429-fc75ffa4a2f4",
+        "label": "C291001D1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/c6ca1172-2ff7-47c1-a80e-f18caf0dd49c",
+        "label": "C291001D2-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738198",
+    "label": "cSTUT",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/3818b453-618a-41f3-a1ef-6318f0c690ce",
+        "label": "C020502D-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ace79031-cb00-4dbe-ab58-8b50946f6d2d",
+        "label": "C050401A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/f7bb2dc9-c50b-43e6-a1ba-ec13fdc9ffe6",
+        "label": "C070502E-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/50457117-c8f9-4efa-8e7e-9f4d2f0310fb",
+        "label": "C220301A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/2d806b8a-fd85-4bd4-9bb6-6b8e8641c578",
+        "label": "C220301A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/fd313bf7-f527-4226-8184-fb44eb4c1e58",
+        "label": "C231001B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/be12a035-83f4-465c-abb1-f480bd69f41c",
+        "label": "C240501A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/cc9b9bd5-3f64-4e57-b6c1-15aeaac13b5a",
+        "label": "C280301B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/2411230f-9633-4415-af58-e704539a09b2",
+        "label": "C291001B3-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/3de4e985-1eec-46a8-b888-06d8d6b477c5",
+        "label": "C300301B1-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738205",
+    "label": "dNAC",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/39979d9b-ef05-4ab5-98ac-66ccc79f41ff",
+        "label": "C050600C1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/010b8ecb-21ac-4987-8faa-91f1274e656d",
+        "label": "C080301A2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/b281ab07-06cd-414f-bb10-549a368c5786",
+        "label": "C100300D1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/fb19413e-1e93-4b3d-aaf2-59a8372341ba",
+        "label": "C110301B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/fd940302-58e5-413c-b361-6074e7d5059d",
+        "label": "C171001B4-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/224d7ab3-317b-4d21-ac3d-676ea2c5209f",
+        "label": "C180800A1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/7ecb5f8d-0295-4cb6-9ba6-c3ab838cdc8e",
+        "label": "C281101B-MT-C1"
+      }
+    ]
+  },
+  {
+    "id": "http://uri.interlex.org/base/ilx_0738202",
+    "label": "dSTUT",
+    "experiments": [
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/71d3f505-9f14-4514-b99f-1a95f1b18e33",
+        "label": "C040600C2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/feab8ee6-18aa-462e-96bc-ef6d80b4b1d1",
+        "label": "C070301B1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/0f938aa7-c089-4263-9c35-ec5565e0574f",
+        "label": "C070502B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/0a5fe60b-af62-4688-afd7-a34cb77a57b1",
+        "label": "C080300B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/94125c4c-fed1-4271-8b64-a4055016c81b",
+        "label": "C110501B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/ed9c227d-9ee9-4e4b-9b4c-15ebbc221ae8",
+        "label": "C120501B2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/7a0b1245-0bfd-4c4e-bb96-e01581353749",
+        "label": "C170501A4-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/979288b6-4423-4d37-8ec6-5eebb5f3e64c",
+        "label": "C230300D1-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/aba7fa6b-0f60-425a-bd05-1af586c9e73b",
+        "label": "C250402B-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/589ae613-aca0-4689-bfe0-4aa28d78affb",
+        "label": "C291001C2-MT-C1"
+      },
+      {
+        "id": "https://bbp.epfl.ch/neurosciencegraph/data/3badf05a-c51d-46ea-9362-cd5518c5a216",
+        "label": "C291101A-MT-C1"
+      }
+    ]
+  }
+]

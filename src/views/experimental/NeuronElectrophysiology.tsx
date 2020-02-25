@@ -1,22 +1,18 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useNexus } from '@bbp/react-nexus';
 
-import { sscx } from '../../config';
-import LayerAnatomySelector from '../../components/LayerAnatomySelector';
+import Data from '../../layouts/Data';
+import { electroPhysiologyDataQuery } from '../../queries/es';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
 import { colorName } from './config';
-import Selector from '../../components/Selector';
-import { Layer } from '../../types';
 import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';
-
-const eTypes = ['bSTUT', 'cNAC', 'dNAC', 'cintAC'];
-const instances = ['instance 1', 'instance 2'];
+import Collapsible from '../../components/Collapsible';
+import eTypes from '../../__generated__/experimentalData.json';
 
 const LayerAnatomy: React.FC = () => {
   const query = useQuery();
@@ -36,72 +32,75 @@ const LayerAnatomy: React.FC = () => {
 
   const currentEtype: string = query.get('etype');
   const currentInstance: string = query.get('etype_instance');
-
-  useNexus(nexus =>
-    nexus.View.elasticSearchQuery(
-      sscx.org,
-      sscx.project,
-      sscx.expNeuronElectroViewId,
-      {
-        query: {
-          term: {
-            _deprecated: false,
-          },
-        },
-      },
-    ),
-  );
+  const etypeData = eTypes.find(etype => etype.label === currentEtype);
+  const instances = etypeData ? etypeData.experiments.map(e => e.label) : [];
 
   return (
-    <Filters
-      primaryColor={colorName}
-      backgroundAlt
-      hasData={!!currentEtype && !!currentInstance}
-    >
-      <div className="center-col">
-        <Title
-          primaryColor={colorName}
-          title="Neuron Electrophysiology"
-          subtitle="Experimental Data"
-          hint="Select a layer of interest in the S1 of the rat brain."
-        />
-        {!!currentEtype && (
-          <div role="information">
-            <InfoBox title="Longer Text" text={lorem} color={colorName} />
-          </div>
+    <>
+      <Filters
+        primaryColor={colorName}
+        backgroundAlt
+        hasData={!!currentEtype && !!currentInstance}
+      >
+        <div className="center-col">
+          <Title
+            primaryColor={colorName}
+            title="Neuron Electrophysiology"
+            subtitle="Experimental Data"
+            hint="Select a layer of interest in the S1 of the rat brain."
+          />
+          {!!currentEtype && (
+            <div role="information">
+              <InfoBox title="Longer Text" text={lorem} color={colorName} />
+            </div>
+          )}
+        </div>
+        <div className="center-col">
+          <ComboSelector
+            selector={
+              <img
+                src={require('../../assets/images/electroIllustration.svg')}
+                alt="Electro-physiology"
+              />
+            }
+            list1={
+              <List
+                title="e-type"
+                list={eTypes.map(etype => etype.label)}
+                color={colorName}
+                onSelect={setEtype}
+                defaultValue={currentEtype}
+              />
+            }
+            list2={
+              <List
+                title={`Experiment instance (${instances.length})`}
+                list={instances}
+                color={colorName}
+                onSelect={setInstance}
+                defaultValue={currentInstance}
+              />
+            }
+            listsTitle="Select cell type"
+            list2Open={!!currentEtype}
+          />
+        </div>
+      </Filters>
+      <Data
+        hasData={!!currentEtype && !!currentInstance}
+        query={electroPhysiologyDataQuery(currentEtype, currentInstance)}
+      >
+        {data => (
+          <>
+            <Collapsible
+              title={`Raw query result for ${currentEtype}_${currentInstance}`}
+            >
+              <code>{JSON.stringify(data, null, 2)}</code>
+            </Collapsible>
+          </>
         )}
-      </div>
-      <div className="center-col">
-        <ComboSelector
-          selector={
-            <img
-              src={require('../../assets/images/electroIllustration.svg')}
-              alt="EPFL logo"
-            />
-          }
-          list1={
-            <List
-              title="e-type"
-              list={eTypes}
-              color={colorName}
-              onSelect={setEtype}
-              defaultValue={currentEtype}
-            />
-          }
-          list2={
-            <List
-              title="e-type"
-              list={instances}
-              color={colorName}
-              onSelect={setInstance}
-              defaultValue={currentInstance}
-            />
-          }
-          listsTitle="Select cell type"
-          list2Open={!!currentEtype}
-        />
-      </div>
-    </Filters>
+      </Data>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 # Builder stage
 FROM node:12-alpine AS builder
 
+ARG NEXUS_TOKEN
 WORKDIR /tmp/sscx
 COPY . /tmp/sscx
 RUN yarn && yarn build
