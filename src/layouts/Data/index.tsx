@@ -9,7 +9,7 @@ const classPrefix = 'data-results__';
 type DataProps = {
   hasData: boolean;
   query: {};
-  children: (data: any) => React.ReactNode;
+  children: (data) => React.ReactNode;
   id?: string;
 };
 
