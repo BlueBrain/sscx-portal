@@ -21,7 +21,7 @@ const Video: React.FC<VideoProps> = ({ id, width = 350 }) => {
   }, []);
 
   if (error) {
-    return <p>error</p>;
+    return <p>error loading video</p>;
   }
 
   if (!video) {
