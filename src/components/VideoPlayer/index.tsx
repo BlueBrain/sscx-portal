@@ -10,8 +10,8 @@ type VideoProps = {
 const Video: React.FC<VideoProps> = ({ id, width = 350 }) => {
   const [video, setVideo] = React.useState<Blob | undefined>(undefined);
   const [error, setError] = React.useState<boolean>(false);
-
   const nexus = useNexusContext();
+
   React.useEffect(() => {
     nexus.File.get(sscx.org, sscx.project, id, {
       as: 'blob',
