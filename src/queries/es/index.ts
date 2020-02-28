@@ -8,36 +8,31 @@ export const electroPhysiologyDataQuery = (
 ) => ({
   query: {
     bool: {
-      must: [
+      filter: [
+        {
+          bool: {
+            should: [{ term: { '@type': 'https://neuroshapes.org/Trace' } }],
+          },
+        },
         {
           nested: {
-            path: 'annotation.hasBody',
+            path: 'derivation.entity',
             query: {
               bool: {
-                must: {
-                  match: {
-                    'annotation.hasBody.label': etype,
-                  },
-                },
+                filter: [
+                  { term: { 'derivation.entity.name.raw': experiment } },
+                  { term: { 'derivation.entity.@type.raw': 'PatchedCell' } },
+                ],
               },
             },
           },
         },
         {
           nested: {
-            path: 'derivation',
+            path: 'annotation.hasBody',
             query: {
-              nested: {
-                path: 'derivation.entity',
-                query: {
-                  bool: {
-                    must: {
-                      match: {
-                        'derivation.entity.name': experiment,
-                      },
-                    },
-                  },
-                },
+              bool: {
+                filter: { term: { 'annotation.hasBody.label.raw': etype } },
               },
             },
           },
