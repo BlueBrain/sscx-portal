@@ -1,8 +1,14 @@
 .combo-selector__basis {
-  position: relative;
+  display: flex;
+
+  .selector__basis {
+    text-align: center;
+    padding-top: 0;
+    min-width: 420px;
+    height: 530px;
+  }
 
   p.combo-boxes-header {
-    position: absolute;
     font-weight: 700;
     top: 80px;
     left: 300px;
@@ -11,7 +17,6 @@
 
   .list-1,
   .list-2 {
-    position: absolute;
     left: 279px;
     background-color: rgba(255, 255, 255, 0.6);
     border-top-right-radius: 5px;
@@ -28,15 +33,13 @@
   }
 
   .list-1 {
-    top: 127px;
-
     &.open {
       padding-left: 20px;
     }
   }
 
   .list-2 {
-    bottom: 55px;
+    margin-top: 10px;
 
     &.open {
       padding-left: 40px;
