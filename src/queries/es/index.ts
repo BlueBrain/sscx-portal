@@ -41,3 +41,39 @@ export const electroPhysiologyDataQuery = (
     },
   },
 });
+
+export const morphologyDataQuery = (layers: string) => ({
+  query: {
+    bool: {
+      filter: [
+        {
+          bool: {
+            should: [
+              {
+                term: {
+                  '@type': 'https://neuroshapes.org/NeuronMorphology',
+                },
+              },
+            ],
+          },
+        },
+        {
+          nested: {
+            path: 'brainLocation',
+            query: {
+              bool: {
+                filter: [
+                  {
+                    term: {
+                      'brainLocation.label.raw': 'layer 4',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+});

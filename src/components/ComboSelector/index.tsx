@@ -31,11 +31,13 @@ const ComboSelector: React.FC<ComboSelectorProps> = ({
       <Selector title={selectorTitle} column>
         {selector}
       </Selector>
-      {(list1Open || list2Open) && (
-        <p className="combo-boxes-header">{listsTitle}</p>
-      )}
-      <div className={`list-1 ${list1Open ? 'open' : ''}`}>{list1}</div>
-      <div className={`list-2 ${list2Open ? 'open' : ''}`}>{list2}</div>
+      <div>
+        {(list1Open || list2Open) && (
+          <p className="combo-boxes-header">{listsTitle}</p>
+        )}
+        <div className={`list-1 ${list1Open ? 'open' : ''}`}>{list1}</div>
+        <div className={`list-2 ${list2Open ? 'open' : ''}`}>{list2}</div>
+      </div>
     </div>
   );
 };
