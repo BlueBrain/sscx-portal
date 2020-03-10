@@ -61,6 +61,7 @@ const LayerAnatomy: React.FC = () => {
               <img
                 src={require('../../assets/images/electroIllustration.svg')}
                 alt="Electro-physiology"
+                className="electro-phys-image"
               />
             }
             list1={
@@ -83,6 +84,7 @@ const LayerAnatomy: React.FC = () => {
             }
             listsTitle="Select cell type"
             list2Open={!!currentEtype}
+            withGradient
           />
         </div>
       </Filters>
