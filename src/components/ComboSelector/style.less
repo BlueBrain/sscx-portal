@@ -9,32 +9,37 @@
   }
 
   p.combo-boxes-header {
-    font-weight: 700;
+    font-weight: 600;
     top: 80px;
     left: 300px;
     white-space: nowrap;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 1.2em;
   }
 
   .list-1,
   .list-2 {
     left: 279px;
     background-color: rgba(255, 255, 255, 0.6);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 0 10px 10px 0;
     max-width: 0;
     overflow: hidden;
     padding: 0;
     transition: all 0.4s;
 
     &.open {
-      padding: 5px;
-      max-width: 400px;
+      padding: 12px;
     }
   }
 
   .list-1 {
+    margin-top: 5px;
+
     &.open {
-      padding-left: 20px;
+      padding-left: 40px;
+      margin-left: -5px;
+      max-width: 280px;
     }
   }
 
@@ -42,7 +47,25 @@
     margin-top: 10px;
 
     &.open {
-      padding-left: 40px;
+      padding-left: 130px;
+      margin-left: -5px;
+      max-width: 400px;
+
+      &.with-gradient {
+        padding-left: 275px;
+        margin-left: -187px;
+        background: linear-gradient(
+          313deg,
+          rgba(255, 255, 255, 0.5) 76%,
+          rgba(0, 0, 0, 0) 76%
+        );
+      }
     }
+  }
+
+  .electro-phys-image {
+    width: 390px;
+    margin-top: -30px;
+    margin-right: -30px;
   }
 }

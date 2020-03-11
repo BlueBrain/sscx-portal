@@ -15,6 +15,7 @@ export type ComboSelectorProps = {
   listsTitle?: string;
   list1Open?: boolean;
   list2Open?: boolean;
+  withGradient?: boolean;
 };
 
 const ComboSelector: React.FC<ComboSelectorProps> = ({
@@ -25,6 +26,7 @@ const ComboSelector: React.FC<ComboSelectorProps> = ({
   listsTitle = '',
   list1Open = true,
   list2Open = true,
+  withGradient = false,
 }) => {
   return (
     <div className={`${cssPrefix}basis`}>
@@ -36,7 +38,12 @@ const ComboSelector: React.FC<ComboSelectorProps> = ({
           <p className="combo-boxes-header">{listsTitle}</p>
         )}
         <div className={`list-1 ${list1Open ? 'open' : ''}`}>{list1}</div>
-        <div className={`list-2 ${list2Open ? 'open' : ''}`}>{list2}</div>
+        <div
+          className={`list-2 ${list2Open ? 'open' : ''} ${withGradient &&
+            'with-gradient'}`}
+        >
+          {list2}
+        </div>
       </div>
     </div>
   );
