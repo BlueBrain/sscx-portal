@@ -964,9 +964,21 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
 
+"@types/dygraphs@^1.1.10":
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/@types/dygraphs/-/dygraphs-1.1.10.tgz#7ad273130f303cf9aa579d67067ae4e20dcad2a0"
+  integrity sha512-AZyGAsYdZI1lEzBU6+/UPn2nrn5vLGVJqToGMb02ZBexers2I0jHxPMZo7sH/KoPsQMg3ertZc5hwZEo56mRfw==
+  dependencies:
+    "@types/google.visualization" "*"
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
+
+"@types/google.visualization@*":
+  version "0.0.51"
+  resolved "https://registry.yarnpkg.com/@types/google.visualization/-/google.visualization-0.0.51.tgz#6c667b3249c71b3be9eeebc066a3c601681b3079"
+  integrity sha512-EG1pQyXW6UeG3Nr+daWhj6BMVJ+iOzl2kMjvrXzzp56nwo0w4KYE23qJj9xI807AISqREuysMhD/yL7m/bsAZg==
 
 "@types/history@*":
   version "4.7.4"
@@ -2393,6 +2405,11 @@ duplexer2@~0.1.4:
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
   dependencies:
     readable-stream "^2.0.2"
+
+dygraphs@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/dygraphs/-/dygraphs-2.1.0.tgz#2fbfd2c803ead02307df3faf8d4dd3ef55cb2075"
+  integrity sha1-L7/SyAPq0CMH3z+vjU3T71XLIHU=
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -5626,6 +5643,11 @@ randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
   dependencies:
     safe-buffer "^5.1.0"
+
+randomcolor@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/randomcolor/-/randomcolor-0.5.4.tgz#df615b13f25b89ea58c5f8f72647f0a6f07adcc3"
+  integrity sha512-nYd4nmTuuwMFzHL6W+UWR5fNERGZeVauho8mrJDUSXdNDbao4rbrUwhuLgKC/j8VCS5+34Ria8CsTDuBjrIrQA==
 
 randomfill@^1.0.3:
   version "1.0.4"

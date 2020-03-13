@@ -13,6 +13,7 @@ import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import eTypes from '../../__generated__/experimentalData.json';
+import EphysViewer, { EphysResponse } from '../../components/EphysViewer';
 
 const LayerAnatomy: React.FC = () => {
   const query = useQuery();
@@ -95,9 +96,12 @@ const LayerAnatomy: React.FC = () => {
         {data => (
           <>
             <Collapsible
-              title={`Raw query result for ${currentEtype}_${currentInstance}`}
+              title={`Electrophysiological Recordings for ${currentEtype}_${currentInstance}`}
             >
-              <code>{JSON.stringify(data, null, 2)}</code>
+              <EphysViewer
+                colorName={colorName}
+                data={data as EphysResponse[]}
+              />
             </Collapsible>
           </>
         )}

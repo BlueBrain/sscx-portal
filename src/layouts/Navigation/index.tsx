@@ -38,7 +38,7 @@ export const SecondaryNav: React.FC = () => (
         </li>
         <li>
           <NavLink to="/experimental/neuron-electrophysiology">
-            Neuron Electrophysilogy
+            Neuron Electrophysiology
           </NavLink>
         </li>
       </ul>
