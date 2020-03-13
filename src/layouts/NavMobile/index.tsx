@@ -1,10 +1,8 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import { IoIosMenu, MdClose } from 'react-icons/all';
-import { useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { MdClose, IoMdMenu } from 'react-icons/all';
 
 import { SecondaryNav, HomeNav } from '../Navigation';
-import { State } from '../../store';
 
 import './style.less';
 
@@ -30,36 +28,11 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
 const NavMobile = withRouter(({ location }) => {
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => setOpen(false), [location]);
-  const downloadItems = useSelector<State, number>(
-    state => state.download.items.length,
-  );
 
   return (
     <>
-      <div className={`${classPrefix}basis`}>
-        <div
-          className={`menu-icon ${open ? 'open' : ''}`}
-          onClick={() => setOpen(true)}
-        >
-          <IoIosMenu />
-        </div>
-        <ul>
-          <li>
-            <NavLink to="/downloads" activeClassName="active">
-              Downloads{downloadItems > 0 && ` (${downloadItems})`}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/literature" activeClassName="active">
-              Literature
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/styleguide" activeClassName="active">
-              Styleguide
-            </NavLink>
-          </li>
-        </ul>
+      <div className={`${classPrefix}basis`} onClick={() => setOpen(true)}>
+        <IoMdMenu />
       </div>
       <Menu onClose={() => setOpen(false)} open={open} />
     </>

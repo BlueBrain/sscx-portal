@@ -55,6 +55,10 @@ const Styleguide: React.FC = () => {
       </div>
 
       <section>
+        <h3></h3>
+      </section>
+
+      <section>
         <h3>Buttons</h3>
         <h4>Primary</h4>
         <Button primary onClick={dummyFn}>

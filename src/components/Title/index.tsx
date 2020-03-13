@@ -22,7 +22,7 @@ const Title: React.FC<TitleProps> = ({
     <div className={`${classPrefix}basis ${primaryColor}`}>
       {subtitle && <h4>{subtitle}</h4>}
       <h2 role="title">{title}</h2>
-      {hint && <h3>{hint}</h3>}
+      {hint && <p>{hint}</p>}
     </div>
   );
 };
