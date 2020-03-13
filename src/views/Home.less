@@ -24,20 +24,60 @@
   }
 
   #section-1 {
+    display: flex;
     padding-top: 160px;
     padding-bottom: 0;
     background-image: url('../assets/images/backgrounds/homepage1.svg');
-    background-position-x: center;
-    background-position-y: -15px;
+    background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
 
-    .cta {
-      text-align: center;
+    @media @small {
+      flex-direction: column;
+    }
 
+    .title {
+      width: 520px;
+      margin-top: 90px;
+      margin-left: 10%;
+
+      h2 {
+        font-size: 3.5rem;
+      }
+
+      h4 {
+        font-size: 2rem;
+      }
+
+      @media @small {
+        width: 100%;
+        margin-top: 0;
+        margin-left: 0;
+        h4 {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .cta {
       & a {
-        display: block;
-        margin-bottom: 1.5rem;
+        margin-right: 15px;
+      }
+
+      @media @small {
+        text-align: center;
+        & a {
+          display: block;
+        }
+        & button {
+          margin-bottom: 1.5rem;
+          margin-right: 0;
+          font-size: 1.5rem;
+          border-width: 2px;
+          height: 40px;
+          border-radius: 40px;
+          line-height: 40px;
+        }
       }
     }
 
@@ -45,14 +85,33 @@
       padding-top: 90px;
     }
 
-    .img {
-      margin: 30px
+    img {
+      width: 480px;
+      margin: 30px 0 30px -90px;
+      @media @small {
+        width: initial;
+        margin: 30px;
+      }
     }
   }
 
   #section-2 {
     h2 {
       color: #basePalette[navy-3];
+      text-align: center;
+
+      @media @small {
+        text-align: left;
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row-reverse;
+
+      @media @small {
+        flex-direction: column;
+      }
     }
 
     .workflow {
@@ -67,6 +126,7 @@
 
   #section-3 {
     background-color: #basePalette[navy-4];
+
     .intro {
       text-align: center;
       margin-bottom: 2rem;
@@ -111,10 +171,12 @@
         font-size: 2.5rem;
         margin: 0;
       }
+
       h3 {
         text-transform: uppercase;
         margin: 0;
       }
+
       p {
         width: 67%;
         margin-top: 20px;
@@ -131,9 +193,11 @@
       display: flex;
       flex-direction: column;
       align-items: end;
+
       .accent-border {
         margin: 0 0 -15px 0;
       }
+
       p {
         text-align: right;
       }
@@ -147,16 +211,19 @@
 
   #section-5 {
     padding-top: 0;
+
     h2 {
       text-transform: uppercase;
       font-size: 2.5rem;
       text-align: center;
       color: #basePalette[navy-4];
     }
+
     span {
       display: block;
       margin: 10px auto 0;
     }
+
     #acknowledgments {
       margin: 0 -45px;
     }

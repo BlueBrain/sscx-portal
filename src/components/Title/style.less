@@ -88,8 +88,11 @@
 
     p {
       border-left: 4px solid #accentPalette[yellow];
-      margin: 1rem;
+      margin: 1rem 1rem 1rem 0;
       padding-left: 12px;
+      @media @small {
+        margin-left: 1rem;
+      }
     }
   }
 }
