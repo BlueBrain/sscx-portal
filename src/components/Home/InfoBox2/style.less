@@ -1,0 +1,51 @@
+@import '../../assets/styles/config/_colors';
+@import '../../assets/styles/config/_fonts';
+
+.info-box__basis {
+  width: 100%;
+  max-width: 480px;
+  padding: 30px;
+  background-color: rgba(229, 233, 244, 0.5);
+  border-radius: 15px;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  transition: all 0.2s;
+
+  &.default {
+    border: none;
+  }
+
+  &.yellow {
+    background-color: #accentPalette[yellow];
+  }
+  &.blue {
+    background-color: #accentPalette[blue];
+  }
+  &.lavender {
+    background-color: #accentPalette[lavender];
+  }
+  &.green {
+    background-color: #accentPalette[green];
+  }
+  &.grey {
+    background-color: #accentPalette[grey];
+  }
+
+  h3 {
+    margin: 0;
+  }
+  p,
+  span {
+    margin-top: 15px;
+    font-size: #fontSize[small];
+    line-height: 1.7;
+  }
+  p {
+    font-weight: 700;
+    white-space: pre-line;
+  }
+  span {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+  }
+}
