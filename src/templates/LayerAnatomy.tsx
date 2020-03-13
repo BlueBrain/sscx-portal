@@ -43,6 +43,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
     history.push(`?layer=${layer}`);
   };
   const currentLayer: Layer = query.get('layer') as Layer;
+
   const currentQuery = currentLayer
     ? dataQuery(layersMapping[currentLayer])
     : {};
