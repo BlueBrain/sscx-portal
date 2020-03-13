@@ -1,28 +1,50 @@
 import React from 'react';
+import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
+import DataFilter from '../DataFilter';
+import ErrorBoundary from '../ErrorBoundary';
+
+type DataShape = {
+  brainLocation: {
+    layer: {
+      label: string;
+    };
+  };
+  series: {
+    statistic: string;
+    value: {
+      '@value': number;
+    };
+    unitCode: string;
+  }[];
+};
 
 export type LayerThicknessProps = {
-  data?: {}[];
+  data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
 };
 
-const LayerThickness: React.FC<LayerThicknessProps> = ({ data = [] }) => {
-  const validData = data.filter(d =>
-    d['_source']['@type'].includes('https://neuroshapes.org/NeuronDensity'),
-  );
-
+const LayerThickness2: React.FC<LayerThicknessProps> = ({ data = [] }) => {
   return (
-    <>
-      {validData.map(d => (
-        <>
-          {d['_source'].series.map &&
-            d['_source'].series.map(s => (
-              <p>
-                {s.statistic}: {s.value['@value']} {s.unitCode}
-              </p>
+    <ErrorBoundary>
+      <DataFilter<DataShape>
+        data={data}
+        type="https://neuroshapes.org/NeuronDensity"
+      >
+        {neuronDensityData => (
+          <>
+            {neuronDensityData.map(d => (
+              <>
+                {d.series.map(s => (
+                  <p>
+                    {s.statistic}: {s.value['@value']} {s.unitCode}
+                  </p>
+                ))}
+              </>
             ))}
-        </>
-      ))}
-    </>
+          </>
+        )}
+      </DataFilter>
+    </ErrorBoundary>
   );
 };
 
-export default LayerThickness;
+export default LayerThickness2;

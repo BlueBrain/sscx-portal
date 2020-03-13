@@ -29,10 +29,10 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ data = [] }) => {
         data={data}
         type="https://neuroshapes.org/LayerThickness"
       >
-        {ds => (
+        {layerThicknessData => (
           <>
             <h1>Layer thickness summary</h1>
-            {ds.map(d => (
+            {layerThicknessData.map(d => (
               <>
                 <p>region: {d.brainLocation.layer.label}</p>
                 {d.series.map(s => (
