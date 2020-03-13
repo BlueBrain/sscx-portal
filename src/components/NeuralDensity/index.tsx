@@ -33,11 +33,12 @@ const LayerThickness2: React.FC<LayerThicknessProps> = ({ data = [] }) => {
           <>
             {neuronDensityData.map(d => (
               <>
-                {d.series.map(s => (
-                  <p>
-                    {s.statistic}: {s.value['@value']} {s.unitCode}
-                  </p>
-                ))}
+                {d.series.map &&
+                  d.series.map(s => (
+                    <p>
+                      {s.statistic}: {s.value['@value']} {s.unitCode}
+                    </p>
+                  ))}
               </>
             ))}
           </>
