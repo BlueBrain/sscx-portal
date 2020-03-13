@@ -10,19 +10,22 @@ type TitleProps = {
   subtitle?: string;
   primaryColor?: Color;
   hint?: string;
+  primary?: boolean;
 };
 
 const Title: React.FC<TitleProps> = ({
   title,
   subtitle,
   hint,
-  primaryColor = '',
+  primaryColor = 'yellow' as Color,
+  primary
 }) => {
   return (
-    <div className={`${classPrefix}basis ${primaryColor}`}>
-      {subtitle && <h4>{subtitle}</h4>}
-      <h2 role="title">{title}</h2>
-      {hint && <p>{hint}</p>}
+    <div className={`${classPrefix}basis ${primary ? 'primary' : ''} ${primaryColor}`}>
+      {subtitle && !primary && <h4>{subtitle}</h4>}
+      <h2 role="title" >{title}</h2>
+      {subtitle && primary && <h4>{subtitle}</h4>}
+      {hint && <p dangerouslySetInnerHTML={{__html: hint}} />}
     </div>
   );
 };

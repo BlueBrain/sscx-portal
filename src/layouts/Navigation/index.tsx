@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './style.less';
 import Brand from '../Brand';
 import NavDesktop from '../NavDesktop';
