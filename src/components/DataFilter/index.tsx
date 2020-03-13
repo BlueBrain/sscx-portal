@@ -30,7 +30,6 @@ const DataFilter: <T>(
       setState({ error: true, data: [] });
     }
   }, [data, type]);
-  console.log(state);
 
   return <>{children(state.data)}</>;
 };
