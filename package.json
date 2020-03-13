@@ -13,6 +13,7 @@
     "style": "prettier --check \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\""
   },
   "devDependencies": {
+    "@types/dygraphs": "^1.1.10",
     "@types/jest": "^25.1.0",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
@@ -42,6 +43,8 @@
   "dependencies": {
     "@bbp/nexus-sdk": "^1.2.1",
     "@bbp/react-nexus": "^1.2.1",
+    "dygraphs": "^2.1.0",
+    "randomcolor": "^0.5.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-icons": "^3.9.0",
