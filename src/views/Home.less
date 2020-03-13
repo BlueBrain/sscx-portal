@@ -6,7 +6,8 @@
   background-color: #basePalette[grey-1];
 
   section {
-    padding: 30px 30px 0;
+    padding: 30px 30px 60px;
+    overflow: hidden;
   }
 
   .accent-border {
@@ -24,6 +25,7 @@
 
   #section-1 {
     padding-top: 160px;
+    padding-bottom: 0;
     background-image: url('../assets/images/backgrounds/homepage1.svg');
     background-position-x: center;
     background-position-y: -15px;
@@ -49,8 +51,6 @@
   }
 
   #section-2 {
-    padding-bottom: 60px;
-
     h2 {
       color: #basePalette[navy-3];
     }
@@ -67,8 +67,6 @@
 
   #section-3 {
     background-color: #basePalette[navy-4];
-    padding-bottom: 60px;
-
     .intro {
       text-align: center;
       margin-bottom: 2rem;
@@ -95,6 +93,55 @@
 
     #flow {
       margin: 20px;
+    }
+  }
+
+  #section-4 {
+    padding-top: 60px;
+    background-color: #basePalette[navy-4];
+    background-image: url('../assets/images/backgrounds/homepage2.svg');
+    background-position-x: center;
+    background-position-y: -120px;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .paper {
+      h2 {
+        text-transform: uppercase;
+        font-size: 2.5rem;
+        margin: 0;
+      }
+      h3 {
+        text-transform: uppercase;
+        margin: 0;
+      }
+      p {
+        width: 67%;
+        margin-top: 20px;
+      }
+    }
+
+    .data-paper {
+      .accent-border {
+        margin: 0 60px 0 0;
+      }
+    }
+
+    .portal-paper {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      .accent-border {
+        margin: 0 0 -15px 0;
+      }
+      p {
+        text-align: right;
+      }
+    }
+
+    #chip {
+      width: 180px;
+      margin: -120px 0 30px 190px;
     }
   }
 }

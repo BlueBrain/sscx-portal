@@ -20,10 +20,10 @@ const Home: React.FC = () => (
       />
       <div className='cta'>
         <Link to="/experimental">
-          <Button width={140} primary>Get started</Button>
+          <Button large width={140} primary>Get started</Button>
         </Link>
         <Link to="/styleguide">
-          <Button width={140}>Read paper</Button>
+          <Button large width={140}>Read paper</Button>
         </Link>
       </div>
       <img src={require('../assets/images/computer.svg')} alt='computer'/>
@@ -106,6 +106,32 @@ const Home: React.FC = () => (
         <small>+ The data is integrated in the Blue Brain Nexus.</small>
       </div>
       <img id="flow" src={require('../assets/images/flow.svg')} alt='data flow'/>
+    </section>
+
+    <section id='section-4'>
+      <div className='paper data-paper'>
+        <h2>The paper</h2>
+        <h3><span className='accent-border'/>About the data</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+          ea commodo consequat.</p>
+        <Link to="/experimental">
+          <Button>Read paper</Button>
+        </Link>
+      </div>
+      <img id="chip" src={require('../assets/images/chip.svg')} alt='microchip'/>
+      <div className='paper portal-paper'>
+        <div className='portal-paper-title'>
+          <h3>Paper about</h3>
+          <h2>The portal <span className='accent-border'/></h2>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+          ea commodo consequat.</p>
+        <Link to="/experimental">
+          <Button>BBP website</Button>
+        </Link>
+      </div>
     </section>
   </div>
 );

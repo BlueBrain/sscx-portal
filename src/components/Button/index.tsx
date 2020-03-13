@@ -7,6 +7,7 @@ const classPrefix = 'button__';
 type ButtonProps = {
   primary?: boolean;
   active?: boolean;
+  large?: boolean;
   discrete?: boolean;
   width?: number;
   notifications?: number;
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   notifications,
   onClick,
   children,
+  large
 }) => {
   return (
     <button
@@ -29,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       className={`${classPrefix}basis ${primary ? 'primary' : ''} ${
         discrete ? 'discrete' : ''
-      } ${active ? 'active' : ''}`}
+      } ${active ? 'active' : ''} ${large ? 'large' : ''}`}
     >
       {children}
       {notifications && <span className="notifications">{notifications}</span>}
