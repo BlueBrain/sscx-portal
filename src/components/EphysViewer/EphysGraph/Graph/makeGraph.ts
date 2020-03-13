@@ -30,8 +30,6 @@ function makeGraph(
   };
 
   const formattedConfig = Object.assign({
-    // legendFormatter,
-    // legend: 'always',
     labelsDiv,
     showLabelsOnHighlight: false,
     axisLineColor: '#999',
@@ -59,7 +57,6 @@ function makeGraph(
           y: yRanges[0],
         });
     },
-
     xlabel: 'time [ms]',
     xLabelHeight: 14,
     ylabel: yLabel,
