@@ -1,56 +1,64 @@
-import React from 'react';
-
-import { Color } from '../../types';
+import React, { ReactChild, ReactFragment } from 'react';
 import './style.less';
+import { FaCircle, FaCaretDown } from 'react-icons/all';
+import { Color } from '../../../types';
 
-const classPrefix = 'info-box__';
+const classPrefix = 'info-box-2__';
 
-type InfoBoxProps = {
-  title?: string;
-  text: string;
-  color?: Color;
-  maxChars?: number;
+type InfoBox2Props = {
+  title: string;
+  color: Color;
+  children: ReactChild | ReactFragment;
+  arrow?: boolean;
 };
 
-const isShorter = (text: string, maxChars: number): boolean =>
-  text.length <= maxChars;
-
-const truncate = (text: string, maxChars: number): string => {
-  if (isShorter(text, maxChars)) return text;
-  const words = text.trim().split(' ');
-  let truncatedText = '';
-  let i = 0;
-  while (isShorter(truncatedText, maxChars)) {
-    truncatedText += ' ' + words[i];
-    i++;
-  }
-  return truncatedText + '…';
-};
-
-const InfoBox: React.FC<InfoBoxProps> = ({
-  title,
-  text,
-  color = 'default',
-  maxChars = 150,
-}) => {
+const InfoBox2: React.FC<InfoBox2Props> = ({
+                                             title,
+                                             color,
+                                             children,
+                                             arrow,
+                                           }) => {
   const [expanded, setExpanded] = React.useState(false);
-  const [currentText, setCurrentText] = React.useState(text);
-
-  React.useEffect(() => {
-    setCurrentText(expanded ? text : truncate(text, maxChars));
-  }, [expanded]);
 
   return (
-    <div className={`${classPrefix}basis ${color}`}>
-      {title && <h3>{title}</h3>}
-      <p>{currentText}</p>
-      {!isShorter(text, maxChars) && (
-        <span onClick={() => setExpanded(!expanded)}>
-          Read {expanded ? 'less' : 'more…'}
-        </span>
-      )}
+    <div className={`${classPrefix}basis ${color} ${expanded ? 'open' : ''}`}>
+      <div className='dataset-container'>
+        <div className='dataset'>
+          <h3 dangerouslySetInnerHTML={{ __html: title }}/>
+          <span onClick={() => setExpanded(!expanded)}>Read {expanded ? 'less' : 'more'}
+            <FaCircle/></span>
+          {arrow && <div className='caret-1'>
+            <FaCaretDown/>
+          </div>}
+        </div>
+        <ul className='links'>
+          <li style={{ width: '100%' }}><img src={require('../../../assets/images/icons/regions.svg')}
+                                             alt='brain regions'/>Sub-regions
+          </li>
+          <li style={{ width: '95%' }}><img src={require('../../../assets/images/icons/microcircuit.svg')}
+                                            alt='microcircuit'/>Microcircuits
+          </li>
+          <li style={{ width: '90%' }}><img src={require('../../../assets/images/icons/synapse.svg')} alt='synapse'/>Synaptic
+            Pathways
+          </li>
+          <li style={{ width: '85%' }}><img src={require('../../../assets/images/icons/neuron.svg')} alt='neuron'/>Neurons
+          </li>
+        </ul>
+      </div>
+      <div className='more'>
+        <div className='more-content'>
+          {children}
+        </div>
+        <div className='more-shadow'/>
+      </div>
+      {arrow && <div className='caret-2'>
+        <FaCaretDown/>
+      </div>}
+      {arrow && <div className='caret-3'>
+        <FaCaretDown/>
+      </div>}
     </div>
   );
 };
 
-export default InfoBox;
+export default InfoBox2;
