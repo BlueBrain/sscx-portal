@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNexusContext } from '@bbp/react-nexus';
+import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
+
 import { sscx } from '../../config';
 import ScrollTo from '../../components/ScrollTo';
 import './style.less';
@@ -9,7 +11,9 @@ const classPrefix = 'data-results__';
 type DataProps = {
   hasData: boolean;
   query: {};
-  children: (data) => React.ReactNode;
+  children: (
+    data: ElasticSearchViewQueryResponse<any>['hits']['hits'],
+  ) => React.ReactNode;
   id?: string;
 };
 
@@ -19,8 +23,12 @@ const Data: React.FC<DataProps> = ({
   children,
   id = 'data',
 }) => {
-  const [state, setState] = React.useState({
-    data: null,
+  const [state, setState] = React.useState<{
+    data: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+    loading: boolean;
+    error: any;
+  }>({
+    data: [],
     loading: false,
     error: null,
   });
@@ -35,7 +43,9 @@ const Data: React.FC<DataProps> = ({
         sscx.expNeuronElectroViewId,
         query,
       )
-        .then(data => setState({ ...state, loading: false, data }))
+        .then(data =>
+          setState({ ...state, loading: false, data: data.hits.hits }),
+        )
         .catch(error => setState({ ...state, loading: false, error }));
     }
   }, [hasData, query]);
