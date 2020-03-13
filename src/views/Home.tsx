@@ -133,6 +133,11 @@ const Home: React.FC = () => (
         </Link>
       </div>
     </section>
+
+    <section id='section-5'>
+      <h2>Acknowledgments<span className='accent-border'/></h2>
+      <img id="acknowledgments" src={require('../assets/images/acknowledgments.svg')} alt='acknowledgments'/>
+    </section>
   </div>
 );
 
