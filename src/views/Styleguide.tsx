@@ -18,7 +18,6 @@ import MicrocircuitSelector from '../components/MicrocircuitSelector';
 import { Color } from '../types';
 import ComboSelector from '../components/ComboSelector';
 import Loading from '../components/Loading';
-import { Store } from '../store/Store';
 import { addItem } from '../store/download';
 
 export const lorem =
