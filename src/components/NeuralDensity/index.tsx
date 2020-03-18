@@ -22,7 +22,7 @@ export type LayerThicknessProps = {
   data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
 };
 
-const LayerThickness2: React.FC<LayerThicknessProps> = ({ data = [] }) => {
+const NeuralDensity: React.FC<LayerThicknessProps> = ({ data = [] }) => {
   return (
     <ErrorBoundary>
       <DataFilter<DataShape>
@@ -32,14 +32,14 @@ const LayerThickness2: React.FC<LayerThicknessProps> = ({ data = [] }) => {
         {neuronDensityData => (
           <>
             {neuronDensityData.map(d => (
-              <>
+              <div key={d['@id']}>
                 {d.series.map &&
                   d.series.map(s => (
-                    <p>
+                    <p key={`${s.statistic}-${s.value['value']}-${s.unitCode}`}>
                       {s.statistic}: {s.value['@value']} {s.unitCode}
                     </p>
                   ))}
-              </>
+              </div>
             ))}
           </>
         )}
@@ -48,4 +48,4 @@ const LayerThickness2: React.FC<LayerThicknessProps> = ({ data = [] }) => {
   );
 };
 
-export default LayerThickness2;
+export default NeuralDensity;

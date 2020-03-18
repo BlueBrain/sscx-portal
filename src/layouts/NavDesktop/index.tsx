@@ -1,12 +1,14 @@
 import React from 'react';
-
-import './style.less';
 import { NavLink, withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import Button from '../../components/Button';
 import { HomeNav, SecondaryNav } from '../Navigation';
+import { State } from '../../store';
+
+import './style.less';
 
 const classPrefix = 'nav-desktop__';
-const palette = 'cool';
 
 type NavButtonProps = {
   path: string;
@@ -42,6 +44,9 @@ const NavButton: React.FC<NavButtonProps> = ({
 const NavDesktop = withRouter(({ location }) => {
   const [secondaryNav, setSecondaryNav] = React.useState(false);
   React.useEffect(() => setSecondaryNav(false), [location]);
+  const downloadItems = useSelector<State, number>(
+    state => state.download.items.length,
+  );
 
   return (
     <ul className={`${classPrefix}basis`}>
@@ -68,7 +73,7 @@ const NavDesktop = withRouter(({ location }) => {
         <NavButton
           path="/downloads"
           name="Downloads"
-          notifications={7}
+          notifications={downloadItems > 0 ? downloadItems : undefined}
           highlight
         />
       </li>
