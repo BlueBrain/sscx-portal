@@ -1,9 +1,12 @@
 import React from 'react';
-
-import './style.less';
 import { NavLink, withRouter } from 'react-router-dom';
 import { IoIosMenu, MdClose } from 'react-icons/all';
+import { useSelector } from 'react-redux';
+
 import { SecondaryNav, HomeNav } from '../Navigation';
+import { State } from '../../store';
+
+import './style.less';
 
 const classPrefix = 'nav-mobile__';
 
@@ -27,6 +30,9 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
 const NavMobile = withRouter(({ location }) => {
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => setOpen(false), [location]);
+  const downloadItems = useSelector<State, number>(
+    state => state.download.items.length,
+  );
 
   return (
     <>
@@ -40,7 +46,7 @@ const NavMobile = withRouter(({ location }) => {
         <ul>
           <li>
             <NavLink to="/downloads" activeClassName="active">
-              Downloads
+              Downloads{downloadItems > 0 && ` (${downloadItems})`}
             </NavLink>
           </li>
           <li>

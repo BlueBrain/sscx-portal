@@ -27,6 +27,7 @@ import PreLayerAnatomy from './views/predictions/LayerAnatomy';
 import PreSynapticPathways from './views/predictions/SynapticPathways';
 import PreMicrocircuits from './views/predictions/Microcircuits';
 import Styleguide from './views/Styleguide';
+import Download from './views/Downloads';
 
 const routes: RouteProps[] = [
   {
@@ -37,6 +38,11 @@ const routes: RouteProps[] = [
   {
     path: '/styleguide',
     component: Styleguide,
+    exact: true,
+  },
+  {
+    path: '/downloads',
+    component: Download,
     exact: true,
   },
   // Experimental

@@ -50,11 +50,15 @@ const Data: React.FC<DataProps> = ({
     }
   }, [hasData, query]);
 
+  if (!hasData) {
+    return null;
+  }
+
   if (state.loading) {
-    return <p>'loading'</p>;
+    return <p>loading...</p>;
   }
   if (state.error) {
-    return <p>error</p>;
+    return <p>An error happened loading the data... Please try again later.</p>;
   }
 
   return (
