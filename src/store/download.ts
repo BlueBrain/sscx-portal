@@ -15,10 +15,16 @@ const initialState: DownloadSate = {
   items: [],
 };
 
+/**
+ * Actions
+ */
 export const addItem = createAction<DownloadItem>('download/add_item');
 export const removeItem = createAction<DownloadItem>('download/remove_item');
 export const clearItems = createAction('download/clear_items');
 
+/**
+ * Reducer
+ */
 export const downloadReducer = createReducer(initialState, {
   [addItem.type]: (state, action: PayloadAction<DownloadItem>) => ({
     ...state,

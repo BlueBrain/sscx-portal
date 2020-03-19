@@ -31,11 +31,13 @@ const Download: React.FC = () => {
   return (
     <FullPage>
       <Title title="Download page" />
-      <Button onClick={handleDownload}>Download data</Button>
+      <Button onClick={handleDownload} primary>
+        Download data
+      </Button>
       <Button onClick={() => dispatch(clearItems())}>Clear data</Button>
       <ul>
         {downloadItems.map(d => (
-          <li>{d.resourceId}</li>
+          <li key={d.resourceId}>{d.resourceId}</li>
         ))}
       </ul>
     </FullPage>
