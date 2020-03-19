@@ -1,5 +1,6 @@
 /**
- *
+ * A simple download button that dispatched `download/add_item` redux action
+ * for every single data element received as props.
  */
 
 import React from 'react';
