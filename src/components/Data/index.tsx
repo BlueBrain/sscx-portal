@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNexusContext } from '@bbp/react-nexus';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
+import Helmet from 'react-helmet';
 
 import { sscx } from '../../config';
 import ScrollTo from '../../components/ScrollTo';
@@ -62,14 +63,24 @@ const Data: React.FC<DataProps> = ({
   }
 
   return (
-    <div id={id} className={`${classPrefix}basis`}>
-      <div className="center">{children(state.data)}</div>
-      <div className="scroll-to">
-        <ScrollTo anchor="filters" direction="up">
-          Return to filters
-        </ScrollTo>
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://bbp.neuroshapes.org',
+            '@graph': state.data.map(d => d._source),
+          })}
+        </script>
+      </Helmet>
+      <div id={id} className={`${classPrefix}basis`}>
+        <div className="center">{children(state.data)}</div>
+        <div className="scroll-to">
+          <ScrollTo anchor="filters" direction="up">
+            Return to filters
+          </ScrollTo>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -11,7 +11,7 @@ import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
 import { accentColors } from '../config';
 import { lorem } from '../views/Styleguide';
-import Data from '../layouts/Data';
+import Data from '../components/Data';
 
 export type LayerAnatomyTemplateProps = {
   color: Color;
