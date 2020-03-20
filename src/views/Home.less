@@ -25,6 +25,9 @@
 
   #section-1 {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 55vw;
     padding-top: 160px;
     padding-bottom: 0;
     background-image: url('../assets/images/backgrounds/homepage1.svg');
@@ -32,14 +35,9 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    @media @small {
-      flex-direction: column;
-    }
-
     .title {
       width: 520px;
-      margin-top: 90px;
-      margin-left: 10%;
+      margin-top: -120px;
 
       h2 {
         font-size: 3.5rem;
@@ -48,23 +46,32 @@
       h4 {
         font-size: 2rem;
       }
-
-      @media @small {
-        width: 100%;
-        margin-top: 0;
-        margin-left: 0;
-        h4 {
-          font-size: 1.5rem;
-        }
-      }
     }
 
     .cta {
       & a {
         margin-right: 15px;
       }
+    }
 
-      @media @small {
+    img {
+      width: 480px;
+    }
+
+    @media @small {
+      flex-direction: column;
+      padding-top: 90px;
+      height: auto;
+
+      .title {
+        width: 100%;
+        margin-top: 0;
+        h4 {
+          font-size: 1.5rem;
+        }
+      }
+
+      .cta {
         text-align: center;
         & a {
           display: block;
@@ -79,16 +86,8 @@
           line-height: 40px;
         }
       }
-    }
 
-    @media @small {
-      padding-top: 90px;
-    }
-
-    img {
-      width: 480px;
-      margin: 30px 0 30px -90px;
-      @media @small {
+      img {
         width: initial;
         margin: 30px;
       }
