@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import InfoBox1 from '../components/Home/InfoBox1';
 import InfoBox2 from '../components/Home/InfoBox2';
 import { Color } from '../types';
+import Search from '../components/Search';
 
 const classPrefix = 'Home__';
 
@@ -30,6 +31,10 @@ const Home: React.FC = () => (
       </div>
       <img src={require('../assets/images/computer.svg')} alt='computer'/>
     </section>
+
+    <div className='search-form'>
+      <Search />
+    </div>
 
     <section id='section-2'>
       <h2>Select and Explore. Download. <span className='nowrap'>Contribute<span
