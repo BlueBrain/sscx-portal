@@ -11,7 +11,7 @@ const classPrefix = 'Home__';
 
 const Home: React.FC = () => (
   <div className={`${classPrefix}basis`}>
-    <section id='section-1'>
+    <section id='section-1' className='content'>
       <div className='title'>
         <Title
           title="Somatosensory Cortex Portal"
@@ -78,40 +78,44 @@ const Home: React.FC = () => (
           adipiscing elit, sed do eiusmod tempor incididunt ut labore et
           dolore magna aliqua.</p>
       </div>
-      <div className='workflow'>
-        <InfoBox2 title='Collected<br/>experimental data'
-                  color={'yellow' as Color} arrow>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
-        </InfoBox2>
-        <InfoBox2 title='Extrapolated<br/>data'
-                  color={'blue' as Color} arrow>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
-        </InfoBox2>
-        <InfoBox2 title='Digital<br/>reconstructions'
-                  color={'lavender' as Color} arrow>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
-        </InfoBox2>
-        <InfoBox2 title='Validated<br/>findings'
-                  color={'green' as Color}>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
-        </InfoBox2>
-        <InfoBox2 title='Predicted<br/>novel behaviours'
-                  color={'grey' as Color}>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.</p>
-        </InfoBox2>
-        <small>+ The data is integrated in the Blue Brain Nexus.</small>
+      <div className='content'>
+        <div className='workflow'>
+          <InfoBox2 title='Collected<br/>experimental data'
+                    color={'yellow' as Color} arrow>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+          </InfoBox2>
+          <InfoBox2 title='Extrapolated<br/>data'
+                    color={'blue' as Color} arrow>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+          </InfoBox2>
+          <InfoBox2 title='Digital<br/>reconstructions'
+                    color={'lavender' as Color} arrow>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+          </InfoBox2>
+          <InfoBox2 title='Validated<br/>findings'
+                    color={'green' as Color}>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+          </InfoBox2>
+          <div>
+            <InfoBox2 title='Predicted<br/>novel behaviours'
+                      color={'grey' as Color}>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat.</p>
+            </InfoBox2>
+            <small>+ The data is integrated in the Blue Brain Nexus.</small>
+          </div>
+        </div>
+        <div className='image' />
       </div>
-      <img id="flow" src={require('../assets/images/flow.svg')} alt='data flow'/>
     </section>
 
     <section id='section-4'>
