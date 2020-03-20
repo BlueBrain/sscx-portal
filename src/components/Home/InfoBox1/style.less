@@ -1,5 +1,6 @@
 @import '../../../assets/styles/config/_colors';
 @import '../../../assets/styles/config/_fonts';
+@import '../../../assets/styles/config/_queries';
 
 .info-box-1__basis {
   padding: 1.5rem 1.5rem 1rem;
@@ -9,6 +10,7 @@
   position: relative;
   margin-bottom: 5px;
   margin-left: 15px;
+  max-width: 520px;
 
   img {
     height: 40px;
@@ -48,5 +50,9 @@
   .more p {
     font-size: #fontSize[small];
     opacity: 0.5;
+  }
+
+  @media @small {
+    max-width: none;
   }
 }

@@ -64,7 +64,7 @@ const Home: React.FC = () => (
               laborum.</p>
           </InfoBox1>
         </div>
-        <div>
+        <div className='image'>
           <img id='screenshot' src={require('../assets/images/screenshot.png')} alt='screenshot'/>
         </div>
       </div>
