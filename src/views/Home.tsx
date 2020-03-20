@@ -36,7 +36,8 @@ const Home: React.FC = () => (
         className='accent-border'/></span></h2>
       <div className='content'>
         <div className='workflow'>
-          <InfoBox1 title='Explore'
+          <InfoBox1 icon='search'
+                    title='Select and Explore'
                     teaser='Discover how the Blue Brain Project organizes collected data and extrapolates principles to rebuild digbitally reconstructed newtworks towards reconciling dicrepancies in literuture.'>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -45,7 +46,8 @@ const Home: React.FC = () => (
               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
               laborum.</p>
           </InfoBox1>
-          <InfoBox1 title='Select & Analyze'
+          <InfoBox1 icon='download'
+                    title='Download'
                     teaser='Enjoy selecting wich levels of detail you wish to explore and navigate back and forth between various datasets and see how they correlate.'>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -54,7 +56,8 @@ const Home: React.FC = () => (
               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
               laborum.</p>
           </InfoBox1>
-          <InfoBox1 title='Download'
+          <InfoBox1 icon='mail'
+                    title='Contribute'
                     teaser='The Blue Brain Project has made various assets available for download throughout the portal, enjoy downloading your selected items for your own use.'>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -108,13 +111,14 @@ const Home: React.FC = () => (
             <InfoBox2 title='Predicted<br/>novel behaviours'
                       color={'grey' as Color}>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex
                 ea commodo consequat.</p>
             </InfoBox2>
             <small>+ The data is integrated in the Blue Brain Nexus.</small>
           </div>
         </div>
-        <div className='image' />
+        <div className='image'/>
       </div>
     </section>
 

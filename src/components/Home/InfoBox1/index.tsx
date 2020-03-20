@@ -5,14 +5,14 @@ import { FaCircle } from 'react-icons/all';
 const classPrefix = 'info-box-1__';
 
 type InfoBox1Props = {
-  iconName?: string;
+  icon: 'checkmark' | 'mail' | 'search' | 'download';
   title: string;
   teaser: string;
   children: ReactChild | ReactFragment;
 };
 
 const InfoBox1: React.FC<InfoBox1Props> = ({
-                                             iconName,
+                                             icon,
                                              title,
                                              teaser,
                                              children,
@@ -21,7 +21,10 @@ const InfoBox1: React.FC<InfoBox1Props> = ({
 
   return (
     <div className={`${classPrefix}basis`}>
-      <img src={require('../../../assets/images/icons/checkmark.svg')} alt='checkmark'/>
+      { icon === 'checkmark' && <img src={require('../../../assets/images/icons/checkmark.svg')} alt='checkmark'/>}
+      { icon === 'mail' && <img src={require('../../../assets/images/icons/mail.svg')} alt='mail'/>}
+      { icon === 'search' && <img src={require('../../../assets/images/icons/search.svg')} alt='search'/>}
+      { icon === 'download' && <img src={require('../../../assets/images/icons/download.svg')} alt='download'/>}
       <h3>{title}</h3>
       <p>{teaser}</p>
       <span onClick={() => setExpanded(!expanded)}>
