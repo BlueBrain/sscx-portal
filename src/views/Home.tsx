@@ -7,6 +7,9 @@ import InfoBox1 from '../components/Home/InfoBox1';
 import InfoBox2 from '../components/Home/InfoBox2';
 import { Color } from '../types';
 import Search from '../components/Search';
+import { FaTwitter } from 'react-icons/all';
+import { FaFacebookF } from 'react-icons/all';
+import { FaLinkedinIn } from 'react-icons/all';
 
 const classPrefix = 'Home__';
 
@@ -30,10 +33,27 @@ const Home: React.FC = () => (
         </div>
       </div>
       <img src={require('../assets/images/computer.svg')} alt='computer'/>
+      <div className='social-media'>
+        <a href='#'>
+          <div className='social-media-icon'>
+            <FaTwitter/>
+          </div>
+        </a>
+        <a href='#'>
+          <div className='social-media-icon'>
+            <FaFacebookF/>
+          </div>
+        </a>
+        <a href='#'>
+          <div className='social-media-icon'>
+            <FaLinkedinIn/>
+          </div>
+        </a>
+      </div>
     </section>
 
     <div className='search-form'>
-      <Search />
+      <Search/>
     </div>
 
     <section id='section-2'>
