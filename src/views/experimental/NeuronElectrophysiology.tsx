@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Data from '../../layouts/Data';
+import Data from '../../components/Data';
 import { electroPhysiologyDataQuery } from '../../queries/es';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
