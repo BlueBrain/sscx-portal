@@ -1,21 +1,23 @@
 import React, { ReactChild, ReactFragment } from 'react';
 import './style.less';
-import {FaCircle} from 'react-icons/all';
+import { FaCircle } from 'react-icons/all';
 
 const classPrefix = 'info-box-1__';
 
 type InfoBox1Props = {
+  iconName?: string;
   title: string;
   teaser: string;
   children: ReactChild | ReactFragment;
 };
 
 const InfoBox1: React.FC<InfoBox1Props> = ({
+                                             iconName,
                                              title,
                                              teaser,
                                              children,
                                            }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false)
 
   return (
     <div className={`${classPrefix}basis`}>
@@ -23,7 +25,7 @@ const InfoBox1: React.FC<InfoBox1Props> = ({
       <h3>{title}</h3>
       <p>{teaser}</p>
       <span onClick={() => setExpanded(!expanded)}>
-        <FaCircle /> Read {expanded ? 'less' : 'more'}
+        <FaCircle/> Read {expanded ? 'less' : 'more'}
       </span>
       <div className={`more ${expanded ? 'open' : ''}`}>{children}</div>
     </div>

@@ -43,8 +43,10 @@
     background-size: cover;
 
     .title {
-      width: 520px;
+      flex: 1 1 0;
+      width: 67%;
       margin-top: -120px;
+      padding-left: 10%;
 
       h2 {
         font-size: 3.5rem;
@@ -52,6 +54,10 @@
 
       h4 {
         font-size: 2rem;
+      }
+
+      p {
+        max-width: 520px;
       }
     }
 
@@ -62,6 +68,7 @@
     }
 
     img {
+      flex: 1 1 0;
       padding-top: 30px;
       width: 480px;
     }
@@ -70,8 +77,10 @@
       height: auto;
 
       .title {
+        flex: initial;
         width: 100%;
         margin-top: 0;
+        padding-left: 0;
         h4 {
           font-size: 1.5rem;
         }
@@ -94,9 +103,23 @@
       }
 
       img {
+        flex: initial;
         width: initial;
         margin: 30px;
         padding-top: 0;
+      }
+    }
+
+    @media @large {
+      .title {
+
+        h2 {
+          font-size: 5.5rem;
+        }
+
+        h4 {
+          font-size: 3.5rem;
+        }
       }
     }
   }
@@ -126,7 +149,6 @@
     #screenshot {
       margin-left: -30px;
       margin-right: 240px;
-      width: 520px;
       max-width: 100%;
     }
 
@@ -186,7 +208,7 @@
     }
 
     .image {
-      height: 542px;
+      height: 610px;
       align-self: flex-start;
       background-image: url('../assets/images/flow.svg');
       background-position-x: 100px;
@@ -204,6 +226,13 @@
         width: 100%;
         min-height: 542px;
         background-position-x: center;
+      }
+    }
+
+    @media @large {
+      .image {
+        height: 725px;
+        background-position-y: -5px;
       }
     }
   }
@@ -312,6 +341,16 @@
           display: inline-block;
           margin: 0 0 -15px 0;
         }
+      }
+    }
+
+    @media @large {
+      #chip {
+        width: 360px;
+      }
+
+      .data-paper, .portal-paper {
+        max-width: 480px;
       }
     }
   }
