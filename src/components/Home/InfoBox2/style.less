@@ -10,24 +10,29 @@
   .caret-2 {
     z-index: 1;
     position: absolute;
-    font-size: 3.9rem;
-    bottom: -4.1rem;
-    left: 1.8rem;
+    font-size: 40px;
+    line-height: 0;
+    bottom: -30px;
+    left: 30px;
     color: #basePalette[navy-4];
   }
 
   &.yellow .dataset {
     background-color: #accentPalette[yellow];
   }
+
   &.blue .dataset {
     background-color: #accentPalette[blue];
   }
+
   &.lavender .dataset {
     background-color: #accentPalette[lavender];
   }
+
   &.green .dataset {
     background-color: #accentPalette[green];
   }
+
   &.grey .dataset {
     background-color: #accentPalette[grey];
   }
@@ -48,23 +53,27 @@
   .caret-1, .caret-3 {
     z-index: 2;
     position: absolute;
-    font-size: 3.5rem;
-    bottom: -3.3rem;
-    left: 2rem;
+    font-size: 40px;
+    bottom: -35px;
+    left: 30px;
   }
 
   &.yellow .caret-1 {
     color: #accentPalette[yellow];
   }
+
   &.blue .caret-1 {
     color: #accentPalette[blue];
   }
+
   &.lavender .caret-1 {
     color: #accentPalette[lavender];
   }
+
   &.green .caret-1 {
     color: #accentPalette[green];
   }
+
   &.grey .caret-1 {
     color: #accentPalette[grey];
   }
@@ -91,6 +100,7 @@
     margin-bottom: 1px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+
     img {
       width: 1rem;
       height: auto;
@@ -103,14 +113,17 @@
     padding: 1rem 0 0.3rem;
     margin: 0;
   }
+
   p,
   span {
     margin-top: 0.5rem;
     line-height: 1.7;
   }
+
   span {
     font-size: #fontSize[small];
     cursor: pointer;
+
     svg {
       height: 5px;
       width: 5px;
@@ -118,6 +131,7 @@
       margin: -2px auto 0;
     }
   }
+
   .more {
     color: #basePalette[navy-4];
     transition: all 0.2s;
@@ -125,9 +139,11 @@
     overflow: hidden;
     display: flex;
   }
+
   .more p {
     font-size: #fontSize[small];
   }
+
   .more-content {
     background-color: #basePalette[white];
     border-bottom-left-radius: 5px;
@@ -135,6 +151,7 @@
     flex: 3 1 0;
     position: relative;
   }
+
   .more-shadow {
     flex: 2 1 0;
   }
@@ -143,9 +160,11 @@
     .more {
       max-height: 500px;
     }
+
     .dataset {
       border-bottom-left-radius: 0;
     }
+
     .caret-3 {
       display: block;
     }

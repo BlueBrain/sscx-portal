@@ -32,7 +32,7 @@ const Home: React.FC = () => (
     </section>
 
     <section id='section-2'>
-      <h2>Explore the data. Select and analyze. <span className='nowrap'>Download<span
+      <h2>Select and Explore. Download. <span className='nowrap'>Contribute<span
         className='accent-border'/></span></h2>
       <div className='content'>
         <div className='workflow'>
