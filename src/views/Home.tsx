@@ -119,28 +119,35 @@ const Home: React.FC = () => (
     </section>
 
     <section id='section-4'>
-      <div className='paper data-paper'>
-        <h2>The paper</h2>
-        <h3><span className='accent-border'/>About the data</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat.</p>
-        <Link to="/experimental">
-          <Button>Read paper</Button>
-        </Link>
-      </div>
-      <img id="chip" src={require('../assets/images/chip.svg')} alt='microchip'/>
-      <div className='paper portal-paper'>
-        <div className='portal-paper-title'>
-          <h3>Paper about</h3>
-          <h2>The portal <span className='accent-border'/></h2>
+      <div className='content'>
+        <div className='paper data-paper-container'>
+          <div className='data-paper'>
+            <h2>The paper</h2>
+            <h3><span className='accent-border'/>About the data</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+            <Link to="/experimental">
+              <Button>Read paper</Button>
+            </Link>
+          </div>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat.</p>
-        <Link to="/experimental">
-          <Button>BBP website</Button>
-        </Link>
+        <img id="chip" src={require('../assets/images/chip.svg')} alt='microchip'/>
+        <div className='paper portal-paper-container'>
+          <div className='portal-paper'>
+            <div className='portal-paper-title'>
+              <h3>Paper about</h3>
+              <h2>The portal <span className='accent-border accent-border-sm'/></h2>
+            </div>
+            <span className='accent-border accent-border-lg'/>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+            <Link to="/experimental">
+              <Button>BBP website</Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
 
