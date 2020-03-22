@@ -12,23 +12,43 @@ type InfoBox1Props = {
 };
 
 const InfoBox1: React.FC<InfoBox1Props> = ({
-                                             icon,
-                                             title,
-                                             teaser,
-                                             children,
-                                           }) => {
-  const [expanded, setExpanded] = React.useState(false)
+  icon,
+  title,
+  teaser,
+  children,
+}) => {
+  const [expanded, setExpanded] = React.useState(false);
 
   return (
     <div className={`${classPrefix}basis`}>
-      { icon === 'checkmark' && <img src={require('../../../assets/images/icons/checkmark.svg')} alt='checkmark'/>}
-      { icon === 'mail' && <img src={require('../../../assets/images/icons/mail.svg')} alt='mail'/>}
-      { icon === 'search' && <img src={require('../../../assets/images/icons/search.svg')} alt='search'/>}
-      { icon === 'download' && <img src={require('../../../assets/images/icons/download.svg')} alt='download'/>}
+      {icon === 'checkmark' && (
+        <img
+          src={require('../../../assets/images/icons/checkmark.svg')}
+          alt="checkmark"
+        />
+      )}
+      {icon === 'mail' && (
+        <img
+          src={require('../../../assets/images/icons/mail.svg')}
+          alt="mail"
+        />
+      )}
+      {icon === 'search' && (
+        <img
+          src={require('../../../assets/images/icons/search.svg')}
+          alt="search"
+        />
+      )}
+      {icon === 'download' && (
+        <img
+          src={require('../../../assets/images/icons/download.svg')}
+          alt="download"
+        />
+      )}
       <h3>{title}</h3>
       <p>{teaser}</p>
       <span onClick={() => setExpanded(!expanded)}>
-        <FaCircle/> Read {expanded ? 'less' : 'more'}
+        <FaCircle /> Read {expanded ? 'less' : 'more'}
       </span>
       <div className={`more ${expanded ? 'open' : ''}`}>{children}</div>
     </div>

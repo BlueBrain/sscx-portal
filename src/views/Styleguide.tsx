@@ -129,16 +129,16 @@ const Styleguide: React.FC = () => {
         <ScrollTo anchor="top" direction="up" color={colorName}>
           Return to filters
         </ScrollTo>
-        <br/>
+        <br />
         <ScrollTo anchor="bottom" direction="down" color="yellow">
           View data
         </ScrollTo>
-        <br/>
+        <br />
         <ScrollTo anchor="bottom" direction="down" color="green">
           View data in green
         </ScrollTo>
         <h4>Scroll top</h4>
-        <ScrollTop anchor="top"/>
+        <ScrollTop anchor="top" />
       </section>
 
       <section>
@@ -156,7 +156,7 @@ const Styleguide: React.FC = () => {
             </p>
           </>
         </Collapsible>
-        <br/>
+        <br />
         <Collapsible title="Murderous Bird on Lockdown" collapsed={true}>
           <>
             <img
@@ -174,13 +174,13 @@ const Styleguide: React.FC = () => {
           title="Short Text"
           text="No need to show the read more link."
         />
-        <br/>
-        <InfoBox title="Longer Text" text={lorem}/>
-        <br/>
-        <InfoBox text={`This one has no title o_0\n${lorem}`}/>
-        <br/>
-        <InfoBox title="Green box" text="I am green" color="green"/>
-        <br/>
+        <br />
+        <InfoBox title="Longer Text" text={lorem} />
+        <br />
+        <InfoBox text={`This one has no title o_0\n${lorem}`} />
+        <br />
+        <InfoBox title="Green box" text="I am green" color="green" />
+        <br />
         <InfoBox
           title="Yellow box"
           text="I am yellow (and I exist in blue, lavender and grey too)"
@@ -207,35 +207,35 @@ const Styleguide: React.FC = () => {
 
         <h4>Brain Regions</h4>
         <div style={{ width: 400 }}>
-          <BrainRegionSelector color={accentColors.blue}/>
+          <BrainRegionSelector color={accentColors.blue} />
         </div>
 
         <h4>Layer Anatomy</h4>
         <div style={{ width: 400 }}>
-          <LayerAnatomySelector color={accentColors.blue}/>
+          <LayerAnatomySelector color={accentColors.blue} />
         </div>
 
         <h4>Synaptic Pathways</h4>
         <div style={{ width: 300 }}>
-          <SynapticPathwaySelector color={accentColors.blue}/>
+          <SynapticPathwaySelector color={accentColors.blue} />
         </div>
 
         <h4>Microcircuits</h4>
         <div style={{ width: 300 }}>
-          <MicrocircuitSelector color={accentColors.blue}/>
+          <MicrocircuitSelector color={accentColors.blue} />
         </div>
 
         <h4>Combo selector (with side lists)</h4>
         <div style={{ width: 300 }}>
           <ComboSelector
-            selector={<MicrocircuitSelector color={accentColors.blue}/>}
-            list1={<List list={dinos} color={colorName}/>}
-            list2={<List list={dinos} color="orange"/>}
+            selector={<MicrocircuitSelector color={accentColors.blue} />}
+            list1={<List list={dinos} color={colorName} />}
+            list2={<List list={dinos} color="orange" />}
           />
         </div>
       </section>
 
-      <section id="bottom"/>
+      <section id="bottom" />
     </FullPage>
   );
 };

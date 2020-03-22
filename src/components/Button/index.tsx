@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   notifications,
   onClick,
   children,
-  large
+  large,
 }) => {
   return (
     <button

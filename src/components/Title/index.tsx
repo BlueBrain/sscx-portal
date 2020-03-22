@@ -18,14 +18,18 @@ const Title: React.FC<TitleProps> = ({
   subtitle,
   hint,
   primaryColor = 'yellow' as Color,
-  primary
+  primary,
 }) => {
   return (
-    <div className={`${classPrefix}basis ${primary ? 'primary' : ''} ${primaryColor}`}>
+    <div
+      className={`${classPrefix}basis ${
+        primary ? 'primary' : ''
+      } ${primaryColor}`}
+    >
       {subtitle && !primary && <h4>{subtitle}</h4>}
-      <h2 role="title" >{title}</h2>
+      <h2 role="title">{title}</h2>
       {subtitle && primary && <h4>{subtitle}</h4>}
-      {hint && <p dangerouslySetInnerHTML={{__html: hint}} />}
+      {hint && <p dangerouslySetInnerHTML={{ __html: hint }} />}
     </div>
   );
 };
