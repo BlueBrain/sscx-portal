@@ -55,6 +55,24 @@ const Styleguide: React.FC = () => {
       </div>
 
       <section>
+        <h3>Title</h3>
+        <h4>Primary</h4>
+        <Title
+          title="Primary title"
+          subtitle="Used on the homepage"
+          hint="Welcome to the SSCx portal created by the <b>Blue Brain Project</b>. Come and explore both model data (in silico) and experiemental data (in vitro) of the rat brain. "
+          primary
+        />
+        <h4>Regular</h4>
+        <Title
+          title="Regular title"
+          subtitle="Used anywhere else"
+          hint="I don't look bad either"
+          primaryColor={'green' as Color}
+        />
+      </section>
+
+      <section>
         <h3>Buttons</h3>
         <h4>Primary</h4>
         <Button primary onClick={dummyFn}>

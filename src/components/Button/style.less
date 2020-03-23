@@ -1,25 +1,42 @@
 @import '../../assets/styles/config/_colors';
 @import '../../assets/styles/config/_fonts';
+@import '../../assets/styles/config/_queries';
 
 @height: 40px;
+@heightSmall: 30px;
 @borderWidth: 2px;
 
 .button__basis {
   font-weight: 700;
-  text-transform: uppercase;
   background-color: #basePalette[navy-4];
   height: @height;
   border-radius: @height;
   line-height: @height;
   border: @borderWidth solid #basePalette[white];
   padding: 0 15px;
-  box-shadow: 4px 4px 4px 0 rgba(59, 65, 101, 0.6);
   transition: all 0.2s;
   position: relative;
+
+  @media @small {
+    border-width: 1px;
+    height: @heightSmall;
+    border-radius: @heightSmall;
+    line-height: @heightSmall;
+  }
 
   &:hover {
     box-shadow: none;
     background-color: #basePalette[navy-3];
+  }
+
+  &.large {
+    font-size: 1.5rem;
+    @media @small {
+      border-width: @borderWidth;
+      height: @height;
+      border-radius: @height;
+      line-height: @height;
+    }
   }
 
   .active &,
