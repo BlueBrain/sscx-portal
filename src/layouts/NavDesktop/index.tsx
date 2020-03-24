@@ -34,6 +34,7 @@ const NavButton: React.FC<NavButtonProps> = ({
         discrete={!highlight && !home}
         onClick={onClick}
         notifications={notifications}
+        uppercase
       >
         {name}
       </Button>
@@ -58,6 +59,7 @@ const NavDesktop = withRouter(({ location }) => {
             width={140}
             active={location.pathname === '/'}
             onClick={() => setSecondaryNav(true)}
+            uppercase
           >
             Home
           </Button>
@@ -72,13 +74,19 @@ const NavDesktop = withRouter(({ location }) => {
       <li>
         <NavButton
           path="/downloads"
-          name="Downloads"
+          name="Download"
           notifications={downloadItems > 0 ? downloadItems : undefined}
           highlight
         />
       </li>
       <li>
-        <NavButton path="/literature" name="Literature" />
+        <NavButton path="/glossary" name="Glossary" />
+      </li>
+      <li>
+        <NavButton
+          path="/contact-and-submission"
+          name="Contact and Submission"
+        />
       </li>
       <li>
         <NavButton path="/styleguide" name="Styleguide" />

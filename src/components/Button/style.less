@@ -16,6 +16,7 @@
   padding: 0 15px;
   transition: all 0.2s;
   position: relative;
+  // min-width: 140px;
 
   @media @small {
     border-width: 1px;
@@ -37,6 +38,10 @@
       border-radius: @height;
       line-height: @height;
     }
+  }
+
+  &.uppercase {
+    text-transform: uppercase;
   }
 
   .active &,
