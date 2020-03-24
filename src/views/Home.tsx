@@ -33,8 +33,15 @@ const Home: React.FC = () => (
             <Button width={140}>Read paper</Button>
           </Link>
         </div>
+        <div className="search-form">
+          <Search />
+        </div>
       </div>
-      <img src={require('../assets/images/computer.svg')} alt="computer" />
+      <img
+        className="top-section-image"
+        src={require('../assets/images/computer.svg')}
+        alt="computer"
+      />
       <div className="social-media">
         <a href="#">
           <div className="social-media-icon">
@@ -53,10 +60,6 @@ const Home: React.FC = () => (
         </a>
       </div>
     </section>
-
-    <div className="search-form">
-      <Search />
-    </div>
 
     <section id="section-2">
       <div className="intro">
