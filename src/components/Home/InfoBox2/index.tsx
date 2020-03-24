@@ -43,13 +43,6 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
             />
             Sub-regions
           </li>
-          <li style={{ width: '95%' }}>
-            <img
-              src={require('../../../assets/images/icons/microcircuit.svg')}
-              alt="microcircuit"
-            />
-            Microcircuits
-          </li>
           <li style={{ width: '90%' }}>
             <img
               src={require('../../../assets/images/icons/synapse.svg')}
@@ -64,6 +57,15 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
             />
             Neurons
           </li>
+          {title !== 'Experimental data' && (
+            <li style={{ width: '95%' }}>
+              <img
+                src={require('../../../assets/images/icons/microcircuit.svg')}
+                alt="microcircuit"
+              />
+              Microcircuits
+            </li>
+          )}
         </ul>
       </div>
       <div className="more">
