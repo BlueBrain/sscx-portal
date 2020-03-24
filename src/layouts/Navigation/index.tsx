@@ -43,7 +43,7 @@ export const SecondaryNav: React.FC = () => (
       </ul>
     </li>
     <li>
-      <NavLink to="/extrapolation">Extrapolation Data</NavLink>
+      <NavLink to="/extrapolation">Reconstruction Data</NavLink>
       <ul>
         <li>
           <NavLink to="/extrapolation/brain-regions">Brain Regions</NavLink>
@@ -62,7 +62,7 @@ export const SecondaryNav: React.FC = () => (
       </ul>
     </li>
     <li>
-      <NavLink to="/reconstruction">Reconstruction Data</NavLink>
+      <NavLink to="/reconstruction">Digital Reconstructions</NavLink>
       <ul>
         <li>
           <NavLink to="/reconstruction/brain-regions">Brain Regions</NavLink>
@@ -81,7 +81,7 @@ export const SecondaryNav: React.FC = () => (
       </ul>
     </li>
     <li>
-      <NavLink to="/validation">Validation Data</NavLink>
+      <NavLink to="/validation">Validations</NavLink>
       <ul>
         <li>
           <NavLink to="/validation/brain-regions">Brain Regions</NavLink>
