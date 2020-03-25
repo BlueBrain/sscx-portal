@@ -8,7 +8,7 @@ import './style.less';
 
 const classPrefix = 'footer__';
 
-const FullPage: React.FC<{}> = () => {
+const Footer: React.FC<{}> = () => {
   return (
     <div className={`${classPrefix}basis`}>
       <div className={`${classPrefix}container`}>
@@ -66,4 +66,4 @@ const FullPage: React.FC<{}> = () => {
   );
 };
 
-export default FullPage;
+export default Footer;
