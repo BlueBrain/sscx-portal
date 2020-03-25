@@ -24,11 +24,11 @@ const Home: React.FC = () => (
           primary
         />
         <div className="cta">
-          <Link to="/experimental">
+          <a href="#section-3">
             <Button primary width={140}>
               Explore
             </Button>
-          </Link>
+          </a>
           <Link to="/styleguide">
             <Button width={140}>Read paper</Button>
           </Link>
