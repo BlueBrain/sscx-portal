@@ -31,38 +31,36 @@ const FullPage: React.FC<{}> = () => {
         <div>
           <h4>Share and follow us</h4>
           <div className={`${classPrefix}social-media`}>
-            <div>
-              <a href="#">
-                <span className={`${classPrefix}social-media-icon`}>
-                  <FaTwitter />
-                </span>
-                <span className={`${classPrefix}social-link`}>
-                  @BlueBrainPjt
-                </span>
-              </a>
-            </div>
-            <div>
-              <a href="#">
-                <span className={`${classPrefix}social-media-icon`}>
-                  <FaFacebookF />
-                </span>
-                <span className={`${classPrefix}social-link`}>
-                  @BlueBrainProject
-                </span>
-              </a>
-            </div>
-            <div>
-              <a href="#">
-                <span className={`${classPrefix}social-media-icon`}>
-                  <FaLinkedinIn />
-                </span>
-                <span className={`${classPrefix}social-link`}>
-                  @BlueBrainProject
-                </span>
-              </a>
-            </div>
+            <a href="#" className={`${classPrefix}social-media-item`}>
+              <div className={`${classPrefix}social-media-icon`}>
+                <FaTwitter />
+              </div>
+              <span className={`${classPrefix}social-link`}>@BlueBrainPjt</span>
+            </a>
+            <a href="#" className={`${classPrefix}social-media-item`}>
+              <div className={`${classPrefix}social-media-icon`}>
+                <FaFacebookF />
+              </div>
+              <span className={`${classPrefix}social-link`}>
+                @BlueBrainProject
+              </span>
+            </a>
+            <a href="#" className={`${classPrefix}social-media-item`}>
+              <div className={`${classPrefix}social-media-icon`}>
+                <FaLinkedinIn />
+              </div>
+              <span className={`${classPrefix}social-link`}>
+                @BlueBrainProject
+              </span>
+            </a>
           </div>
         </div>
+      </div>
+      <div className={`${classPrefix}bottom-line`}>
+        <p>©Blue Brain Project/EPFL 2005-2020</p>
+        <p>
+          <Link to="#">Privacy Policy</Link> | <Link to="#">Terms of use</Link>
+        </p>
       </div>
     </div>
   );
