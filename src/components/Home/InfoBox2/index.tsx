@@ -35,38 +35,62 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
             </div>
           )}
         </div>
-        <ul className="links">
-          <li style={{ width: '100%' }}>
-            <img
-              src={require('../../../assets/images/icons/regions.svg')}
-              alt="brain regions"
-            />
-            Sub-regions
-          </li>
-          <li style={{ width: '90%' }}>
-            <img
-              src={require('../../../assets/images/icons/synapse.svg')}
-              alt="synapse"
-            />
-            Synaptic Pathways
-          </li>
-          <li style={{ width: '85%' }}>
-            <img
-              src={require('../../../assets/images/icons/neuron.svg')}
-              alt="neuron"
-            />
-            Neurons
-          </li>
-          {title !== 'Experimental data' && (
+        {title === 'Experimental data' ? (
+          <ul className="links">
+            <li style={{ width: '95%' }}>
+              <img
+                src={require('../../../assets/images/icons/regions.svg')}
+                alt="microcircuit"
+              />
+              Layer Anatomy
+            </li>
+            <li style={{ width: '85%' }}>
+              <img
+                src={require('../../../assets/images/icons/neuron.svg')}
+                alt="neuron"
+              />
+              Neuron Physiology
+            </li>
+            <li style={{ width: '85%' }}>
+              <img
+                src={require('../../../assets/images/icons/synapse.svg')}
+                alt="neuron"
+              />
+              Neuron Electrophysiology
+            </li>
+          </ul>
+        ) : (
+          <ul className="links">
+            <li style={{ width: '100%' }}>
+              <img
+                src={require('../../../assets/images/icons/regions.svg')}
+                alt="brain regions"
+              />
+              Brain Regions
+            </li>
             <li style={{ width: '95%' }}>
               <img
                 src={require('../../../assets/images/icons/microcircuit.svg')}
                 alt="microcircuit"
               />
-              Microcircuits
+              Microcircuit
             </li>
-          )}
-        </ul>
+            <li style={{ width: '90%' }}>
+              <img
+                src={require('../../../assets/images/icons/synapse.svg')}
+                alt="synapse"
+              />
+              Synaptic Pathways
+            </li>
+            <li style={{ width: '85%' }}>
+              <img
+                src={require('../../../assets/images/icons/neuron.svg')}
+                alt="neuron"
+              />
+              Neurons
+            </li>
+          </ul>
+        )}
       </div>
       <div className="more">
         <div className="more-content">{children}</div>
