@@ -25,18 +25,18 @@ export const HomeNav: React.FC = () => (
 export const SecondaryNav: React.FC = () => (
   <ul className="secondary-nav">
     <li>
-      <NavLink to="/experimental">Experimental Data</NavLink>
+      <NavLink to="/experimental-data">Experimental Data</NavLink>
       <ul>
         <li>
-          <NavLink to="/experimental/layer-anatomy">Layer Anatomy</NavLink>
+          <NavLink to="/experimental-data/layer-anatomy">Layer Anatomy</NavLink>
         </li>
         <li>
-          <NavLink to="/experimental/neuron-morphology">
+          <NavLink to="/experimental-data/neuron-morphology">
             Neuron Morphology
           </NavLink>
         </li>
         <li>
-          <NavLink to="/experimental/neuron-electrophysiology">
+          <NavLink to="/experimental-data/neuron-electrophysiology">
             Neuron Electrophysiology
           </NavLink>
         </li>
@@ -93,40 +93,40 @@ export const SecondaryNav: React.FC = () => (
       </ul>
     </li>
     <li>
-      <NavLink to="/validation">Validations</NavLink>
+      <NavLink to="/validations">Validations</NavLink>
       <ul>
         <li>
-          <NavLink to="/validation/brain-regions">Brain Regions</NavLink>
+          <NavLink to="/validations/brain-regions">Brain Regions</NavLink>
         </li>
         <li>
-          <NavLink to="/validation/layer-anatomy">Layer Anatomy</NavLink>
+          <NavLink to="/validations/layer-anatomy">Layer Anatomy</NavLink>
         </li>
         <li>
-          <NavLink to="/validation/synaptic-pathways">
+          <NavLink to="/validations/synaptic-pathways">
             Synaptic Pathways
           </NavLink>
         </li>
         <li>
-          <NavLink to="/validation/microcircuits">Microcircuits</NavLink>
+          <NavLink to="/validations/microcircuits">Microcircuits</NavLink>
         </li>
       </ul>
     </li>
     <li>
-      <NavLink to="/prediction">Predictions</NavLink>
+      <NavLink to="/predictions">Predictions</NavLink>
       <ul>
         <li>
-          <NavLink to="/prediction/brain-regions">Brain Regions</NavLink>
+          <NavLink to="/predictions/brain-regions">Brain Regions</NavLink>
         </li>
         <li>
-          <NavLink to="/prediction/layer-anatomy">Layer Anatomy</NavLink>
+          <NavLink to="/predictions/layer-anatomy">Layer Anatomy</NavLink>
         </li>
         <li>
-          <NavLink to="/prediction/synaptic-pathways">
+          <NavLink to="/predictions/synaptic-pathways">
             Synaptic Pathways
           </NavLink>
         </li>
         <li>
-          <NavLink to="/prediction/microcircuits">Microcircuits</NavLink>
+          <NavLink to="/predictions/microcircuits">Microcircuits</NavLink>
         </li>
       </ul>
     </li>
