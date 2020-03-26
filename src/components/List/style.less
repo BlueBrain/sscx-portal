@@ -11,6 +11,7 @@
   background-color: #basePalette[navy-1];
   border-radius: 5px;
   overflow: hidden;
+  font-size: 16px;
 
   p {
     font-weight: 500;
@@ -23,12 +24,23 @@
     max-height: @maxHeight;
     overflow-y: scroll;
   }
+
+  ::-webkit-scrollbar {
+    background: #basePalette[navy-1];
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #accentPalette[yellow];
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+  }
 }
 
 .list-element__basis {
   background-color: #basePalette[white];
   color: #basePalette[navy-1];
-  margin: 8px 30px 8px 10px;
+  margin: 8px 20px 8px 10px;
   border-radius: 3px;
   text-align: center;
   padding: 6px;
@@ -47,6 +59,7 @@
     color: #basePalette[white];
     background-color: #basePalette[navy-3];
     cursor: initial;
+    outline-style: none;
 
     .yellow & {
       background-color: #accentPalette[yellow];
