@@ -2,26 +2,26 @@ import React from 'react';
 import { RouteProps, Redirect } from 'react-router';
 
 import Home from './views/Home';
-// Experimental
+// Experimental Data
 import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
 import ExpNeuronMorpho from './views/experimental/NeuronMorphology';
 import ExpNeuronElectro from './views/experimental/NeuronElectrophysiology';
-// Extrapolation
-import ExtBrainRegions from './views/extrapolation/BrainRegions';
-import ExtLayerAnatomy from './views/extrapolation/LayerAnatomy';
-import ExtSynapticPathways from './views/extrapolation/SynapticPathways';
-import ExtMicrocircuits from './views/extrapolation/Microcircuits';
-// Reconstruction
-import RecBrainRegions from './views/reconstruction/BrainRegions';
-import RecLayerAnatomy from './views/reconstruction/LayerAnatomy';
-import RecSynapticPathways from './views/reconstruction/SynapticPathways';
-import RecMicrocircuits from './views/reconstruction/Microcircuits';
-// Validation
-import ValBrainRegions from './views/validation/BrainRegions';
-import ValLayerAnatomy from './views/validation/LayerAnatomy';
-import ValSynapticPathways from './views/validation/SynapticPathways';
-import ValMicrocircuits from './views/validation/Microcircuits';
-// Prediction
+// Reconstruction Data
+import ExtBrainRegions from './views/reconstructionData/BrainRegions';
+import ExtLayerAnatomy from './views/reconstructionData/LayerAnatomy';
+import ExtSynapticPathways from './views/reconstructionData/SynapticPathways';
+import ExtMicrocircuits from './views/reconstructionData/Microcircuits';
+// Digital Reconstructions
+import RecBrainRegions from './views/digitalReconstructions/BrainRegions';
+import RecLayerAnatomy from './views/digitalReconstructions/LayerAnatomy';
+import RecSynapticPathways from './views/digitalReconstructions/SynapticPathways';
+import RecMicrocircuits from './views/digitalReconstructions/Microcircuits';
+// Validations
+import ValBrainRegions from './views/validations/BrainRegions';
+import ValLayerAnatomy from './views/validations/LayerAnatomy';
+import ValSynapticPathways from './views/validations/SynapticPathways';
+import ValMicrocircuits from './views/validations/Microcircuits';
+// Predictions
 import PreBrainRegions from './views/predictions/BrainRegions';
 import PreLayerAnatomy from './views/predictions/LayerAnatomy';
 import PreSynapticPathways from './views/predictions/SynapticPathways';
@@ -45,128 +45,128 @@ const routes: RouteProps[] = [
     component: Download,
     exact: true,
   },
-  // Experimental
+  // Experimental Data
   {
-    path: '/experimental',
-    component: () => <Redirect to="/experimental/layer-anatomy" />,
+    path: '/experimental-data',
+    component: () => <Redirect to="/experimental-data/layer-anatomy" />,
     exact: true,
   },
   {
-    path: '/experimental/layer-anatomy',
+    path: '/experimental-data/layer-anatomy',
     component: ExpLayerAnatomy,
     exact: true,
   },
   {
-    path: '/experimental/neuron-morphology',
+    path: '/experimental-data/neuron-morphology',
     component: ExpNeuronMorpho,
     exact: true,
   },
   {
-    path: '/experimental/neuron-electrophysiology',
+    path: '/experimental-data/neuron-electrophysiology',
     component: ExpNeuronElectro,
     exact: true,
   },
-  // Extrapolation
+  // Reconstruction Data
   {
-    path: '/extrapolation',
-    component: () => <Redirect to="/reconstruction/brain-regions" />,
+    path: '/reconstruction-data',
+    component: () => <Redirect to="/reconstruction-data/brain-regions" />,
     exact: true,
   },
   {
-    path: '/extrapolation/brain-regions',
+    path: '/reconstruction-data/brain-regions',
     component: ExtBrainRegions,
     exact: true,
   },
   {
-    path: '/extrapolation/layer-anatomy',
+    path: '/reconstruction-data/layer-anatomy',
     component: ExtLayerAnatomy,
     exact: true,
   },
   {
-    path: '/extrapolation/synaptic-pathways',
+    path: '/reconstruction-data/synaptic-pathways',
     component: ExtSynapticPathways,
     exact: true,
   },
   {
-    path: '/extrapolation/microcircuits',
+    path: '/reconstruction-data/microcircuits',
     component: ExtMicrocircuits,
     exact: true,
   },
-  // Reconstruction
+  // Digital Reconstructions
   {
-    path: '/reconstruction',
-    component: () => <Redirect to="/reconstruction/brain-regions" />,
+    path: '/digital-reconstructions',
+    component: () => <Redirect to="/digital-reconstructions/brain-regions" />,
     exact: true,
   },
   {
-    path: '/reconstruction/brain-regions',
+    path: '/digital-reconstructions/brain-regions',
     component: RecBrainRegions,
     exact: true,
   },
   {
-    path: '/reconstruction/layer-anatomy',
+    path: '/digital-reconstructions/layer-anatomy',
     component: RecLayerAnatomy,
     exact: true,
   },
   {
-    path: '/reconstruction/synaptic-pathways',
+    path: '/digital-reconstructions/synaptic-pathways',
     component: RecSynapticPathways,
     exact: true,
   },
   {
-    path: '/reconstruction/microcircuits',
+    path: '/digital-reconstructions/microcircuits',
     component: RecMicrocircuits,
     exact: true,
   },
-  // Validation
+  // Validations
   {
-    path: '/validation',
-    component: () => <Redirect to="/validation/brain-regions" />,
+    path: '/validations',
+    component: () => <Redirect to="/validations/brain-regions" />,
     exact: true,
   },
   {
-    path: '/validation/brain-regions',
+    path: '/validations/brain-regions',
     component: ValBrainRegions,
     exact: true,
   },
   {
-    path: '/validation/layer-anatomy',
+    path: '/validations/layer-anatomy',
     component: ValLayerAnatomy,
     exact: true,
   },
   {
-    path: '/validation/synaptic-pathways',
+    path: '/validations/synaptic-pathways',
     component: ValSynapticPathways,
     exact: true,
   },
   {
-    path: '/validation/microcircuits',
+    path: '/validations/microcircuits',
     component: ValMicrocircuits,
     exact: true,
   },
   // Predictions
   {
-    path: '/prediction',
-    component: () => <Redirect to="/prediction/brain-regions" />,
+    path: '/predictions',
+    component: () => <Redirect to="/predictions/brain-regions" />,
     exact: true,
   },
   {
-    path: '/prediction/brain-regions',
+    path: '/predictions/brain-regions',
     component: PreBrainRegions,
     exact: true,
   },
   {
-    path: '/prediction/layer-anatomy',
+    path: '/predictions/layer-anatomy',
     component: PreLayerAnatomy,
     exact: true,
   },
   {
-    path: '/prediction/synaptic-pathways',
+    path: '/predictions/synaptic-pathways',
     component: PreSynapticPathways,
     exact: true,
   },
   {
-    path: '/prediction/microcircuits',
+    path: '/predictions/microcircuits',
     component: PreMicrocircuits,
     exact: true,
   },
