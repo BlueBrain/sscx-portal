@@ -17,6 +17,7 @@
     font-weight: 500;
     letter-spacing: 0.5px;
     margin: 0 0 0 5px;
+    color: #basePalette[white];
   }
 
   .elements {
@@ -26,14 +27,72 @@
   }
 
   ::-webkit-scrollbar {
-    background: #basePalette[navy-1];
     width: 10px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #accentPalette[yellow];
     -webkit-border-radius: 8px;
     border-radius: 8px;
+  }
+
+  &.yellow {
+    ::-webkit-scrollbar-thumb {
+      background: #accentPalette[yellow];
+    }
+
+    .list-element__basis:hover {
+      background-color: #accentPalette[yellow];
+    }
+  }
+
+  &.blue {
+    ::-webkit-scrollbar-thumb {
+      background: #accentPalette[blue];
+    }
+
+    .list-element__basis:hover {
+      background-color: #accentPalette[blue];
+    }
+  }
+
+  &.lavender {
+    ::-webkit-scrollbar-thumb {
+      background: #accentPalette[lavender];
+    }
+
+    .list-element__basis:hover {
+      background-color: #accentPalette[lavender];
+    }
+  }
+
+  &.green {
+    ::-webkit-scrollbar-thumb {
+      background: #accentPalette[green];
+    }
+
+    .list-element__basis:hover {
+      background-color: #accentPalette[green];
+    }
+  }
+
+  &.orange {
+    ::-webkit-scrollbar-thumb {
+      background: #accentPalette[orange];
+    }
+
+    .list-element__basis:hover {
+      background-color: #accentPalette[orange];
+    }
+  }
+
+  &.grey {
+    ::-webkit-scrollbar-thumb {
+      background: #accentPalette[grey];
+    }
+
+    .list-element__basis:hover {
+      background-color: #accentPalette[grey];
+    }
   }
 }
 
@@ -47,7 +106,7 @@
   font-weight: 700;
   cursor: pointer;
   &:hover {
-    color: #basePalette[navy-4];
+    color: #basePalette[white];
   }
   &:first-child {
     margin-top: 0;
