@@ -43,40 +43,52 @@ export const SecondaryNav: React.FC = () => (
       </ul>
     </li>
     <li>
-      <NavLink to="/extrapolation">Reconstruction Data</NavLink>
+      <NavLink to="/reconstruction-data">Reconstruction Data</NavLink>
       <ul>
         <li>
-          <NavLink to="/extrapolation/brain-regions">Brain Regions</NavLink>
+          <NavLink to="/reconstruction-data/brain-regions">
+            Brain Regions
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/extrapolation/layer-anatomy">Layer Anatomy</NavLink>
+          <NavLink to="/reconstruction-data/layer-anatomy">
+            Layer Anatomy
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/extrapolation/synaptic-pathways">
+          <NavLink to="/reconstruction-data/synaptic-pathways">
             Synaptic Pathways
           </NavLink>
         </li>
         <li>
-          <NavLink to="/extrapolation/microcircuits">Microcircuits</NavLink>
+          <NavLink to="/reconstruction-data/microcircuits">
+            Microcircuits
+          </NavLink>
         </li>
       </ul>
     </li>
     <li>
-      <NavLink to="/reconstruction">Digital Reconstructions</NavLink>
+      <NavLink to="/digital-reconstructions">Digital Reconstructions</NavLink>
       <ul>
         <li>
-          <NavLink to="/reconstruction/brain-regions">Brain Regions</NavLink>
+          <NavLink to="/digital-reconstructions/brain-regions">
+            Brain Regions
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/reconstruction/layer-anatomy">Layer Anatomy</NavLink>
+          <NavLink to="/digital-reconstructions/layer-anatomy">
+            Layer Anatomy
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/reconstruction/synaptic-pathways">
+          <NavLink to="/digital-reconstructions/synaptic-pathways">
             Synaptic Pathways
           </NavLink>
         </li>
         <li>
-          <NavLink to="/reconstruction/microcircuits">Microcircuits</NavLink>
+          <NavLink to="/digital-reconstructions/microcircuits">
+            Microcircuits
+          </NavLink>
         </li>
       </ul>
     </li>
