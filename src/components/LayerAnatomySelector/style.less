@@ -1,38 +1,51 @@
-.layer_anatomy_svg__st3 {
-  fill: #050a30;
-}
+@import '../../assets/styles/config/_colors';
 
-.layer_anatomy_svg__st4 {
-  fill: #52617d;
-}
+.layer-anatomy-svg {
+  &__layer-background-top {
+    fill: #050a30;
+  }
 
-.layer_anatomy_svg__st5 {
-  fill: #303354;
-  stroke: #fff;
-  stroke-width: 1.6671;
-  stroke-miterlimit: 10;
-}
+  &__layer-background-left {
+    fill: #52617d;
+  }
 
-.layer_anatomy_svg__st6 {
-  fill: none;
-}
+  &__layer {
+    cursor: pointer;
 
-.layer_anatomy_svg__st7 {
-  enable-background: new;
+    &:hover {
+      .layer-anatomy-svg__shape {
+        fill: #accentPalette[blue];
+        transition: fill 0.1s ease-in-out;
+      }
+    }
+  }
+
+  &__shape {
+    fill: #303354;
+    stroke: #fff;
+    stroke-width: 1.6671;
+    stroke-miterlimit: 10;
+
+    &--active {
+      fill: #accentPalette[blue];
+      stroke: #fff;
+      stroke-width: 1.6671;
+      stroke-miterlimit: 10;
+    }
+  }
+
+  &__name {
+    fill: #fff;
+  }
+
+  &__outline {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.6671;
+    stroke-miterlimit: 10;
+  }
 }
 
 .layer_anatomy_svg__st8 {
   fill: #fff;
-}
-
-.layer_anatomy_svg__st10 {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 1.6671;
-  stroke-miterlimit: 10;
-}
-
-#layer_anatomy_svg__layers path {
-  cursor: pointer;
-  transition: fill 0.1s ease-in-out;
 }
