@@ -41,8 +41,6 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
 
   const colorHex = accentColors[color];
 
-  console.log('color', color);
-
   return (
     <svg
       id="layer_anatomy_svg"
