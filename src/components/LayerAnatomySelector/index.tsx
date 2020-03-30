@@ -1,5 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
 import { Layer } from '../../types';
+import { accentColors } from '../../config';
 
 import './style.less';
 
@@ -32,10 +33,15 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
   const [activeLayer, setActiveLayer] = React.useState<Layer>(
     defaultActiveLayer,
   );
+
   const selectLayer = (l: Layer): void => {
     setActiveLayer(l);
     onLayerSelected(l);
   };
+
+  const colorHex = accentColors[color];
+
+  console.log('color', color);
 
   return (
     <svg
@@ -66,7 +72,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
           gradientTransform="translate(0 -512.11)"
         >
           <stop offset={0} stopColor="#fff" />
-          <stop offset={1} stopColor={color} />
+          <stop offset={1} stopColor={colorHex} />
         </linearGradient>
         <path
           d="M363.5 357.3H51.9c-8.5 0-15.5-7-15.5-15.5V30.2c0-8.5 7-15.5 15.5-15.5h311.6c8.5 0 15.5 7 15.5 15.5v311.6c0 8.5-7 15.5-15.5 15.5z"
@@ -93,7 +99,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
               activeLayer={activeLayer}
             >
               <path
-                className={`${classPrefix}shape${
+                className={`${color} ${classPrefix}shape${
                   activeLayer === 'L1' ? '--active' : ''
                 }`}
                 d="M324.7 119.9C276 96 216.8 79.7 147.1 82c-1.2 0-2.3-.8-2.5-2l-4.5-26.2c0-1.3.8-2.5 2.3-2.7 15.2-2 99.9-10.5 195.2 37.2l-12.9 31.6z"
@@ -109,7 +115,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
               activeLayer={activeLayer}
             >
               <path
-                className={`${classPrefix}shape${
+                className={`${color} ${classPrefix}shape${
                   activeLayer === 'L23' ? '--active' : ''
                 }`}
                 d="M319.2 131.7c-89.9-46-166.5-41-181.2-39.5-1.3 0-2.3 1.3-2 2.5l9.8 66c0 1.2 1.2 2 2.3 2 53.7.2 101 13.5 141.2 32 10-21 20-42 29.9-63"
@@ -125,7 +131,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
               activeLayer={activeLayer}
             >
               <path
-                className={`${classPrefix}shape${
+                className={`${color} ${classPrefix}shape${
                   activeLayer === 'L4' ? '--active' : ''
                 }`}
                 d="M262.5 250.1c-34.3-15.7-73.9-27.7-117.2-29.8-1.2 0-2-.8-2.3-2l-6.8-41.7c-.5-1.3.5-2.7 2-2.7 13-.7 72.4-1.5 144.9 33l-20.6 43.2z"
@@ -141,7 +147,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
               activeLayer={activeLayer}
             >
               <path
-                className={`${classPrefix}shape${
+                className={`${color} ${classPrefix}shape${
                   activeLayer === 'L5' ? '--active' : ''
                 }`}
                 d="M242.5 292.1c-28.3-10.5-61.3-17.7-98.4-17.2-1.3 0-2.5-.7-2.5-2l-5.7-42.3c-.2-1.7.8-2.7 2.5-2.7 12.2.5 60.7 4.5 119.4 30.8l-15.3 33.4z"
@@ -157,7 +163,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
               activeLayer={activeLayer}
             >
               <path
-                className={`${classPrefix}shape${
+                className={`${color} ${classPrefix}shape${
                   activeLayer === 'L6' ? '--active' : ''
                 }`}
                 d="M137.6 283.1c-1.2 0-2.3 1.2-2 2.7l6.8 43.5c.2 1.3 1.3 2 2.5 2 8.3-.8 38.5-3 76.2 6.5 5.7-12.3 11.3-24.8 17.2-37.2-28.8-11-62.5-18.4-100.7-17.5z"
@@ -174,7 +180,7 @@ const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
       <g id={`${classPrefix}lines-and-text`}>
         <g className={`${classPrefix}s1`}>
           <path
-            fill={color}
+            fill={colorHex}
             d="M333.7 324.6c0 1.7-.5 3.2-1.3 4.5-.8 1.3-2.2 2.3-3.8 3.2-1.7.8-3.7 1.2-5.8 1.2-2.7 0-5-.5-6.7-1.5-1.2-.7-2.3-1.7-3-3-.8-1.2-1.2-2.5-1.2-3.7 0-.7.2-1.3.7-1.7.5-.5 1-.7 1.8-.7.7 0 1 .2 1.5.5.3.3.8 1 1 1.7.3.8.7 1.7 1.2 2.2.3.7 1 1 1.7 1.5.7.3 1.7.5 2.8.5 1.7 0 3-.3 4-1.2s1.5-1.7 1.5-2.8c0-.8-.3-1.7-.8-2.2-.5-.5-1.3-1-2.2-1.3-.8-.3-2-.7-3.5-1-2-.5-3.7-1-5-1.7-1.3-.7-2.3-1.5-3.2-2.5-.8-1-1.2-2.3-1.2-4 0-1.5.3-2.8 1.2-4 .8-1.2 2-2 3.5-2.7 1.5-.7 3.3-1 5.5-1 1.7 0 3.2.2 4.3.7 1.2.5 2.2 1 3 1.7.8.7 1.3 1.5 1.8 2.2.5.7.5 1.5.5 2.2 0 .7-.2 1.3-.7 1.8-.5.5-1 .8-1.7.8s-1.2-.2-1.5-.5c-.3-.3-.7-.8-1-1.5-.5-1-1.2-1.8-1.8-2.5-.7-.5-1.8-.8-3.3-.8-1.5 0-2.7.3-3.5 1-.8.7-1.3 1.3-1.3 2.3 0 .5.2 1 .5 1.5s.7.7 1.2 1c.5.3 1 .5 1.7.7.5.2 1.5.3 2.7.7 1.5.3 3 .8 4.2 1.2 1.3.5 2.3 1 3.2 1.7s1.5 1.3 2 2.3c.6.5 1 1.7 1 3.2zM346.2 330.3v-17.2c-3.2 2.5-5.3 3.7-6.3 3.7-.5 0-1-.2-1.3-.7-.3-.5-.7-.8-.7-1.5s.2-1.2.7-1.3c.3-.3 1.2-.7 2.2-1.2 1.5-.7 2.7-1.5 3.7-2.2.8-.8 1.7-1.7 2.3-2.7.7-1 1.2-1.5 1.3-1.8.2-.2.7-.3 1.2-.3.7 0 1.2.3 1.7.8.3.5.7 1.2.7 2.2v21.5c0 2.5-.8 3.8-2.5 3.8-.8 0-1.3-.3-1.8-.8-1.1-.7-1.2-1.3-1.2-2.3z"
           />
         </g>

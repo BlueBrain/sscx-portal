@@ -42,7 +42,7 @@ const LayerAnatomy: React.FC = () => {
           selectorTitle="1. Choose a layer"
           selector={
             <LayerAnatomySelector
-              color={primaryColor}
+              color={colorName}
               defaultActiveLayer={currentLayer}
               onLayerSelected={setLayerQuery}
             />
