@@ -69,7 +69,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
         <div className="center-col">
           <Selector title="Choose a layer">
             <LayerAnatomySelector
-              color={accentColors[color]}
+              color={color}
               defaultActiveLayer={currentLayer}
               onLayerSelected={setLayerQuery}
             />
