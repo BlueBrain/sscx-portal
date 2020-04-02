@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
@@ -9,7 +9,6 @@ import Selector from '../components/Selector';
 import useQuery from '../hooks/useQuery';
 import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
-import { accentColors } from '../config';
 import { lorem } from '../views/Styleguide';
 import Data from '../components/Data';
 
