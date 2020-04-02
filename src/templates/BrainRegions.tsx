@@ -11,7 +11,6 @@ import Selector from '../components/Selector';
 import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
-import { accentColors } from '../config';
 
 export type BrainRegionTemplateProps = {
   color: Color;
@@ -48,7 +47,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
       <div className="center-col">
         <Selector title="Choose a subregion">
           <BrainRegionsSelector
-            color={accentColors[color]}
+            color={color}
             defaultActiveBrainRegion={currentRegion}
             onBrainRegionSelected={setBrainRegionQuery}
           />

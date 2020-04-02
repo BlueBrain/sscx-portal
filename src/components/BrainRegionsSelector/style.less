@@ -1,32 +1,89 @@
-.brain_regions_svg__st3 {
-  fill: #050a30;
-}
-
-.brain_regions_svg__st6,
-.brain_regions_svg__st7 {
-  fill: none;
-}
-
-.brain_regions_svg__st7 {
-  stroke: #fff;
-  stroke-width: 1.6667;
-  stroke-miterlimit: 10;
-}
-
-.brain_regions_svg__st8 {
-  enable-background: new;
-}
-
-.brain_regions_svg__st9 {
-  fill: #fff;
-}
-
-#brain_regions_svg__Fill path {
-  cursor: pointer;
-  fill: #303354;
-  transition: fill 0.1s ease-in-out;
-}
+@import '../../assets/styles/config/_colors';
 
 g {
   outline-style: none;
+}
+
+.brain-regions-svg {
+  &__region {
+    cursor: pointer;
+
+    &:hover {
+      .brain-regions-svg__shape {
+        transition: fill 0.2s ease-in-out;
+
+        &.yellow {
+          fill: #accentPalette[yellow];
+        }
+
+        &.orange {
+          fill: #accentPalette[orange];
+        }
+
+        &.blue {
+          fill: #accentPalette[blue];
+        }
+
+        &.lavender {
+          fill: #accentPalette[lavender];
+        }
+
+        &.green {
+          fill: #accentPalette[green];
+        }
+
+        &.grey {
+          fill: #accentPalette[grey];
+        }
+      }
+    }
+  }
+
+  &__shape {
+    fill: #303354;
+    stroke: #fff;
+    stroke-width: 1.6671;
+    stroke-miterlimit: 10;
+
+    &--active {
+      stroke: #fff;
+      stroke-width: 1.6671;
+      stroke-miterlimit: 10;
+
+      &.yellow {
+        fill: #accentPalette[yellow];
+      }
+
+      &.orange {
+        fill: #accentPalette[orange];
+      }
+
+      &.blue {
+        fill: #accentPalette[blue];
+      }
+
+      &.lavender {
+        fill: #accentPalette[lavender];
+      }
+
+      &.green {
+        fill: #accentPalette[green];
+      }
+
+      &.grey {
+        fill: #accentPalette[grey];
+      }
+    }
+  }
+
+  &__outline {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.6667;
+    stroke-miterlimit: 10;
+  }
+
+  &__name {
+    fill: #fff;
+  }
 }
