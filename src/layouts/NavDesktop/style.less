@@ -21,32 +21,106 @@
 
   .flyout {
     position: absolute;
-    right: -350%;
-    background: #basePalette[white];
+    left: 0;
     top: 60px;
-    border-radius: 15px;
-    padding: 20px 30px 60px;
+    background: #basePalette[white];
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     box-shadow: 4px 4px 4px 0 rgba(59, 65, 101, 0.6);
 
-    a {
+    a, button {
       font-size: #fontSize[small];
-      color: #basePalette[navy-1];
       white-space: nowrap;
+      line-height: 45px;
+      flex-grow: 1;
+      text-align: left;
     }
   }
 
   .home-nav {
-    border-bottom: 2px solid #basePalette[grey];
-    margin-bottom: 10px;
+    border-bottom: 1px solid #basePalette[grey-2];
+    margin-right: 10px;
+    padding: 5px 17px;
+    display: flex;
+
+    li {
+      margin: 0;
+      flex-grow: 1;
+      text-align: center;
+    }
   }
 
   .secondary-nav {
-    display: flex;
-    li {
-      padding-right: 10px;
+    width: 300px;
+
+    li > span {
+      display: inline-block;
+      height: 100%;
+      width: 20px;
+      margin: 0;
     }
+
+    button {
+      border-bottom: 1px solid #basePalette[grey-2];
+      color: #basePalette[grey-2];
+      text-transform: none;
+      padding-left: 20px;
+      margin: 0 10px 0 20px;
+    }
+
+    li {
+      height: 45px;
+      display: flex;
+      margin-right: 0;
+
+      &:last-child {
+        button {
+          border-bottom: none;
+        }
+      }
+    }
+
+    li > ul {
+      display: none;
+    }
+
+    li.active button {
+      color: #basePalette[navy-2];
+    }
+
+    li.active > ul {
+      display: flex;
+      position: absolute;
+      left: 300px;
+      width: 200px;
+      top: 0;
+      bottom: 0;
+      background: #basePalette[white];
+      border-left-width: 10px;
+      border-left-style: solid;
+      padding: 20px;
+      box-sizing: border-box;
+      flex-direction: column;
+      justify-content: center;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
     li > ul > li {
-      padding-right: inherit;
+      margin: 5px 0;
+    }
+
+    li > ul > li a {
+      display: flex;
+      align-items: center;
+      white-space: initial;
+      line-height: initial;
+    }
+
+    li > ul > li svg {
+      width: 20px;
+      flex: 0 0 auto;
+      margin-right: 7px;
     }
   }
 }
