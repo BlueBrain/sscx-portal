@@ -5,105 +5,83 @@ import { Color } from '../../../types';
 
 const classPrefix = 'info-box-2__';
 
+const getSlug = (name: string): string => name.toLowerCase().replace(/ |<br\/>/g, '-');
+
 type InfoBox2Props = {
   title: string;
   color: Color;
   children: ReactChild | ReactFragment;
   arrow?: boolean;
+  subsections: {
+    name: string,
+    icon: 'region' | 'neuron' | 'circuit' | 'synapse'
+  }[]
 };
 
 const InfoBox2: React.FC<InfoBox2Props> = ({
-  title,
-  color,
-  children,
-  arrow,
-}) => {
+                                             title,
+                                             color,
+                                             children,
+                                             arrow,
+                                             subsections,
+                                           }) => {
   const [expanded, setExpanded] = React.useState(false);
+
+  const icons = {
+    region: <img
+      src={require('../../../assets/images/icons/regions.svg')}
+      alt="brain regions"
+    />,
+    neuron: <img
+      src={require('../../../assets/images/icons/neuron.svg')}
+      alt="neuron"
+    />,
+    circuit: <img
+      src={require('../../../assets/images/icons/microcircuit.svg')}
+      alt="microcircuit"
+    />,
+    synapse: <img
+      src={require('../../../assets/images/icons/synapse.svg')}
+      alt="synapse"
+    />,
+  };
 
   return (
     <div className={`${classPrefix}basis ${color} ${expanded ? 'open' : ''}`}>
       <div className="dataset-container">
         <div className="dataset">
-          <h3 dangerouslySetInnerHTML={{ __html: title }} />
+          <h3 dangerouslySetInnerHTML={{ __html: title }}/>
           <span onClick={() => setExpanded(!expanded)}>
             Read {expanded ? 'less' : 'more'}
-            <FaCircle />
+            <FaCircle/>
           </span>
           {arrow && (
             <div className="caret-1">
-              <FaCaretDown />
+              <FaCaretDown/>
             </div>
           )}
         </div>
-        {title === 'Experimental data' ? (
-          <ul className="links">
-            <li style={{ width: '95%' }}>
-              <img
-                src={require('../../../assets/images/icons/regions.svg')}
-                alt="microcircuit"
-              />
-              Layer Anatomy
-            </li>
-            <li style={{ width: '85%' }}>
-              <img
-                src={require('../../../assets/images/icons/neuron.svg')}
-                alt="neuron"
-              />
-              Neuron Physiology
-            </li>
-            <li style={{ width: '85%' }}>
-              <img
-                src={require('../../../assets/images/icons/synapse.svg')}
-                alt="neuron"
-              />
-              Neuron Electrophysiology
-            </li>
-          </ul>
-        ) : (
-          <ul className="links">
-            <li style={{ width: '100%' }}>
-              <img
-                src={require('../../../assets/images/icons/regions.svg')}
-                alt="brain regions"
-              />
-              Brain Regions
-            </li>
-            <li style={{ width: '95%' }}>
-              <img
-                src={require('../../../assets/images/icons/microcircuit.svg')}
-                alt="microcircuit"
-              />
-              Microcircuit
-            </li>
-            <li style={{ width: '90%' }}>
-              <img
-                src={require('../../../assets/images/icons/synapse.svg')}
-                alt="synapse"
-              />
-              Synaptic Pathways
-            </li>
-            <li style={{ width: '85%' }}>
-              <img
-                src={require('../../../assets/images/icons/neuron.svg')}
-                alt="neuron"
-              />
-              Neurons
-            </li>
-          </ul>
-        )}
+        <ul className="links">
+          {subsections.map((section, i) => <li key={i} style={{ width: `${100 - 5 * i}%` }}>
+            <a href={`${getSlug(title)}/${getSlug(section.name)}`}>
+              {icons[section.icon]}
+              {section.name}
+            </a>
+          </li>)}
+        </ul>
       </div>
       <div className="more">
         <div className="more-content">{children}</div>
-        <div className="more-shadow" />
+        <div className="more-shadow"/>
       </div>
       {arrow && (
         <div className="caret-2">
-          <FaCaretDown />
+          <FaCaretDown/>
         </div>
       )}
       {arrow && (
         <div className="caret-3">
-          <FaCaretDown />
+          <FaCaretDown/>
         </div>
       )}
     </div>
