@@ -27,7 +27,7 @@ const LayerAnatomy: React.FC = () => {
       <div className="center-col">
         <Title
           primaryColor={colorName}
-          title="Neuron Morphology"
+          title="Neuron Physiology"
           subtitle="Experimental Data"
           hint="Select a layer of interest in the S1 of the rat brain."
         />

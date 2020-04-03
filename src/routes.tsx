@@ -4,28 +4,28 @@ import { RouteProps, Redirect } from 'react-router';
 import Home from './views/Home';
 // Experimental Data
 import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
-import ExpNeuronMorpho from './views/experimental/NeuronMorphology';
+import ExpNeuronMorpho from './views/experimental/NeuronPhysiology';
 import ExpNeuronElectro from './views/experimental/NeuronElectrophysiology';
 // Reconstruction Data
 import ExtBrainRegions from './views/reconstructionData/BrainRegions';
-import ExtLayerAnatomy from './views/reconstructionData/LayerAnatomy';
+import ExtMicrocircuits from './views/reconstructionData/Microcircuit';
 import ExtSynapticPathways from './views/reconstructionData/SynapticPathways';
-import ExtMicrocircuits from './views/reconstructionData/Microcircuits';
+import ExtNeurons from './views/reconstructionData/Neurons';
 // Digital Reconstructions
 import RecBrainRegions from './views/digitalReconstructions/BrainRegions';
-import RecLayerAnatomy from './views/digitalReconstructions/LayerAnatomy';
+import RecNeurons from './views/digitalReconstructions/Neurons';
 import RecSynapticPathways from './views/digitalReconstructions/SynapticPathways';
-import RecMicrocircuits from './views/digitalReconstructions/Microcircuits';
+import RecMicrocircuit from './views/digitalReconstructions/Microcircuit';
 // Validations
 import ValBrainRegions from './views/validations/BrainRegions';
-import ValLayerAnatomy from './views/validations/LayerAnatomy';
+import ValNeurons from './views/validations/Neurons';
 import ValSynapticPathways from './views/validations/SynapticPathways';
-import ValMicrocircuits from './views/validations/Microcircuits';
+import ValMicrocircuit from './views/validations/Microcircuit';
 // Predictions
 import PreBrainRegions from './views/predictions/BrainRegions';
-import PreLayerAnatomy from './views/predictions/LayerAnatomy';
+import PreNeurons from './views/predictions/Neurons';
 import PreSynapticPathways from './views/predictions/SynapticPathways';
-import PreMicrocircuits from './views/predictions/Microcircuits';
+import PreMicrocircuit from './views/predictions/Microcircuit';
 import Styleguide from './views/Styleguide';
 import Download from './views/Downloads';
 
@@ -57,7 +57,7 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/experimental-data/neuron-morphology',
+    path: '/experimental-data/neuron-physiology',
     component: ExpNeuronMorpho,
     exact: true,
   },
@@ -78,8 +78,8 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/reconstruction-data/layer-anatomy',
-    component: ExtLayerAnatomy,
+    path: '/reconstruction-data/neurons',
+    component: ExtNeurons,
     exact: true,
   },
   {
@@ -88,7 +88,7 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/reconstruction-data/microcircuits',
+    path: '/reconstruction-data/microcircuit',
     component: ExtMicrocircuits,
     exact: true,
   },
@@ -104,8 +104,8 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/digital-reconstructions/layer-anatomy',
-    component: RecLayerAnatomy,
+    path: '/digital-reconstructions/neurons',
+    component: RecNeurons,
     exact: true,
   },
   {
@@ -114,8 +114,8 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/digital-reconstructions/microcircuits',
-    component: RecMicrocircuits,
+    path: '/digital-reconstructions/microcircuit',
+    component: RecMicrocircuit,
     exact: true,
   },
   // Validations
@@ -130,8 +130,8 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/validations/layer-anatomy',
-    component: ValLayerAnatomy,
+    path: '/validations/neurons',
+    component: ValNeurons,
     exact: true,
   },
   {
@@ -140,8 +140,8 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/validations/microcircuits',
-    component: ValMicrocircuits,
+    path: '/validations/microcircuit',
+    component: ValMicrocircuit,
     exact: true,
   },
   // Predictions
@@ -156,8 +156,8 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/predictions/layer-anatomy',
-    component: PreLayerAnatomy,
+    path: '/predictions/neurons',
+    component: PreNeurons,
     exact: true,
   },
   {
@@ -166,8 +166,8 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/predictions/microcircuits',
-    component: PreMicrocircuits,
+    path: '/predictions/microcircuit',
+    component: PreMicrocircuit,
     exact: true,
   },
 ];

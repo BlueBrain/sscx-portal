@@ -45,7 +45,7 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
       <div className="center-col">
         <Title
           primaryColor={color}
-          title="Microcircuits"
+          title="Microcircuit"
           subtitle={sectionTitle}
           hint="Select a microcircuit of interest."
         />
