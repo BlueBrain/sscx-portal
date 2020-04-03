@@ -55,4 +55,34 @@
       width: 150px;
     }
   }
+
+  @media @small {
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 5px 5px 15px;
+
+    input {
+      font-size: 1rem;
+      border-bottom: none;
+    }
+
+    button {
+      width: 45px;
+      height: 30px;
+      padding: 0;
+      text-align: center !important;
+      margin-top: 0;
+      margin-right: 3px;
+      box-shadow: none;
+
+      img {
+        float: none;
+        margin-top: 0;
+      }
+
+      & > span > span {
+        display: none;
+      }
+    }
+  }
 }

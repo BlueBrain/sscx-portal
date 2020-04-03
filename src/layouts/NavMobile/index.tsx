@@ -1,10 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { MdClose, IoMdMenu } from 'react-icons/all';
 
-import { SecondaryNav, HomeNav } from '../Navigation';
+import { SecondaryNav } from '../Navigation';
 
 import './style.less';
+import Search from '../../components/Search';
 
 const classPrefix = 'nav-mobile__';
 
@@ -14,14 +15,42 @@ type MenuProps = {
 };
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
-  <div className={`${classPrefix}menu ${open ? 'open' : ''}`} onClick={onClose}>
-    <div className="menu" onClick={e => e.stopPropagation()}>
-      <div className="close-icon" onClick={onClose}>
-        <MdClose />
-      </div>
-      <HomeNav />
-      <SecondaryNav />
+  <div className={`${classPrefix}menu ${open ? 'open' : ''}`}>
+    <div className="close-icon" onClick={onClose}>
+      <MdClose/>
     </div>
+    <div className="top-links">
+      <NavLink to="/">
+        <img
+          src={require('../../assets/images/icons/home.svg')}
+          alt="home"
+        />
+        <span>Home</span>
+      </NavLink>
+      <NavLink to="#">
+        <img
+          src={require('../../assets/images/icons/globe.svg')}
+          alt="globe"
+        />
+        <span>Glossary</span>
+      </NavLink>
+      <NavLink to="#">
+        <img
+          src={require('../../assets/images/icons/mail-alt.svg')}
+          alt="mail"
+        />
+        <span>Contact</span>
+      </NavLink>
+      <NavLink to="/downloads">
+        <img
+          src={require('../../assets/images/icons/download-alt.svg')}
+          alt="download"
+        />
+        <span>Download</span>
+      </NavLink>
+    </div>
+    <SecondaryNav canClose/>
+    <div className="menu-search"><Search /></div>
   </div>
 );
 
@@ -32,9 +61,9 @@ const NavMobile = withRouter(({ location }) => {
   return (
     <>
       <div className={`${classPrefix}basis`} onClick={() => setOpen(true)}>
-        <IoMdMenu />
+        <IoMdMenu/>
       </div>
-      <Menu onClose={() => setOpen(false)} open={open} />
+      <Menu onClose={() => setOpen(false)} open={open}/>
     </>
   );
 });

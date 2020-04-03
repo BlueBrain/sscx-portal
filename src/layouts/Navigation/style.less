@@ -38,4 +38,30 @@
       }
     }
   }
+
+  .secondary-nav {
+    li > span {
+      display: inline-block;
+      height: 100%;
+      width: 20px;
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    li > ul > li svg {
+      width: 25px;
+      flex: 0 0 auto;
+      margin-right: 7px;
+      @media @large {
+        width: 30px;
+      }
+    }
+
+    li > ul > li a {
+      display: flex;
+      align-items: center;
+      white-space: initial;
+      line-height: initial;
+    }
+  }
 }
