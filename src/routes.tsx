@@ -4,7 +4,7 @@ import { RouteProps, Redirect } from 'react-router';
 import Home from './views/Home';
 // Experimental Data
 import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
-import ExpNeuronMorpho from './views/experimental/NeuronPhysiology';
+import ExpNeuronMorpho from './views/experimental/NeuronMorphology';
 import ExpNeuronElectro from './views/experimental/NeuronElectrophysiology';
 // Reconstruction Data
 import ExtBrainRegions from './views/reconstructionData/BrainRegions';
@@ -57,7 +57,7 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
-    path: '/experimental-data/neuron-physiology',
+    path: '/experimental-data/neuron-morphology',
     component: ExpNeuronMorpho,
     exact: true,
   },
