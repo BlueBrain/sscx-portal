@@ -34,7 +34,7 @@ const Home: React.FC = () => (
           </Link>
         </div>
         <div className="search-form">
-          <Search/>
+          <Search />
         </div>
       </div>
       <img
@@ -45,17 +45,17 @@ const Home: React.FC = () => (
       <div className="social-media">
         <a href="#">
           <div className="social-media-icon">
-            <FaTwitter/>
+            <FaTwitter />
           </div>
         </a>
         <a href="#">
           <div className="social-media-icon">
-            <FaFacebookF/>
+            <FaFacebookF />
           </div>
         </a>
         <a href="#">
           <div className="social-media-icon">
-            <FaLinkedinIn/>
+            <FaLinkedinIn />
           </div>
         </a>
       </div>
@@ -66,7 +66,7 @@ const Home: React.FC = () => (
         Select and Explore. Download.{' '}
         <span className="nowrap">
           Contribute
-          <span className="accent-border"/>
+          <span className="accent-border" />
         </span>
       </h2>
       <div className="content">
@@ -148,12 +148,16 @@ const Home: React.FC = () => (
       </div>
       <div className="content">
         <div className="workflow">
-          <InfoBox2 title="Experimental data" color={'yellow' as Color}
-                    subsections={[
-                      { name: 'Layer Anatomy', icon: 'region' },
-                      { name: 'Neuron Physiology', icon: 'neuron' },
-                      { name: 'Neuron Electrophysiology', icon: 'neuron' },
-                    ]} arrow>
+          <InfoBox2
+            title="Experimental data"
+            color={'yellow' as Color}
+            subsections={[
+              { name: 'Layer Anatomy', icon: 'region' },
+              { name: 'Neuron Physiology', icon: 'neuron' },
+              { name: 'Neuron Electrophysiology', icon: 'neuron' },
+            ]}
+            arrow
+          >
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -169,7 +173,9 @@ const Home: React.FC = () => (
               { name: 'Microcircuit', icon: 'circuit' },
               { name: 'Synaptic Pathways', icon: 'synapse' },
               { name: 'Neurons', icon: 'neuron' },
-            ]} arrow>
+            ]}
+            arrow
+          >
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -185,7 +191,9 @@ const Home: React.FC = () => (
               { name: 'Microcircuit', icon: 'circuit' },
               { name: 'Synaptic Pathways', icon: 'synapse' },
               { name: 'Neurons', icon: 'neuron' },
-            ]} arrow>
+            ]}
+            arrow
+          >
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -193,14 +201,16 @@ const Home: React.FC = () => (
               nisi ut aliquip ex ea commodo consequat.
             </p>
           </InfoBox2>
-          <InfoBox2 title="Validations"
-                    color={'green' as Color}
-                    subsections={[
-                      { name: 'Brain Regions', icon: 'region' },
-                      { name: 'Microcircuit', icon: 'circuit' },
-                      { name: 'Synaptic Pathways', icon: 'synapse' },
-                      { name: 'Neurons', icon: 'neuron' },
-                    ]}>
+          <InfoBox2
+            title="Validations"
+            color={'green' as Color}
+            subsections={[
+              { name: 'Brain Regions', icon: 'region' },
+              { name: 'Microcircuit', icon: 'circuit' },
+              { name: 'Synaptic Pathways', icon: 'synapse' },
+              { name: 'Neurons', icon: 'neuron' },
+            ]}
+          >
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -209,14 +219,16 @@ const Home: React.FC = () => (
             </p>
           </InfoBox2>
           <div>
-            <InfoBox2 title="Predictions"
-                      color={'grey' as Color}
-                      subsections={[
-                        { name: 'Brain Regions', icon: 'region' },
-                        { name: 'Microcircuit', icon: 'circuit' },
-                        { name: 'Synaptic Pathways', icon: 'synapse' },
-                        { name: 'Neurons', icon: 'neuron' },
-                      ]}>
+            <InfoBox2
+              title="Predictions"
+              color={'grey' as Color}
+              subsections={[
+                { name: 'Brain Regions', icon: 'region' },
+                { name: 'Microcircuit', icon: 'circuit' },
+                { name: 'Synaptic Pathways', icon: 'synapse' },
+                { name: 'Neurons', icon: 'neuron' },
+              ]}
+            >
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -227,7 +239,7 @@ const Home: React.FC = () => (
             <small>+ The data is integrated in the Blue Brain Nexus.</small>
           </div>
         </div>
-        <div className="image"/>
+        <div className="image" />
       </div>
     </section>
 
@@ -237,7 +249,7 @@ const Home: React.FC = () => (
           <div className="data-paper">
             <h2>The paper</h2>
             <h3>
-              <span className="accent-border"/>
+              <span className="accent-border" />
               About the data
             </h3>
             <p>
@@ -261,10 +273,10 @@ const Home: React.FC = () => (
             <div className="portal-paper-title">
               <h3>Paper about</h3>
               <h2>
-                The portal <span className="accent-border accent-border-sm"/>
+                The portal <span className="accent-border accent-border-sm" />
               </h2>
             </div>
-            <span className="accent-border accent-border-lg"/>
+            <span className="accent-border accent-border-lg" />
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -282,7 +294,7 @@ const Home: React.FC = () => (
     <section id="section-5">
       <h2>
         Acknowledgments
-        <span className="accent-border"/>
+        <span className="accent-border" />
       </h2>
       <img
         id="acknowledgments"

@@ -17,21 +17,15 @@ type MenuProps = {
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
   <div className={`${classPrefix}menu ${open ? 'open' : ''}`}>
     <div className="close-icon" onClick={onClose}>
-      <MdClose/>
+      <MdClose />
     </div>
     <div className="top-links">
       <NavLink to="/">
-        <img
-          src={require('../../assets/images/icons/home.svg')}
-          alt="home"
-        />
+        <img src={require('../../assets/images/icons/home.svg')} alt="home" />
         <span>Home</span>
       </NavLink>
       <NavLink to="#">
-        <img
-          src={require('../../assets/images/icons/globe.svg')}
-          alt="globe"
-        />
+        <img src={require('../../assets/images/icons/globe.svg')} alt="globe" />
         <span>Glossary</span>
       </NavLink>
       <NavLink to="#">
@@ -49,8 +43,10 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
         <span>Download</span>
       </NavLink>
     </div>
-    <SecondaryNav canClose/>
-    <div className="menu-search"><Search /></div>
+    <SecondaryNav canClose />
+    <div className="menu-search">
+      <Search />
+    </div>
   </div>
 );
 
@@ -61,9 +57,9 @@ const NavMobile = withRouter(({ location }) => {
   return (
     <>
       <div className={`${classPrefix}basis`} onClick={() => setOpen(true)}>
-        <IoMdMenu/>
+        <IoMdMenu />
       </div>
-      <Menu onClose={() => setOpen(false)} open={open}/>
+      <Menu onClose={() => setOpen(false)} open={open} />
     </>
   );
 });

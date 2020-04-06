@@ -67,7 +67,7 @@ const NavDesktop = withRouter(({ location }) => {
         {secondaryNav && (
           <div className="flyout">
             <HomeNav />
-            <SecondaryNav initActive='exp' />
+            <SecondaryNav initActive="exp" />
           </div>
         )}
       </li>
