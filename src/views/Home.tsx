@@ -148,7 +148,16 @@ const Home: React.FC = () => (
       </div>
       <div className="content">
         <div className="workflow">
-          <InfoBox2 title="Experimental data" color={'yellow' as Color} arrow>
+          <InfoBox2
+            title="Experimental data"
+            color={'yellow' as Color}
+            subsections={[
+              { name: 'Layer Anatomy', icon: 'region' },
+              { name: 'Neuron Physiology', icon: 'neuron' },
+              { name: 'Neuron Electrophysiology', icon: 'neuron' },
+            ]}
+            arrow
+          >
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -159,6 +168,12 @@ const Home: React.FC = () => (
           <InfoBox2
             title="Reconstruction<br/>data"
             color={'blue' as Color}
+            subsections={[
+              { name: 'Brain Regions', icon: 'region' },
+              { name: 'Microcircuit', icon: 'circuit' },
+              { name: 'Synaptic Pathways', icon: 'synapse' },
+              { name: 'Neurons', icon: 'neuron' },
+            ]}
             arrow
           >
             <p>
@@ -171,6 +186,12 @@ const Home: React.FC = () => (
           <InfoBox2
             title="Digital<br/>reconstructions"
             color={'lavender' as Color}
+            subsections={[
+              { name: 'Brain Regions', icon: 'region' },
+              { name: 'Microcircuit', icon: 'circuit' },
+              { name: 'Synaptic Pathways', icon: 'synapse' },
+              { name: 'Neurons', icon: 'neuron' },
+            ]}
             arrow
           >
             <p>
@@ -180,7 +201,16 @@ const Home: React.FC = () => (
               nisi ut aliquip ex ea commodo consequat.
             </p>
           </InfoBox2>
-          <InfoBox2 title="Validations" color={'green' as Color}>
+          <InfoBox2
+            title="Validations"
+            color={'green' as Color}
+            subsections={[
+              { name: 'Brain Regions', icon: 'region' },
+              { name: 'Microcircuit', icon: 'circuit' },
+              { name: 'Synaptic Pathways', icon: 'synapse' },
+              { name: 'Neurons', icon: 'neuron' },
+            ]}
+          >
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -189,7 +219,16 @@ const Home: React.FC = () => (
             </p>
           </InfoBox2>
           <div>
-            <InfoBox2 title="Predictions" color={'grey' as Color}>
+            <InfoBox2
+              title="Predictions"
+              color={'grey' as Color}
+              subsections={[
+                { name: 'Brain Regions', icon: 'region' },
+                { name: 'Microcircuit', icon: 'circuit' },
+                { name: 'Synaptic Pathways', icon: 'synapse' },
+                { name: 'Neurons', icon: 'neuron' },
+              ]}
+            >
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

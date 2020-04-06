@@ -5,11 +5,18 @@ import { Color } from '../../../types';
 
 const classPrefix = 'info-box-2__';
 
+const getSlug = (name: string): string =>
+  name.toLowerCase().replace(/ |<br\/>/g, '-');
+
 type InfoBox2Props = {
   title: string;
   color: Color;
   children: ReactChild | ReactFragment;
   arrow?: boolean;
+  subsections: {
+    name: string;
+    icon: 'region' | 'neuron' | 'circuit' | 'synapse';
+  }[];
 };
 
 const InfoBox2: React.FC<InfoBox2Props> = ({
@@ -17,8 +24,36 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
   color,
   children,
   arrow,
+  subsections,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
+
+  const icons = {
+    region: (
+      <img
+        src={require('../../../assets/images/icons/regions.svg')}
+        alt="brain regions"
+      />
+    ),
+    neuron: (
+      <img
+        src={require('../../../assets/images/icons/neuron.svg')}
+        alt="neuron"
+      />
+    ),
+    circuit: (
+      <img
+        src={require('../../../assets/images/icons/microcircuit.svg')}
+        alt="microcircuit"
+      />
+    ),
+    synapse: (
+      <img
+        src={require('../../../assets/images/icons/synapse.svg')}
+        alt="synapse"
+      />
+    ),
+  };
 
   return (
     <div className={`${classPrefix}basis ${color} ${expanded ? 'open' : ''}`}>
@@ -35,62 +70,16 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
             </div>
           )}
         </div>
-        {title === 'Experimental data' ? (
-          <ul className="links">
-            <li style={{ width: '95%' }}>
-              <img
-                src={require('../../../assets/images/icons/regions.svg')}
-                alt="microcircuit"
-              />
-              Layer Anatomy
+        <ul className="links">
+          {subsections.map((section, i) => (
+            <li key={i} style={{ width: `${100 - 5 * i}%` }}>
+              <a href={`${getSlug(title)}/${getSlug(section.name)}`}>
+                {icons[section.icon]}
+                {section.name}
+              </a>
             </li>
-            <li style={{ width: '85%' }}>
-              <img
-                src={require('../../../assets/images/icons/neuron.svg')}
-                alt="neuron"
-              />
-              Neuron Physiology
-            </li>
-            <li style={{ width: '85%' }}>
-              <img
-                src={require('../../../assets/images/icons/synapse.svg')}
-                alt="neuron"
-              />
-              Neuron Electrophysiology
-            </li>
-          </ul>
-        ) : (
-          <ul className="links">
-            <li style={{ width: '100%' }}>
-              <img
-                src={require('../../../assets/images/icons/regions.svg')}
-                alt="brain regions"
-              />
-              Brain Regions
-            </li>
-            <li style={{ width: '95%' }}>
-              <img
-                src={require('../../../assets/images/icons/microcircuit.svg')}
-                alt="microcircuit"
-              />
-              Microcircuit
-            </li>
-            <li style={{ width: '90%' }}>
-              <img
-                src={require('../../../assets/images/icons/synapse.svg')}
-                alt="synapse"
-              />
-              Synaptic Pathways
-            </li>
-            <li style={{ width: '85%' }}>
-              <img
-                src={require('../../../assets/images/icons/neuron.svg')}
-                alt="neuron"
-              />
-              Neurons
-            </li>
-          </ul>
-        )}
+          ))}
+        </ul>
       </div>
       <div className="more">
         <div className="more-content">{children}</div>
