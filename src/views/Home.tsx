@@ -153,7 +153,7 @@ const Home: React.FC = () => (
             color={'yellow' as Color}
             subsections={[
               { name: 'Layer Anatomy', icon: 'region' },
-              { name: 'Neuron Physiology', icon: 'neuron' },
+              { name: 'Neuron Morphology', icon: 'neuron' },
               { name: 'Neuron Electrophysiology', icon: 'neuron' },
             ]}
             arrow

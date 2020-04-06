@@ -7,8 +7,7 @@ import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import { lorem } from '../Styleguide';
-import { primaryColor, colorName } from './config';
-import Selector from '../../components/Selector';
+import { colorName } from './config';
 import { Layer } from '../../types';
 import ComboSelector from '../../components/ComboSelector';
 import List from '../../components/List';
@@ -27,7 +26,7 @@ const LayerAnatomy: React.FC = () => {
       <div className="center-col">
         <Title
           primaryColor={colorName}
-          title="Neuron Physiology"
+          title="Neuron Morphology"
           subtitle="Experimental Data"
           hint="Select a layer of interest in the S1 of the rat brain."
         />
