@@ -49,7 +49,10 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
       <li className={active === 'exp' && 'active'}>
         <span style={{ backgroundColor: accentColors.yellow }} />
         <button onClick={() => toggleSubmenu('exp')}>
-          Experimental Data <IoIosArrowDropdown />
+          Experimental Data{' '}
+          <span className="show-mobile">
+            <IoIosArrowDropdown />
+          </span>
         </button>
         <ul style={{ borderLeftColor: accentColors.yellow }}>
           <li>
@@ -75,7 +78,10 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
       <li className={active === 'rec' && 'active'}>
         <span style={{ backgroundColor: accentColors.blue }} />
         <button onClick={() => toggleSubmenu('rec')}>
-          Reconstruction Data <IoIosArrowDropdown />
+          Reconstruction Data{' '}
+          <span className="show-mobile">
+            <IoIosArrowDropdown />
+          </span>
         </button>
         <ul style={{ borderLeftColor: accentColors.blue }}>
           <li>
@@ -107,7 +113,10 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
       <li className={active === 'dig' && 'active'}>
         <span style={{ backgroundColor: accentColors.lavender }} />
         <button onClick={() => toggleSubmenu('dig')}>
-          Digital Reconstructions <IoIosArrowDropdown />
+          Digital Reconstructions{' '}
+          <span className="show-mobile">
+            <IoIosArrowDropdown />
+          </span>
         </button>
         <ul style={{ borderLeftColor: accentColors.lavender }}>
           <li>
@@ -139,7 +148,10 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
       <li className={active === 'val' && 'active'}>
         <span style={{ backgroundColor: accentColors.green }} />
         <button onClick={() => toggleSubmenu('val')}>
-          Validations <IoIosArrowDropdown />
+          Validations{' '}
+          <span className="show-mobile">
+            <IoIosArrowDropdown />
+          </span>
         </button>
         <ul style={{ borderLeftColor: accentColors.green }}>
           <li>
@@ -171,7 +183,10 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
       <li className={active === 'pre' && 'active'}>
         <span style={{ backgroundColor: accentColors.grey }} />
         <button onClick={() => toggleSubmenu('pre')}>
-          Predictions <IoIosArrowDropdown />
+          Predictions{' '}
+          <span className="show-mobile">
+            <IoIosArrowDropdown />
+          </span>
         </button>
         <ul style={{ borderLeftColor: accentColors.grey }}>
           <li>
