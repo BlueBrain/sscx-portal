@@ -109,7 +109,6 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             cssPrefix={prePrefix}
             activeLayer={activePreLayer}
           >
-            PathwayPoint>
             <path
               className="synaptic_pathways_svg__st2"
               d="M92.8 145.6l-68.5-33.8v140.6l68.5 33.5z"
