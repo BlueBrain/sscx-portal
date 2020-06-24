@@ -1,5 +1,7 @@
 ![SSCx illustration](./doc/sscx.png)
 
+
+
 ## Development
 
 Install dependencies:
