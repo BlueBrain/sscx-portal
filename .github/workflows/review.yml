@@ -23,5 +23,3 @@ jobs:
       - name: build project 👷
         run: |
           yarn build
-        env:
-          NEXUS_TOKEN: ${{ secrets.NEXUS_TOKEN }}
