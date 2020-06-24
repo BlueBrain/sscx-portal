@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "jest",
-    "start": "parcel -p 8080 watch src/index.html",
+    "start": "parcel -p 3000 watch src/index.html",
     "build": "tsc --noEmit && parcel build src/index.html",
     "build:data": "ts-node --skip-project scripts/buildData.ts",
     "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
