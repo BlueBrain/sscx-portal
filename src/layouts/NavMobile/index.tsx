@@ -21,11 +21,17 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
     </div>
     <div className="top-links">
       <NavLink to="/">
-        <img src={require('url:../../assets/images/icons/home.svg')} alt="home" />
+        <img
+          src={require('url:../../assets/images/icons/home.svg')}
+          alt="home"
+        />
         <span>Home</span>
       </NavLink>
       <NavLink to="#">
-        <img src={require('url:../../assets/images/icons/globe.svg')} alt="globe" />
+        <img
+          src={require('url:../../assets/images/icons/globe.svg')}
+          alt="globe"
+        />
         <span>Glossary</span>
       </NavLink>
       <NavLink to="#">

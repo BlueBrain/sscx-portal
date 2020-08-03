@@ -1,10 +1,8 @@
-
 import React from 'react';
 import get from 'lodash/get';
 import isNumber from 'lodash/isNumber';
 
 import './style.less';
-
 
 const classPrefix = 'factsheet__';
 
@@ -12,7 +10,7 @@ const kgTypeMap = {
   'nsg:NeuronCount': {
     valuePath: 'count',
     labelPath: 'brainLocation.layer',
-  }
+  },
 };
 
 export type BrainSubregionFactsheetProps = {
@@ -22,7 +20,7 @@ export type BrainSubregionFactsheetProps = {
 type FactsheetEntryBaseType = {
   name: string;
   description: string;
-}
+};
 
 type FactsheetMapValueType = FactsheetEntryBaseType & {
   value: any[];
@@ -31,26 +29,24 @@ type FactsheetMapValueType = FactsheetEntryBaseType & {
 type FactsheetSingleValueType = FactsheetEntryBaseType & {
   value: string | number;
   unitCode: string;
-}
+};
 
 type FactsheetEntryType = FactsheetEntryBaseType & {
   value: string | number | object[];
 };
 
 function formatNumber(num: number | string) {
-  return isNumber(num)
-    ? num.toLocaleString()
-    : num || 'NA'
+  return isNumber(num) ? num.toLocaleString() : num || 'NA';
 }
 
-const FactsheetSingleValueEntry: React.FC<{ fact: FactsheetSingleValueType }> = ({ fact }) => {
+const FactsheetSingleValueEntry: React.FC<{
+  fact: FactsheetSingleValueType;
+}> = ({ fact }) => {
   const formattedValue = formatNumber(fact.value);
 
   return (
     <div className="row mt-1">
-      <div className="col-4 name">
-        {fact.name}
-      </div>
+      <div className="col-4 name">{fact.name}</div>
       <div className="col-4 value">
         {formattedValue} {fact.unitCode}
       </div>
@@ -58,10 +54,15 @@ const FactsheetSingleValueEntry: React.FC<{ fact: FactsheetSingleValueType }> = 
   );
 };
 
-const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({ fact }) => {
+const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
+  fact,
+}) => {
   const { valuePath, labelPath } = kgTypeMap[fact['@type']];
 
-  const maxVal = Math.max.apply(null, fact.value.map(curr => parseFloat(get(curr, `${valuePath}.value`))));
+  const maxVal = Math.max.apply(
+    null,
+    fact.value.map(curr => parseFloat(get(curr, `${valuePath}.value`))),
+  );
 
   const valueColumn = fact.value.map(valueEntry => {
     const value = get(valueEntry, `${valuePath}.value`, '');
@@ -69,17 +70,14 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({ fac
     const unitCode = get(valueEntry, `${valuePath}.unitCode`, '');
     const label = get(valueEntry, `${labelPath}.label`, '');
 
-    const barMaxFillRatio = 0.8
-    const barWidthPct = value / maxVal * 100 * barMaxFillRatio;
+    const barMaxFillRatio = 0.8;
+    const barWidthPct = (value / maxVal) * 100 * barMaxFillRatio;
 
     return (
       <div className="row mb-1">
         <div className="col-6 pos-relative">
           {label}
-          <div
-            className="bar"
-            style={{ width: `${barWidthPct}%` }}
-          />
+          <div className="bar" style={{ width: `${barWidthPct}%` }} />
         </div>
         <div className="col-6">
           {formattedValue} {unitCode}
@@ -90,23 +88,23 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({ fac
 
   return (
     <div className="row mt-1">
-      <div className="col-4 name">
-        {fact.name}
-      </div>
-      <div className="col-8">
-        {valueColumn}
-      </div>
+      <div className="col-4 name">{fact.name}</div>
+      <div className="col-8">{valueColumn}</div>
     </div>
   );
 };
 
-const FactsheetEntry: React.FC<{ fact: FactsheetEntryType}> = ({ fact }) => {
-  return Array.isArray(fact.value)
-    ? <FactsheetMapValueEntry fact={fact as FactsheetMapValueType}/>
-    : <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />;
+const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => {
+  return Array.isArray(fact.value) ? (
+    <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
+  ) : (
+    <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
+  );
 };
 
-const BrainSubregionFactsheet: React.FC<BrainSubregionFactsheetProps> = ({ data }) => {
+const BrainSubregionFactsheet: React.FC<BrainSubregionFactsheetProps> = ({
+  data,
+}) => {
   const facts = get(data, 'fact', []);
 
   return (

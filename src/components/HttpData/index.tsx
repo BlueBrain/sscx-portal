@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Helmet from 'react-helmet';
 
@@ -9,17 +8,11 @@ const classPrefix = 'data-results__';
 
 type HttpDataProps = {
   path: string;
-  children: (
-    data: any,
-  ) => React.ReactNode;
+  children: (data: any) => React.ReactNode;
   id?: string;
 };
 
-const HttpData: React.FC<HttpDataProps> = ({
-  path,
-  children,
-  id = 'data',
-}) => {
+const HttpData: React.FC<HttpDataProps> = ({ path, children, id = 'data' }) => {
   const [state, setState] = React.useState<{
     data: any;
     loading: boolean;
@@ -36,7 +29,7 @@ const HttpData: React.FC<HttpDataProps> = ({
       fetch(path)
         .then(res => res.json())
         .then(data => setState({ ...state, data, error: false }))
-        .catch(error => setState({ ...state, error, data: null }))
+        .catch(error => setState({ ...state, error, data: null }));
     }
   }, [path]);
 

@@ -64,9 +64,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
           </Selector>
         </div>
       </Filters>
-      <HttpData path={currentFactsheetPath}>
-        {data => children(data)}
-      </HttpData>
+      <HttpData path={currentFactsheetPath}>{data => children(data)}</HttpData>
     </>
   );
 };
