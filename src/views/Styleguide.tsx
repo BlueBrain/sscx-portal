@@ -147,7 +147,7 @@ const Styleguide: React.FC = () => {
         <Collapsible title="Murderous Bird on the Loose">
           <>
             <img
-              src={require('../assets/images/cassowary.jpg')}
+              src={require('url:../assets/images/cassowary.jpg')}
               alt="cassowary"
             />
             <p>
@@ -160,7 +160,7 @@ const Styleguide: React.FC = () => {
         <Collapsible title="Murderous Bird on Lockdown" collapsed={true}>
           <>
             <img
-              src={require('../assets/images/cassowary.jpg')}
+              src={require('url:../assets/images/cassowary.jpg')}
               alt="cassowary"
             />
             <p>
@@ -191,7 +191,7 @@ const Styleguide: React.FC = () => {
           <em>TODO: Make expand function work properly</em>
         </p>
         <ImageViewer
-          src={require('../assets/images/cassowary.jpg')}
+          src={require('url:../assets/images/cassowary.jpg')}
           alt="cassowary"
           color={color}
         />

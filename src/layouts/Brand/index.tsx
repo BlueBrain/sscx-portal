@@ -10,7 +10,7 @@ const Brand: React.FC = () => {
       <div className="logo">
         <a href="https://www.epfl.ch/">
           <img
-            src={require('../../assets/images/epfl-logo.svg')}
+            src={require('url:../../assets/images/epfl-logo.svg')}
             alt="EPFL logo"
           />
         </a>

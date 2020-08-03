@@ -23,25 +23,25 @@ const InfoBox1: React.FC<InfoBox1Props> = ({
     <div className={`${classPrefix}basis`}>
       {icon === 'checkmark' && (
         <img
-          src={require('../../../assets/images/icons/checkmark.svg')}
+          src={require('url:../../../assets/images/icons/checkmark.svg')}
           alt="checkmark"
         />
       )}
       {icon === 'mail' && (
         <img
-          src={require('../../../assets/images/icons/mail.svg')}
+          src={require('url:../../../assets/images/icons/mail.svg')}
           alt="mail"
         />
       )}
       {icon === 'search' && (
         <img
-          src={require('../../../assets/images/icons/search.svg')}
+          src={require('url:../../../assets/images/icons/search.svg')}
           alt="search"
         />
       )}
       {icon === 'download' && (
         <img
-          src={require('../../../assets/images/icons/download.svg')}
+          src={require('url:../../../assets/images/icons/download.svg')}
           alt="download"
         />
       )}

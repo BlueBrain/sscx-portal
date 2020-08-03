@@ -39,7 +39,7 @@ const Home: React.FC = () => (
       </div>
       <img
         className="top-section-image"
-        src={require('../assets/images/computer.svg')}
+        src={require('url:../assets/images/computer.svg')}
         alt="computer"
       />
       <div className="social-media">
@@ -129,7 +129,7 @@ const Home: React.FC = () => (
         <div className="image">
           <img
             id="screenshot"
-            src={require('../assets/images/screenshot.png')}
+            src={require('url:../assets/images/screenshot.png')}
             alt="screenshot"
           />
         </div>
@@ -265,7 +265,7 @@ const Home: React.FC = () => (
         </div>
         <img
           id="chip"
-          src={require('../assets/images/chip.svg')}
+          src={require('url:../assets/images/chip.svg')}
           alt="microchip"
         />
         <div className="paper portal-paper-container">
@@ -298,7 +298,7 @@ const Home: React.FC = () => (
       </h2>
       <img
         id="acknowledgments"
-        src={require('../assets/images/acknowledgments.svg')}
+        src={require('url:../assets/images/acknowledgments.svg')}
         alt="acknowledgments"
       />
     </section>

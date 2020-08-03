@@ -71,4 +71,8 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
+# Parcel builder cache
+.parcel-cache
+
 dist/
+/data

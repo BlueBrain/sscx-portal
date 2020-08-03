@@ -12,7 +12,7 @@ const Search: React.FC = () => {
       <button>
         <span style={{ height: 30 }}>
           <img
-            src={require('../../assets/images/icons/search.svg')}
+            src={require('url:../../assets/images/icons/search.svg')}
             alt="search"
           />
           <span style={{ lineHeight: '40px' }}>Search</span>

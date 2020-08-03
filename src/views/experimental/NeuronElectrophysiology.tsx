@@ -60,7 +60,7 @@ const LayerAnatomy: React.FC = () => {
           <ComboSelector
             selector={
               <img
-                src={require('../../assets/images/electroIllustration.svg')}
+                src={require('url:../../assets/images/electroIllustration.svg')}
                 alt="Electro-physiology"
                 className="electro-phys-image"
               />

@@ -31,25 +31,25 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
   const icons = {
     region: (
       <img
-        src={require('../../../assets/images/icons/regions.svg')}
+        src={require('url:../../../assets/images/icons/regions.svg')}
         alt="brain regions"
       />
     ),
     neuron: (
       <img
-        src={require('../../../assets/images/icons/neuron.svg')}
+        src={require('url:../../../assets/images/icons/neuron.svg')}
         alt="neuron"
       />
     ),
     circuit: (
       <img
-        src={require('../../../assets/images/icons/microcircuit.svg')}
+        src={require('url:../../../assets/images/icons/microcircuit.svg')}
         alt="microcircuit"
       />
     ),
     synapse: (
       <img
-        src={require('../../../assets/images/icons/synapse.svg')}
+        src={require('url:../../../assets/images/icons/synapse.svg')}
         alt="synapse"
       />
     ),
