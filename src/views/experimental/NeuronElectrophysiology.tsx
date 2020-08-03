@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Data from '../../components/Data';
+import ESData from '../../components/ESData';
 import { electroPhysiologyDataQuery } from '../../queries/es';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
@@ -89,7 +89,7 @@ const LayerAnatomy: React.FC = () => {
           />
         </div>
       </Filters>
-      <Data
+      <ESData
         hasData={!!currentEtype && !!currentInstance}
         query={electroPhysiologyDataQuery(currentEtype, currentInstance)}
       >
@@ -105,7 +105,7 @@ const LayerAnatomy: React.FC = () => {
             </Collapsible>
           </>
         )}
-      </Data>
+      </ESData>
     </>
   );
 };

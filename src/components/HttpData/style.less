@@ -1,0 +1,28 @@
+@import '../../assets/styles/config/_colors';
+
+.data-results__basis {
+  background-color: #basePalette[grey];
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .center {
+    background-color: #basePalette[grey];
+    margin: 60px auto 60px;
+    max-width: 1080px;
+    margin-bottom: 100px;
+
+    & > div {
+      margin-top: 20px;
+    }
+  }
+
+  .scroll-to {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+  }
+}

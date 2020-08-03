@@ -10,7 +10,7 @@ import useQuery from '../hooks/useQuery';
 import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
 import { lorem } from '../views/Styleguide';
-import Data from '../components/Data';
+import ESData from '../components/ESData';
 
 export type LayerAnatomyTemplateProps = {
   color: Color;
@@ -75,9 +75,9 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           </Selector>
         </div>
       </Filters>
-      <Data hasData={!!currentLayer} query={currentQuery}>
+      <ESData hasData={!!currentLayer} query={currentQuery}>
         {data => children(data)}
-      </Data>
+      </ESData>
     </>
   );
 };

@@ -1,57 +1,46 @@
+
 import React from 'react';
-import { useNexusContext } from '@bbp/react-nexus';
-import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 import Helmet from 'react-helmet';
 
-import { sscx } from '../../config';
 import ScrollTo from '../../components/ScrollTo';
 import './style.less';
 
 const classPrefix = 'data-results__';
 
-type DataProps = {
-  hasData: boolean;
-  query: {};
+type HttpDataProps = {
+  path: string;
   children: (
-    data: ElasticSearchViewQueryResponse<any>['hits']['hits'],
+    data: any,
   ) => React.ReactNode;
   id?: string;
 };
 
-const Data: React.FC<DataProps> = ({
-  hasData,
-  query,
+const HttpData: React.FC<HttpDataProps> = ({
+  path,
   children,
   id = 'data',
 }) => {
   const [state, setState] = React.useState<{
-    data: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+    data: any;
     loading: boolean;
     error: any;
   }>({
-    data: [],
+    data: null,
     loading: false,
     error: null,
   });
-  const nexus = useNexusContext();
 
   React.useEffect(() => {
-    if (hasData) {
+    if (path) {
       setState({ ...state, loading: true });
-      nexus.View.elasticSearchQuery(
-        sscx.org,
-        sscx.project,
-        sscx.expNeuronElectroViewId,
-        query,
-      )
-        .then(data =>
-          setState({ ...state, loading: false, data: data.hits.hits }),
-        )
-        .catch(error => setState({ ...state, loading: false, error }));
+      fetch(path)
+        .then(res => res.json())
+        .then(data => setState({ ...state, data, error: false }))
+        .catch(error => setState({ ...state, error, data: null }))
     }
-  }, [hasData, query]);
+  }, [path]);
 
-  if (!hasData) {
+  if (!path) {
     return null;
   }
 
@@ -68,7 +57,7 @@ const Data: React.FC<DataProps> = ({
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://bbp.neuroshapes.org',
-            '@graph': state.data.map(d => d._source),
+            '@graph': state.data,
           })}
         </script>
       </Helmet>
@@ -84,4 +73,4 @@ const Data: React.FC<DataProps> = ({
   );
 };
 
-export default Data;
+export default HttpData;
