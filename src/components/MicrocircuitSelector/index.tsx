@@ -19,7 +19,7 @@ type MicrocircuitSelectProps = {
   onLayerSelected?: (layer: Layer) => void;
 };
 
-const Layer: React.FC<MicrocircuitProps> = ({
+const LayerIcon: React.FC<MicrocircuitProps> = ({
   layer,
   activeLayer,
   onSelect,
@@ -81,7 +81,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
         id="microcircuit_svg__layers"
         className={disabled ? 'disabled' : 'enabled'}
       >
-        <Layer
+        <LayerIcon
           layer="L1"
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
@@ -90,8 +90,8 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
             className="microcircuit_svg__st2"
             d="M224.7 71.8H87.5L19.2 38.3 87.5 4.5 19.2 38.3l.2.4v73.1l68.1 33.5h137.2l68.1-33.5V38.7l.2-.4z"
           />
-        </Layer>
-        <Layer
+        </LayerIcon>
+        <LayerIcon
           layer="L23"
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
@@ -100,8 +100,8 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
             className="microcircuit_svg__st2"
             d="M224.7 145.3H87.5l-68.1-33.5v139.6l68.1 33.4v.2h137.2v-.2l68.1-33.4V111.8z"
           />
-        </Layer>
-        <Layer
+        </LayerIcon>
+        <LayerIcon
           layer="L4"
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
@@ -110,8 +110,8 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
             className="microcircuit_svg__st2"
             d="M224.7 284.8v.2H87.5v-.2l-68.1-33.4v73.8l68.1 33.5h137.2l68.1-33.5v-73.8z"
           />
-        </Layer>
-        <Layer
+        </LayerIcon>
+        <LayerIcon
           layer="L5"
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
@@ -120,8 +120,8 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
             className="microcircuit_svg__st2"
             d="M224.7 358.7H87.5l-68.1-33.5v73.9l68.1 33.5h137.2l68.1-33.5v-73.9z"
           />
-        </Layer>
-        <Layer
+        </LayerIcon>
+        <LayerIcon
           layer="L6"
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
@@ -130,7 +130,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
             className="microcircuit_svg__st2"
             d="M224.7 432.6H87.5l-68.1-33.5v73.1l68.1 33.5h137.2l68.1-33.5v-73.1z"
           />
-        </Layer>
+        </LayerIcon>
       </g>
       <g id="microcircuit_svg__Textandlines">
         <g className="microcircuit_svg__st3">
