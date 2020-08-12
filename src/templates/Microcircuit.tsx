@@ -15,7 +15,6 @@ import { BrainRegion } from '../components/BrainRegionsSelector';
 import { accentColors } from '../config';
 import ScrollTo from '../components/ScrollTo';
 
-
 export type MicrocircuitTemplateProps = {
   color: Color;
   sectionTitle: string;
@@ -52,12 +51,13 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
       .map(numStr => parseInt(numStr));
   };
 
-  const currentFactsheets = (currentRegion && currentLayer)
-    ? getLayerNums().map(layerNum => ({
-      path: factsheetPath(currentRegion, layerNum),
-      title: `Layer L${layerNum} factsheet`,
-    }))
-    : [];
+  const currentFactsheets =
+    currentRegion && currentLayer
+      ? getLayerNums().map(layerNum => ({
+          path: factsheetPath(currentRegion, layerNum),
+          title: `Layer L${layerNum} factsheet`,
+        }))
+      : [];
 
   return (
     <>
@@ -98,10 +98,7 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
       </Filters>
 
       {currentFactsheets.map(factsheet => (
-        <HttpData
-          key={factsheet.path}
-          path={factsheet.path}
-        >
+        <HttpData key={factsheet.path} path={factsheet.path}>
           {data => children(data, factsheet.title)}
         </HttpData>
       ))}
