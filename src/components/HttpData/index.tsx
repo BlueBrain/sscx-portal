@@ -1,7 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import ScrollTo from '../../components/ScrollTo';
 import './style.less';
 
 const classPrefix = 'data-results__';
@@ -46,21 +45,16 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, id = 'data' }) => {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://bbp.neuroshapes.org',
             '@graph': state.data,
           })}
         </script>
-      </Helmet>
+      </Helmet> */}
       <div id={id} className={`${classPrefix}basis`}>
         <div className="center">{children(state.data)}</div>
-        <div className="scroll-to">
-          <ScrollTo anchor="filters" direction="up">
-            Return to filters
-          </ScrollTo>
-        </div>
       </div>
     </>
   );

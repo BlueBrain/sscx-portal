@@ -9,7 +9,7 @@ const classPrefix = 'factsheet__';
 const kgTypeMap = {
   'nsg:NeuronCount': {
     valuePath: 'count',
-    labelPaths: ['brainLocation.layer'],
+    labelPaths: ['brainLocation.mType', 'brainLocation.eType'],
   },
 };
 
