@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 import Title from '../components/Title';
@@ -21,6 +21,15 @@ export type SynapticPathwaysTemplateProps = {
   sectionTitle: string;
 };
 
+type PathwayMType = {
+  pre: {
+    [layer: string]: string[];
+  };
+  post: {
+    [layer: string]: string[];
+  };
+}
+
 const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
   sectionTitle,
   color,
@@ -32,6 +41,8 @@ const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
     query.set(key, value);
     history.push(`?${query.toString()}`);
   };
+
+  const [pathwayMType, setPathwayMType] = useState<PathwayMType | null>(null);
 
   const currentRegion: BrainRegion = query.get('brain_region') as BrainRegion;
   const currentPreLayer: Layer = query.get('prelayer') as Layer;
@@ -45,8 +56,22 @@ const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
   const setPreTypeQuery = (layer: Layer) => addParam('pretype', layer);
   const setPostTypeQuery = (layer: Layer) => addParam('posttype', layer);
 
-  const hasData =
-    currentPreLayer && currentPostLayer && currentPreType && currentPostType;
+  const hasData = currentPreLayer && currentPostLayer && currentPreType && currentPostType;
+
+  // FIXME: pick pathway mtypes from L2, L23 and L3 when user selects L23
+  const preMTypes = pathwayMType && currentPreLayer
+    ? pathwayMType.pre[currentPreLayer]
+    : [];
+
+  const postMTypes = pathwayMType && currentPostLayer
+    ? pathwayMType.post[currentPostLayer]
+    : [];
+
+  useEffect(() => {
+    fetch('/data/pathway-mtype.json')
+      .then(res => res.json())
+      .then(pathwayMType => setPathwayMType(pathwayMType))
+  }, []);
 
   return (
     <Filters primaryColor={color} hasData={!!hasData}>
@@ -83,7 +108,7 @@ const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
           list1={
             <List
               title="m-type pre-synaptic"
-              list={mTypes}
+              list={preMTypes}
               defaultValue={currentPreType}
               onSelect={setPreTypeQuery}
               color={color}
@@ -92,7 +117,7 @@ const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
           list2={
             <List
               title="m-type post-synaptic"
-              list={mTypes}
+              list={postMTypes}
               defaultValue={currentPostType}
               onSelect={setPostTypeQuery}
               color="orange"
