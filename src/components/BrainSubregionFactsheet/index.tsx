@@ -46,8 +46,8 @@ const FactsheetSingleValueEntry: React.FC<{
 
   return (
     <div className="row mt-1">
-      <div className="col-4 name">{fact.name}</div>
-      <div className="col-4 value">
+      <div className="col-xs-4 name">{fact.name}</div>
+      <div className="col-xs-4 value">
         {formattedValue} {fact.unitCode}
       </div>
     </div>
@@ -78,11 +78,11 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
 
     return (
       <div className="row mb-1">
-        <div className="col-6 pos-relative">
+        <div className="col-xs-6 pos-relative">
           {label}
           <div className="bar" style={{ width: `${barWidthPct}%` }} />
         </div>
-        <div className="col-6">
+        <div className="col-xs-6">
           {formattedValue} {unitCode}
         </div>
       </div>
@@ -91,8 +91,8 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
 
   return (
     <div className="row mt-1">
-      <div className="col-4 name">{fact.name}</div>
-      <div className="col-8">{valueColumn}</div>
+      <div className="col-xs-4 name">{fact.name}</div>
+      <div className="col-xs-8">{valueColumn}</div>
     </div>
   );
 };
@@ -113,7 +113,7 @@ const BrainSubregionFactsheet: React.FC<BrainSubregionFactsheetProps> = ({
   return (
     <div className={`${classPrefix}basis`}>
       {facts.map(fact => (
-        <FactsheetEntry fact={fact} />
+        <FactsheetEntry key={fact.name} fact={fact} />
       ))}
     </div>
   );
