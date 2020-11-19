@@ -11,10 +11,12 @@ export type ComboSelectorProps = {
   selector: React.ReactNode;
   list1: React.ReactNode;
   list2: React.ReactNode;
+  list3?: React.ReactNode;
   selectorTitle?: string;
   listsTitle?: string;
   list1Open?: boolean;
   list2Open?: boolean;
+  list3Open?: boolean;
   withGradient?: boolean;
 };
 
@@ -22,10 +24,12 @@ const ComboSelector: React.FC<ComboSelectorProps> = ({
   selector,
   list1,
   list2,
+  list3,
   selectorTitle = '',
   listsTitle = '',
   list1Open = true,
   list2Open = true,
+  list3Open = true,
   withGradient = false,
 }) => {
   return (
@@ -44,6 +48,14 @@ const ComboSelector: React.FC<ComboSelectorProps> = ({
         >
           {list2}
         </div>
+        {list3 && (
+          <div
+            className={`list-3 ${list3Open ? 'open' : ''} ${withGradient &&
+              'with-gradient'}`}
+          >
+            {list3}
+          </div>
+        )}
       </div>
     </div>
   );

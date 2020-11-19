@@ -35,7 +35,7 @@
     "less": "^3.11.0",
     "lint-staged": "^10.0.3",
     "node-fetch": "^2.6.0",
-    "parcel": "next",
+    "parcel": "2.0.0-nightly.443",
     "prettier": "^1.19.1",
     "ts-jest": "^25.0.0",
     "ts-loader": "^6.2.1",
@@ -46,6 +46,7 @@
     "@bbp/nexus-sdk": "^1.2.1",
     "@bbp/react-nexus": "^1.2.1",
     "@reduxjs/toolkit": "^1.2.5",
+    "antd": "^4.8.2",
     "dygraphs": "^2.1.0",
     "flexboxgrid": "^6.3.1",
     "lodash": "^4.17.19",
@@ -57,10 +58,7 @@
     "react-icons": "^3.9.0",
     "react-image-lightbox": "^5.1.1",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
-    "video.js": "^7.8.4",
-    "videojs-contrib-quality-levels": "^2.0.9",
-    "videojs-http-source-selector": "^1.1.6"
+    "react-router-dom": "^5.1.2"
   },
   "husky": {
     "hooks": {
@@ -73,5 +71,8 @@
       "yarn style --write",
       "yarn lint --fix"
     ]
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
 }

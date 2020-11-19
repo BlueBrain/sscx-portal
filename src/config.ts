@@ -14,3 +14,5 @@ export const sscx = {
     'https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset',
   ),
 };
+
+export const nexusPluginBaseUrl = 'https://bbp.epfl.ch/nexus/plugins';

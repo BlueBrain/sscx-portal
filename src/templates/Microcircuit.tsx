@@ -15,17 +15,18 @@ import { BrainRegion } from '../components/BrainRegionsSelector';
 import { accentColors } from '../config';
 import ScrollTo from '../components/ScrollTo';
 
+
 export type MicrocircuitTemplateProps = {
   color: Color;
   sectionTitle: string;
-  factsheetPath: (subregion: string, layerNum: number) => string;
-  children: (data: any, title: string) => React.ReactNode;
+  factsheetPath?: (subregion: string, layerNum: number) => string;
+  children?: (subregion: string, layer: string, data: any) => React.ReactNode;
 };
 
 const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
   color,
   sectionTitle,
-  factsheetPath,
+  factsheetPath = () => '',
   children,
 }) => {
   const query = useQuery();
@@ -55,7 +56,6 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
     currentRegion && currentLayer
       ? getLayerNums().map(layerNum => ({
           path: factsheetPath(currentRegion, layerNum),
-          title: `Layer L${layerNum} factsheet`,
         }))
       : [];
 
@@ -99,7 +99,7 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
 
       {currentFactsheets.map(factsheet => (
         <HttpData key={factsheet.path} path={factsheet.path}>
-          {data => children(data, factsheet.title)}
+          {data => children(currentRegion, currentLayer, data)}
         </HttpData>
       ))}
 

@@ -3,14 +3,14 @@
  *
  */
 export const layerAnatomyDataQuery = (layers: string | string[]) => {
-  let filters;
-  if (typeof layers === 'string') {
-    filters = [{ term: { 'brainLocation.layer.label.raw': layers } }];
-  } else {
-    filters = layers.map(layer => ({
-      term: { 'brainLocation.layer.label.raw': layer },
-    }));
-  }
+  // let filters;
+  // if (typeof layers === 'string') {
+  //   filters = [{ term: { 'brainLocation.layer.label.raw': layers } }];
+  // } else {
+  //   filters = layers.map(layer => ({
+  //     term: { 'brainLocation.layer.label.raw': layer },
+  //   }));
+  // }
 
   return {
     from: 0,
@@ -31,14 +31,19 @@ export const layerAnatomyDataQuery = (layers: string | string[]) => {
                     '@type': 'https://neuroshapes.org/NeuronDensity',
                   },
                 },
+                {
+                  term: {
+                    '@type': 'https://neuroshapes.org/SliceCollection',
+                  }
+                }
               ],
             },
           },
-          {
-            bool: {
-              should: filters,
-            },
-          },
+          // {
+          //   bool: {
+          //     should: filters,
+          //   },
+          // },
         ],
       },
     },
@@ -56,43 +61,78 @@ export const electroPhysiologyDataQuery = (
       filter: [
         {
           bool: {
-            should: [{ term: { '@type': 'https://neuroshapes.org/Trace' } }],
+            must: [
+              { term: { '@type': 'https://neuroshapes.org/Trace' } },
+            ],
           },
         },
         {
+          bool: {
+            must: {
+              term: { 'name.raw': experiment }
+            }
+          }
+        },
+        // {
+        //   nested: {
+        //     path: 'derivation.entity',
+        //     query: {
+        //       bool: {
+        //         filter: [
+        //           { term: { 'derivation.entity.name.raw': experiment } },
+        //           { term: { 'derivation.entity.@type.raw': 'PatchedCell' } },
+        //         ],
+        //       },
+        //     },
+        //   },
+        // },
+        {
           nested: {
-            path: 'derivation.entity',
+            path: 'distribution',
             query: {
               bool: {
-                filter: [
-                  { term: { 'derivation.entity.name.raw': experiment } },
-                  { term: { 'derivation.entity.@type.raw': 'PatchedCell' } },
-                ],
+                must: {
+                  match: { 'distribution.encodingFormat': 'application/nwb' },
+                },
               },
             },
           },
         },
-        {
-          nested: {
-            path: 'annotation.hasBody',
-            query: {
-              bool: {
-                filter: { term: { 'annotation.hasBody.label.raw': etype } },
-              },
-            },
-          },
-        },
+        // {
+        //   nested: {
+        //     path: 'annotation.hasBody',
+        //     query: {
+        //       bool: {
+        //         filter: { term: { 'annotation.hasBody.label.raw': etype } },
+        //       },
+        //     },
+        //   },
+        // },
       ],
     },
   },
 });
 
-export const morphologyDataQuery = (layers: string) => ({
+export const morphologyDataQuery = (
+  mtype: string,
+  instance: string
+) => ({
   from: 0,
-  size: 10000,
+  size: 100,
   query: {
     bool: {
       filter: [
+        {
+          bool: {
+            should: [
+              {
+                term: {
+                  '_deprecated': false,
+                },
+              },
+            ],
+          },
+        },
         {
           bool: {
             should: [
@@ -105,14 +145,25 @@ export const morphologyDataQuery = (layers: string) => ({
           },
         },
         {
+          bool: {
+            should: [
+              {
+                term: {
+                  'name.raw': instance,
+                },
+              },
+            ],
+          },
+        },
+        {
           nested: {
-            path: 'brainLocation',
+            path: 'annotation.hasBody',
             query: {
               bool: {
                 filter: [
                   {
                     term: {
-                      'brainLocation.label.raw': 'layer 4',
+                      'annotation.hasBody.label.raw': mtype,
                     },
                   },
                 ],

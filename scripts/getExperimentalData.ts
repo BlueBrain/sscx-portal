@@ -27,7 +27,7 @@ export default async (nexus: NexusClient) => {
           id: etype.id.value,
           label: etype.label.value,
           experiments: experiments.results.bindings.map(exp => ({
-            id: exp.id.value,
+            contentUrl: exp.contentUrl.value,
             label: exp.label.value,
           })),
         };

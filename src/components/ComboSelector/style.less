@@ -19,7 +19,8 @@
   }
 
   .list-1,
-  .list-2 {
+  .list-2,
+  .list-3 {
     left: 279px;
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 0 10px 10px 0;
@@ -39,7 +40,7 @@
     &.open {
       padding-left: 40px;
       margin-left: -5px;
-      max-width: 280px;
+      max-width: 300px;
     }
   }
 
@@ -49,7 +50,27 @@
     &.open {
       padding-left: 130px;
       margin-left: -5px;
-      max-width: 400px;
+      max-width: 600px;
+
+      &.with-gradient {
+        padding-left: 275px;
+        margin-left: -187px;
+        background: linear-gradient(
+          313deg,
+          rgba(255, 255, 255, 0.5) 76%,
+          rgba(0, 0, 0, 0) 76%
+        );
+      }
+    }
+  }
+
+  .list-3 {
+    margin-top: 10px;
+
+    &.open {
+      padding-left: 40px;
+      margin-left: -5px;
+      max-width: 600px;
 
       &.with-gradient {
         padding-left: 275px;

@@ -27,12 +27,19 @@
     padding: @padding;
     overflow: hidden;
   }
+
+  &.red {
+    .header {
+      background-color: red;
+      color: white;
+    }
+  }
 }
 
 .collapsible__expanded {
   .collapsible__basis();
   .content {
-    max-height: 10000px;
+    max-height: 20000px;
     transition: max-height 1s, padding 0.3s;
   }
 }

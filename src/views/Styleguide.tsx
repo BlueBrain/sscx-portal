@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import ScrollTo from '../components/ScrollTo';
 import ScrollTop from '../components/ScrollTop';

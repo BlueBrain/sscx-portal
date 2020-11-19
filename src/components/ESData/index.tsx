@@ -64,14 +64,14 @@ const ESData: React.FC<ESDataProps> = ({
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://bbp.neuroshapes.org',
             '@graph': state.data.map(d => d._source),
           })}
         </script>
-      </Helmet>
+      </Helmet> */}
       <div id={id} className={`${classPrefix}basis`}>
         <div className="center">{children(state.data)}</div>
         <div className="scroll-to">

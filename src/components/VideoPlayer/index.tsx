@@ -1,36 +1,55 @@
-import React from 'react';
-import { useNexusContext } from '@bbp/react-nexus';
-import { sscx } from '../../config';
+import React, { useRef, useEffect, useState } from 'react';
 
-type VideoProps = {
-  id: string;
-  width?: number;
-};
+// import videojs from 'video.js';
+// import 'videojs-contrib-quality-levels';
+// import 'videojs-http-source-selector';
 
-const Video: React.FC<VideoProps> = ({ id, width = 350 }) => {
-  const [video, setVideo] = React.useState<Blob | undefined>(undefined);
-  const [error, setError] = React.useState<boolean>(false);
-  const nexus = useNexusContext();
+// import 'video.js/dist/video-js.css';
 
-  React.useEffect(() => {
-    nexus.File.get(sscx.org, sscx.project, id, {
-      as: 'blob',
-    })
-      .then(v => setVideo(v as Blob))
-      .catch(() => setError(true));
+import Plyr from 'plyr';
+
+import 'plyr/dist/plyr.css';
+
+
+const Video: React.FC<any> = (props) => {
+  const videoRef = useRef(null);
+  const [videoPlayer, setVideoPlayer] = useState(null);
+
+  useEffect(() => {
+    console.log('Init video player');
+    const player = new Plyr(videoRef.current, {
+      settings: ['quality', 'loop'],
+      controls: ['play', 'progress', 'settings', 'pip', 'airplay', 'fullscreen'],
+      autoplay: true,
+      muted: true,
+      loop: {
+        active: true,
+      },
+    });
+    player.source = {
+      type: 'video',
+      sources: [{
+        src: props.src || 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
+        type: 'video/mp4',
+        size: 720
+      }, {
+        src: props.src || 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
+        type: 'video/mp4',
+        size: 1080
+      }]
+    };
+    setVideoPlayer(player);
+
+    return () => {
+      if (player) {
+        player.destroy();
+      }
+    }
   }, []);
 
-  if (error) {
-    return <p>error loading video</p>;
-  }
-
-  if (!video) {
-    return <p>loading...</p>;
-  }
-
-  const url = URL.createObjectURL(video);
-
-  return <video src={url} autoPlay loop muted width={width} controls />;
+  return (
+    <video className="js-plyr plyr" ref={videoRef} />
+  );
 };
 
 export default Video;

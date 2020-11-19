@@ -2,6 +2,9 @@ import React from 'react';
 import { RouteProps, Redirect } from 'react-router';
 
 import Home from './views/Home';
+import Glossary from './views/Glossary';
+import About from './views/About';
+import Contact from './views/Contact';
 // Experimental Data
 import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
 import ExpNeuronMorpho from './views/experimental/NeuronMorphology';
@@ -36,15 +39,30 @@ const routes: RouteProps[] = [
     exact: true,
   },
   {
+    path: '/glossary',
+    component: () => <Glossary />,
+    exact: true,
+  },
+  {
+    path: '/about',
+    component: () => <About />,
+    exact: true,
+  },
+  {
+    path: '/contact-and-submission',
+    component: () => <Contact />,
+    exact: true,
+  },
+  {
     path: '/styleguide',
     component: Styleguide,
     exact: true,
   },
-  {
-    path: '/downloads',
-    component: Download,
-    exact: true,
-  },
+  // {
+  //   path: '/downloads',
+  //   component: Download,
+  //   exact: true,
+  // },
   // Experimental Data
   {
     path: '/experimental-data',

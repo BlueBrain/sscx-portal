@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import Button from '../../components/Button';
 import { HomeNav, SecondaryNav } from '../Navigation';
-import { State } from '../../store';
+// import { State } from '../../store';
 
 import './style.less';
 
@@ -45,9 +45,9 @@ const NavButton: React.FC<NavButtonProps> = ({
 const NavDesktop = withRouter(({ location }) => {
   const [secondaryNav, setSecondaryNav] = React.useState(false);
   React.useEffect(() => setSecondaryNav(false), [location]);
-  const downloadItems = useSelector<State, number>(
-    state => state.download.items.length,
-  );
+  // const downloadItems = useSelector<State, number>(
+  //   state => state.download.items.length,
+  // )
 
   return (
     <ul className={`${classPrefix}basis`}>
@@ -75,9 +75,13 @@ const NavDesktop = withRouter(({ location }) => {
         <NavButton
           path="/downloads"
           name="Download"
-          notifications={downloadItems > 0 ? downloadItems : undefined}
+          // notifications={downloadItems > 0 ? downloadItems : undefined}
+          notifications={undefined}
           highlight
         />
+      </li>
+      <li>
+        <NavButton path="/about" name="About" />
       </li>
       <li>
         <NavButton path="/glossary" name="Glossary" />
@@ -87,9 +91,6 @@ const NavDesktop = withRouter(({ location }) => {
           path="/contact-and-submission"
           name="Contact and Submission"
         />
-      </li>
-      <li>
-        <NavButton path="/styleguide" name="Styleguide" />
       </li>
     </ul>
   );

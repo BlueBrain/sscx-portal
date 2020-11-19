@@ -3,7 +3,7 @@ import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import DataFilter from '../DataFilter';
 import ErrorBoundary from '../ErrorBoundary';
-import DownloadButton from '../DownloadButton';
+// import DownloadButton from '../DownloadButton';
 
 import './style.less';
 
@@ -50,12 +50,12 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ data = [] }) => {
               ))}
             </div>
             <div className="download">
-              <DownloadButton
+              {/* <DownloadButton
                 data={neuronDensityData.map(d => ({
                   '@type': 'Resource',
                   resourceId: d['@id'],
                 }))}
-              />
+              /> */}
             </div>
           </div>
         )}

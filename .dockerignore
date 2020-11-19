@@ -1,4 +1,4 @@
-node_modules/
-dist/
-doc/
-.cache
+*
+!dist
+!data
+!nginx.conf

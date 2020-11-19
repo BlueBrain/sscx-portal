@@ -3,7 +3,7 @@ import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import DataFilter from '../DataFilter';
 import ErrorBoundary from '../ErrorBoundary';
-import DownloadButton from '../DownloadButton';
+// import DownloadButton from '../DownloadButton';
 
 import './style.less';
 
@@ -51,12 +51,12 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ data = [] }) => {
               <i>missing data...</i>
             </div>
             <div className="download">
-              <DownloadButton
+              {/* <DownloadButton
                 data={layerThicknessData.map(d => ({
                   '@type': 'Resource',
                   resourceId: d['@id'],
                 }))}
-              />
+              /> */}
             </div>
           </div>
         )}

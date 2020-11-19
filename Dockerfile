@@ -1,19 +1,7 @@
-# Builder stage
-FROM node:14-alpine AS builder
+FROM nginx:alpine
 
-ARG NEXUS_TOKEN
-WORKDIR /tmp/sscx
-COPY . /tmp/sscx
-RUN yarn && yarn build
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY dist/ /usr/share/nginx/html/
+COPY data/ /usr/share/nginx/html/data/
 
-# Final stage
-FROM alpine:3.5
-
-ARG plugins=http.git
-RUN apk update && apk add caddy
-WORKDIR /var/www/sscx-portal
-COPY --from=builder /tmp/sscx/dist/ /var/www/sscx-portal
-COPY Caddyfile /etc/caddy/Caddyfile
-ENTRYPOINT ["/usr/sbin/caddy"]
-CMD ["--conf", "/etc/caddy/Caddyfile", "--log", "stdout"]
-EXPOSE 8080
+EXPOSE 8000

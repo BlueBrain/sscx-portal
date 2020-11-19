@@ -1,7 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useNexusContext } from '@bbp/react-nexus';
 
 import ESData from '../../components/ESData';
+import Data from '../../components/Data';
+import ImageViewer from '../../components/ImageViewer';
+import NexusPlugin from '../../components/NexusPlugin';
 import { electroPhysiologyDataQuery } from '../../queries/es';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
@@ -13,11 +17,11 @@ import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import eTypes from '../../__generated__/experimentalData.json';
-import EphysViewer, { EphysResponse } from '../../components/EphysViewer';
 
 const LayerAnatomy: React.FC = () => {
   const query = useQuery();
   const history = useHistory();
+  const nexus = useNexusContext();
 
   const addParam = (key: string, value: string): void => {
     query.set(key, value);
@@ -93,14 +97,58 @@ const LayerAnatomy: React.FC = () => {
         hasData={!!currentEtype && !!currentInstance}
         query={electroPhysiologyDataQuery(currentEtype, currentInstance)}
       >
-        {data => (
+        {esDocuments => (
           <>
+            <Collapsible title="Population">
+              <h3>Factsheet</h3>
+              <p>TBD</p>
+
+              <h3 className="mt-3">Distribution</h3>
+              <div className="row">
+                <div className="col-xs-12 col-sm-6">
+                  <ImageViewer src="/data/assets/images/population-distribution-1.png" />
+                </div>
+                <div className="col-xs-12 col-sm-6">
+                  <ImageViewer src="/data/assets/images/population-distribution-2.png" />
+                </div>
+              </div>
+
+              <h3 className="mt-3">Experimental instances</h3>
+              <table style={{width: '100%'}}>
+                <tr>
+                  <th>Name</th>
+                  <th>Image</th>
+                  <th>M-Type</th>
+                  <th>E-Type</th>
+                  <th>Organization</th>
+                  <th>Person</th>
+                </tr>
+                <tr>
+                  <td>Instance 1</td>
+                  <td></td>
+                  <td>L23_BP</td>
+                  <td>cNAC</td>
+                  <td>LNMC</td>
+                  <td>Ying Shi</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+              </table>
+            </Collapsible>
+
             <Collapsible
               title={`Electrophysiological Recordings for ${currentEtype}_${currentInstance}`}
             >
-              <EphysViewer
-                colorName={colorName}
-                data={data as EphysResponse[]}
+              <NexusPlugin
+                name="neuron-electrophysiology"
+                resource={esDocuments.length ? esDocuments[0]._source : null}
+                nexusClient={nexus}
               />
             </Collapsible>
           </>

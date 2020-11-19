@@ -16,7 +16,7 @@ const Brand: React.FC = () => {
         </a>
       </div>
       <a href="/">
-        <h1>SSCx Portal</h1>
+        <h1 className="text-white" >SSCx Portal</h1>
       </a>
     </div>
   );

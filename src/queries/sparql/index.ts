@@ -14,15 +14,19 @@ export const listEtypesExperiments = (etypeId: string) => `
 prefix nsg: <https://neuroshapes.org/>
 prefix schema: <http://schema.org/>
 prefix prov: <http://www.w3.org/ns/prov#>
+prefix vocab: <https://bluebrain.github.io/nexus/vocabulary/>
 
-SELECT DISTINCT (?entity AS ?id) (?entityName AS ?label)
+SELECT DISTINCT ?label ?contentUrl ?fileName
 WHERE {
   ?s rdf:type nsg:Trace ;
+     vocab:deprecated false ;
      nsg:annotation / nsg:hasBody <${etypeId}> ;
-     nsg:derivation / prov:entity ?entity .
-  ?entity schema:name ?entityName
+     nsg:derivation / prov:entity / schema:name ?label ;
+     schema:distribution / schema:name ?fileName ;
+     schema:distribution / schema:contentUrl ?contentUrl ;
+     schema:distribution / schema:encodingFormat "application/octet-stream" ;
   }
-ORDER BY ASC(?entityName)
+ORDER BY ASC(?traceName)
 `;
 
 export const listLayers = () => `

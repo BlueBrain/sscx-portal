@@ -1,14 +1,26 @@
 import React from 'react';
 
-import LayerAnatomyTemplate from '../../templates/LayerAnatomy';
+import NeuronTemplate from '../../templates/Neuron';
 import { colorName, sectionTitle } from './config';
+import Collapsible from '../../components/Collapsible';
+// import { neuronFactsheetPath } from '../../queries/http';
+
+
+const pathwayFactsheetPath = () => '';
+
 
 export default () => (
-  <LayerAnatomyTemplate
+  <NeuronTemplate
     color={colorName}
     sectionTitle={sectionTitle}
-    dataQuery={() => ''}
+    factsheetPath={pathwayFactsheetPath}
   >
-    {data => ''}
-  </LayerAnatomyTemplate>
+    {(data, title) => (
+      <>
+        <Collapsible title={title}>
+          <span>test</span>
+        </Collapsible>
+      </>
+    )}
+  </NeuronTemplate>
 );

@@ -46,7 +46,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
 
   return (
     <ul className="secondary-nav">
-      <li className={active === 'exp' && 'active'}>
+      <li className={active === 'exp' ? 'active' : ''}>
         <span style={{ backgroundColor: accentColors.yellow }} />
         <button onClick={() => toggleSubmenu('exp')}>
           Experimental Data{' '}
@@ -75,7 +75,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
           </li>
         </ul>
       </li>
-      <li className={active === 'rec' && 'active'}>
+      <li className={active === 'rec' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.blue }} />
         <button onClick={() => toggleSubmenu('rec')}>
           Reconstruction Data{' '}
@@ -110,7 +110,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
           </li>
         </ul>
       </li>
-      <li className={active === 'dig' && 'active'}>
+      <li className={active === 'dig' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.lavender }} />
         <button onClick={() => toggleSubmenu('dig')}>
           Digital Reconstructions{' '}
@@ -145,7 +145,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
           </li>
         </ul>
       </li>
-      <li className={active === 'val' && 'active'}>
+      <li className={active === 'val' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.green }} />
         <button onClick={() => toggleSubmenu('val')}>
           Validations{' '}
@@ -180,7 +180,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
           </li>
         </ul>
       </li>
-      <li className={active === 'pre' && 'active'}>
+      <li className={active === 'pre' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.grey }} />
         <button onClick={() => toggleSubmenu('pre')}>
           Predictions{' '}

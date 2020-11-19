@@ -6,6 +6,7 @@ import InfoBox from '../components/InfoBox';
 import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
+import HttpData from '../components/HttpData';
 import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
 import { BrainRegion } from '../components/BrainRegionsSelector';
@@ -13,12 +14,14 @@ import ComboSelector from '../components/ComboSelector';
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import List from '../components/List';
 import { accentColors } from '../config';
+import ScrollTo from '../components/ScrollTo';
 
-const mTypes = ['a', 'b', 'c', 'd', 'e', 'f'];
 
 export type SynapticPathwaysTemplateProps = {
   color: Color;
   sectionTitle: string;
+  factsheetPath?: (pathway: string) => string;
+  children?: (data: any, title: string, pathway: string) => React.ReactNode;
 };
 
 type PathwayMType = {
@@ -30,9 +33,11 @@ type PathwayMType = {
   };
 }
 
-const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
+const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   sectionTitle,
   color,
+  factsheetPath = () => '',
+  children,
 }) => {
   const query = useQuery();
   const history = useHistory();
@@ -67,6 +72,16 @@ const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
     ? pathwayMType.post[currentPostLayer]
     : [];
 
+  const pathway = currentPreType && currentPostType
+    ? `${currentPreType}-${currentPostType}`
+    : null;
+
+  const path = pathway
+    ? factsheetPath(pathway)
+    : null;
+
+  const title = `Pathway fact sheet ${pathway}`;
+
   useEffect(() => {
     fetch('/data/pathway-mtype.json')
       .then(res => res.json())
@@ -74,63 +89,75 @@ const BrainRegions: React.FC<SynapticPathwaysTemplateProps> = ({
   }, []);
 
   return (
-    <Filters primaryColor={color} hasData={!!hasData}>
-      <div className="center-col">
-        <Title
-          primaryColor={color}
-          title="Synaptic Pathways"
-          subtitle={sectionTitle}
-          hint="Select a subregion of interest in the S1 of the rat brain."
-        />
-        <div>
-          <InfoBox title="Longer Text" text={lorem} color={color} />
-          <br />
-          <Pills
-            title="1. Select a subregion"
-            list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
-            defaultValue={currentRegion}
-            onSelect={setRegion}
-            color={color}
+    <>
+      <Filters primaryColor={color} hasData={!!hasData}>
+        <div className="center-col">
+          <Title
+            primaryColor={color}
+            title="Synaptic Pathways"
+            subtitle={sectionTitle}
+            hint="Select a subregion of interest in the S1 of the rat brain."
           />
-        </div>
-      </div>
-      <div className="center-col">
-        <ComboSelector
-          selector={
-            <SynapticPathwaySelector
-              color={accentColors[color]}
-              defaultActivePreLayer={currentPreLayer}
-              onPreLayerSelected={setPreLayerQuery}
-              defaultActivePostLayer={currentPostLayer}
-              onPostLayerSelected={setPostLayerQuery}
-            />
-          }
-          list1={
-            <List
-              title="m-type pre-synaptic"
-              list={preMTypes}
-              defaultValue={currentPreType}
-              onSelect={setPreTypeQuery}
+          <div>
+            <InfoBox title="Longer Text" text={lorem} color={color} />
+            <br />
+            <Pills
+              title="1. Select a subregion"
+              list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
+              defaultValue={currentRegion}
+              onSelect={setRegion}
               color={color}
             />
-          }
-          list2={
-            <List
-              title="m-type post-synaptic"
-              list={postMTypes}
-              defaultValue={currentPostType}
-              onSelect={setPostTypeQuery}
-              color="orange"
-            />
-          }
-          selectorTitle="2. Choose two layers"
-          listsTitle="3. Choose Pre and Post-synaptio"
-          list1Open={!!currentPreLayer}
-          list2Open={!!currentPostLayer}
-        />
+          </div>
+        </div>
+        <div className="center-col">
+          <ComboSelector
+            selector={
+              <SynapticPathwaySelector
+                color={accentColors[color]}
+                defaultActivePreLayer={currentPreLayer}
+                onPreLayerSelected={setPreLayerQuery}
+                defaultActivePostLayer={currentPostLayer}
+                onPostLayerSelected={setPostLayerQuery}
+              />
+            }
+            list1={
+              <List
+                title="m-type pre-synaptic"
+                list={preMTypes}
+                defaultValue={currentPreType}
+                onSelect={setPreTypeQuery}
+                color={color}
+              />
+            }
+            list2={
+              <List
+                title="m-type post-synaptic"
+                list={postMTypes}
+                defaultValue={currentPostType}
+                onSelect={setPostTypeQuery}
+                color="orange"
+              />
+            }
+            selectorTitle="2. Choose two layers"
+            listsTitle="3. Choose Pre and Post-synaptic"
+            list1Open={!!currentPreLayer}
+            list2Open={!!currentPostLayer}
+          />
+        </div>
+      </Filters>
+
+      <HttpData path={path}>
+        {data => children(data, title, pathway)}
+      </HttpData>
+
+      <div className="scroll-to">
+        <ScrollTo anchor="filters" direction="up">
+          Return to filters
+        </ScrollTo>
       </div>
-    </Filters>
+    </>
   );
 };
 
-export default BrainRegions;
+export default SynapticPathways;

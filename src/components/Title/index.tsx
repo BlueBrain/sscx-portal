@@ -6,7 +6,7 @@ import './style.less';
 const classPrefix = 'title__';
 
 type TitleProps = {
-  title: string;
+  title?: string;
   subtitle?: string;
   primaryColor?: Color;
   hint?: string;
@@ -26,9 +26,9 @@ const Title: React.FC<TitleProps> = ({
         primary ? 'primary' : ''
       } ${primaryColor}`}
     >
-      {subtitle && !primary && <h4>{subtitle}</h4>}
-      <h2 role="title">{title}</h2>
-      {subtitle && primary && <h4>{subtitle}</h4>}
+      {subtitle && !primary && <h4 className="text-white">{subtitle}</h4>}
+      {title && <h2 role="title" className="text-white">{title}</h2>}
+      {subtitle && primary && <h4 className="text-white">{subtitle}</h4>}
       {hint && <p dangerouslySetInnerHTML={{ __html: hint }} />}
     </div>
   );

@@ -17,14 +17,14 @@ import { Color } from '../types';
 export type BrainRegionTemplateProps = {
   color: Color;
   sectionTitle: string;
-  factsheetPath: (subregion: string) => string;
-  children: (data: any) => React.ReactNode;
+  factsheetPath?: (subregion: string) => string;
+  children?: (subregion: string, data: any) => React.ReactNode;
 };
 
 const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
   color,
   sectionTitle,
-  factsheetPath,
+  factsheetPath = () => '',
   children,
 }) => {
   const query = useQuery();
@@ -65,7 +65,9 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
           </Selector>
         </div>
       </Filters>
-      <HttpData path={currentFactsheetPath}>{data => children(data)}</HttpData>
+
+      <HttpData path={currentFactsheetPath}>{data => children(currentRegion, data)}</HttpData>
+
       <div className="scroll-to">
         <ScrollTo anchor="filters" direction="up">
           Return to filters

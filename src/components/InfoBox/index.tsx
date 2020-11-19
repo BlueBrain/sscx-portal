@@ -42,7 +42,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
 
   return (
     <div className={`${classPrefix}basis ${color}`}>
-      {title && <h3>{title}</h3>}
+      {title && <h3 className="text-white">{title}</h3>}
       <p>{currentText}</p>
       {!isShorter(text, maxChars) && (
         <span onClick={() => setExpanded(!expanded)}>

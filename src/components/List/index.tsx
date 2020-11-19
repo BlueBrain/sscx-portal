@@ -12,6 +12,7 @@ type ListProps = {
   defaultValue?: string;
   onSelect?: (string) => void;
   color?: Color;
+  block?: boolean;
 };
 
 type ListElementProps = {
@@ -44,6 +45,7 @@ const List: React.FC<ListProps> = ({
   defaultValue,
   onSelect,
   color,
+  block = false,
 }) => {
   const [activeElement, setActiveElement] = React.useState<string>(
     defaultValue,
@@ -58,7 +60,7 @@ const List: React.FC<ListProps> = ({
 
   return (
     <div
-      className={`${classPrefixList}basis ${color}`}
+      className={`${classPrefixList}basis ${color} ${block ? 'block' : ''}`}
       role="radiogroup"
       aria-labelledby={`${classPrefixList}${id}`}
     >
