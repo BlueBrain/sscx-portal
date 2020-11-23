@@ -6,6 +6,7 @@ import { layerAnatomyDataQuery } from '../../queries/es';
 import Collapsible from '../../components/Collapsible';
 import LayerThickness from '../../components/LayerThickness';
 import NeuralDensity from '../../components/NeuralDensity';
+import LayerAnatomySummary from '../../components/LayerAnatomySummary';
 
 export default () => (
   <LayerAnatomyTemplate
@@ -13,14 +14,17 @@ export default () => (
     sectionTitle={sectionTitle}
     dataQuery={layerAnatomyDataQuery}
   >
-    {data => (
+    {(layer, data) => (
       <>
-        <Collapsible title="Layer Thickness">
+        <Collapsible title="Summary">
+          <LayerAnatomySummary data={data}/>
+        </Collapsible>
+        {/* <Collapsible title="Layer Thickness">
           <LayerThickness data={data} />
-        </Collapsible>
-        <Collapsible title="Neuronal Density">
+        </Collapsible> */}
+        {/* <Collapsible title="Neuronal Density">
           <NeuralDensity data={data} />
-        </Collapsible>
+        </Collapsible> */}
       </>
     )}
   </LayerAnatomyTemplate>

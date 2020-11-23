@@ -15,18 +15,11 @@ import ESData from '../components/ESData';
 export type LayerAnatomyTemplateProps = {
   color: Color;
   sectionTitle: string;
-  dataQuery: (layers: string | string[]) => any;
+  dataQuery: () => any;
   children: (
+    layer: Layer,
     data: ElasticSearchViewQueryResponse<any>['hits']['hits'],
   ) => React.ReactNode;
-};
-
-const layersMapping = {
-  L1: 'layer 1',
-  L23: ['layer 2', 'layer 3'],
-  L4: 'layer 4',
-  L5: 'layer 5',
-  L6: 'layer 6',
 };
 
 const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
@@ -43,9 +36,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
   };
   const currentLayer: Layer = query.get('layer') as Layer;
 
-  const currentQuery = currentLayer
-    ? dataQuery(layersMapping[currentLayer])
-    : {};
+  const currentQuery = dataQuery();
 
   return (
     <>
@@ -75,8 +66,8 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           </Selector>
         </div>
       </Filters>
-      <ESData hasData={!!currentLayer} query={currentQuery}>
-        {data => children(data)}
+      <ESData hasData={currentQuery} query={currentQuery}>
+        {data => children(currentLayer, data)}
       </ESData>
     </>
   );

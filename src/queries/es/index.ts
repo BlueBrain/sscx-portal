@@ -2,19 +2,10 @@
  * Lists get specific experiment of specific e-type
  *
  */
-export const layerAnatomyDataQuery = (layers: string | string[]) => {
-  // let filters;
-  // if (typeof layers === 'string') {
-  //   filters = [{ term: { 'brainLocation.layer.label.raw': layers } }];
-  // } else {
-  //   filters = layers.map(layer => ({
-  //     term: { 'brainLocation.layer.label.raw': layer },
-  //   }));
-  // }
-
+export const layerAnatomyDataQuery = () => {
   return {
     from: 0,
-    size: 10000,
+    size: 1000,
     query: {
       bool: {
         filter: [
@@ -39,11 +30,6 @@ export const layerAnatomyDataQuery = (layers: string | string[]) => {
               ],
             },
           },
-          // {
-          //   bool: {
-          //     should: filters,
-          //   },
-          // },
         ],
       },
     },
