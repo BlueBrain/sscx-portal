@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useNexusContext } from '@bbp/react-nexus';
 
 import ESData from '../../components/ESData';
+import DataContainer from '../../components/DataContainer';
 import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import { morphologyDataQuery } from '../../queries/es';
 import useQuery from '../../hooks/useQuery';
@@ -107,24 +108,27 @@ const NeuronExperimentalMorphology: React.FC = () => {
           />
         </div>
       </Filters>
-      <ESData
-        hasData={!!currentInstance}
-        query={morphologyDataQuery(currentMtype, currentInstance)}
-      >
-        {esDocuments => (
-          <>
-            <Collapsible
-              title={`Neuron Morphology ${currentMtype} ${currentInstance}`}
-            >
-              <NexusPlugin
-                name="neuron-morphology"
-                resource={esDocuments.length ? esDocuments[0]._source : null}
-                nexusClient={nexus}
-              />
-            </Collapsible>
-          </>
-        )}
-      </ESData>
+
+      <DataContainer visible={!!currentInstance}>
+        <ESData
+          hasData={!!currentInstance}
+          query={morphologyDataQuery(currentMtype, currentInstance)}
+        >
+          {esDocuments => (
+            <>
+              <Collapsible
+                title={`Neuron Morphology ${currentMtype} ${currentInstance}`}
+              >
+                <NexusPlugin
+                  name="neuron-morphology"
+                  resource={esDocuments.length ? esDocuments[0]._source : null}
+                  nexusClient={nexus}
+                />
+              </Collapsible>
+            </>
+          )}
+        </ESData>
+      </DataContainer>
     </>
   );
 };

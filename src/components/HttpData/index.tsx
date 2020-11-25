@@ -1,17 +1,12 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 
-import './style.less';
-
-const classPrefix = 'data-results__';
 
 type HttpDataProps = {
   path: string;
   children: (data: any) => React.ReactNode;
-  id?: string;
 };
 
-const HttpData: React.FC<HttpDataProps> = ({ path, children, id = 'data' }) => {
+const HttpData: React.FC<HttpDataProps> = ({ path, children }) => {
   const [state, setState] = React.useState<{
     data: any;
     loading: boolean;
@@ -45,17 +40,7 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, id = 'data' }) => {
 
   return (
     <>
-      {/* <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://bbp.neuroshapes.org',
-            '@graph': state.data,
-          })}
-        </script>
-      </Helmet> */}
-      <div id={id} className={`${classPrefix}basis`}>
-        <div className="center">{children(state.data)}</div>
-      </div>
+      {children(state.data)}
     </>
   );
 };

@@ -11,6 +11,7 @@ import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
 import { lorem } from '../views/Styleguide';
 import ESData from '../components/ESData';
+import DataContainer from '../components/DataContainer';
 
 export type LayerAnatomyTemplateProps = {
   color: Color;
@@ -66,9 +67,11 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           </Selector>
         </div>
       </Filters>
-      <ESData hasData={currentQuery} query={currentQuery}>
-        {data => children(currentLayer, data)}
-      </ESData>
+      <DataContainer visible={currentQuery}>
+        <ESData hasData={currentQuery} query={currentQuery}>
+          {data => children(currentLayer, data)}
+        </ESData>
+      </DataContainer>
     </>
   );
 };
