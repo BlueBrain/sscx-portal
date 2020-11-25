@@ -2,6 +2,7 @@ import React from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import ErrorBoundary from '../ErrorBoundary';
+import NumberFormat from '../NumberFormat';
 
 import './style.less';
 
@@ -65,19 +66,19 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
           <thead>
             <tr>
               <th>Layer</th>
-              <th colSpan={2} >Layer thickness, {summary[0].thickness.unit}</th>
-              <th colSpan={3} >Neuron density, {summary[0].density.unit}</th>
+              <th colSpan={2} >Layer thickness (mean), {summary[0].thickness.unit}</th>
+              <th colSpan={3} >Neuron density (mean ± std), {summary[0].density.unit}</th>
             </tr>
           </thead>
           <tbody>
             {summary.map(row => (
               <tr key={row.layer}>
                 <td className="text-capitalize">{row.layer}</td>
-                <td>{row.thickness.mean}</td>
-                <td>(n={row.thickness.n})</td>
-                <td>{row.density.mean}</td>
-                <td>± {row.density.std}</td>
-                <td>(n={row.density.n})</td>
+                <td><NumberFormat value={row.thickness.mean}/></td>
+                <td><NumberFormat value={row.thickness.n} prefix="n=" /></td>
+                <td><NumberFormat value={row.density.mean} /></td>
+                <td><NumberFormat value={row.density.std} prefix="± " /></td>
+                <td><NumberFormat value={row.density.n} prefix="n=" /></td>
               </tr>
             ))}
           </tbody>

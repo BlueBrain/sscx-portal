@@ -1,10 +1,31 @@
+
 .layer-thickness__basis {
-  display: flex;
-  .data-view {
-    flex-grow: 11;
+  table {
+    width: 100%;
   }
-  .download {
-    flex-grow: 1;
-    text-align: right;
+
+  table, th, td {
+    border: 1px solid #eee;
+  }
+
+  th, td {
+    padding: 1rem;
+  }
+
+  td.nowrap {
+    max-width:100%;
+    white-space:nowrap;
+  }
+
+  .image-cell {
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+
+  .image-container {
+    max-width: 100px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    display: inline-block;
   }
 }

@@ -1,65 +1,66 @@
 import React from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
-import DataFilter from '../DataFilter';
 import ErrorBoundary from '../ErrorBoundary';
-// import DownloadButton from '../DownloadButton';
+import NumberFormat from '../NumberFormat';
+import { Layer } from '../../types'
 
 import './style.less';
 
-type DataShape = {
-  brainLocation: {
-    layer: {
-      label: string;
-    };
-  };
-  series: {
-    statistic: string;
-    value: {
-      '@value': number;
-    };
-    unitCode: string;
-  }[];
-};
+const classPrefix = 'neural-density__';
+
 
 export type LayerThicknessProps = {
+  layer?: Layer;
   data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+  className?: string;
 };
 
-const NeuralDensity: React.FC<LayerThicknessProps> = ({ data = [] }) => {
+const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], className='' }) => {
+  const entities = data.map(document => document._source);
+
+  const layerNums = layer.match(/(\d+)/)[0].split('');
+  const layerLabels = layerNums.map(layerNum => `layer ${layerNum}`);
+
+  const rawNeuralDensities = entities
+    .filter(entity => entity['@type'].toString().includes('NeuronDensity'))
+    .filter(entity => entity.derivation)
+    .filter(entity => layerLabels.includes(entity.brainLocation?.layer?.label));
+
+  const neuralDensities = rawNeuralDensities.map(neuralDensity => ({
+    layer: neuralDensity.brainLocation.layer.label,
+    mean: neuralDensity.series.find(s => s.statistic === 'mean')?.value,
+    unit: neuralDensity.series.find(s => s.statistic === 'mean')?.unitCode,
+    std: neuralDensity.series.find(s => s.statistic === 'standard deviation')?.value,
+    n: neuralDensity.series.find(s => s.statistic === 'N')?.value,
+  }));
+
+  const unit = neuralDensities.length
+    ? neuralDensities[0].unit
+    : ''
+
   return (
     <ErrorBoundary>
-      <DataFilter<DataShape>
-        data={data}
-        type="https://neuroshapes.org/NeuronDensity"
-      >
-        {neuronDensityData => (
-          <div className="neural-density__basis">
-            <div className="data-view">
-              {neuronDensityData.map(d => (
-                <div key={d['@id']}>
-                  {d.series.map &&
-                    d.series.map(s => (
-                      <p
-                        key={`${s.statistic}-${s.value['value']}-${s.unitCode}`}
-                      >
-                        {s.statistic}: {s.value['@value']} {s.unitCode}
-                      </p>
-                    ))}
-                </div>
-              ))}
-            </div>
-            <div className="download">
-              {/* <DownloadButton
-                data={neuronDensityData.map(d => ({
-                  '@type': 'Resource',
-                  resourceId: d['@id'],
-                }))}
-              /> */}
-            </div>
-          </div>
-        )}
-      </DataFilter>
+      <div className={`${classPrefix}basis ${className}`}>
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th colSpan={3}>Neuron density (mean ± std), {unit}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {neuralDensities.map(neuralDensity => (
+              <tr key={neuralDensity.layer}>
+                <td className="text-capitalize">{neuralDensity.layer}</td>
+                <td><NumberFormat value={neuralDensity.mean} /></td>
+                <td><NumberFormat value={neuralDensity.std} prefix="± " /></td>
+                <td><NumberFormat value={neuralDensity.n} prefix="n=" /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </ErrorBoundary>
   );
 };

@@ -1,66 +1,138 @@
 import React from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
-import DataFilter from '../DataFilter';
 import ErrorBoundary from '../ErrorBoundary';
-// import DownloadButton from '../DownloadButton';
+import { Layer } from '../../types'
+import NexusImage from '../NexusImage';
+import NumberFormat from '../NumberFormat';
+import { sscx } from '../../config';
 
 import './style.less';
 
-type DataShape = {
-  brainLocation: {
-    layer: {
-      label: string;
-    };
-  };
-  series: {
-    statistic: string;
-    value: {
-      '@value': number;
-    };
-    unitCode: string;
-  }[];
-};
+
+const classPrefix = 'layer-thickness__';
 
 export type LayerThicknessProps = {
+  layer: Layer;
   data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+  className?: string;
 };
 
-const LayerThickness: React.FC<LayerThicknessProps> = ({ data = [] }) => {
+const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], className='' }) => {
+  const entities = data.map(document => document._source);
+
+  const rawSliceCollections = entities
+    .filter(entity => entity['@type'].toString().includes('SliceCollection'));
+
+  const rawLayerThicknesses = entities
+    .filter(entity => entity['@type'].toString().includes('LayerThickness'))
+    .filter(entity => !Array.isArray(entity.derivation));
+
+  const layerNums = layer.match(/(\d+)/)[0].split('');
+
+  const sliceCollections = rawSliceCollections
+    // construct simplified sliceCollection object
+    .map(sliceCollection => ({
+      name: sliceCollection.name,
+      images: sliceCollection.image.map(imageEntity => imageEntity['@id']),
+      layerThicknesses: rawLayerThicknesses
+        // filter layerThicknesses derived from current sliceCollection
+        .filter(rawLayerThickness => {
+          return rawLayerThickness.derivation?.entity['@id'] === sliceCollection['@id'];
+        })
+        // filter layerThicknesses for current layers
+        .filter(rawLayerThickness => {
+          return layerNums
+            .map(layerNum => `layer ${layerNum}`)
+            .includes(rawLayerThickness.brainLocation?.layer?.label);
+        })
+        // compose simplified layer thickness objects
+        .map(rawLayerThickness => ({
+          layer: rawLayerThickness.brainLocation.layer.label,
+          unit: rawLayerThickness.series.find(s => s.statistic === 'mean')?.unitCode,
+          mean: rawLayerThickness.series.find(s => s.statistic === 'mean')?.value,
+          std: rawLayerThickness.series.find(s => s.statistic === 'standard deviation')?.value,
+          n: rawLayerThickness.series.find(s => s.statistic === 'N')?.value,
+        }))
+        // sort by layer
+        .sort((a, b) => a.layer < b.layer ? -1 : 1),
+    }))
+    // sort by species name
+    .sort((a, b) => a.name < b.name ? -1 : 1);
+
+  const unit = sliceCollections[0]?.layerThicknesses[0].unit;
+
   return (
     <ErrorBoundary>
-      <DataFilter<DataShape>
-        data={data}
-        type="https://neuroshapes.org/LayerThickness"
-      >
-        {layerThicknessData => (
-          <div className="layer-thickness__basis">
-            <div className="data-view">
-              <h1>Layer thickness summary</h1>
-              {layerThicknessData.map(d => (
-                <div key={d['@id']}>
-                  <p>region: {d.brainLocation.layer.label}</p>
-                  {d.series.map(s => (
-                    <p key={`${s.statistic}-${s.value['value']}-${s.unitCode}`}>
-                      {s.statistic}: {s.value['@value']} {s.unitCode}
-                    </p>
+      <div className={`${classPrefix}basis ${className}`}>
+        <table>
+          <thead>
+            <tr>
+              <th>Animal</th>
+              <th>Preview</th>
+              <th colSpan={4}>Layer thickness (mean ± std), {unit}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sliceCollections.map(sliceCollection => (
+              <tr key={sliceCollection.name}>
+                <td className="td-nowrap">{sliceCollection.name}</td>
+                <td className="image-cell">
+                  {sliceCollection.images.map(image => (
+                    <div key={image} className="image-container">
+                      <NexusImage
+                        org={sscx.org}
+                        project={sscx.project}
+                        imageUrl={image}
+                      />
+                    </div>
                   ))}
-                </div>
-              ))}
-              <h1>Layer thickness per specimen</h1>
-              <i>missing data...</i>
-            </div>
-            <div className="download">
-              {/* <DownloadButton
-                data={layerThicknessData.map(d => ({
-                  '@type': 'Resource',
-                  resourceId: d['@id'],
-                }))}
-              /> */}
-            </div>
-          </div>
-        )}
-      </DataFilter>
+                </td>
+                <td className="td-nowrap">
+                  {sliceCollection.layerThicknesses.map(layerThickness => (
+                    <div key={layerThickness.layer}>
+                      <span className="text-capitalize text-nowrap">
+                        {layerThickness.layer}
+                      </span>
+                      <br/>
+                    </div>
+                  ))}
+                </td>
+                <td className="td-nowrap">
+                  {sliceCollection.layerThicknesses.map(layerThickness => (
+                    <div key={layerThickness.layer}>
+                      <span className="text-nowrap">
+                        <NumberFormat value={layerThickness.mean} />
+                      </span>
+                      <br/>
+                    </div>
+                  ))}
+                </td>
+                <td className="td-nowrap">
+                  {sliceCollection.layerThicknesses.map(layerThickness => (
+                    <div key={layerThickness.layer}>
+                      <span className="text-nowrap">
+                        <NumberFormat value={layerThickness.std} prefix="± " />
+                      </span>
+                      <br/>
+                    </div>
+                  ))}
+                </td>
+                <td className="td-nowrap">
+                  {sliceCollection.layerThicknesses.map(layerThickness => (
+                    <div key={layerThickness.layer}>
+                      <span className="text-nowrap">
+                        <NumberFormat value={layerThickness.n} prefix={'n='} />
+                      </span>
+                      <br/>
+                    </div>
+                  ))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </ErrorBoundary>
   );
 };
