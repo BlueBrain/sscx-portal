@@ -7,6 +7,9 @@ import { NexusProvider } from '@bbp/react-nexus';
 import routes from './routes';
 import MainLayout from './layouts/MainLayout';
 
+import 'antd/dist/antd.css';
+import './assets/styles/app.global.less'
+
 
 const importMap = `{
   "imports": {
