@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { useNexusContext } from '@bbp/react-nexus';
 
 import ESData from '../../components/ESData';
+import HttpData from '../../components/HttpData';
 import DataContainer from '../../components/DataContainer';
 import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import { morphologyDataQuery } from '../../queries/es';
+import { expMorphologyFactsheetPath } from '../../queries/http';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
@@ -18,8 +20,9 @@ import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import List from '../../components/List';
 import expMorphologyData from '../../__generated__/exp-morphology-data.json';
-
-// import 'antd/es/button/style/index.css';
+import Factsheet from '../../components/Factsheet';
+import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
+import { sscx } from '../../config';
 
 
 const NeuronExperimentalMorphology: React.FC = () => {
@@ -57,6 +60,10 @@ const NeuronExperimentalMorphology: React.FC = () => {
     addQueryParam('instance', instance);
   };
   const currentInstance: string = query.get('instance') as string;
+
+  const getMorphologyDistribution = (morphologyResource: any) => {
+    return morphologyResource.distribution.find(d => d.name.includes('.asc'));
+  };
 
   return (
     <>
@@ -110,24 +117,40 @@ const NeuronExperimentalMorphology: React.FC = () => {
       </Filters>
 
       <DataContainer visible={!!currentInstance}>
-        <ESData
-          hasData={!!currentInstance}
-          query={morphologyDataQuery(currentMtype, currentInstance)}
-        >
-          {esDocuments => (
-            <>
-              <Collapsible
-                title={`Neuron Morphology ${currentMtype} ${currentInstance}`}
-              >
+        <Collapsible title={`Neuron Morphology ${currentMtype} ${currentInstance}`}>
+          <HttpData path={expMorphologyFactsheetPath(currentInstance)}>
+            {factsheetData => (
+              <Factsheet facts={factsheetData[0].values} />
+            )}
+          </HttpData>
+
+          <ESData
+            hasData={!!currentInstance}
+            query={morphologyDataQuery(currentMtype, currentInstance)}
+          >
+            {esDocuments => (
+              <>
+                {esDocuments.length  && (
+                  <NexusFileDownloadButton
+                    className="mt-2 mb-3"
+                    filename={getMorphologyDistribution(esDocuments[0]._source).name}
+                    url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
+                    org={sscx.org}
+                    project={sscx.project}
+                  >
+                    Download morphology
+                  </NexusFileDownloadButton>
+                )}
                 <NexusPlugin
+                  className="mt-3"
                   name="neuron-morphology"
                   resource={esDocuments.length ? esDocuments[0]._source : null}
                   nexusClient={nexus}
                 />
-              </Collapsible>
-            </>
-          )}
-        </ESData>
+              </>
+            )}
+          </ESData>
+        </Collapsible>
       </DataContainer>
     </>
   );

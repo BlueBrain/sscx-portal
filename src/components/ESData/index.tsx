@@ -4,7 +4,6 @@ import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import { sscx } from '../../config';
 
-const classPrefix = 'data-results__';
 
 type ESDataProps = {
   hasData: boolean;
@@ -51,11 +50,12 @@ const ESData: React.FC<ESDataProps> = ({
     return null;
   }
 
-  if (state.loading) {
-    return <p>loading...</p>;
-  }
   if (state.error) {
     return <p>An error happened loading the data... Please try again later.</p>;
+  }
+
+  if (state.loading || !state.data) {
+    return <p>loading...</p>;
   }
 
   return (

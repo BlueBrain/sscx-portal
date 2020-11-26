@@ -31,7 +31,7 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children }) => {
     return null;
   }
 
-  if (state.loading) {
+  if (state.loading || !state.data) {
     return <p>loading...</p>;
   }
   if (state.error) {

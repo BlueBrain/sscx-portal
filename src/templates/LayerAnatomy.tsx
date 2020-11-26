@@ -67,6 +67,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           </Selector>
         </div>
       </Filters>
+
       <DataContainer visible={currentQuery}>
         <ESData hasData={currentQuery} query={currentQuery}>
           {data => children(currentLayer, data)}
