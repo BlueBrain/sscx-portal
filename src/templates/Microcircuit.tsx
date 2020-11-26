@@ -10,6 +10,7 @@ import MicrocircuitSelector from '../components/MicrocircuitSelector';
 import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
 import HttpData from '../components/HttpData';
+import DataContainer from '../components/DataContainer';
 import Pills from '../components/Pills';
 import { BrainRegion } from '../components/BrainRegionsSelector';
 import { accentColors } from '../config';
@@ -97,17 +98,13 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
         </div>
       </Filters>
 
-      {currentFactsheets.map(factsheet => (
-        <HttpData key={factsheet.path} path={factsheet.path}>
-          {data => children(currentRegion, currentLayer, data)}
-        </HttpData>
-      ))}
-
-      <div className="scroll-to">
-        <ScrollTo anchor="filters" direction="up">
-          Return to filters
-        </ScrollTo>
-      </div>
+      <DataContainer>
+        {currentFactsheets.map(factsheet => (
+          <HttpData key={factsheet.path} path={factsheet.path}>
+            {data => children(currentRegion, currentLayer, data)}
+          </HttpData>
+        ))}
+      </DataContainer>
     </>
   );
 };

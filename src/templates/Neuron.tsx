@@ -7,6 +7,7 @@ import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import HttpData from '../components/HttpData';
+import DataContainer from '../components/DataContainer';
 import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
 import { BrainRegion } from '../components/BrainRegionsSelector';
@@ -152,100 +153,92 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         </div>
       </Filters>
 
-      {/* <HttpData path={path}>
-        {data => children(data, title, pathway)}
-      </HttpData> */}
+      <DataContainer>
+        {currentMtype && (
+          <HttpData path={'/data/MTypes/L5_BTC/factsheet.json'}>
+            {data => (
+              <>
+                <Collapsible title={`M-Type ${currentMtype} Factsheet`}>
+                  <MtypeFactsheet data={data} />
 
-      {currentMtype && (
-        <HttpData path={'/data/MTypes/L5_BTC/factsheet.json'}>
-          {data => (
-            <>
-              <Collapsible title={`M-Type ${currentMtype} Factsheet`}>
-                <MtypeFactsheet data={data} />
+                  <h4 className="mt-4">Axonal and dendritic distribution</h4>
+                  <div className="row">
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_bif_angle.png"/>
+                    </div>
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_length.png"/>
+                    </div>
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_sec_length.png"/>
+                    </div>
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_volume.png"/>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_bif_angle.png"/>
+                    </div>
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_length.png"/>
+                    </div>
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_sec_length.png"/>
+                    </div>
+                    <div className="col-xs-3">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_volume.png"/>
+                    </div>
+                  </div>
+                </Collapsible>
+              </>
+            )}
+          </HttpData>
+        )}
 
-                <h4 className="mt-4">Axonal and dendritic distribution</h4>
-                <div className="row">
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_bif_angle.png"/>
-                  </div>
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_length.png"/>
-                  </div>
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_sec_length.png"/>
-                  </div>
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_axon_volume.png"/>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_bif_angle.png"/>
-                  </div>
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_length.png"/>
-                  </div>
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_sec_length.png"/>
-                  </div>
-                  <div className="col-xs-3">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/51766/dist_basal_volume.png"/>
-                  </div>
-                </div>
-              </Collapsible>
-            </>
-          )}
-        </HttpData>
-      )}
+        {currentEtype && (
+          <HttpData path={'/data/emodel/cADpyr_L5TPC/factsheet.json'}>
+            {data => (
+              <>
+                <Collapsible title={`E-Type ${currentEtype} Factsheet`}>
+                  <EtypeFactsheet data={data} />
+                </Collapsible>
+              </>
+            )}
+          </HttpData>
+        )}
 
-      {currentEtype && (
-        <HttpData path={'/data/emodel/cADpyr_L5TPC/factsheet.json'}>
-          {data => (
-            <>
-              <Collapsible title={`E-Type ${currentEtype} Factsheet`}>
-                <EtypeFactsheet data={data} />
-              </Collapsible>
-            </>
-          )}
-        </HttpData>
-      )}
+        {currentInstance && (
+          <HttpData path={'/data/emodel/cADpyr_L5TPC/factsheet.json'}>
+            {data => (
+              <>
+                <Collapsible title={`ME-Type Instance ${currentInstance} Factsheet`}>
 
-      {currentInstance && (
-        <HttpData path={'/data/emodel/cADpyr_L5TPC/factsheet.json'}>
-          {data => (
-            <>
-              <Collapsible title={`ME-Type Instance ${currentInstance} Factsheet`}>
+                <h4>{currentInstance} data</h4>
+                  <div className="row">
+                    <div className="col-xs-12 col-sm-6">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/1921846/cADpyr_dend-C060114A2_axon-C060114A5.png" />
+                    </div>
+                    <div className="col-xs-12 col-sm-6">
+                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/1921846/_dend-C060114A2_axon-C060114A5_xy_.png" />
+                    </div>
+                  </div>
 
-              <h4>{currentInstance} data</h4>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/1921846/cADpyr_dend-C060114A2_axon-C060114A5.png" />
+                  <h4 className="mt-4">EPSP Attenuation and bAP Attenuation</h4>
+                  <div className="row">
+                    <div className="col-xs-12 col-sm-6">
+                      <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/epsp.mp4" />
+                    </div>
+                    <div className="col-xs-12 col-sm-6">
+                      <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/bap.mp4" />
+                    </div>
                   </div>
-                  <div className="col-xs-12 col-sm-6">
-                    <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/1921846/_dend-C060114A2_axon-C060114A5_xy_.png" />
-                  </div>
-                </div>
-
-                <h4 className="mt-4">EPSP Attenuation and bAP Attenuation</h4>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6">
-                    <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/epsp.mp4" />
-                  </div>
-                  <div className="col-xs-12 col-sm-6">
-                    <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/bap.mp4" />
-                  </div>
-                </div>
-              </Collapsible>
-            </>
-          )}
-        </HttpData>
-      )}
-
-      <div className="scroll-to">
-        <ScrollTo anchor="filters" direction="up">
-          Return to filters
-        </ScrollTo>
-      </div>
+                </Collapsible>
+              </>
+            )}
+          </HttpData>
+        )}
+      </DataContainer>
     </>
   );
 };

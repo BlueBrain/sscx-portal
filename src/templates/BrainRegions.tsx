@@ -9,6 +9,7 @@ import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Selector from '../components/Selector';
 import HttpData from '../components/HttpData';
+import DataContainer from '../components/DataContainer';
 import ScrollTo from '../components/ScrollTo';
 import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
@@ -66,13 +67,9 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
         </div>
       </Filters>
 
-      <HttpData path={currentFactsheetPath}>{data => children(currentRegion, data)}</HttpData>
-
-      <div className="scroll-to">
-        <ScrollTo anchor="filters" direction="up">
-          Return to filters
-        </ScrollTo>
-      </div>
+      <DataContainer>
+        <HttpData path={currentFactsheetPath}>{data => children(currentRegion, data)}</HttpData>
+      </DataContainer>
     </>
   );
 };

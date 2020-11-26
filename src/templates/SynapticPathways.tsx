@@ -7,6 +7,7 @@ import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import HttpData from '../components/HttpData';
+import DataContainer from '../components/DataContainer';
 import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
 import { BrainRegion } from '../components/BrainRegionsSelector';
@@ -147,15 +148,11 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
         </div>
       </Filters>
 
-      <HttpData path={path}>
-        {data => children(data, title, pathway)}
-      </HttpData>
-
-      <div className="scroll-to">
-        <ScrollTo anchor="filters" direction="up">
-          Return to filters
-        </ScrollTo>
-      </div>
+      <DataContainer>
+        <HttpData path={path}>
+          {data => children(data, title, pathway)}
+        </HttpData>
+      </DataContainer>
     </>
   );
 };
