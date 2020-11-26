@@ -28,6 +28,7 @@ const warningMessage =
 export type NexusPluginProps<T> = {
   name: string;
   resource: Resource<T>;
+  className?: string;
 };
 
 export type NexusPluginClassProps<T = any> = NexusPluginProps<T> & {
@@ -117,8 +118,13 @@ export class NexusPlugin extends React.Component<
   }
 
   render() {
+    const className = this.props.className || '';
+
     return (
-      <div className="remote-component" ref={this.container}></div>
+      <div
+        className={`remote-component ${className}`}
+        ref={this.container}
+      />
       // <Loading
       //   size="big"
       //   loading={this.state.loading}
