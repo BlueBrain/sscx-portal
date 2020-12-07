@@ -49,13 +49,9 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
             subtitle={sectionTitle}
             hint="Select a layer of interest in the S1 of the rat brain."
           />
-          {!!currentLayer && (
-            <div role="information">
-              <InfoBox title="Longer Text" text={lorem} color={color} />
-              <br />
-              <InfoBox text={`This one has no title o_0\n${lorem}`} />
-            </div>
-          )}
+          <div role="information">
+            <InfoBox title="Longer Text" text={lorem} color={color} />
+          </div>
         </div>
         <div className="center-col">
           <Selector title="Choose a layer">
