@@ -6,7 +6,7 @@ import './style.less';
 const classPrefix = 'title__';
 
 type TitleProps = {
-  title?: string;
+  title?: React.ReactChild;
   subtitle?: string;
   primaryColor?: Color;
   hint?: string;
