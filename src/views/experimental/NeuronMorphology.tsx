@@ -71,7 +71,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
         <div className="center-col">
           <Title
             primaryColor={colorName}
-            title="Neuron Morphology"
+            title={<span>Neuronal <br/> Morphology</span>}
             subtitle="Experimental Data"
             hint="Select a layer of interest in the S1 of the rat brain."
           />
@@ -105,7 +105,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
               <List
                 list={instances}
                 defaultValue={currentInstance}
-                title="Reconstruction instances"
+                title="Reconstructed morphology"
                 color={colorName}
                 onSelect={setInstance}
               />
