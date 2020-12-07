@@ -70,7 +70,7 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
             <tr>
               <th>Animal</th>
               <th>Preview</th>
-              <th colSpan={4}>Layer thickness (mean ± std), {unit}</th>
+              <th colSpan={4}>Layer thickness, {unit} (mean ± std)</th>
             </tr>
           </thead>
           <tbody>

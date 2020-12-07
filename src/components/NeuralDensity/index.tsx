@@ -46,7 +46,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
           <thead>
             <tr>
               <th>Layer</th>
-              <th colSpan={3}>Neuron density (mean ± std), {unit}</th>
+              <th colSpan={3}>Neuron density, {unit} (mean ± std)</th>
             </tr>
           </thead>
           <tbody>

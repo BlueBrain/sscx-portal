@@ -66,8 +66,8 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
           <thead>
             <tr>
               <th>Layer</th>
-              <th colSpan={2} >Layer thickness (mean), {summary[0].thickness.unit}</th>
-              <th colSpan={3} >Neuron density (mean ± std), {summary[0].density.unit}</th>
+              <th colSpan={2} >Layer thickness, {summary[0].thickness.unit} (mean)</th>
+              <th colSpan={3} >Neuron density, {summary[0].density.unit} (mean ± std)</th>
             </tr>
           </thead>
           <tbody>
