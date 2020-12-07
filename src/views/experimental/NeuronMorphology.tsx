@@ -62,7 +62,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
   const currentInstance: string = query.get('instance') as string;
 
   const getMorphologyDistribution = (morphologyResource: any) => {
-    return morphologyResource.distribution.find(d => d.name.includes('.asc'));
+    return morphologyResource.distribution.find(d => d.name.match(/\.asc$/i));
   };
 
   return (
