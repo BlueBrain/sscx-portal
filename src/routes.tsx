@@ -1,66 +1,36 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { RouteProps, Redirect } from 'react-router';
 
-import Home from './views/Home';
-import Glossary from './views/Glossary';
-import About from './views/About';
-import Contact from './views/Contact';
-// Experimental Data
-import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
-import ExpNeuronMorpho from './views/experimental/NeuronMorphology';
-import ExpNeuronElectro from './views/experimental/NeuronElectrophysiology';
-// Reconstruction Data
-import ExtBrainRegions from './views/reconstructionData/BrainRegions';
-import ExtMicrocircuits from './views/reconstructionData/Microcircuit';
-import ExtSynapticPathways from './views/reconstructionData/SynapticPathways';
-import ExtNeurons from './views/reconstructionData/Neurons';
-// Digital Reconstructions
-import RecBrainRegions from './views/digitalReconstructions/BrainRegions';
-import RecNeurons from './views/digitalReconstructions/Neurons';
-import RecSynapticPathways from './views/digitalReconstructions/SynapticPathways';
-import RecMicrocircuit from './views/digitalReconstructions/Microcircuit';
-// Validations
-import ValBrainRegions from './views/validations/BrainRegions';
-import ValNeurons from './views/validations/Neurons';
-import ValSynapticPathways from './views/validations/SynapticPathways';
-import ValMicrocircuit from './views/validations/Microcircuit';
-// Predictions
-import PreBrainRegions from './views/predictions/BrainRegions';
-import PreNeurons from './views/predictions/Neurons';
-import PreSynapticPathways from './views/predictions/SynapticPathways';
-import PreMicrocircuit from './views/predictions/Microcircuit';
-import Styleguide from './views/Styleguide';
-import Download from './views/Downloads';
 
 const routes: RouteProps[] = [
   {
     path: '/',
-    component: Home,
+    component: lazy(() => import('./views/Home')),
     exact: true,
   },
   {
     path: '/glossary',
-    component: () => <Glossary />,
+    component: lazy(() => import('./views/Glossary')),
     exact: true,
   },
   {
     path: '/about',
-    component: () => <About />,
+    component: lazy(() => import('./views/About')),
     exact: true,
   },
   {
     path: '/contact-and-submission',
-    component: () => <Contact />,
+    component: lazy(() => import('./views/Contact')),
     exact: true,
   },
   {
     path: '/styleguide',
-    component: Styleguide,
+    component: lazy(() => import('./views/Styleguide')),
     exact: true,
   },
   // {
   //   path: '/downloads',
-  //   component: Download,
+  //   component: lazy(() => import('./views/Downloads')),
   //   exact: true,
   // },
   // Experimental Data
@@ -71,17 +41,17 @@ const routes: RouteProps[] = [
   },
   {
     path: '/experimental-data/layer-anatomy',
-    component: ExpLayerAnatomy,
+    component: lazy(() => import('./views/experimental/LayerAnatomy')),
     exact: true,
   },
   {
     path: '/experimental-data/neuron-morphology',
-    component: ExpNeuronMorpho,
+    component: lazy(() => import('./views/experimental/NeuronMorphology')),
     exact: true,
   },
   {
     path: '/experimental-data/neuron-electrophysiology',
-    component: ExpNeuronElectro,
+    component: lazy(() => import('./views/experimental/NeuronElectrophysiology')),
     exact: true,
   },
   // Reconstruction Data
@@ -92,22 +62,22 @@ const routes: RouteProps[] = [
   },
   {
     path: '/reconstruction-data/brain-regions',
-    component: ExtBrainRegions,
+    component: lazy(() => import('./views/reconstructionData/BrainRegions')),
     exact: true,
   },
   {
     path: '/reconstruction-data/neurons',
-    component: ExtNeurons,
+    component: lazy(() => import('./views/reconstructionData/Neurons')),
     exact: true,
   },
   {
     path: '/reconstruction-data/synaptic-pathways',
-    component: ExtSynapticPathways,
+    component: lazy(() => import('./views/reconstructionData/SynapticPathways')),
     exact: true,
   },
   {
     path: '/reconstruction-data/microcircuit',
-    component: ExtMicrocircuits,
+    component: lazy(() => import('./views/reconstructionData/Microcircuit')),
     exact: true,
   },
   // Digital Reconstructions
@@ -118,22 +88,22 @@ const routes: RouteProps[] = [
   },
   {
     path: '/digital-reconstructions/brain-regions',
-    component: RecBrainRegions,
+    component: lazy(() => import('./views/digitalReconstructions/BrainRegions')),
     exact: true,
   },
   {
     path: '/digital-reconstructions/neurons',
-    component: RecNeurons,
+    component: lazy(() => import('./views/digitalReconstructions/Neurons')),
     exact: true,
   },
   {
     path: '/digital-reconstructions/synaptic-pathways',
-    component: RecSynapticPathways,
+    component: lazy(() => import('./views/digitalReconstructions/SynapticPathways')),
     exact: true,
   },
   {
     path: '/digital-reconstructions/microcircuit',
-    component: RecMicrocircuit,
+    component: lazy(() => import('./views/digitalReconstructions/Microcircuit')),
     exact: true,
   },
   // Validations
@@ -144,22 +114,22 @@ const routes: RouteProps[] = [
   },
   {
     path: '/validations/brain-regions',
-    component: ValBrainRegions,
+    component: lazy(() => import('./views/validations/BrainRegions')),
     exact: true,
   },
   {
     path: '/validations/neurons',
-    component: ValNeurons,
+    component: lazy(() => import('./views/validations/Neurons')),
     exact: true,
   },
   {
     path: '/validations/synaptic-pathways',
-    component: ValSynapticPathways,
+    component: lazy(() => import('./views/validations/SynapticPathways')),
     exact: true,
   },
   {
     path: '/validations/microcircuit',
-    component: ValMicrocircuit,
+    component: lazy(() => import('./views/validations/Microcircuit')),
     exact: true,
   },
   // Predictions
@@ -170,22 +140,22 @@ const routes: RouteProps[] = [
   },
   {
     path: '/predictions/brain-regions',
-    component: PreBrainRegions,
+    component: lazy(() => import('./views/predictions/BrainRegions')),
     exact: true,
   },
   {
     path: '/predictions/neurons',
-    component: PreNeurons,
+    component: lazy(() => import('./views/predictions/Neurons')),
     exact: true,
   },
   {
     path: '/predictions/synaptic-pathways',
-    component: PreSynapticPathways,
+    component: lazy(() => import('./views/predictions/SynapticPathways')),
     exact: true,
   },
   {
     path: '/predictions/microcircuit',
-    component: PreMicrocircuit,
+    component: lazy(() => import('./views/predictions/Microcircuit')),
     exact: true,
   },
 ];
