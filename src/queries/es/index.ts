@@ -99,6 +99,55 @@ export const electroPhysiologyDataQuery = (
   },
 });
 
+export const mtypeExpMorphologyListDataQuery = (mtype: string) => ({
+  from: 0,
+  size: 200,
+  query: {
+    bool: {
+      filter: [
+        {
+          bool: {
+            should: [
+              {
+                term: {
+                  '_deprecated': false,
+                },
+              },
+            ],
+          },
+        },
+        {
+          bool: {
+            should: [
+              {
+                term: {
+                  '@type': 'https://neuroshapes.org/ReconstructedCell',
+                },
+              },
+            ],
+          },
+        },
+        {
+          nested: {
+            path: 'annotation.hasBody',
+            query: {
+              bool: {
+                filter: [
+                  {
+                    term: {
+                      'annotation.hasBody.label.raw': mtype,
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+});
+
 export const morphologyDataQuery = (
   mtype: string,
   instance: string

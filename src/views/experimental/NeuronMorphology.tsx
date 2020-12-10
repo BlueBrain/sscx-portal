@@ -6,7 +6,8 @@ import ESData from '../../components/ESData';
 import HttpData from '../../components/HttpData';
 import DataContainer from '../../components/DataContainer';
 import LayerAnatomySelector from '../../components/LayerAnatomySelector';
-import { morphologyDataQuery } from '../../queries/es';
+import ImageViewer from '../../components/ImageViewer';
+import { morphologyDataQuery, mtypeExpMorphologyListDataQuery } from '../../queries/es';
 import { expMorphologyFactsheetPath } from '../../queries/http';
 import useQuery from '../../hooks/useQuery';
 import Filters from '../../layouts/Filters';
@@ -117,7 +118,62 @@ const NeuronExperimentalMorphology: React.FC = () => {
       </Filters>
 
       <DataContainer visible={!!currentInstance}>
-        <Collapsible title={`Neuron Morphology ${currentMtype} ${currentInstance}`}>
+        <Collapsible title="Population">
+          <h3>Factsheet</h3>
+          <p>TBD</p>
+
+          <h3 className="mt-3">Distribution</h3>
+          <div className="row">
+            <div className="col-xs-12 col-sm-6">
+              <ImageViewer src="/data/assets/images/population-distribution-1.png" />
+            </div>
+            <div className="col-xs-12 col-sm-6">
+              <ImageViewer src="/data/assets/images/population-distribution-2.png" />
+            </div>
+          </div>
+
+          <h3 className="mt-3">Reconstructed morphologies</h3>
+          <ESData
+            hasData={!!currentMtype}
+            query={mtypeExpMorphologyListDataQuery(currentMtype)}
+          >
+            {esDocuments => (
+              <>
+                {!!esDocuments.length && <div className="layer-anatomy-summary__basis">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>M-Type</th>
+                        <th>E-Type</th>
+                        <th>Organization</th>
+                        <th>Person</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {esDocuments.map(esDocument => esDocument._source).map(morph => (
+                        <tr key={morph.name}>
+                          <td className="text-capitalize">{morph.name}</td>
+                          <td></td>
+                          <td>{morph.annotation.hasBody.label}</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>}
+              </>
+            )}
+          </ESData>
+        </Collapsible>
+
+        <Collapsible
+          className="mt-4 mb-4"
+          title={`Neuron Morphology ${currentMtype} ${currentInstance}`}
+        >
           <HttpData path={expMorphologyFactsheetPath(currentInstance)}>
             {factsheetData => (
               <Factsheet facts={factsheetData[0].values} />
@@ -132,7 +188,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
               <>
                 {esDocuments.length  && (
                   <NexusFileDownloadButton
-                    className="mt-2 mb-3"
+                    className="mt-2"
                     filename={getMorphologyDistribution(esDocuments[0]._source).name}
                     url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
                     org={sscx.org}
