@@ -12,6 +12,7 @@ type CollapsibleProps = {
   title: string;
   children: ReactChild | ReactFragment;
   color?: CollapsibleColor;
+  className?: string;
 };
 
 const Collapsible: React.FC<CollapsibleProps> = ({
@@ -19,11 +20,12 @@ const Collapsible: React.FC<CollapsibleProps> = ({
   title,
   children,
   color = '',
+  className = '',
 }) => {
   const [isCollapsed, setCollapsed] = React.useState(collapsed);
 
   return (
-    <div className={`${classPrefix}${isCollapsed ? 'collapsed' : 'expanded'} ${color}`}>
+    <div id="data" className={`${classPrefix}${isCollapsed ? 'collapsed' : 'expanded'} ${color} ${className}`}>
       <div onClick={() => setCollapsed(!isCollapsed)} className="header">
         {title}
         <span className="arrow">

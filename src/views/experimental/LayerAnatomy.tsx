@@ -20,7 +20,7 @@ export default () => (
           <LayerAnatomySummary data={data}/>
         </Collapsible>
         {layer && (
-          <Collapsible title={`Layer ${layer}`}>
+          <Collapsible className="mt-4" title={`Layer ${layer}`}>
             <LayerThickness layer={layer} data={data} />
             <NeuralDensity layer={layer} data={data} className="mt-3"/>
           </Collapsible>
