@@ -8,9 +8,6 @@ import BrainRegionsSelector, {
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Selector from '../components/Selector';
-import HttpData from '../components/HttpData';
-import DataContainer from '../components/DataContainer';
-import ScrollTo from '../components/ScrollTo';
 import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
@@ -18,14 +15,12 @@ import { Color } from '../types';
 export type BrainRegionTemplateProps = {
   color: Color;
   sectionTitle: string;
-  factsheetPath?: (subregion: string) => string;
-  children?: (subregion: string, data: any) => React.ReactNode;
+  children?: (subregion: string) => React.ReactNode;
 };
 
 const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
   color,
   sectionTitle,
-  factsheetPath = () => '',
   children,
 }) => {
   const query = useQuery();
@@ -35,10 +30,6 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
     history.push(`?brain_region=${brainRegion}`);
   };
   const currentRegion = query.get('brain_region') as BrainRegion;
-
-  const currentFactsheetPath = currentRegion
-    ? factsheetPath(currentRegion)
-    : null;
 
   return (
     <>
@@ -50,11 +41,9 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
             subtitle={sectionTitle}
             hint="Select a subregion of interest in the S1 of the rat brain."
           />
-          {!!currentRegion && (
-            <div>
-              <InfoBox title="Longer Text" text={lorem} color={color} />
-            </div>
-          )}
+          <div>
+            <InfoBox title="Longer Text" text={lorem} color={color} />
+          </div>
         </div>
         <div className="center-col">
           <Selector title="Choose a subregion">
@@ -67,9 +56,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
         </div>
       </Filters>
 
-      <DataContainer>
-        <HttpData path={currentFactsheetPath}>{data => children(currentRegion, data)}</HttpData>
-      </DataContainer>
+      {children(currentRegion)}
     </>
   );
 };

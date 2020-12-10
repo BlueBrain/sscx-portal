@@ -1,9 +1,11 @@
 import React from 'react';
 
 import BrainRegionTemplate from '../../templates/BrainRegions';
-import BrainSubregionFactsheet from '../../components/BrainSubregionFactsheet';
+import DataContainer from '../../components/DataContainer';
+import Factsheet from '../../components/Factsheet';
+import HttpData from '../../components/HttpData';
 import { colorName, sectionTitle } from './config';
-import { subregionFactsheetPath } from '../../queries/http';
+import { regionCircuitFactsheetPath, subregionCircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
 import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
@@ -12,19 +14,29 @@ export default () => (
   <BrainRegionTemplate
     color={colorName}
     sectionTitle={sectionTitle}
-    factsheetPath={subregionFactsheetPath}
   >
-    {(subregion, data) => (
-      <>
+    {(subregion) => (
+      <DataContainer visible={!!subregion}>
         <Collapsible title="S1 (Region) Factsheet">
-          <BrainSubregionFactsheet data={data} />
+          <HttpData path={regionCircuitFactsheetPath()}>
+            {data => (
+              <Factsheet facts={data[0].values} />
+            )}
+          </HttpData>
         </Collapsible>
 
-        <Collapsible title={`${subregion} (Sub-region) Factsheet`}>
-          <BrainSubregionFactsheet data={data} />
+        <Collapsible
+          className="mt-4"
+          title={`${subregion} (Sub-region) Factsheet`}
+        >
+          <HttpData path={subregionCircuitFactsheetPath(subregion)}>
+            {data => (
+              <Factsheet facts={data[0].values} />
+            )}
+          </HttpData>
         </Collapsible>
 
-        <div className="mt-2">
+        <div className="mt-4">
           <Collapsible color="red" title="Simulations">
             <div className="row">
               <div className="col-xs-4">
@@ -44,7 +56,7 @@ export default () => (
           </Collapsible>
         </div>
 
-      </>
+      </DataContainer>
     )}
   </BrainRegionTemplate>
 );

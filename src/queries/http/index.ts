@@ -1,14 +1,15 @@
 
-export const subregionFactsheetPath = (subregion: string): string => {
-  return `/data/Circuit/Central/factsheet.json`;
+export const subregionCircuitFactsheetPath = (subregion: string): string => {
+  // FIXME: change to full circuit once Vishal finishes it
+  return `/data/model-data/factsheets/REGION/${subregion}/Central/Circuit/factsheet.json`;
 };
+
+export const regionCircuitFactsheetPath = (): string => {
+  return '/data/model-data/factsheets/Circuit/factsheet.json';
+}
 
 export const subregionMicrocircuitFactsheetPath = (subregion: string): string => {
   return `/data/model-data/factsheets/REGION/${subregion}/Central/Circuit/factsheet.json`;
-}
-
-export const regionFactsheetPath = (subregion: string): string => {
-  return `/data/Circuit/Central/factsheet.json`;
 }
 
 export const layerFactsheetPath = (subregion: string, layerNum: number): string => {
