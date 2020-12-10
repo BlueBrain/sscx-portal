@@ -9,25 +9,20 @@ import Selector from '../components/Selector';
 import MicrocircuitSelector from '../components/MicrocircuitSelector';
 import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
-import HttpData from '../components/HttpData';
-import DataContainer from '../components/DataContainer';
 import Pills from '../components/Pills';
 import { BrainRegion } from '../components/BrainRegionsSelector';
 import { accentColors } from '../config';
-import ScrollTo from '../components/ScrollTo';
 
 
 export type MicrocircuitTemplateProps = {
   color: Color;
   sectionTitle: string;
-  factsheetPath?: (subregion: string, layerNum: number) => string;
-  children?: (subregion: string, layer: string, data: any) => React.ReactNode;
+  children?: (subregion: string, layerNums: number[]) => React.ReactNode;
 };
 
-const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
+const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
   color,
   sectionTitle,
-  factsheetPath = () => '',
   children,
 }) => {
   const query = useQuery();
@@ -44,21 +39,12 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
   const setRegion = (region: BrainRegion) => addParam('brain_region', region);
   const setLayer = (layer: Layer) => addParam('layer', layer);
 
-  const getLayerNums = () => {
-    if (!currentLayer) return [];
-
-    return currentLayer
+  const layerNums = currentLayer
+    ? currentLayer
       .replace('L', '')
       .split('')
-      .map(numStr => parseInt(numStr));
-  };
-
-  const currentFactsheets =
-    currentRegion && currentLayer
-      ? getLayerNums().map(layerNum => ({
-          path: factsheetPath(currentRegion, layerNum),
-        }))
-      : [];
+      .map(numStr => parseInt(numStr))
+    : [];
 
   return (
     <>
@@ -79,7 +65,7 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
             <br />
             <Pills
               title="1. Select a subregion"
-              list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
+              list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
               defaultValue={currentRegion}
               onSelect={setRegion}
               color={color}
@@ -98,15 +84,9 @@ const Microcircuits: React.FC<MicrocircuitTemplateProps> = ({
         </div>
       </Filters>
 
-      <DataContainer>
-        {currentFactsheets.map(factsheet => (
-          <HttpData key={factsheet.path} path={factsheet.path}>
-            {data => children(currentRegion, currentLayer, data)}
-          </HttpData>
-        ))}
-      </DataContainer>
+      {children(currentRegion, layerNums)}
     </>
   );
 };
 
-export default Microcircuits;
+export default Microcircuit;

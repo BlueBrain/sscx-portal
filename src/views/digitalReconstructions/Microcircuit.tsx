@@ -2,29 +2,51 @@ import React from 'react';
 
 import MicrocircuitsTemplates from '../../templates/Microcircuit';
 import { colorName, sectionTitle } from './config';
-import { layerFactsheetPath } from '../../queries/http';
+import { layerFactsheetPath, subregionMicrocircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
-import LayerFactsheet from '../../components/LayerFactsheet';
+import HttpData from '../../components/HttpData';
+import DataContainer from '../../components/DataContainer';
 import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
+import Factsheet from '../../components/Factsheet';
 
 export default () => (
   <MicrocircuitsTemplates
     color={colorName}
     sectionTitle={sectionTitle}
-    factsheetPath={layerFactsheetPath}
   >
-    {(subregion, layer, data) => (
-      <>
+    {(subregion, layerNums) => (
+      <DataContainer visible={!!layerNums.length}>
+
         <Collapsible title={`${subregion} Microcircuit Factsheet`}>
-          <LayerFactsheet data={data} />
+          <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
+            {data => (
+              <Factsheet facts={data[0].values}/>
+            )}
+          </HttpData>
         </Collapsible>
 
-        <Collapsible title={`Layer ${layer} of ${subregion} Microcircuit Factsheet`}>
-          <LayerFactsheet data={data} />
+        <Collapsible
+          title={`Layer ${layerNums.join('/')} of ${subregion} Microcircuit`}
+          className="mt-4"
+        >
+          {layerNums.map(layerNum => (
+            <div key={layerNum}>
+              <HttpData path={layerFactsheetPath(subregion, layerNum)}>
+                {data => (
+                  <>
+                    <h3 className="mb-2">L{layerNum} Anatomy</h3>
+                    <Factsheet facts={data[0].values} />
+                    <h3 className="mt-3 mb-2">L{layerNum} Physiology</h3>
+                    <Factsheet className="mb-3" facts={data[1].values} />
+                  </>
+                )}
+              </HttpData>
+            </div>
+          ))}
         </Collapsible>
 
-        <div className="mt-2">
+        <div className="mt-4">
           <Collapsible color="red" title="Simulations">
             <div className="row">
               <div className="col-xs-4">
@@ -44,7 +66,7 @@ export default () => (
           </Collapsible>
         </div>
 
-      </>
+      </DataContainer>
     )}
   </MicrocircuitsTemplates>
 );
