@@ -45,6 +45,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
 
     return {
       layer,
+      thicknessEntityDescription: thicknessEntity.description,
       thickness: {
         mean: thicknessMean,
         unit: thicknessUnit,
@@ -62,11 +63,11 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
   return (
     <ErrorBoundary>
       {!!summary.length && <div className={`${classPrefix}basis`}>
-        <table>
+        <table className="mb-2">
           <thead>
             <tr>
               <th>Layer</th>
-              <th colSpan={2} >Layer thickness, {summary[0].thickness.unit} (mean)</th>
+              <th colSpan={2} >Layer thickness, {summary[0].thickness.unit} (mean)*</th>
               <th colSpan={3} >Neuron density, {summary[0].density.unit} (mean ± std)</th>
             </tr>
           </thead>
@@ -83,6 +84,9 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
             ))}
           </tbody>
         </table>
+        <small className="ant-typography ant-typography-secondary">
+          * {summary[0]?.thicknessEntityDescription}
+        </small>
       </div>}
     </ErrorBoundary>
   );
