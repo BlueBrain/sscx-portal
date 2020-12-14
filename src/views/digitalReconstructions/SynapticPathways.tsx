@@ -2,9 +2,11 @@ import React from 'react';
 
 import SynapticPathwaysTemplates from '../../templates/SynapticPathways';
 import { pathwayFactsheetPath } from '../../queries/http';
+import DataContainer from '../../components/DataContainer';
+import HttpData from '../../components/HttpData';
+import Factsheet from '../../components/Factsheet';
 import { colorName, sectionTitle } from './config';
 import Collapsible from '../../components/Collapsible';
-import PathwayFactsheet from '../../components/PathwayFactsheet';
 import Synaptome from '../../components/Synaptome';
 
 import ImageViewer from '../../components/ImageViewer';
@@ -14,12 +16,20 @@ export default () => (
   <SynapticPathwaysTemplates
     color={colorName}
     sectionTitle={sectionTitle}
-    factsheetPath={pathwayFactsheetPath}
   >
-    {(data, title, pathway) => (
-      <>
-        <Collapsible title={title}>
-          <PathwayFactsheet data={data} />
+    {(subregion, pathway) => (
+      <DataContainer visible={!!pathway}>
+        <Collapsible title={`Pathway ${pathway}`}>
+          <HttpData path={pathwayFactsheetPath(subregion, pathway)}>
+            {data => (
+              <>
+                <h3 className="mb-2">Anatomy</h3>
+                <Factsheet facts={data[0].values} />
+                <h3 className="mt-3 mb-2">Physiology</h3>
+                <Factsheet className="mb-3" facts={data[1].values} />
+              </>
+            )}
+          </HttpData>
 
           <div className="row around-xs mt-4">
             <div className="col-xs-6 col-sm-2">
@@ -62,7 +72,7 @@ export default () => (
             </div>
           </Collapsible>
         </div>
-      </>
+      </DataContainer>
     )}
   </SynapticPathwaysTemplates>
 );

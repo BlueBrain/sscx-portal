@@ -6,8 +6,6 @@ import InfoBox from '../components/InfoBox';
 import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
-import HttpData from '../components/HttpData';
-import DataContainer from '../components/DataContainer';
 import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
 import { BrainRegion } from '../components/BrainRegionsSelector';
@@ -15,14 +13,12 @@ import ComboSelector from '../components/ComboSelector';
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import List from '../components/List';
 import { accentColors } from '../config';
-import ScrollTo from '../components/ScrollTo';
 
 
 export type SynapticPathwaysTemplateProps = {
   color: Color;
   sectionTitle: string;
-  factsheetPath?: (pathway: string) => string;
-  children?: (data: any, title: string, pathway: string) => React.ReactNode;
+  children?: (subregion: string, pathway: string) => React.ReactNode;
 };
 
 type PathwayMType = {
@@ -37,7 +33,6 @@ type PathwayMType = {
 const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   sectionTitle,
   color,
-  factsheetPath = () => '',
   children,
 }) => {
   const query = useQuery();
@@ -77,12 +72,6 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     ? `${currentPreType}-${currentPostType}`
     : null;
 
-  const path = pathway
-    ? factsheetPath(pathway)
-    : null;
-
-  const title = `Pathway fact sheet ${pathway}`;
-
   useEffect(() => {
     fetch('/data/pathway-mtype.json')
       .then(res => res.json())
@@ -104,7 +93,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             <br />
             <Pills
               title="1. Select a subregion"
-              list={['S1FL', 'S1Sh', 'S1HL', 'S1Tr']}
+              list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
               defaultValue={currentRegion}
               onSelect={setRegion}
               color={color}
@@ -148,11 +137,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
         </div>
       </Filters>
 
-      <DataContainer>
-        <HttpData path={path}>
-          {data => children(data, title, pathway)}
-        </HttpData>
-      </DataContainer>
+      {children(currentRegion, pathway)}
     </>
   );
 };

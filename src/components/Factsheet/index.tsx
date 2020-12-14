@@ -1,5 +1,6 @@
 import React from 'react';
 import NumberFormat from '../NumberFormat';
+import isNil from 'lodash/isNil';
 
 import './style.less';
 
@@ -33,7 +34,27 @@ const FactsheetSingleValueEntry: React.FC<{
     <div className="row mt-1">
       <div className="col-xs-4 name">{fact.name}</div>
       <div className="col-xs-4 value">
-        <NumberFormat value={fact.value} /> {fact.unit}
+        {isNil(fact.value)
+          ? (<span>-</span>)
+          : (<span>
+              <NumberFormat value={fact.value} /> {fact.unit}
+            </span>)
+        }
+      </div>
+    </div>
+  );
+};
+
+const FactsheetSingleMeanStdEntry: React.FC<{
+  fact: FactsheetEntryType;
+}> = ({
+  fact,
+}) => {
+  return (
+    <div className="row mt-1">
+      <div className="col-xs-4 name">{fact.name}</div>
+      <div className="col-xs-4 value">
+        <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> {fact.unit}
       </div>
     </div>
   );
@@ -77,9 +98,19 @@ const FactsheetEntry: React.FC<{
 }> = ({
   fact
 }) => {
-  return fact.value_map
-    ? (<FactsheetMapValueEntry fact={fact} />)
-    : (<FactsheetSingleValueEntry fact={fact} />);
+  if(
+    fact.value_map &&
+    !isNil(fact.value_map.mean) &&
+    !isNil(fact.value_map.std)
+  ) {
+    return (<FactsheetSingleMeanStdEntry fact={fact} />);
+  }
+
+  if(fact.value_map) {
+    return (<FactsheetMapValueEntry fact={fact} />);
+  }
+
+  return (<FactsheetSingleValueEntry fact={fact} />);
 };
 
 const Factsheet: React.FC<FactsheetProps> = ({

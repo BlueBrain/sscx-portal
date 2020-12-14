@@ -16,8 +16,8 @@ export const layerFactsheetPath = (subregion: string, layerNum: number): string 
   return `/data/model-data/factsheets/REGION/${subregion}/Central/CircuitLayers/${layerNum}/factsheet.json`;
 };
 
-export const pathwayFactsheetPath = (pathway: string): string => {
-  return `/data/Pathways/${pathway}/factsheet.json`;
+export const pathwayFactsheetPath = (subregion: string, pathway: string): string => {
+  return `/data/model-data/factsheets/REGION/${subregion}/Central/Pathways/${pathway}/factsheet.json`;
 };
 
 export const expMorphologyFactsheetPath = (morphologyName: string): string => {
