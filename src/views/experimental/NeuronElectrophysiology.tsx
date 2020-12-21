@@ -145,6 +145,7 @@ const NeuronElectrophysiology: React.FC = () => {
               </Collapsible>
 
               <Collapsible
+                className="mt-4"
                 title={`Electrophysiological Recordings for ${currentEtype}_${currentInstance}`}
               >
                 <NexusPlugin
