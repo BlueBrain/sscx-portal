@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
 import './style.less';
-import { FaCircle, FaCaretDown } from 'react-icons/all';
+import { FaCircle, FaCaretDown } from 'react-icons/fa';
 import { Color } from '../../../types';
 
 const classPrefix = 'info-box-2__';

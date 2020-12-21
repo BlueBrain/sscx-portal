@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
 import './style.less';
-import { FaCircle } from 'react-icons/all';
+import { FaCircle } from 'react-icons/fa';
 
 const classPrefix = 'info-box-1__';
 

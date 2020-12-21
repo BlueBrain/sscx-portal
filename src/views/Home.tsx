@@ -7,9 +7,8 @@ import InfoBox1 from '../components/Home/InfoBox1';
 import InfoBox2 from '../components/Home/InfoBox2';
 import { Color } from '../types';
 import Search from '../components/Search';
-import { FaTwitter } from 'react-icons/all';
-import { FaFacebookF } from 'react-icons/all';
-import { FaLinkedinIn } from 'react-icons/all';
+import { FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+
 
 const classPrefix = 'Home__';
 

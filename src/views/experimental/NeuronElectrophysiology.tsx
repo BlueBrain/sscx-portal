@@ -55,7 +55,7 @@ const NeuronElectrophysiology: React.FC = () => {
             hint="Select a layer of interest in the S1 of the rat brain."
           />
           {!!currentEtype && (
-            <div role="information">
+            <div role="information" className="mb-4">
               <InfoBox title="Longer Text" text={lorem} color={colorName} />
             </div>
           )}

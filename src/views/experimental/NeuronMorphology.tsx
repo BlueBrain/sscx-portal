@@ -76,11 +76,9 @@ const NeuronExperimentalMorphology: React.FC = () => {
             subtitle="Experimental Data"
             hint="Select a layer of interest in the S1 of the rat brain."
           />
-          {!!currentLayer && (
-            <div role="information">
-              <InfoBox color="yellow" title="Longer Text" text={lorem} />
-            </div>
-          )}
+          <div role="information" className="mb-4">
+            <InfoBox color="yellow" title="Longer Text" text={lorem} />
+          </div>
         </div>
         <div className="center-col">
           <ComboSelector

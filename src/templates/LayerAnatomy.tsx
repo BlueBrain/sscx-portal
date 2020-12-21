@@ -50,7 +50,11 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
             hint="Select a layer of interest in the S1 of the rat brain."
           />
           <div role="information">
-            <InfoBox title="Longer Text" text={lorem} color={color} />
+            <InfoBox
+              title="Layer thickness: S1"
+              text="Data are provided in the form of raw microscopy images of NeuN (neuron-specific nuclear protein) stained coronal slices with annotations of individual layer extents, and spreadsheets summarizing measurements of layer thicknesses."
+              color={color}
+            />
           </div>
         </div>
         <div className="center-col">

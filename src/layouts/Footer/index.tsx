@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaTwitter } from 'react-icons/all';
-import { FaFacebookF } from 'react-icons/all';
-import { FaLinkedinIn } from 'react-icons/all';
+import { FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 
 import './style.less';
 
@@ -13,14 +11,14 @@ const Footer: React.FC<{}> = () => {
     <div className={`${classPrefix}basis`}>
       <div className={`${classPrefix}container`}>
         <div className={`${classPrefix}address`}>
-          <h4>Blue Brain Project</h4>
+          <h4 className="text-white">Blue Brain Project</h4>
           <p>EPFL/Campus Biotech</p>
           <p>Chemin des Mines 9</p>
           <p>CH-1202 Geneva</p>
           <p>Switzerland</p>
         </div>
         <div>
-          <h4>Contact</h4>
+          <h4 className="text-white">Contact</h4>
           <p>
             <Link to="#">Submission</Link>
           </p>
@@ -29,7 +27,7 @@ const Footer: React.FC<{}> = () => {
           </p>
         </div>
         <div>
-          <h4>Share and follow us</h4>
+          <h4 className="text-white">Share and follow us</h4>
           <div className={`${classPrefix}social-media`}>
             <a href="#" className={`${classPrefix}social-media-item`}>
               <div className={`${classPrefix}social-media-icon`}>
