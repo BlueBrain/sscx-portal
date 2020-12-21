@@ -8,7 +8,7 @@
   width: 100%;
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;
+  // overflow: hidden;
   background-color: #basePalette[navy-4];
   background-repeat: no-repeat;
   background-position: center;
@@ -28,18 +28,21 @@
     margin: 60px auto 60px;
     max-width: 2160px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     @media @small {
       flex-direction: column;
     }
   }
 
   .center-col {
-    flex: 50%;
+    // flex: 50%;
+    flex-grow: 1;
     &:first-child {
-      margin-right: 40px;
+      // margin-right: 40px;
     }
     &:last-child {
-      margin-left: 40px;
+      // margin-left: 40px;
     }
     @media @small {
       &:first-child {
@@ -50,11 +53,12 @@
       }
     }
   }
+}
 
-  .scroll-to {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    bottom: 0;
-  }
+.scroll-to {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  // left: 0;
+  width: 100%;
 }

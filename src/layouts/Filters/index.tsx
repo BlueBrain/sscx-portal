@@ -22,11 +22,13 @@ const Filters: React.FC<FiltersProps> = ({
   id = 'filters',
 }) => {
   return (
-    <div
-      id={id}
-      className={`${classPrefix}basis ${backgroundAlt ? 'background-alt' : ''}`}
-    >
-      <div className="center">{children}</div>
+    <div>
+      <div
+        id={id}
+        className={`${classPrefix}basis ${backgroundAlt ? 'background-alt' : ''}`}
+      >
+        <div className="center">{children}</div>
+      </div>
       {!!hasData && (
         <div className="scroll-to">
           <ScrollTo anchor="data" color={primaryColor} direction="down">

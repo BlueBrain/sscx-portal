@@ -1,5 +1,7 @@
 .combo-selector__basis {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   .selector__basis {
     text-align: center;
@@ -80,6 +82,18 @@
           rgba(255, 255, 255, 0.5) 76%,
           rgba(0, 0, 0, 0) 76%
         );
+      }
+    }
+  }
+
+  @media (max-width: 796px) {
+    .list-1, .list-2, .list-3 {
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 400px !important;
+      margin-bottom: 2rem !important;
+      .list__basis {
+        width: 400px;
       }
     }
   }
