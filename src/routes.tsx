@@ -1,36 +1,39 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { RouteProps, Redirect } from 'react-router';
 
-import Home from './views/Home';
-import Glossary from './views/Glossary';
-import About from './views/About';
-import Contact from './views/Contact';
+
+const Home = lazy(() => import('./views/Home'));
+const Glossary = lazy(() => import('./views/Glossary'));
+const About = lazy(() => import('./views/About'));
+const Contact = lazy(() => import('./views/Contact'));
 // Experimental Data
-import ExpLayerAnatomy from './views/experimental/LayerAnatomy';
-import ExpNeuronMorpho from './views/experimental/NeuronMorphology';
-import ExpNeuronElectro from './views/experimental/NeuronElectrophysiology';
+const ExpLayerAnatomy = lazy(() => import('./views/experimental/LayerAnatomy'));
+const ExpNeuronMorpho = lazy(() => import('./views/experimental/NeuronMorphology'));
+const ExpNeuronElectro = lazy(() => import('./views/experimental/NeuronElectrophysiology'));
 // Reconstruction Data
-import ExtBrainRegions from './views/reconstructionData/BrainRegions';
-import ExtMicrocircuits from './views/reconstructionData/Microcircuit';
-import ExtSynapticPathways from './views/reconstructionData/SynapticPathways';
-import ExtNeurons from './views/reconstructionData/Neurons';
+const RecBrainRegions = lazy(() => import('./views/digitalReconstructions/BrainRegions'));
+const ExtBrainRegions = lazy(() => import('./views/reconstructionData/BrainRegions'));
+const ExtMicrocircuits = lazy(() => import('./views/reconstructionData/Microcircuit'));
+const ExtSynapticPathways = lazy(() => import('./views/reconstructionData/SynapticPathways'));
+const ExtNeurons = lazy(() => import('./views/reconstructionData/Neurons'));
 // Digital Reconstructions
-import RecBrainRegions from './views/digitalReconstructions/BrainRegions';
-import RecNeurons from './views/digitalReconstructions/Neurons';
-import RecSynapticPathways from './views/digitalReconstructions/SynapticPathways';
-import RecMicrocircuit from './views/digitalReconstructions/Microcircuit';
+const RecNeurons = lazy(() => import('./views/digitalReconstructions/Neurons'));
+const RecSynapticPathways = lazy(() => import('./views/digitalReconstructions/SynapticPathways'));
+const RecMicrocircuit = lazy(() => import('./views/digitalReconstructions/Microcircuit'));
 // Validations
-import ValBrainRegions from './views/validations/BrainRegions';
-import ValNeurons from './views/validations/Neurons';
-import ValSynapticPathways from './views/validations/SynapticPathways';
-import ValMicrocircuit from './views/validations/Microcircuit';
+const ValBrainRegions = lazy(() => import('./views/validations/BrainRegions'));
+const ValNeurons = lazy(() => import('./views/validations/Neurons'));
+const ValSynapticPathways = lazy(() => import('./views/validations/SynapticPathways'));
+const ValMicrocircuit = lazy(() => import('./views/validations/Microcircuit'));
 // Predictions
-import PreBrainRegions from './views/predictions/BrainRegions';
-import PreNeurons from './views/predictions/Neurons';
-import PreSynapticPathways from './views/predictions/SynapticPathways';
-import PreMicrocircuit from './views/predictions/Microcircuit';
-import Styleguide from './views/Styleguide';
-import Download from './views/Downloads';
+const PreBrainRegions = lazy(() => import('./views/predictions/BrainRegions'));
+const PreNeurons = lazy(() => import('./views/predictions/Neurons'));
+const PreSynapticPathways = lazy(() => import('./views/predictions/SynapticPathways'));
+const PreMicrocircuit = lazy(() => import('./views/predictions/Microcircuit'));
+
+const Styleguide = lazy(() => import('./views/Styleguide'));
+const Download = lazy(() => import('./views/Downloads'));
+
 
 const routes: RouteProps[] = [
   {
@@ -40,17 +43,17 @@ const routes: RouteProps[] = [
   },
   {
     path: '/glossary',
-    component: () => <Glossary />,
+    component: Glossary,
     exact: true,
   },
   {
     path: '/about',
-    component: () => <About />,
+    component: About,
     exact: true,
   },
   {
     path: '/contact-and-submission',
-    component: () => <Contact />,
+    component: Contact,
     exact: true,
   },
   {
@@ -58,11 +61,11 @@ const routes: RouteProps[] = [
     component: Styleguide,
     exact: true,
   },
-  // {
-  //   path: '/downloads',
-  //   component: Download,
-  //   exact: true,
-  // },
+  {
+    path: '/downloads',
+    component: Download,
+    exact: true,
+  },
   // Experimental Data
   {
     path: '/experimental-data',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { createNexusClient } from '@bbp/nexus-sdk';
@@ -31,9 +31,11 @@ ReactDOM.render(
   <BrowserRouter>
     <NexusProvider nexusClient={nexusClient}>
       <MainLayout>
-        {routes.map(props => (
-          <Route key={props.path as string} {...props} />
-        ))}
+        <Suspense fallback={null}>
+          {routes.map(props => (
+            <Route key={props.path as string} {...props} />
+          ))}
+        </Suspense>
       </MainLayout>
     </NexusProvider>
   </BrowserRouter>,
