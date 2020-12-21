@@ -1,55 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react';
-
-// import videojs from 'video.js';
-// import 'videojs-contrib-quality-levels';
-// import 'videojs-http-source-selector';
-
-// import 'video.js/dist/video-js.css';
-
-import Plyr from 'plyr';
-
-import 'plyr/dist/plyr.css';
+import React, { Suspense } from 'react';
 
 
-const Video: React.FC<any> = (props) => {
-  const videoRef = useRef(null);
-  const [videoPlayer, setVideoPlayer] = useState(null);
+const VideoPlayerLazy = React.lazy(() => import('./video-player'));
 
-  useEffect(() => {
-    console.log('Init video player');
-    const player = new Plyr(videoRef.current, {
-      settings: ['quality', 'loop'],
-      controls: ['play', 'progress', 'settings', 'pip', 'airplay', 'fullscreen'],
-      autoplay: true,
-      muted: true,
-      loop: {
-        active: true,
-      },
-    });
-    player.source = {
-      type: 'video',
-      sources: [{
-        src: props.src || 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
-        type: 'video/mp4',
-        size: 720
-      }, {
-        src: props.src || 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
-        type: 'video/mp4',
-        size: 1080
-      }]
-    };
-    setVideoPlayer(player);
-
-    return () => {
-      if (player) {
-        player.destroy();
-      }
-    }
-  }, []);
-
+const VideoPlayer: React.FC<any> = (props) => {
   return (
-    <video className="js-plyr plyr" ref={videoRef} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <VideoPlayerLazy {...props} />
+    </Suspense>
   );
 };
 
-export default Video;
+
+export default VideoPlayer;
