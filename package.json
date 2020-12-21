@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "serve": "parcel serve -p 3000 ./src/index.html",
-    "build": "tsc --noEmit && parcel build ./src/index.html",
+    "build": "PARCEL_BUNDLE_ANALYZER=1 parcel build ./src/index.html",
     "build:data": "ts-node --skip-project scripts/buildData.ts",
     "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
     "style": "prettier --check \"./src/**/*.{ts,tsx,js,jsx,less,html,css}\""
@@ -34,7 +34,7 @@
     "less": "^3.11.0",
     "lint-staged": "^10.0.3",
     "node-fetch": "^2.6.0",
-    "parcel": "^2.0.0-nightly.462",
+    "parcel": "2.0.0-nightly.481",
     "prettier": "^2.0.0",
     "ts-jest": "^26.0.0",
     "ts-loader": "^8.0.0",
