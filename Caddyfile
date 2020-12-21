@@ -1,9 +1,0 @@
-:8080
-
-errors
-
-tls off
-
-root /var/www/sscx-portal
-
-rewrite { to {path} {path}/ / }
