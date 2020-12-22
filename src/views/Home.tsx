@@ -17,7 +17,7 @@ const Home: React.FC = () => (
     <section id="section-1" className="content">
       <div className="title">
         <Title
-          title="Somatosensory Cortex Portal"
+          title={<span>Somatosensory <br/> Cortex Portal</span>}
           subtitle="Explore the datasets!"
           hint="Welcome to the SSCx portal created by the <b>Blue Brain Project</b>. Come and explore both model data (in silico) and experiemental data (in vitro) of the rat brain."
           primary
@@ -32,16 +32,16 @@ const Home: React.FC = () => (
             <Button width={140}>Read paper</Button>
           </Link>
         </div>
-        <div className="search-form">
+        {/* <div className="search-form">
           <Search />
-        </div>
+        </div> */}
       </div>
-      <img
+      {/* <img
         className="top-section-image"
         src={require('url:../assets/images/computer.svg')}
         alt="computer"
-      />
-      <div className="social-media">
+      /> */}
+      {/* <div className="social-media">
         <a href="#">
           <div className="social-media-icon">
             <FaTwitter />
@@ -57,7 +57,7 @@ const Home: React.FC = () => (
             <FaLinkedinIn />
           </div>
         </a>
-      </div>
+      </div> */}
     </section>
 
     <section id="section-2">
