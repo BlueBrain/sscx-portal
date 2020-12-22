@@ -5,7 +5,7 @@ import './style.less';
 const classPrefix = 'full-page__';
 
 type FullPageProps = {
-  children: ReactChild | ReactFragment;
+  children?: ReactChild | ReactFragment;
 };
 
 const FullPage: React.FC<FullPageProps> = ({ children }) => {

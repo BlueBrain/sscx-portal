@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createNexusClient } from '@bbp/nexus-sdk';
 import { NexusProvider } from '@bbp/react-nexus';
 
 import routes from './routes';
 import MainLayout from './layouts/MainLayout';
+import FullPage from './layouts/FullPage';
 
 import 'antd/lib/style/css';
 import './assets/styles/app.global.less'
@@ -28,16 +29,18 @@ const nexusClient = createNexusClient({
 });
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <NexusProvider nexusClient={nexusClient}>
       <MainLayout>
-        <Suspense fallback={null}>
-          {routes.map(props => (
-            <Route key={props.path as string} {...props} />
-          ))}
+        <Suspense fallback={<FullPage />}>
+          <Switch>
+            {routes.map(props => (
+              <Route key={props.path as string} {...props} />
+            ))}
+          </Switch>
         </Suspense>
       </MainLayout>
     </NexusProvider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('app'),
 );
