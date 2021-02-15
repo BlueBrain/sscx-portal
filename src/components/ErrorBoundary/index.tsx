@@ -5,12 +5,12 @@ type State = {
 };
 
 export default class ErrorBoundary extends React.Component<any, State> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = { hasError: false };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch() {
     this.setState({ hasError: true });
   }
 

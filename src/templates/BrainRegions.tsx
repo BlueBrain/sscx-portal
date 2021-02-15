@@ -1,16 +1,15 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 
-import useQuery from '../hooks/useQuery';
-import BrainRegionsSelector, {
-  BrainRegion,
-} from '../components/BrainRegionsSelector';
+import ServerSideContext from '../context/server-side-context';
+import BrainRegionsSelector, { BrainRegion } from '../components/BrainRegionsSelector';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Selector from '../components/Selector';
 import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
+
 
 export type BrainRegionTemplateProps = {
   color: Color;
@@ -23,13 +22,18 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
   sectionTitle,
   children,
 }) => {
-  const query = useQuery();
-  const history = useHistory();
+  const router = useRouter();
+  const serverSideContext = useContext(ServerSideContext);
+
+  const query = { ...serverSideContext?.query, ...router?.query };
 
   const setBrainRegionQuery = (brainRegion: BrainRegion) => {
-    history.push(`?brain_region=${brainRegion}`);
+    const query = {
+      brain_region: brainRegion,
+    };
+    router.push({ query }, undefined, { shallow: true });
   };
-  const currentRegion = query.get('brain_region') as BrainRegion;
+  const currentRegion = query.brain_region as BrainRegion;
 
   return (
     <>
@@ -42,7 +46,10 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
             hint="Select a subregion of interest in the S1 of the rat brain."
           />
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={color} />
+            <InfoBox
+              text="We digitally reconstructed the non-barrel hind limb primary rat Somatosensory Cortex consisting of eight sub-regions, four million neurons mediated by four billion synapses."
+              color={color}
+            />
           </div>
         </div>
         <div className="center-col">
@@ -56,7 +63,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
         </div>
       </Filters>
 
-      {children(currentRegion)}
+      {!!children && children(currentRegion)}
     </>
   );
 };

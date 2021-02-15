@@ -2,7 +2,9 @@ import React from 'react';
 import NumberFormat from '../NumberFormat';
 import isNil from 'lodash/isNil';
 
-import './style.less';
+import Unit from '../Unit';
+
+// import './style.scss';
 
 
 const classPrefix = 'factsheet__';
@@ -37,7 +39,7 @@ const FactsheetSingleValueEntry: React.FC<{
         {isNil(fact.value)
           ? (<span>-</span>)
           : (<span>
-              <NumberFormat value={fact.value} /> {fact.unit}
+              <NumberFormat value={fact.value} /> <Unit value={fact.unit} />
             </span>)
         }
       </div>
@@ -54,7 +56,7 @@ const FactsheetSingleMeanStdEntry: React.FC<{
     <div className="row mt-1">
       <div className="col-xs-4 name">{fact.name}</div>
       <div className="col-xs-4 value">
-        <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> {fact.unit}
+        <NumberFormat value={fact.value_map?.mean} /> ± <NumberFormat value={fact.value_map?.std} /> <Unit value={fact.unit} />
       </div>
     </div>
   );
@@ -65,9 +67,11 @@ const FactsheetMapValueEntry: React.FC<{
 }> = ({
   fact,
 }) => {
+  // @ts-ignore
   const maxVal = Math.max.apply(null, Object.values(fact.value_map).map(s => parseFloat(s as string)));
   const unitCode = fact.unit;
 
+  // @ts-ignore
   const valueColumn = Object.entries(fact.value_map).map(([label, value]) => {
     const barMaxFillRatio = 0.8;
     const barWidthPct = (parseFloat(value as string) / maxVal) * 100 * barMaxFillRatio;
@@ -79,7 +83,7 @@ const FactsheetMapValueEntry: React.FC<{
           <div className="bar" style={{ width: `${barWidthPct}%` }} />
         </div>
         <div className="col-xs-6">
-          <NumberFormat value={value}/> {unitCode}
+          <NumberFormat value={value}/> <Unit value={unitCode} />
         </div>
       </div>
     );

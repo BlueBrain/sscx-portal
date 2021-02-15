@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function SvgNeuron(props) {
+function SvgNeuron(props: any) {
   return (
     <svg viewBox="0 0 14.98 15.23" {...props}>
       <g data-name="Layer 2">

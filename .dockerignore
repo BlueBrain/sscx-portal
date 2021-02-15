@@ -1,4 +1,4 @@
-*
-!dist
-!data
-!nginx.conf
+node_modules
+.next
+public/data
+venv

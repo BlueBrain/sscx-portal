@@ -1,7 +1,7 @@
 import React from 'react';
 
-import './style.less';
-import { IoIosArrowUp } from 'react-icons/all';
+// import './style.scss';
+import { IoIosArrowUp } from 'react-icons/io';
 
 const classPrefix = 'scroll-top__';
 

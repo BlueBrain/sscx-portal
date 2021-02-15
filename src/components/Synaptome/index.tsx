@@ -3,7 +3,7 @@ import React from 'react';
 import ImageViewer from '../ImageViewer';
 import Video from '../VideoPlayer';
 
-import './style.less';
+// import './style.less';
 
 
 const classPrefix = 'synaptome__';

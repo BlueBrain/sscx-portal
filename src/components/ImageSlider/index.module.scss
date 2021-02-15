@@ -1,0 +1,17 @@
+
+.container {
+  height: 100%;
+}
+
+.currentImage, .nextImage {
+  height: 100%;
+  transition: opacity 1.6s ease;
+}
+
+.currentImage {
+  opacity: 1;
+}
+
+.nextImage {
+  opacity: 0;
+}

@@ -12,7 +12,7 @@ import Synaptome from '../../components/Synaptome';
 import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
 
-export default () => (
+const RecSynPathwaysView = () => (
   <SynapticPathwaysTemplates
     color={colorName}
     sectionTitle={sectionTitle}
@@ -24,9 +24,9 @@ export default () => (
             {data => (
               <>
                 <h3 className="mb-2">Anatomy</h3>
-                <Factsheet facts={data[0].values} />
+                {data && <Factsheet facts={data[0].values} />}
                 <h3 className="mt-3 mb-2">Physiology</h3>
-                <Factsheet className="mb-3" facts={data[1].values} />
+                {data && <Factsheet className="mb-3" facts={data[1].values} />}
               </>
             )}
           </HttpData>
@@ -76,3 +76,5 @@ export default () => (
     )}
   </SynapticPathwaysTemplates>
 );
+
+export default RecSynPathwaysView;

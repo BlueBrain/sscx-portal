@@ -1,29 +1,30 @@
 import React, { ReactChild, ReactFragment } from 'react';
-import './style.less';
+// import './style.scss';
 import Brand from '../Brand';
 import NavDesktop from '../NavDesktop';
 import NavMobile from '../NavMobile';
-import { NavLink } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { accentColors } from '../../config';
 import SvgRegions from '../../components/Icons/Regions';
 import SvgNeuron from '../../components/Icons/Neuron';
 import SvgMicrocircuit from '../../components/Icons/Microcircuit';
 import SvgSynapse from '../../components/Icons/Synapse';
-import { IoIosArrowDropdown } from 'react-icons/all';
+import { IoIosArrowDropdown } from 'react-icons/io';
 
 const classPrefix = 'nav__';
 
 export const HomeNav: React.FC = () => (
   <ul className="home-nav">
     <li>
-      <NavLink to="/#about" exact>
+      <Link href="/about">
         About
-      </NavLink>
+      </Link>
     </li>
     <li>
-      <NavLink to="#" exact>
+      <Link href="#">
         Explore
-      </NavLink>
+      </Link>
     </li>
   </ul>
 );
@@ -36,7 +37,7 @@ type NavProps = {
 export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
   const [active, setActive] = React.useState(initActive);
 
-  const toggleSubmenu = name => {
+  const toggleSubmenu = (name: string) => {
     if (active !== name) {
       setActive(name);
     } else if (canClose) {
@@ -56,22 +57,28 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.yellow }}>
           <li>
-            <NavLink to="/experimental-data/layer-anatomy">
-              <SvgRegions fill={accentColors.yellow} />
-              Layer Anatomy
-            </NavLink>
+            <Link href="/experimental-data/layer-anatomy">
+              <a>
+                <SvgRegions fill={accentColors.yellow} />
+                Layer Anatomy
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/experimental-data/neuron-morphology">
-              <SvgNeuron fill={accentColors.yellow} />
-              Neuron Morphology
-            </NavLink>
+            <Link href="/experimental-data/neuron-morphology">
+              <a>
+                <SvgNeuron fill={accentColors.yellow} />
+                Neuron Morphology
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/experimental-data/neuron-electrophysiology">
-              <SvgNeuron fill={accentColors.yellow} />
-              Neuron Electrophysiology
-            </NavLink>
+            <Link href="/experimental-data/neuron-electrophysiology">
+              <a>
+                <SvgNeuron fill={accentColors.yellow} />
+                Neuron Electrophysiology
+              </a>
+            </Link>
           </li>
         </ul>
       </li>
@@ -85,28 +92,36 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.blue }}>
           <li>
-            <NavLink to="/reconstruction-data/brain-regions">
-              <SvgRegions fill={accentColors.blue} />
-              Brain Regions
-            </NavLink>
+            <Link href="/reconstruction-data/brain-regions">
+              <a>
+                <SvgRegions fill={accentColors.blue} />
+                Brain Regions
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/reconstruction-data/microcircuit">
-              <SvgMicrocircuit fill={accentColors.blue} />
-              Microcircuit
-            </NavLink>
+            <Link href="/reconstruction-data/microcircuit">
+              <a>
+                <SvgMicrocircuit fill={accentColors.blue} />
+                Microcircuit
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/reconstruction-data/synaptic-pathways">
-              <SvgSynapse fill={accentColors.blue} />
-              Synaptic Pathways
-            </NavLink>
+            <Link href="/reconstruction-data/synaptic-pathways">
+              <a>
+                <SvgSynapse fill={accentColors.blue} />
+                Synaptic Pathways
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/reconstruction-data/neurons">
-              <SvgNeuron fill={accentColors.blue} />
-              Neurons
-            </NavLink>
+            <Link href="/reconstruction-data/neurons">
+              <a>
+                <SvgNeuron fill={accentColors.blue} />
+                Neurons
+              </a>
+            </Link>
           </li>
         </ul>
       </li>
@@ -120,28 +135,36 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.lavender }}>
           <li>
-            <NavLink to="/digital-reconstructions/brain-regions">
-              <SvgRegions fill={accentColors.lavender} />
-              Brain Regions
-            </NavLink>
+            <Link href="/digital-reconstructions/brain-regions">
+              <a>
+                <SvgRegions fill={accentColors.lavender} />
+                Brain Regions
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/digital-reconstructions/microcircuit">
-              <SvgMicrocircuit fill={accentColors.lavender} />
-              Microcircuit
-            </NavLink>
+            <Link href="/digital-reconstructions/microcircuit">
+              <a>
+                <SvgMicrocircuit fill={accentColors.lavender} />
+                Microcircuit
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/digital-reconstructions/synaptic-pathways">
-              <SvgSynapse fill={accentColors.lavender} />
-              Synaptic Pathways
-            </NavLink>
+            <Link href="/digital-reconstructions/synaptic-pathways">
+              <a>
+                <SvgSynapse fill={accentColors.lavender} />
+                Synaptic Pathways
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/digital-reconstructions/neurons">
-              <SvgNeuron fill={accentColors.lavender} />
-              Neurons
-            </NavLink>
+            <Link href="/digital-reconstructions/neurons">
+              <a>
+                <SvgNeuron fill={accentColors.lavender} />
+                Neurons
+              </a>
+            </Link>
           </li>
         </ul>
       </li>
@@ -155,28 +178,36 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.green }}>
           <li>
-            <NavLink to="/validations/brain-regions">
-              <SvgRegions fill={accentColors.green} />
-              Brain Regions
-            </NavLink>
+            <Link href="/validations/brain-regions">
+              <a>
+                <SvgRegions fill={accentColors.green} />
+                Brain Regions
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/validations/microcircuit">
-              <SvgMicrocircuit fill={accentColors.green} />
-              Microcircuit
-            </NavLink>
+            <Link href="/validations/microcircuit">
+              <a>
+                <SvgMicrocircuit fill={accentColors.green} />
+                Microcircuit
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/validations/synaptic-pathways">
-              <SvgSynapse fill={accentColors.green} />
-              Synaptic Pathways
-            </NavLink>
+            <Link href="/validations/synaptic-pathways">
+              <a>
+                <SvgSynapse fill={accentColors.green} />
+                Synaptic Pathways
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/validations/neurons">
-              <SvgNeuron fill={accentColors.green} />
-              Neurons
-            </NavLink>
+            <Link href="/validations/neurons">
+              <a>
+                <SvgNeuron fill={accentColors.green} />
+                Neurons
+              </a>
+            </Link>
           </li>
         </ul>
       </li>
@@ -190,28 +221,36 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.grey }}>
           <li>
-            <NavLink to="/predictions/brain-regions">
-              <SvgRegions fill={accentColors.grey} />
-              Brain Regions
-            </NavLink>
+            <Link href="/predictions/brain-regions">
+              <a>
+                <SvgRegions fill={accentColors.grey} />
+                Brain Regions
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/predictions/microcircuit">
-              <SvgMicrocircuit fill={accentColors.grey} />
-              Microcircuit
-            </NavLink>
+            <Link href="/predictions/microcircuit">
+              <a>
+                <SvgMicrocircuit fill={accentColors.grey} />
+                Microcircuit
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/predictions/synaptic-pathways">
-              <SvgSynapse fill={accentColors.grey} />
-              Synaptic Pathways
-            </NavLink>
+            <Link href="/predictions/synaptic-pathways">
+              <a>
+                <SvgSynapse fill={accentColors.grey} />
+                Synaptic Pathways
+              </a>
+            </Link>
           </li>
           <li>
-            <NavLink to="/predictions/neurons">
-              <SvgNeuron fill={accentColors.grey} />
-              Neurons
-            </NavLink>
+            <Link href="/predictions/neurons">
+              <a>
+                <SvgNeuron fill={accentColors.grey} />
+                Neurons
+              </a>
+            </Link>
           </li>
         </ul>
       </li>

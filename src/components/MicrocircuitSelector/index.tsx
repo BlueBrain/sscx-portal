@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
-import './style.less';
+// import './style.scss';
 import { Layer } from '../../types';
 
 const classPrefix = 'microcircuit_svg__';
@@ -41,11 +41,11 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
   onLayerSelected,
 }) => {
   const [activeLayer, setActiveLayer] = React.useState<Layer>(
-    defaultActiveLayer,
+    defaultActiveLayer as Layer,
   );
   const selectLayer = (l: Layer): void => {
     setActiveLayer(l);
-    onLayerSelected(l);
+    onLayerSelected && onLayerSelected(l);
   };
 
   return (
@@ -83,6 +83,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
       >
         <LayerIcon
           layer="L1"
+          // @ts-ignore
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
         >
@@ -93,6 +94,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
         </LayerIcon>
         <LayerIcon
           layer="L23"
+          // @ts-ignore
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
         >
@@ -103,6 +105,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
         </LayerIcon>
         <LayerIcon
           layer="L4"
+          // @ts-ignore
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
         >
@@ -113,6 +116,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
         </LayerIcon>
         <LayerIcon
           layer="L5"
+          // @ts-ignore
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
         >
@@ -123,6 +127,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitSelectProps> = ({
         </LayerIcon>
         <LayerIcon
           layer="L6"
+          // @ts-ignore
           onSelect={!disabled && selectLayer}
           activeLayer={activeLayer}
         >

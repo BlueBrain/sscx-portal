@@ -5,12 +5,14 @@ import 'plyr/dist/plyr.css';
 
 
 const Video: React.FC<any> = (props) => {
-  const videoRef = useRef(null);
-  const [videoPlayer, setVideoPlayer] = useState(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoPlayer, setVideoPlayer] = useState<Plyr | null>(null);
 
   useEffect(() => {
     console.log('Init video player');
-    const player = new Plyr(videoRef.current, {
+    if (!videoRef?.current) return;
+
+    const player = new Plyr(videoRef?.current, {
       settings: ['quality', 'loop'],
       controls: ['play', 'progress', 'settings', 'pip', 'airplay', 'fullscreen'],
       autoplay: true,
@@ -34,11 +36,12 @@ const Video: React.FC<any> = (props) => {
     setVideoPlayer(player);
 
     return () => {
-      if (videoPlayer) {
+      if (!!videoPlayer) {
         videoPlayer.destroy();
       }
     }
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoRef]);
 
   return (
     <video className="js-plyr plyr" ref={videoRef} />

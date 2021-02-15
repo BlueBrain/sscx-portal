@@ -1,7 +1,8 @@
 import React, { ReactChild, ReactFragment } from 'react';
+import { IoIosArrowUp } from 'react-icons/io';
 
-import './style.less';
-import { IoIosArrowUp } from 'react-icons/all';
+// import './style.scss';
+
 
 const classPrefix = 'collapsible__';
 

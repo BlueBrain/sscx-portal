@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Color } from '../../types';
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'title__';
 

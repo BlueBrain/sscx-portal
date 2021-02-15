@@ -23,8 +23,10 @@ const DataFilter: <T>(
   React.useEffect(() => {
     try {
       const matchingTypes = data
+        // @ts-ignore
         .filter(hit => hit._source['@type'].includes(type))
         .map(hit => hit._source);
+      // @ts-ignore
       setState({ error: false, data: matchingTypes });
     } catch (error) {
       setState({ error: true, data: [] });

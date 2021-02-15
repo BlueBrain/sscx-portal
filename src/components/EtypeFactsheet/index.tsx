@@ -1,154 +1,150 @@
 import React from 'react';
 import get from 'lodash/get';
-import isNumber from 'lodash/isNumber';
+import sortBy from 'lodash/sortBy';
+import { Table, Collapse } from 'antd';
 
-import './style.less';
+import NumberFormat from '../NumberFormat';
+import styles from './index.module.scss';
 
-const classPrefix = 'factsheet__';
 
-const kgTypeMap = {
-  'nsg:NeuronCount': {
-    valuePath: 'count',
-    labelPaths: ['eType'],
-  },
-};
+const { Panel } = Collapse;
 
 export type EtypeFactsheetProps = {
   data?: any;
 };
 
-type FactsheetEntryBaseType = {
-  name: string;
-  description: string;
-};
-
-type FactsheetMapValueType = FactsheetEntryBaseType & {
-  value: any[];
-};
-
-type FactsheetSingleValueType = FactsheetEntryBaseType & {
-  value?: string | number;
-  series: any[];
-  unitCode: string;
-};
-
-type FactsheetEntryType = FactsheetEntryBaseType & {
-  value: string | number | object[];
-};
-
-function formatNumber(num: number | string) {
-  return isNumber(num) ? num.toLocaleString() : num || 'NA';
-}
-
-const FactsheetSingleValueEntry: React.FC<{
-  fact: FactsheetSingleValueType;
-}> = ({ fact }) => {
-  if (fact.series) {
-    return (
-      <div className="row mt-1">
-        <div className="col-xs-6">{fact['@type']}</div>
-        <div className="col-xs-2 text-center">
-          {formatNumber(fact.series[1].value)}
-        </div>
-        <div className="col-xs-2 text-center">
-          {formatNumber(fact.series[0].value)}
-        </div>
-        <div className="col-xs-2 text-center">
-          {formatNumber(fact.series[2].value)}
-        </div>
-      </div>
-    );
-  }
-
-  const formattedValue = formatNumber(fact.value);
-
-  return (
-    <div className="row mt-1">
-      <div className="col-xs-4 name">{fact.name}</div>
-      <div className="col-xs-4 value">
-        {formattedValue} {fact.unitCode}
-      </div>
-    </div>
-  );
-};
-
-const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
-  fact,
-}) => {
-  const { valuePath, labelPaths } = kgTypeMap[fact['@type']];
-
-  const maxVal = Math.max.apply(
-    null,
-    fact.value.map(curr => parseFloat(get(curr, `${valuePath}.value`))),
-  );
-
-  const valueColumn = fact.value.map(valueEntry => {
-    const value = get(valueEntry, `${valuePath}.value`, '');
-    const formattedValue = formatNumber(value);
-    const unitCode = get(valueEntry, `${valuePath}.unitCode`, '');
-
-    const label = labelPaths
-      .map(labelPath => get(valueEntry, `${labelPath}.label`))
-      .find(Boolean);
-
-    const barMaxFillRatio = 0.8;
-    const barWidthPct = (value / maxVal) * 100 * barMaxFillRatio;
-
-    return (
-      <div key={label} className="row mb-1">
-        <div className="col-xs-6 pos-relative">
-          {label}
-          <div className="bar" style={{ width: `${barWidthPct}%` }} />
-        </div>
-        <div className="col-xs-6">
-          {formattedValue} {unitCode}
-        </div>
-      </div>
-    );
-  });
-
-  return (
-    <div className="row mt-1">
-      <div className="col-xs-4 name">{fact.name}</div>
-      <div className="col-xs-8">{valueColumn}</div>
-    </div>
-  );
-};
-
-const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => {
-  return Array.isArray(fact.value) ? (
-    <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
-  ) : (
-    <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
-  );
-};
 
 const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
 }) => {
-  const facts = get(data, 'fact', []);
+  // Experimental features and model fitness table data preparation
+  const expFeatures = get(data, '[0].values[0]');
+
+  const tableData = {};
+  const protocols = [];
+  Object.entries(expFeatures).forEach(([protocol, protocolVal]) => {
+    protocols.push(protocol);
+    Object.entries(protocolVal).forEach(([measurement, measurementVal]) => {
+      measurementVal.features.sort((f1, f2) => (f1.name > f2.name) ? 1 : -1).forEach(feature => {
+        if (!tableData[protocol]) {
+          tableData[protocol] = [];
+        }
+
+        tableData[protocol].push({
+          key: feature.name,
+          protocol,
+          measurement,
+          feature: feature.name,
+          unit: feature.unit,
+          mean: feature.values[0].mean,
+          std: feature.values[0].std,
+          modelFitness: feature['model fitness'],
+        })
+      });
+    });
+  });
+
+  protocols.sort();
+
+  // sortBy(tableData, ['protocol', 'feature']);
+
+  // const protocolColRender = (protocol, row, idx) => {
+  //   if (idx > 0 && tableData[idx - 1].protocol === protocol) {
+  //     return {
+  //       children: null,
+  //       props: {
+  //         rowSpan: 0,
+  //       },
+  //     };
+  //   }
+
+  //   return {
+  //     children: protocol,
+  //     props: {
+  //       rowSpan: tableData.filter(tableRow => tableRow.protocol === protocol).length,
+  //     },
+  //   }
+  // };
+
+  const tableColumns = [
+    // {
+      // title: 'Protocol',
+      // dataIndex: 'protocol',
+      // render: protocolColRender,
+    // },
+    {
+      title: 'Feature',
+      dataIndex: 'feature',
+      render: feature => feature.replace(/\_/g, ' '),
+    },
+    {
+      title: 'Mean',
+      dataIndex: 'mean',
+      render: (mean, row) => <span><NumberFormat value={mean} /> {row.unit}</span>
+    },
+    {
+      title: 'Std',
+      dataIndex: 'std',
+      render: (std, row) => <span><NumberFormat value={std} /> {row.unit}</span>
+    },
+    {
+      title: 'Model fitness',
+      dataIndex: 'modelFitness',
+      render: modelFitness => <NumberFormat value={modelFitness} />
+    },
+  ];
+
+  // Channel mechanisms data preparation
+  const channelMechanisms = get(data, '[1].values[0].location_map');
+  const sections = Object.keys(channelMechanisms);
 
   return (
-    <div className={`${classPrefix}basis`}>
-      <div className="row mt-1">
-        <div className="col-xs-6">
-          <strong>E-phys traces feature</strong>
+    <div className={styles.container}>
+      <h3>Factsheet</h3>
+      <Collapse
+        className="mb-3"
+        bordered={false}
+        defaultActiveKey={protocols[0]}
+      >
+        {protocols.map(protocol => (
+          <Panel key={protocol} header={<strong>{protocol}</strong>}>
+            <Table
+              dataSource={tableData[protocol]}
+              columns={tableColumns}
+              pagination={false}
+              size="small"
+              tableLayout="fixed"
+              bordered
+            />
+          </Panel>
+        ))}
+      </Collapse>
+
+      <h3>Channel Mechanisms</h3>
+      <div className={styles.mechanisms}>
+        <div className="row mb-1">
+          <div className="col-xs-6 col-md-4"><strong>Sections</strong></div>
+          <div className="col-xs-6 col-md-8"><strong>Mechanisms</strong></div>
         </div>
-        <div className="col-xs-2 text-center">
-          <strong>Mean value</strong>
-        </div>
-        <div className="col-xs-2 text-center">
-          <strong>Standard deviation</strong>
-        </div>
-        <div className="col-xs-2 text-center">
-          <strong>Model error in std deviation</strong>
-        </div>
+        {sections.map(section => (
+          <div className={`row ${styles.mechanismsRow}`} key={section}>
+            <div className="col-xs-6 col-md-4">{section}</div>
+            <div className="col-xs-6 col-md-8">
+              {Object.entries(channelMechanisms[section].channels).map(([channelName, channelData]) => (
+                <span
+                  className={styles.channelLabel}
+                  key={channelName}
+                >
+                  {channelName}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
-      {facts.map(fact => (
-        <FactsheetEntry key={fact.name} fact={fact} />
-      ))}
     </div>
   );
 };
+
 
 export default EtypeFactsheet;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.less';
+// import './style.scss';
 import { Color } from '../../types';
 
 const classPrefixPills = 'pills__';
@@ -10,14 +10,14 @@ type PillsProps = {
   title?: string;
   list: string[];
   defaultValue?: string;
-  onSelect?: (string) => void;
+  onSelect?: (s: string) => void;
   color?: Color;
 };
 
 type PillProps = {
   element: string;
   selected: boolean;
-  onSelect?: (string) => void;
+  onSelect?: (s: string) => void;
 };
 
 const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
@@ -43,9 +43,9 @@ const Pills: React.FC<PillsProps> = ({
   onSelect,
   color = '',
 }) => {
-  const [activePill, setActivePill] = React.useState<string>(defaultValue);
+  const [activePill, setActivePill] = React.useState<string>(defaultValue as string);
 
-  const handleSelectedPill = element => {
+  const handleSelectedPill = (element: string) => {
     setActivePill(element);
     onSelect && onSelect(element);
   };
@@ -62,9 +62,9 @@ const Pills: React.FC<PillsProps> = ({
       >
         {list.map(el => (
           <Pill
-            key={`${el}`}
+            key={el}
             element={el}
-            selected={activePill === el}
+            selected={(activePill || defaultValue) === el}
             onSelect={handleSelectedPill}
           />
         ))}

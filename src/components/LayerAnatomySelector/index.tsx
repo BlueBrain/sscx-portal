@@ -2,7 +2,7 @@ import React, { ReactChild, ReactFragment } from 'react';
 import { Layer } from '../../types';
 import { accentColors } from '../../config';
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'layer-anatomy-svg__';
 
@@ -15,7 +15,7 @@ type LayerProps = {
 
 type LayerAnatomySelectProps = {
   color: string;
-  defaultActiveLayer?: Layer;
+  activeLayer?: Layer;
   onLayerSelected?: (layer: Layer) => void;
 };
 
@@ -27,17 +27,10 @@ const LayerIcon: React.FC<LayerProps> = ({ layer, onSelect, children }) => (
 
 const LayerAnatomySelector: React.FC<LayerAnatomySelectProps> = ({
   color,
-  defaultActiveLayer,
-  onLayerSelected,
+  activeLayer,
+  onLayerSelected = () => {},
 }) => {
-  const [activeLayer, setActiveLayer] = React.useState<Layer>(
-    defaultActiveLayer,
-  );
-
-  const selectLayer = (l: Layer): void => {
-    setActiveLayer(l);
-    onLayerSelected(l);
-  };
+  const selectLayer = (l: Layer): void => onLayerSelected(l);
 
   const colorHex = accentColors[color];
 

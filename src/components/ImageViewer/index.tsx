@@ -1,15 +1,14 @@
-import React, { Suspense } from 'react';
+import React from 'react';
+import dynamic from 'next/dynamic';
 
 import { ImageViewerProps } from './image-viewer';
 
 
-const ImageViewerLazy = React.lazy(() => import('./image-viewer'));
+const ImageViewerLazy = dynamic(() => import('./image-viewer'), { ssr: false });
 
 const ImageViewer: React.FC<ImageViewerProps> = (props) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ImageViewerLazy {...props} />
-    </Suspense>
+    <ImageViewerLazy {...props} />
   );
 };
 

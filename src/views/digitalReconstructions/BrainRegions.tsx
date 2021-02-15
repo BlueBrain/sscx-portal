@@ -10,7 +10,7 @@ import Collapsible from '../../components/Collapsible';
 import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
 
-export default () => (
+const BrainRegionsView = () => (
   <BrainRegionTemplate
     color={colorName}
     sectionTitle={sectionTitle}
@@ -20,7 +20,9 @@ export default () => (
         <Collapsible title="S1 (Region) Factsheet">
           <HttpData path={regionCircuitFactsheetPath()}>
             {data => (
-              <Factsheet facts={data[0].values} />
+              <>
+                {data && <Factsheet facts={data[0].values} />}
+              </>
             )}
           </HttpData>
         </Collapsible>
@@ -31,7 +33,9 @@ export default () => (
         >
           <HttpData path={subregionCircuitFactsheetPath(subregion)}>
             {data => (
-              <Factsheet facts={data[0].values} />
+              <>
+                {data && <Factsheet facts={data[0].values} />}
+              </>
             )}
           </HttpData>
         </Collapsible>
@@ -60,3 +64,6 @@ export default () => (
     )}
   </BrainRegionTemplate>
 );
+
+export default BrainRegionsView;
+

@@ -4,7 +4,7 @@ import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'layer-anatomy-summary__';
 
@@ -27,11 +27,11 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
         && entity.derivation
     });
 
-    const densityMean = densityEntity?.series.find(s => s.statistic === 'mean')?.value;
-    const densityUnit = densityEntity?.series.find(s => s.statistic === 'mean')?.unitCode;
-    const densityN = densityEntity?.series.find(s => s.statistic === 'N')?.value;
+    const densityMean = densityEntity?.series.find((s: any) => s.statistic === 'mean')?.value;
+    const densityUnit = densityEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
+    const densityN = densityEntity?.series.find((s: any) => s.statistic === 'N')?.value;
     const densityStd = densityEntity?.series
-      .find(s => s.statistic === 'standard deviation')?.value;
+      .find((s: any) => s.statistic === 'standard deviation')?.value;
 
     const thicknessEntity = entities.find((entity) => {
       return entity['@type'].toString().includes('Thickness')
@@ -39,9 +39,9 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
         && entity.derivation?.length > 1
     });
 
-    const thicknessMean = thicknessEntity?.series.find(s => s.statistic === 'mean')?.value;
-    const thicknessUnit = thicknessEntity?.series.find(s => s.statistic === 'mean')?.unitCode;
-    const thicknessN = thicknessEntity?.series.find(s => s.statistic === 'N')?.value;
+    const thicknessMean = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.value;
+    const thicknessUnit = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
+    const thicknessN = thicknessEntity?.series.find((s: any) => s.statistic === 'N')?.value;
 
     return {
       layer,

@@ -1,15 +1,14 @@
-import React, { Suspense } from 'react';
+import React from 'react';
+import dynamic from 'next/dynamic';
 
 import { NexusPluginClassProps } from './nexus-plugin';
 
 
-const NexusPluginLazy = React.lazy(() => import('./nexus-plugin'));
+const NexusPluginLazy = dynamic(() => import('./nexus-plugin'), { ssr: false });
 
 const ImageViewer: React.FC<NexusPluginClassProps<any>> = (props) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <NexusPluginLazy {...props} />
-    </Suspense>
+    <NexusPluginLazy {...props} />
   );
 };
 

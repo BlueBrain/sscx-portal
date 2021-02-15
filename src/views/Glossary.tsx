@@ -1,11 +1,12 @@
 import React from 'react';
+
 import Title from '../components/Title';
 import FullPage from '../layouts/FullPage';
 import { accentColors } from '../config';
 import { Color } from '../types';
 import glossaryContent from './glossary-content.json';
 
-import './Glossary.less';
+// import './Glossary.scss';
 
 
 const colorName: Color = 'lavender';
@@ -25,7 +26,7 @@ const Glossary: React.FC = () => {
               <Title subtitle={sectionLabel} primaryColor={colorName} />
             )}
 
-            {glossaryContent[sectionLabel].map(([term, description]) => (
+            {(glossaryContent as any)[sectionLabel].map(([term, description]: [term: any, d: any]) => (
               <div className="row mt-2" key={term}>
                 <div className="col-xs-4 col-md-3">
                   <strong dangerouslySetInnerHTML={{ __html: term }} />
@@ -38,13 +39,13 @@ const Glossary: React.FC = () => {
           </section>
         ))}
 
-        <img style={{ width: '100%' }} src={require('url:../assets/images/etypes.png')} alt="etype" />
+        <img style={{ width: '100%' }} src="/assets/images/etypes.png" alt="etype" />
 
         <h4>Spike Characteristics</h4>
-        <img style={{ width: '100%' }} src={require('url:../assets/images/spike.png')} alt="spike" />
+        <img style={{ width: '100%' }} src="/assets/images/spike.png" alt="spike" />
 
         <h4>Firing Behavior</h4>
-        <img style={{ width: '100%' }} src={require('url:../assets/images/firing-behavior.png')} alt="spike" />
+        <img style={{ width: '100%' }} src="/assets/images/firing-behavior.png" alt="firing-behavior" />
       </div>
     </FullPage>
   );

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'footer__';
 
@@ -20,10 +21,10 @@ const Footer: React.FC<{}> = () => {
         <div>
           <h4 className="text-white">Contact</h4>
           <p>
-            <Link to="#">Submission</Link>
+            <Link href="#">Submission</Link>
           </p>
           <p>
-            <Link to="#">Chat</Link>
+            <Link href="#">Chat</Link>
           </p>
         </div>
         <div>
@@ -57,7 +58,7 @@ const Footer: React.FC<{}> = () => {
       <div className={`${classPrefix}bottom-line`}>
         <p>©Blue Brain Project/EPFL 2005-2020</p>
         <p>
-          <Link to="#">Privacy Policy</Link> | <Link to="#">Terms of use</Link>
+          <Link href="#">Privacy Policy</Link> | <Link href="#">Terms of use</Link>
         </p>
       </div>
     </div>

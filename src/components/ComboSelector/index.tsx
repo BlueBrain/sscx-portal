@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.less';
+// import './style.scss';
 import Selector from '../Selector';
 import List from '../List';
 import { Color } from '../../types';
@@ -35,7 +35,7 @@ const ComboSelector: React.FC<ComboSelectorProps> = ({
   return (
     <div className={`${cssPrefix}basis`}>
       <Selector title={selectorTitle} column>
-        {selector}
+        <>{selector}</>
       </Selector>
       <div>
         {(list1Open || list2Open) && (

@@ -1,3 +1,4 @@
+
 export const accentColors: { [key: string]: string } = {
   yellow: '#ffc500',
   blue: '#84bbf8',
@@ -13,6 +14,13 @@ export const sscx = {
   expNeuronElectroViewId: encodeURIComponent(
     'https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset',
   ),
+  datasetViewId: encodeURIComponent(
+    'https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset',
+  ),
 };
 
 export const nexusPluginBaseUrl = 'https://bbp.epfl.ch/nexus/plugins';
+
+export const basePath = '';
+
+export const liveContent = process.env.SSCX_LIVE_CONTENT || false;

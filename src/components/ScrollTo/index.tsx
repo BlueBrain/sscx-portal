@@ -1,8 +1,10 @@
 import React, { ReactChild, ReactFragment } from 'react';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-import './style.less';
-import { Direction, Palette, Color } from '../../types';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/all';
+import { Direction, Color } from '../../types';
+
+// import './style.scss';
+
 
 const classPrefix = 'scroll-to__';
 
@@ -19,14 +21,21 @@ const ScrollTo: React.FC<ScrollToProps> = ({
   children,
   color = '',
 }) => {
+  const scroll = () => {
+    const target = document.querySelector(`#${anchor}`);
+    if (target) {
+      target.scrollIntoView();
+    }
+  };
+
   return (
-    <a href={`#${anchor}`} className={`${classPrefix}basis ${color}`}>
+    <div onClick={scroll} className={`${classPrefix}basis ${color}`}>
       {children}
       <span className={`${classPrefix}direction`}>
         {direction === 'up' && <IoIosArrowUp />}
         {direction === 'down' && <IoIosArrowDown />}
       </span>
-    </a>
+    </div>
   );
 };
 

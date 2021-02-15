@@ -1,13 +1,13 @@
-import React from 'react';
-import { useHistory } from 'react-router';
+import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 
+import ServerSideContext from '../context/server-side-context';
 import Filters from '../layouts/Filters';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import { lorem } from '../views/Styleguide';
 import Selector from '../components/Selector';
 import MicrocircuitSelector from '../components/MicrocircuitSelector';
-import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
 import Pills from '../components/Pills';
 import { BrainRegion } from '../components/BrainRegionsSelector';
@@ -25,19 +25,30 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
   sectionTitle,
   children,
 }) => {
-  const query = useQuery();
-  const history = useHistory();
+  const router = useRouter();
+  const serverSideContext = useContext(ServerSideContext);
 
-  const addParam = (key: string, value: string): void => {
-    query.set(key, value);
-    history.push(`?${query.toString()}`);
+  const query = { ...serverSideContext?.query, ...router?.query };
+
+  const setQuery = (query: any) => {
+    router.push({ query }, undefined, { shallow: true });
   };
 
-  const currentRegion: BrainRegion = query.get('brain_region') as BrainRegion;
-  const currentLayer: Layer = query.get('layer') as Layer;
+  const currentRegion: BrainRegion = query.brain_region as BrainRegion;
+  const currentLayer: Layer = query.layer as Layer;
 
-  const setRegion = (region: BrainRegion) => addParam('brain_region', region);
-  const setLayer = (layer: Layer) => addParam('layer', layer);
+  const setRegion = (region: BrainRegion) => {
+    setQuery({
+      layer: currentLayer,
+      brain_region: region,
+    });
+  }
+  const setLayer = (layer: Layer) => {
+    setQuery({
+      layer,
+      brain_region: currentRegion,
+    });
+  }
 
   const layerNums = currentLayer
     ? currentLayer
@@ -61,13 +72,13 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
             hint="Select a microcircuit of interest."
           />
           <div>
-            <InfoBox title="Longer Text" text={lorem} />
+            <InfoBox text="A neuronal microcircuit is the smallest functional ecosystem in any brain region that encompasses a diverse morphological and electrical assortment of neurons, and their synaptic interactions." />
             <br />
             <Pills
               title="1. Select a subregion"
               list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
               defaultValue={currentRegion}
-              onSelect={setRegion}
+              onSelect={setRegion as (s: string) => void}
               color={color}
             />
           </div>
@@ -84,7 +95,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
         </div>
       </Filters>
 
-      {children(currentRegion, layerNums)}
+      {!!children && children(currentRegion, layerNums)}
     </>
   );
 };

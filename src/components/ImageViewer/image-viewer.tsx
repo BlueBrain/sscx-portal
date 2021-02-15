@@ -5,13 +5,14 @@ import { IoMdDownload } from 'react-icons/io';
 
 import 'react-image-lightbox/style.css';
 
-import './style.less';
+// import './style.scss';
 
 
 const classPrefix = 'image-viewer__';
 
 export type ImageViewerProps = {
   src: string;
+  loading?: 'eager' | 'lazy';
   thumbnailSrc?: string;
   alt?: string;
   color?: string;
@@ -28,6 +29,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   // canDownload = true,
   canExpand = true,
   border = false,
+  loading = 'eager',
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -42,11 +44,12 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
     <div className={`${classPrefix}basis`}>
       <img
         src={thumbnailSrc || src}
+        loading={loading}
         alt={alt}
         onClick={(e: React.MouseEvent) => onThumbnailClick(e)}
         style={{ border: border ? '1px solid grey' : 'none' }}
       />
-      <FaExpandArrowsAlt />
+      {/* <FaExpandArrowsAlt /> */}
       {expanded && (
         <Lightbox
           mainSrc={src}

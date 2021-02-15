@@ -8,8 +8,7 @@ import Collapsible from '../../components/Collapsible';
 
 const pathwayFactsheetPath = () => '';
 
-
-export default () => (
+const NeuronsView = () => (
   <NeuronTemplate
     color={colorName}
     sectionTitle={sectionTitle}
@@ -24,3 +23,5 @@ export default () => (
     )}
   </NeuronTemplate>
 );
+
+export default NeuronsView;

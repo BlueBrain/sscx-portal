@@ -3,7 +3,11 @@ import React from 'react';
 
 type HttpDataProps = {
   path: string;
-  children: (data: any) => React.ReactNode;
+  children: (
+    data: any,
+    loading: boolean,
+    error: any,
+  ) => React.ReactNode;
 };
 
 const HttpData: React.FC<HttpDataProps> = ({ path, children }) => {
@@ -19,7 +23,7 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children }) => {
 
   React.useEffect(() => {
     if (path) {
-      setState({ ...state, loading: true });
+      setState({ ...state, loading: true, data: null });
       fetch(path)
         .then(res => res.json())
         .then(data => setState({ ...state, data, error: false }))
@@ -40,7 +44,7 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children }) => {
 
   return (
     <>
-      {children(state.data)}
+      {children(state.data, state.loading, state.error)}
     </>
   );
 };

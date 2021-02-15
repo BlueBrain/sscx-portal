@@ -1,13 +1,12 @@
-import React, { Suspense } from 'react';
+import React from 'react';
+import dynamic from 'next/dynamic';
 
 
-const VideoPlayerLazy = React.lazy(() => import('./video-player'));
+const VideoPlayerLazy = dynamic(() => import('./video-player'), { ssr: false });
 
 const VideoPlayer: React.FC<any> = (props) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <VideoPlayerLazy {...props} />
-    </Suspense>
+    <VideoPlayerLazy {...props} />
   );
 };
 

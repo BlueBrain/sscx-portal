@@ -1,6 +1,9 @@
 import React, { ReactChild, ReactFragment } from 'react';
-import './style.less';
 import { FaCircle } from 'react-icons/fa';
+
+import { basePath } from '../../../config';
+
+// import './style.scss';
 
 const classPrefix = 'info-box-1__';
 
@@ -23,25 +26,25 @@ const InfoBox1: React.FC<InfoBox1Props> = ({
     <div className={`${classPrefix}basis`}>
       {icon === 'checkmark' && (
         <img
-          src={require('url:../../../assets/images/icons/checkmark.svg')}
+          src={`${basePath}/assets/images/icons/checkmark.svg`}
           alt="checkmark"
         />
       )}
       {icon === 'mail' && (
         <img
-          src={require('url:../../../assets/images/icons/mail.svg')}
+          src={`${basePath}/assets/images/icons/mail.svg`}
           alt="mail"
         />
       )}
       {icon === 'search' && (
         <img
-          src={require('url:../../../assets/images/icons/search.svg')}
+          src={`${basePath}/assets/images/icons/search.svg`}
           alt="search"
         />
       )}
       {icon === 'download' && (
         <img
-          src={require('url:../../../assets/images/icons/download.svg')}
+          src={`${basePath}/assets/images/icons/download.svg`}
           alt="download"
         />
       )}

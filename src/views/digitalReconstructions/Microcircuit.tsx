@@ -10,7 +10,7 @@ import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
 import Factsheet from '../../components/Factsheet';
 
-export default () => (
+const RecMicrocircuitView = () => (
   <MicrocircuitsTemplates
     color={colorName}
     sectionTitle={sectionTitle}
@@ -21,7 +21,9 @@ export default () => (
         <Collapsible title={`${subregion} Microcircuit Factsheet`}>
           <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
             {data => (
-              <Factsheet facts={data[0].values}/>
+              <>
+                {data && <Factsheet facts={data[0].values}/>}
+              </>
             )}
           </HttpData>
         </Collapsible>
@@ -36,9 +38,9 @@ export default () => (
                 {data => (
                   <>
                     <h3 className="mb-2">L{layerNum} Anatomy</h3>
-                    <Factsheet facts={data[0].values} />
+                    {data && <Factsheet facts={data[0].values} />}
                     <h3 className="mt-3 mb-2">L{layerNum} Physiology</h3>
-                    <Factsheet className="mb-3" facts={data[1].values} />
+                    {data && <Factsheet className="mb-3" facts={data[1].values} />}
                   </>
                 )}
               </HttpData>
@@ -70,3 +72,5 @@ export default () => (
     )}
   </MicrocircuitsTemplates>
 );
+
+export default RecMicrocircuitView;

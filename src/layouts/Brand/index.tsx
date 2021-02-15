@@ -1,6 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 
-import './style.less';
+import { basePath } from '../../config';
+
+// import './style.scss';
+
 
 const classPrefix = 'brand__';
 
@@ -10,14 +14,16 @@ const Brand: React.FC = () => {
       <div className="logo">
         <a href="https://www.epfl.ch/">
           <img
-            src={require('url:../../assets/images/epfl-logo.svg')}
+            src={`${basePath}/assets/images/epfl-logo.svg`}
             alt="EPFL logo"
           />
         </a>
       </div>
-      <a href="/">
-        <h1 className="text-white" >SSCx Portal</h1>
-      </a>
+      <Link href="/">
+        <a>
+          <h1 className="text-white" >SSCx Portal</h1>
+        </a>
+      </Link>
     </div>
   );
 };

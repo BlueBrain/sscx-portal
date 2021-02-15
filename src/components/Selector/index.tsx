@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'selector__';
 

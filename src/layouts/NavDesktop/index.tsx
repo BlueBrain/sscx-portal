@@ -1,12 +1,14 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+// import { NavLink, withRouter } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 // import { useSelector } from 'react-redux';
 
 import Button from '../../components/Button';
 import { HomeNav, SecondaryNav } from '../Navigation';
 // import { State } from '../../store';
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'nav-desktop__';
 
@@ -16,7 +18,7 @@ type NavButtonProps = {
   notifications?: number;
   home?: boolean;
   highlight?: boolean;
-  onClick?: (any) => void;
+  onClick?: () => void;
 };
 
 const NavButton: React.FC<NavButtonProps> = ({
@@ -28,23 +30,27 @@ const NavButton: React.FC<NavButtonProps> = ({
   onClick,
 }) => {
   return (
-    <NavLink to={path} exact={home}>
-      <Button
-        width={highlight || home ? 140 : null}
-        discrete={!highlight && !home}
-        onClick={onClick}
-        notifications={notifications}
-        uppercase
-      >
-        {name}
-      </Button>
-    </NavLink>
+    <Link href={path}>
+      <a>
+        <Button
+          width={highlight || home ? 140 : undefined}
+          discrete={!highlight && !home}
+          onClick={onClick}
+          notifications={notifications}
+          uppercase
+        >
+          {name}
+        </Button>
+      </a>
+    </Link>
   );
 };
 
-const NavDesktop = withRouter(({ location }) => {
+const NavDesktop = () => {
+  const router = useRouter();
+
   const [secondaryNav, setSecondaryNav] = React.useState(false);
-  React.useEffect(() => setSecondaryNav(false), [location]);
+  React.useEffect(() => setSecondaryNav(false), [router]);
   // const downloadItems = useSelector<State, number>(
   //   state => state.download.items.length,
   // )
@@ -57,7 +63,7 @@ const NavDesktop = withRouter(({ location }) => {
         ) : (
           <Button
             width={140}
-            active={location.pathname === '/'}
+            active={router.pathname === '/'}
             onClick={() => setSecondaryNav(true)}
             uppercase
           >
@@ -81,19 +87,16 @@ const NavDesktop = withRouter(({ location }) => {
         />
       </li>
       <li>
-        <NavButton path="/about" name="About" />
-      </li>
-      <li>
         <NavButton path="/glossary" name="Glossary" />
       </li>
       <li>
         <NavButton
-          path="/contact-and-submission"
+          path="/contact"
           name="Contact and Submission"
         />
       </li>
     </ul>
   );
-});
+}
 
 export default NavDesktop;

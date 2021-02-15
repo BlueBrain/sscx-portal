@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import './style.less';
 import { Color } from '../../types';
+
+// import './style.scss';
 
 const classPrefixList = 'list__';
 const classPrefixListElement = 'list-element__';
@@ -9,8 +10,8 @@ const classPrefixListElement = 'list-element__';
 type ListProps = {
   title?: string;
   list: string[];
-  defaultValue?: string;
-  onSelect?: (string) => void;
+  value?: string;
+  onSelect?: (s: string) => void;
   color?: Color;
   block?: boolean;
 };
@@ -18,7 +19,7 @@ type ListProps = {
 type ListElementProps = {
   element: string;
   selected?: boolean;
-  onSelect?: (string) => void;
+  onSelect?: (s: string) => void;
 };
 
 const ListElement: React.FC<ListElementProps> = ({
@@ -32,7 +33,7 @@ const ListElement: React.FC<ListElementProps> = ({
       aria-checked={selected}
       tabIndex={0}
       className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
-      onClick={() => onSelect(element)}
+      onClick={() => onSelect && onSelect(element)}
     >
       {element}
     </div>
@@ -42,19 +43,12 @@ const ListElement: React.FC<ListElementProps> = ({
 const List: React.FC<ListProps> = ({
   title,
   list,
-  defaultValue,
-  onSelect,
+  value,
+  onSelect = () => {},
   color,
   block = false,
 }) => {
-  const [activeElement, setActiveElement] = React.useState<string>(
-    defaultValue,
-  );
-
-  const handleSelectedElement = (element: string) => {
-    setActiveElement(element);
-    onSelect && onSelect(element);
-  };
+  const handleSelectedElement = (element: string) => onSelect(element);
 
   const id = title ? title.replace(/\s/g, '') : 'no_title';
 
@@ -70,7 +64,7 @@ const List: React.FC<ListProps> = ({
           <ListElement
             key={`${el}`}
             element={el}
-            selected={activeElement === el}
+            selected={value === el}
             onSelect={handleSelectedElement}
           />
         ))}

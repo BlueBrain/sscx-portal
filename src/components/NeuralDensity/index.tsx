@@ -5,7 +5,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
 import { Layer } from '../../types'
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'neural-density__';
 
@@ -19,6 +19,7 @@ export type LayerThicknessProps = {
 const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], className='' }) => {
   const entities = data.map(document => document._source);
 
+  // @ts-ignore
   const layerNums = layer.match(/(\d+)/)[0].split('');
   const layerLabels = layerNums.map(layerNum => `layer ${layerNum}`);
 
@@ -29,10 +30,10 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
 
   const neuralDensities = rawNeuralDensities.map(neuralDensity => ({
     layer: neuralDensity.brainLocation.layer.label,
-    mean: neuralDensity.series.find(s => s.statistic === 'mean')?.value,
-    unit: neuralDensity.series.find(s => s.statistic === 'mean')?.unitCode,
-    std: neuralDensity.series.find(s => s.statistic === 'standard deviation')?.value,
-    n: neuralDensity.series.find(s => s.statistic === 'N')?.value,
+    mean: neuralDensity.series.find((s: any) => s.statistic === 'mean')?.value,
+    unit: neuralDensity.series.find((s: any) => s.statistic === 'mean')?.unitCode,
+    std: neuralDensity.series.find((s: any) => s.statistic === 'standard deviation')?.value,
+    n: neuralDensity.series.find((s: any) => s.statistic === 'N')?.value,
   }));
 
   const unit = neuralDensities.length

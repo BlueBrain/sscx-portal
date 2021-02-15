@@ -2,7 +2,7 @@ import React, { ReactChild, ReactFragment } from 'react';
 
 import ScrollTo from '../../components/ScrollTo';
 import { Color } from '../../types';
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'filters__';
 

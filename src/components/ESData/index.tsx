@@ -6,33 +6,32 @@ import { sscx } from '../../config';
 
 
 type ESDataProps = {
-  hasData: boolean;
-  query: {};
+  query: Record<string, unknown> | null;
   children: (
-    data: ElasticSearchViewQueryResponse<any>['hits']['hits'],
+    data: ElasticSearchViewQueryResponse<any>['hits']['hits'] | null,
+    loading: boolean,
+    error: any,
   ) => React.ReactNode;
-  id?: string;
 };
 
 const ESData: React.FC<ESDataProps> = ({
-  hasData,
   query,
   children,
 }) => {
   const [state, setState] = React.useState<{
-    data: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+    data: ElasticSearchViewQueryResponse<any>['hits']['hits'] | null;
     loading: boolean;
     error: any;
   }>({
-    data: [],
+    data: null,
     loading: false,
     error: null,
   });
   const nexus = useNexusContext();
 
   React.useEffect(() => {
-    if (hasData) {
-      setState({ ...state, loading: true });
+    if (query) {
+      setState({ ...state, loading: true, data: null });
       nexus.View.elasticSearchQuery(
         sscx.org,
         sscx.project,
@@ -44,23 +43,12 @@ const ESData: React.FC<ESDataProps> = ({
         )
         .catch(error => setState({ ...state, loading: false, error }));
     }
-  }, [hasData, query]);
-
-  if (!hasData) {
-    return null;
-  }
-
-  if (state.error) {
-    return <p>An error happened loading the data... Please try again later.</p>;
-  }
-
-  if (state.loading || !state.data) {
-    return <p>loading...</p>;
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   return (
     <>
-      {children(state.data)}
+      {children(state.data, state.loading, state.error)}
     </>
   );
 };

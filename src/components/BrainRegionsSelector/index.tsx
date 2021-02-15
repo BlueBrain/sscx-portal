@@ -1,7 +1,7 @@
 import React, { ReactChild, ReactFragment } from 'react';
 import { accentColors } from '../../config';
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'brain-regions-svg__';
 
@@ -43,12 +43,12 @@ const BrainRegionSelector: React.FC<BrainRegionsSelectProps> = ({
   color,
 }) => {
   const [activeRegion, setActiveRegion] = React.useState<BrainRegion>(
-    defaultActiveBrainRegion,
+    defaultActiveBrainRegion as BrainRegion,
   );
 
   const selectRegion = (r: BrainRegion): void => {
     setActiveRegion(r);
-    onBrainRegionSelected(r);
+    onBrainRegionSelected && onBrainRegionSelected(r);
   };
 
   const colorHex = accentColors[color];

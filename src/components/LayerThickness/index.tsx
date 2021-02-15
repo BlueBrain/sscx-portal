@@ -7,7 +7,7 @@ import NexusImage from '../NexusImage';
 import NumberFormat from '../NumberFormat';
 import { sscx } from '../../config';
 
-import './style.less';
+// import './style.scss';
 
 
 const classPrefix = 'layer-thickness__';
@@ -28,12 +28,14 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
     .filter(entity => entity['@type'].toString().includes('LayerThickness'))
     .filter(entity => !Array.isArray(entity.derivation));
 
+  // @ts-ignore
   const layerNums = layer.match(/(\d+)/)[0].split('');
 
   const sliceCollections = rawSliceCollections
     // construct simplified sliceCollection object
     .map(sliceCollection => ({
       name: sliceCollection.name,
+      // @ts-ignore
       images: sliceCollection.image.map(imageEntity => imageEntity['@id']),
       layerThicknesses: rawLayerThicknesses
         // filter layerThicknesses derived from current sliceCollection
@@ -49,10 +51,10 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
         // compose simplified layer thickness objects
         .map(rawLayerThickness => ({
           layer: rawLayerThickness.brainLocation.layer.label,
-          unit: rawLayerThickness.series.find(s => s.statistic === 'mean')?.unitCode,
-          mean: rawLayerThickness.series.find(s => s.statistic === 'mean')?.value,
-          std: rawLayerThickness.series.find(s => s.statistic === 'standard deviation')?.value,
-          n: rawLayerThickness.series.find(s => s.statistic === 'N')?.value,
+          unit: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.unitCode,
+          mean: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.value,
+          std: rawLayerThickness.series.find((s: any) => s.statistic === 'standard deviation')?.value,
+          n: rawLayerThickness.series.find((s: any) => s.statistic === 'N')?.value,
         }))
         // sort by layer
         .sort((a, b) => a.layer < b.layer ? -1 : 1),
@@ -78,7 +80,7 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
               <tr key={sliceCollection.name}>
                 <td className="td-nowrap">{sliceCollection.name}</td>
                 <td className="image-cell">
-                  {sliceCollection.images.map(image => (
+                  {sliceCollection.images.map((image: string) => (
                     <div key={image} className="image-container">
                       <NexusImage
                         org={sscx.org}

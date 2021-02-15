@@ -1,13 +1,13 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
 
+import ServerSideContext from '../../context/server-side-context';
 import ESData from '../../components/ESData';
 import DataContainer from '../../components/DataContainer';
 import ImageViewer from '../../components/ImageViewer';
 import NexusPlugin from '../../components/NexusPlugin';
-import { electroPhysiologyDataQuery } from '../../queries/es';
-import useQuery from '../../hooks/useQuery';
+import { electroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -16,29 +16,45 @@ import { colorName } from './config';
 import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
+import ExpTraceTable from '../../components/ExpTraceTable';
 import eTypes from '../../__generated__/experimentalData.json';
+import { basePath } from '../../config';
+
 
 const NeuronElectrophysiology: React.FC = () => {
-  const query = useQuery();
-  const history = useHistory();
+  const router = useRouter();
   const nexus = useNexusContext();
+  const serverSideContext = useContext(ServerSideContext);
 
-  const addParam = (key: string, value: string): void => {
-    query.set(key, value);
-    history.push(`?${query.toString()}`);
-  };
+  const query = { ...serverSideContext.query, ...router.query };
+
+  const setQuery = (query: any) => {
+    router.push({ query }, undefined, { shallow: true });
+  }
 
   const setEtype = (etype: string) => {
-    addParam('etype', etype);
+    setQuery({
+      etype,
+      etype_instance: currentInstance,
+    });
   };
   const setInstance = (instance: string) => {
-    addParam('etype_instance', instance);
+    setQuery({
+      etype: currentEtype,
+      etype_instance: instance,
+    });
   };
 
-  const currentEtype: string = query.get('etype');
-  const currentInstance: string = query.get('etype_instance');
+  const currentEtype: string = query.etype as string;
+  const currentInstance: string = query.etype_instance as string;
   const etypeData = eTypes.find(etype => etype.label === currentEtype);
   const instances = etypeData ? etypeData.experiments.map(e => e.label) : [];
+
+  const getAndSortTraces = (esDocuments) => {
+    return esDocuments
+      .map(esDocument => esDocument._source)
+      .sort((m1, m2) => (m1.name > m2.name) ? 1 : -1);
+  };
 
   return (
     <>
@@ -54,17 +70,18 @@ const NeuronElectrophysiology: React.FC = () => {
             subtitle="Experimental Data"
             hint="Select a layer of interest in the S1 of the rat brain."
           />
-          {!!currentEtype && (
-            <div role="information" className="mb-4">
-              <InfoBox title="Longer Text" text={lorem} color={colorName} />
-            </div>
-          )}
+          <div className="mb-4">
+            <InfoBox
+              color={colorName}
+              text="Electrical traces were recorded from neurons using whole-cell patch clamp experiments in brain slices. A standardized stimulus protocol, called the e-code, is injected in each cell. Our scientists then classify the cells based on their firing type in different electrical types (e-types)."
+            />
+          </div>
         </div>
         <div className="center-col">
           <ComboSelector
             selector={
               <img
-                src={require('url:../../assets/images/electroIllustration.svg')}
+                src={`${basePath}/assets/images/electroIllustration.svg`}
                 alt="Electro-physiology"
                 className="electro-phys-image"
               />
@@ -75,7 +92,7 @@ const NeuronElectrophysiology: React.FC = () => {
                 list={eTypes.map(etype => etype.label)}
                 color={colorName}
                 onSelect={setEtype}
-                defaultValue={currentEtype}
+                value={currentEtype}
               />
             }
             list2={
@@ -84,7 +101,7 @@ const NeuronElectrophysiology: React.FC = () => {
                 list={instances}
                 color={colorName}
                 onSelect={setInstance}
-                defaultValue={currentInstance}
+                value={currentInstance}
               />
             }
             listsTitle="Select cell type"
@@ -95,68 +112,51 @@ const NeuronElectrophysiology: React.FC = () => {
       </Filters>
 
       <DataContainer visible={!!currentEtype && !!currentInstance}>
-        <ESData
-          hasData={!!currentEtype && !!currentInstance}
-          query={electroPhysiologyDataQuery(currentEtype, currentInstance)}
+        <Collapsible title="Population">
+          <h3>Factsheet</h3>
+          <p>TBD</p>
+
+          <h3 className="mt-3">Distribution</h3>
+          <div className="row">
+            <div className="col-xs-12 col-sm-6">
+              <ImageViewer src={`${basePath}/assets/images/population-distribution-1.png`} />
+            </div>
+            <div className="col-xs-12 col-sm-6">
+              <ImageViewer src={`${basePath}/assets/images/population-distribution-2.png`} />
+            </div>
+          </div>
+
+          <h3 className="mt-3">Experimental instances</h3>
+
+          <ESData query={etypeTracesDataQuery(currentEtype)}>
+            {esDocuments => (
+              <>
+                {!!esDocuments && (
+                  <ExpTraceTable traces={getAndSortTraces(esDocuments)}/>
+                )}
+              </>
+            )}
+          </ESData>
+        </Collapsible>
+
+        <Collapsible
+          className="mt-4"
+          title={`Electrophysiological Recordings for ${currentEtype}_${currentInstance}`}
         >
-          {esDocuments => (
-            <>
-              <Collapsible title="Population">
-                <h3>Factsheet</h3>
-                <p>TBD</p>
-
-                <h3 className="mt-3">Distribution</h3>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6">
-                    <ImageViewer src="/data/assets/images/population-distribution-1.png" />
-                  </div>
-                  <div className="col-xs-12 col-sm-6">
-                    <ImageViewer src="/data/assets/images/population-distribution-2.png" />
-                  </div>
-                </div>
-
-                <h3 className="mt-3">Experimental instances</h3>
-                <table style={{width: '100%'}}>
-                  <tr>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>M-Type</th>
-                    <th>E-Type</th>
-                    <th>Organization</th>
-                    <th>Person</th>
-                  </tr>
-                  <tr>
-                    <td>Instance 1</td>
-                    <td></td>
-                    <td>L23_BP</td>
-                    <td>cNAC</td>
-                    <td>LNMC</td>
-                    <td>Ying Shi</td>
-                  </tr>
-                  <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                  </tr>
-                </table>
-              </Collapsible>
-
-              <Collapsible
-                className="mt-4"
-                title={`Electrophysiological Recordings for ${currentEtype}_${currentInstance}`}
-              >
-                <NexusPlugin
-                  name="neuron-electrophysiology"
-                  resource={esDocuments.length ? esDocuments[0]._source : null}
-                  nexusClient={nexus}
-                />
-              </Collapsible>
-            </>
-          )}
-        </ESData>
+          <ESData query={electroPhysiologyDataQuery(currentEtype, currentInstance)}>
+            {esDocuments => (
+              <>
+                {!!esDocuments && (
+                  <NexusPlugin
+                    name="neuron-electrophysiology"
+                    resource={esDocuments[0]._source}
+                    nexusClient={nexus}
+                  />
+                )}
+              </>
+            )}
+          </ESData>
+        </Collapsible>
       </DataContainer>
     </>
   );

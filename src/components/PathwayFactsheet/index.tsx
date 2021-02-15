@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 import isNumber from 'lodash/isNumber';
 
-import './style.less';
+// import './style.less';
 
 const classPrefix = 'factsheet__';
 
@@ -52,6 +52,7 @@ const FactsheetSingleValueEntry: React.FC<{
 const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
   fact,
 }) => {
+  // @ts-ignore
   const { valuePath, labelPaths } = kgTypeMap[fact['@type']];
 
   const maxVal = Math.max.apply(
@@ -65,7 +66,7 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
     const unitCode = get(valueEntry, `${valuePath}.unitCode`, '');
 
     const label = labelPaths
-      .map(labelPath => get(valueEntry, `${labelPath}.label`))
+      .map((labelPath: string) => get(valueEntry, `${labelPath}.label`))
       .find(Boolean);
 
     const barMaxFillRatio = 0.8;
@@ -107,7 +108,7 @@ const PathwayFactsheet: React.FC<PathwayFactsheetProps> = ({
 
   return (
     <div className={`${classPrefix}basis`}>
-      {facts.map(fact => (
+      {facts.map((fact: any) => (
         <FactsheetEntry key={fact.name} fact={fact} />
       ))}
     </div>

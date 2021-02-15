@@ -1,43 +1,37 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
+import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 
+import ServerSideContext from '../context/server-side-context';
 import LayerAnatomySelector from '../components/LayerAnatomySelector';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Selector from '../components/Selector';
-import useQuery from '../hooks/useQuery';
 import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
-import { lorem } from '../views/Styleguide';
-import ESData from '../components/ESData';
-import DataContainer from '../components/DataContainer';
+
 
 export type LayerAnatomyTemplateProps = {
   color: Color;
   sectionTitle: string;
-  dataQuery: () => any;
   children: (
     layer: Layer,
-    data: ElasticSearchViewQueryResponse<any>['hits']['hits'],
   ) => React.ReactNode;
 };
 
 const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
   color,
   sectionTitle,
-  dataQuery,
   children,
 }) => {
-  const query = useQuery();
-  const history = useHistory();
+  const router = useRouter();
+  const serverSideContext = useContext(ServerSideContext);
+
+  const query = { ...serverSideContext?.query, ...router?.query };
 
   const setLayerQuery = (layer: Layer) => {
-    history.push(`?layer=${layer}`);
+    router.push({ query: { layer }}, undefined, { shallow: true });
   };
-  const currentLayer: Layer = query.get('layer') as Layer;
-
-  const currentQuery = dataQuery();
+  const currentLayer: Layer = query.layer as Layer;
 
   return (
     <>
@@ -47,7 +41,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
             primaryColor={color}
             title="Layer Anatomy"
             subtitle={sectionTitle}
-            hint="Select a layer of interest in the S1 of the rat brain."
+            hint="The Somatosensory Cortex has a laminar structure <br> where neurons are organized across six distinct layers."
           />
           <div role="information">
             <InfoBox
@@ -61,18 +55,14 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           <Selector title="Choose a layer">
             <LayerAnatomySelector
               color={color}
-              defaultActiveLayer={currentLayer}
+              activeLayer={currentLayer}
               onLayerSelected={setLayerQuery}
             />
           </Selector>
         </div>
       </Filters>
 
-      <DataContainer visible={currentQuery}>
-        <ESData hasData={currentQuery} query={currentQuery}>
-          {data => children(currentLayer, data)}
-        </ESData>
-      </DataContainer>
+      {children(currentLayer)}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'button__';
 
@@ -11,7 +11,7 @@ type ButtonProps = {
   discrete?: boolean;
   width?: number;
   notifications?: number;
-  onClick?: (any) => void;
+  onClick?: (e: any) => void;
   children: ReactChild | ReactFragment;
   uppercase?: boolean;
 };

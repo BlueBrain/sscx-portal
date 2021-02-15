@@ -1,7 +1,11 @@
 import React, { ReactChild, ReactFragment } from 'react';
-import './style.less';
 import { FaCircle, FaCaretDown } from 'react-icons/fa';
+
 import { Color } from '../../../types';
+import { basePath } from '../../../config';
+
+// import './style.scss';
+
 
 const classPrefix = 'info-box-2__';
 
@@ -31,25 +35,25 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
   const icons = {
     region: (
       <img
-        src={require('url:../../../assets/images/icons/regions.svg')}
+        src={`${basePath}/assets/images/icons/regions.svg`}
         alt="brain regions"
       />
     ),
     neuron: (
       <img
-        src={require('url:../../../assets/images/icons/neuron.svg')}
+        src={`${basePath}/assets/images/icons/neuron.svg`}
         alt="neuron"
       />
     ),
     circuit: (
       <img
-        src={require('url:../../../assets/images/icons/microcircuit.svg')}
+        src={`${basePath}/assets/images/icons/microcircuit.svg`}
         alt="microcircuit"
       />
     ),
     synapse: (
       <img
-        src={require('url:../../../assets/images/icons/synapse.svg')}
+        src={`${basePath}/assets/images/icons/synapse.svg`}
         alt="synapse"
       />
     ),
@@ -59,7 +63,7 @@ const InfoBox2: React.FC<InfoBox2Props> = ({
     <div className={`${classPrefix}basis ${color} ${expanded ? 'open' : ''}`}>
       <div className="dataset-container">
         <div className="dataset">
-          <h3 dangerouslySetInnerHTML={{ __html: title }} />
+          <h3 className="text-white" dangerouslySetInnerHTML={{ __html: title }} />
           <span onClick={() => setExpanded(!expanded)}>
             Read {expanded ? 'less' : 'more'}
             <FaCircle />

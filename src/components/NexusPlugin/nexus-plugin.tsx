@@ -9,11 +9,6 @@ import { NexusClient, Resource } from '@bbp/nexus-sdk';
 // import Loading from '../components/Loading';
 import { nexusPluginBaseUrl } from '../../config';
 
-import 'antd/lib/button/style/css';
-import 'antd/lib/select/style/css';
-import 'antd/lib/radio/style/css';
-import 'antd/lib/checkbox/style/css';
-
 
 const PluginError: React.FC<{ error: Error }> = ({ error }) => {
   return (
@@ -46,7 +41,7 @@ export class NexusPlugin extends React.Component<
   { error: Error | null; loading: boolean }
 > {
   private container: React.RefObject<HTMLDivElement>;
-  private destroyPlugin: () => void | null;
+  private destroyPlugin: (() => void) | null;
 
   constructor(props: NexusPluginClassProps) {
     super(props);

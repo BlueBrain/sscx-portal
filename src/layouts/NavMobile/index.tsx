@@ -1,10 +1,13 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import { MdClose, IoMdMenu } from 'react-icons/all';
+// import { Link, withRouter } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { MdClose } from 'react-icons/md';
+import { IoMdMenu } from 'react-icons/io';
 
 import { SecondaryNav } from '../Navigation';
 
-import './style.less';
+// import './style.scss';
 import Search from '../../components/Search';
 
 const classPrefix = 'nav-mobile__';
@@ -20,34 +23,42 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
       <MdClose />
     </div>
     <div className="top-links">
-      <NavLink to="/">
-        <img
-          src={require('url:../../assets/images/icons/home.svg')}
-          alt="home"
-        />
-        <span>Home</span>
-      </NavLink>
-      <NavLink to="#">
-        <img
-          src={require('url:../../assets/images/icons/globe.svg')}
-          alt="globe"
-        />
-        <span>Glossary</span>
-      </NavLink>
-      <NavLink to="#">
-        <img
-          src={require('url:../../assets/images/icons/mail-alt.svg')}
-          alt="mail"
-        />
-        <span>Contact</span>
-      </NavLink>
-      <NavLink to="/downloads">
-        <img
-          src={require('url:../../assets/images/icons/download-alt.svg')}
-          alt="download"
-        />
-        <span>Download</span>
-      </NavLink>
+      <Link href="/">
+        <a>
+          <img
+            src="/assets/images/icons/home.svg"
+            alt="home"
+          />
+          <span>Home</span>
+        </a>
+      </Link>
+      <Link href="#">
+        <a>
+          <img
+            src="/assets/images/icons/globe.svg"
+            alt="globe"
+          />
+          <span>Glossary</span>
+        </a>
+      </Link>
+      <Link href="#">
+        <a>
+          <img
+            src="/assets/images/icons/mail-alt.svg"
+            alt="mail"
+          />
+          <span>Contact</span>
+        </a>
+      </Link>
+      <Link href="/downloads">
+        <a>
+          <img
+            src="/assets/images/icons/download-alt.svg"
+            alt="download"
+          />
+          <span>Download</span>
+        </a>
+      </Link>
     </div>
     <SecondaryNav canClose />
     <div className="menu-search">
@@ -56,9 +67,11 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
   </div>
 );
 
-const NavMobile = withRouter(({ location }) => {
+const NavMobile = () => {
+  const router = useRouter()
+
   const [open, setOpen] = React.useState(false);
-  React.useEffect(() => setOpen(false), [location]);
+  React.useEffect(() => setOpen(false), [router]);
 
   return (
     <>
@@ -68,6 +81,6 @@ const NavMobile = withRouter(({ location }) => {
       <Menu onClose={() => setOpen(false)} open={open} />
     </>
   );
-});
+}
 
 export default NavMobile;

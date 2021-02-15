@@ -39,13 +39,13 @@ const Styleguide: React.FC = () => {
   const dummyFn = () => {
     console.log('click');
   };
-  const dummyFnStr = str => {
+  const dummyFnStr = (str: string) => {
     console.log(str);
   };
 
   return (
     <FullPage>
-      <div id="top" role="title">
+      <div id="top">
         <Title
           title="Styleguide"
           subtitle="SSCx Portal"
@@ -100,7 +100,7 @@ const Styleguide: React.FC = () => {
         <List
           title="1. Pick a dino 🦕🦕🦕"
           list={dinos}
-          defaultValue={dinos[2]}
+          value={dinos[2]}
           onSelect={dummyFnStr}
           color={colorName}
         />
@@ -147,7 +147,7 @@ const Styleguide: React.FC = () => {
         <Collapsible title="Murderous Bird on the Loose">
           <>
             <img
-              src={require('url:../assets/images/cassowary.jpg')}
+              src="/assets/images/cassowary.jpg"
               alt="cassowary"
             />
             <p>
@@ -160,7 +160,7 @@ const Styleguide: React.FC = () => {
         <Collapsible title="Murderous Bird on Lockdown" collapsed={true}>
           <>
             <img
-              src={require('url:../assets/images/cassowary.jpg')}
+              src="/assets/images/cassowary.jpg"
               alt="cassowary"
             />
             <p>
@@ -191,7 +191,7 @@ const Styleguide: React.FC = () => {
           <em>TODO: Make expand function work properly</em>
         </p>
         <ImageViewer
-          src={require('url:../assets/images/cassowary.jpg')}
+          src="/assets/images/cassowary.jpg"
           alt="cassowary"
           color={color}
         />

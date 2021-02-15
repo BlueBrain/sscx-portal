@@ -1,8 +1,11 @@
+
+type ESQuery = Record<string, unknown>;
+
 /**
  * Lists get specific experiment of specific e-type
  *
  */
-export const layerAnatomyDataQuery = () => {
+export const layerAnatomyDataQuery = (): ESQuery | null => {
   return {
     from: 0,
     size: 1000,
@@ -39,174 +42,295 @@ export const layerAnatomyDataQuery = () => {
 export const electroPhysiologyDataQuery = (
   etype: string,
   experiment: string,
-) => ({
-  from: 0,
-  size: 10000,
-  query: {
-    bool: {
-      filter: [
-        {
-          bool: {
-            must: [
-              { term: { '@type': 'https://neuroshapes.org/Trace' } },
-            ],
-          },
-        },
-        {
-          bool: {
-            must: {
-              term: { 'name.raw': experiment }
-            }
-          }
-        },
-        // {
-        //   nested: {
-        //     path: 'derivation.entity',
-        //     query: {
-        //       bool: {
-        //         filter: [
-        //           { term: { 'derivation.entity.name.raw': experiment } },
-        //           { term: { 'derivation.entity.@type.raw': 'PatchedCell' } },
-        //         ],
-        //       },
-        //     },
-        //   },
-        // },
-        {
-          nested: {
-            path: 'distribution',
-            query: {
-              bool: {
-                must: {
-                  match: { 'distribution.encodingFormat': 'application/nwb' },
-                },
-              },
-            },
-          },
-        },
-        // {
-        //   nested: {
-        //     path: 'annotation.hasBody',
-        //     query: {
-        //       bool: {
-        //         filter: { term: { 'annotation.hasBody.label.raw': etype } },
-        //       },
-        //     },
-        //   },
-        // },
-      ],
-    },
-  },
-});
+): ESQuery | null => {
+  if (!etype || !experiment) {
+    return null;
+  }
 
-export const mtypeExpMorphologyListDataQuery = (mtype: string) => ({
-  from: 0,
-  size: 200,
-  query: {
-    bool: {
-      filter: [
-        {
-          bool: {
-            should: [
-              {
-                term: {
-                  '_deprecated': false,
-                },
-              },
-            ],
+  return {
+    from: 0,
+    size: 10000,
+    query: {
+      bool: {
+        filter: [
+          {
+            bool: {
+              must: [
+                { term: { '@type': 'https://neuroshapes.org/Trace' } },
+              ],
+            },
           },
-        },
-        {
-          bool: {
-            should: [
-              {
-                term: {
-                  '@type': 'https://neuroshapes.org/ReconstructedCell',
-                },
-              },
-            ],
+          {
+            bool: {
+              must: {
+                term: { 'name.raw': experiment }
+              }
+            }
           },
-        },
-        {
-          nested: {
-            path: 'annotation.hasBody',
-            query: {
-              bool: {
-                filter: [
-                  {
-                    term: {
-                      'annotation.hasBody.label.raw': mtype,
-                    },
+          // {
+          //   nested: {
+          //     path: 'derivation.entity',
+          //     query: {
+          //       bool: {
+          //         filter: [
+          //           { term: { 'derivation.entity.name.raw': experiment } },
+          //           { term: { 'derivation.entity.@type.raw': 'PatchedCell' } },
+          //         ],
+          //       },
+          //     },
+          //   },
+          // },
+          {
+            nested: {
+              path: 'distribution',
+              query: {
+                bool: {
+                  must: {
+                    match: { 'distribution.encodingFormat': 'application/nwb' },
                   },
-                ],
+                },
               },
             },
           },
-        },
-      ],
+          // {
+          //   nested: {
+          //     path: 'annotation.hasBody',
+          //     query: {
+          //       bool: {
+          //         filter: { term: { 'annotation.hasBody.label.raw': etype } },
+          //       },
+          //     },
+          //   },
+          // },
+        ],
+      },
     },
-  },
-});
+  };
+};
+
+
+export const mtypeExpMorphologyListDataQuery = (
+  mtype: string
+): ESQuery | null => {
+  if (!mtype) {
+    return null;
+  }
+
+  return {
+    from: 0,
+    size: 200,
+    query: {
+      bool: {
+        filter: [
+          {
+            bool: {
+              should: [
+                {
+                  term: {
+                    '_deprecated': false,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            bool: {
+              should: [
+                {
+                  term: {
+                    '@type': 'https://neuroshapes.org/ReconstructedCell',
+                  },
+                },
+              ],
+            },
+          },
+          {
+            nested: {
+              path: 'annotation.hasBody',
+              query: {
+                bool: {
+                  filter: [
+                    {
+                      term: {
+                        'annotation.hasBody.label.raw': mtype,
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  };
+};
 
 export const morphologyDataQuery = (
   mtype: string,
   instance: string
-) => ({
-  from: 0,
-  size: 100,
-  query: {
-    bool: {
-      filter: [
-        {
-          bool: {
-            should: [
-              {
-                term: {
-                  '_deprecated': false,
-                },
-              },
-            ],
-          },
-        },
-        {
-          bool: {
-            should: [
-              {
-                term: {
-                  '@type': 'https://neuroshapes.org/NeuronMorphology',
-                },
-              },
-            ],
-          },
-        },
-        {
-          bool: {
-            should: [
-              {
-                term: {
-                  'name.raw': instance,
-                },
-              },
-            ],
-          },
-        },
-        {
-          nested: {
-            path: 'annotation.hasBody',
-            query: {
-              bool: {
-                filter: [
-                  {
-                    term: {
-                      'annotation.hasBody.label.raw': mtype,
-                    },
+): ESQuery | null => {
+  if(!mtype || !instance) {
+    return null;
+  }
+
+  return {
+    from: 0,
+    size: 100,
+    query: {
+      bool: {
+        filter: [
+          {
+            bool: {
+              should: [
+                {
+                  term: {
+                    '_deprecated': false,
                   },
-                ],
+                },
+              ],
+            },
+          },
+          {
+            bool: {
+              should: [
+                {
+                  term: {
+                    '@type': 'https://neuroshapes.org/NeuronMorphology',
+                  },
+                },
+              ],
+            },
+          },
+          {
+            bool: {
+              should: [
+                {
+                  term: {
+                    'name.raw': instance,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            nested: {
+              path: 'annotation.hasBody',
+              query: {
+                bool: {
+                  filter: [
+                    {
+                      term: {
+                        'annotation.hasBody.label.raw': mtype,
+                      },
+                    },
+                  ],
+                },
               },
             },
           },
-        },
-      ],
+        ],
+      },
     },
-  },
-});
+  };
+};
+
+
+export const dataByIdQuery = (
+  id: string | string[]
+): ESQuery | null => {
+  if(!id) {
+    return null;
+  }
+
+  return {
+    from: 0,
+    size: 100,
+    query: {
+      bool: {
+        filter: [
+          {
+            bool: {
+              should: [
+                {
+                  term: {
+                    '_deprecated': false,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            bool: {
+              should: [
+                {
+                  term: {
+                    '@id': id,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  };
+};
+
+
+export const etypeTracesDataQuery = (
+  etype: string,
+): ESQuery | null => {
+  if (!etype) {
+    return null;
+  }
+
+  return {
+    from: 0,
+    size: 10000,
+    query: {
+      bool: {
+        filter: [
+          {
+            bool: {
+              must: [
+                { term: { '@type': 'https://neuroshapes.org/Trace' } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must_not: {
+                exists: {
+                  "field": "note",
+                },
+              },
+            },
+          },
+          {
+            nested: {
+              path: 'distribution',
+              query: {
+                bool: {
+                  must: {
+                    match: { 'distribution.encodingFormat': 'application/nwb' },
+                  },
+                },
+              },
+            },
+          },
+          {
+            nested: {
+              path: 'annotation.hasBody',
+              query: {
+                bool: {
+                  filter: { term: { 'annotation.hasBody.label.raw': etype } },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  };
+};

@@ -3,7 +3,7 @@ import Title from '../components/Title';
 import FullPage from '../layouts/FullPage';
 import { accentColors } from '../config';
 import { Color } from '../types';
-import './Glossary.less';
+// import './Glossary.scss';
 
 
 const colorName: Color = 'lavender';

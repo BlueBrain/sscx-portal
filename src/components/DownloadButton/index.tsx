@@ -5,21 +5,22 @@
 
 import React from 'react';
 import { IoMdDownload } from 'react-icons/io';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-import { DownloadItem, addItem } from '../../store/download';
+// import { DownloadItem, addItem } from '../../store/download';
 
-import './style.less';
+// import './style.less';
 
 export type DownloadButtonProps = {
-  data: DownloadItem[];
+  // data: DownloadItem[];
+  data: any;
 };
 
 const DownloadButton: React.FC<DownloadButtonProps> = ({ data }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleClick = () => {
-    data.forEach(d => dispatch(addItem(d)));
+    // data.forEach(d => dispatch(addItem(d)));
   };
 
   if (data.length <= 0) {

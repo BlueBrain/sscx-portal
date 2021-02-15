@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import React, { useState, useEffect, useContext } from 'react';
+import { useRouter } from 'next/router';
 
+import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
-import useQuery from '../hooks/useQuery';
 import { Layer, Color } from '../types';
 import { BrainRegion } from '../components/BrainRegionsSelector';
 import ComboSelector from '../components/ComboSelector';
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import List from '../components/List';
 import { accentColors } from '../config';
+import { basePath } from '../config';
 
 
 export type SynapticPathwaysTemplateProps = {
@@ -35,21 +36,32 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   color,
   children,
 }) => {
-  const query = useQuery();
-  const history = useHistory();
+  const router = useRouter();
+  const serverSideContext = useContext(ServerSideContext);
+
+  const query = { ...serverSideContext?.query, ...router?.query };
 
   const addParam = (key: string, value: string): void => {
-    query.set(key, value);
-    history.push(`?${query.toString()}`);
+    const query = {
+      ...{
+        brain_region: currentRegion,
+        prelayer: currentPreLayer,
+        postlayer: currentPostLayer,
+        pretype: currentPreType,
+        posttype: currentPostType,
+      },
+      [key]: value,
+    };
+    router.push({ query }, undefined, { shallow: true });
   };
 
   const [pathwayMType, setPathwayMType] = useState<PathwayMType | null>(null);
 
-  const currentRegion: BrainRegion = query.get('brain_region') as BrainRegion;
-  const currentPreLayer: Layer = query.get('prelayer') as Layer;
-  const currentPostLayer: Layer = query.get('postlayer') as Layer;
-  const currentPreType: string = query.get('pretype');
-  const currentPostType: string = query.get('posttype');
+  const currentRegion: BrainRegion = query.brain_region as BrainRegion;
+  const currentPreLayer: Layer = query.prelayer as Layer;
+  const currentPostLayer: Layer = query.postlayer as Layer;
+  const currentPreType: string = query.pretype as string;
+  const currentPostType: string = query.posttype as string;
 
   const setRegion = (region: BrainRegion) => addParam('brain_region', region);
   const setPreLayerQuery = (layer: Layer) => addParam('prelayer', layer);
@@ -73,7 +85,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     : null;
 
   useEffect(() => {
-    fetch('/data/pathway-mtype.json')
+    fetch(`${basePath}/data/pathway-mtype.json`)
       .then(res => res.json())
       .then(pathwayMType => setPathwayMType(pathwayMType))
   }, []);
@@ -89,13 +101,16 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             hint="Select a subregion of interest in the S1 of the rat brain."
           />
           <div>
-            <InfoBox title="Longer Text" text={lorem} color={color} />
+            <InfoBox
+              color={color}
+              text="A synaptic pathway encompasses the set of all possible connections between pairs of neurons of pre and postsynaptic  morphological types (m-types)."
+            />
             <br />
             <Pills
               title="1. Select a subregion"
               list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
               defaultValue={currentRegion}
-              onSelect={setRegion}
+              onSelect={setRegion as (s: string) => void}
               color={color}
             />
           </div>
@@ -115,8 +130,8 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
               <List
                 title="m-type pre-synaptic"
                 list={preMTypes}
-                defaultValue={currentPreType}
-                onSelect={setPreTypeQuery}
+                value={currentPreType}
+                onSelect={setPreTypeQuery as (s: string) => void}
                 color={color}
               />
             }
@@ -124,8 +139,8 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
               <List
                 title="m-type post-synaptic"
                 list={postMTypes}
-                defaultValue={currentPostType}
-                onSelect={setPostTypeQuery}
+                value={currentPostType}
+                onSelect={setPostTypeQuery as (s: string) => void}
                 color="orange"
               />
             }
@@ -137,7 +152,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
         </div>
       </Filters>
 
-      {children(currentRegion, pathway)}
+      {!!children && children(currentRegion, pathway as string)}
     </>
   );
 };

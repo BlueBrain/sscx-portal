@@ -1,7 +1,7 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
-import './style.less';
-import { Layer, Color } from '../../types';
+// import './style.scss';
+import { Layer } from '../../types';
 import { accentColors } from '../../config';
 
 const prePrefix = 'pre_pathway_svg__';
@@ -47,18 +47,18 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
   onPostLayerSelected,
 }) => {
   const [activePreLayer, setActivePreLayer] = React.useState<Layer>(
-    defaultActivePreLayer,
+    defaultActivePreLayer as Layer,
   );
   const [activePostLayer, setActivePostLayer] = React.useState<Layer>(
-    defaultActivePostLayer,
+    defaultActivePostLayer as Layer,
   );
   const selectPreLayer = (l: Layer): void => {
     setActivePreLayer(l);
-    onPreLayerSelected(l);
+    onPreLayerSelected && onPreLayerSelected(l);
   };
   const selectPostLayer = (l: Layer): void => {
     setActivePostLayer(l);
-    onPostLayerSelected(l);
+    onPostLayerSelected && onPostLayerSelected(l);
   };
 
   return (

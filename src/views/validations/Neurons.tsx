@@ -3,12 +3,13 @@ import React from 'react';
 import LayerAnatomyTemplate from '../../templates/LayerAnatomy';
 import { colorName, sectionTitle } from './config';
 
-export default () => (
+const ValidationsNeuronsView = () => (
   <LayerAnatomyTemplate
     color={colorName}
     sectionTitle={sectionTitle}
-    dataQuery={() => ''}
   >
     {data => ''}
   </LayerAnatomyTemplate>
 );
+
+export default ValidationsNeuronsView;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Color } from '../../types';
-import './style.less';
+// import './style.scss';
 
 const classPrefix = 'info-box__';
 
@@ -34,11 +34,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   maxChars = 150,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
-  const [currentText, setCurrentText] = React.useState(text);
-
-  React.useEffect(() => {
-    setCurrentText(expanded ? text : truncate(text, maxChars));
-  }, [expanded]);
+  const currentText = expanded ? text : truncate(text, maxChars);
 
   return (
     <div className={`${classPrefix}basis ${color}`}>

@@ -8,7 +8,7 @@ import { sscx } from '../../config';
 type NexusFileProps = {
   hasData: boolean;
   contentUrl: string;
-  children: (data) => React.ReactNode;
+  children: (data: any) => React.ReactNode;
   id?: string;
 };
 
@@ -42,6 +42,7 @@ const NexusFile: React.FC<NexusFileProps> = ({
         )
         .catch(error => setState({ ...state, loading: false, error }));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasData, contentUrl]);
 
   if (!hasData) {
