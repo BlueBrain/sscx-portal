@@ -29,9 +29,17 @@ yarn build
 ```
 ### ENV variables
 
-NEXUS_TOKEN: The Service Account Token the portal will use to query the data from Nexus. No token by default
+**NEXT_PUBLIC_SSCX_LIVE_CONTENT**: boolean switch to enable SSCx scientific content, by default set to false.
 
-SSCX_LIVE_CONTENT: boolean switch to enable SSCx scientific content, by default set to false.
+If enabled, the following datasources will be used to fetch the data:
+* Nexus KG, might require a NEXUS_TOKEN to be set, see below.
+* Static data, requires the content from `/gpfs/bbp.cscs.ch/project/proj109/sscx-portal/static-data` to be present in `./public/data`. GPFS sshfs mount with an alias isn't recommended for this use case due to poor performance.
+
+
+**NEXT_PUBLIC_NEXUS_TOKEN**: The Service Account Token the portal will use to query the data from Nexus. No token by default. SSCx project data will become publicly accessible once the corresponding scientific paper is published, you can generate a token using your account with access to the `public/sscx` Nexus project.
+
+**NEXT_PUBLIC_NEXUS_URL**: The URL of the Nexus KG deployment, defaults to `https://bbp.epfl.ch/nexus/v1`
+
 
 ## Docker image
 

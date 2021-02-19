@@ -19,8 +19,14 @@ export const sscx = {
   ),
 };
 
+export const nexus = {
+  url: process.env.NEXT_PUBLIC_NEXUS_URL || 'https://bbp.epfl.ch/nexus/v1',
+  token: process.env.NEXT_PUBLIC_NEXUS_TOKEN,
+};
+
 export const nexusPluginBaseUrl = 'https://bbp.epfl.ch/nexus/plugins';
 
 export const basePath = '';
 
-export const liveContent = process.env.SSCX_LIVE_CONTENT || false;
+const liveContentEnv = process.env.NEXT_PUBLIC_SSCX_LIVE_CONTENT;
+export const liveContent = liveContentEnv?.toLowerCase() === 'true';

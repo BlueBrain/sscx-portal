@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { createNexusClient } from '@bbp/nexus-sdk';
 import { NexusProvider } from '@bbp/react-nexus';
 
+import { nexus } from '../config';
 import MainLayout from '../layouts/MainLayout';
 
 import '../styles/globals.scss';
@@ -13,8 +14,8 @@ if (typeof(window)) {
 
 
 const nexusClient = createNexusClient({
-  uri: process.env.NEXUS_URL || 'https://bbp.epfl.ch/nexus/v1',
-  token: process.env.NEXUS_TOKEN,
+  uri: nexus.url,
+  token: nexus.token,
 });
 
 function MyApp({ Component, pageProps }) {
