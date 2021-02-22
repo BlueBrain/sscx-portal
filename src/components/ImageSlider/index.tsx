@@ -17,19 +17,12 @@ type ImageSliderProps = {
 };
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
+  const [domImages, setDomImages] = useState<ImageProp[]>(images.slice(0, 1));
   const [currentImgIdx, setCurrentImgIdx] = useState<number>(0);
-  const [nextImgIdx, setNextImgIdx] = useState<number | null>(null);
-  const [transitionActive, setTransitionActive] = useState(false);
-
-  const currentImage = images[currentImgIdx];
-
-  const nextImage = nextImgIdx !== null
-    ? images[nextImgIdx]
-    : null;
 
   useEffect(() => {
+    let preloadNextTimer;
     let transitionTimer;
-    let transitionEndTimer;
 
     const initTimer = setTimeout(() => {
       requestAnimationFrame(() => {
@@ -37,54 +30,45 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
           ? 0
           : currentImgIdx + 1;
 
-        setNextImgIdx(nextIdx);
+        preloadNextTimer = setTimeout(() => {
+          if (domImages[nextIdx]) return;
 
-        transitionTimer = setTimeout(() => setTransitionActive(true), IMAGE_INTERVAL - IMAGE_TRANSITION - 100);
+          setDomImages(images.slice(0, nextIdx + 1));
+        }, IMAGE_INTERVAL - IMAGE_TRANSITION - 1000);
 
-        transitionEndTimer = setTimeout(() => {
+        transitionTimer = setTimeout(() => {
           setCurrentImgIdx(nextIdx);
-          setTransitionActive(false);
-          setNextImgIdx(null);
-        }, IMAGE_INTERVAL - 100);
+        }, IMAGE_INTERVAL - IMAGE_TRANSITION);
       });
     }, 1000);
 
     return () => {
       clearTimeout(initTimer);
+      preloadNextTimer && clearTimeout(preloadNextTimer);
       transitionTimer && clearTimeout(transitionTimer);
-      transitionEndTimer && clearTimeout(transitionEndTimer);
     };
   }, [currentImgIdx]);
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.currentImage}
-        style={{ opacity: transitionActive ? 0 : 1 }}
-        key={currentImage.src}
-      >
-        <Image
-          src={currentImage.src}
-          alt={currentImage.alt}
-          objectFit="cover"
-          layout="fill"
-          priority
-        />
-      </div>
-      {nextImage && currentImage !== nextImage && (
+      {domImages.map((domImage, idx) => (
         <div
-          className={styles.nextImage}
-          style={{ opacity: transitionActive ? 1 : 0 }}
-          key={nextImage.src}
+          className={styles.image}
+          style={{
+            opacity: idx === currentImgIdx ? 1 : 0,
+            transition: `opacity ${IMAGE_TRANSITION / 1000}s ease`,
+          }}
+          key={domImage.src}
         >
           <Image
-            src={nextImage.src}
-            alt={nextImage.alt}
+            src={domImage.src}
+            alt={domImage.alt}
             objectFit="cover"
             layout="fill"
+            priority
           />
         </div>
-      )}
+      ))}
     </div>
   );
 };
