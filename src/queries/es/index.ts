@@ -5,38 +5,36 @@ type ESQuery = Record<string, unknown>;
  * Lists get specific experiment of specific e-type
  *
  */
-export const layerAnatomyDataQuery = (): ESQuery | null => {
-  return {
-    from: 0,
-    size: 1000,
-    query: {
-      bool: {
-        filter: [
-          {
-            bool: {
-              should: [
-                {
-                  term: {
-                    '@type': 'https://neuroshapes.org/LayerThickness',
-                  },
+export const layerAnatomyDataQuery = {
+  from: 0,
+  size: 1000,
+  query: {
+    bool: {
+      filter: [
+        {
+          bool: {
+            should: [
+              {
+                term: {
+                  '@type': 'https://neuroshapes.org/LayerThickness',
                 },
-                {
-                  term: {
-                    '@type': 'https://neuroshapes.org/NeuronDensity',
-                  },
+              },
+              {
+                term: {
+                  '@type': 'https://neuroshapes.org/NeuronDensity',
                 },
-                {
-                  term: {
-                    '@type': 'https://neuroshapes.org/SliceCollection',
-                  }
+              },
+              {
+                term: {
+                  '@type': 'https://neuroshapes.org/SliceCollection',
                 }
-              ],
-            },
+              }
+            ],
           },
-        ],
-      },
+        },
+      ],
     },
-  };
+  },
 };
 
 export const electroPhysiologyDataQuery = (
