@@ -227,6 +227,15 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             {data => (
               <Collapsible className="mt-4" title={`E-Type ${currentEtype} Factsheet`}>
                 <EtypeFactsheet data={data} />
+                <div className="text-right mt-3">
+                  <Button
+                    type="primary"
+                    href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}
+                    download
+                  >
+                    Download factsheet
+                  </Button>
+                </div>
               </Collapsible>
             )}
           </HttpData>
