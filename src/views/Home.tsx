@@ -20,13 +20,13 @@ const Home: React.FC = () => (
   <div className={`${classPrefix}basis`}>
     <section id="section-1" className="content">
       <ImageSlider images={[{
-        src: `${basePath}/assets/images/backgrounds/home-page/sscx-side.jpg`,
+        src: `${basePath}/assets/images/backgrounds/home-page/sscx-side.jpeg`,
         alt: 'SSCx side view',
       }, {
-        src: `${basePath}/assets/images/backgrounds/home-page/sscx-top.jpg`,
+        src: `${basePath}/assets/images/backgrounds/home-page/sscx-top.jpeg`,
         alt: 'SSCx top view'
       }, {
-        src: `${basePath}/assets/images/backgrounds/home-page/sscx-inside.jpg`,
+        src: `${basePath}/assets/images/backgrounds/home-page/sscx-inside.jpeg`,
         alt: 'SSCx inside view',
       }]}/>
       <div className="title">
