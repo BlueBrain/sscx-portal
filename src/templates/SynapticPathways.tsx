@@ -52,7 +52,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
       },
       [key]: value,
     };
-    router.push({ query }, undefined, { shallow: true });
+    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
   const [pathwayMType, setPathwayMType] = useState<PathwayMType | null>(null);

@@ -31,7 +31,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
     const query = {
       brain_region: brainRegion,
     };
-    router.push({ query }, undefined, { shallow: true });
+    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
   const currentRegion = query.brain_region as BrainRegion;
 

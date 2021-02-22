@@ -35,7 +35,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
   const query = { ...serverSideContext.query, ...router.query };
 
   const setQuery = (query: any): void => {
-    router.push({ query }, undefined, { shallow: true });
+    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
   const setLayer = (layer: Layer) => {

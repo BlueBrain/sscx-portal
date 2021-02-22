@@ -29,7 +29,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
   const query = { ...serverSideContext?.query, ...router?.query };
 
   const setLayerQuery = (layer: Layer) => {
-    router.push({ query: { layer }}, undefined, { shallow: true });
+    router.push({ query: { layer }, pathname: router.pathname}, undefined, { shallow: true });
   };
   const currentLayer: Layer = query.layer as Layer;
 

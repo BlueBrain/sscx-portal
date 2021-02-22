@@ -70,7 +70,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       },
       ...params,
     };
-    router.push({ query }, undefined, { shallow: true });
+    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
   const setRegion = (region: BrainRegion) => {

@@ -31,7 +31,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
   const query = { ...serverSideContext?.query, ...router?.query };
 
   const setQuery = (query: any) => {
-    router.push({ query }, undefined, { shallow: true });
+    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
   const currentRegion: BrainRegion = query.brain_region as BrainRegion;
