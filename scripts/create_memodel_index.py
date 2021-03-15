@@ -126,4 +126,5 @@ def main():
   logger.info(f'Created index for {len(memodels)} memodels')
 
 
-main()
+if __name__ == '__main__':
+  main()

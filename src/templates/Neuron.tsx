@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { Button } from 'antd';
+import { Button, Tabs } from 'antd';
+import { useNexusContext } from '@bbp/react-nexus';
+import range from 'lodash/range';
+import get from 'lodash/get';
 
 import { etypeFactsheetPath, metypeFactsheetPath } from '../queries/http';
 import ServerSideContext from '../context/server-side-context';
@@ -29,8 +32,10 @@ import NeuronMorphology from '../components/NeuronMorphology';
 import ESData from '../components/ESData';
 import NexusPlugin from '../components/NexusPlugin';
 import NexusFileDownloadButton from '../components/NexusFileDownloadButton';
-import { morphologyDataQuery } from '../queries/es';
-import { sscx, basePath } from '../config';
+import { morphologyDataQuery, ephysByNameDataQuery } from '../queries/es';
+import { basePath } from '../config';
+
+const { TabPane } = Tabs;
 
 
 export type NeuronsTemplateProps = {
@@ -47,11 +52,13 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   children,
 }) => {
   const router = useRouter();
+  const nexus = useNexusContext();
   const serverSideContext = useContext(ServerSideContext);
 
   const query = { ...serverSideContext?.query, ...router?.query };
 
   const [memodelIndex, setMemodelIndex] = useState<any>(null);
+  const [memodelNumberExceptions, setMemodelNumberExceptions] = useState<any>(null);
 
   const currentRegion: BrainRegion = query.brain_region as BrainRegion;
   const currentLayer: Layer = query.layer as Layer;
@@ -115,8 +122,13 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     ? memodelIndex[currentRegion][currentMtype]
     : [];
 
+  const memodelInstanceRange = () => {
+    return range(1, );
+  }
+
   const instances = currentEtype && memodelIndex
-    ? [1, 2, 3, 4, 5].map(idx => `${currentMtype}_${currentEtype}_${idx}`)
+    ? range(1, get(memodelNumberExceptions, `${currentMtype}.${currentEtype}.${currentRegion}`, 5) + 1)
+      .map(idx => `${currentMtype}_${currentEtype}_${idx}`)
     : [];
 
   const getMorphologyDistribution = (morphologyResource: any) => {
@@ -133,9 +145,14 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   ].join('/');
 
   useEffect(() => {
-    fetch(`${basePath}/data/memodel-index.json`)
+    if (memodelIndex) return;
+
+    fetch(`${basePath}/data/memodel-number-exceptions.json`)
       .then(res => res.json())
-      .then(memodelIndex => setMemodelIndex(memodelIndex))
+      .then(memodelNumberExceptions => setMemodelNumberExceptions(memodelNumberExceptions))
+      .then(() => fetch(`${basePath}/data/memodel-index.json`))
+      .then(res => res.json())
+      .then(memodelIndex => setMemodelIndex(memodelIndex));
   }, []);
 
   return (
@@ -227,7 +244,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             {data => (
               <Collapsible className="mt-4" title={`E-Type ${currentEtype} Factsheet`}>
                 <EtypeFactsheet data={data} />
-                <div className="text-right mt-3">
+                <div className="text-right mt-3 mb-3">
                   <Button
                     type="primary"
                     href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}
@@ -236,6 +253,26 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     Download factsheet
                   </Button>
                 </div>
+
+                <h3>Experimental traces used for model fitting</h3>
+                <ESData query={ephysByNameDataQuery(data[4].value)}>
+                  {esDocuments => (
+                    <Tabs type="card" className="mt-3">
+                      {esDocuments && esDocuments.map(esDocument => (
+                        <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
+                          <div style={{ minHeight: '600px' }}>
+                            <NexusPlugin
+                              name="neuron-electrophysiology"
+                              resource={esDocument._source}
+                              nexusClient={nexus}
+                            />
+                          </div>
+                        </TabPane>
+                      ))}
+                    </Tabs>
+                  )}
+                </ESData>
+
               </Collapsible>
             )}
           </HttpData>
@@ -267,6 +304,8 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     </div>
                   </div>
 
+                  <h3 className="mt-3">Morphology</h3>
+                  {/* <h5>{data[2].value}</h5> */}
                   <NeuronMorphology
                     path={`${basePath}/data/memodel_morphologies/${data[2].value}.swc`}
                   />
@@ -301,20 +340,13 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     </ESData>
                   )} */}
 
-
-                  <div className="row mt-4">
+                  <div className="row">
                     <div className="col-xs-12 col-sm-6">
-                      <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/1921846/cADpyr_dend-C060114A2_axon-C060114A5.png" />
-                    </div>
-                  </div>
-
-                  <div className="row mt-4">
-                    <div className="col-xs-12 col-sm-6">
-                      <h4 className="mt-4">EPSP Attenuation</h4>
+                      <h4 className="mt-3">EPSP Attenuation</h4>
                       <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/epsp.mp4" />
                     </div>
                     <div className="col-xs-12 col-sm-6">
-                    <h4 className="mt-4">bAP Attenuation</h4>
+                    <h4 className="mt-3">bAP Attenuation</h4>
                       <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/bap.mp4" />
                     </div>
                   </div>

@@ -2,6 +2,7 @@ import React from 'react';
 
 // import './style.less';
 import Button from '../Button';
+import { basePath } from '../../config';
 
 const classPrefix = 'search__';
 
@@ -12,7 +13,7 @@ const Search: React.FC = () => {
       <button>
         <span style={{ height: 30 }}>
           <img
-            src="/assets/images/icons/search.svg"
+            src={`${basePath}/assets/images/icons/search.svg`}
             alt="search"
           />
           <span style={{ lineHeight: '40px' }}>Search</span>

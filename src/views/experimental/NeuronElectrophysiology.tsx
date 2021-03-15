@@ -11,7 +11,6 @@ import { electroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
-import { lorem } from '../Styleguide';
 import { colorName } from './config';
 import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';

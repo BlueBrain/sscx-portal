@@ -2,7 +2,15 @@
 const isProd = process.env.NODE_ENV === 'production';
 
 
+const basePath = '/sscx-portal';
+
 module.exports = {
+  trailingSlash: true,
+  basePath: basePath,
+  assetPrefix: `${basePath}/`,
+  images: {
+    path: `${basePath}/_next/image`,
+  },
   async redirects() {
     return [
       {
@@ -31,5 +39,8 @@ module.exports = {
         permanent: false,
       },
     ]
+  },
+  async headers() {
+    return [];
   },
 };

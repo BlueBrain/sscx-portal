@@ -147,4 +147,5 @@ def main():
   logger.info(f'Generated {len(memodels)} memodel archives')
 
 
-main()
+if __name__ == '__main__':
+  main()

@@ -9,6 +9,8 @@
 @import 'antd/lib/table/style/index.css';
 @import 'antd/lib/grid/style/index.css';
 @import 'antd/lib/collapse/style/index.css';
+@import 'antd/lib/popover/style/index.css';
+@import 'antd/lib/tabs/style/index.css';
 
 
 @import 'config/_colors';
@@ -23,18 +25,18 @@ html, body {
   scroll-behavior: smooth;
 }
 
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-}
+// html,
+// body {
+//   width: 100%;
+//   max-width: 100%;
+// }
 
-html,
-body,
-div {
-  margin: 0;
-  padding: 0;
-}
+// html,
+// body,
+// div {
+//   margin: 0;
+//   padding: 0;
+// }
 
 #__next {
   height: 100%;
@@ -42,7 +44,7 @@ div {
 
 button {
   @include font-default;
-  color: map-get($basePalette, "white");
+  // color: map-get($basePalette, "white");
 }
 
 input {
@@ -161,6 +163,22 @@ section {
 
 .ml-4 {
   margin-left: 4rem;
+}
+
+.p-1 {
+  padding: 0.5rem;
+}
+
+.p-2 {
+  padding: 1rem;
+}
+
+.p-3 {
+  padding: 2rem;
+}
+
+.p-4 {
+  padding: 4rem;
 }
 
 .text-center {
@@ -2024,7 +2042,7 @@ $collapsible-padding: 20px 30px;
   background-repeat: no-repeat;
   background-position: center;
   // background-attachment: fixed;
-  background-image: url('/assets/images/backgrounds/default.svg');
+  background-image: url('/sscx-portal/assets/images/backgrounds/default.svg');
   background-size: cover;
 
   @media (max-width: $small) {
@@ -2032,7 +2050,7 @@ $collapsible-padding: 20px 30px;
   }
 
   &.background-alt {
-    background-image: url('/assets/images/backgrounds/alt.svg');
+    background-image: url('/sscx-portal/assets/images/backgrounds/alt.svg');
   }
 
   .center {
@@ -2660,7 +2678,7 @@ $collapsible-padding: 20px 30px;
     padding-top: 90px;
     padding-bottom: 0;
     background-color: #050a30;
-    // background-image: url('/assets/images/backgrounds/home-page/3d-brain.jpg');
+    // background-image: url('/sscx-portal/assets/images/backgrounds/home-page/3d-brain.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -2827,8 +2845,9 @@ $collapsible-padding: 20px 30px;
       }
 
       #screenshot {
-        width: 280px;
-        margin-right: initial;
+        // width: 280px;
+        display: none;
+        // margin-right: initial;
       }
     }
   }
@@ -2871,7 +2890,7 @@ $collapsible-padding: 20px 30px;
     .image {
       height: 610px;
       align-self: flex-start;
-      background-image: url('/assets/images/flow.svg');
+      background-image: url('/sscx-portal/assets/images/flow.svg');
       background-position-x: 100px;
       background-position-y: top;
       background-repeat: no-repeat;
@@ -2906,7 +2925,7 @@ $collapsible-padding: 20px 30px;
   #section-4 {
     padding-top: 60px;
     background-color: map-get($basePalette, "navy-4");
-    background-image: url('/assets/images/backgrounds/homepage2.svg');
+    background-image: url('/sscx-portal/assets/images/backgrounds/homepage2.svg');
     background-position-x: center;
     background-position-y: top;
     background-repeat: no-repeat;

@@ -157,4 +157,5 @@ def main():
   logger.info(f'Extracted factsheets for {len(memodels)} memodels')
 
 
-main()
+if __name__ == '__main__':
+  main()

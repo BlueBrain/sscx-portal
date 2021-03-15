@@ -6,6 +6,7 @@ import { MdClose } from 'react-icons/md';
 import { IoMdMenu } from 'react-icons/io';
 
 import { SecondaryNav } from '../Navigation';
+import { basePath } from '../../config';
 
 // import './style.scss';
 import Search from '../../components/Search';
@@ -26,7 +27,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
       <Link href="/">
         <a>
           <img
-            src="/assets/images/icons/home.svg"
+            src={`${basePath}/assets/images/icons/home.svg`}
             alt="home"
           />
           <span>Home</span>
@@ -35,7 +36,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
       <Link href="#">
         <a>
           <img
-            src="/assets/images/icons/globe.svg"
+            src={`${basePath}/assets/images/icons/globe.svg`}
             alt="globe"
           />
           <span>Glossary</span>
@@ -44,21 +45,21 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
       <Link href="#">
         <a>
           <img
-            src="/assets/images/icons/mail-alt.svg"
+            src={`${basePath}/assets/images/icons/mail-alt.svg`}
             alt="mail"
           />
           <span>Contact</span>
         </a>
       </Link>
-      <Link href="/downloads">
+      {/* <Link href="/downloads">
         <a>
           <img
-            src="/assets/images/icons/download-alt.svg"
+            src={`${basePath}/assets/images/icons/download-alt.svg`}
             alt="download"
           />
           <span>Download</span>
         </a>
-      </Link>
+      </Link> */}
     </div>
     <SecondaryNav canClose />
     <div className="menu-search">

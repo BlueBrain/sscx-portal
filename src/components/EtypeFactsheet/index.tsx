@@ -1,9 +1,9 @@
 import React from 'react';
 import get from 'lodash/get';
-import sortBy from 'lodash/sortBy';
-import { Table, Collapse } from 'antd';
+import { Table, Collapse, Popover } from 'antd';
 
 import NumberFormat from '../NumberFormat';
+import IonChannelPlot, { Equation } from '../IonChannelPlot';
 import styles from './index.module.scss';
 
 
@@ -44,34 +44,9 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
     });
   });
 
-  protocols.sort();
-
-  // sortBy(tableData, ['protocol', 'feature']);
-
-  // const protocolColRender = (protocol, row, idx) => {
-  //   if (idx > 0 && tableData[idx - 1].protocol === protocol) {
-  //     return {
-  //       children: null,
-  //       props: {
-  //         rowSpan: 0,
-  //       },
-  //     };
-  //   }
-
-  //   return {
-  //     children: protocol,
-  //     props: {
-  //       rowSpan: tableData.filter(tableRow => tableRow.protocol === protocol).length,
-  //     },
-  //   }
-  // };
+  protocols.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
   const tableColumns = [
-    // {
-      // title: 'Protocol',
-      // dataIndex: 'protocol',
-      // render: protocolColRender,
-    // },
     {
       title: 'Feature',
       dataIndex: 'feature',
@@ -130,13 +105,28 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
           <div className={`row ${styles.mechanismsRow}`} key={section}>
             <div className="col-xs-6 col-md-4">{section}</div>
             <div className="col-xs-6 col-md-8">
-              {Object.entries(channelMechanisms[section].channels).map(([channelName, channelData]) => (
-                <span
-                  className={styles.channelLabel}
+              {Object.entries(channelMechanisms[section].channels).map(([channelName, channelData]: [string, any]) => (
+                <Popover
                   key={channelName}
+                  title={channelName}
+                  content={(
+                    <>
+                      {Object.entries(channelData.equations).map(([equationLabel, equation]: [string, Equation]) => (
+                        <IonChannelPlot
+                          key={equationLabel}
+                          name={equationLabel}
+                          equation={equation}
+                        />
+                      ))}
+                    </>
+                  )}
                 >
-                  {channelName}
-                </span>
+                  <span
+                    className={styles.channelLabel}
+                  >
+                    {channelName}
+                  </span>
+                </Popover>
               ))}
             </div>
           </div>

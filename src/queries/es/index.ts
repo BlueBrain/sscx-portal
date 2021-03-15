@@ -65,19 +65,6 @@ export const electroPhysiologyDataQuery = (
               }
             }
           },
-          // {
-          //   nested: {
-          //     path: 'derivation.entity',
-          //     query: {
-          //       bool: {
-          //         filter: [
-          //           { term: { 'derivation.entity.name.raw': experiment } },
-          //           { term: { 'derivation.entity.@type.raw': 'PatchedCell' } },
-          //         ],
-          //       },
-          //     },
-          //   },
-          // },
           {
             nested: {
               path: 'distribution',
@@ -90,16 +77,58 @@ export const electroPhysiologyDataQuery = (
               },
             },
           },
-          // {
-          //   nested: {
-          //     path: 'annotation.hasBody',
-          //     query: {
-          //       bool: {
-          //         filter: { term: { 'annotation.hasBody.label.raw': etype } },
-          //       },
-          //     },
-          //   },
-          // },
+        ],
+      },
+    },
+  };
+};
+
+export const ephysByNameDataQuery = (
+  names: string[],
+): ESQuery | null => {
+  if (!names) {
+    return null;
+  }
+
+  return {
+    from: 0,
+    size: 10000,
+    query: {
+      bool: {
+        filter: [
+          {
+            bool: {
+              must: [
+                { term: { '@type': 'https://neuroshapes.org/Trace' } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: {
+                terms: { 'name.raw': names }
+              }
+            }
+          },
+          {
+            bool: {
+              must: {
+                term: { 'note': 'subset' }
+              }
+            }
+          },
+          {
+            nested: {
+              path: 'distribution',
+              query: {
+                bool: {
+                  must: {
+                    match: { 'distribution.encodingFormat': 'application/nwb' },
+                  },
+                },
+              },
+            },
+          },
         ],
       },
     },

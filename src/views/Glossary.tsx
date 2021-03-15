@@ -5,6 +5,7 @@ import FullPage from '../layouts/FullPage';
 import { accentColors } from '../config';
 import { Color } from '../types';
 import glossaryContent from './glossary-content.json';
+import { basePath } from '../config';
 
 // import './Glossary.scss';
 
@@ -39,13 +40,25 @@ const Glossary: React.FC = () => {
           </section>
         ))}
 
-        <img style={{ width: '100%' }} src="/assets/images/etypes.png" alt="etype" />
+        <img
+          style={{ width: '100%' }}
+          src={`${basePath}/assets/images/etypes.png`}
+          alt="etype"
+        />
 
         <h4>Spike Characteristics</h4>
-        <img style={{ width: '100%' }} src="/assets/images/spike.png" alt="spike" />
+        <img
+          style={{ width: '100%' }}
+          src={`${basePath}/assets/images/spike.png`}
+          alt="spike"
+        />
 
         <h4>Firing Behavior</h4>
-        <img style={{ width: '100%' }} src="/assets/images/firing-behavior.png" alt="firing-behavior" />
+        <img
+          style={{ width: '100%' }}
+          src={`${basePath}/assets/images/firing-behavior.png`}
+          alt="firing-behavior"
+        />
       </div>
     </FullPage>
   );
