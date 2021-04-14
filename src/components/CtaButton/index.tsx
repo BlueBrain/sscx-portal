@@ -18,11 +18,13 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   className = '',
   width = 'auto',
   color = 'blue',
+  href = null,
   block = false,
 }) => {
   return (
-    <div
+    <a
       className={`${styles.container} ${color} ${className}`}
+      href={href}
       style={{
         width,
         display: block ? 'block' : 'inline-block'
@@ -34,7 +36,7 @@ const CtaButton: React.FC<CtaButtonProps> = ({
       <div className={styles.arrow}>
         <MdKeyboardArrowRight fontSize={22} />
       </div>
-    </div>
+    </a>
   );
 };
 

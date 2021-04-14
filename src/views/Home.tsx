@@ -15,7 +15,7 @@ const classPrefix = 'Home__';
 
 const Home: React.FC = () => (
   <div className={`${classPrefix}basis`}>
-    <section id="section-1" className="content">
+    <section className="content section-1">
       <ImageSlider images={[{
         src: `${basePath}/assets/images/backgrounds/home-page/sscx-side.jpeg`,
         alt: 'SSCx side view',
@@ -44,48 +44,14 @@ const Home: React.FC = () => (
           primary
         />
         <div className="cta">
-          <CtaButton color="yellow">Explore now</CtaButton>
+          <CtaButton href="#explore" color="yellow">Explore now</CtaButton>
           <br/>
-          <CtaButton className="mt-2" color="grey">Publications</CtaButton>
-
-          {/* <a href="#section-3">
-            <Button primary width={140}>
-              Explore
-            </Button>
-          </a>
-          <Link href="/styleguide">
-            <Button width={140}>Read paper</Button>
-          </Link> */}
+          <CtaButton href="#publications" className="mt-2" color="grey">Publications</CtaButton>
         </div>
-        {/* <div className="search-form">
-          <Search />
-        </div> */}
       </div>
-      {/* <img
-        className="top-section-image"
-        src={require('url:../assets/images/computer.svg')}
-        alt="computer"
-      /> */}
-      {/* <div className="social-media">
-        <a href="#">
-          <div className="social-media-icon">
-            <FaTwitter />
-          </div>
-        </a>
-        <a href="#">
-          <div className="social-media-icon">
-            <FaFacebookF />
-          </div>
-        </a>
-        <a href="#">
-          <div className="social-media-icon">
-            <FaLinkedinIn />
-          </div>
-        </a>
-      </div> */}
     </section>
 
-    <section id="section-2">
+    <section className="section-2">
       <h2>
         Select and Explore. Download.{' '}
         <span className="nowrap">
@@ -131,7 +97,7 @@ const Home: React.FC = () => (
       </div>
     </section>
 
-    <section id="section-3">
+    <section id="explore" className="section-3">
       <div className="intro">
         <h2 className="text-white">Explore</h2>
         <h3>Navigate the various datasets made available</h3>
@@ -224,7 +190,7 @@ const Home: React.FC = () => (
       </div>
     </section>
 
-    <section id="section-4">
+    <section id="publications" className="section-4">
       <div className="content">
         <div className="paper data-paper-container">
           <div className="data-paper">
