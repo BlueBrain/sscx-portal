@@ -35,7 +35,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
 
   return (
     <>
-      <Filters primaryColor={color} backgroundAlt hasData={!!currentLayer}>
+      <Filters primaryColor={color} hasData={!!currentLayer}>
         <div className="center-col">
           <Title
             primaryColor={color}
@@ -44,11 +44,13 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
             hint="The Somatosensory Cortex has a laminar structure <br> where neurons are organized across six distinct layers."
           />
           <div role="information">
-            <InfoBox
-              title="Layer thickness: S1"
-              text="Data are provided in the form of raw microscopy images of NeuN (neuron-specific nuclear protein) stained coronal slices with annotations of individual layer extents, and spreadsheets summarizing measurements of layer thicknesses."
-              color={color}
-            />
+            <InfoBox>
+              <p>The rat primary somatosensory cortex (SSCx) is responsible for the processing of sensory information such as touch from the entire body. <br/> It has a laminar structure where neurons are organized across six distinct layers - with layer 1 at the surface and layer 6 at the bottom. <br/> This section showcases the data we have acquired and organized on the anatomy of SSCx from cortical slices in developing rats.</p>
+              <h3>Layer thickness: S1</h3>
+              <p>Data are provided in the form of raw microscopy images of NeuN (neuron-specific nuclear protein) stained coronal slices with annotations of individual layer extents, and spreadsheets summarizing measurements of layer thicknesses.</p>
+              <h3>Neuronal density</h3>
+              <p>Data are given as raw microscopy images of NeuN stained slices with annotations of individual layer extents, and spreadsheets summarizing measurements of neuron counts across different layers.</p>
+            </InfoBox>
           </div>
         </div>
         <div className="center-col">

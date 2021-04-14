@@ -6,7 +6,6 @@ import BrainRegionsSelector, { BrainRegion } from '../components/BrainRegionsSel
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Selector from '../components/Selector';
-import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
 
@@ -45,12 +44,9 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
             subtitle={sectionTitle}
             hint="Select a subregion of interest in the S1 of the rat brain."
           />
-          <div>
-            <InfoBox
-              text="We digitally reconstructed the non-barrel hind limb primary rat Somatosensory Cortex consisting of eight sub-regions, four million neurons mediated by four billion synapses."
-              color={color}
-            />
-          </div>
+          <InfoBox>
+            <p>We digitally reconstructed the non-barrel hind limb primary rat Somatosensory Cortex consisting of eight sub-regions, four million neurons mediated by four billion synapses.</p>
+          </InfoBox>
         </div>
         <div className="center-col">
           <Selector title="Choose a subregion">

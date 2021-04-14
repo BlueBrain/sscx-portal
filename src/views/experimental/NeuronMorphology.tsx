@@ -14,7 +14,6 @@ import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import NexusPlugin from '../../components/NexusPlugin';
-import { lorem } from '../Styleguide';
 import { colorName } from './config';
 import { Layer } from '../../types';
 import ComboSelector from '../../components/ComboSelector';
@@ -85,7 +84,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
 
   return (
     <>
-      <Filters primaryColor={colorName} backgroundAlt hasData={!!currentInstance}>
+      <Filters primaryColor={colorName} hasData={!!currentInstance}>
         <div className="center-col">
           <Title
             primaryColor={colorName}
@@ -94,10 +93,9 @@ const NeuronExperimentalMorphology: React.FC = () => {
             hint="Select a layer of interest in the S1 of the rat brain."
           />
           <div className="mb-4">
-            <InfoBox
-              color="yellow"
-              text="Reconstructed neurons are classified into diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal and dendritic morphologies. Using objective classification methods, we have identified 60 m-types in the primary rat Somatosensory Cortex."
-            />
+            <InfoBox>
+              <p>Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal and dendritic morphologies. Using a combination of objective classification methods for pyramidal cell types, and subjective classification for interneuron types, we have identified 57 m-types in the primary rat Somatosensory Cortex.</p>
+            </InfoBox>
           </div>
         </div>
         <div className="center-col">
@@ -151,6 +149,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           </div>
 
           <h3 className="mt-3">Reconstructed morphologies</h3>
+          <p>Data are provided as ASCII files containing 3D representations of neuronal morphologies - axons and dendrites - whose shapes are traced and reconstructed using Neurolucida (neuron tracing, reconstruction, and analysis software).</p>
           <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
             {esDocuments => (
               <>

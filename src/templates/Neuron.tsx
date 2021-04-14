@@ -9,7 +9,6 @@ import { etypeFactsheetPath, metypeFactsheetPath } from '../queries/http';
 import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import HttpData from '../components/HttpData';
@@ -163,15 +162,13 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             primaryColor={color}
             title="Neurons"
             subtitle={sectionTitle}
-            hint="Select a subregion of interest in the S1 of the rat brain."
           />
           <div>
-            <InfoBox
-              text="We labeled single neurons with biocytin to stain their axonal and dendritic morphologies to enable their 3D reconstruction and their objective classification into morphological types (m-types). In addition, we also characterized the electrical firing patterns of these neurons to different intensities of step currents injected in the soma to group their response into electrical types (e-types). We then mapped the e-types expressed in each m-type to account for the observed diversity of morpho-electrical subtypes (me-types)."
-              color={color}
-            />
-            <br />
+            <InfoBox>
+              <p>We labeled single neurons with biocytin to stain their axonal and dendritic morphologies to enable their 3D reconstruction and their objective classification into morphological types (m-types). In addition, we also characterised the electrical firing patterns of these neurons to different intensities of step currents injected in the soma to group their response into electrical types (e-types). We then mapped the e-types expressed in each m-type to account for the observed diversity of morpho-electrical subtypes (me-types).</p>
+            </InfoBox>
             <Pills
+              className="mt-3"
               title="1. Select a subregion"
               list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
               defaultValue={currentRegion}
@@ -232,6 +229,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           <HttpData path={`${basePath}/data/MTypes/L5_BTC/factsheet.json`}>
             {data => (
               <Collapsible title={`M-Type ${currentMtype} Factsheet`}>
+                <p className="mb-3">Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.</p>
                 <MtypeFactsheet data={data} />
                 <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
               </Collapsible>
@@ -243,6 +241,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
             {data => (
               <Collapsible className="mt-4" title={`E-Type ${currentEtype} Factsheet`}>
+                <p className="mb-3">Neurons are classified into e-types based on their electrical response properties to step current injections at the soma.</p>
                 <EtypeFactsheet data={data} />
                 <div className="text-right mt-3 mb-3">
                   <Button
@@ -283,6 +282,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             {data => (
               <>
                 <Collapsible className="mt-4" title={`ME-Type Instance ${currentInstance} Factsheet`}>
+                  <p className="mb-3">Each m-type expresses a certain proportion of various e-types, giving rise to a diversity of morpho-electrical subtypes (me-types).</p>
                   <h3>Anatomy</h3>
                   {data && (
                     <Factsheet facts={data[0].values}/>
@@ -343,11 +343,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                   <div className="row">
                     <div className="col-xs-12 col-sm-6">
                       <h4 className="mt-3">EPSP Attenuation</h4>
-                      <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/epsp.mp4" />
+                      <VideoPlayer src="https://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/epsp.mp4" />
                     </div>
                     <div className="col-xs-12 col-sm-6">
                     <h4 className="mt-3">bAP Attenuation</h4>
-                      <VideoPlayer src="http://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/bap.mp4" />
+                      <VideoPlayer src="https://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/bap.mp4" />
                     </div>
                   </div>
                 </Collapsible>

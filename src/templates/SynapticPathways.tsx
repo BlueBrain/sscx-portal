@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import { lorem } from '../views/Styleguide';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import { Layer, Color } from '../types';
@@ -98,15 +97,13 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             primaryColor={color}
             title="Synaptic Pathways"
             subtitle={sectionTitle}
-            hint="Select a subregion of interest in the S1 of the rat brain."
           />
           <div>
-            <InfoBox
-              color={color}
-              text="A synaptic pathway encompasses the set of all possible connections between pairs of neurons of pre and postsynaptic  morphological types (m-types)."
-            />
-            <br />
+            <InfoBox>
+              <p>A synaptic pathway encompasses the set of all possible connections between pairs of neurons of pre and postsynaptic  morphological types (m-types).</p>
+            </InfoBox>
             <Pills
+              className="mt-3"
               title="1. Select a subregion"
               list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
               defaultValue={currentRegion}

@@ -18,6 +18,18 @@ const BrainRegionsView = () => (
     {(subregion) => (
       <DataContainer visible={!!subregion}>
         <Collapsible title="S1 (Region) Factsheet">
+          <p>The S1 consists of eight sub-regions:</p>
+          <ol className="mb-3">
+            <li>S1HL, "Hind limb"</li>
+            <li>S1FL, "Fore Limb"</li>
+            <li>S1Sh, "Shoulder"</li>
+            <li>S1Tr, "Trunk"</li>
+            <li>S1J, “Jaw"</li>
+            <li>S1ULp, "Upper lip"</li>
+            <li>S1DZ, "Disgranular zone"</li>
+            <li>S1DZO, "Oral disgranular zone"</li>
+          </ol>
+
           <HttpData path={regionCircuitFactsheetPath()}>
             {data => (
               <>

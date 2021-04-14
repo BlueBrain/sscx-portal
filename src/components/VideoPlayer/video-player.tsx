@@ -24,11 +24,11 @@ const Video: React.FC<any> = (props) => {
     player.source = {
       type: 'video',
       sources: [{
-        src: props.src || 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
+        src: props.src || 'https://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
         type: 'video/mp4',
         size: 720
       }, {
-        src: props.src || 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
+        src: props.src || 'https://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4',
         type: 'video/mp4',
         size: 1080
       }]

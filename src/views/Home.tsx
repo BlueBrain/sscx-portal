@@ -1,4 +1,3 @@
-// import './Home.scss';
 import React from 'react';
 import Link from 'next/link';
 
@@ -8,8 +7,6 @@ import Button from '../components/Button';
 import InfoBox1 from '../components/Home/InfoBox1';
 import InfoBox2 from '../components/Home/InfoBox2';
 import { Color } from '../types';
-import Search from '../components/Search';
-import { FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import CtaButton from '../components/CtaButton';
 import { basePath } from '../config';
 
@@ -29,6 +26,16 @@ const Home: React.FC = () => (
         src: `${basePath}/assets/images/backgrounds/home-page/sscx-inside.jpeg`,
         alt: 'SSCx inside view',
       }]}/>
+
+      <div style={{
+        position: 'absolute',
+        bottom: '40px',
+        left: '60px',
+        color: 'grey',
+      }}>
+        ©Blue Brain Project/EPFL 2005-2021.
+      </div>
+
       <div className="title">
         <Title
           title={<span>Somatosensory <br/> Cortex Portal</span>}
@@ -264,19 +271,6 @@ const Home: React.FC = () => (
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="section-5">
-      <h2>
-        Acknowledgments
-        <span className="accent-border" />
-      </h2>
-      <img
-        id="acknowledgments"
-        src={`${basePath}/assets/images/acknowledgments.svg`}
-        alt="acknowledgments"
-        loading="lazy"
-      />
     </section>
   </div>
 );

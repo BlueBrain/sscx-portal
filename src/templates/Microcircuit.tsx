@@ -5,7 +5,6 @@ import ServerSideContext from '../context/server-side-context';
 import Filters from '../layouts/Filters';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import { lorem } from '../views/Styleguide';
 import Selector from '../components/Selector';
 import MicrocircuitSelector from '../components/MicrocircuitSelector';
 import { Layer, Color } from '../types';
@@ -59,22 +58,19 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
 
   return (
     <>
-      <Filters
-        primaryColor={color}
-        backgroundAlt
-        hasData={!!currentLayer && !!currentRegion}
-      >
+      <Filters primaryColor={color} hasData={!!currentLayer && !!currentRegion}>
         <div className="center-col">
           <Title
             primaryColor={color}
             title="Microcircuit"
             subtitle={sectionTitle}
-            hint="Select a microcircuit of interest."
           />
           <div>
-            <InfoBox text="A neuronal microcircuit is the smallest functional ecosystem in any brain region that encompasses a diverse morphological and electrical assortment of neurons, and their synaptic interactions." />
-            <br />
+            <InfoBox>
+              <p>A neuronal microcircuit is the smallest functional ecosystem in any brain region that encompasses a diverse morphological and electrical assortment of neurons, and their synaptic interactions.</p>
+            </InfoBox>
             <Pills
+              className="mt-3"
               title="1. Select a subregion"
               list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
               defaultValue={currentRegion}

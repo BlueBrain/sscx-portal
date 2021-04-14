@@ -1,0 +1,34 @@
+
+.containerOuter {
+  display: inline-block;
+  position: relative;
+}
+
+.containerInner {
+  max-width: 560px;
+  max-height: 260px;
+  overflow-y: scroll;
+  background-color: #313254;
+  padding: 30px;
+
+  h1,h2,h3 {
+    color: white;
+  }
+}
+
+.topGradient, .bottomGradient {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 40px;
+}
+
+.topGradient {
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(49,50,84,1) 0%, rgba(49,50,84,0) 100%);
+}
+
+.bottomGradient {
+  top: 0;
+  background: linear-gradient(180deg, rgba(49,50,84,1) 0%, rgba(49,50,84,0) 100%);
+}

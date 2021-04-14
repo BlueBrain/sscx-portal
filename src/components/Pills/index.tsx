@@ -12,6 +12,7 @@ type PillsProps = {
   defaultValue?: string;
   onSelect?: (s: string) => void;
   color?: Color;
+  className?: string;
 };
 
 type PillProps = {
@@ -42,6 +43,7 @@ const Pills: React.FC<PillsProps> = ({
   defaultValue,
   onSelect,
   color = '',
+  className = '',
 }) => {
   const [activePill, setActivePill] = React.useState<string>(defaultValue as string);
 
@@ -53,7 +55,7 @@ const Pills: React.FC<PillsProps> = ({
   const id = title ? title.replace(/\s/g, '') : 'no_title';
 
   return (
-    <div className={`${classPrefixPills}basis ${color}`}>
+    <div className={`${classPrefixPills}basis ${color} ${className}`}>
       {title && <p id={`${classPrefixPill}${id}`}>{title}</p>}
       <div
         className="elements"

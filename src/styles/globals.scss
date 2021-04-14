@@ -44,7 +44,7 @@ html, body {
 
 button {
   @include font-default;
-  // color: map-get($basePalette, "white");
+  color: map-get($basePalette, "white");
 }
 
 input {
@@ -58,12 +58,12 @@ a {
 
 h1 {
   font-family: 'Arial Rounded MT Bold', Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
 }
 
 h2 {
   font-family: 'Arial Rounded MT Bold', Arial, Helvetica, sans-serif;
-  font-size: 2.5rem;
+  // font-size: 2.5rem;
 }
 
 h3 {
@@ -76,7 +76,7 @@ p {
 }
 
 a {
-  color: map-get($basePalette, "white");
+  // color: map-get($basePalette, "white");
   font-weight: 400;
 }
 
@@ -1107,54 +1107,54 @@ $collapsible-padding: 20px 30px;
 
 
 // InfoBox
-.info-box__basis {
-  width: 100%;
-  max-width: 480px;
-  padding: 30px;
-  background-color: rgba(229, 233, 244, 0.5);
-  border-radius: 15px;
-  border: 2px solid #fff;
-  box-sizing: border-box;
-  transition: all 0.2s;
+// .info-box__basis {
+//   width: 100%;
+//   max-width: 480px;
+//   padding: 30px;
+//   background-color: rgba(6, 7, 10, 0.5);
+//   border-radius: 15px;
+//   border: 2px solid #fff;
+//   box-sizing: border-box;
+//   transition: all 0.2s;
 
-  &.default {
-    border: none;
-  }
+//   &.default {
+//     border: none;
+//   }
 
-  &.yellow {
-    background-color: map-get($accentPalette, "yellow");
-  }
-  &.blue {
-    background-color: map-get($accentPalette, "blue");
-  }
-  &.lavender {
-    background-color: map-get($accentPalette, "lavender");
-  }
-  &.green {
-    background-color: map-get($accentPalette, "green");
-  }
-  &.grey {
-    background-color: map-get($accentPalette, "grey");
-  }
+//   &.yellow {
+//     background-color: map-get($accentPalette, "yellow");
+//   }
+//   &.blue {
+//     background-color: map-get($accentPalette, "blue");
+//   }
+//   &.lavender {
+//     background-color: map-get($accentPalette, "lavender");
+//   }
+//   &.green {
+//     background-color: map-get($accentPalette, "green");
+//   }
+//   &.grey {
+//     background-color: map-get($accentPalette, "grey");
+//   }
 
-  h3 {
-    margin: 0;
-  }
-  p,
-  span {
-    margin-top: 15px;
-    font-size: map-get($fontSize, "small");
-    line-height: 1.7;
-  }
-  p {
-    font-weight: 700;
-    white-space: pre-line;
-  }
-  span {
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-  }
-}
+//   h3 {
+//     margin: 0;
+//   }
+//   p,
+//   span {
+//     margin-top: 15px;
+//     font-size: map-get($fontSize, "small");
+//     line-height: 1.7;
+//   }
+//   p {
+//     font-weight: 700;
+//     white-space: pre-line;
+//   }
+//   span {
+//     color: rgba(255, 255, 255, 0.8);
+//     cursor: pointer;
+//   }
+// }
 
 
 
@@ -2031,58 +2031,52 @@ $collapsible-padding: 20px 30px;
 
 
 // layout / Filters
-.filters__basis {
-  padding: 100px 60px 80px;
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  box-sizing: border-box;
-  // overflow: hidden;
-  background-color: map-get($basePalette, "navy-4");
-  background-repeat: no-repeat;
-  background-position: center;
-  // background-attachment: fixed;
-  background-image: url('/sscx-portal/assets/images/backgrounds/default.svg');
-  background-size: cover;
+// .filters__basis {
+//   padding: 100px 60px 80px;
+//   min-height: 100vh;
+//   width: 100%;
+//   position: relative;
+//   box-sizing: border-box;
+//   background-color: #050a30;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-image: url('/sscx-portal/assets/images/backgrounds/filter-section-bg.png');
+//   background-size: cover;
 
-  @media (max-width: $small) {
-    padding: 60px 20px;
-  }
+//   @media (max-width: $small) {
+//     padding: 60px 20px;
+//   }
 
-  &.background-alt {
-    background-image: url('/sscx-portal/assets/images/backgrounds/alt.svg');
-  }
+//   .center {
+//     margin: 60px auto 60px;
+//     max-width: 2160px;
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+//     @media (max-width: $small) {
+//       flex-direction: column;
+//     }
+//   }
 
-  .center {
-    margin: 60px auto 60px;
-    max-width: 2160px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    @media (max-width: $small) {
-      flex-direction: column;
-    }
-  }
-
-  .center-col {
-    // flex: 50%;
-    flex-grow: 1;
-    &:first-child {
-      // margin-right: 40px;
-    }
-    &:last-child {
-      // margin-left: 40px;
-    }
-    @media (max-width: $small) {
-      &:first-child {
-        margin-right: 0;
-      }
-      &:last-child {
-        margin-left: 0;
-      }
-    }
-  }
-}
+//   .center-col {
+//     // flex: 50%;
+//     flex-grow: 1;
+//     &:first-child {
+//       // margin-right: 40px;
+//     }
+//     &:last-child {
+//       // margin-left: 40px;
+//     }
+//     @media (max-width: $small) {
+//       &:first-child {
+//         margin-right: 0;
+//       }
+//       &:last-child {
+//         margin-left: 0;
+//       }
+//     }
+//   }
+// }
 
 .scroll-to {
   position: -webkit-sticky;
@@ -2134,6 +2128,7 @@ $collapsible-padding: 20px 30px;
     a {
       text-decoration: none;
       font-weight: 300;
+      color: map-get($basePalette, "white");
     }
   }
 
@@ -2855,6 +2850,10 @@ $collapsible-padding: 20px 30px;
   #section-3 {
     background-color: map-get($basePalette, "navy-4");
 
+    a {
+      color: white;
+    }
+
     .intro {
       text-align: center;
       margin-bottom: 2rem;
@@ -3042,33 +3041,6 @@ $collapsible-padding: 20px 30px;
 
       .portal-paper-container {
         padding-bottom: 150px;
-      }
-    }
-  }
-
-  #section-5 {
-    padding-top: 0;
-    text-align: center;
-
-    h2 {
-      text-transform: uppercase;
-      font-size: 2.5rem;
-      text-align: center;
-      color: map-get($basePalette, "navy-4");
-    }
-
-    span {
-      display: block;
-      margin: 10px auto 0;
-    }
-
-    #acknowledgments {
-      max-width: 960px;
-    }
-
-    @media (max-width: $small) {
-      #acknowledgments {
-        margin: 0 -60px;
       }
     }
   }

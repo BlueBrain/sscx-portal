@@ -57,11 +57,7 @@ const NeuronElectrophysiology: React.FC = () => {
 
   return (
     <>
-      <Filters
-        primaryColor={colorName}
-        backgroundAlt
-        hasData={!!currentEtype && !!currentInstance}
-      >
+      <Filters primaryColor={colorName} hasData={!!currentEtype && !!currentInstance}>
         <div className="center-col">
           <Title
             primaryColor={colorName}
@@ -70,10 +66,9 @@ const NeuronElectrophysiology: React.FC = () => {
             hint="Select a layer of interest in the S1 of the rat brain."
           />
           <div className="mb-4">
-            <InfoBox
-              color={colorName}
-              text="Electrical traces were recorded from neurons using whole-cell patch clamp experiments in brain slices. A standardized stimulus protocol, called the e-code, is injected in each cell. Our scientists then classify the cells based on their firing type in different electrical types (e-types)."
-            />
+            <InfoBox>
+              <p>Electrical traces were recorded from neurons using whole-cell patch clamp experiments in brain slices. A standardized stimulus protocol, called the e-code, is injected in each cell. Our scientists then classify the cells based on their firing type in different electrical types (e-types).</p>
+            </InfoBox>
           </div>
         </div>
         <div className="center-col">
@@ -111,7 +106,8 @@ const NeuronElectrophysiology: React.FC = () => {
       </Filters>
 
       <DataContainer visible={!!currentEtype && !!currentInstance}>
-        <Collapsible title="Population">
+        <Collapsible title="E-type">
+          <p className="mb-3">The e-type of a neuron is determined by its firing behavior when injected with a step current in the soma. The pattern of electrical activity of neurons can be accommodating or non-accommodating (AC and NAC types), it can be very regular or show some stuttering or irregular firing (STUT or IR types). The reaction of the cell at the start of the stimulus is also important, there can be a delay at the beginning (‘d’ types) or a little burst (‘b’ types).</p>
           <h3>Factsheet</h3>
           <p>TBD</p>
 
@@ -140,8 +136,9 @@ const NeuronElectrophysiology: React.FC = () => {
 
         <Collapsible
           className="mt-4"
-          title={`Electrophysiological Recordings for ${currentEtype}_${currentInstance}`}
+          title={`Electrophysiological recordings instance ${currentEtype}_${currentInstance}`}
         >
+          <p className="mb-3">This section shows the whole-cell patch clamp recording of the neuron. The stimulus represents the current trace that was injected into the cell using the current clamp method. The response shows the membrane voltage of the neuron.</p>
           <ESData query={electroPhysiologyDataQuery(currentEtype, currentInstance)}>
             {esDocuments => (
               <>

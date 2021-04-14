@@ -56,7 +56,7 @@ const Footer: React.FC<{}> = () => {
         </div>
       </div>
       <div className={`${classPrefix}bottom-line`}>
-        <p>©Blue Brain Project/EPFL 2005-2021</p>
+        <p>©Blue Brain Project/EPFL 2005-2021.</p>
         <p>
           <Link href="#">Privacy Policy</Link> | <Link href="#">Terms of use</Link>
         </p>

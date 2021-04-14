@@ -9,18 +9,18 @@ import Video from '../VideoPlayer';
 const classPrefix = 'synaptome__';
 
 
-const Synaptome: React.FC<{ mtype: string, label: string }> = ({ mtype, label }) => {
+const Synaptome: React.FC<{ mtype: string, label: string, className?: string }> = ({ mtype, label, className = '' }) => {
   return (
-    <div className={`${classPrefix}basis`}>
+    <div className={`${classPrefix}basis ${className}`}>
       <h3>{label}</h3>
       <div className="row">
         <div className="col-xs-12 col-sm-3">
           <div className="synaptome-img-container">
-            <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/742704/input_synaptome.png" />
+            <ImageViewer src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Synaptome/L23_DBC/input_synaptome.png" />
             <span>Input synaptome</span>
           </div>
           <div className="synaptome-img-container">
-            <ImageViewer src="https://bbp.epfl.ch/nmc-portal/documents/10184/742704/input_synaptome.png" />
+            <ImageViewer src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Synaptome/L23_DBC/output_synaptome.png" />
             <span>Output synaptome</span>
           </div>
         </div>
@@ -31,8 +31,8 @@ const Synaptome: React.FC<{ mtype: string, label: string }> = ({ mtype, label })
             loop
             autoplay
             sources={[
-              { src: 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4', type: 'video/mp4', size: '720' },
-              { src: 'http://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4', type: 'video/mp4', size: '1080' },
+              { src: 'https://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4', type: 'video/mp4', size: '720' },
+              { src: 'https://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4', type: 'video/mp4', size: '1080' },
             ]}
           />
           <span>Map of afferent intrinsic synapses</span>

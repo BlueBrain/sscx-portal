@@ -1,52 +1,24 @@
 import React from 'react';
 
-import { Color } from '../../types';
-// import './style.scss';
+import styles from './styles.module.scss';
 
-const classPrefix = 'info-box__';
 
 type InfoBoxProps = {
-  title?: string;
-  text: string;
-  color?: Color;
-  maxChars?: number;
-};
-
-const isShorter = (text: string, maxChars: number): boolean =>
-  text.length <= maxChars;
-
-const truncate = (text: string, maxChars: number): string => {
-  if (isShorter(text, maxChars)) return text;
-  const words = text.trim().split(' ');
-  let truncatedText = '';
-  let i = 0;
-  while (isShorter(truncatedText, maxChars)) {
-    truncatedText += ' ' + words[i];
-    i++;
-  }
-  return truncatedText + '…';
+  bgImage?: string
 };
 
 const InfoBox: React.FC<InfoBoxProps> = ({
-  title,
-  text,
-  color = 'default',
-  maxChars = 150,
+  bgImage = '',
+  children,
 }) => {
-  const [expanded, setExpanded] = React.useState(false);
-  const currentText = expanded ? text : truncate(text, maxChars);
-
   return (
-    <div className={`${classPrefix}basis ${color}`}>
-      {title && <h3 className="text-white">{title}</h3>}
-      <p>{currentText}</p>
-      {!isShorter(text, maxChars) && (
-        <span onClick={() => setExpanded(!expanded)}>
-          Read {expanded ? 'less' : 'more…'}
-        </span>
-      )}
+    <div className={`${styles.containerOuter} bg-${bgImage}`}>
+      <div className={styles.containerInner}>{children}</div>
+      <div className={styles.topGradient}></div>
+      <div className={styles.bottomGradient}></div>
     </div>
   );
 };
+
 
 export default InfoBox;

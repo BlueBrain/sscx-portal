@@ -33,34 +33,35 @@ const RecSynPathwaysView = () => (
 
           <div className="row around-xs mt-4">
             <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/148969/figure1.png" />
+              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/figure1.png" />
             </div>
             <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/148969/diagram.png" />
+              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/diagram.png" />
             </div>
             <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/148969/figure3.png" />
+              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/figure3.png" />
             </div>
             <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/148969/figure4.png" />
+              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/figure4.png" />
             </div>
             <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/148969/rendering.png" />
+              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/rendering.png" />
             </div>
           </div>
 
+          <p className="mt-4 mb-3">The SSCx reconstruction makes it possible to predict the full complement of synaptic inputs and outputs for any given neuron.</p>
           <Synaptome label="Pre-synaptic Synaptome L1_NGC-DA" mtype="L1_NGC-DA"/>
-          <Synaptome label="Post-synaptic Synaptome L23_BTC" mtype="L23_BTC"/>
+          <Synaptome className="mt-3" label="Post-synaptic Synaptome L23_BTC" mtype="L23_BTC"/>
         </Collapsible>
 
-        <div className="mt-2">
+        <div className="mt-3">
           <Collapsible color="red" title="Simulations">
             <div className="row">
               <div className="col-xs-4">
                 Definition : explain that these are in silico experiments. Explanation of this exact simulation.
               </div>
               <div className="col-xs-4">
-                <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/1204661/11_maya_christmasTree.jpg" />
+                <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/10184/1204661/11_maya_christmasTree.jpg" />
               </div>
               <div className="col-xs-4">
                 <h3 className="mt-0">Explore data</h3>
