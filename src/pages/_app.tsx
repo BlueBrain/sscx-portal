@@ -23,9 +23,9 @@ function MyApp({ Component, pageProps }) {
     <NexusProvider nexusClient={nexusClient}>
       <MainLayout>
         <Head>
-          <script defer src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js"></script>
-          <script defer src="https://www.unpkg.com/systemjs@6.1.7/dist/extras/named-exports.js"></script>
-          <script type="systemjs-importmap" src={`${basePath}/sscx-portal/systemjs-importmap.json`}></script>
+          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js"></script>
+          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/extras/named-exports.js"></script>
+          <script type="systemjs-importmap" src={`${basePath}/systemjs-importmap.json`}></script>
         </Head>
         <Component {...pageProps} />
       </MainLayout>
