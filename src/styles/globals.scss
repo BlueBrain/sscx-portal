@@ -2966,6 +2966,15 @@ $collapsible-padding: 20px 30px;
 .glossary__container {
   max-width: 1080px;
   margin: 0 auto;
+
+  a, a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .term {
+    word-break: break-all;
+  }
 }
 
 
