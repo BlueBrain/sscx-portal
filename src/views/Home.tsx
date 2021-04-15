@@ -3,11 +3,11 @@ import Link from 'next/link';
 
 import Title from '../components/Title';
 import ImageSlider from '../components/ImageSlider';
-import Button from '../components/Button';
 import InfoBox1 from '../components/Home/InfoBox1';
 import InfoBox2 from '../components/Home/InfoBox2';
 import { Color } from '../types';
 import CtaButton from '../components/CtaButton';
+import PublicationBlock from '../components/PublicationBlock';
 import { basePath } from '../config';
 
 
@@ -26,6 +26,7 @@ const Home: React.FC = () => (
         src: `${basePath}/assets/images/backgrounds/home-page/sscx-inside.jpeg`,
         alt: 'SSCx inside view',
       }]}/>
+      <div className="gradient"></div>
 
       <div style={{
         position: 'absolute',
@@ -43,7 +44,7 @@ const Home: React.FC = () => (
           hint="Welcome to the Somatosensory Cortex (SSCx) Portal created by the EPFL <b>Blue Brain Project</b>. Explore the datasets, models and visuals to understand how we reconstruct the rodent somatosensory cortex in silico."
           primary
         />
-        <div className="cta">
+        <div>
           <CtaButton href="#explore" color="yellow">Explore now</CtaButton>
           <br/>
           <CtaButton href="#publications" className="mt-2" color="grey">Publications</CtaButton>
@@ -53,11 +54,8 @@ const Home: React.FC = () => (
 
     <section className="section-2">
       <h2>
-        Select and Explore. Download.{' '}
-        <span className="nowrap">
-          Contribute
-          <span className="accent-border" />
-        </span>
+        Select and Explore. Download. Contribute
+        <span className="accent-border" />
       </h2>
       <div className="content">
         <div className="workflow">
@@ -192,48 +190,43 @@ const Home: React.FC = () => (
 
     <section id="publications" className="section-4">
       <div className="content">
-        <div className="paper data-paper-container">
-          <div className="data-paper">
-            <h2 className="text-white">The paper</h2>
-            <h3 className="text-white">
-              <span className="accent-border" />
-              About the data
-            </h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <Link href="/experimental">
-              <Button>Read paper</Button>
-            </Link>
-          </div>
-        </div>
-        <img
-          id="chip"
-          src={`${basePath}/assets/images/chip.png`}
-          alt="microchip"
-          loading="lazy"
-        />
-        <div className="paper portal-paper-container">
-          <div className="portal-paper">
-            <div className="portal-paper-title">
-              <h3 className="text-white">Paper about</h3>
-              <h2 className="text-white">
-                The portal <span className="accent-border accent-border-sm" />
-              </h2>
-            </div>
-            <span className="accent-border accent-border-lg" />
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <Link href="/experimental">
-              <Button>BBP website</Button>
-            </Link>
+        <div className="row w-100">
+          <div className="col-xs-12 col-md-6">
+            <h1 className="text-uppercase m-0">Publications</h1>
+            <p className="text-yellow text-subtitle mb-3">Read up on our latest publications !</p>
+
+            <PublicationBlock
+              href="#"
+              description={(
+                <>
+                  <strong>The Somatosensory Cortex</strong>: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                  sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                </>
+              )}
+              authors={<>Author <i>et al.</i>, 2021</>}
+            />
+
+            <PublicationBlock
+              href="#"
+              description={
+                <>
+                  <strong>The Somatosensory Cortex</strong>: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                  sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                </>
+              }
+              authors={<>Author <i>et al.</i>, 2021</>}
+            />
+
+            <PublicationBlock
+              href="#"
+              description={
+                <>
+                  <strong>The Somatosensory Cortex</strong>: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                  sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                </>
+              }
+              authors={<>Author <i>et al.</i>, 2021</>}
+            />
           </div>
         </div>
       </div>

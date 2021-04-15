@@ -7,8 +7,6 @@ import { Color } from '../types';
 import glossaryContent from './glossary-content.json';
 import { basePath } from '../config';
 
-// import './Glossary.scss';
-
 
 const colorName: Color = 'lavender';
 const color = accentColors[colorName];

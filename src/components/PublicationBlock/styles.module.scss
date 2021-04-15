@@ -1,0 +1,36 @@
+
+.container {
+  display: block;
+  position: relative;
+  min-height: 9rem;
+  text-decoration: none;
+  color: #f7f8fc;
+  background-color: #454968;
+  border: 1px solid #454968;
+  padding: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+
+  .arrow {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-yellow);
+  }
+}
+.container:hover {
+  background-color: transparent;
+  color: white;
+}
+
+.container p {
+  margin: 0;
+}
+
+.container > p:nth-child(2) {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+}
