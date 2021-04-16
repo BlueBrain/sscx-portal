@@ -17,8 +17,21 @@
 @import 'config/_fonts';
 @import 'config/_queries';
 
+
+// colors
+// TODO: refactor to have all the colors here
 :root {
   --color-yellow: #ffc807;
+  --color-light-blue: #84bbf8;
+  --color-blue: #657be1;
+  --color-green: #33b080;
+  --color-grey: #b2b3b3;
+
+  --color-yellow-darker: #efb90a;
+  --color-light-blue-darker: #78acdd;
+  --color-blue-darker: #5f75c9;
+  --color-green-darker: #329b70;
+  --color-grey-darker: #a0a0a0;
 }
 
 
@@ -185,6 +198,10 @@ section {
 
 .text-white {
   color: white;
+}
+
+.text-grey {
+  color: var(--color-grey);
 }
 
 .text-capitalize {
@@ -2878,6 +2895,17 @@ $collapsible-padding: 20px 30px;
 
       p {
         opacity: 0.5;
+      }
+    }
+
+    .cards {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      @media screen and (min-width: 1200px) {
+        .ant-col {
+          flex: 20% !important;
+        }
       }
     }
 
