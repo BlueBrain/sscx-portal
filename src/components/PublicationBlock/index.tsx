@@ -25,7 +25,7 @@ const PublicationBlock: React.FC<PublicationBlockProps> = ({
     >
       <p>{description}</p>
       <p>{authors}</p>
-      <div className="arrow" />
+      <div className={styles.arrow} />
     </a>
   );
 };
