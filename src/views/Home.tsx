@@ -290,9 +290,6 @@ const Home: React.FC = () => (
               authors={<>Author <i>et al.</i>, 2021</>}
             />
           </div>
-          <div className="col-xs-12 col-md-6">
-            test
-          </div>
         </div>
       </div>
     </section>
