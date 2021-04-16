@@ -30,7 +30,6 @@ const icons = {
 };
 
 const IconSvg: React.FC<{ icon: IconType }> = ({ icon }) => {
-
   switch (icon) {
     case 'layer': return <LayerSvg />;
     case 'microcircuit': return <MicrocircuitSvg />;
@@ -75,13 +74,13 @@ const ExploreSectionCard: React.FC<ExploreSectionCardProps> = ({
           {links.map(link => link.href ? (
             <Link key={link.label} href={link.href}>
               <a className={styles.link}>
-                {link.icon && <IconSvg icon={link.icon}/>}
+                {link.icon && <IconSvg icon={link.icon} />}
                 {link.label}
               </a>
             </Link>
           ) : (
             <p key={link.label} className={`${styles.link} ${styles.disabledLink}`}>
-              {link.icon && icons[link.icon]}
+              {link.icon && <IconSvg icon={link.icon} />}
               {link.label}<sup>*</sup>
             </p>
           ))}
