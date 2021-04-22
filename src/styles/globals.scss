@@ -11,6 +11,8 @@
 @import 'antd/lib/collapse/style/index.css';
 @import 'antd/lib/popover/style/index.css';
 @import 'antd/lib/tabs/style/index.css';
+@import 'antd/lib/input/style/index.css';
+@import 'antd/lib/form/style/index.css';
 
 
 @import 'config/_colors';
@@ -40,10 +42,6 @@ html, body {
   color: map-get($basePalette, "white");
   background-color: map-get($basePalette, "navy-4");
   scroll-behavior: smooth;
-}
-
-#__next {
-  height: 100%;
 }
 
 button {
@@ -187,6 +185,10 @@ section {
 
 .text-white {
   color: white;
+}
+
+.text-read {
+  color: #f4364c;
 }
 
 .text-grey {

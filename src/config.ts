@@ -26,6 +26,8 @@ export const nexus = {
 
 export const nexusPluginBaseUrl = 'https://bbp.epfl.ch/nexus/plugins';
 
+export const feedbackDeploymentId = process.env.NEXT_PUBLIC_FEEDBACK_DEPLOYMENT_ID;
+
 export const basePath = '/sscx-portal';
 
 const liveContentEnv = process.env.NEXT_PUBLIC_SSCX_LIVE_CONTENT;

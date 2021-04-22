@@ -5,6 +5,7 @@ import { NexusProvider } from '@bbp/react-nexus';
 
 import { nexus, basePath } from '../config';
 import MainLayout from '../layouts/MainLayout';
+import Feedback from '../components/Feedback';
 
 import '../styles/globals.scss';
 
@@ -27,7 +28,9 @@ function MyApp({ Component, pageProps }) {
           <script src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js"></script>
           <script src="https://www.unpkg.com/systemjs@6.1.7/dist/extras/named-exports.js"></script>
           <script type="systemjs-importmap" src={`${basePath}/systemjs-importmap.json`}></script>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
+        <Feedback />
         <Component {...pageProps} />
       </MainLayout>
     </NexusProvider>
