@@ -14,16 +14,16 @@ const { Option } = Select;
 
 const FEEDBACK_CONTACT_KEY = 'feedbackContact';
 
-const FEEDBACK_URL = `https://script.google.com/macros/s/${feedbackDeploymentId}/exec`;
+const FEEDBACK_URL = `http://localhost:8000/feedback`;
 
-const storage = typeof(window) !== 'undefined' ? window.sessionStorage : null;
+const storage = typeof (window) !== 'undefined' ? window.sessionStorage : null;
 
 
 const Feedback: React.FC = () => {
   const router = useRouter()
 
   const [formVisible, setFormVisible] = useState(false);
-  const issueSelectRef = useRef(null);
+  const issueSelectRef = useRef<HTMLSelectElement>(null);
 
   const [type, setType] = useState('');
   const [component, setComponent] = useState('');
@@ -31,8 +31,7 @@ const Feedback: React.FC = () => {
   const [contact, setContact] = useState(storage?.getItem(FEEDBACK_CONTACT_KEY) ?? '');
 
   const [sending, setSending] = useState(false);
-  const [sendSuccess, setSendSuccess] = useState(false);
-  const [sendError, setSendError] = useState(false);
+  const [responseStatus, setResponseStatus] = useState<'success' | 'error'>(null)
 
   const onContactChange = (value: string) => {
     storage?.setItem(FEEDBACK_CONTACT_KEY, value);
@@ -52,37 +51,48 @@ const Feedback: React.FC = () => {
       setComponent('');
       setDetails('');
 
-      setSendError(false);
-      setSendSuccess(false);
+      setResponseStatus(null)
     }, 200);
   }
 
-  const sendFeedback = () => {
-    setSendError(false);
-    setSendSuccess(false);
-
+  const sendFeedback = async () => {
+    setResponseStatus(null)
     setSending(true);
 
-    const feedback = { type, component, details, contact };
-    const formData = new FormData();
-    Object.entries(feedback).forEach(([key, val]) => formData.append(key, val));
-    formData.append('page', pageLabelMap[router.pathname] ?? router.pathname);
+    try {
+      const res = await fetch(FEEDBACK_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          title: details.slice(0, 100), body: `
+Field | Element
+--- | ---
+type | ${type}
+component | ${component}
+contact | ${contact}
+page | ${pageLabelMap[router.pathname] ?? router.pathname}
 
-    fetch(FEEDBACK_URL, {
-      method: 'POST',
-      body: formData,
-    })
-      .then(() => {
-        setSendSuccess(true);
+${details.slice(100)}
+        `
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+      if (res.ok) {
+        setResponseStatus('success');
         setTimeout(closeForm, 1000);
-      })
-      .catch(() => {
-        setSendError(true);
-      })
-      .finally(() => {
-        setSending(false);
-      })
-  };
+      } else setResponseStatus('error')
+
+      setSending(false);
+    } catch (e) {
+      setResponseStatus('error')
+    } finally {
+      setSending(false)
+    }
+  }
+
+
 
   return (
     <div className={`${formVisible ? styles.formVisible : ''}`}>
@@ -131,7 +141,7 @@ const Feedback: React.FC = () => {
               placeholder="Tell us about your experience..."
               rows={4}
               disabled={sending}
-              autoSize={{minRows: 4, maxRows: 4}}
+              autoSize={{ minRows: 4, maxRows: 4 }}
               value={details}
               onChange={e => setDetails(e.target.value)}
             />
@@ -147,21 +157,21 @@ const Feedback: React.FC = () => {
             />
           </Form.Item>
           <Form.Item className="text-right mb-0">
-            {sendSuccess && (
+            {responseStatus === 'success' && (
               <span className="mr-1">Sent, thank you!</span>
             )}
-            {sendError && (
+            {responseStatus === 'error' && (
               <span className="mr-1 text-red">Oops, something went wrong</span>
             )}
             <Button
               className={styles.sendBtn}
               type="primary"
               danger
-              disabled={!details || sendSuccess}
+              disabled={!details || responseStatus === 'success'}
               loading={sending}
               onClick={sendFeedback}
             >
-              {sending ? 'Sending': 'Send'}
+              {sending ? 'Sending' : 'Send'}
             </Button>
           </Form.Item>
         </Form>
