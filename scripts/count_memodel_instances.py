@@ -62,8 +62,10 @@ def main():
 
   """
   memodel_path = abspath(sys.argv[1])
+  output_path = abspath(sys.argv[2])
 
   logger.info(f'memodel path: {memodel_path}')
+  logger.info(f'output path:  {output_path}')
 
   if not isdir(memodel_path):
     logger.critical(f'memodel base path doesn\'t seem to be directory: {memodel_path}')
@@ -104,7 +106,8 @@ def main():
           memodels.append((mtype, etype, region, memodel_name))
 
   logger.info(f'Found {len(memodels)} memodel directories')
-  logger.info(f'Memodel count exceptions: {json.dumps(memodel_count_exceptions)}')
+  with open(join(output_path, 'memodel-number-exceptions.json'), 'w') as file:
+    json.dump(memodel_count_exceptions, file)
 
 
 if __name__ == '__main__':

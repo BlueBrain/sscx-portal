@@ -1,4 +1,5 @@
 import sys
+import json
 import multiprocessing
 import subprocess
 import logging
@@ -6,6 +7,8 @@ from os import listdir, makedirs
 from os.path import isfile, isdir, join, abspath
 
 CPU_COUNT = multiprocessing.cpu_count()
+
+emodel_exp_cells = json.loads(open('./emodel-exp-cells.json').read())
 
 
 class CustomFormatter(logging.Formatter):
@@ -51,45 +54,60 @@ def listdirsonly(path):
   return [dir for dir in listdir(path) if isdir(join(path, dir))]
 
 
-def copy_morphology(args):
+def extend_factsheet(args):
   memodel_base_path, memodel, output_path = args
   mtype, etype, region, memodel_name = memodel
+  logger.info(f'Extending {mtype}/{etype}/{region}/{memodel_name}')
 
   memodel_base_path = join(memodel_base_path, mtype, etype, region, memodel_name)
-  output_dir = output_path
-
-  morphology_name = listdir(join(memodel_base_path, 'morphology'))[0]
+  output_dir = join(output_path, mtype, etype, region, memodel_name)
 
   if not isdir(output_dir):
     makedirs(output_dir)
 
-  if isfile(join(output_dir, morphology_name)):
-    logger.info(f'Morphology already exists for {mtype}/{etype}/{region}/{memodel_name}')
-  else:
-    cp_morph_cmd = f'cp "morphology/{morphology_name}" "{output_dir}/"'
-    cp_morph_run = subprocess.run(cp_morph_cmd, shell=True, cwd=memodel_base_path)
+  # check config/constants.json file present in memodel folder
+  if not isfile(join(memodel_base_path, 'config/constants.json')):
+    logger.error(f'Can\'t read config/constants.json for {mtype}/{etype}/{region}/{memodel_name}')
+    return
 
-    if cp_morph_run.returncode != 0:
-      logger.error(f'Error copying morphology {memodel_base_path}/{memodel_name} to {output_dir}')
-      logger.error(cp_morph_run.stderr)
-    else:
-      logger.info(f'Copy morphology done for {mtype}/{etype}/{region}/{memodel_name}')
+  # check target e_type_factsheet present
+  if not isfile(join(output_dir, 'e_type_factsheeet.json')):
+    logger.error(f'Etype factsheet does not exist for {mtype}/{etype}/{region}/{memodel_name}')
+    return
+
+  # read emodel template and extend the e_type_factsheet
+  with open(join(memodel_base_path, 'config/constants.json')) as constants_file:
+    constants = json.loads(constants_file.read())
+  with open(join(output_dir, 'e_type_factsheeet.json')) as etype_factsheet_file:
+    etype_factsheet = json.loads(etype_factsheet_file.read())
+  if len(etype_factsheet) == 3:
+    etype_factsheet.append({
+      "value": constants['template_name'],
+      "name": "emodel template"
+    })
+    etype_factsheet.append({
+      "value": emodel_exp_cells[constants['template_name']],
+      "name": "experimental cells used for model fitting"
+    })
+    with open(join(output_dir, 'e_type_factsheeet.json'), 'w') as etype_factsheet_file:
+      json.dump(etype_factsheet, etype_factsheet_file)
 
 
 def main():
   """
-  Copy morphologies from memodel build folder.
+  Extract emodel template names from memodel build folder and append those to the etype factsheets.
+  Factsheets should be already generated.
 
   Script arguments:
   * memodel base path
-  * output path
+  * output factsheets path
 
   Expected memodel directory structure:
   <mtype>/<etype>/<region>/<memodel_name>
   e.g.: L1_DAC/bNAC/S1DZ/L1_DAC_bNAC_1
 
   Output directory structure:
-  ./<morphology_name>.asc
+  <mtype>/<etype>/<region>/<memodel_name>/e_type_factsheeet.json
 
   """
   memodel_path = abspath(sys.argv[1])
@@ -118,10 +136,12 @@ def main():
   memodels = []
 
   mtypes = listdirsonly(memodel_path)
+  logger.info(f'mtypes: {mtypes}')
   if not len(mtypes):
     logger.critical('Looks like there are no mtype directories, check provided memodel base path')
     sys.exit(1)
   for mtype in mtypes:
+    logger.info(f'Listing mtype {mtype}')
     etypes = listdir(join(memodel_path, mtype))
     if not len(etypes):
       logger.warn(f'No etype directories found in ./{mtype}')
@@ -140,11 +160,11 @@ def main():
   logger.info('About to start extraction')
 
   pool = multiprocessing.Pool(proc_num)
-  pool.map(copy_morphology, [(memodel_path, memodel, output_path) for memodel in memodels])
+  pool.map(extend_factsheet, [(memodel_path, memodel, output_path) for memodel in memodels])
   pool.close()
   pool.join()
 
-  logger.info(f'Extracted morphologies for {len(memodels)} memodels')
+  logger.info(f'Extend factsheets for {len(memodels)} memodels')
 
 
 if __name__ == '__main__':

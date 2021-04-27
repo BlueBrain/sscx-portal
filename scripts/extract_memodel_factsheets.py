@@ -1,4 +1,5 @@
 import sys
+import json
 import multiprocessing
 import subprocess
 import logging
@@ -6,6 +7,10 @@ from os import listdir, makedirs
 from os.path import isfile, isdir, join, abspath
 
 CPU_COUNT = multiprocessing.cpu_count()
+
+
+with open('./scripts/emodel-exp-cells.json') as emodel_exp_cells:
+  emodel_exp_cells = json.loads(emodel_exp_cells.read())
 
 
 class CustomFormatter(logging.Formatter):
@@ -51,44 +56,60 @@ def listdirsonly(path):
   return [dir for dir in listdir(path) if isdir(join(path, dir))]
 
 
-def copy_factsheets(args):
-  memodel_base_path, memodel, output_path = args
+def extract_factsheets(args):
+  memodels_dir, memodel, output_path = args
   mtype, etype, region, memodel_name = memodel
 
-  memodel_base_path = join(memodel_base_path, mtype, etype, region, memodel_name)
+  memodel_base_path = join(memodels_dir, mtype, etype, region, memodel_name)
   output_dir = join(output_path, mtype, etype, region, memodel_name)
 
   if not isdir(output_dir):
     makedirs(output_dir)
 
+  # check config/constants.json file present in memodel folder
+  if not isfile(join(memodel_base_path, 'config/constants.json')):
+    logger.error(f'Can\'t read config/constants.json for {mtype}/{etype}/{region}/{memodel_name}')
+    return
+
+  # etype factsheet
   if isfile(join(output_dir, 'e_type_factsheet.json')):
     logger.info(f'Etype factsheet already exists for {mtype}/{etype}/{region}/{memodel_name}')
   else:
-    etype_cmd = f'cp "factsheets/e_type_factsheeet.json" "{output_dir}/"'
-    cp_etype_run = subprocess.run(etype_cmd, shell=True, cwd=memodel_base_path)
+    # read emodel template and extend the e_type_factsheet
+    with open(join(memodel_base_path, 'config/constants.json')) as constants_file:
+      constants = json.loads(constants_file.read())
+    with open(join(memodel_base_path,'factsheets', 'e_type_factsheeet.json')) as etype_factsheet_file:
+      etype_factsheet = json.loads(etype_factsheet_file.read())
+    etype_factsheet.append({
+      "value": constants['template_name'],
+      "name": "emodel template"
+    })
+    etype_factsheet.append({
+      "value": emodel_exp_cells[constants['template_name']],
+      "name": "experimental cells used for model fitting"
+    })
+    with open(join(output_dir, 'e_type_factsheet.json'), 'w') as etype_factsheet_file:
+      json.dump(etype_factsheet, etype_factsheet_file)
+    logger.info(f'Etype factsheet was successfully written for {mtype}/{etype}/{region}/{memodel_name}')
 
-    if cp_etype_run.returncode != 0:
-      logger.error(f'Error copying Etype factesheet {memodel_base_path}/{memodel_name} to {output_dir}')
-      logger.error(cp_etype_run.stderr)
-    else:
-      logger.info(f'Copy Etype factsheet done for {mtype}/{etype}/{region}/{memodel_name}')
-
+  # metype factsheet
   if isfile(join(output_dir, 'me_type_factsheeet.json')):
     logger.info(f'MEtype factsheet already exists for {mtype}/{etype}/{region}/{memodel_name}')
   else:
-    etype_cmd = f'cp "factsheets/me_type_factsheet.json" "{output_dir}/"'
-    cp_etype_run = subprocess.run(etype_cmd, shell=True, cwd=memodel_base_path)
+    metype_cmd = f'cp "factsheets/me_type_factsheeet.json" "{output_dir}/me_type_factsheet.json"'
+    logger.log(f'metype_cmd: {metype_cmd}')
+    cp_metype_run = subprocess.run(metype_cmd, shell=True, cwd=memodel_base_path)
 
-    if cp_etype_run.returncode != 0:
-      logger.error(f'Error copying MEtype factesheet {memodel_base_path}/{memodel_name} to {output_dir}')
-      logger.error(cp_etype_run.stderr)
+    if cp_metype_run.returncode != 0:
+      logger.error(f'Error copying MEtype factsheet {memodel_base_path} to {output_dir}')
+      logger.error(cp_metype_run.stderr)
     else:
-      logger.info(f'Copy MEtype factsheet done for {mtype}/{etype}/{region}/{memodel_name}')
+      logger.info(f'MEtype factsheet was successfully written for {mtype}/{etype}/{region}/{memodel_name}')
 
 
 def main():
   """
-  Extract and copy factsheets from memodel build folder.
+  Copy extended factsheets from memodel build folder.
 
   Script arguments:
   * memodel base path
@@ -99,7 +120,7 @@ def main():
   e.g.: L1_DAC/bNAC/S1DZ/L1_DAC_bNAC_1
 
   Output directory structure:
-  <mtype>/<etype>/<region>/<memodel_name>.tar.xz
+  <mtype>/<etype>/<region>/<memodel_name>/<"me_type_factsheet.json" || "e_type_factsheet.json">
 
   """
   memodel_path = abspath(sys.argv[1])
@@ -118,9 +139,9 @@ def main():
     except Exception:
       logger.critical(f'Can\'t create an output directory ({output_path})')
       sys.exit(1)
-  # elif len(listdir(output_path)):
-  #   logger.critical(f'Output directory isn\'t clean ({output_path})')
-  #   sys.exit(1)
+  elif len(listdir(output_path)):
+    logger.critical(f'Output directory isn\'t clean ({output_path})')
+    sys.exit(1)
 
   proc_num = int(input(f'Enter Number of processes to use ({CPU_COUNT}): '))
 
@@ -150,7 +171,7 @@ def main():
   logger.info('About to start extraction')
 
   pool = multiprocessing.Pool(proc_num)
-  pool.map(copy_factsheets, [(memodel_path, memodel, output_path) for memodel in memodels])
+  pool.map(extract_factsheets, [(memodel_path, memodel, output_path) for memodel in memodels])
   pool.close()
   pool.join()
 
