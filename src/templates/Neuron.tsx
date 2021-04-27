@@ -5,7 +5,7 @@ import { useNexusContext } from '@bbp/react-nexus';
 import range from 'lodash/range';
 import get from 'lodash/get';
 
-import { etypeFactsheetPath, metypeFactsheetPath } from '../queries/http';
+import { mtypeFactsheetPath, etypeFactsheetPath, metypeFactsheetPath, bapMoviePath, epspMoviePath } from '../queries/http';
 import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
@@ -226,11 +226,16 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
 
       <DataContainer>
         {currentMtype && (
-          <HttpData path={`${basePath}/data/MTypes/L5_BTC/factsheet.json`}>
+          <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
             {data => (
               <Collapsible title={`M-Type ${currentMtype} Factsheet`}>
                 <p className="mb-3">Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.</p>
-                <MtypeFactsheet data={data} />
+
+                <h3>Anatomy</h3>
+                {data && <Factsheet facts={data[0].values}/>}
+                <h3 className="mt-3">Physiology</h3>
+                {data && <Factsheet facts={data[1].values}/>}
+
                 <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
               </Collapsible>
             )}
@@ -307,7 +312,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                   <h3 className="mt-3">Morphology</h3>
                   {/* <h5>{data[2].value}</h5> */}
                   <NeuronMorphology
-                    path={`${basePath}/data/memodel_morphologies/${data[2].value}.swc`}
+                    path={`${basePath}/data/memodel-morphologies-swc/${data[2].value}.swc`}
                   />
 
                   {/* {data && (
@@ -343,11 +348,23 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                   <div className="row">
                     <div className="col-xs-12 col-sm-6">
                       <h4 className="mt-3">EPSP Attenuation</h4>
-                      <VideoPlayer src="https://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/epsp.mp4" />
+                      <VideoPlayer
+                        sources={[{
+                          src: epspMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
+                          type: 'video/mp4',
+                          size: 1080,
+                        }]}
+                      />
                     </div>
                     <div className="col-xs-12 col-sm-6">
-                    <h4 className="mt-3">bAP Attenuation</h4>
-                      <VideoPlayer src="https://bbp.epfl.ch/project/media/nmc-portal/METypes/L5_TTPC1_cADpyr/dend-C060114A2_axon-C060114A5/bap.mp4" />
+                      <h4 className="mt-3">bAP Attenuation</h4>
+                      <VideoPlayer
+                        sources={[{
+                          src: bapMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
+                          type: 'video/mp4',
+                          size: 1080,
+                        }]}
+                      />
                     </div>
                   </div>
                 </Collapsible>
