@@ -37,11 +37,19 @@ export const metypeFactsheetPath = (
 }
 
 export const layerFactsheetPath = (subregion: string, layerNum: number): string => {
-  return `${basePath}/data/model-data/factsheets/REGION/${subregion}/Central/CircuitLayers/${layerNum}/factsheet.json`;
+  return `${basePath}/data/model-data/REGION/${subregion}/Central/CircuitLayers/${layerNum}/factsheet.json`;
 };
 
 export const pathwayFactsheetPath = (subregion: string, pathway: string): string => {
-  return `${basePath}/data/model-data/factsheets/REGION/${subregion}/Central/Pathways/${pathway}/factsheet.json`;
+  return `${basePath}/data/model-data/REGION/${subregion}/Central/Pathways/${pathway}/factsheet.json`;
+};
+
+export const synapticPhysiologyPlotPath = (subregion: string, pathway: string, plotName: string): string => {
+  return `${basePath}/data/model-data/REGION/${subregion}/Central/Pathways/${pathway}/SynapticPhysiology/${plotName}.png`;
+};
+
+export const synapticAnatomyPlotPath = (subregion: string, pathway: string, plotName: string): string => {
+  return `${basePath}/data/model-data/REGION/${subregion}/Central/Pathways/${pathway}/synaptic_anatomy/${plotName}.png`;
 };
 
 export const expMorphologyFactsheetPath = (morphologyName: string): string => {

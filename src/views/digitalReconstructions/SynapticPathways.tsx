@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SynapticPathwaysTemplates from '../../templates/SynapticPathways';
-import { pathwayFactsheetPath } from '../../queries/http';
+import { pathwayFactsheetPath, synapticPhysiologyPlotPath, synapticAnatomyPlotPath } from '../../queries/http';
 import DataContainer from '../../components/DataContainer';
 import HttpData from '../../components/HttpData';
 import Factsheet from '../../components/Factsheet';
@@ -31,48 +31,113 @@ const RecSynPathwaysView = () => (
             )}
           </HttpData>
 
-          <div className="row around-xs mt-4">
-            <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/figure1.png" />
+          <h3>Synaptic physiology</h3>
+          <div className="row center-xs mt-1 mb-4">
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'CV_vs_amplitudes')} />
             </div>
-            <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/diagram.png" />
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'amplitude')} />
             </div>
-            <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/figure3.png" />
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'coefficient_variation')} />
             </div>
-            <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/figure4.png" />
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'decay_time')} />
             </div>
-            <div className="col-xs-6 col-sm-2">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Pathways/L23_DBC-L23_ChC/rendering.png" />
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'failures_vs_amplitudes')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'onset_latency')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'rise_time')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'transmission_failures')} />
             </div>
           </div>
 
-          <p className="mt-4 mb-3">The SSCx reconstruction makes it possible to predict the full complement of synaptic inputs and outputs for any given neuron.</p>
-          <Synaptome label="Pre-synaptic Synaptome L1_NGC-DA" mtype="L1_NGC-DA"/>
-          <Synaptome className="mt-3" label="Post-synaptic Synaptome L23_BTC" mtype="L23_BTC"/>
+          <h3>Synaptic anatomy</h3>
+          <div className="row center-xs mt-1 mb-4">
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'afferent_synapse_count')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'axonal_branch_order')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'axonal_path_distance')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'dendritic_branch_order')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'dendritic_path_distance')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'neuronal_convergence')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'neuronal_divergence')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synapses_per_connection')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synaptic_convergence')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synaptic_divergence')} />
+            </div>
+          </div>
         </Collapsible>
 
-        <div className="mt-3">
-          <Collapsible color="red" title="Simulations">
-            <div className="row">
-              <div className="col-xs-4">
-                Definition : explain that these are in silico experiments. Explanation of this exact simulation.
-              </div>
-              <div className="col-xs-4">
-                <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/10184/1204661/11_maya_christmasTree.jpg" />
-              </div>
-              <div className="col-xs-4">
-                <h3 className="mt-0">Explore data</h3>
-                <ul>
-                  <li> <Button>Pair Recording App</Button> </li>
-                  <li> <Button>Visualize with Brayns</Button> </li>
-                </ul>
-              </div>
+        <Collapsible className="mt-3" title="Synaptomes">
+          <p className="mb-3">
+            The SSCx reconstruction makes it possible to predict the full complement of synaptic inputs and outputs
+            for any given neuron.
+          </p>
+          <Synaptome
+            type="pre"
+            region={subregion}
+            pathway={pathway}
+          />
+          <Synaptome
+            className="mt-3"
+            type="post"
+            region={subregion}
+            pathway={pathway}
+          />
+        </Collapsible>
+
+        <Collapsible className="mt-3" title={`Synaptome ${pathway}`}>
+          <Synaptome
+            className="mt-3"
+            type="pathway"
+            region={subregion}
+            pathway={pathway}
+          />
+        </Collapsible>
+
+        <Collapsible className="mt-3" color="red" title="Simulations">
+          <div className="row">
+            <div className="col-xs-4">
+              Definition : explain that these are in silico experiments. Explanation of this exact simulation.
             </div>
-          </Collapsible>
-        </div>
+            <div className="col-xs-4">
+              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/10184/1204661/11_maya_christmasTree.jpg" />
+            </div>
+            <div className="col-xs-4">
+              <h3 className="mt-0">Explore data</h3>
+              <ul>
+                <li> <Button>Pair Recording App</Button> </li>
+                <li> <Button>Visualize with Brayns</Button> </li>
+              </ul>
+            </div>
+          </div>
+        </Collapsible>
       </DataContainer>
     )}
   </SynapticPathwaysTemplates>

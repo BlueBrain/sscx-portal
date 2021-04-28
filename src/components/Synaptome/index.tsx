@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ImageViewer from '../ImageViewer';
-import Video from '../VideoPlayer';
+import { basePath } from '../../config';
 
 // import './style.less';
 
@@ -9,33 +9,43 @@ import Video from '../VideoPlayer';
 const classPrefix = 'synaptome__';
 
 
-const Synaptome: React.FC<{ mtype: string, label: string, className?: string }> = ({ mtype, label, className = '' }) => {
+type SynaptomeProps = {
+  type: 'pre' | 'post' | 'pathway';
+  region: string;
+  pathway: string;
+  className?: string;
+}
+
+const pathwayRe = /^(L\d+.*)\-(L\d+.*)$/;
+
+const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className = '' }) => {
+  const pathwayMatched = pathway.match(pathwayRe);
+
+  const [, preMtype, postMtype] = pathwayMatched;
+
+  const label = `${type === 'pre' ? 'Pre' : 'Post'}-synaptic Synaptome ${type === 'pre' ? preMtype : postMtype}`;
+  const synaptomeBaseUrl = `${basePath}/data/synaptomes/${region}_Column/${preMtype}___${postMtype}`;
+  const mtypeSynaptomeBaseUrl = `${basePath}/data/model-data/REGION/${region}/Central/Mtypes/${type === 'pre' ? preMtype : postMtype}/Synaptome`;
+
+  if (type === 'pathway') {
+    return (
+      <ImageViewer src={`${synaptomeBaseUrl}/${preMtype}_${postMtype}.png`} />
+    );
+  }
+
   return (
     <div className={`${classPrefix}basis ${className}`}>
       <h3>{label}</h3>
-      <div className="row">
-        <div className="col-xs-12 col-sm-3">
-          <div className="synaptome-img-container">
-            <ImageViewer src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Synaptome/L23_DBC/input_synaptome.png" />
-            <span>Input synaptome</span>
-          </div>
-          <div className="synaptome-img-container">
-            <ImageViewer src="https://bbp.epfl.ch/nmc-portal/assets/documents/static/Synaptome/L23_DBC/output_synaptome.png" />
-            <span>Output synaptome</span>
-          </div>
+      <div className="row middle-sm">
+        <div className="col-xs-6 col-sm-1">
+          <ImageViewer src={`${mtypeSynaptomeBaseUrl}/input_synaptome.png`} />
         </div>
-        <div className="col-xs-12 col-sm-9">
-          <Video
-            controls
-            muted
-            loop
-            autoplay
-            sources={[
-              { src: 'https://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4', type: 'video/mp4', size: '720' },
-              { src: 'https://bbp.epfl.ch/project/media/nmc-portal/Synaptome/mp4/L1_NGC-DA.mp4', type: 'video/mp4', size: '1080' },
-            ]}
-          />
-          <span>Map of afferent intrinsic synapses</span>
+        <div className="col-xs-6 col-sm-1">
+          <ImageViewer src={`${mtypeSynaptomeBaseUrl}/output_synaptome.png`} />
+        </div>
+        <div className="col-xs-12 col-sm-10">
+          <h2>Synapses</h2>
+          <ImageViewer src={`${synaptomeBaseUrl}/${type === 'pre' ? preMtype : postMtype}.png`} />
         </div>
       </div>
     </div>

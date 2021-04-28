@@ -1081,9 +1081,9 @@ $collapsible-padding: 20px 30px;
 
 // ImageViewer
 .image-viewer__basis {
-  $maxWidth: 600px;
+  // $maxWidth: 600px;
 
-  max-width: $maxWidth;
+  // max-width: $maxWidth;
   position: relative;
 
   img {

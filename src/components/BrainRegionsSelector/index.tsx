@@ -5,7 +5,7 @@ import { accentColors } from '../../config';
 
 const classPrefix = 'brain-regions-svg__';
 
-export type BrainRegion = 'S1FL' | 'S1Sh' | 'S1HL' | 'S1Tr';
+export type BrainRegion = 'S1DZ' | 'S1DZO' | 'S1FL' | 'S1HL' | 'S1J' | 'S1Sh' | 'S1Tr' | 'S1ULp';
 
 type BrainRegionProps = {
   region: BrainRegion;
