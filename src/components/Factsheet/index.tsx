@@ -72,7 +72,7 @@ const FactsheetMapValueEntry: React.FC<{
   const unitCode = fact.unit;
 
   // @ts-ignore
-  const valueColumn = Object.entries(fact.value_map).map(([label, value]) => {
+  const valueColumn = Object.entries(fact.value_map).filter(([, value]) => value !== 0).map(([label, value]) => {
     const barMaxFillRatio = 0.8;
     const barWidthPct = (parseFloat(value as string) / maxVal) * 100 * barMaxFillRatio;
 

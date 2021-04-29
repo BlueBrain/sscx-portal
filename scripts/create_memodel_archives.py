@@ -66,7 +66,7 @@ def compress_memodel_dir(args):
   if not isdir(output_dir):
     makedirs(output_dir)
 
-  cmd = f'tar cf - "{memodel_name}" | xz -4e > "{output_file}"'
+  cmd = f'tar cf - "{memodel_name}" --exclude=\'recordings.*\' --exclude=\'*step*.dat\' | xz -4e > "{output_file}"'
   compression_run = subprocess.run(cmd, shell=True, cwd=memodel_base_path)
 
   if compression_run.returncode != 0:

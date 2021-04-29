@@ -1,4 +1,5 @@
 import React, { ReactChild, ReactFragment } from 'react';
+import noop from 'lodash/noop';
 
 // import './style.scss';
 import { Layer } from '../../types';
@@ -17,9 +18,9 @@ type PathwayPointProps = {
 
 export type SynapticPathwaySelectProps = {
   color: string;
-  defaultActivePreLayer?: Layer;
+  preLayer?: Layer;
   onPreLayerSelected?: (layer: Layer) => void;
-  defaultActivePostLayer?: Layer;
+  postLayer?: Layer;
   onPostLayerSelected?: (layer: Layer) => void;
 };
 
@@ -41,25 +42,13 @@ const PathwayPoint: React.FC<PathwayPointProps> = ({
 
 const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
   color,
-  defaultActivePreLayer,
-  onPreLayerSelected,
-  defaultActivePostLayer,
-  onPostLayerSelected,
+  preLayer,
+  onPreLayerSelected = noop,
+  postLayer,
+  onPostLayerSelected = noop,
 }) => {
-  const [activePreLayer, setActivePreLayer] = React.useState<Layer>(
-    defaultActivePreLayer as Layer,
-  );
-  const [activePostLayer, setActivePostLayer] = React.useState<Layer>(
-    defaultActivePostLayer as Layer,
-  );
-  const selectPreLayer = (l: Layer): void => {
-    setActivePreLayer(l);
-    onPreLayerSelected && onPreLayerSelected(l);
-  };
-  const selectPostLayer = (l: Layer): void => {
-    setActivePostLayer(l);
-    onPostLayerSelected && onPostLayerSelected(l);
-  };
+  const selectPreLayer = (l: Layer): void => onPreLayerSelected(l);
+  const selectPostLayer = (l: Layer): void => onPostLayerSelected(l);
 
   return (
     <div>
@@ -96,7 +85,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L1"
             onSelect={selectPreLayer}
             cssPrefix={prePrefix}
-            activeLayer={activePreLayer}
+            activeLayer={preLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -107,7 +96,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L23"
             onSelect={selectPreLayer}
             cssPrefix={prePrefix}
-            activeLayer={activePreLayer}
+            activeLayer={preLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -118,7 +107,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L4"
             onSelect={selectPreLayer}
             cssPrefix={prePrefix}
-            activeLayer={activePreLayer}
+            activeLayer={preLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -129,7 +118,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L5"
             onSelect={selectPreLayer}
             cssPrefix={prePrefix}
-            activeLayer={activePreLayer}
+            activeLayer={preLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -140,7 +129,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L6"
             onSelect={selectPreLayer}
             cssPrefix={prePrefix}
-            activeLayer={activePreLayer}
+            activeLayer={preLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -153,7 +142,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L1"
             onSelect={selectPostLayer}
             cssPrefix={postPrefix}
-            activeLayer={activePostLayer}
+            activeLayer={postLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -164,7 +153,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L23"
             onSelect={selectPostLayer}
             cssPrefix={postPrefix}
-            activeLayer={activePostLayer}
+            activeLayer={postLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -175,7 +164,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L4"
             onSelect={selectPostLayer}
             cssPrefix={postPrefix}
-            activeLayer={activePostLayer}
+            activeLayer={postLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -186,7 +175,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L5"
             onSelect={selectPostLayer}
             cssPrefix={postPrefix}
-            activeLayer={activePostLayer}
+            activeLayer={postLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"
@@ -197,7 +186,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             layer="L6"
             onSelect={selectPostLayer}
             cssPrefix={postPrefix}
-            activeLayer={activePostLayer}
+            activeLayer={postLayer}
           >
             <path
               className="synaptic_pathways_svg__st2"

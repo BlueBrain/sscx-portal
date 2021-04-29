@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import chunk from 'lodash/chunk';
 
 import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
@@ -30,6 +31,19 @@ type PathwayMType = {
   };
 }
 
+type PathwayIndex = {
+  region: {
+    [brainRegion: string]: number[],
+  },
+  mtypeIdx: string[],
+}
+
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+
+
 const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   sectionTitle,
   color,
@@ -40,7 +54,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
 
   const query = { ...serverSideContext?.query, ...router?.query };
 
-  const addParam = (key: string, value: string): void => {
+  const setParams = (params: Record<string, string>): void => {
     const query = {
       ...{
         brain_region: currentRegion,
@@ -49,12 +63,12 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
         pretype: currentPreType,
         posttype: currentPostType,
       },
-      [key]: value,
+      ...params,
     };
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
-  const [pathwayMType, setPathwayMType] = useState<PathwayMType | null>(null);
+  const [pathwayIndex, setPathwayIndex] = useState<PathwayIndex>(null);
 
   const currentRegion: BrainRegion = query.brain_region as BrainRegion;
   const currentPreLayer: Layer = query.prelayer as Layer;
@@ -62,21 +76,63 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   const currentPreType: string = query.pretype as string;
   const currentPostType: string = query.posttype as string;
 
-  const setRegion = (region: BrainRegion) => addParam('brain_region', region);
-  const setPreLayerQuery = (layer: Layer) => addParam('prelayer', layer);
-  const setPostLayerQuery = (layer: Layer) => addParam('postlayer', layer);
-  const setPreTypeQuery = (layer: Layer) => addParam('pretype', layer);
-  const setPostTypeQuery = (layer: Layer) => addParam('posttype', layer);
+  const setRegion = (region: BrainRegion) => {
+    setParams({
+      'brain_region': region,
+      prelayer: null,
+      pretype: null,
+      postlayer: null,
+      posttype: null,
+    });
+  }
 
-  const hasData = currentPreLayer && currentPostLayer && currentPreType && currentPostType;
+  const setPreLayerQuery = (layer: Layer) => {
+    setParams({
+      prelayer: layer,
+      pretype: null,
+      postlayer: null,
+      posttype: null,
+    });
+  }
 
-  // FIXME: pick pathway mtypes from L2, L23 and L3 when user selects L23
-  const preMTypes = pathwayMType && currentPreLayer
-    ? pathwayMType.pre[currentPreLayer]
+  const setPreTypeQuery = (layer: Layer) => {
+    setParams({
+      pretype: layer,
+      postlayer: null,
+      posttype: null,
+    });
+  }
+
+  const setPostLayerQuery = (layer: Layer) => {
+    setParams({
+      postlayer: layer,
+      posttype: null,
+    });
+  }
+
+  const setPostTypeQuery = (layer: Layer) => {
+    setParams({
+      posttype: layer,
+    });
+  }
+
+  const hasData = currentPreType && currentPostType;
+
+  const preMTypes = pathwayIndex && currentRegion && currentPreLayer
+    ? chunk(pathwayIndex.region[currentRegion], 2)
+      .map(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx])
+      .filter(onlyUnique)
+      .filter(mtype => mtype.match(currentPreLayer === 'L23' ? 'L23|L2|L3' : currentPreLayer))
+      .sort()
     : [];
 
-  const postMTypes = pathwayMType && currentPostLayer
-    ? pathwayMType.post[currentPostLayer]
+  const postMTypes = pathwayIndex && currentRegion && currentPreType && currentPostLayer
+    ? chunk(pathwayIndex.region[currentRegion], 2)
+        .filter(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx] === currentPreType)
+        .map(([,postMtypeIdx]) => pathwayIndex.mtypeIdx[postMtypeIdx])
+        .filter(onlyUnique)
+        .filter(mtype => mtype.match(currentPostLayer === 'L23' ? 'L23|L2|L3' : currentPostLayer))
+        .sort()
     : [];
 
   const pathway = currentPreType && currentPostType
@@ -84,9 +140,9 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     : null;
 
   useEffect(() => {
-    fetch(`${basePath}/data/pathway-mtype.json`)
+    fetch(`${basePath}/data/pathway-index.json`)
       .then(res => res.json())
-      .then(pathwayMType => setPathwayMType(pathwayMType))
+      .then(pathwayIndex => setPathwayIndex(pathwayIndex))
   }, []);
 
   return (
@@ -117,9 +173,9 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             selector={
               <SynapticPathwaySelector
                 color={accentColors[color]}
-                defaultActivePreLayer={currentPreLayer}
+                preLayer={currentPreLayer}
                 onPreLayerSelected={setPreLayerQuery}
-                defaultActivePostLayer={currentPostLayer}
+                postLayer={currentPostLayer}
                 onPostLayerSelected={setPostLayerQuery}
               />
             }
