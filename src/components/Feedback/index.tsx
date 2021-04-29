@@ -57,7 +57,7 @@ const Feedback: React.FC = () => {
     setSending(true);
 
     try {
-      const res = await fetch(`${FEEDBACK_HOST}/BlueBrain/sscx-portal/issues`, {
+      const res = await fetch(`${FEEDBACK_HOST}/sscx-portal/issues`, {
         method: 'POST',
         body: JSON.stringify({
           title: details.slice(0, 100), body: `
