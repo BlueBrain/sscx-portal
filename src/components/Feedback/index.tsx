@@ -4,7 +4,6 @@ import { Form, Input, Button, Select } from 'antd';
 import { GatewayOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons';
 
 import { FEEDBACK_HOST } from '../../config';
-import pageLabelMap from './page-labels.json';
 
 import styles from './styles.module.scss';
 
@@ -57,7 +56,7 @@ const Feedback: React.FC = () => {
     setSending(true);
 
     try {
-      const res = await fetch(`${FEEDBACK_HOST}/BlueBrain/sscx-portal/issues`, {
+      const res = await fetch(`${FEEDBACK_HOST}/sscx-portal/issues`, {
         method: 'POST',
         body: JSON.stringify({
           title: details.slice(0, 100), body: `
@@ -66,10 +65,11 @@ Field | Element
 type | ${type}
 component | ${component}
 contact | ${contact}
-page | ${pageLabelMap[router.pathname] ?? router.pathname}
+page | ${router.pathname}
 
 ${details.slice(100)}
-        `
+        `,
+          labels: ["triage"]
         }),
         headers: {
           'Accept': 'application/json',

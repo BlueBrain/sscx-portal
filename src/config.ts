@@ -34,4 +34,6 @@ const liveContentEnv = process.env.NEXT_PUBLIC_SSCX_LIVE_CONTENT;
 export const liveContent = liveContentEnv?.toLowerCase() === "true";
 
 export const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
-export const FEEDBACK_HOST = isProd ? "whatever" : `http://localhost:8000`;
+export const FEEDBACK_HOST = isProd
+  ? "https://sscx-portal.ocp.bbp.epfl.ch/feedback"
+  : `http://localhost:8000`;
