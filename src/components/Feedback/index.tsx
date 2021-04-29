@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Form, Input, Button, Select } from 'antd';
 import { GatewayOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { feedbackDeploymentId } from '../../config';
+import { FEEDBACK_HOST } from '../../config';
 import pageLabelMap from './page-labels.json';
 
 import styles from './styles.module.scss';
@@ -13,9 +13,6 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 const FEEDBACK_CONTACT_KEY = 'feedbackContact';
-
-const FEEDBACK_URL = `http://localhost:8000/feedback`;
-
 const storage = typeof (window) !== 'undefined' ? window.sessionStorage : null;
 
 
@@ -60,7 +57,7 @@ const Feedback: React.FC = () => {
     setSending(true);
 
     try {
-      const res = await fetch(FEEDBACK_URL, {
+      const res = await fetch(`${FEEDBACK_HOST}/BlueBrain/sscx-portal/issues`, {
         method: 'POST',
         body: JSON.stringify({
           title: details.slice(0, 100), body: `
