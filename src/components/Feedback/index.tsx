@@ -21,7 +21,7 @@ const Feedback: React.FC = () => {
   const [formVisible, setFormVisible] = useState(false);
   const issueSelectRef = useRef<HTMLSelectElement>(null);
 
-  const [type, setType] = useState('');
+  const [type, setType] = useState(null);
   const [component, setComponent] = useState('');
   const [details, setDetails] = useState('');
   const [contact, setContact] = useState(storage?.getItem(FEEDBACK_CONTACT_KEY) ?? '');
@@ -43,7 +43,7 @@ const Feedback: React.FC = () => {
     setFormVisible(false);
 
     setTimeout(() => {
-      setType('');
+      setType(null);
       setComponent('');
       setDetails('');
 
@@ -62,7 +62,7 @@ const Feedback: React.FC = () => {
           title: details.slice(0, 100), body: `
 Field | Element
 --- | ---
-type | ${type}
+type | ${type || ''}
 component | ${component}
 contact | ${contact}
 page | ${router.pathname}
