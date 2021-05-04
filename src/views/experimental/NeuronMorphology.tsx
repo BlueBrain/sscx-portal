@@ -9,7 +9,7 @@ import DataContainer from '../../components/DataContainer';
 import LayerAnatomySelector from '../../components/LayerAnatomySelector';
 import ImageViewer from '../../components/ImageViewer';
 import { morphologyDataQuery, mtypeExpMorphologyListDataQuery } from '../../queries/es';
-import { expMorphologyFactsheetPath } from '../../queries/http';
+import { expMorphologyFactsheetPath, expMorphMemodelsPath } from '../../queries/http';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -19,6 +19,7 @@ import { Layer } from '../../types';
 import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import List from '../../components/List';
+import ExpMorphMemodelList from '../../components/ExpMorphMemodelList';
 import expMorphologyData from '../../__generated__/exp-morphology-data.json';
 import Factsheet from '../../components/Factsheet';
 import ExpMorphologyTable from '../../components/ExpMorphologyTable';
@@ -167,39 +168,53 @@ const NeuronExperimentalMorphology: React.FC = () => {
           className="mt-4 mb-4"
           title={`Neuron Morphology ${currentMtype} ${currentInstance}`}
         >
-          <HttpData path={expMorphologyFactsheetPath(currentInstance)}>
-            {factsheetData => (
-              <Factsheet facts={factsheetData[0].values} />
-            )}
-          </HttpData>
-
           <ESData
             query={morphologyDataQuery(currentMtype, currentInstance)}
           >
             {esDocuments => (
               <>
-                {!!esDocuments  && (
-                  <NexusFileDownloadButton
-                    className="mt-2"
-                    filename={getMorphologyDistribution(esDocuments[0]._source).name}
-                    url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
-                    org={sscx.org}
-                    project={sscx.project}
-                  >
-                    Download morphology
-                  </NexusFileDownloadButton>
-                )}
                 {!!esDocuments && (
-                  <NexusPlugin
-                    className="mt-3"
-                    name="neuron-morphology"
-                    resource={esDocuments[0]._source}
-                    nexusClient={nexus}
-                  />
+                  <div>
+                    <h2>3D view</h2>
+                    <NexusPlugin
+                      className="mt-2"
+                      name="neuron-morphology"
+                      resource={esDocuments[0]._source}
+                      nexusClient={nexus}
+                    />
+                    <div className="text-right mt-2">
+                      <NexusFileDownloadButton
+                        filename={getMorphologyDistribution(esDocuments[0]._source).name}
+                        url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
+                        org={sscx.org}
+                        project={sscx.project}
+                      >
+                        Download morphology
+                      </NexusFileDownloadButton>
+                    </div>
+                  </div>
                 )}
               </>
             )}
           </ESData>
+
+          <HttpData path={expMorphologyFactsheetPath(currentInstance)}>
+            {factsheetData => (
+              <div className="mt-3">
+                <h2>Morphometrics</h2>
+                <Factsheet className="mt-2" facts={factsheetData[0].values} />
+              </div>
+            )}
+          </HttpData>
+
+          <HttpData path={expMorphMemodelsPath(currentInstance)}>
+            {memodels => (
+              <div className="mt-3">
+                <h2>Morpho-Electrical neuron models using this morphology</h2>
+                <ExpMorphMemodelList className="mt-2" memodels={memodels} />
+              </div>
+            )}
+          </HttpData>
         </Collapsible>
       </DataContainer>
     </>

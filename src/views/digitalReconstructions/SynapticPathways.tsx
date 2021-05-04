@@ -31,44 +31,24 @@ const RecSynPathwaysView = () => (
             )}
           </HttpData>
 
-          <h3>Synaptic physiology</h3>
-          <div className="row center-xs mt-1 mb-4">
+          <h3>Synaptic anatomy</h3>
+          <div className="row mt-1">
             <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'CV_vs_amplitudes')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'amplitude')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'coefficient_variation')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'decay_time')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'failures_vs_amplitudes')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'onset_latency')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'rise_time')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'transmission_failures')} />
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synapses_per_connection')} />
             </div>
           </div>
-
-          <h3>Synaptic anatomy</h3>
-          <div className="row center-xs mt-1 mb-4">
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'afferent_synapse_count')} />
-            </div>
+          <div className="row mt-1 mb-4">
             <div className="col-xs-6 col-sm-3 mt-2">
               <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'axonal_branch_order')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
               <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'axonal_path_distance')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'neuronal_divergence')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synaptic_divergence')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
               <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'dendritic_branch_order')} />
@@ -80,16 +60,38 @@ const RecSynPathwaysView = () => (
               <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'neuronal_convergence')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'neuronal_divergence')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synapses_per_connection')} />
-            </div>
-            <div className="col-xs-6 col-sm-3 mt-2">
               <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synaptic_convergence')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'synaptic_divergence')} />
+              <ImageViewer border src={synapticAnatomyPlotPath(subregion, pathway, 'afferent_synapse_count')} />
+            </div>
+          </div>
+
+          <h3>Synaptic physiology</h3>
+          <div className="row center-xs mt-1">
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'amplitude')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'onset_latency')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'rise_time')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'decay_time')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'transmission_failures')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'coefficient_variation')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'failures_vs_amplitudes')} />
+            </div>
+            <div className="col-xs-6 col-sm-3 mt-2">
+              <ImageViewer border src={synapticPhysiologyPlotPath(subregion, pathway, 'CV_vs_amplitudes')} />
             </div>
           </div>
         </Collapsible>

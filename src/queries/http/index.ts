@@ -67,3 +67,16 @@ export const bapMoviePath = (region: string, mtype: string, etype: string, morph
 export const epspMoviePath = (region: string, mtype: string, etype: string, morphology: string) => {
   return `${basePath}/data/epsp-bap/${region}/${mtype}_${etype}/${morphology}/epsp.mp4`;
 };
+
+export const modelExpMorphologiesPath = (
+  region: string,
+  mtype: string,
+  etype: string,
+  instance: string,
+) => {
+  return `${basePath}/data/memodel-factsheets/${mtype}/${etype}/${region}/${instance}/exp-morphologies.json`;
+};
+
+export const expMorphMemodelsPath = (morphologyName: string) => {
+  return `${basePath}/data/exp-morph-models/${morphologyName}.json`;
+};

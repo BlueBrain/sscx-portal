@@ -5,7 +5,14 @@ import { useNexusContext } from '@bbp/react-nexus';
 import range from 'lodash/range';
 import get from 'lodash/get';
 
-import { mtypeFactsheetPath, etypeFactsheetPath, metypeFactsheetPath, bapMoviePath, epspMoviePath } from '../queries/http';
+import {
+  mtypeFactsheetPath,
+  etypeFactsheetPath,
+  metypeFactsheetPath,
+  bapMoviePath,
+  epspMoviePath,
+  modelExpMorphologiesPath,
+} from '../queries/http';
 import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
@@ -22,6 +29,7 @@ import { accentColors } from '../config';
 import Collapsible from '../components/Collapsible';
 
 import MtypeFactsheet from '../components/MtypeFactsheet';
+import MemodelExpMorphList from '../components/MemodelExpMorphList';
 import EtypeFactsheet from '../components/EtypeFactsheet';
 import Factsheet from '../components/Factsheet';
 import MorphHistogram from '../components/MorphHistogram';
@@ -165,7 +173,15 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           />
           <div>
             <InfoBox>
-              <p>We labeled single neurons with biocytin to stain their axonal and dendritic morphologies to enable their 3D reconstruction and their objective classification into morphological types (m-types). In addition, we also characterised the electrical firing patterns of these neurons to different intensities of step currents injected in the soma to group their response into electrical types (e-types). We then mapped the e-types expressed in each m-type to account for the observed diversity of morpho-electrical subtypes (me-types).</p>
+              <p>
+                We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
+                to enable their 3D reconstruction and their objective classification
+                into morphological types (m-types). In addition, we also characterised the electrical firing patterns
+                of these neurons to different intensities of step currents injected in the soma
+                to group their response into electrical types (e-types).
+                We then mapped the e-types expressed in each m-type
+                to account for the observed diversity of morpho-electrical subtypes (me-types).
+              </p>
             </InfoBox>
             <Pills
               className="mt-3"
@@ -296,6 +312,14 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                   {data && (
                     <Factsheet facts={data[1].values}/>
                   )}
+
+                  <HttpData path={modelExpMorphologiesPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
+                    {expMorphologies => (
+                      <>
+                        <MemodelExpMorphList className="mt-3" morphologies={expMorphologies} />
+                      </>
+                    )}
+                  </HttpData>
 
                   <div className="row end-xs mt-3 mb-3">
                     <div className="col">
