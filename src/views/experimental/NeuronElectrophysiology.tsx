@@ -91,7 +91,7 @@ const NeuronElectrophysiology: React.FC = () => {
             }
             list2={
               <List
-                title={`Experiment instance (${instances.length})`}
+                title={`Experiment instance`}
                 list={instances}
                 color={colorName}
                 onSelect={setInstance}

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import { Color } from '../../types';
 
-// import './style.scss';
 
 const classPrefixList = 'list__';
 const classPrefixListElement = 'list-element__';
@@ -16,40 +15,15 @@ type ListProps = {
   block?: boolean;
 };
 
-type ListElementProps = {
-  element: string;
-  selected?: boolean;
-  onSelect?: (s: string) => void;
-};
-
-const ListElement: React.FC<ListElementProps> = ({
-  element,
-  selected,
-  onSelect,
-}) => {
-  return (
-    <div
-      role="radio"
-      aria-checked={selected}
-      tabIndex={0}
-      className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
-      onClick={() => onSelect && onSelect(element)}
-    >
-      {element}
-    </div>
-  );
-};
 
 const List: React.FC<ListProps> = ({
   title,
   list,
   value,
-  onSelect = () => {},
+  onSelect = () => { },
   color,
   block = false,
 }) => {
-  const handleSelectedElement = (element: string) => onSelect(element);
-
   const id = title ? title.replace(/\s/g, '') : 'no_title';
 
   return (
@@ -58,16 +32,20 @@ const List: React.FC<ListProps> = ({
       role="radiogroup"
       aria-labelledby={`${classPrefixList}${id}`}
     >
-      {title && <p>{title}</p>}
+      {title && <p>{title} ({list.length})</p>}
       <div className="elements">
-        {list.map(el => (
-          <ListElement
-            key={`${el}`}
-            element={el}
-            selected={value === el}
-            onSelect={handleSelectedElement}
-          />
-        ))}
+        {list.map(element => {
+          const selected = value === element
+          return <div
+            role="radio"
+            aria-checked={selected}
+            tabIndex={0}
+            className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
+            onClick={() => onSelect(element)}
+          >
+            {element}
+          </div>
+        })}
       </div>
     </div>
   );
