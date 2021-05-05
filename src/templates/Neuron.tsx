@@ -71,7 +71,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   const currentLayer: Layer = query.layer as Layer;
   const currentEtype: string = query.etype as string;
   const currentMtype: string = query.mtype as string;
-  const currentInstance: string = query.instance as string;
+  const currentMemodel: string = query.memodel as string;
 
   const setParams = (params: Record<string, string>): void => {
     const query = {
@@ -80,7 +80,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         layer: currentLayer,
         etype: currentEtype,
         mtype: currentMtype,
-        instance: currentInstance,
+        memodel: currentMemodel,
       },
       ...params,
     };
@@ -92,7 +92,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       'brain_region': region,
       mtype: null,
       etype: null,
-      instance: null,
+      memodel: null,
     });
   };
   const setLayer = (layer: Layer) => {
@@ -100,24 +100,24 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       layer,
       mtype: null,
       etype: null,
-      instance: null,
+      memodel: null,
     })
   };
   const setMtype = (mtype: string) => {
     setParams({
       mtype,
       etype: null,
-      instance: null,
+      memodel: null,
     })
   };
   const setEtype = (etype: string) => {
     setParams({
       etype,
-      instance: null,
+      memodel: null,
     })
   };
-  const setInstance = (instance: string) => {
-    setParams({ instance })
+  const setMemodel = (memodel: string) => {
+    setParams({ memodel })
   };
 
   const mtypes = currentLayer && memodelIndex
@@ -129,11 +129,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     ? memodelIndex[currentRegion][currentMtype]
     : [];
 
-  const memodelInstanceRange = () => {
+  const memodelMemodelRange = () => {
     return range(1, );
   }
 
-  const instances = currentEtype && memodelIndex
+  const memodels = currentEtype && memodelIndex
     ? range(1, get(memodelNumberExceptions, `${currentMtype}.${currentEtype}.${currentRegion}`, 5) + 1)
       .map(idx => `${currentMtype}_${currentEtype}_${idx}`)
     : [];
@@ -148,7 +148,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     encodeURIComponent(currentMtype),
     encodeURIComponent(currentEtype),
     encodeURIComponent(currentRegion),
-    `${currentInstance}.tar.xz`
+    `${currentMemodel}.tar.xz`
   ].join('/');
 
   useEffect(() => {
@@ -164,7 +164,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
 
   return (
     <>
-      <Filters primaryColor={color} hasData={!!currentInstance}>
+      <Filters primaryColor={color} hasData={!!currentMemodel}>
         <div className="center-col">
           <Title
             primaryColor={color}
@@ -205,7 +205,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             }
             list1={
               <List
-                title="m-type"
+                title="M-type"
                 list={mtypes}
                 value={currentMtype}
                 onSelect={setMtype}
@@ -214,7 +214,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             }
             list2={
               <List
-                title="e-type"
+                title="E-type"
                 list={etypes}
                 value={currentEtype}
                 onSelect={setEtype}
@@ -223,16 +223,16 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             }
             list3={
               <List
-                title="me-type instance"
+                title="ME-model"
                 block
-                list={instances}
-                value={currentInstance}
-                onSelect={setInstance}
+                list={memodels}
+                value={currentMemodel}
+                onSelect={setMemodel}
                 color="orange"
               />
             }
             selectorTitle="2. Choose a layer"
-            listsTitle="3. Choose mtype, etype and neuron instance"
+            listsTitle="3. Choose M-type, E-type and neuron model"
             list1Open={!!currentLayer}
             list2Open={!!currentMtype}
             list3Open={!!currentMtype && !!currentEtype}
@@ -258,8 +258,8 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           </HttpData>
         )}
 
-        {currentInstance && (
-          <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
+        {currentMemodel && (
+          <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (
               <Collapsible className="mt-4" title={`E-Type ${currentEtype} Factsheet`}>
                 <p className="mb-3">Neurons are classified into e-types based on their electrical response properties to step current injections at the soma.</p>
@@ -267,7 +267,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <div className="text-right mt-3 mb-3">
                   <Button
                     type="primary"
-                    href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}
+                    href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
                     download
                   >
                     Download factsheet
@@ -298,12 +298,15 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           </HttpData>
         )}
 
-        {currentInstance && (
-          <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
+        {currentMemodel && (
+          <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (
               <>
-                <Collapsible className="mt-4" title={`ME-Type Instance ${currentInstance} Factsheet`}>
-                  <p className="mb-3">Each m-type expresses a certain proportion of various e-types, giving rise to a diversity of morpho-electrical subtypes (me-types).</p>
+                <Collapsible className="mt-4" title={`ME-model ${currentMemodel} Factsheet`}>
+                  <p className="mb-3">
+                    Each m-type expresses a certain proportion of various e-types,
+                    giving rise to a diversity of morpho-electrical subtypes (me-types).
+                  </p>
                   <h3>Anatomy</h3>
                   {data && (
                     <Factsheet facts={data[0].values}/>
@@ -313,28 +316,26 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     <Factsheet facts={data[1].values}/>
                   )}
 
-                  <HttpData path={modelExpMorphologiesPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
+                  <div className="text-right mt-3">
+                    <Button
+                      type="primary"
+                      download
+                      href={memodelArchiveHref}
+                    >
+                      Download model
+                    </Button>
+                  </div>
+
+                  <HttpData path={modelExpMorphologiesPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
                     {expMorphologies => (
-                      <>
-                        <MemodelExpMorphList className="mt-3" morphologies={expMorphologies} />
-                      </>
+                      <div className="mt-3">
+                        <h3>Experimental morphologies used for this model</h3>
+                        <MemodelExpMorphList morphologies={expMorphologies} />
+                      </div>
                     )}
                   </HttpData>
 
-                  <div className="row end-xs mt-3 mb-3">
-                    <div className="col">
-                      <Button
-                        type="primary"
-                        download
-                        href={memodelArchiveHref}
-                      >
-                        Download model
-                      </Button>
-                    </div>
-                  </div>
-
-                  <h3 className="mt-3">Morphology</h3>
-                  {/* <h5>{data[2].value}</h5> */}
+                  <h3 className="mt-3">Model morphology</h3>
                   <NeuronMorphology
                     path={`${basePath}/data/memodel-morphologies-swc/${data[2].value}.swc`}
                   />

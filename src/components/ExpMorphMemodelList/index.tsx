@@ -23,7 +23,7 @@ const linkHref = (memodel) => {
     layer: mtypeLayer(memodel.mtype),
     mtype: memodel.mtype,
     etype: memodel.etype,
-    instance: memodel.memodel_name,
+    memodel: memodel.memodel_name,
   });
   return `${hrefBase}?${query}`;
 };
