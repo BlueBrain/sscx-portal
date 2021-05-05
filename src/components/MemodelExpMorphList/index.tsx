@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import qs from 'querystring';
+import { Table } from 'antd';
 
 
 type MemodelExpMorphListProps = {
@@ -16,26 +17,57 @@ const neuriteTypeLabel = {
   'axon+dendrite': 'axon and dendrite',
 }
 
+const tableColumns = [
+  {
+    title: 'Layer',
+    dataIndex: 'layer',
+    key: 'layer',
+  },
+  {
+    title: 'M-type',
+    dataIndex: 'mtype',
+    key: 'mtype',
+  },
+  {
+    title: 'Source neurite type',
+    dataIndex: 'source_neurite_type',
+    key: 'neuriteType',
+  },
+  {
+    title: 'Morphology',
+    dataIndex: 'morphology',
+    key: 'morphology',
+    render: (morphologyName, morphology) => <Link href={linkHref(morphology)}>{morphologyName}</Link>
+  },
+];
+
+const linkHref = (morphology) => {
+  const query = qs.stringify({
+    layer: morphology.layer,
+    mtype: morphology.mtype,
+    instance: morphology.morphology,
+  });
+  return `${hrefBase}?${query}`;
+};
+
 const MemodelExpMorphList: React.FC<MemodelExpMorphListProps> = ({ morphologies, className = '' }) => {
-  const linkHref = (morphology) => {
-    const query = qs.stringify({
-      layer: morphology.layer,
-      mtype: morphology.mtype,
-      instance: morphology.morphology,
-    });
-    return `${hrefBase}?${query}`;
-  };
+  const allMorphologies = morphologies.length === 1 && morphologies[0].source_neurite_type === 'axon+dendrite'
+    ? [
+      { ...morphologies[0], source_neurite_type: 'axon' },
+      { ...morphologies[0], source_neurite_type: 'dendrite' },
+    ]
+    : morphologies;
 
   return (
     <div className={className}>
-      {morphologies.map(morphology => (
-        <div key={morphology.morphology}>
-          Morphology reconstruction used for {neuriteTypeLabel[morphology.source_neurite_type]}: &nbsp;
-          <Link href={linkHref(morphology)}>
-            <a>{morphology.morphology}</a>
-          </Link>
-        </div>
-      ))}
+      <Table
+        dataSource={allMorphologies}
+        columns={tableColumns}
+        pagination={false}
+        size="small"
+        tableLayout="fixed"
+        bordered
+      />
     </div>
   );
 };
