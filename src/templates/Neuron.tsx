@@ -277,19 +277,24 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <h3>Experimental traces used for model fitting</h3>
                 <ESData query={ephysByNameDataQuery(data[4].value)}>
                   {esDocuments => (
-                    <Tabs type="card" className="mt-3">
-                      {esDocuments && esDocuments.map(esDocument => (
-                        <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
-                          <div style={{ minHeight: '600px' }}>
-                            <NexusPlugin
-                              name="neuron-electrophysiology"
-                              resource={esDocument._source}
-                              nexusClient={nexus}
-                            />
-                          </div>
-                        </TabPane>
-                      ))}
-                    </Tabs>
+                    <>
+                      {esDocuments && (
+                        <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
+                      )}
+                      <Tabs type="card" className="mt-3">
+                        {esDocuments && esDocuments.map(esDocument => (
+                          <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
+                            <div style={{ minHeight: '600px' }}>
+                              <NexusPlugin
+                                name="neuron-electrophysiology"
+                                resource={esDocument._source}
+                                nexusClient={nexus}
+                              />
+                            </div>
+                          </TabPane>
+                        ))}
+                      </Tabs>
+                    </>
                   )}
                 </ESData>
 
