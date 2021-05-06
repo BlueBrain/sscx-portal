@@ -2,9 +2,10 @@ import sys
 import json
 import re
 from os import listdir, makedirs
-from os.path import isfile, isdir, join, abspath
+from os.path import isdir, join, abspath
 from xml.dom import minidom
 import coloredlogs, logging
+
 
 log = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG')
