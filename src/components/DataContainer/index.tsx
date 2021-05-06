@@ -29,7 +29,7 @@ const DataContainer: React.FC<DataContainerProps> = ({
           )}
           <div className="scroll-to">
             <ScrollTo anchor="filters" direction="up">
-              Return to filters
+              Return to selectors
             </ScrollTo>
           </div>
         </div>
