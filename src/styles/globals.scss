@@ -45,15 +45,6 @@ html, body {
   scroll-behavior: smooth;
 }
 
-button {
-  @include font-default;
-  color: map-get($basePalette, "white");
-}
-
-input {
-  @include font-default;
-}
-
 button,
 a {
   cursor: pointer;
@@ -186,6 +177,10 @@ section {
 
 .text-white {
   color: white;
+}
+
+.text-black {
+  color: black;
 }
 
 .text-read {
@@ -386,6 +381,7 @@ g {
   padding: 0 15px;
   transition: all 0.2s;
   position: relative;
+  color: white;
 
   @media (max-width: $small) {
     border-width: 1px;
@@ -424,8 +420,6 @@ g {
     border: none;
     box-shadow: none;
     opacity: 0.7;
-    // padding: 0;
-    // background-color: transparent;
 
     .active &,
     &:active,
