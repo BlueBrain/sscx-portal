@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { morphHistogramIndexPath } from '../../queries/http';
+import { morphHistogramIndexPath, morphHistogramImgPath } from '../../queries/http';
 import ImageViewer from '../ImageViewer';
-import { basePath } from '../../config';
 
 
 type MorphHistogramProps = {
@@ -55,9 +54,7 @@ const MorphHistogram: React.FC<MorphHistogramProps> = ({ region, mtype, classNam
                 key={histogramType}
                 className="col-xs-12 col-sm-6 col-md-3"
               >
-                <ImageViewer
-                  src={`${basePath}/data/morph-histogram/${region}_Column/${mtype}/${histogramType}-${axonType}.png`}
-                />
+                <ImageViewer src={morphHistogramImgPath(region, mtype, histogramType, axonType)} />
               </div>
             ))}
           </div>
@@ -76,7 +73,7 @@ const MorphHistogram: React.FC<MorphHistogramProps> = ({ region, mtype, classNam
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
-                  src={`${basePath}/data/morph-histogram/${region}_Column/${mtype}/${histogramType}-${dendriteType}.png`}
+                  src={morphHistogramImgPath(region, mtype, histogramType, dendriteType)}
                 />
               </div>
             ))}

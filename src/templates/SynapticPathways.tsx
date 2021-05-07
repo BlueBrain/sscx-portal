@@ -13,7 +13,7 @@ import ComboSelector from '../components/ComboSelector';
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import List from '../components/List';
 import { accentColors } from '../config';
-import { basePath } from '../config';
+import { pathwayIndexPath } from '../queries/http';
 
 
 export type SynapticPathwaysTemplateProps = {
@@ -140,7 +140,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     : null;
 
   useEffect(() => {
-    fetch(`${basePath}/data/pathway-index.json`)
+    fetch(pathwayIndexPath)
       .then(res => res.json())
       .then(pathwayIndex => setPathwayIndex(pathwayIndex))
   }, []);

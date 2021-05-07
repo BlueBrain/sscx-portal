@@ -1,39 +1,32 @@
 export const accentColors: { [key: string]: string } = {
-  yellow: "#ffc500",
-  blue: "#84bbf8",
-  lavender: "#657be1",
-  green: "#33b080",
-  grey: "#b2b3b3",
-  orange: "#ed8048",
+  yellow: '#ffc500',
+  blue: '#84bbf8',
+  lavender: '#657be1',
+  green: '#33b080',
+  grey: '#b2b3b3',
+  orange: '#ed8048',
 };
 
 export const sscx = {
-  org: "public",
-  project: "sscx",
-  expNeuronElectroViewId: encodeURIComponent(
-    "https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset"
-  ),
-  datasetViewId: encodeURIComponent(
-    "https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset"
-  ),
+  org: 'public',
+  project: 'sscx',
+  datasetViewId: encodeURIComponent('https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset'),
 };
 
+export const deploymentUrl = 'https://bbp.epfl.ch';
+export const basePath = '/sscx-portal';
+
+export const isServer = typeof window === 'undefined';
+
 export const nexus = {
-  url: process.env.NEXT_PUBLIC_NEXUS_URL || "https://bbp.epfl.ch/nexus/v1",
+  url: process.env.NEXT_PUBLIC_NEXUS_URL,
   token: process.env.NEXT_PUBLIC_NEXUS_TOKEN,
 };
 
-export const nexusPluginBaseUrl = "https://bbp.epfl.ch/nexus/plugins";
+export const nexusPluginBaseUrl = process.env.NEXT_PUBLIC_NEXUS_PLUGIN_BASE_URL;
 
-export const feedbackDeploymentId =
-  process.env.NEXT_PUBLIC_FEEDBACK_DEPLOYMENT_ID;
+export const staticDataBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_BASE_URL;
 
-export const basePath = "/sscx-portal";
+export const staticDataCredentials = process.env.NEXT_PUBLIC_STATIC_DATA_CREDENTIALS;
 
-const liveContentEnv = process.env.NEXT_PUBLIC_SSCX_LIVE_CONTENT;
-export const liveContent = liveContentEnv?.toLowerCase() === "true";
-
-export const isProd = process.env.NEXT_PUBLIC_APP_ENV === "production";
-export const FEEDBACK_HOST = isProd
-  ? "https://sscx-portal.ocp.bbp.epfl.ch/feedback"
-  : `http://localhost:8000`;
+export const feedbackUrl = process.env.NEXT_PUBLIC_FEEDBACK_URL;

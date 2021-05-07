@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { keyBy } from 'lodash';
 import { useNexusContext } from '@bbp/react-nexus';
 
-import { sscx, basePath } from '../../config';
+import { sscx } from '../../config';
+import { expMorphologyImgPath } from '../../queries/http';
 import ImageViewer from '../ImageViewer';
 
 import styles from './styles.module.scss'
@@ -92,7 +93,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = 
               <td style={{ textAlign: 'center'}}>
                 <div className={styles.morphImageContainer}>
                   <ImageViewer
-                    src={`${basePath}/data/exp-morph-images/${morph.name}.png`}
+                    src={expMorphologyImgPath(morph.name)}
                     alt={`Morphology ${morph.name} image`}
                     loading="lazy"
                   />
