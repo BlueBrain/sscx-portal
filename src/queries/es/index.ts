@@ -37,7 +37,7 @@ export const layerAnatomyDataQuery = {
   },
 };
 
-export const electroPhysiologyDataQuery = (
+export const fullElectroPhysiologyDataQuery = (
   etype: string,
   experiment: string,
 ): ESQuery | null => {
@@ -66,6 +66,13 @@ export const electroPhysiologyDataQuery = (
             }
           },
           {
+            bool: {
+              must_not: {
+                term: { 'note': 'subset' }
+              }
+            }
+          },
+          {
             nested: {
               path: 'distribution',
               query: {
@@ -83,7 +90,7 @@ export const electroPhysiologyDataQuery = (
   };
 };
 
-export const ephysByNameDataQuery = (
+export const modelEphysByNamesDataQuery = (
   names: string[],
 ): ESQuery | null => {
   if (!names) {
