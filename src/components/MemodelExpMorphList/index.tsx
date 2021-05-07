@@ -50,6 +50,8 @@ const linkHref = (morphology) => {
   return `${hrefBase}?${query}`;
 };
 
+const rowKey = morphology => `${morphology.morphology}_${morphology.source_neurite_type}`;
+
 const MemodelExpMorphList: React.FC<MemodelExpMorphListProps> = ({ morphologies, className = '' }) => {
   const allMorphologies = morphologies.length === 1 && morphologies[0].source_neurite_type === 'axon+dendrite'
     ? [
@@ -65,6 +67,7 @@ const MemodelExpMorphList: React.FC<MemodelExpMorphListProps> = ({ morphologies,
         columns={tableColumns}
         pagination={false}
         size="small"
+        rowKey={rowKey}
         tableLayout="fixed"
         bordered
       />

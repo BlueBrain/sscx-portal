@@ -35,7 +35,7 @@ const ESData: React.FC<ESDataProps> = ({
       nexus.View.elasticSearchQuery(
         sscx.org,
         sscx.project,
-        sscx.expNeuronElectroViewId,
+        sscx.datasetViewId,
         query,
       )
         .then(data =>

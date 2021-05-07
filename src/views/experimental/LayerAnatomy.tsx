@@ -21,12 +21,13 @@ const LayerAnatomyView = () => (
         <ESData query={layerAnatomyDataQuery}>
           {data => (
             <>
-              <Collapsible title="Summary">
-                <>{data && <LayerAnatomySummary data={data}/>}</>
-              </Collapsible>
               <Collapsible className="mt-4" title={`Layer ${layer}`}>
                 {data && <LayerThickness layer={layer} data={data} />}
                 {data && <NeuralDensity layer={layer} data={data} className="mt-3"/>}
+              </Collapsible>
+
+              <Collapsible title="Summary" className="mt-4">
+                <>{data && <LayerAnatomySummary data={data} highlightLayer={layer} />}</>
               </Collapsible>
             </>
           )}

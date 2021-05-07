@@ -135,37 +135,8 @@ const NeuronExperimentalMorphology: React.FC = () => {
       </Filters>
 
       <DataContainer visible={!!currentInstance}>
-        <Collapsible title="Population">
-          <h3>Factsheet</h3>
-          <p>TBD</p>
-
-          <h3 className="mt-3">Distribution</h3>
-          <div className="row">
-            <div className="col-xs-12 col-sm-6">
-              <ImageViewer src={`${basePath}/assets/images/population-distribution-1.png`} />
-            </div>
-            <div className="col-xs-12 col-sm-6">
-              <ImageViewer src={`${basePath}/assets/images/population-distribution-2.png`} />
-            </div>
-          </div>
-
-          <h3 className="mt-3">Reconstructed morphologies</h3>
-          <p>Data are provided as ASCII files containing 3D representations of neuronal morphologies - axons and dendrites - whose shapes are traced and reconstructed using Neurolucida (neuron tracing, reconstruction, and analysis software).</p>
-          <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
-            {esDocuments => (
-              <>
-                {!!esDocuments &&
-                  <ExpMorphologyTable
-                    morphologies={getAndSortMorphologies(esDocuments)}
-                  />
-                }
-              </>
-            )}
-          </ESData>
-        </Collapsible>
-
         <Collapsible
-          className="mt-4 mb-4"
+          className="mb-4"
           title={`Neuron Morphology ${currentMtype} ${currentInstance}`}
         >
           <ESData
@@ -215,6 +186,33 @@ const NeuronExperimentalMorphology: React.FC = () => {
               </div>
             )}
           </HttpData>
+        </Collapsible>
+
+        <Collapsible title={`Population ${currentMtype}`}>
+          <h3>Factsheet</h3>
+          <p>TBD</p>
+
+          <h3 className="mt-3">Distribution</h3>
+          <div className="row">
+            <div className="col-xs-12 col-sm-6">
+              <ImageViewer src={`${basePath}/assets/images/population-distribution-1.png`} />
+            </div>
+            <div className="col-xs-12 col-sm-6">
+              <ImageViewer src={`${basePath}/assets/images/population-distribution-2.png`} />
+            </div>
+          </div>
+
+          <h3 className="mt-3">Reconstructed morphologies</h3>
+          <p>Data are provided as ASCII files containing 3D representations of neuronal morphologies - axons and dendrites - whose shapes are traced and reconstructed using Neurolucida (neuron tracing, reconstruction, and analysis software).</p>
+          <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
+            {esDocuments => (
+              <>
+                {!!esDocuments &&
+                  <ExpMorphologyTable morphologies={getAndSortMorphologies(esDocuments)} />
+                }
+              </>
+            )}
+          </ESData>
         </Collapsible>
       </DataContainer>
     </>
