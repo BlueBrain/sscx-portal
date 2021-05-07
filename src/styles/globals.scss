@@ -175,6 +175,10 @@ section {
   text-align: center;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
 .text-white {
   color: white;
 }
@@ -477,7 +481,7 @@ g {
 
 // Collapsible
 
-$collapsible-padding: 20px 30px;
+$collapsible-padding: 2rem;
 
 @mixin collapsible__basis {
   border-radius: 3px;
