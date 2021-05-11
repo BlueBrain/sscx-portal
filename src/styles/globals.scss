@@ -1394,6 +1394,11 @@ $collapsible-padding: 2rem;
     overflow-y: scroll;
   }
 
+  ::-webkit-scrollbar-track {
+    width: 10px;
+    background-color: #f1f1f1;;
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -1401,11 +1406,16 @@ $collapsible-padding: 2rem;
   ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 8px;
     border-radius: 8px;
+    border: 1px solid white;
+    background-clip: content-box;
   }
 
   &.yellow {
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "yellow");
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
     }
 
     .list-element__basis:hover {
@@ -1417,6 +1427,9 @@ $collapsible-padding: 2rem;
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "blue");
     }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
+    }
 
     .list-element__basis:hover {
       background-color: map-get($accentPalette, "blue");
@@ -1426,6 +1439,9 @@ $collapsible-padding: 2rem;
   &.lavender {
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "lavender");
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
     }
 
     .list-element__basis:hover {
@@ -1437,6 +1453,9 @@ $collapsible-padding: 2rem;
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "green");
     }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
+    }
 
     .list-element__basis:hover {
       background-color: map-get($accentPalette, "green");
@@ -1447,6 +1466,9 @@ $collapsible-padding: 2rem;
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "orange");
     }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
+    }
 
     .list-element__basis:hover {
       background-color: map-get($accentPalette, "orange");
@@ -1456,6 +1478,9 @@ $collapsible-padding: 2rem;
   &.grey {
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "grey");
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
     }
 
     .list-element__basis:hover {
