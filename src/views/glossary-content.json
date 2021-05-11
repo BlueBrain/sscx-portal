@@ -25,11 +25,11 @@
     ["Dep", "time constant (in ms) for recovery from depression"],
     ["Fac", "time constant  (in ms) for recovery from facilitation"],
     ["PSP", "the postsynaptic membrane potential change (in mV) evoked by a presynaptic stimulus; typically an injection of a brief pulse or a train of pulses to the presynaptic soma"],
-    ["Latency", "the onset time (in ms) measured as the difference between the time to peak of the presynaptic AP and time taken to reach 5% of peak PSP amplitude"],
-    ["Amplitude", "the difference in the membrane potential (in mV) measured between the peak and baseline"],
-    ["Rise time", "the mean time (in ms) to rise from 20% to 80% of peak PSP amplitude"],
-    ["Decay time constant", "the mean time (in ms) to decay from peak PSP amplitude to baseline constant"],
-    ["Transmission failure", "an event where the presynaptic stimulus fails to evoke a postsynaptic response"],
+    ["PSP Latency", "the onset time (in ms) measured as the difference between the time to peak of the presynaptic AP and time taken to reach 5% of peak PSP amplitude"],
+    ["PSP Amplitude", "the difference in the membrane potential (in mV) measured between the peak and baseline"],
+    ["PSP rise time", "the mean time (in ms) to rise from 20% to 80% of peak PSP amplitude"],
+    ["PSP decay time constant", "the mean time (in ms) to decay from peak PSP amplitude to baseline constant"],
+    ["Transmission failure of PSP", "an event where the presynaptic stimulus fails to evoke a postsynaptic response"],
     ["c.v. of PSP", "the coefficient of variation of the PSP amplitude measured as the ratio of SD and mean"]
   ],
   "List of features": [
