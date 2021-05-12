@@ -36,12 +36,12 @@ const About: React.FC = () => {
 
         <p>
           <strong>Efferent connectivity and properties of an m-type:</strong>
-          <span>the user clicks on the name of the m-type. The portal displays a left window showing the connectivity, and a right window showing the morphometric properties of the m-type together with data on its constituent me-types. A More Details button allows users to obtain detailed statistical distributions for the morphometric properties of axons and dendrites.</span>
+          <span>the user clicks on the name of the m-type. The portal displays a left window showing the connectivity, and a right window showing the morphometric properties of the m-type together with data on its constituent me-models. A More Details button allows users to obtain detailed statistical distributions for the morphometric properties of axons and dendrites.</span>
         </p>
 
         <p>
-          <strong>Properties of an me-type.</strong>
-          <span>The me-type data in the m-type fact sheet contains links to separate fact sheets for each me-type. The fact sheet provides anatomical and physiological data for five exemplars of neurons belonging to the me-type, including data for the distribution of ion channels on axons, dendrites and the soma, traces of the response to step currents at 3 different intensities, an interactive 3D display of the neuron morphology, and movies showing the attenuation of post-synaptic potentials as they propagate from their dendritic location to the soma and the attenuation of action potentials as they back propagate from the soma to the dendrites. Users can download a NEURON model package for each exemplar. Again, text windows allow users to annotate the data.</span>
+          <strong>Properties of an me-model.</strong>
+          <span>The me-model data in the m-type fact sheet contains links to separate fact sheets for each me-model. The fact sheet provides anatomical and physiological data for five exemplars of neurons belonging to the me-model, including data for the distribution of ion channels on axons, dendrites and the soma, traces of the response to step currents at 3 different intensities, an interactive 3D display of the neuron morphology, and movies showing the attenuation of post-synaptic potentials as they propagate from their dendritic location to the soma and the attenuation of action potentials as they back propagate from the soma to the dendrites. Users can download a NEURON model package for each exemplar. Again, text windows allow users to annotate the data.</span>
         </p>
 
         <p>

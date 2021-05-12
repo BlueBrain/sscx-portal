@@ -165,7 +165,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           />
           <div>
             <InfoBox>
-              <p>We labeled single neurons with biocytin to stain their axonal and dendritic morphologies to enable their 3D reconstruction and their objective classification into morphological types (m-types). In addition, we also characterised the electrical firing patterns of these neurons to different intensities of step currents injected in the soma to group their response into electrical types (e-types). We then mapped the e-types expressed in each m-type to account for the observed diversity of morpho-electrical subtypes (me-types).</p>
+              <p>We labeled single neurons with biocytin to stain their axonal and dendritic morphologies to enable their 3D reconstruction and their objective classification into morphological types (m-types). In addition, we also characterised the electrical firing patterns of these neurons to different intensities of step currents injected in the soma to group their response into electrical types (e-types). We then mapped the e-types expressed in each m-type to account for the observed diversity of morpho-electrical subtypes (me-models).</p>
             </InfoBox>
             <Pills
               className="mt-3"
@@ -207,7 +207,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             }
             list3={
               <List
-                title="me-type instance"
+                title="me-model instance"
                 block
                 list={instances}
                 value={currentInstance}
@@ -286,8 +286,8 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
             {data => (
               <>
-                <Collapsible className="mt-4" title={`ME-Type Instance ${currentInstance} Factsheet`}>
-                  <p className="mb-3">Each m-type expresses a certain proportion of various e-types, giving rise to a diversity of morpho-electrical subtypes (me-types).</p>
+                <Collapsible className="mt-4" title={`me-model Instance ${currentInstance} Factsheet`}>
+                  <p className="mb-3">Each m-type expresses a certain proportion of various e-types, giving rise to a diversity of morpho-electrical subtypes (me-models).</p>
                   <h3>Anatomy</h3>
                   {data && (
                     <Factsheet facts={data[0].values}/>
