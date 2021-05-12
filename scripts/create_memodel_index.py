@@ -1,45 +1,12 @@
 import sys
 import json
-import logging
 from os import listdir, makedirs
-from os.path import isfile, isdir, join, abspath
+from os.path import isdir, join, abspath
+import coloredlogs, logging
 
 
-
-class CustomFormatter(logging.Formatter):
-  """Logging Formatter to add colors and count warning / errors"""
-
-  grey = "\x1b[38;21m"
-  yellow = "\x1b[33;21m"
-  red = "\x1b[31;21m"
-  bold_red = "\x1b[31;1m"
-  reset = "\x1b[0m"
-  # format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
-  format = "%(asctime)s - %(levelname)s - %(message)s"
-
-  FORMATS = {
-    logging.DEBUG: grey + format + reset,
-    logging.INFO: grey + format + reset,
-    logging.WARNING: yellow + format + reset,
-    logging.ERROR: red + format + reset,
-    logging.CRITICAL: bold_red + format + reset
-  }
-
-  def format(self, record):
-    log_fmt = self.FORMATS.get(record.levelno)
-    formatter = logging.Formatter(log_fmt)
-    return formatter.format(record)
-
-
-logger = logging.getLogger("main")
-logger.setLevel(logging.DEBUG)
-# create console handler with a higher log level
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-
-ch.setFormatter(CustomFormatter())
-
-logger.addHandler(ch)
+log = logging.getlog(__name__)
+coloredlogs.install(level='DEBUG')
 
 
 def listdirsonly(path):
@@ -67,44 +34,44 @@ def main():
   memodel_path = abspath(sys.argv[1])
   output_path = abspath(sys.argv[2])
 
-  logger.info(f'memodel path: {memodel_path}')
-  logger.info(f'output path:  {output_path}')
+  log.info(f'memodel path: {memodel_path}')
+  log.info(f'output path:  {output_path}')
 
   if not isdir(memodel_path):
-    logger.critical(f'memodel base path doesn\'t seem to be directory: {memodel_path}')
+    log.critical(f'memodel base path doesn\'t seem to be directory: {memodel_path}')
     sys.exit(1)
 
   if not isdir(output_path):
     try:
       makedirs(output_path)
     except Exception:
-      logger.critical(f'Can\'t create an output directory ({output_path})')
+      log.critical(f'Can\'t create an output directory ({output_path})')
       sys.exit(1)
 
-  logger.info('Reading directory structure')
+  log.info('Reading directory structure')
   memodels = []
 
   mtypes = listdirsonly(memodel_path)
   if not len(mtypes):
-    logger.critical('Looks like there are no mtype directories, check provided memodel base path')
+    log.critical('Looks like there are no mtype directories, check provided memodel base path')
     sys.exit(1)
   for mtype in mtypes:
     etypes = listdirsonly(join(memodel_path, mtype))
     if not len(etypes):
-      logger.warn(f'No etype directories found in ./{mtype}')
+      log.warn(f'No etype directories found in ./{mtype}')
     for etype in etypes:
       regions = listdirsonly(join(memodel_path, mtype, etype))
       if not len(regions):
-        logger.warn(f'No region directories found in ./{mtype}/{etype}')
+        log.warn(f'No region directories found in ./{mtype}/{etype}')
       for region in regions:
         memodel_names = listdirsonly(join(memodel_path, mtype, etype, region))
         if not len(memodel_names):
-          logger.warn(f'No memodel directories found in ./{mtype}/{etype}/{region}')
+          log.warn(f'No memodel directories found in ./{mtype}/{etype}/{region}')
         for memodel_name in memodel_names:
           memodels.append((mtype, etype, region, memodel_name))
 
-  logger.info(f'Found {len(memodels)} memodel directories')
-  logger.info('Creating index')
+  log.info(f'Found {len(memodels)} memodel directories')
+  log.info('Creating index')
 
   index = {}
   # path structure: region, mtype, etype
@@ -123,7 +90,7 @@ def main():
   with open(join(output_path, 'memodel-index.json'), 'w') as index_file:
     json.dump(index, index_file)
 
-  logger.info(f'Created index for {len(memodels)} memodels')
+  log.info(f'Created index for {len(memodels)} memodels')
 
 
 if __name__ == '__main__':

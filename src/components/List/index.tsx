@@ -38,6 +38,7 @@ const List: React.FC<ListProps> = ({
           const selected = value === element
           return <div
             role="radio"
+            key={element}
             aria-checked={selected}
             tabIndex={0}
             className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}

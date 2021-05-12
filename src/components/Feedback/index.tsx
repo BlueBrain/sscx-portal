@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Form, Input, Button, Select } from 'antd';
 import { GatewayOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { FEEDBACK_HOST } from '../../config';
+import { feedbackUrl, deploymentUrl } from '../../config';
 
 import styles from './styles.module.scss';
 
@@ -21,7 +21,7 @@ const Feedback: React.FC = () => {
   const [formVisible, setFormVisible] = useState(false);
   const issueSelectRef = useRef<HTMLSelectElement>(null);
 
-  const [type, setType] = useState('');
+  const [type, setType] = useState(null);
   const [component, setComponent] = useState('');
   const [details, setDetails] = useState('');
   const [contact, setContact] = useState(storage?.getItem(FEEDBACK_CONTACT_KEY) ?? '');
@@ -43,7 +43,7 @@ const Feedback: React.FC = () => {
     setFormVisible(false);
 
     setTimeout(() => {
-      setType('');
+      setType(null);
       setComponent('');
       setDetails('');
 
@@ -55,21 +55,24 @@ const Feedback: React.FC = () => {
     setResponseStatus(null)
     setSending(true);
 
+    const pageUrl = `${deploymentUrl}/${router.basePath}/${router.asPath}`;
+
     try {
-      const res = await fetch(`${FEEDBACK_HOST}/sscx-portal/issues`, {
+      const res = await fetch(`${feedbackUrl}/sscx-portal/issues`, {
         method: 'POST',
         body: JSON.stringify({
-          title: details.slice(0, 100), body: `
-Field | Element
---- | ---
-type | ${type}
-component | ${component}
-contact | ${contact}
-page | ${router.pathname}
-
-${details.slice(100)}
-        `,
-          labels: ["triage"]
+          title: details.slice(0, 100),
+          body: [
+            `Field | Element`,
+            `--- | ---`,
+            `Issue type | ${type || '--'}`,
+            `Page URL | [${router.asPath}](${pageUrl})`,
+            `Component | ${component || '--'}`,
+            `Contact | ${contact || '--'}`,
+            ``,
+            `${details.slice(100)}`,
+          ].join('\n'),
+          labels: ['triage']
         }),
         headers: {
           'Accept': 'application/json',

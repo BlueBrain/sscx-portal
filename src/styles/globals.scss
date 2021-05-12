@@ -13,6 +13,7 @@
 @import 'antd/lib/tabs/style/index.css';
 @import 'antd/lib/input/style/index.css';
 @import 'antd/lib/form/style/index.css';
+@import 'antd/lib/pagination/style/index.css';
 
 
 @import 'config/_colors';
@@ -42,15 +43,6 @@ html, body {
   color: map-get($basePalette, "white");
   background-color: map-get($basePalette, "navy-4");
   scroll-behavior: smooth;
-}
-
-button {
-  @include font-default;
-  color: map-get($basePalette, "white");
-}
-
-input {
-  @include font-default;
 }
 
 button,
@@ -183,8 +175,16 @@ section {
   text-align: center;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
 .text-white {
   color: white;
+}
+
+.text-black {
+  color: black;
 }
 
 .text-read {
@@ -385,6 +385,7 @@ g {
   padding: 0 15px;
   transition: all 0.2s;
   position: relative;
+  color: white;
 
   @media (max-width: $small) {
     border-width: 1px;
@@ -423,8 +424,6 @@ g {
     border: none;
     box-shadow: none;
     opacity: 0.7;
-    // padding: 0;
-    // background-color: transparent;
 
     .active &,
     &:active,
@@ -482,7 +481,7 @@ g {
 
 // Collapsible
 
-$collapsible-padding: 20px 30px;
+$collapsible-padding: 2rem;
 
 @mixin collapsible__basis {
   border-radius: 3px;
@@ -1395,6 +1394,11 @@ $collapsible-padding: 20px 30px;
     overflow-y: scroll;
   }
 
+  ::-webkit-scrollbar-track {
+    width: 10px;
+    background-color: #f1f1f1;;
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -1402,11 +1406,16 @@ $collapsible-padding: 20px 30px;
   ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 8px;
     border-radius: 8px;
+    border: 1px solid white;
+    background-clip: content-box;
   }
 
   &.yellow {
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "yellow");
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
     }
 
     .list-element__basis:hover {
@@ -1418,6 +1427,9 @@ $collapsible-padding: 20px 30px;
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "blue");
     }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
+    }
 
     .list-element__basis:hover {
       background-color: map-get($accentPalette, "blue");
@@ -1427,6 +1439,9 @@ $collapsible-padding: 20px 30px;
   &.lavender {
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "lavender");
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
     }
 
     .list-element__basis:hover {
@@ -1438,6 +1453,9 @@ $collapsible-padding: 20px 30px;
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "green");
     }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
+    }
 
     .list-element__basis:hover {
       background-color: map-get($accentPalette, "green");
@@ -1448,6 +1466,9 @@ $collapsible-padding: 20px 30px;
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "orange");
     }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
+    }
 
     .list-element__basis:hover {
       background-color: map-get($accentPalette, "orange");
@@ -1457,6 +1478,9 @@ $collapsible-padding: 20px 30px;
   &.grey {
     ::-webkit-scrollbar-thumb {
       background: map-get($accentPalette, "grey");
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: lighten(map-get($accentPalette, "yellow"), 10%);
     }
 
     .list-element__basis:hover {

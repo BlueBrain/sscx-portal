@@ -53,14 +53,9 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
       render: feature => feature.replace(/\_/g, ' '),
     },
     {
-      title: 'Mean',
-      dataIndex: 'mean',
-      render: (mean, row) => <span><NumberFormat value={mean} /> {row.unit}</span>
-    },
-    {
-      title: 'Std',
-      dataIndex: 'std',
-      render: (std, row) => <span><NumberFormat value={std} /> {row.unit}</span>
+      title: 'Mean ± Std',
+      key: 'value',
+      render: (row) => (<span><NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {row.unit}</span>),
     },
     {
       title: 'Model fitness',

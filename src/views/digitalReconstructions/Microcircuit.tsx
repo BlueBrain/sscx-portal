@@ -17,21 +17,7 @@ const RecMicrocircuitView = () => (
   >
     {(subregion, layerNums) => (
       <DataContainer visible={!!layerNums.length}>
-
-        <Collapsible title={`${subregion} Microcircuit Factsheet`}>
-          <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
-            {data => (
-              <>
-                {data && <Factsheet facts={data[0].values}/>}
-              </>
-            )}
-          </HttpData>
-        </Collapsible>
-
-        <Collapsible
-          title={`Layer ${layerNums.join('/')} of ${subregion} Microcircuit`}
-          className="mt-4"
-        >
+        <Collapsible title={`Layer ${layerNums.join('/')} of ${subregion} Microcircuit`}>
           {layerNums.map(layerNum => (
             <div key={layerNum}>
               <HttpData path={layerFactsheetPath(subregion, layerNum)}>
@@ -48,26 +34,33 @@ const RecMicrocircuitView = () => (
           ))}
         </Collapsible>
 
-        <div className="mt-4">
-          <Collapsible color="red" title="Simulations">
-            <div className="row">
-              <div className="col-xs-4">
-                Definition : explain that these are in silico experiments. Explanation of this exact simulation.
-              </div>
-              <div className="col-xs-4">
-                <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/1204661/11_maya_christmasTree.jpg" />
-              </div>
-              <div className="col-xs-4">
-                <h3 className="mt-0">Explore data</h3>
-                <ul>
-                  <li><Button>Pair Recording App</Button></li>
-                  <li><Button>Visualize with Brayns</Button></li>
-                </ul>
-              </div>
-            </div>
-          </Collapsible>
-        </div>
+        <Collapsible title={`${subregion} Microcircuit Factsheet`} className="mt-4">
+          <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
+            {data => (
+              <>
+                {data && <Factsheet facts={data[0].values}/>}
+              </>
+            )}
+          </HttpData>
+        </Collapsible>
 
+        <Collapsible color="red" title="Simulations" className="mt-4">
+          <div className="row">
+            <div className="col-xs-4">
+              Definition : explain that these are in silico experiments. Explanation of this exact simulation.
+            </div>
+            <div className="col-xs-4">
+              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/1204661/11_maya_christmasTree.jpg" />
+            </div>
+            <div className="col-xs-4">
+              <h3 className="mt-0">Explore data</h3>
+              <ul>
+                <li><Button>Pair Recording App</Button></li>
+                <li><Button>Visualize with Brayns</Button></li>
+              </ul>
+            </div>
+          </div>
+        </Collapsible>
       </DataContainer>
     )}
   </MicrocircuitsTemplates>

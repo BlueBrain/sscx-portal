@@ -10,9 +10,10 @@ const classPrefix = 'layer-anatomy-summary__';
 
 export type LayerAnatomySummaryProps = {
   data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+  highlightLayer?: string;
 };
 
-const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) => {
+const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], highlightLayer = '' }) => {
   const entities = data.map(document => document._source);
 
   const layers = Array
@@ -73,7 +74,10 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [] }) 
           </thead>
           <tbody>
             {summary.map(row => (
-              <tr key={row.layer}>
+              <tr
+                key={row.layer}
+                className={highlightLayer.includes(row.layer.replace('layer ', '')) ? 'text-bold' : null}
+              >
                 <td className="text-capitalize">{row.layer}</td>
                 <td><NumberFormat value={row.thickness.mean}/></td>
                 <td><NumberFormat value={row.thickness.n} prefix="n=" /></td>

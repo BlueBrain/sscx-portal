@@ -1,11 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Button, Tabs } from 'antd';
 import { useNexusContext } from '@bbp/react-nexus';
 import range from 'lodash/range';
 import get from 'lodash/get';
+import qs from 'querystring';
 
-import { mtypeFactsheetPath, etypeFactsheetPath, metypeFactsheetPath, bapMoviePath, epspMoviePath } from '../queries/http';
+import {
+  mtypeFactsheetPath,
+  etypeFactsheetPath,
+  metypeFactsheetPath,
+  bapMoviePath,
+  epspMoviePath,
+  modelExpMorphologiesPath,
+  memodelNumberExceptionsPath,
+  memodelIndexPath,
+  memodelMorphologyPath,
+  memodelArchivePath,
+} from '../queries/http';
 import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
@@ -22,6 +35,7 @@ import { accentColors } from '../config';
 import Collapsible from '../components/Collapsible';
 
 import MtypeFactsheet from '../components/MtypeFactsheet';
+import MemodelExpMorphList from '../components/MemodelExpMorphList';
 import EtypeFactsheet from '../components/EtypeFactsheet';
 import Factsheet from '../components/Factsheet';
 import MorphHistogram from '../components/MorphHistogram';
@@ -31,8 +45,8 @@ import NeuronMorphology from '../components/NeuronMorphology';
 import ESData from '../components/ESData';
 import NexusPlugin from '../components/NexusPlugin';
 import NexusFileDownloadButton from '../components/NexusFileDownloadButton';
-import { morphologyDataQuery, ephysByNameDataQuery } from '../queries/es';
-import { basePath } from '../config';
+import { morphologyDataQuery, modelEphysByNamesDataQuery } from '../queries/es';
+
 
 const { TabPane } = Tabs;
 
@@ -44,6 +58,16 @@ export type NeuronsTemplateProps = {
   children: (data: any, title: string, pathway: string) => React.ReactNode;
 };
 
+
+const expEphysPageUrl = (etype: string, instance: string) => {
+  return [
+    '/experimental-data/neuron-electrophysiology/?',
+    qs.stringify({
+      etype,
+      etype_instance: instance,
+    }),
+  ].join('');
+}
 
 const Neurons: React.FC<NeuronsTemplateProps> = ({
   sectionTitle,
@@ -63,7 +87,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   const currentLayer: Layer = query.layer as Layer;
   const currentEtype: string = query.etype as string;
   const currentMtype: string = query.mtype as string;
-  const currentInstance: string = query.instance as string;
+  const currentMemodel: string = query.memodel as string;
 
   const setParams = (params: Record<string, string>): void => {
     const query = {
@@ -72,7 +96,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         layer: currentLayer,
         etype: currentEtype,
         mtype: currentMtype,
-        instance: currentInstance,
+        memodel: currentMemodel,
       },
       ...params,
     };
@@ -84,7 +108,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       'brain_region': region,
       mtype: null,
       etype: null,
-      instance: null,
+      memodel: null,
     });
   };
   const setLayer = (layer: Layer) => {
@@ -92,24 +116,24 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       layer,
       mtype: null,
       etype: null,
-      instance: null,
+      memodel: null,
     })
   };
   const setMtype = (mtype: string) => {
     setParams({
       mtype,
       etype: null,
-      instance: null,
+      memodel: null,
     })
   };
   const setEtype = (etype: string) => {
     setParams({
       etype,
-      instance: null,
+      memodel: null,
     })
   };
-  const setInstance = (instance: string) => {
-    setParams({ instance })
+  const setMemodel = (memodel: string) => {
+    setParams({ memodel })
   };
 
   const mtypes = currentLayer && memodelIndex
@@ -121,11 +145,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     ? memodelIndex[currentRegion][currentMtype]
     : [];
 
-  const memodelInstanceRange = () => {
+  const memodelMemodelRange = () => {
     return range(1, );
   }
 
-  const instances = currentEtype && memodelIndex
+  const memodels = currentEtype && memodelIndex
     ? range(1, get(memodelNumberExceptions, `${currentMtype}.${currentEtype}.${currentRegion}`, 5) + 1)
       .map(idx => `${currentMtype}_${currentEtype}_${idx}`)
     : [];
@@ -134,29 +158,20 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
   };
 
-  const memodelArchiveHref = [
-    basePath,
-    '/data/memodel_archives',
-    encodeURIComponent(currentMtype),
-    encodeURIComponent(currentEtype),
-    encodeURIComponent(currentRegion),
-    `${currentInstance}.tar.xz`
-  ].join('/');
-
   useEffect(() => {
     if (memodelIndex) return;
 
-    fetch(`${basePath}/data/memodel-number-exceptions.json`)
+    fetch(memodelNumberExceptionsPath)
       .then(res => res.json())
       .then(memodelNumberExceptions => setMemodelNumberExceptions(memodelNumberExceptions))
-      .then(() => fetch(`${basePath}/data/memodel-index.json`))
+      .then(() => fetch(memodelIndexPath))
       .then(res => res.json())
       .then(memodelIndex => setMemodelIndex(memodelIndex));
   }, []);
 
   return (
     <>
-      <Filters primaryColor={color} hasData={!!currentInstance}>
+      <Filters primaryColor={color} hasData={!!currentMemodel}>
         <div className="center-col">
           <Title
             primaryColor={color}
@@ -165,7 +180,15 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           />
           <div>
             <InfoBox>
-              <p>We labeled single neurons with biocytin to stain their axonal and dendritic morphologies to enable their 3D reconstruction and their objective classification into morphological types (m-types). In addition, we also characterised the electrical firing patterns of these neurons to different intensities of step currents injected in the soma to group their response into electrical types (e-types). We then mapped the e-types expressed in each m-type to account for the observed diversity of morpho-electrical subtypes (me-models).</p>
+              <p>
+                We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
+                to enable their 3D reconstruction and their objective classification
+                into morphological types (m-types). In addition, we also characterized the electrical firing patterns
+                of these neurons to different intensities of step currents injected in the soma
+                to group their response into electrical types (e-types).
+                We then mapped the e-types expressed in each m-type
+                to account for the observed diversity of morpho-electrical subtypes (me-models).
+              </p>
             </InfoBox>
             <Pills
               className="mt-3"
@@ -189,7 +212,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             }
             list1={
               <List
-                title="m-type"
+                title="M-type"
                 list={mtypes}
                 value={currentMtype}
                 onSelect={setMtype}
@@ -198,7 +221,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             }
             list2={
               <List
-                title="e-type"
+                title="E-type"
                 list={etypes}
                 value={currentEtype}
                 onSelect={setEtype}
@@ -207,16 +230,16 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             }
             list3={
               <List
-                title="me-model instance"
+                title="ME-model"
                 block
-                list={instances}
-                value={currentInstance}
-                onSelect={setInstance}
+                list={memodels}
+                value={currentMemodel}
+                onSelect={setMemodel}
                 color="orange"
               />
             }
             selectorTitle="2. Choose a layer"
-            listsTitle="3. Choose mtype, etype and neuron instance"
+            listsTitle="3. Choose M-type, E-type and neuron model"
             list1Open={!!currentLayer}
             list2Open={!!currentMtype}
             list3Open={!!currentMtype && !!currentEtype}
@@ -224,11 +247,77 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         </div>
       </Filters>
 
-      <DataContainer>
-        {currentMtype && (
+      <DataContainer visible={!!currentMemodel}>
+        <Collapsible title={`ME-model ${currentMemodel} Factsheet`}>
+          <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
+            {data => (
+              <>
+                <p className="mb-3">
+                  Each m-type expresses a certain proportion of various e-types,
+                  giving rise to a diversity of morpho-electrical subtypes (me-models).
+                </p>
+                <h3>Anatomy</h3>
+                {data && (
+                  <Factsheet facts={data[0].values}/>
+                )}
+                <h3 className="mt-3">Physiology</h3>
+                {data && (
+                  <Factsheet facts={data[1].values}/>
+                )}
+
+                <div className="text-right mt-3">
+                  <Button
+                    type="primary"
+                    download
+                    href={memodelArchivePath(currentRegion, currentMtype, currentEtype, currentMemodel)}
+                  >
+                    Download model
+                  </Button>
+                </div>
+
+                <HttpData path={modelExpMorphologiesPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
+                  {expMorphologies => (
+                    <div className="mt-3">
+                      <h3>Experimental morphologies used for this model</h3>
+                      <MemodelExpMorphList morphologies={expMorphologies} />
+                    </div>
+                  )}
+                </HttpData>
+
+                <h3 className="mt-3">Model morphology</h3>
+                <NeuronMorphology path={memodelMorphologyPath(data[2].value)} />
+
+                <div className="row">
+                  <div className="col-xs-12 col-sm-6">
+                    <h4 className="mt-3">EPSP Attenuation</h4>
+                    <VideoPlayer
+                      sources={[{
+                        src: epspMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
+                        type: 'video/mp4',
+                        size: 1080,
+                      }]}
+                    />
+                  </div>
+                  <div className="col-xs-12 col-sm-6">
+                    <h4 className="mt-3">bAP Attenuation</h4>
+                    <VideoPlayer
+                      sources={[{
+                        src: bapMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
+                        type: 'video/mp4',
+                        size: 1080,
+                      }]}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+          </HttpData>
+        </Collapsible>
+
+        <Collapsible title={`M-Type ${currentMtype} Factsheet`} className="mt-4">
           <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
             {data => (
-              <Collapsible title={`M-Type ${currentMtype} Factsheet`}>
+              <>
                 <p className="mb-3">Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.</p>
 
                 <h3>Anatomy</h3>
@@ -237,21 +326,24 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 {data && <Factsheet facts={data[1].values}/>}
 
                 <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
-              </Collapsible>
+              </>
             )}
           </HttpData>
-        )}
+        </Collapsible>
 
-        {currentInstance && (
-          <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
+        <Collapsible className="mt-4" title={`E-Type ${currentEtype} Factsheet`}>
+          <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (
-              <Collapsible className="mt-4" title={`E-Type ${currentEtype} Factsheet`}>
-                <p className="mb-3">Neurons are classified into e-types based on their electrical response properties to step current injections at the soma.</p>
+              <>
+                <p className="mb-3">
+                  Neurons are classified into e-types based on their electrical response properties
+                  to step current injections at the soma.
+                </p>
                 <EtypeFactsheet data={data} />
                 <div className="text-right mt-3 mb-3">
                   <Button
                     type="primary"
-                    href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}
+                    href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
                     download
                   >
                     Download factsheet
@@ -259,119 +351,38 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 </div>
 
                 <h3>Experimental traces used for model fitting</h3>
-                <ESData query={ephysByNameDataQuery(data[4].value)}>
+                <ESData query={modelEphysByNamesDataQuery(data[4].value)}>
                   {esDocuments => (
-                    <Tabs type="card" className="mt-3">
-                      {esDocuments && esDocuments.map(esDocument => (
-                        <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
-                          <div style={{ minHeight: '600px' }}>
-                            <NexusPlugin
-                              name="neuron-electrophysiology"
-                              resource={esDocument._source}
-                              nexusClient={nexus}
-                            />
-                          </div>
-                        </TabPane>
-                      ))}
-                    </Tabs>
+                    <>
+                      {esDocuments && (
+                        <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
+                      )}
+                      <Tabs type="card" className="mt-3">
+                        {esDocuments && esDocuments.map(esDocument => (
+                          <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
+                            <div style={{ minHeight: '600px' }}>
+                              <p className="mt-2 mb-3">
+                                Full experimental instance (with all traces): &nbsp;
+                                <Link href={expEphysPageUrl(currentEtype, esDocument._source.name)}>
+                                  {esDocument._source.name}
+                                </Link>
+                              </p>
+                              <NexusPlugin
+                                name="neuron-electrophysiology"
+                                resource={esDocument._source}
+                                nexusClient={nexus}
+                              />
+                            </div>
+                          </TabPane>
+                        ))}
+                      </Tabs>
+                    </>
                   )}
                 </ESData>
-
-              </Collapsible>
-            )}
-          </HttpData>
-        )}
-
-        {currentInstance && (
-          <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentInstance)}>
-            {data => (
-              <>
-                <Collapsible className="mt-4" title={`me-model Instance ${currentInstance} Factsheet`}>
-                  <p className="mb-3">Each m-type expresses a certain proportion of various e-types, giving rise to a diversity of morpho-electrical subtypes (me-models).</p>
-                  <h3>Anatomy</h3>
-                  {data && (
-                    <Factsheet facts={data[0].values}/>
-                  )}
-                  <h3 className="mt-3">Physiology</h3>
-                  {data && (
-                    <Factsheet facts={data[1].values}/>
-                  )}
-
-                  <div className="row end-xs mt-3 mb-3">
-                    <div className="col">
-                      <Button
-                        type="primary"
-                        download
-                        href={memodelArchiveHref}
-                      >
-                        Download model
-                      </Button>
-                    </div>
-                  </div>
-
-                  <h3 className="mt-3">Morphology</h3>
-                  {/* <h5>{data[2].value}</h5> */}
-                  <NeuronMorphology
-                    path={`${basePath}/data/memodel-morphologies-swc/${data[2].value}.swc`}
-                  />
-
-                  {/* {data && (
-                    <ESData
-                      query={morphologyDataQuery(currentMtype, data[2].value)}
-                    >
-                      {esDocuments => (
-                        <>
-                          {!!esDocuments  && (
-                            <NexusFileDownloadButton
-                              className="mt-2"
-                              filename={getMorphologyDistribution(esDocuments[0]._source).name}
-                              url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
-                              org={sscx.org}
-                              project={sscx.project}
-                            >
-                              Download morphology
-                            </NexusFileDownloadButton>
-                          )}
-                          {!!esDocuments && (
-                            <NexusPlugin
-                              className="mt-3"
-                              name="neuron-morphology"
-                              resource={esDocuments[0]._source}
-                              nexusClient={nexus}
-                            />
-                          )}
-                        </>
-                      )}
-                    </ESData>
-                  )} */}
-
-                  <div className="row">
-                    <div className="col-xs-12 col-sm-6">
-                      <h4 className="mt-3">EPSP Attenuation</h4>
-                      <VideoPlayer
-                        sources={[{
-                          src: epspMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
-                          type: 'video/mp4',
-                          size: 1080,
-                        }]}
-                      />
-                    </div>
-                    <div className="col-xs-12 col-sm-6">
-                      <h4 className="mt-3">bAP Attenuation</h4>
-                      <VideoPlayer
-                        sources={[{
-                          src: bapMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
-                          type: 'video/mp4',
-                          size: 1080,
-                        }]}
-                      />
-                    </div>
-                  </div>
-                </Collapsible>
               </>
             )}
           </HttpData>
-        )}
+        </Collapsible>
       </DataContainer>
     </>
   );

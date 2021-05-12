@@ -1,10 +1,10 @@
 import sys
 import re
 import json
-import logging
 from os import listdir, makedirs
-from os.path import isfile, isdir, join, abspath
+from os.path import isdir, join, abspath
 import coloredlogs, logging
+
 
 log = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG')

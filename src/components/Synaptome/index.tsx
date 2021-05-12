@@ -1,9 +1,8 @@
 import React from 'react';
 
 import ImageViewer from '../ImageViewer';
-import { basePath } from '../../config';
+import { staticDataBaseUrl } from '../../config';
 
-// import './style.less';
 
 
 const classPrefix = 'synaptome__';
@@ -24,8 +23,8 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
   const [, preMtype, postMtype] = pathwayMatched;
 
   const label = `${type === 'pre' ? 'Pre' : 'Post'}-synaptic Synaptome ${type === 'pre' ? preMtype : postMtype}`;
-  const synaptomeBaseUrl = `${basePath}/data/synaptomes/${region}_Column/${preMtype}___${postMtype}`;
-  const mtypeSynaptomeBaseUrl = `${basePath}/data/model-data/REGION/${region}/Central/Mtypes/${type === 'pre' ? preMtype : postMtype}/Synaptome`;
+  const synaptomeBaseUrl = `${staticDataBaseUrl}/synaptomes/${region}_Column/${preMtype}___${postMtype}`;
+  const mtypeSynaptomeBaseUrl = `${staticDataBaseUrl}/model-data/REGION/${region}/Central/MTypes/${type === 'pre' ? preMtype : postMtype}/Synaptome`;
 
   if (type === 'pathway') {
     return (

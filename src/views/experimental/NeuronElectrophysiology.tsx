@@ -7,7 +7,7 @@ import ESData from '../../components/ESData';
 import DataContainer from '../../components/DataContainer';
 import ImageViewer from '../../components/ImageViewer';
 import NexusPlugin from '../../components/NexusPlugin';
-import { electroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
+import { fullElectroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -106,8 +106,35 @@ const NeuronElectrophysiology: React.FC = () => {
       </Filters>
 
       <DataContainer visible={!!currentEtype && !!currentInstance}>
-        <Collapsible title="E-type">
-          <p className="mb-3">The e-type of a neuron is determined by its firing behavior when injected with a step current in the soma. The pattern of electrical activity of neurons can be accommodating or non-accommodating (AC and NAC types), it can be very regular or show some stuttering or irregular firing (STUT or IR types). The reaction of the cell at the start of the stimulus is also important, there can be a delay at the beginning (‘d’ types) or a little burst (‘b’ types).</p>
+        <Collapsible title={`Electrophysiological recordings instance ${currentEtype}_${currentInstance}`}>
+          <p className="mb-3">
+            This section shows the whole-cell patch clamp recording of the neuron. The stimulus represents
+            the current trace that was injected into the cell using the current clamp method.
+            The response shows the membrane voltage of the neuron.
+          </p>
+          <ESData query={fullElectroPhysiologyDataQuery(currentEtype, currentInstance)}>
+            {esDocuments => (
+              <>
+                {!!esDocuments && (
+                  <NexusPlugin
+                    name="neuron-electrophysiology"
+                    resource={esDocuments[0]._source}
+                    nexusClient={nexus}
+                  />
+                )}
+              </>
+            )}
+          </ESData>
+        </Collapsible>
+
+        <Collapsible title={`E-type ${currentEtype}`} className="mt-4">
+          <p className="mb-3">
+            The e-type of a neuron is determined by its firing behavior when injected with a step current in the soma.
+            The pattern of electrical activity of neurons can be accommodating or non-accommodating (AC and NAC types),
+            it can be very regular or show some stuttering or irregular firing (STUT or IR types).
+            The reaction of the cell at the start of the stimulus is also important,
+            there can be a delay at the beginning (‘d’ types) or a little burst (‘b’ types).
+          </p>
           <h3>Factsheet</h3>
           <p>TBD</p>
 
@@ -128,26 +155,6 @@ const NeuronElectrophysiology: React.FC = () => {
               <>
                 {!!esDocuments && (
                   <ExpTraceTable traces={getAndSortTraces(esDocuments)}/>
-                )}
-              </>
-            )}
-          </ESData>
-        </Collapsible>
-
-        <Collapsible
-          className="mt-4"
-          title={`Electrophysiological recordings instance ${currentEtype}_${currentInstance}`}
-        >
-          <p className="mb-3">This section shows the whole-cell patch clamp recording of the neuron. The stimulus represents the current trace that was injected into the cell using the current clamp method. The response shows the membrane voltage of the neuron.</p>
-          <ESData query={electroPhysiologyDataQuery(currentEtype, currentInstance)}>
-            {esDocuments => (
-              <>
-                {!!esDocuments && (
-                  <NexusPlugin
-                    name="neuron-electrophysiology"
-                    resource={esDocuments[0]._source}
-                    nexusClient={nexus}
-                  />
                 )}
               </>
             )}
