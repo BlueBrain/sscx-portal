@@ -2,6 +2,6 @@ trigger_build:
   stage: deploy
   image: curlimages/curl
   script:
-    - curl -X POST -k "$BUILD_WEBHOOK_URL"
+    - curl -X POST -k -s -S -f -o /dev/null "$BUILD_WEBHOOK_URL"
   only:
     - develop
