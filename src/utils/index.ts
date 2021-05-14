@@ -1,3 +1,6 @@
+import { staticDataBaseUrl, staticDataClusterBaseUrl, basePath } from '../config';
+
+
 interface ParsedNexusUrl {
   deployment: string;
   entityType: string;
@@ -70,4 +73,20 @@ export const parseUrl = (nexusUrl: string): ParsedNexusUrl => {
     schema: matches[5],
     id: matches[6],
   };
+};
+
+type OptImgUrlParams = {
+  width?: 640 | 750 | 828 | 1080 | 1200 | 1920 | 2048 | 3840;
+  quality?: number;
+}
+
+export function imgOpt(url: string, params?: OptImgUrlParams) {
+  const width = params?.width || 1080;
+  const quality = params?.quality || 75;
+
+  const imgUrl = url.startsWith(staticDataBaseUrl)
+    ? url.replace(staticDataBaseUrl, staticDataClusterBaseUrl)
+    : url;
+
+  return `${basePath}/_next/image/?url=${encodeURIComponent(imgUrl)}&w=${width}&q=${quality}`;
 };

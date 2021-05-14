@@ -26,6 +26,7 @@ export const nexus = {
 export const nexusPluginBaseUrl = process.env.NEXT_PUBLIC_NEXUS_PLUGIN_BASE_URL;
 
 export const staticDataBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_BASE_URL;
+export const staticDataClusterBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_CLUSTER_BASE_URL;
 
 export const staticDataCredentials = process.env.NEXT_PUBLIC_STATIC_DATA_CREDENTIALS;
 

@@ -11,6 +11,9 @@ module.exports = {
   future: {
     webpack5: true,
   },
+  images: {
+    domains: ['sscx-portal-static-data'],
+  },
   async redirects() {
     return [
       {
