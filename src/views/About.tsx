@@ -41,7 +41,7 @@ const About: React.FC = () => {
 
         <p>
           <strong>Properties of an me-model.</strong>
-          <span>The me-model data in the m-type fact sheet contains links to separate fact sheets for each me-model. The fact sheet provides anatomical and physiological data for five exemplars of neurons belonging to the me-model, including data for the distribution of ion channels on axons, dendrites and the soma, traces of the response to step currents at 3 different intensities, an interactive 3D display of the neuron morphology, and movies showing the attenuation of post-synaptic potentials as they propagate from their dendritic location to the soma and the attenuation of action potentials as they back propagate from the soma to the dendrites. Users can download a NEURON model package for each exemplar. Again, text windows allow users to annotate the data.</span>
+          <span>The me-model data in the m-type fact sheet contains links to separate fact sheets for each me-model. The fact sheet provides anatomical and physiological data for five exemplars of neurons belonging to the me-type, including data for the distribution of ion channels on axons, dendrites and the soma, traces of the response to step currents at 3 different intensities, an interactive 3D display of the neuron morphology, and movies showing the attenuation of post-synaptic potentials as they propagate from their dendritic location to the soma and the attenuation of action potentials as they back propagate from the soma to the dendrites. Users can download a NEURON model package for each exemplar. Again, text windows allow users to annotate the data.</span>
         </p>
 
         <p>

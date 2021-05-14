@@ -187,7 +187,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 of these neurons to different intensities of step currents injected in the soma
                 to group their response into electrical types (e-types).
                 We then mapped the e-types expressed in each m-type
-                to account for the observed diversity of morpho-electrical subtypes (me-models).
+                to account for the observed diversity of morpho-electrical subtypes (me-types).
               </p>
             </InfoBox>
             <Pills
@@ -254,7 +254,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
               <>
                 <p className="mb-3">
                   Each m-type expresses a certain proportion of various e-types,
-                  giving rise to a diversity of morpho-electrical subtypes (me-models).
+                  giving rise to a diversity of morpho-electrical subtypes (me-types).
                 </p>
                 <h3>Anatomy</h3>
                 {data && (

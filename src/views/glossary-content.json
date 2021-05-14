@@ -2,7 +2,7 @@
   "Glossary": [
     ["m-type", "morphological type, classified based on the shape of the neuron"],
     ["e-type", "electrical type, classified based on the firing behavior of a neuron"],
-    ["me-model", "morpho-electrical type, a combination of an m-type and e-type"],
+    ["me-type", "morpho-electrical type, a combination of an m-type and e-type"],
     ["s-type", "synapse type"],
     ["morphological instance", "one particular morphology of a certain m-type"],
     ["e-model", "electrical model, typically for a specific e-type"],
