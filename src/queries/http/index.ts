@@ -51,7 +51,7 @@ export const synapticPhysiologyPlotPath = (subregion: string, pathway: string, p
 };
 
 export const synapticAnatomyPlotPath = (subregion: string, pathway: string, plotName: string): string => {
-  return `${staticDataBaseUrl}/model-data/REGION/${subregion}/Central/Pathways/${pathway}/synaptic_anatomy/${plotName}.png`;
+  return `${staticDataBaseUrl}/model-data/REGION/${subregion}/Central/Pathways/${pathway}/SynapticAnatomy/${plotName}.png`;
 };
 
 export const expMorphologyFactsheetPath = (morphologyName: string): string => {

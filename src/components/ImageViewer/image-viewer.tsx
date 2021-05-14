@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Lightbox from 'react-image-lightbox';
-import { FaExpandArrowsAlt } from 'react-icons/fa';
-import { IoMdDownload } from 'react-icons/io';
+import noop from 'lodash/noop';
 
 import 'react-image-lightbox/style.css';
-
-// import './style.scss';
 
 
 const classPrefix = 'image-viewer__';
@@ -19,19 +16,29 @@ export type ImageViewerProps = {
   canDownload?: boolean;
   canExpand?: boolean;
   border?: boolean;
+  aspectRatio?: string;
+  onThumbnailLoad?: () => void;
+  onThumbnailError?: () => void;
 };
 
 const ImageViewer: React.FC<ImageViewerProps> = ({
   src,
   thumbnailSrc,
   alt,
-  // color,
-  // canDownload = true,
   canExpand = true,
   border = false,
   loading = 'eager',
+  aspectRatio = null,
+  onThumbnailLoad = noop,
+  onThumbnailError = noop,
 }) => {
   const [expanded, setExpanded] = useState(false);
+  const [thumbnailLoadError, setThumbnailLoadError] = useState(false);
+
+  const onThumbnailLoadError = () => {
+    setThumbnailLoadError(true);
+    onThumbnailError();
+  };
 
   const onThumbnailClick = (e: React.MouseEvent) => {
     if (!canExpand) return;
@@ -40,30 +47,32 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
     e.stopPropagation();
   };
 
+  useEffect(() => {
+    setThumbnailLoadError(false);
+  }, [src]);
+
   return (
-    <div className={`${classPrefix}basis`}>
+    <div className={`${classPrefix}basis`} style={{ aspectRatio }}>
       <img
+        key={src}
         src={thumbnailSrc || src}
         loading={loading}
         alt={alt}
         onClick={(e: React.MouseEvent) => onThumbnailClick(e)}
-        style={{ border: border ? '1px solid grey' : 'none' }}
+        style={{
+          aspectRatio,
+          border: border ? '1px solid grey' : 'none',
+          display: thumbnailLoadError ? 'none' : 'block',
+        }}
+        onLoad={onThumbnailLoad}
+        onError={onThumbnailLoadError}
       />
-      {/* <FaExpandArrowsAlt /> */}
       {expanded && (
         <Lightbox
           mainSrc={src}
           onCloseRequest={() => setExpanded(false)}
         />
       )}
-      {/* {canDownload && (
-        <button
-          className="icon-button__download"
-          style={{ backgroundColor: color }}
-        >
-          <IoMdDownload />
-        </button>
-      )} */}
     </div>
   );
 };
