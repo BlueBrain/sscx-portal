@@ -8,7 +8,10 @@ import styles from './index.module.scss';
 type CtaButtonProps = {
   color?: string;
   href?: string;
+  onClick?: () => void;
   width?: string;
+  size?: 'small' | 'default' | 'large';
+  maxWidth?: string;
   block?: boolean;
   className?: string;
 };
@@ -17,16 +20,28 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   children,
   className = '',
   width = 'auto',
+  size = 'default',
+  maxWidth = 'auto',
   color = 'blue',
   href = null,
+  onClick,
   block = false,
 }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (!onClick) return;
+
+    e.preventDefault()
+    onClick();
+  };
+
   return (
     <a
-      className={`${styles.container} ${color} ${className}`}
+      className={`${styles.container} ${color} btn-${size} ${className}`}
       href={href}
+      onClick={e => handleClick(e)}
       style={{
         width,
+        maxWidth,
         display: block ? 'block' : 'inline-block'
       }}
     >

@@ -11,6 +11,12 @@
   border-radius: 48px;
   overflow: hidden;
   color: #dddddd;
+
+  &:global(.btn-small) {
+    font-size: 0.8rem;
+    line-height: 36px;
+    border-radius: 36px;
+  }
 }
 
 .container:hover {
@@ -23,6 +29,10 @@
   text-align: center;
   width: 100%;
   white-space: nowrap;
+}
+
+:global(.btn-small) .text {
+  padding: 0 5rem 0 2rem;
 }
 
 .container:global(.yellow) {
@@ -43,6 +53,12 @@
   line-height: 48px;
 }
 
+:global(.btn-small) .arrow {
+  height: 36px;
+  line-height: 36px;
+  width: 3rem;
+}
+
 .arrow svg {
   vertical-align: middle;
 }
@@ -54,5 +70,3 @@
 :global(.grey) .arrow {
   background-color: #202537;
 }
-
-// "purple": #6d63bf,

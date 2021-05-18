@@ -7,6 +7,7 @@ import { nexus, basePath } from '../config';
 import { init as initSentry } from '../services/sentry';
 import MainLayout from '../layouts/MainLayout';
 import Feedback from '../components/Feedback';
+import GoogleAnalytics from '../components/GoogleAnalytics';
 
 import '../styles/globals.scss';
 
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <NexusProvider nexusClient={nexusClient}>
       <MainLayout>
+        {/* TODO: move to separate component */}
         <Head>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap" />
           <script src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js"></script>
@@ -33,7 +35,10 @@ function MyApp({ Component, pageProps }) {
           <script type="systemjs-importmap" src={`${basePath}/systemjs-importmap.json`}></script>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
+
         <Feedback />
+        <GoogleAnalytics />
+
         <Component {...pageProps} />
       </MainLayout>
     </NexusProvider>

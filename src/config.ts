@@ -34,3 +34,7 @@ export const staticDataClusterBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_CLUS
 export const staticDataCredentials = process.env.NEXT_PUBLIC_STATIC_DATA_CREDENTIALS;
 
 export const feedbackUrl = process.env.NEXT_PUBLIC_FEEDBACK_URL;
+
+export const gtm = {
+  id: process.env.NEXT_PUBLIC_GTM_ID,
+};
