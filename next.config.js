@@ -1,7 +1,10 @@
+const { withSentryConfig } = require('@sentry/nextjs');
+// https://docs.sentry.io/platforms/javascript/guides/nextjs/
+
 
 const basePath = '/sscx-portal';
 
-module.exports = {
+module.exports = withSentryConfig({
   trailingSlash: true,
   basePath: basePath,
   assetPrefix: `${basePath}/`,
@@ -12,7 +15,7 @@ module.exports = {
     webpack5: true,
   },
   images: {
-    domains: ['sscx-portal-static-data'],
+    domains: ['localhost', 'sscx-portal-static-data'],
   },
   async redirects() {
     return [
@@ -46,4 +49,4 @@ module.exports = {
   async headers() {
     return [];
   },
-};
+});

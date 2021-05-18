@@ -4,7 +4,6 @@ import { createNexusClient } from '@bbp/nexus-sdk';
 import { NexusProvider } from '@bbp/react-nexus';
 
 import { nexus, basePath } from '../config';
-import { init as initSentry } from '../services/sentry';
 import MainLayout from '../layouts/MainLayout';
 import Feedback from '../components/Feedback';
 import GoogleAnalytics from '../components/GoogleAnalytics';
@@ -15,8 +14,6 @@ if (typeof(window)) {
   require('abort-controller/polyfill');
 }
 
-
-initSentry();
 
 const nexusClient = createNexusClient({
   uri: nexus.url,
