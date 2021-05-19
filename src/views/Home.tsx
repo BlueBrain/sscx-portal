@@ -40,8 +40,18 @@ const Home: React.FC = () => (
       <div className="title">
         <Title
           title={<span>Somatosensory <br/> Cortex Portal</span>}
-          subtitle="Explore the datasets!"
-          hint="Welcome to the Somatosensory Cortex (SSCx) Portal created by the EPFL <b>Blue Brain Project</b>. Explore the datasets, models and visuals to understand how we reconstruct the rodent somatosensory cortex in silico."
+          hint={<>
+            <p>
+              The SSCx portal is a freely accessible resource, which provides access to the <b>Blue Brain Project</b>'s
+              experimental data sets on the multi-scale organization of the juvenile rat primary somatosensory cortex -
+              sub-regions, microcircuits, neurons, synapses, and the resulting computational models.
+            </p>
+            <p>
+              The portal describes a workflow for how sparse experimental data are gathered and extrapolated
+              to obtain dense computational models, their validation and
+              resulting predictions across multiple levels of organization.
+            </p>
+          </>}
           primary
         />
         <div>

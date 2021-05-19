@@ -9,7 +9,7 @@ type TitleProps = {
   title?: React.ReactChild;
   subtitle?: string;
   primaryColor?: Color;
-  hint?: string;
+  hint?: string | React.ReactNode;
   primary?: boolean;
 };
 
@@ -29,7 +29,7 @@ const Title: React.FC<TitleProps> = ({
       {subtitle && !primary && <h4 className="text-white">{subtitle}</h4>}
       {title && <h2 role="title" className="text-white">{title}</h2>}
       {subtitle && primary && <h4 className="text-white">{subtitle}</h4>}
-      {hint && <p dangerouslySetInnerHTML={{ __html: hint }} />}
+      {<div className="hint">{hint}</div>}
     </div>
   );
 };
