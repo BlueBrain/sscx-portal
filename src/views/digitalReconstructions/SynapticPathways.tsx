@@ -85,7 +85,7 @@ const RecSynPathwaysView = () => (
           </div>
 
           <h3>Synaptic physiology</h3>
-          <div className="row center-xs mt-1">
+          <div className="row center-xs mt-1 mb-4">
             <div className="col-xs-6 col-sm-3 mt-2">
               <Plot url={physiologyPlotPath(subregion, pathway, 'amplitude')} />
             </div>
@@ -111,6 +111,14 @@ const RecSynPathwaysView = () => (
               <Plot url={physiologyPlotPath(subregion, pathway, 'CV_vs_amplitudes')} />
             </div>
           </div>
+
+          <h3>Synaptome {pathway}</h3>
+          <Synaptome
+            className="mt-3"
+            type="pathway"
+            region={subregion}
+            pathway={pathway}
+          />
         </Collapsible>
 
         <Collapsible className="mt-3" title="Synaptomes">
@@ -126,15 +134,6 @@ const RecSynPathwaysView = () => (
           <Synaptome
             className="mt-3"
             type="post"
-            region={subregion}
-            pathway={pathway}
-          />
-        </Collapsible>
-
-        <Collapsible className="mt-3" title={`Synaptome ${pathway}`}>
-          <Synaptome
-            className="mt-3"
-            type="pathway"
             region={subregion}
             pathway={pathway}
           />
