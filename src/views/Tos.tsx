@@ -48,7 +48,7 @@ const TermsOfUse: React.FC = () => {
           in the licence terms adhering to the Data, all rights not specifically granted are reserved.
         </p>
 
-        <h3>DATA LICENCE</h3>
+        <h2>DATA LICENCE</h2>
 
         <p>
           You may use, copy, distribute, publicly perform, publicly display or create derivative works of Data
