@@ -287,9 +287,9 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <h3 className="mt-3">Model morphology</h3>
                 <NeuronMorphology path={memodelMorphologyPath(data[2].value)} />
 
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6">
-                    <h4 className="mt-3">EPSP Attenuation</h4>
+                <div className="row mt-3">
+                  <div className="col-xs-12 col-sm-6 mt-1">
+                    <h3>EPSP Attenuation</h3>
                     <VideoPlayer
                       sources={[{
                         src: epspMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
@@ -298,8 +298,8 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                       }]}
                     />
                   </div>
-                  <div className="col-xs-12 col-sm-6">
-                    <h4 className="mt-3">bAP Attenuation</h4>
+                  <div className="col-xs-12 col-sm-6 mt-1">
+                    <h3>bAP Attenuation</h3>
                     <VideoPlayer
                       sources={[{
                         src: bapMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
