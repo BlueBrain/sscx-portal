@@ -8,6 +8,7 @@ import 'react-image-lightbox/style.css';
 const classPrefix = 'image-viewer__';
 
 export type ImageViewerProps = {
+  className?: string;
   src: string;
   loading?: 'eager' | 'lazy';
   thumbnailSrc?: string;
@@ -22,6 +23,7 @@ export type ImageViewerProps = {
 };
 
 const ImageViewer: React.FC<ImageViewerProps> = ({
+  className = '',
   src,
   thumbnailSrc,
   alt,
@@ -52,7 +54,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   }, [src]);
 
   return (
-    <div className={`${classPrefix}basis`} style={{ aspectRatio }}>
+    <div className={`${classPrefix}basis ${className}`} style={{ aspectRatio }}>
       <img
         key={src}
         src={thumbnailSrc || src}

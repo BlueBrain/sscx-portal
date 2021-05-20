@@ -1,3 +1,4 @@
+import React from 'react';
 import GlossaryView from '../views/Glossary';
 
 

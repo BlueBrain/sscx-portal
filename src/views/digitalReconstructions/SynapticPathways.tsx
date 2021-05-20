@@ -112,7 +112,7 @@ const RecSynPathwaysView = () => (
             </div>
           </div>
 
-          <h3>Synaptome {pathway}</h3>
+          <h3>Exemplar connection {pathway}</h3>
           <Synaptome
             className="mt-3"
             type="pathway"

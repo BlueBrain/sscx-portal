@@ -265,6 +265,9 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                   <Factsheet facts={data[1].values}/>
                 )}
 
+                <h3 className="mt-3">Model morphology</h3>
+                <NeuronMorphology path={memodelMorphologyPath(data[2].value)} />
+
                 <div className="text-right mt-3">
                   <Button
                     type="primary"
@@ -283,9 +286,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     </div>
                   )}
                 </HttpData>
-
-                <h3 className="mt-3">Model morphology</h3>
-                <NeuronMorphology path={memodelMorphologyPath(data[2].value)} />
 
                 <div className="row mt-3">
                   <div className="col-xs-12 col-sm-6 mt-1">
