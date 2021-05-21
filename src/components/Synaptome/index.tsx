@@ -63,29 +63,37 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
     <div className={`${classPrefix}basis ${className}`}>
       <h3>{label}</h3>
 
-      <h4 className="mt-3">Input synaptome {synaptomeMtype}</h4>
-      <div className="row middle-sm">
-        {layers.map(layer => (
-          <div className="col-xs-6 col-sm-2 mt-1" key={layer}>
-            <MtypeSynaptomeLayerImage
-              src={`${mtypeSynaptomeBaseUrl}/input_synaptome/${layer}.png`}
-              layer={layer}
-            />
+      {type === 'post' && (
+        <div className="mt-3">
+          <h4>Input synaptome {synaptomeMtype}</h4>
+          <div className="row middle-sm">
+            {layers.map(layer => (
+              <div className="col-xs-6 col-sm-2 mt-1" key={layer}>
+                <MtypeSynaptomeLayerImage
+                  src={`${mtypeSynaptomeBaseUrl}/input_synaptome/${layer}.png`}
+                  layer={layer}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      <h4 className="mt-3">Output synaptome {synaptomeMtype}</h4>
-      <div className="row middle-sm">
-        {layers.map(layer => (
-          <div className="col-xs-6 col-sm-2 mt-1" key={layer}>
-            <MtypeSynaptomeLayerImage
-              src={`${mtypeSynaptomeBaseUrl}/output_synaptome/${layer}.png`}
-              layer={layer}
-            />
+      {type === 'pre' && (
+        <div className="mt-3">
+          <h4>Output synaptome {synaptomeMtype}</h4>
+          <div className="row middle-sm">
+            {layers.map(layer => (
+              <div className="col-xs-6 col-sm-2 mt-1" key={layer}>
+                <MtypeSynaptomeLayerImage
+                  src={`${mtypeSynaptomeBaseUrl}/output_synaptome/${layer}.png`}
+                  layer={layer}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
       <ImageViewer
         className="mt-3"
