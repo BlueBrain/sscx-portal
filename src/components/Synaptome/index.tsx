@@ -19,10 +19,10 @@ const pathwayRe = /^(L\d+.*)\-(L\d+.*)$/;
 
 
 const MtypeSynaptomeLayerImage = ({ src, layer }) => {
-  const [noImagePresent, setNoImagePresent] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    setNoImagePresent(false);
+    setImageLoaded(false);
   }, [src]);
 
   return (
@@ -31,9 +31,9 @@ const MtypeSynaptomeLayerImage = ({ src, layer }) => {
         src={src}
         thumbnailSrc={imgOpt(src, { width: 640 })}
         aspectRatio="5 / 4"
-        onThumbnailError={() => setNoImagePresent(true)}
+        onThumbnailLoad={() => setImageLoaded(true)}
       />
-      <div className="text-center">{noImagePresent ? '' : layer} &nbsp;</div>
+      <div className="text-center">{imageLoaded ? layer : ''} &nbsp;</div>
     </>
   );
 };
