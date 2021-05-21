@@ -13,6 +13,13 @@ export type EtypeFactsheetProps = {
   data?: any;
 };
 
+const unitLabelMap = {
+  constant: '',
+  'mV/nA': 'MΩ',
+};
+
+const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
+
 
 const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
@@ -55,7 +62,11 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Mean ± Std',
       key: 'value',
-      render: (row) => (<span><NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {row.unit}</span>),
+      render: (row) => (
+        <span>
+          <NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {unitLabel(row.unit)}
+        </span>
+      ),
     },
     {
       title: 'Model fitness',
