@@ -1,30 +1,20 @@
-/**
- * This component requires SystemJS to be available globally (in window)
- */
-import * as React from 'react';
-import invariant from 'ts-invariant';
+import React from 'react';
 import { NexusClient, Resource } from '@bbp/nexus-sdk';
-// import { Result } from 'antd';
+import Sentry from '@sentry/nextjs';
+import { Result } from 'antd';
 
-// import Loading from '../components/Loading';
 import { nexusPluginBaseUrl } from '../../config';
 
 
-const PluginError: React.FC<{ error: Error }> = ({ error }) => {
+const PluginError: React.FC = () => {
   return (
-    <p>Plugin failed to render</p>
-    // <Result
-    //   status="warning"
-    //   title="Plugin failed to render"
-    //   subTitle={error.message}
-    // />
+    <Result
+      status="warning"
+      title="Plugin failed to render"
+      subTitle="This issue has been reported to devolopers"
+    />
   );
 };
-
-const warningMessage =
-  'SystemJS not found. ' +
-  'To load plugins, Nexus Web requires SystemJS to be available globally.' +
-  ' You can find out more here https://github.com/systemjs/systemjs';
 
 export type NexusPluginProps<T> = {
   name: string;
@@ -48,8 +38,6 @@ export class NexusPlugin extends React.Component<
     this.state = { error: null, loading: true };
     this.container = React.createRef();
     this.destroyPlugin = null;
-    // @ts-ignore
-    invariant(window.System, warningMessage);
   }
 
   async loadExternalPlugin() {
@@ -87,23 +75,22 @@ export class NexusPlugin extends React.Component<
         }
       )
       .catch((error: Error) => {
-        console.log(error);
+        Sentry.captureException(error);
         this.setState({ error, loading: false });
       });
   }
 
   componentDidCatch(error: Error) {
+    Sentry.captureException(error);
     this.setState({ error, loading: false });
   }
 
   componentWillUpdate(prevProps: NexusPluginClassProps) {
-    // Reload the plugin(and pass in new props to it) when props change
-    // NOTE: will not reload the plugin if nexusClient or goToResource changes
-    // otherwise it will cause too many reloads
     if (
       prevProps.resource !== this.props.resource ||
       prevProps.name !== this.props.name
     ) {
+      this.setState({ error: null, loading: true })
       this.loadExternalPlugin();
     }
   }
@@ -122,21 +109,15 @@ export class NexusPlugin extends React.Component<
     const className = this.props.className || '';
 
     return (
-      <div
-        className={`remote-component ${className}`}
-        ref={this.container}
-      />
-      // <Loading
-      //   size="big"
-      //   loading={this.state.loading}
-      //   loadingMessage={<h3>Loading {this.props.pluginName || 'Plugin'}</h3>}
-      // >
-      //   {this.state.error ? (
-      //     <PluginError error={this.state.error} />
-      //   ) : (
-      //     <div className="remote-component" ref={this.container}></div>
-      //   )}
-      // </Loading>
+      <div>
+        <div
+          className={`remote-component ${className}`}
+          ref={this.container}
+        />
+        {this.state.error && (
+          <PluginError />
+        )}
+      </div>
     );
   }
 }
