@@ -215,6 +215,10 @@ section {
   color: var(--color-yellow);
 }
 
+.bg-white {
+  background-color: white;
+}
+
 .spin {
   animation: spin 2s infinite linear;
 }
@@ -2692,6 +2696,16 @@ $collapsible-padding: 2rem;
         line-height: 50px;
         margin-bottom: 15px;
       }
+    }
+  }
+
+  .section-about {
+    background-color: #dbdbdb;
+    color: black;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
     }
   }
 
