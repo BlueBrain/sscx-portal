@@ -16,6 +16,7 @@ import List from '../../components/List';
 import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import ExpTraceTable from '../../components/ExpTraceTable';
+import Metadata from '../../components/Metadata';
 import eTypes from '../../__generated__/experimentalData.json';
 import { basePath } from '../../config';
 
@@ -116,11 +117,16 @@ const NeuronElectrophysiology: React.FC = () => {
             {esDocuments => (
               <>
                 {!!esDocuments && (
-                  <NexusPlugin
-                    name="neuron-electrophysiology"
-                    resource={esDocuments[0]._source}
-                    nexusClient={nexus}
-                  />
+                  <>
+                    <Metadata nexusDocument={esDocuments[0]._source} />
+                    <h3 className="mt-3">Patch clamp recording</h3>
+                    <NexusPlugin
+                      className="mt-2"
+                      name="neuron-electrophysiology"
+                      resource={esDocuments[0]._source}
+                      nexusClient={nexus}
+                    />
+                  </>
                 )}
               </>
             )}

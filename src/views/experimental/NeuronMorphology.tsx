@@ -23,6 +23,7 @@ import ExpMorphMemodelList from '../../components/ExpMorphMemodelList';
 import expMorphologyData from '../../__generated__/exp-morphology-data.json';
 import Factsheet from '../../components/Factsheet';
 import ExpMorphologyTable from '../../components/ExpMorphologyTable';
+import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { sscx, basePath } from '../../config';
 
@@ -146,7 +147,8 @@ const NeuronExperimentalMorphology: React.FC = () => {
               <>
                 {!!esDocuments && (
                   <div>
-                    <h2>3D view</h2>
+                    <Metadata nexusDocument={esDocuments[0]._source} />
+                    <h3 className="mt-3">3D view</h3>
                     <NexusPlugin
                       className="mt-2"
                       name="neuron-morphology"
@@ -172,7 +174,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <HttpData path={expMorphologyFactsheetPath(currentInstance)}>
             {factsheetData => (
               <div className="mt-3">
-                <h2>Morphometrics</h2>
+                <h3>Morphometrics</h3>
                 <Factsheet className="mt-2" facts={factsheetData[0].values} />
               </div>
             )}
@@ -181,7 +183,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <HttpData path={expMorphMemodelsPath(currentInstance)}>
             {memodels => (
               <div className="mt-3">
-                <h2>Morpho-Electrical neuron models using this morphology</h2>
+                <h3>Morpho-Electrical neuron models using this morphology</h3>
                 <ExpMorphMemodelList className="mt-2" memodels={memodels} />
               </div>
             )}
