@@ -1,6 +1,6 @@
 import React from 'react';
 import { NexusClient, Resource } from '@bbp/nexus-sdk';
-import Sentry from '@sentry/nextjs';
+import { captureException } from '@sentry/nextjs';
 import { Result } from 'antd';
 
 import { nexusPluginBaseUrl } from '../../config';
@@ -75,13 +75,13 @@ export class NexusPlugin extends React.Component<
         }
       )
       .catch((error: Error) => {
-        Sentry.captureException(error);
+        captureException(error);
         this.setState({ error, loading: false });
       });
   }
 
   componentDidCatch(error: Error) {
-    Sentry.captureException(error);
+    captureException(error);
     this.setState({ error, loading: false });
   }
 
