@@ -16,17 +16,17 @@ export const layerAnatomyDataQuery = {
             should: [
               {
                 term: {
-                  '@type': 'https://neuroshapes.org/LayerThickness',
+                  '@type': 'LayerThickness',
                 },
               },
               {
                 term: {
-                  '@type': 'https://neuroshapes.org/NeuronDensity',
+                  '@type': 'NeuronDensity',
                 },
               },
               {
                 term: {
-                  '@type': 'https://neuroshapes.org/SliceCollection',
+                  '@type': 'SliceCollection',
                 }
               }
             ],
@@ -54,7 +54,7 @@ export const fullElectroPhysiologyDataQuery = (
           {
             bool: {
               must: [
-                { term: { '@type': 'https://neuroshapes.org/Trace' } },
+                { term: { '@type': 'Trace' } },
               ],
             },
           },
@@ -106,7 +106,7 @@ export const modelEphysByNamesDataQuery = (
           {
             bool: {
               must: [
-                { term: { '@type': 'https://neuroshapes.org/Trace' } },
+                { term: { '@type': 'Trace' } },
               ],
             },
           },
@@ -172,7 +172,7 @@ export const mtypeExpMorphologyListDataQuery = (
               should: [
                 {
                   term: {
-                    '@type': 'https://neuroshapes.org/ReconstructedCell',
+                    '@type': 'ReconstructedCell',
                   },
                 },
               ],
@@ -230,7 +230,7 @@ export const morphologyDataQuery = (
               should: [
                 {
                   term: {
-                    '@type': 'https://neuroshapes.org/NeuronMorphology',
+                    '@type': 'NeuronMorphology',
                   },
                 },
               ],
@@ -328,7 +328,7 @@ export const etypeTracesDataQuery = (
           {
             bool: {
               must: [
-                { term: { '@type': 'https://neuroshapes.org/Trace' } },
+                { term: { '@type': 'Trace' } },
               ],
             },
           },
