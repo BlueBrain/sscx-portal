@@ -59,12 +59,15 @@ const mtypeLayer = (mtype: string) => {
 }
 
 const ExpMorphMemodelList: React.FC<ExpMorphMemodelListProps> = ({ memodels, className = '' }) => {
+  const memodelsDataSource = memodels
+    .map(memodel => ({ ...memodel, key: `${memodel.region}-${memodel.memodel_name}` }));
+
   return (
     <div className={className}>
       <Table
-        dataSource={memodels}
+        dataSource={memodelsDataSource}
         columns={tableColumns}
-        pagination={memodels.length > 10 ? { position: ['bottomRight'] } : false}
+        pagination={memodelsDataSource.length > 10 ? { position: ['bottomRight'] } : false}
         size="small"
         tableLayout="fixed"
         bordered
