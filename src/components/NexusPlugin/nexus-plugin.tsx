@@ -58,7 +58,7 @@ export class NexusPlugin extends React.Component<
             nexusClient,
             resource,
           }: {
-            ref: HTMLDivElement | null;
+            ref: HTMLDivElement;
             nexusClient?: NexusClient;
             resource: Resource;
           }) => () => void;
@@ -85,7 +85,7 @@ export class NexusPlugin extends React.Component<
     this.setState({ error, loading: false });
   }
 
-  componentWillUpdate(prevProps: NexusPluginClassProps) {
+  componentDidUpdate(prevProps: NexusPluginClassProps) {
     if (
       prevProps.resource !== this.props.resource ||
       prevProps.name !== this.props.name
@@ -100,9 +100,9 @@ export class NexusPlugin extends React.Component<
   }
 
   componentWillUnmount() {
-    this.destroyPlugin &&
-      typeof this.destroyPlugin === 'function' &&
+    if (this.destroyPlugin && typeof this.destroyPlugin === 'function') {
       this.destroyPlugin();
+    }
   }
 
   render() {
