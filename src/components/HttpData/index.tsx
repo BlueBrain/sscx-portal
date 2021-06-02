@@ -33,7 +33,7 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
 
         const err = new Error(`Can't fetch ${path}`);
         captureException(err);
-        return err;
+        return Promise.reject(err);
       })
       .then(data => setState({ ...state, data, error: null, loading: false }))
       .catch(error => setState({ ...state, error, data: null, loading: false }));
