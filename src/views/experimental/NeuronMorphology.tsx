@@ -171,7 +171,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             )}
           </ESData>
 
-          <HttpData path={expMorphologyFactsheetPath(currentInstance)}>
+          <HttpData path={expMorphologyFactsheetPath(currentInstance)} label="morphometrics">
             {factsheetData => (
               <div className="mt-3">
                 <h3>Morphometrics</h3>
