@@ -54,7 +54,10 @@ const MorphHistogram: React.FC<MorphHistogramProps> = ({ region, mtype, classNam
                 key={histogramType}
                 className="col-xs-12 col-sm-6 col-md-3"
               >
-                <ImageViewer src={morphHistogramImgPath(region, mtype, histogramType, axonType)} />
+                <ImageViewer
+                  thumbnailSrc={morphHistogramImgPath(region, mtype, histogramType, axonType).replace('.png', '__w640.png')}
+                  src={morphHistogramImgPath(region, mtype, histogramType, axonType)}
+                />
               </div>
             ))}
           </div>
@@ -73,6 +76,7 @@ const MorphHistogram: React.FC<MorphHistogramProps> = ({ region, mtype, classNam
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
+                  thumbnailSrc={morphHistogramImgPath(region, mtype, histogramType, dendriteType).replace('.png', '__w640.png')}
                   src={morphHistogramImgPath(region, mtype, histogramType, dendriteType)}
                 />
               </div>

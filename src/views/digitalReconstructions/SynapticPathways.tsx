@@ -12,18 +12,17 @@ import Factsheet from '../../components/Factsheet';
 import { colorName, sectionTitle } from './config';
 import Collapsible from '../../components/Collapsible';
 import Synaptome from '../../components/Synaptome';
-import { imgOpt } from '../../utils';
 
 import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
 
 
-const Plot: React.FC<{ url: string }> = ({ url }) => {
+const Plot: React.FC<{ src: string }> = ({ src }) => {
   return (
     <ImageViewer
       border
-      src={url}
-      thumbnailSrc={imgOpt(url, { width: 640 })}
+      src={src}
+      thumbnailSrc={src.replace('.png', '__w640.png')}
       aspectRatio='5 / 4'
     />
   );
@@ -51,64 +50,64 @@ const RecSynPathwaysView = () => (
           <h3>Synaptic anatomy</h3>
           <div className="row mt-1">
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'synapses_per_connection')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'synapses_per_connection')} />
             </div>
           </div>
           <div className="row mt-1 mb-4">
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'axonal_branch_order')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'axonal_branch_order')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'axonal_path_distance')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'axonal_path_distance')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'neuronal_divergence')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'neuronal_divergence')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'synaptic_divergence')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'synaptic_divergence')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'dendritic_branch_order')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'dendritic_branch_order')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'dendritic_path_distance')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'dendritic_path_distance')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'neuronal_convergence')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'neuronal_convergence')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'synaptic_convergence')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'synaptic_convergence')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={anatomyPlotPath(subregion, pathway, 'afferent_synapse_count')} />
+              <Plot src={anatomyPlotPath(subregion, pathway, 'afferent_synapse_count')} />
             </div>
           </div>
 
           <h3>Synaptic physiology</h3>
           <div className="row center-xs mt-1 mb-4">
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'amplitude')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'amplitude')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'onset_latency')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'onset_latency')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'rise_time')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'rise_time')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'decay_time')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'decay_time')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'transmission_failures')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'transmission_failures')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'coefficient_variation')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'coefficient_variation')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'failures_vs_amplitudes')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'failures_vs_amplitudes')} />
             </div>
             <div className="col-xs-6 col-sm-3 mt-2">
-              <Plot url={physiologyPlotPath(subregion, pathway, 'CV_vs_amplitudes')} />
+              <Plot src={physiologyPlotPath(subregion, pathway, 'CV_vs_amplitudes')} />
             </div>
           </div>
 

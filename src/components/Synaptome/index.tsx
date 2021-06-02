@@ -29,7 +29,7 @@ const MtypeSynaptomeLayerImage = ({ src, layer }) => {
     <>
       <ImageViewer
         src={src}
-        thumbnailSrc={imgOpt(src, { width: 640 })}
+        thumbnailSrc={src.replace('.png', '__w640.png')}
         aspectRatio="5 / 4"
         onThumbnailLoad={() => setImageLoaded(true)}
       />
