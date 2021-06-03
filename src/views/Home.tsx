@@ -64,7 +64,7 @@ const Home: React.FC = () => (
 
     <section id="about" className="section-about p-4">
       <div className="container">
-        <h3>
+        <h3 className="text-uppercase">
           About
           <span className="accent-border" />
         </h3>
@@ -110,8 +110,8 @@ const Home: React.FC = () => (
       </div>
     </section>
 
-    <section className="section-2">
-      <h2>
+    {/* <section className="section-2">
+      <h2 className="text-uppercase">
         Select and Explore. Download. Contribute
         <span className="accent-border" />
       </h2>
@@ -151,7 +151,7 @@ const Home: React.FC = () => (
           />
         </div>
       </div>
-    </section>
+    </section> */}
 
     <section id="explore" className="section-3">
       <div className="intro">
