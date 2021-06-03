@@ -62,7 +62,7 @@ const Home: React.FC = () => (
       </div>
     </section>
 
-    <section className="section-about p-4">
+    <section id="about" className="section-about p-4">
       <div className="container">
         <h3>
           About
