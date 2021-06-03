@@ -64,10 +64,10 @@ const Home: React.FC = () => (
 
     <section id="about" className="section-about p-4">
       <div className="container">
-        <h3 className="text-uppercase">
+        <h2 className="text-uppercase mt-2 mb-2">
           About
           <span className="accent-border" />
-        </h3>
+        </h2>
 
         <div className="row">
           <div className="col-xs-12 col-sm-6 bg-white p-2">
@@ -155,13 +155,8 @@ const Home: React.FC = () => (
 
     <section id="explore" className="section-3">
       <div className="intro">
-        <h2 className="text-white">Explore</h2>
-        <h3>Navigate the various datasets made available</h3>
-        <p>
-          In order to address the still existing gaps in our knowledge in brain
-          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <h2 className="text-white mb-2 text-uppercase">Explore</h2>
+        <p>Navigate the various datasets made available</p>
       </div>
 
       <div className="cards">
