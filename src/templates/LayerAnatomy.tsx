@@ -41,7 +41,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
             primaryColor={color}
             title="Layer Anatomy"
             subtitle={sectionTitle}
-            hint="The Somatosensory Cortex has a laminar structure <br> where neurons are organized across six distinct layers."
+            hint={<p>The Somatosensory Cortex has a laminar structure <br/> where neurons are organized across six distinct layers.</p>}
           />
           <div role="information">
             <InfoBox>
