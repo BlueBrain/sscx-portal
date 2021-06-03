@@ -90,14 +90,14 @@ const Home: React.FC = () => (
               which is a process or experiment performed on a computer as opposed to in vivo experiments
               conducted in live organisms, and in vitro experiments made of organic tissue under the microscope.
               Our digital reconstruction of a rat Somatosensory Cortex allows us a better vision and understanding
-              of the anatomy, to see behaviour recorded in experimental data which is then translated
+              of the anatomy, to see behavior recorded in experimental data which is then translated
               into our in silico model, the validation of these translations against all accessible literature,
               and the testing of new hypotheses under various conditions.
             </p>
             <p>
               The SSCx portal gives a clear view of the process used to reconstruct a brain region,
               taking you through the various Data Sections and levels of magnitude, and offering a unique opportunity
-              to observe the various results in 3D data visualisations.
+              to observe the various results in 3D data visualizations.
             </p>
             <p>
               The aim of the EPFL Blue Brain Project, a Swiss brain research initiative is to establish
