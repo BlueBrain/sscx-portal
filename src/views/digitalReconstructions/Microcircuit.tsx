@@ -24,9 +24,9 @@ const RecMicrocircuitView = () => (
                 {data => (
                   <>
                     <h3 className="mb-2">L{layerNum} Anatomy</h3>
-                    {data && <Factsheet facts={data[0].values} />}
+                    {data && <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />}
                     <h3 className="mt-3 mb-2">L{layerNum} Physiology</h3>
-                    {data && <Factsheet className="mb-3" facts={data[1].values} />}
+                    {data && <Factsheet id="layerPhysiologyFactsheet" className="mb-3" facts={data[1].values} />}
                   </>
                 )}
               </HttpData>
@@ -38,7 +38,7 @@ const RecMicrocircuitView = () => (
           <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
             {data => (
               <>
-                {data && <Factsheet facts={data[0].values}/>}
+                {data && <Factsheet id="subregionMicrocircuitFactsheet" facts={data[0].values}/>}
               </>
             )}
           </HttpData>

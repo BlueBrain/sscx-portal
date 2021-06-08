@@ -24,6 +24,7 @@ type FactsheetEntryType = {
 type FactsheetProps = {
   facts: FactsheetEntryType[];
   className?: string;
+  id?: string;
 };
 
 
@@ -120,9 +121,10 @@ const FactsheetEntry: React.FC<{
 const Factsheet: React.FC<FactsheetProps> = ({
   facts,
   className = '',
+  id = '',
 }) => {
   return (
-    <div className={`${classPrefix}basis ${className}`}>
+    <div id={id} className={`${classPrefix}basis ${className}`}>
       {facts.map(fact => (
         <FactsheetEntry key={fact.name} fact={fact} />
       ))}

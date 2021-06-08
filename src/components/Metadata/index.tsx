@@ -71,7 +71,7 @@ const Metadata: React.FC<MetadataProps> = ({ nexusDocument }) => {
   return (
     <>
       <h3>Metadata</h3>
-      <p>
+      <p id={agents ? 'metadata' : undefined}>
         Contribution: {contributionStr}
       </p>
     </>

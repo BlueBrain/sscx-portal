@@ -7,6 +7,7 @@ import { Table } from 'antd';
 type ExpMorphMemodelListProps = {
   memodels: Record<string, string>[];
   className?: string;
+  id?: string;
 }
 
 const hrefBase = '/digital-reconstructions/neurons';
@@ -58,12 +59,12 @@ const mtypeLayer = (mtype: string) => {
     : rawLayer;
 }
 
-const ExpMorphMemodelList: React.FC<ExpMorphMemodelListProps> = ({ memodels, className = '' }) => {
+const ExpMorphMemodelList: React.FC<ExpMorphMemodelListProps> = ({ memodels, className = '', id = '' }) => {
   const memodelsDataSource = memodels
     .map(memodel => ({ ...memodel, key: `${memodel.region}-${memodel.memodel_name}` }));
 
   return (
-    <div className={className}>
+    <div id={id} className={className}>
       <Table
         dataSource={memodelsDataSource}
         columns={tableColumns}

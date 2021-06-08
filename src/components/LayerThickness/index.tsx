@@ -66,7 +66,7 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
 
   return (
     <ErrorBoundary>
-      <div className={`${classPrefix}basis ${className}`}>
+      <div id="layerThickness" className={`${classPrefix}basis ${className}`}>
         <table>
           <thead>
             <tr>

@@ -11,6 +11,7 @@ const { Panel } = Collapse;
 
 export type EtypeFactsheetProps = {
   data?: any;
+  id?: string;
 };
 
 const unitLabelMap = {
@@ -23,6 +24,7 @@ const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
 const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
+  id = '',
 }) => {
   // Experimental features and model fitness table data preparation
   const expFeatures = get(data, '[0].values[0]');
@@ -80,7 +82,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   const sections = Object.keys(channelMechanisms);
 
   return (
-    <div className={styles.container}>
+    <div id="id" className={styles.container}>
       <h3>Factsheet</h3>
       <Collapse
         className="mb-3"

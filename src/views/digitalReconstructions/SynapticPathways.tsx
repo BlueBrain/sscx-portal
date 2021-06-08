@@ -40,9 +40,9 @@ const RecSynPathwaysView = () => (
             {data => (
               <>
                 <h3 className="mb-2">Anatomy</h3>
-                {data && <Factsheet facts={data[0].values} />}
+                {data && <Factsheet id="pathwayAnatomyFactsheet" facts={data[0].values} />}
                 <h3 className="mt-3 mb-2">Physiology</h3>
-                {data && <Factsheet className="mb-3" facts={data[1].values} />}
+                {data && <Factsheet id="pathwayPhysiologyFactsheet" className="mb-3" facts={data[1].values} />}
               </>
             )}
           </HttpData>

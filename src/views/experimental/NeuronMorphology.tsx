@@ -161,6 +161,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                         url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
                         org={sscx.org}
                         project={sscx.project}
+                        id="morphologyDownloadBtn"
                       >
                         Download morphology
                       </NexusFileDownloadButton>
@@ -175,7 +176,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {factsheetData => (
               <div className="mt-3">
                 <h3>Morphometrics</h3>
-                <Factsheet className="mt-2" facts={factsheetData[0].values} />
+                <Factsheet id="morphometrics" className="mt-2" facts={factsheetData[0].values} />
               </div>
             )}
           </HttpData>
@@ -184,7 +185,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {memodels => (
               <div className="mt-3">
                 <h3>Morpho-Electrical neuron models using this morphology</h3>
-                <ExpMorphMemodelList className="mt-2" memodels={memodels} />
+                <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={memodels} />
               </div>
             )}
           </HttpData>

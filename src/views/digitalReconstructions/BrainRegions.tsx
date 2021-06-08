@@ -21,7 +21,7 @@ const BrainRegionsView = () => (
           <HttpData path={subregionCircuitFactsheetPath(subregion)}>
             {data => (
               <>
-                {data && <Factsheet facts={data[0].values} />}
+                {data && <Factsheet id="subregionCircuitFactsheet" facts={data[0].values} />}
               </>
             )}
           </HttpData>
@@ -43,7 +43,7 @@ const BrainRegionsView = () => (
           <HttpData path={regionCircuitFactsheetPath()}>
             {data => (
               <>
-                {data && <Factsheet facts={data[0].values} />}
+                {data && <Factsheet id="regionCircuitFactsheet" facts={data[0].values} />}
               </>
             )}
           </HttpData>

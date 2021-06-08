@@ -75,12 +75,11 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ traces = [] }) => {
   }, [traces]);
 
   return (
-    <div className="layer-anatomy-summary__basis mt-2">
+    <div id={traces.length && agentMap ? 'expTraceTable' : null} className="layer-anatomy-summary__basis mt-2">
       <table>
         <thead>
           <tr>
             <th>Name</th>
-            {/* <th>Image</th> */}
             <th>E-Type</th>
             <th>Contribution</th>
           </tr>
@@ -89,15 +88,6 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ traces = [] }) => {
           {traces.map(trace => (
             <tr key={trace.name}>
               <td className="text-capitalize">{trace.name}</td>
-              {/* <td style={{ textAlign: 'center'}}>
-                <div className={styles.morphImageContainer}>
-                  <ImageViewer
-                    src={`/data/exp-morph-images/${morph.name}.png`}
-                    alt={`Morphology ${morph.name} image`}
-                    loading="lazy"
-                  />
-                </div>
-              </td> */}
               <td>{trace.annotation.hasBody.label}</td>
               <td>
                 {agentMap && entryToArray(trace.contribution)

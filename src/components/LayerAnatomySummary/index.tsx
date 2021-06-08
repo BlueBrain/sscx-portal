@@ -63,7 +63,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
 
   return (
     <ErrorBoundary>
-      {!!summary.length && <div className={`${classPrefix}basis`}>
+      {!!summary.length && <div id="layerAnatomySummary" className={`${classPrefix}basis`}>
         <table className="mb-2">
           <thead>
             <tr>

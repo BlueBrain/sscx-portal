@@ -42,7 +42,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
 
   return (
     <ErrorBoundary>
-      <div className={`${classPrefix}basis ${className}`}>
+      <div id="neuronDensity" className={`${classPrefix}basis ${className}`}>
         <table>
           <thead>
             <tr>

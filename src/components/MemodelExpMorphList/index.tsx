@@ -61,7 +61,7 @@ const MemodelExpMorphList: React.FC<MemodelExpMorphListProps> = ({ morphologies,
     : morphologies;
 
   return (
-    <div className={className}>
+    <div id="memodelExpMorphList" className={className}>
       <Table
         dataSource={allMorphologies}
         columns={tableColumns}

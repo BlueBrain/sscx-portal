@@ -44,7 +44,7 @@ const MorphHistogram: React.FC<MorphHistogramProps> = ({ region, mtype, classNam
   };
 
   return (
-    <div className={className}>
+    <div id="morphHistogram" className={className}>
       {axonType && (
         <>
           <h4>Axonal distributions</h4>

@@ -258,11 +258,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 </p>
                 <h3>Anatomy</h3>
                 {data && (
-                  <Factsheet facts={data[0].values}/>
+                  <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values}/>
                 )}
                 <h3 className="mt-3">Physiology</h3>
                 {data && (
-                  <Factsheet facts={data[1].values}/>
+                  <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values}/>
                 )}
 
                 <h3 className="mt-3">Model morphology</h3>
@@ -321,9 +321,9 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <p className="mb-3">Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.</p>
 
                 <h3>Anatomy</h3>
-                {data && <Factsheet facts={data[0].values}/>}
+                {data && <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values}/>}
                 <h3 className="mt-3">Physiology</h3>
-                {data && <Factsheet facts={data[1].values}/>}
+                {data && <Factsheet id="mtypePhysiologyFactsheet" facts={data[1].values}/>}
 
                 <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
               </>
@@ -339,7 +339,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                   Neurons are classified into e-types based on their electrical response properties
                   to step current injections at the soma.
                 </p>
-                <EtypeFactsheet data={data} />
+                <EtypeFactsheet id="etypeFactsheet" data={data} />
                 <div className="text-right mt-3 mb-3">
                   <Button
                     type="primary"
@@ -357,7 +357,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                       {esDocuments && (
                         <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
                       )}
-                      <Tabs type="card" className="mt-3">
+                      <Tabs type="card" className="mt-3" id={esDocuments && esDocuments.length ? 'modelFittingEphys': null}>
                         {esDocuments && esDocuments.map(esDocument => (
                           <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
                             <div style={{ minHeight: '600px' }}>
