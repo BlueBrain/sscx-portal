@@ -17,7 +17,7 @@
 
 .feedbackButton:hover {
   color: white;
-  transform: rotate(180deg) translateY(50%) translateX(2px);
+  transform: rotate(180deg) translate3d(2px, 50%, 0);
 }
 
 .closeBtn {
@@ -28,15 +28,14 @@
 
 .form {
   position: fixed;
-  right: 2rem;
+  right: -24rem;
   top: 50%;
   width: 20rem;
   max-width: calc(100vw - 4rem);
-  transform: translateX(110%) translateY(-50%);
+  transform: translateY(-50%);
   z-index: 12;
   padding: 2rem 1rem 1rem 1rem;
   background-color: white;
-  box-shadow: rgb(0 0 0 / 35%) 0 6px 100px 0;
   transition: transform 0.3s ease;
 
   :global(.ant-btn:not([disabled])) {
@@ -45,13 +44,30 @@
   }
 }
 
+.form::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: rgb(0 0 0 / 35%) 0 6px 100px 0;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease-in-out;
+}
+
 .formVisible {
   .form {
-    transform: translateY(-50%);
+    transform: translate3d(-26rem, -50%, 0);
+  }
+
+  .form::after {
+    opacity: 1;
   }
 
   .feedbackButton {
-    transform: rotate(180deg) translateY(50%) translateX(-100%);
+    transform: rotate(180deg) translate3d(-100%, 50%, 0);
   }
 }
 
