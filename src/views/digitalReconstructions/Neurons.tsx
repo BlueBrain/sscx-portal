@@ -1,16 +1,15 @@
 import React from 'react';
 
 import NeuronTemplate from '../../templates/Neuron';
-import { colorName, sectionTitle } from './config';
+import { color, sectionTitle } from './config';
 import Collapsible from '../../components/Collapsible';
-// import { neuronFactsheetPath } from '../../queries/http';
 
 
 const pathwayFactsheetPath = () => '';
 
 const NeuronsView = () => (
   <NeuronTemplate
-    color={colorName}
+    color={color}
     sectionTitle={sectionTitle}
     factsheetPath={pathwayFactsheetPath}
   >

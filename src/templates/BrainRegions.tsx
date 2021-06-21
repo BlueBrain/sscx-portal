@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
+import { Row, Col } from 'antd';
 
 import ServerSideContext from '../context/server-side-context';
-import BrainRegionsSelector, { BrainRegion } from '../components/BrainRegionsSelector';
+import BrainRegionSelector from '../components/BrainRegionSelector';
+import { Subregion } from '../types';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import Selector from '../components/Selector';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
+
+import selectorStyle from '../styles/selector.module.scss';
 
 
 export type BrainRegionTemplateProps = {
@@ -26,37 +29,65 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
 
   const query = { ...serverSideContext?.query, ...router?.query };
 
-  const setBrainRegionQuery = (brainRegion: BrainRegion) => {
+  const setBrainRegionQuery = (brainRegion: Subregion) => {
     const query = {
       brain_region: brainRegion,
     };
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
-  const currentRegion = query.brain_region as BrainRegion;
+  const currentRegion = query.brain_region as Subregion;
 
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentRegion}>
-        <div className="center-col">
-          <Title
-            primaryColor={color}
-            title="Brain Regions"
-            subtitle={sectionTitle}
-            hint="Select a subregion of interest in the S1 of the rat brain."
-          />
-          <InfoBox>
-            <p>We digitally reconstructed the non-barrel hind limb primary rat Somatosensory Cortex consisting of eight sub-regions, four million neurons mediated by four billion synapses.</p>
-          </InfoBox>
-        </div>
-        <div className="center-col">
-          <Selector title="Choose a subregion">
-            <BrainRegionsSelector
-              color={color}
-              defaultActiveBrainRegion={currentRegion}
-              onBrainRegionSelected={setBrainRegionQuery}
+        <Row
+          className="w-100"
+          align="bottom"
+          gutter={16}
+        >
+          <Col
+            xs={24}
+            md={10}
+            xl={8}
+            xxl={12}
+          >
+            <Title
+              primaryColor={color}
+              title="Brain Regions"
+              subtitle={sectionTitle}
+              hint="Select a subregion of interest in the S1 of the rat brain."
             />
-          </Selector>
-        </div>
+            <InfoBox>
+              <p>
+                We digitally reconstructed the non-barrel hind limb primary rat Somatosensory Cortex
+                consisting of eight sub-regions, four million neurons mediated by four billion synapses.
+              </p>
+            </InfoBox>
+          </Col>
+
+          <Col
+            className={`mt-2 set-accent-color--${color}`}
+            xs={24}
+            md={14}
+            xl={16}
+            xxl={12}
+          >
+            <div style={{ maxWidth: '32rem', margin: '0 auto' }}>
+              <div className={selectorStyle.row}>
+                  <div className={selectorStyle.column}>
+                    <div className={selectorStyle.head}>2. Choose a layer</div>
+                    <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                      <BrainRegionSelector
+                        color={color}
+                        value={currentRegion}
+                        onSelect={setBrainRegionQuery}
+                      />
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </Col>
+        </Row>
       </Filters>
 
       {!!children && children(currentRegion)}

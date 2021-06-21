@@ -37,12 +37,13 @@ const List: React.FC<ListProps> = ({
         {list.map(element => {
           const selected = value === element
           return <div
-            role="radio"
             key={element}
+            role="radio"
             aria-checked={selected}
             tabIndex={0}
             className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
             onClick={() => onSelect(element)}
+            title={element}
           >
             {element}
           </div>

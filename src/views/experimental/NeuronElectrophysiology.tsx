@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
+import { Row, Col } from 'antd';
 
 import ServerSideContext from '../../context/server-side-context';
 import ESData from '../../components/ESData';
@@ -11,14 +12,15 @@ import { fullElectroPhysiologyDataQuery, etypeTracesDataQuery } from '../../quer
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
-import { colorName } from './config';
+import { color } from './config';
 import List from '../../components/List';
-import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import ExpTraceTable from '../../components/ExpTraceTable';
 import Metadata from '../../components/Metadata';
 import eTypes from '../../__generated__/experimentalData.json';
 import { basePath } from '../../config';
+
+import selectorStyle from '../../styles/selector.module.scss';
 
 
 const NeuronElectrophysiology: React.FC = () => {
@@ -58,52 +60,82 @@ const NeuronElectrophysiology: React.FC = () => {
 
   return (
     <>
-      <Filters primaryColor={colorName} hasData={!!currentEtype && !!currentInstance}>
-        <div className="center-col">
-          <Title
-            primaryColor={colorName}
-            title="Neuron Electrophysiology"
-            subtitle="Experimental Data"
-            hint="Select a layer of interest in the S1 of the rat brain."
-          />
-          <div className="mb-4">
+      <Filters primaryColor={color} hasData={!!currentEtype && !!currentInstance}>
+        <Row align="bottom" className="w-100" gutter={16}>
+          <Col
+            xs={24}
+            xl={8}
+            xxl={12}
+          >
+            <Title
+              primaryColor={color}
+              title="Neuron Electrophysiology"
+              subtitle="Experimental Data"
+              hint="Select a layer of interest in the S1 of the rat brain."
+            />
             <InfoBox>
-              <p>Electrical traces were recorded from neurons using whole-cell patch clamp experiments in brain slices. A standardized stimulus protocol, called the e-code, is injected in each cell. Our scientists then classify the cells based on their firing type in different electrical types (e-types).</p>
+              <p>
+                Electrical traces were recorded from neurons using whole-cell patch clamp experiments in brain slices.
+                A standardized stimulus protocol, called the e-code, is injected in each cell.
+                Our scientists then classify the cells based on their firing type in different
+                electrical types (e-types).
+              </p>
             </InfoBox>
-          </div>
-        </div>
-        <div className="center-col">
-          <ComboSelector
-            selector={
-              <img
-                src={`${basePath}/assets/images/electroIllustration.svg`}
-                alt="Electro-physiology"
-                className="electro-phys-image"
-              />
-            }
-            list1={
-              <List
-                title="e-type"
-                list={eTypes.map(etype => etype.label)}
-                color={colorName}
-                onSelect={setEtype}
-                value={currentEtype}
-              />
-            }
-            list2={
-              <List
-                title={`Experiment instance`}
-                list={instances}
-                color={colorName}
-                onSelect={setInstance}
-                value={currentInstance}
-              />
-            }
-            listsTitle="Select cell type"
-            list2Open={!!currentEtype}
-            withGradient
-          />
-        </div>
+          </Col>
+
+          <Col
+            className={`set-accent-color--${color}`}
+            xs={24}
+            xl={16}
+            xxl={12}
+          >
+            <div className={selectorStyle.row}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>&nbsp;</div>
+                <div className={selectorStyle.body} style={{ padding: '0 4rem' }}>
+                  <img
+                    style={{ width: '100%' }}
+                    src="/sscx-portal/assets/images/selectors/ephys-bg.png"
+                    alt="Background with neuron morphology example"
+                  />
+                </div>
+              </div>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>Select a cell type</div>
+                <div className={selectorStyle.body}>
+                  <div style={{
+                    backgroundColor: 'rgb(49, 50, 84)',
+                    padding: '1rem',
+                    margin: '1rem 1rem 1rem 0'
+                  }}>
+                    <List
+                      title="e-type"
+                      block
+                      color={color}
+                      list={eTypes.map(etype => etype.label)}
+                      value={currentEtype}
+                      onSelect={setEtype}
+                    />
+                  </div>
+                  <div style={{
+                    backgroundColor: 'rgb(49, 50, 84)',
+                    padding: '1rem 1rem 1rem 2rem',
+                    margin: '1rem 0 1rem 0'
+                  }}>
+                    <List
+                      title={`Experiment instance`}
+                      block
+                      color={color}
+                      list={instances}
+                      value={currentInstance}
+                      onSelect={setInstance}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Filters>
 
       <DataContainer visible={!!currentEtype && !!currentInstance}>

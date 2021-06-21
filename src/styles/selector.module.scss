@@ -1,0 +1,30 @@
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--accent-color);
+}
+
+.head {
+  text-align: center;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.body {
+  margin: auto 0;
+  background-color: #050a30;
+}
+
+.centeredBodyContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

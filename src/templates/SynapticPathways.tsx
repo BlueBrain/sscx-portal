@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import chunk from 'lodash/chunk';
+import { Row, Col } from 'antd';
 
 import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
@@ -8,28 +9,19 @@ import InfoBox from '../components/InfoBox';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import { Layer, Color } from '../types';
-import { BrainRegion } from '../components/BrainRegionsSelector';
-import ComboSelector from '../components/ComboSelector';
+import { Subregion } from '../types';
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import List from '../components/List';
-import { accentColors } from '../config';
 import { pathwayIndexPath } from '../queries/http';
+
+import selectorStyle from '../styles/selector.module.scss';
 
 
 export type SynapticPathwaysTemplateProps = {
   color: Color;
   sectionTitle: string;
-  children?: (subregion: string, pathway: string) => React.ReactNode;
+  children?: (subregion: Subregion, pathway: string) => React.ReactNode;
 };
-
-type PathwayMType = {
-  pre: {
-    [layer: string]: string[];
-  };
-  post: {
-    [layer: string]: string[];
-  };
-}
 
 type PathwayIndex = {
   region: {
@@ -70,13 +62,13 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
 
   const [pathwayIndex, setPathwayIndex] = useState<PathwayIndex>(null);
 
-  const currentRegion: BrainRegion = query.brain_region as BrainRegion;
+  const currentRegion: Subregion = query.brain_region as Subregion;
   const currentPreLayer: Layer = query.prelayer as Layer;
   const currentPostLayer: Layer = query.postlayer as Layer;
   const currentPreType: string = query.pretype as string;
   const currentPostType: string = query.posttype as string;
 
-  const setRegion = (region: BrainRegion) => {
+  const setRegion = (region: Subregion) => {
     setParams({
       'brain_region': region,
       prelayer: null,
@@ -148,61 +140,92 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   return (
     <>
       <Filters primaryColor={color} hasData={!!hasData}>
-        <div className="center-col">
-          <Title
-            primaryColor={color}
-            title="Synaptic Pathways"
-            subtitle={sectionTitle}
-          />
-          <div>
-            <InfoBox>
-              <p>A synaptic pathway encompasses the set of all possible connections between pairs of neurons of pre and postsynaptic  morphological types (m-types).</p>
-            </InfoBox>
-            <Pills
-              className="mt-3"
-              title="1. Select a subregion"
-              list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
-              defaultValue={currentRegion}
-              onSelect={setRegion as (s: string) => void}
-              color={color}
+        <Row
+          className="w-100"
+          align="bottom"
+          gutter={16}
+        >
+          <Col
+            xs={24}
+            xl={8}
+            xxl={12}
+          >
+            <Title
+              primaryColor={color}
+              title="Synaptic Pathways"
+              subtitle={sectionTitle}
             />
-          </div>
-        </div>
-        <div className="center-col">
-          <ComboSelector
-            selector={
-              <SynapticPathwaySelector
-                color={accentColors[color]}
-                preLayer={currentPreLayer}
-                onPreLayerSelected={setPreLayerQuery}
-                postLayer={currentPostLayer}
-                onPostLayerSelected={setPostLayerQuery}
-              />
-            }
-            list1={
-              <List
-                title="m-type pre-synaptic"
-                list={preMTypes}
-                value={currentPreType}
-                onSelect={setPreTypeQuery as (s: string) => void}
-                color={color}
-              />
-            }
-            list2={
-              <List
-                title="m-type post-synaptic"
-                list={postMTypes}
-                value={currentPostType}
-                onSelect={setPostTypeQuery as (s: string) => void}
-                color="orange"
-              />
-            }
-            selectorTitle="2. Choose two layers"
-            listsTitle="3. Choose Pre and Post-synaptic"
-            list1Open={!!currentPreLayer}
-            list2Open={!!currentPostLayer}
-          />
-        </div>
+            <div>
+              <InfoBox>
+                <p>
+                  A synaptic pathway encompasses the set of all possible connections between pairs of neurons
+                  of pre and postsynaptic  morphological types (m-types).
+                </p>
+              </InfoBox>
+            </div>
+          </Col>
+
+          <Col
+            className={`set-accent-color--${color} mt-2`}
+            xs={24}
+            xl={16}
+            xxl={12}
+          >
+            <div className={selectorStyle.row}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>1. Choose a subregion</div>
+                <div className={selectorStyle.body} style={{ padding: '0 0.5rem 0.5rem 0.5rem' }}>
+                  <Pills
+                    list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
+                    defaultValue={currentRegion}
+                    onSelect={setRegion as (s: Subregion) => void}
+                    color={color}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={selectorStyle.row}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>2. Choose a layer</div>
+                <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                  <SynapticPathwaySelector
+                    color={color}
+                    maxWidth="14rem"
+                    preLayer={currentPreLayer}
+                    onPreLayerSelect={setPreLayerQuery}
+                    postLayer={currentPostLayer}
+                    onPostLayerSelect={setPostLayerQuery}
+                  />
+                </div>
+              </div>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>3. Select an ME-model</div>
+                <div className={selectorStyle.body}>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
+                    <List
+                      title="m-type pre-synaptic"
+                      block
+                      color={color}
+                      list={preMTypes}
+                      value={currentPreType}
+                      onSelect={setPreTypeQuery as (s: string) => void}
+                    />
+                  </div>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem 0' }}>
+                    <List
+                      title="m-type post-synaptic"
+                      block
+                      color="orange"
+                      list={postMTypes}
+                      value={currentPostType}
+                      onSelect={setPostTypeQuery as (s: string) => void}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Filters>
 
       {!!children && children(currentRegion, pathway as string)}

@@ -21,7 +21,7 @@ type PillProps = {
   onSelect?: (s: string) => void;
 };
 
-const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
+export const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
   return (
     <div
       role="radio"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Row, Col } from 'antd';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button, Tabs } from 'antd';
@@ -27,11 +28,9 @@ import Pills from '../components/Pills';
 import HttpData from '../components/HttpData';
 import DataContainer from '../components/DataContainer';
 import { Layer, Color } from '../types';
-import { BrainRegion } from '../components/BrainRegionsSelector';
-import ComboSelector from '../components/ComboSelector';
-import MicrocircuitSelector from '../components/MicrocircuitSelector';
+import { Subregion } from '../types';
+import LayerSelector from '../components/MicrocircuitLayerSelector';
 import List from '../components/List';
-import { accentColors } from '../config';
 import Collapsible from '../components/Collapsible';
 
 import MtypeFactsheet from '../components/MtypeFactsheet';
@@ -45,7 +44,9 @@ import NeuronMorphology from '../components/NeuronMorphology';
 import ESData from '../components/ESData';
 import NexusPlugin from '../components/NexusPlugin';
 import NexusFileDownloadButton from '../components/NexusFileDownloadButton';
-import { morphologyDataQuery, modelEphysByNamesDataQuery } from '../queries/es';
+import { morphologyDataQuery, modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
+
+import selectorStyle from '../styles/selector.module.scss';
 
 
 const { TabPane } = Tabs;
@@ -83,7 +84,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   const [memodelIndex, setMemodelIndex] = useState<any>(null);
   const [memodelNumberExceptions, setMemodelNumberExceptions] = useState<any>(null);
 
-  const currentRegion: BrainRegion = query.brain_region as BrainRegion;
+  const currentRegion: Subregion = query.brain_region as Subregion;
   const currentLayer: Layer = query.layer as Layer;
   const currentEtype: string = query.etype as string;
   const currentMtype: string = query.mtype as string;
@@ -103,7 +104,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
-  const setRegion = (region: BrainRegion) => {
+  const setRegion = (region: Subregion) => {
     setParams({
       'brain_region': region,
       mtype: null,
@@ -172,79 +173,109 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentMemodel}>
-        <div className="center-col">
-          <Title
-            primaryColor={color}
-            title="Neurons"
-            subtitle={sectionTitle}
-          />
-          <div>
-            <InfoBox>
-              <p>
-                We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
-                to enable their 3D reconstruction and their objective classification
-                into morphological types (m-types). In addition, we also characterized the electrical firing patterns
-                of these neurons to different intensities of step currents injected in the soma
-                to group their response into electrical types (e-types).
-                We then mapped the e-types expressed in each m-type
-                to account for the observed diversity of morpho-electrical subtypes (me-types).
-              </p>
-            </InfoBox>
-            <Pills
-              className="mt-3"
-              title="1. Select a subregion"
-              list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
-              defaultValue={currentRegion}
-              onSelect={setRegion as (s: string) => void}
-              color={color}
+        <Row
+          className="w-100"
+          align="bottom"
+          gutter={16}
+        >
+          <Col
+            xs={24}
+            xl={8}
+            xxl={12}
+          >
+            <Title
+              primaryColor={color}
+              title="Neurons"
+              subtitle={sectionTitle}
             />
-          </div>
-        </div>
-        <div className="center-col">
-          <ComboSelector
-            selector={
-              <MicrocircuitSelector
-                color={accentColors[color]}
-                defaultActiveLayer={currentLayer}
-                onLayerSelected={setLayer}
-                disabled={!currentRegion}
-              />
-            }
-            list1={
-              <List
-                title="M-type"
-                list={mtypes}
-                value={currentMtype}
-                onSelect={setMtype}
-                color={color}
-              />
-            }
-            list2={
-              <List
-                title="E-type"
-                list={etypes}
-                value={currentEtype}
-                onSelect={setEtype}
-                color="orange"
-              />
-            }
-            list3={
-              <List
-                title="ME-model"
-                block
-                list={memodels}
-                value={currentMemodel}
-                onSelect={setMemodel}
-                color="orange"
-              />
-            }
-            selectorTitle="2. Choose a layer"
-            listsTitle="3. Choose M-type, E-type and neuron model"
-            list1Open={!!currentLayer}
-            list2Open={!!currentMtype}
-            list3Open={!!currentMtype && !!currentEtype}
-          />
-        </div>
+            <div>
+              <InfoBox>
+                <p>
+                  We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
+                  to enable their 3D reconstruction and their objective classification
+                  into morphological types (m-types). In addition, we also characterized the electrical firing patterns
+                  of these neurons to different intensities of step currents injected in the soma
+                  to group their response into electrical types (e-types).
+                  We then mapped the e-types expressed in each m-type
+                  to account for the observed diversity of morpho-electrical subtypes (me-types).
+                </p>
+              </InfoBox>
+            </div>
+          </Col>
+
+          <Col
+            className={`set-accent-color--${color}`}
+            xs={24}
+            xl={16}
+            xxl={12}
+          >
+          <div className={selectorStyle.row}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>1. Choose a subregion</div>
+                <div className={selectorStyle.body} style={{ padding: '0 0.5rem 1rem 0.5rem' }}>
+                  <Pills
+                    list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
+                    defaultValue={currentRegion}
+                    onSelect={setRegion as (s: string) => void}
+                    color={color}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={selectorStyle.row}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>2. Choose a layer</div>
+                <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                  <LayerSelector
+                    color={color}
+                    maxWidth="14rem"
+                    value={currentLayer}
+                    onSelect={setLayer}
+                  />
+                </div>
+              </div>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>3. Select an ME-model</div>
+                <div className={selectorStyle.body}>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
+                    <Row className="w-100">
+                      <Col xs={24} sm={12}>
+                        <List
+                          title="M-type"
+                          block
+                          list={mtypes}
+                          value={currentMtype}
+                          onSelect={setMtype}
+                          color={color}
+                        />
+                      </Col>
+                      <Col xs={24} sm={12}>
+                        <List
+                          title="E-type"
+                          block
+                          color={color}
+                          list={etypes}
+                          value={currentEtype}
+                          onSelect={setEtype}
+                        />
+                      </Col>
+                    </Row>
+                  </div>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem 0' }}>
+                    <List
+                      title="ME-model"
+                      block
+                      color={color}
+                      list={memodels}
+                      value={currentMemodel}
+                      onSelect={setMemodel}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Filters>
 
       <DataContainer visible={!!currentMemodel}>
@@ -277,6 +308,23 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     Download model
                   </Button>
                 </div>
+
+                <ESData query={modelSimTraceByNameDataQuery(`${currentRegion}_${currentMemodel}`)}>
+                  {esDocuments => (
+                    <>
+                      {esDocuments && esDocuments.length && (
+                        <div className="mt-3">
+                          <h3>ME-model simulation traces</h3>
+                          <NexusPlugin
+                            name="neuron-electrophysiology"
+                            resource={esDocuments[0]._source}
+                            nexusClient={nexus}
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </ESData>
 
                 <HttpData path={modelExpMorphologiesPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
                   {expMorphologies => (
@@ -318,7 +366,9 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
             {data => (
               <>
-                <p className="mb-3">Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.</p>
+                <p className="mb-3">
+                  Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.
+                </p>
 
                 <h3>Anatomy</h3>
                 {data && <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values}/>}
@@ -357,7 +407,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                       {esDocuments && (
                         <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
                       )}
-                      <Tabs type="card" className="mt-3" id={esDocuments && esDocuments.length ? 'modelFittingEphys': null}>
+                      <Tabs
+                        id={esDocuments && esDocuments.length ? 'modelFittingEphys': null}
+                        className="mt-3"
+                        type="card"
+                      >
                         {esDocuments && esDocuments.map(esDocument => (
                           <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
                             <div style={{ minHeight: '600px' }}>

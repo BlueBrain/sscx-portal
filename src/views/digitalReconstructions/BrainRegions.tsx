@@ -4,15 +4,16 @@ import BrainRegionTemplate from '../../templates/BrainRegions';
 import DataContainer from '../../components/DataContainer';
 import Factsheet from '../../components/Factsheet';
 import HttpData from '../../components/HttpData';
-import { colorName, sectionTitle } from './config';
+import { color, sectionTitle } from './config';
 import { regionCircuitFactsheetPath, subregionCircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
 import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
 
+
 const BrainRegionsView = () => (
   <BrainRegionTemplate
-    color={colorName}
+    color={color}
     sectionTitle={sectionTitle}
   >
     {(subregion) => (

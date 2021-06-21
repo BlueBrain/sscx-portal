@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LayerAnatomyTemplate from '../../templates/LayerAnatomy';
-import { colorName, sectionTitle } from './config';
+import { color, sectionTitle } from './config';
 import { layerAnatomyDataQuery } from '../../queries/es';
 import Collapsible from '../../components/Collapsible';
 import DataContainer from '../../components/DataContainer';
@@ -13,7 +13,7 @@ import LayerAnatomySummary from '../../components/LayerAnatomySummary';
 
 const LayerAnatomyView = () => (
   <LayerAnatomyTemplate
-    color={colorName}
+    color={color}
     sectionTitle={sectionTitle}
   >
     {(layer) => (

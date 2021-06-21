@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MicrocircuitsTemplates from '../../templates/Microcircuit';
-import { colorName, sectionTitle } from './config';
+import { color, sectionTitle } from './config';
 import { layerFactsheetPath, subregionMicrocircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
 import HttpData from '../../components/HttpData';
@@ -10,9 +10,10 @@ import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
 import Factsheet from '../../components/Factsheet';
 
+
 const RecMicrocircuitView = () => (
   <MicrocircuitsTemplates
-    color={colorName}
+    color={color}
     sectionTitle={sectionTitle}
   >
     {(subregion, layerNums) => (

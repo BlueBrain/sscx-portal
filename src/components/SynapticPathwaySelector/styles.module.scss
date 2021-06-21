@@ -1,0 +1,35 @@
+.svg {
+  max-width: 100%;
+  overflow: hidden;
+
+  text {
+    fill: #fff;
+    font-size: 12.9532;
+  }
+
+  path {
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .2s ease;
+
+    &.selected {
+      cursor: default;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &.selected {
+      opacity: 1;
+    }
+  }
+}
+
+.pre path {
+  fill: var(--accent-color);
+}
+
+.post path {
+  fill: var(--secondary-accent-color);
+}

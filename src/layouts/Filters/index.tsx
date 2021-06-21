@@ -20,7 +20,7 @@ const Filters: React.FC<FiltersProps> = ({
   return (
     <div>
       <div id={id} className={styles.container}>
-        <div className="center">{children}</div>
+        {children}
       </div>
       {!!hasData && (
         <div className="scroll-to">
@@ -29,7 +29,7 @@ const Filters: React.FC<FiltersProps> = ({
             color={primaryColor}
             direction="down"
           >
-            View data
+            Click to view data
           </ScrollTo>
         </div>
       )}

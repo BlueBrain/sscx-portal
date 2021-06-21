@@ -9,7 +9,7 @@ import {
 import DataContainer from '../../components/DataContainer';
 import HttpData from '../../components/HttpData';
 import Factsheet from '../../components/Factsheet';
-import { colorName, sectionTitle } from './config';
+import { color, sectionTitle } from './config';
 import Collapsible from '../../components/Collapsible';
 import Synaptome from '../../components/Synaptome';
 
@@ -30,7 +30,7 @@ const Plot: React.FC<{ src: string }> = ({ src }) => {
 
 const RecSynPathwaysView = () => (
   <SynapticPathwaysTemplates
-    color={colorName}
+    color={color}
     sectionTitle={sectionTitle}
   >
     {(subregion, pathway) => (

@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
+import { Row, Col } from 'antd';
 
 import ServerSideContext from '../context/server-side-context';
 import Filters from '../layouts/Filters';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import Selector from '../components/Selector';
-import MicrocircuitSelector from '../components/MicrocircuitSelector';
+import LayerSelector from '../components/MicrocircuitLayerSelector';
 import { Layer, Color } from '../types';
 import Pills from '../components/Pills';
-import { BrainRegion } from '../components/BrainRegionsSelector';
-import { accentColors } from '../config';
+import { Subregion } from '../types';
+
+import selectorStyle from '../styles/selector.module.scss';
 
 
 export type MicrocircuitTemplateProps = {
@@ -33,10 +34,10 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
-  const currentRegion: BrainRegion = query.brain_region as BrainRegion;
+  const currentRegion: Subregion = query.brain_region as Subregion;
   const currentLayer: Layer = query.layer as Layer;
 
-  const setRegion = (region: BrainRegion) => {
+  const setRegion = (region: Subregion) => {
     setQuery({
       layer: currentLayer,
       brain_region: region,
@@ -59,36 +60,68 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentLayer && !!currentRegion}>
-        <div className="center-col">
-          <Title
-            primaryColor={color}
-            title="Microcircuit"
-            subtitle={sectionTitle}
-          />
-          <div>
-            <InfoBox>
-              <p>A neuronal microcircuit is the smallest functional ecosystem in any brain region that encompasses a diverse morphological and electrical assortment of neurons, and their synaptic interactions.</p>
-            </InfoBox>
-            <Pills
-              className="mt-3"
-              title="1. Select a subregion"
-              list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
-              defaultValue={currentRegion}
-              onSelect={setRegion as (s: string) => void}
-              color={color}
+        <Row
+          className="w-100"
+          align="bottom"
+          gutter={16}
+        >
+          <Col
+            xs={24}
+            xl={8}
+            xxl={12}
+          >
+            <Title
+              primaryColor={color}
+              title="Microcircuit"
+              subtitle={sectionTitle}
             />
-          </div>
-        </div>
-        <div className="center-col">
-          <Selector title="2. Choose a layer" column>
-            <MicrocircuitSelector
-              color={accentColors[color]}
-              defaultActiveLayer={currentLayer}
-              onLayerSelected={setLayer}
-              disabled={!currentRegion}
-            />
-          </Selector>
-        </div>
+            <div>
+              <InfoBox>
+                <p>
+                  A neuronal microcircuit is the smallest functional ecosystem in any brain region that
+                  encompasses a diverse morphological and electrical assortment of neurons,
+                  and their synaptic interactions.
+                </p>
+              </InfoBox>
+            </div>
+          </Col>
+
+          <Col
+            className={`mt-2 set-accent-color--${color}`}
+            xs={24}
+            xl={16}
+            xxl={12}
+          >
+            <div style={{ maxWidth: '32rem', margin: '0 auto' }}>
+              <div className={selectorStyle.row}>
+                <div className={selectorStyle.column}>
+                  <div className={selectorStyle.head}>1. Choose a subregion</div>
+                  <div className={selectorStyle.body} style={{ padding: '1rem 2rem' }}>
+                    <Pills
+                      list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
+                      defaultValue={currentRegion}
+                      onSelect={setRegion as (s: string) => void}
+                      color={color}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={selectorStyle.row}>
+                <div className={selectorStyle.column}>
+                  <div className={selectorStyle.head}>2. Choose a layer</div>
+                  <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                    <LayerSelector
+                      color={color}
+                      maxWidth="14rem"
+                      value={currentLayer}
+                      onSelect={setLayer}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Filters>
 
       {!!children && children(currentRegion, layerNums)}

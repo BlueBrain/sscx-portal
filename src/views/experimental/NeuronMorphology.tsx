@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
+import { Row, Col } from 'antd';
 
 import ServerSideContext from '../../context/server-side-context';
 import ESData from '../../components/ESData';
 import HttpData from '../../components/HttpData';
 import DataContainer from '../../components/DataContainer';
-import LayerAnatomySelector from '../../components/LayerAnatomySelector';
+import LayerSelector from '../../components/AnatomyLayerSelector';
 import ImageViewer from '../../components/ImageViewer';
 import { morphologyDataQuery, mtypeExpMorphologyListDataQuery } from '../../queries/es';
 import { expMorphologyFactsheetPath, expMorphMemodelsPath } from '../../queries/http';
@@ -14,9 +15,8 @@ import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
 import NexusPlugin from '../../components/NexusPlugin';
-import { colorName } from './config';
+import { color } from './config';
 import { Layer } from '../../types';
-import ComboSelector from '../../components/ComboSelector';
 import Collapsible from '../../components/Collapsible';
 import List from '../../components/List';
 import ExpMorphMemodelList from '../../components/ExpMorphMemodelList';
@@ -26,6 +26,8 @@ import ExpMorphologyTable from '../../components/ExpMorphologyTable';
 import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { sscx, basePath } from '../../config';
+
+import selectorStyle from '../../styles/selector.module.scss';
 
 
 const NeuronExperimentalMorphology: React.FC = () => {
@@ -86,53 +88,78 @@ const NeuronExperimentalMorphology: React.FC = () => {
 
   return (
     <>
-      <Filters primaryColor={colorName} hasData={!!currentInstance}>
-        <div className="center-col">
-          <Title
-            primaryColor={colorName}
-            title={<span>Neuronal <br/> Morphology</span>}
-            subtitle="Experimental Data"
-            hint="Select a layer of interest in the S1 of the rat brain."
-          />
-          <div className="mb-4">
+      <Filters primaryColor={color} hasData={!!currentInstance}>
+        <Row
+          className="w-100"
+          align="bottom"
+          gutter={16}
+        >
+          <Col
+            xs={24}
+            xl={8}
+            xxl={12}
+          >
+            <Title
+              primaryColor={color}
+              title={<span>Neuronal <br/> Morphology</span>}
+              subtitle="Experimental Data"
+              hint="Select a layer of interest in the S1 of the rat brain."
+            />
             <InfoBox>
-              <p>Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal and dendritic morphologies. Using a combination of objective classification methods for pyramidal cell types, and subjective classification for interneuron types, we have identified 57 m-types in the primary rat Somatosensory Cortex.</p>
+              <p>
+                Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into
+                diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal
+                and dendritic morphologies. Using a combination of objective classification methods for
+                pyramidal cell types, and subjective classification for interneuron types,
+                we have identified 57 m-types in the primary rat Somatosensory Cortex.
+              </p>
             </InfoBox>
-          </div>
-        </div>
-        <div className="center-col">
-          <ComboSelector
-            selectorTitle="1. Choose a layer"
-            selector={
-              <LayerAnatomySelector
-                color={colorName}
-                activeLayer={currentLayer}
-                onLayerSelected={setLayer}
-              />
-            }
-            listsTitle="2. Select reconstruction"
-            list1={
-              <List
-                list={mtypes}
-                value={currentMtype}
-                title="m-type"
-                color={colorName}
-                onSelect={setMtype}
-              />
-            }
-            list2={
-              <List
-                list={instances}
-                value={currentInstance}
-                title="Reconstructed morphology"
-                color={colorName}
-                onSelect={setInstance}
-              />
-            }
-            list1Open={!!currentLayer}
-            list2Open={!!currentMtype}
-          />
-        </div>
+          </Col>
+          <Col
+            className={`set-accent-color--${color}`}
+            xs={24}
+            xl={16}
+            xxl={12}
+          >
+            <div className={selectorStyle.row}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>1. Choose a layer</div>
+                <div className={selectorStyle.body} style={{ padding: '2rem 4rem' }}>
+                  <LayerSelector
+                    color={color}
+                    value={currentLayer}
+                    onSelect={setLayer}
+                  />
+                </div>
+              </div>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>2. Select a reconstruction</div>
+                <div className={selectorStyle.body}>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
+                    <List
+                      block
+                      list={mtypes}
+                      value={currentMtype}
+                      title="m-type"
+                      color={color}
+                      onSelect={setMtype}
+                    />
+                  </div>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem 0' }}>
+                    <List
+                      block
+                      list={instances}
+                      value={currentInstance}
+                      title="Reconstructed morphology"
+                      color={color}
+                      onSelect={setInstance}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Filters>
 
       <DataContainer visible={!!currentInstance}>
@@ -206,7 +233,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
           </div>
 
           <h3 className="mt-3">Reconstructed morphologies</h3>
-          <p>Data are provided as ASCII files containing 3D representations of neuronal morphologies - axons and dendrites - whose shapes are traced and reconstructed using Neurolucida (neuron tracing, reconstruction, and analysis software).</p>
+          <p>
+            Data are provided as ASCII files containing 3D representations of neuronal morphologies -
+            axons and dendrites - whose shapes are traced and reconstructed using Neurolucida
+            (neuron tracing, reconstruction, and analysis software).
+          </p>
           <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
             {esDocuments => (
               <>
