@@ -143,6 +143,40 @@ export const modelEphysByNamesDataQuery = (
 };
 
 
+export const modelSimTraceByNameDataQuery = (
+  name: string,
+): ESQuery | null => {
+  if (!name) {
+    return null;
+  }
+
+  return {
+    from: 0,
+    size: 10000,
+    query: {
+      bool: {
+        filter: [
+          {
+            bool: {
+              must: [
+                { term: { '@type': 'SingleCellSimulationTrace' } },
+              ],
+            },
+          },
+          {
+            bool: {
+              must: {
+                term: { 'name.raw': name }
+              }
+            }
+          },
+        ],
+      },
+    },
+  };
+};
+
+
 export const mtypeExpMorphologyListDataQuery = (
   mtype: string
 ): ESQuery | null => {
