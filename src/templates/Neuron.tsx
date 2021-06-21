@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'antd';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -20,7 +20,6 @@ import {
   memodelMorphologyPath,
   memodelArchivePath,
 } from '../queries/http';
-import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Filters from '../layouts/Filters';
@@ -32,13 +31,10 @@ import { Subregion } from '../types';
 import LayerSelector from '../components/MicrocircuitLayerSelector';
 import List from '../components/List';
 import Collapsible from '../components/Collapsible';
-
-import MtypeFactsheet from '../components/MtypeFactsheet';
 import MemodelExpMorphList from '../components/MemodelExpMorphList';
 import EtypeFactsheet from '../components/EtypeFactsheet';
 import Factsheet from '../components/Factsheet';
 import MorphHistogram from '../components/MorphHistogram';
-import ImageViewer from '../components/ImageViewer';
 import VideoPlayer from '../components/VideoPlayer';
 import NeuronMorphology from '../components/NeuronMorphology';
 import ESData from '../components/ESData';
@@ -77,9 +73,8 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
 }) => {
   const router = useRouter();
   const nexus = useNexusContext();
-  const serverSideContext = useContext(ServerSideContext);
 
-  const query = { ...serverSideContext?.query, ...router?.query };
+  const query = router.query;
 
   const [memodelIndex, setMemodelIndex] = useState<any>(null);
   const [memodelNumberExceptions, setMemodelNumberExceptions] = useState<any>(null);

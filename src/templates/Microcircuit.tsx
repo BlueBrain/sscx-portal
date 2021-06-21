@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { Row, Col } from 'antd';
 
-import ServerSideContext from '../context/server-side-context';
 import Filters from '../layouts/Filters';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
@@ -26,9 +25,8 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const serverSideContext = useContext(ServerSideContext);
 
-  const query = { ...serverSideContext?.query, ...router?.query };
+  const query = router.query;
 
   const setQuery = (query: any) => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });

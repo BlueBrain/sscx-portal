@@ -25,9 +25,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const serverSideContext = useContext(ServerSideContext);
-
-  const query = { ...serverSideContext?.query, ...router?.query };
+  const query = router.query;
 
   const setBrainRegionQuery = (brainRegion: Subregion) => {
     const query = {

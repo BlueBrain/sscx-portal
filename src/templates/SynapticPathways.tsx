@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import chunk from 'lodash/chunk';
 import { Row, Col } from 'antd';
 
-import ServerSideContext from '../context/server-side-context';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Filters from '../layouts/Filters';
@@ -42,9 +41,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const serverSideContext = useContext(ServerSideContext);
-
-  const query = { ...serverSideContext?.query, ...router?.query };
+  const query = router.query;
 
   const setParams = (params: Record<string, string>): void => {
     const query = {
