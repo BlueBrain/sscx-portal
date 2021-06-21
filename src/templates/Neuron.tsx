@@ -132,7 +132,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     setParams({ memodel })
   };
 
-  const mtypes = currentLayer && memodelIndex
+  const mtypes = currentRegion && currentLayer && memodelIndex
     ? Object.keys(memodelIndex[currentRegion])
       .filter(mtype => currentLayer.match(/\d+/)[0].includes(mtype.match(/\d+/)[0]))
     : [];
@@ -141,18 +141,10 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
     ? memodelIndex[currentRegion][currentMtype]
     : [];
 
-  const memodelMemodelRange = () => {
-    return range(1, );
-  }
-
   const memodels = currentEtype && memodelIndex
     ? range(1, get(memodelNumberExceptions, `${currentMtype}.${currentEtype}.${currentRegion}`, 5) + 1)
       .map(idx => `${currentMtype}_${currentEtype}_${idx}`)
     : [];
-
-  const getMorphologyDistribution = (morphologyResource: any) => {
-    return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
-  };
 
   useEffect(() => {
     if (memodelIndex) return;
