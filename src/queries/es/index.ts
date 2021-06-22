@@ -170,6 +170,18 @@ export const modelSimTraceByNameDataQuery = (
               }
             }
           },
+          {
+            nested: {
+              path: 'distribution',
+              query: {
+                bool: {
+                  must: {
+                    match: { 'distribution.encodingFormat': 'application/nwb' },
+                  },
+                },
+              },
+            },
+          },
         ],
       },
     },
