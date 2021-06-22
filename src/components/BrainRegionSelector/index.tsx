@@ -61,6 +61,7 @@ const BrainRegionSelector: React.FC<SubregionSelectProps> = ({
       className={`${styles.svg} set-accent-color--${color}`}
       style={{ maxWidth }}
       enableBackground="new 0 0 189.9 225.8"
+      width="100%"
       viewBox="0 0 189.9 225.8"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -68,9 +69,8 @@ const BrainRegionSelector: React.FC<SubregionSelectProps> = ({
       <image
         height="1181"
         width="1181"
-        overflow="visible"
         transform="matrix(.3357 0 0 .3357 -93.68 -86.0367)"
-        xlinkHref="/sscx-portal/assets/images/selectors/subregion-selector-bg.png"
+        href="/sscx-portal/assets/images/selectors/subregion-selector-bg.png"
       />
 
       <g fontSize="7">

@@ -50,6 +50,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
       className={`${style.svg} set-accent-color--${color}`}
       style={{ maxWidth }}
       enableBackground="new 0 0 155 245"
+      width="100%"
       viewBox="0 0 155 245"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -57,9 +58,8 @@ const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
       <image
         height="1285"
         width="1207"
-        overflow="visible"
         transform="matrix(.24 0 0 .24 -71.461 -24.8222)"
-        xlinkHref="/sscx-portal/assets/images/selectors/microcircuit-layer-selector-bg.png"
+        href="/sscx-portal/assets/images/selectors/microcircuit-layer-selector-bg.png"
       />
       <g fontSize="11.8561">
         {Object.entries(layerSvgContent).map(([layer, svgContent]) => (

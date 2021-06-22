@@ -46,16 +46,16 @@ const AnatomyLayerSelector: React.FC<AnatomyLayerSelectorProps> = ({
     <svg
       className={`${styles.svg} set-accent-color--${color}`}
       enableBackground="new 0 0 190 250"
+      width="100%"
       viewBox="0 0 190 250"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <image
         height="1282"
-        overflow="hidden"
-        transform="matrix(.24 0 0 .24 -50.0485 -39.622)"
         width="1207"
-        xlinkHref="/sscx-portal/assets/images/selectors/layer-selector-bg.png"
+        transform="matrix(.24 0 0 .24 -50.0485 -39.622)"
+        href="/sscx-portal/assets/images/selectors/layer-selector-bg.png"
       />
       <g fontSize="12.9532">
         {Object.entries(layerSvgContent).map(([layer, svgContent]) => (

@@ -51,16 +51,16 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
       className={styles.svg}
       style={{ maxWidth }}
       enableBackground="new 0 0 155 245"
+      width="100%"
       viewBox="0 0 155 245"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <image
         height="1285"
-        overflow="visible"
-        transform="matrix(.24 0 0 .24 -71.0247 -24.9962)"
         width="1207"
-        xlinkHref="/sscx-portal/assets/images/selectors/pathway-selector-bg.png"
+        transform="matrix(.24 0 0 .24 -71.0247 -24.9962)"
+        href="/sscx-portal/assets/images/selectors/pathway-selector-bg.png"
       />
 
       <g fontSize="11.8561">
