@@ -15,6 +15,7 @@ type FactsheetEntryType = {
   description: string;
   unit?: string;
   value?: number | string;
+  values?: number[];
   value_map?: {
     [key: string]: string | number;
   };
@@ -57,7 +58,16 @@ const FactsheetSingleMeanStdEntry: React.FC<{
     <div className="row mt-1">
       <div className="col-xs-4 name">{fact.name}</div>
       <div className="col-xs-4 value">
-        <NumberFormat value={fact.value_map?.mean} /> ± <NumberFormat value={fact.value_map?.std} /> <Unit value={fact.unit} />
+        {fact.value_map && (
+          <>
+            <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> <Unit value={fact.unit} />
+          </>
+        )}
+        {fact.values && (
+          <>
+            <NumberFormat value={fact.values[0]} /> ± <NumberFormat value={fact.values[1]} /> <Unit value={fact.unit} />
+          </>
+        )}
       </div>
     </div>
   );
@@ -104,9 +114,8 @@ const FactsheetEntry: React.FC<{
   fact
 }) => {
   if(
-    fact.value_map &&
-    !isNil(fact.value_map.mean) &&
-    !isNil(fact.value_map.std)
+    (fact.values && fact.values.length) ||
+    (fact.value_map && !isNil(fact.value_map.mean) && !isNil(fact.value_map.std))
   ) {
     return (<FactsheetSingleMeanStdEntry fact={fact} />);
   }

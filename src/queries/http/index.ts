@@ -91,6 +91,14 @@ export const expMorphMemodelsPath = (morphologyName: string) => {
   return `${staticDataBaseUrl}/exp-morph-models/${morphologyName}.json`;
 };
 
+export const expMorphPopulationFactesheetPath = (mtype: string) => {
+  return `${staticDataBaseUrl}/exp-morph-populations/${mtype}/factsheet.json`;
+};
+
+export const expTracePopulationFactsheetPath = (etype: string) => {
+  return `${staticDataBaseUrl}/exp-trace-populations/${etype}/factsheet.json`;
+};
+
 export const memodelNumberExceptionsPath = `${staticDataBaseUrl}/memodel-number-exceptions.json`;
 
 export const memodelIndexPath = `${staticDataBaseUrl}/memodel-index.json`;

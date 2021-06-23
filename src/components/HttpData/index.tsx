@@ -28,8 +28,12 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
 
     setState({ ...state, loading: true, data: null });
     fetch(path)
-      .then(res => {
-        if (res.ok) return res.json();
+      .then(async res => {
+        // TODO: remove when factesheets don't longer contain NaN values
+        if (res.ok) {
+          const resBody = await res.text();
+          return JSON.parse(resBody.replace(/NaN/g, 'null'));
+        }
 
         const err = new Error(`Can't fetch ${path}`);
         captureException(err);

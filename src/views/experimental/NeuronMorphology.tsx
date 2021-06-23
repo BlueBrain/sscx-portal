@@ -10,7 +10,7 @@ import DataContainer from '../../components/DataContainer';
 import LayerSelector from '../../components/AnatomyLayerSelector';
 import ImageViewer from '../../components/ImageViewer';
 import { morphologyDataQuery, mtypeExpMorphologyListDataQuery } from '../../queries/es';
-import { expMorphologyFactsheetPath, expMorphMemodelsPath } from '../../queries/http';
+import { expMorphologyFactsheetPath, expMorphMemodelsPath, expMorphPopulationFactesheetPath } from '../../queries/http';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -28,6 +28,7 @@ import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { sscx, basePath } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
+import { features } from 'process';
 
 
 const NeuronExperimentalMorphology: React.FC = () => {
@@ -85,6 +86,12 @@ const NeuronExperimentalMorphology: React.FC = () => {
       .map(esDocument => esDocument._source)
       .sort((m1, m2) => (m1.name > m2.name) ? 1 : -1);
   };
+
+  const preprocessPopulationFactesheet = factsheetData => {
+    return factsheetData.features
+      .filter(feature => feature.values && feature.values[0])
+      .map(feature => ({ ...feature, name: feature.name.replace(/\_/g, ' ') }))
+  }
 
   return (
     <>
@@ -220,7 +227,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
 
         <Collapsible title={`Population ${currentMtype}`}>
           <h3>Factsheet</h3>
-          <p>TBD</p>
+          <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
+            {factsheetData => (
+              <Factsheet facts={preprocessPopulationFactesheet(factsheetData)}/>
+            )}
+          </HttpData>
 
           <h3 className="mt-3">Distribution</h3>
           <div className="row">

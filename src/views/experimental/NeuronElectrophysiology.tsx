@@ -9,6 +9,7 @@ import DataContainer from '../../components/DataContainer';
 import ImageViewer from '../../components/ImageViewer';
 import NexusPlugin from '../../components/NexusPlugin';
 import { fullElectroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
+import { expTracePopulationFactsheetPath } from '../../queries/http';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -16,11 +17,13 @@ import { color } from './config';
 import List from '../../components/List';
 import Collapsible from '../../components/Collapsible';
 import ExpTraceTable from '../../components/ExpTraceTable';
+import ExpTracePopulationFactsheet from '../../components/ExpTracePopulationFactsheet';
 import Metadata from '../../components/Metadata';
 import eTypes from '../../__generated__/experimentalData.json';
 import { basePath } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
+import HttpData from '../../components/HttpData';
 
 
 const NeuronElectrophysiology: React.FC = () => {
@@ -173,8 +176,13 @@ const NeuronElectrophysiology: React.FC = () => {
             The reaction of the cell at the start of the stimulus is also important,
             there can be a delay at the beginning (‘d’ types) or a little burst (‘b’ types).
           </p>
+
           <h3>Factsheet</h3>
-          <p>TBD</p>
+          <HttpData path={expTracePopulationFactsheetPath(currentEtype)}>
+            {factsheetData => (
+              <ExpTracePopulationFactsheet data={factsheetData} />
+            )}
+          </HttpData>
 
           <h3 className="mt-3">Distribution</h3>
           <div className="row">
