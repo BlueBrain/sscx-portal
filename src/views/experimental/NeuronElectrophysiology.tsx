@@ -9,7 +9,7 @@ import DataContainer from '../../components/DataContainer';
 import ImageViewer from '../../components/ImageViewer';
 import NexusPlugin from '../../components/NexusPlugin';
 import { fullElectroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
-import { expTracePopulationFactsheetPath } from '../../queries/http';
+import { expTracePopulationFactsheetPath, expTraceFactsheetPath } from '../../queries/http';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -166,6 +166,12 @@ const NeuronElectrophysiology: React.FC = () => {
               </>
             )}
           </ESData>
+
+          <HttpData path={expTraceFactsheetPath(currentInstance)}>
+            {factsheetData => (
+              <ExpTracePopulationFactsheet data={factsheetData} />
+            )}
+          </HttpData>
         </Collapsible>
 
         <Collapsible title={`E-type ${currentEtype}`} className="mt-4">

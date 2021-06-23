@@ -99,6 +99,10 @@ export const expTracePopulationFactsheetPath = (etype: string) => {
   return `${staticDataBaseUrl}/exp-trace-populations/${etype}/factsheet.json`;
 };
 
+export const expTraceFactsheetPath = (instance: string) => {
+  return `${staticDataBaseUrl}/exp-trace-factsheets/${instance}/factsheet.json`;
+};
+
 export const memodelNumberExceptionsPath = `${staticDataBaseUrl}/memodel-number-exceptions.json`;
 
 export const memodelIndexPath = `${staticDataBaseUrl}/memodel-index.json`;
