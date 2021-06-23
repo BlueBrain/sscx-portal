@@ -2,7 +2,6 @@ import React from 'react';
 import { Table, Collapse } from 'antd';
 
 import NumberFormat from '../NumberFormat';
-import styles from './index.module.scss';
 
 
 const { Panel } = Collapse;
@@ -20,7 +19,7 @@ const unitLabelMap = {
 const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
 
-const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
+const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
   id = '',
 }) => {
@@ -59,16 +58,23 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Mean ± Std',
       key: 'value',
+      colSpan: 2,
       render: (row) => (
         <span>
-          <NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {unitLabel(row.unit)} &nbsp; (n={row.n})
+          <NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {unitLabel(row.unit)}
         </span>
       ),
     },
+    {
+      title: 'N',
+      key: 'n',
+      colSpan: 0,
+      render: row => <span>n={row.n}</span>
+    }
   ];
 
   return (
-    <div className={styles.container}>
+    <div>
       <Collapse
         className="mb-3"
         bordered={false}
@@ -92,4 +98,4 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
 };
 
 
-export default EtypeFactsheet;
+export default ExpTraceFactsheet;

@@ -17,7 +17,7 @@ import { color } from './config';
 import List from '../../components/List';
 import Collapsible from '../../components/Collapsible';
 import ExpTraceTable from '../../components/ExpTraceTable';
-import ExpTracePopulationFactsheet from '../../components/ExpTracePopulationFactsheet';
+import ExpTraceFactsheet from '../../components/ExpTraceFactsheet';
 import Metadata from '../../components/Metadata';
 import eTypes from '../../__generated__/experimentalData.json';
 import { basePath } from '../../config';
@@ -169,7 +169,7 @@ const NeuronElectrophysiology: React.FC = () => {
 
           <HttpData path={expTraceFactsheetPath(currentInstance)}>
             {factsheetData => (
-              <ExpTracePopulationFactsheet data={factsheetData} />
+              <ExpTraceFactsheet data={factsheetData} />
             )}
           </HttpData>
         </Collapsible>
@@ -186,7 +186,7 @@ const NeuronElectrophysiology: React.FC = () => {
           <h3>Factsheet</h3>
           <HttpData path={expTracePopulationFactsheetPath(currentEtype)}>
             {factsheetData => (
-              <ExpTracePopulationFactsheet data={factsheetData} />
+              <ExpTraceFactsheet data={factsheetData} />
             )}
           </HttpData>
 
