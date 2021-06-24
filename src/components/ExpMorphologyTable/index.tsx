@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { keyBy } from 'lodash';
 import { useNexusContext } from '@bbp/react-nexus';
 import { DownloadOutlined } from '@ant-design/icons';
+import qs from 'querystring';
 
 import { sscx } from '../../config';
+import { Layer } from '../../types';
 import { expMorphologyImgPath, expMorphologyImgThumbnailPath } from '../../queries/http';
 import ImageViewer from '../ImageViewer';
 import NexusFileDownloadButton from '../NexusFileDownloadButton';
@@ -12,6 +15,8 @@ import styles from './styles.module.scss'
 
 
 type ExpMorphologyTableProps = {
+  layer: Layer;
+  mtype: string;
   morphologies: Record<string, any>[];
 };
 
@@ -37,7 +42,7 @@ const getMorphologyDistribution = (morphologyResource: any) => {
   return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
 };
 
-const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = [] }) => {
+const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, morphologies = [] }) => {
   const nexus = useNexusContext();
 
   const agentIds = morphologies.reduce((ids: string[], morphology) => {
@@ -81,6 +86,15 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = 
       .then(agentMap => setAgentMap(agentMap));
   }, [morphologies]);
 
+  const morphHref = (morphologyName: string) => {
+    const query = qs.stringify({
+      layer,
+      mtype,
+      instance: morphologyName,
+    });
+    return `/experimental-data/neuron-morphology/?${query}#data`
+  };
+
   return (
     <div id="expMorphologyTable" className="layer-anatomy-summary__basis mt-2">
       <table>
@@ -96,7 +110,9 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = 
         <tbody>
           {morphologies.map(morph => (
             <tr key={morph.name}>
-              <td className="text-capitalize">{morph.name}</td>
+              <td className="text-capitalize">
+                <Link href={morphHref(morph.name)}>{morph.name}</Link>
+              </td>
               <td style={{ textAlign: 'center'}}>
                 <div className={styles.morphImageContainer}>
                   <ImageViewer

@@ -169,7 +169,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
       <DataContainer visible={!!currentInstance}>
         <Collapsible
           className="mb-4"
-          title={`Neuron Morphology ${currentMtype} ${currentInstance}`}
+          title={`Neuron Morphology ${currentInstance}`}
         >
           <ESData
             query={morphologyDataQuery(currentMtype, currentInstance)}
@@ -250,7 +250,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {esDocuments => (
               <>
                 {!!esDocuments &&
-                  <ExpMorphologyTable morphologies={getAndSortMorphologies(esDocuments)} />
+                  <ExpMorphologyTable
+                    layer={currentLayer}
+                    mtype={currentMtype}
+                    morphologies={getAndSortMorphologies(esDocuments)}
+                  />
                 }
               </>
             )}
