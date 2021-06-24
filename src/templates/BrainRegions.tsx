@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { Row, Col } from 'antd';
 
-import ServerSideContext from '../context/server-side-context';
 import BrainRegionSelector from '../components/BrainRegionSelector';
 import { Subregion } from '../types';
 import Title from '../components/Title';

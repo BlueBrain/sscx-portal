@@ -5,9 +5,6 @@ import { keyBy } from 'lodash';
 import { useNexusContext } from '@bbp/react-nexus';
 
 import { sscx } from '../../config';
-import ImageViewer from '../ImageViewer';
-
-import styles from './styles.module.scss'
 
 
 type ExpTraceTableProps = {
