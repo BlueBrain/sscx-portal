@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col } from 'antd';
 
-import ServerSideContext from '../../context/server-side-context';
 import ESData from '../../components/ESData';
 import HttpData from '../../components/HttpData';
 import DataContainer from '../../components/DataContainer';
@@ -28,15 +27,13 @@ import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { sscx, basePath } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
-import { features } from 'process';
 
 
 const NeuronExperimentalMorphology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
-  const serverSideContext = useContext(ServerSideContext);
 
-  const query = { ...serverSideContext.query, ...router.query };
+  const { query } = router;
 
   const setQuery = (query: any): void => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });

@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <NexusProvider nexusClient={nexusClient}>
       <MainLayout>
-        {/* TODO: move to separate component */}
+        {/* TODO: move all head elements to a separate component */}
         <Head>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap" />
           <script src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js"></script>
