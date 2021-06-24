@@ -9,6 +9,7 @@ const classPrefixPill = 'pill__';
 type PillsProps = {
   title?: string;
   list: string[];
+  titles?: string[];
   defaultValue?: string;
   onSelect?: (s: string) => void;
   color?: Color;
@@ -19,9 +20,10 @@ type PillProps = {
   element: string;
   selected: boolean;
   onSelect?: (s: string) => void;
+  title?: string;
 };
 
-export const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
+export const Pill: React.FC<PillProps> = ({ element, selected, onSelect, title }) => {
   return (
     <div
       role="radio"
@@ -31,6 +33,7 @@ export const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
         selected ? `${classPrefixPill}selected` : ''
       }`}
       onClick={() => onSelect && onSelect(element)}
+      title={title}
     >
       {element}
     </div>
@@ -40,6 +43,7 @@ export const Pill: React.FC<PillProps> = ({ element, selected, onSelect }) => {
 const Pills: React.FC<PillsProps> = ({
   title,
   list,
+  titles,
   defaultValue,
   onSelect,
   color = '',
@@ -62,10 +66,11 @@ const Pills: React.FC<PillsProps> = ({
         role="radiogroup"
         aria-labelledby={`${classPrefixPill}${id}`}
       >
-        {list.map(el => (
+        {list.map((el, index) => (
           <Pill
             key={el}
             element={el}
+            title={titles ? titles[index] : undefined}
             selected={(activePill || defaultValue) === el}
             onSelect={handleSelectedPill}
           />

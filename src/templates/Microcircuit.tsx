@@ -9,6 +9,7 @@ import LayerSelector from '../components/MicrocircuitLayerSelector';
 import { Layer, Color } from '../types';
 import Pills from '../components/Pills';
 import { Subregion } from '../types';
+import { subregionTitle, subregions } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -96,7 +97,8 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
                   <div className={selectorStyle.head}>1. Choose a subregion</div>
                   <div className={selectorStyle.body} style={{ padding: '1rem 2rem' }}>
                     <Pills
-                      list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
+                      list={subregions}
+                      titles={subregions.map(subregion => subregionTitle[subregion])}
                       defaultValue={currentRegion}
                       onSelect={setRegion as (s: string) => void}
                       color={color}
