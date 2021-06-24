@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { keyBy } from 'lodash';
 import { useNexusContext } from '@bbp/react-nexus';
+import { DownloadOutlined } from '@ant-design/icons';
 
 import { sscx } from '../../config';
-import { expMorphologyImgPath } from '../../queries/http';
+import { expMorphologyImgPath, expMorphologyImgThumbnailPath } from '../../queries/http';
 import ImageViewer from '../ImageViewer';
+import NexusFileDownloadButton from '../NexusFileDownloadButton';
 
 import styles from './styles.module.scss'
 
@@ -30,6 +32,10 @@ function getAgentType(agent) {
     ? 'institution'
     : 'person';
 }
+
+const getMorphologyDistribution = (morphologyResource: any) => {
+  return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
+};
 
 const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = [] }) => {
   const nexus = useNexusContext();
@@ -84,6 +90,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = 
             <th>Image</th>
             <th>M-Type</th>
             <th>Contribution</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -94,6 +101,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = 
                 <div className={styles.morphImageContainer}>
                   <ImageViewer
                     src={expMorphologyImgPath(morph.name)}
+                    thumbnailSrc={expMorphologyImgThumbnailPath(morph.name)}
                     alt={`Morphology ${morph.name} image`}
                     loading="lazy"
                   />
@@ -106,6 +114,18 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ morphologies = 
                   .sort((a1, a2) => a1.type > a2.type ? 1 : -1)
                   .map(agent => <span key={agent.label}>{agent.label} <br/></span>)
                 }
+              </td>
+              <td className="text-center">
+                <NexusFileDownloadButton
+                  className={styles.downloadBtn}
+                  filename={getMorphologyDistribution(morph).name}
+                  url={getMorphologyDistribution(morph).contentUrl}
+                  org={sscx.org}
+                  project={sscx.project}
+                  animate={false}
+                >
+                  <DownloadOutlined />
+                </NexusFileDownloadButton>
               </td>
             </tr>
           ))}

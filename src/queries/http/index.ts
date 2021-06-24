@@ -62,6 +62,10 @@ export const expMorphologyImgPath = (morphology: string) => {
   return `${staticDataBaseUrl}/exp-morph-images/${morphology}.png`;
 };
 
+export const expMorphologyImgThumbnailPath = (morphology: string) => {
+  return `${staticDataBaseUrl}/exp-morph-images/${morphology}__w640.png`;
+};
+
 export const morphHistogramIndexPath = (region: string, mtype: string) => {
   return `${staticDataBaseUrl}/morph-histogram/${region}_Column/${mtype}/histogram-index.json`;
 };

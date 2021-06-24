@@ -15,6 +15,7 @@ export type NexusFileDownloadButtonProps = {
   children: React.ReactNode;
   id?: string;
   className?: string;
+  animate?: boolean;
 };
 
 const NexusFileDownloadButton: React.FC<NexusFileDownloadButtonProps> = ({
@@ -25,6 +26,7 @@ const NexusFileDownloadButton: React.FC<NexusFileDownloadButtonProps> = ({
   children,
   className = '',
   id = '',
+  animate = true,
 }) => {
   const nexus = useNexusContext();
 
@@ -48,7 +50,8 @@ const NexusFileDownloadButton: React.FC<NexusFileDownloadButtonProps> = ({
       type="primary"
       size="small"
       onClick={download}
-      loading={loading}
+      loading={animate && loading}
+      disabled={loading}
     >
       {children}
     </Button>
