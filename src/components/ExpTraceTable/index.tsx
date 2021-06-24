@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import qs from 'querystring';
 import { keyBy } from 'lodash';
 import { useNexusContext } from '@bbp/react-nexus';
 
@@ -9,6 +11,7 @@ import styles from './styles.module.scss'
 
 
 type ExpTraceTableProps = {
+  etype: string;
   traces: Record<string, any>[];
 };
 
@@ -30,7 +33,7 @@ function getAgentType(agent) {
     : 'person';
 }
 
-const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ traces = [] }) => {
+const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => {
   const nexus = useNexusContext();
 
   const agentIds = traces.reduce((ids: string[], trace) => {
@@ -74,6 +77,14 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ traces = [] }) => {
       .then(agentMap => setAgentMap(agentMap));
   }, [traces]);
 
+  const instanceHref = (instanceName: string) => {
+    const query = qs.stringify({
+      etype,
+      etype_instance: instanceName,
+    });
+    return `/experimental-data/neuron-electrophysiology/?${query}#data`;
+  };
+
   return (
     <div id={traces.length && agentMap ? 'expTraceTable' : null} className="layer-anatomy-summary__basis mt-2">
       <table>
@@ -87,7 +98,7 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ traces = [] }) => {
         <tbody>
           {traces.map(trace => (
             <tr key={trace.name}>
-              <td className="text-capitalize">{trace.name}</td>
+              <td><Link href={instanceHref(trace.name)}>{trace.name}</Link></td>
               <td>{trace.annotation.hasBody.label}</td>
               <td>
                 {agentMap && entryToArray(trace.contribution)

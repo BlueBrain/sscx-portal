@@ -138,7 +138,7 @@ const NeuronElectrophysiology: React.FC = () => {
       </Filters>
 
       <DataContainer visible={!!currentEtype && !!currentInstance}>
-        <Collapsible title={`Electrophysiological recordings instance ${currentEtype}_${currentInstance}`}>
+        <Collapsible title={`Electrophysiological recordings instance ${currentInstance}`}>
           <p className="mb-3">
             This section shows the whole-cell patch clamp recording of the neuron. The stimulus represents
             the current trace that was injected into the cell using the current clamp method.
@@ -165,7 +165,10 @@ const NeuronElectrophysiology: React.FC = () => {
 
           <HttpData path={expTraceFactsheetPath(currentInstance)}>
             {factsheetData => (
-              <ExpTraceFactsheet data={factsheetData} />
+              <div className="mt-3">
+                <h3>Electrical features</h3>
+                <ExpTraceFactsheet data={factsheetData} />
+              </div>
             )}
           </HttpData>
         </Collapsible>
@@ -202,7 +205,7 @@ const NeuronElectrophysiology: React.FC = () => {
             {esDocuments => (
               <>
                 {!!esDocuments && (
-                  <ExpTraceTable traces={getAndSortTraces(esDocuments)}/>
+                  <ExpTraceTable etype={currentEtype} traces={getAndSortTraces(esDocuments)}/>
                 )}
               </>
             )}
