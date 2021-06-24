@@ -110,9 +110,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
         <tbody>
           {morphologies.map(morph => (
             <tr key={morph.name}>
-              <td className="text-capitalize">
-                <Link href={morphHref(morph.name)}>{morph.name}</Link>
-              </td>
+              <td><Link href={morphHref(morph.name)}>{morph.name}</Link></td>
               <td style={{ textAlign: 'center'}}>
                 <div className={styles.morphImageContainer}>
                   <ImageViewer

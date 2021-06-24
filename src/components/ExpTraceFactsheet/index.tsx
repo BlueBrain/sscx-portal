@@ -9,6 +9,7 @@ const { Panel } = Collapse;
 export type EtypeFactsheetProps = {
   data?: any;
   id?: string;
+  className?: string;
 };
 
 const unitLabelMap = {
@@ -22,6 +23,7 @@ const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
   id = '',
+  className = '',
 }) => {
   const tableData = {};
   const protocols = [];
@@ -74,12 +76,8 @@ const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
   ];
 
   return (
-    <div>
-      <Collapse
-        className="mb-3"
-        bordered={false}
-        defaultActiveKey={protocols[0]}
-      >
+    <div className={className}>
+      <Collapse bordered={false} defaultActiveKey={protocols[0]}>
         {protocols.map(protocol => (
           <Panel key={protocol} header={<strong>{protocol}</strong>}>
             <Table

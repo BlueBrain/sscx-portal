@@ -165,9 +165,9 @@ const NeuronElectrophysiology: React.FC = () => {
 
           <HttpData path={expTraceFactsheetPath(currentInstance)}>
             {factsheetData => (
-              <div className="mt-3">
+              <div className="mt-4">
                 <h3>Electrical features</h3>
-                <ExpTraceFactsheet data={factsheetData} />
+                <ExpTraceFactsheet className="mt-2" data={factsheetData} />
               </div>
             )}
           </HttpData>
