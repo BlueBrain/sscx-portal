@@ -71,7 +71,6 @@ const NeuronElectrophysiology: React.FC = () => {
               primaryColor={color}
               title="Neuron Electrophysiology"
               subtitle="Experimental Data"
-              hint="Select a layer of interest in the S1 of the rat brain."
             />
             <InfoBox>
               <p>
