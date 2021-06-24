@@ -1804,11 +1804,11 @@ $collapsible-padding: 2rem;
   cursor: pointer;
   &:hover {
     background-color: map-get($basePalette, "navy-1");
+  }
 
-    svg {
-      animation: arrow-down 1s infinite;
-      animation-timing-function: ease-out;
-    }
+  &.animated svg {
+    animation: arrow-down 1s infinite;
+    animation-timing-function: ease-out;
   }
 
   &.yellow {

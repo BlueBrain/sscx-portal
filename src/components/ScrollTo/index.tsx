@@ -13,6 +13,7 @@ type ScrollToProps = {
   direction: Direction;
   children: ReactChild | ReactFragment;
   color?: Color;
+  animated?: boolean;
 };
 
 const ScrollTo: React.FC<ScrollToProps> = ({
@@ -20,6 +21,7 @@ const ScrollTo: React.FC<ScrollToProps> = ({
   direction,
   children,
   color = '',
+  animated = false,
 }) => {
   const scroll = () => {
     const target = document.querySelector(`#${anchor}`);
@@ -29,7 +31,7 @@ const ScrollTo: React.FC<ScrollToProps> = ({
   };
 
   return (
-    <div onClick={scroll} className={`${classPrefix}basis ${color}`}>
+    <div onClick={scroll} className={`${classPrefix}basis ${color} ${animated ? 'animated' : ''}`}>
       {children}
       <span className={`${classPrefix}direction`}>
         {direction === 'up' && <IoIosArrowUp />}

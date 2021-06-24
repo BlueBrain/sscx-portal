@@ -28,6 +28,7 @@ const Filters: React.FC<FiltersProps> = ({
             anchor="data"
             color={primaryColor}
             direction="down"
+            animated
           >
             Click to view data
           </ScrollTo>
