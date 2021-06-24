@@ -1,27 +1,8 @@
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-
-import ServerSideContext from '../../context/server-side-context';
 import NeuronsView from '../../views/validations/Neurons';
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {
-      serverSideContext: {
-        query: context.query,
-      },
-    },
-  }
-}
-
-type NeuronsPageProps = {
-  serverSideContext: GetServerSidePropsContext,
-}
-
-export default function NeuronsPage({ serverSideContext }: NeuronsPageProps) {
+export default function NeuronsPage() {
   return (
-    <ServerSideContext.Provider value={serverSideContext}>
-      <NeuronsView />
-    </ServerSideContext.Provider>
+    <NeuronsView />
   );
 }
