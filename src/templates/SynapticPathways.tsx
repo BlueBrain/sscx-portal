@@ -183,7 +183,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             </div>
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>2. Choose a layer</div>
+                <div className={selectorStyle.head}>2. Choose a pre- and postsynaptic layers</div>
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
                   <SynapticPathwaySelector
                     color={color}
@@ -196,7 +196,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                 </div>
               </div>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>3. Select an ME-model</div>
+                <div className={selectorStyle.head}>3. Select pathway M-types</div>
                 <div className={selectorStyle.body}>
                   <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
                     <List
