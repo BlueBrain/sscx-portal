@@ -2,18 +2,20 @@ const { withSentryConfig } = require('@sentry/nextjs');
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 
+const SentryWebpackPluginOptions = {
+  silent: true,
+};
+
 const basePath = '/sscx-portal';
 
-module.exports = withSentryConfig({
+const nextConfig = withSentryConfig({
   trailingSlash: true,
   basePath: basePath,
   assetPrefix: `${basePath}/`,
   images: {
     path: `${basePath}/_next/image`,
   },
-  future: {
-    webpack5: true,
-  },
+  webpack5: true,
   images: {
     domains: ['localhost', 'sscx-portal-static-data'],
   },
@@ -56,3 +58,6 @@ module.exports = withSentryConfig({
     },];
   },
 });
+
+
+module.exports = withSentryConfig(nextConfig, SentryWebpackPluginOptions);
