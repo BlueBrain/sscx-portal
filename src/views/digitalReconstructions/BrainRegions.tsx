@@ -1,14 +1,22 @@
 import React from 'react';
+import { Table } from 'antd';
 
 import BrainRegionTemplate from '../../templates/BrainRegions';
 import DataContainer from '../../components/DataContainer';
 import Factsheet from '../../components/Factsheet';
 import HttpData from '../../components/HttpData';
 import { color, sectionTitle } from './config';
+import { subregions, subregionTitle } from '../../constants';
 import { regionCircuitFactsheetPath, subregionCircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
 import ImageViewer from '../../components/ImageViewer';
 import Button from '../../components/Button';
+
+const subregionTableDataSource = subregions.map(subregion => ({ abbr: subregion, name: subregionTitle[subregion] }));
+const subregionTableColumns = [
+  { title: 'Abbreviation', dataIndex: 'abbr', key: 'abbr' },
+  { title: 'Full name', dataIndex: 'name', key: 'name' },
+];
 
 
 const BrainRegionsView = () => (
@@ -30,21 +38,30 @@ const BrainRegionsView = () => (
 
         <Collapsible title="S1 (Region) Factsheet" className="mt-4">
           <p>The S1 consists of eight sub-regions:</p>
-          <ol className="mb-3">
-            <li>S1HL, "Hind limb"</li>
-            <li>S1FL, "Fore Limb"</li>
-            <li>S1Sh, "Shoulder"</li>
-            <li>S1Tr, "Trunk"</li>
-            <li>S1J, “Jaw"</li>
-            <li>S1ULp, "Upper lip"</li>
-            <li>S1DZ, "Disgranular zone"</li>
-            <li>S1DZO, "Oral disgranular zone"</li>
-          </ol>
+
+          <Table 
+            className="mb-4"
+            dataSource={subregionTableDataSource}
+            columns={subregionTableColumns}
+            pagination={false}
+            size="small"
+            tableLayout="fixed"
+            bordered
+          />
 
           <HttpData path={regionCircuitFactsheetPath()}>
             {data => (
               <>
-                {data && <Factsheet id="regionCircuitFactsheet" facts={data[0].values} />}
+                {data && (
+                  <>
+                    <h3>Factsheet</h3>
+                    <Factsheet
+                      id="regionCircuitFactsheet"
+                      className="mt-2"
+                      facts={data[0].values}
+                    />
+                  </>
+                )}
               </>
             )}
           </HttpData>
