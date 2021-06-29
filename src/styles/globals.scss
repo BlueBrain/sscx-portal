@@ -85,6 +85,9 @@ html, body {
   color: map-get($basePalette, "white");
   background-color: map-get($basePalette, "navy-4");
   scroll-behavior: smooth;
+  width: auto;
+  height: auto;
+  min-height: 100vh;
 }
 
 button,
@@ -92,18 +95,9 @@ a {
   cursor: pointer;
 }
 
-// h3 {
-//   font-size: map-get($fontSize, "large");
-//   font-weight: 600;
-// }
-
 p {
   font-weight: 300;
 }
-
-// a {
-//   font-weight: 400;
-// }
 
 section {
   padding: 40px 0;
@@ -217,6 +211,10 @@ section {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .text-bold {
   font-weight: bold;
 }
@@ -276,104 +274,6 @@ section {
 
 .ant-table-thead > tr > th {
   font-weight: bold;
-}
-
-
-
-
-
-
-
-
-
-
-// BrainRegionsSelector
-g {
-  outline-style: none;
-}
-
-.brain-regions-svg {
-  &__region {
-    cursor: pointer;
-
-    &:hover {
-      .brain-regions-svg__shape {
-        transition: fill 0.2s ease-in-out;
-
-        &.yellow {
-          fill: map-get($accentPalette, "yellow");
-        }
-
-        &.orange {
-          fill: map-get($accentPalette, "orange");
-        }
-
-        &.blue {
-          fill: map-get($accentPalette, "blue");
-        }
-
-        &.lavender {
-          fill: map-get($accentPalette, "lavender");
-        }
-
-        &.green {
-          fill: map-get($accentPalette, "green");
-        }
-
-        &.grey {
-          fill: map-get($accentPalette, "grey");
-        }
-      }
-    }
-  }
-
-  &__shape {
-    fill: #303354;
-    stroke: #fff;
-    stroke-width: 1.6671;
-    stroke-miterlimit: 10;
-
-    &--active {
-      stroke: #fff;
-      stroke-width: 1.6671;
-      stroke-miterlimit: 10;
-
-      &.yellow {
-        fill: map-get($accentPalette, "yellow");
-      }
-
-      &.orange {
-        fill: map-get($accentPalette, "orange");
-      }
-
-      &.blue {
-        fill: map-get($accentPalette, "blue");
-      }
-
-      &.lavender {
-        fill: map-get($accentPalette, "lavender");
-      }
-
-      &.green {
-        fill: map-get($accentPalette, "green");
-      }
-
-      &.grey {
-        fill: map-get($accentPalette, "grey");
-      }
-    }
-  }
-
-  &__outline {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 1.6667;
-    stroke-miterlimit: 10;
-  }
-
-  &__name {
-    fill: #fff;
-  }
 }
 
 
@@ -603,125 +503,6 @@ $collapsible-padding: 2rem;
 
 
 
-
-// ComboSelector
-.combo-selector__basis {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  .selector__basis {
-    text-align: center;
-    padding-top: 0;
-    min-width: 420px;
-    height: 530px;
-  }
-
-  p.combo-boxes-header {
-    font-weight: 600;
-    top: 80px;
-    left: 300px;
-    white-space: nowrap;
-    text-align: center;
-    letter-spacing: 1px;
-    font-size: 19px;
-  }
-
-  .list-1,
-  .list-2,
-  .list-3 {
-    left: 279px;
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 0 10px 10px 0;
-    max-width: 0;
-    overflow: hidden;
-    padding: 0;
-    transition: all 0.4s;
-
-    &.open {
-      padding: 12px;
-    }
-  }
-
-  .list-1 {
-    margin-top: 5px;
-
-    &.open {
-      padding-left: 40px;
-      margin-left: -5px;
-      max-width: 300px;
-    }
-  }
-
-  .list-2 {
-    margin-top: 10px;
-
-    &.open {
-      padding-left: 80px;
-      margin-left: -5px;
-      max-width: 600px;
-
-      &.with-gradient {
-        padding-left: 275px;
-        margin-left: -187px;
-        background: linear-gradient(
-          313deg,
-          rgba(255, 255, 255, 0.5) 76%,
-          rgba(0, 0, 0, 0) 76%
-        );
-      }
-    }
-  }
-
-  .list-3 {
-    margin-top: 10px;
-
-    &.open {
-      padding-left: 40px;
-      margin-left: -5px;
-      max-width: 600px;
-
-      &.with-gradient {
-        padding-left: 275px;
-        margin-left: -187px;
-        background: linear-gradient(
-          313deg,
-          rgba(255, 255, 255, 0.5) 76%,
-          rgba(0, 0, 0, 0) 76%
-        );
-      }
-    }
-  }
-
-  @media (max-width: 796px) {
-    .list-1, .list-2, .list-3 {
-      padding: 0 !important;
-      margin: 0 !important;
-      max-width: 400px !important;
-      margin-bottom: 2rem !important;
-      .list__basis {
-        width: 400px;
-      }
-    }
-  }
-
-  .electro-phys-image {
-    width: 390px;
-    margin-top: -30px;
-    margin-right: -30px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
 // DataContainer
 .data-container__basis {
   background-color: map-get($basePalette, "grey");
@@ -729,17 +510,13 @@ $collapsible-padding: 2rem;
   width: 100%;
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;
+  padding: 4rem 0 6rem 0;
 
   .center {
     background-color: map-get($basePalette, "grey");
-    margin: 4rem auto 60px;
+    margin: 0 auto;
     max-width: 1080px;
-    margin-bottom: calc(100px + 4rem);
-
-    // & > div {
-    //   margin-top: 20px;
-    // }
+    margin-bottom: 4rem;
   }
 
   .scroll-to {
@@ -1126,206 +903,13 @@ $collapsible-padding: 2rem;
 
 // ImageViewer
 .image-viewer__basis {
-  // $maxWidth: 600px;
-
-  // max-width: $maxWidth;
   position: relative;
 
   img {
     width: 100%;
     cursor: pointer;
   }
-  // button,
-  // a {
-  //   font-size: 1.5rem;
-  //   line-height: 1rem;
-  //   padding: 0.3rem;
-  //   background: #basePalette[navy-2];
-  //   color: #basePalette[white];
-  //   border-radius: 3px;
-  //   border: none;
-  //   position: absolute;
-  //   box-shadow: 4px 1px 4px 0 rgba(0, 0, 0, 0.3);
-  //   transition: all 0.2s;
-  //   &:hover {
-  //     box-shadow: none;
-  //   }
-  //   &:active {
-  //     background-color: #basePalette[navy-1];
-  //   }
-  //   &.icon-button__expand {
-  //     margin-left: -2.5rem;
-  //     top: 0.5rem;
-  //   }
-  //   &.icon-button__download {
-  //     margin-left: 0.5rem;
-  //     bottom: 0.5rem;
-  //   }
-  // }
 }
-
-
-
-
-
-
-// InfoBox
-// .info-box__basis {
-//   width: 100%;
-//   max-width: 480px;
-//   padding: 30px;
-//   background-color: rgba(6, 7, 10, 0.5);
-//   border-radius: 15px;
-//   border: 2px solid #fff;
-//   box-sizing: border-box;
-//   transition: all 0.2s;
-
-//   &.default {
-//     border: none;
-//   }
-
-//   &.yellow {
-//     background-color: map-get($accentPalette, "yellow");
-//   }
-//   &.blue {
-//     background-color: map-get($accentPalette, "blue");
-//   }
-//   &.lavender {
-//     background-color: map-get($accentPalette, "lavender");
-//   }
-//   &.green {
-//     background-color: map-get($accentPalette, "green");
-//   }
-//   &.grey {
-//     background-color: map-get($accentPalette, "grey");
-//   }
-
-//   h3 {
-//     margin: 0;
-//   }
-//   p,
-//   span {
-//     margin-top: 15px;
-//     font-size: map-get($fontSize, "small");
-//     line-height: 1.7;
-//   }
-//   p {
-//     font-weight: 700;
-//     white-space: pre-line;
-//   }
-//   span {
-//     color: rgba(255, 255, 255, 0.8);
-//     cursor: pointer;
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// LayerAnatomySelector
-.layer-anatomy-svg {
-  &__layer-background-top {
-    fill: #050a30;
-  }
-
-  &__layer-background-left {
-    fill: #52617d;
-  }
-
-  &__layer {
-    cursor: pointer;
-
-    &:hover {
-      .layer-anatomy-svg__shape {
-        transition: fill 0.2s ease-in-out;
-
-        &.yellow {
-          fill: map-get($accentPalette, "yellow");
-        }
-
-        &.orange {
-          fill: map-get($accentPalette, "orange");
-        }
-
-        &.blue {
-          fill: map-get($accentPalette, "blue");
-        }
-
-        &.lavender {
-          fill: map-get($accentPalette, "lavender");
-        }
-
-        &.green {
-          fill: map-get($accentPalette, "green");
-        }
-
-        &.grey {
-          fill: map-get($accentPalette, "grey");
-        }
-      }
-    }
-  }
-
-  &__shape {
-    fill: #303354;
-    stroke: #fff;
-    stroke-width: 1.6671;
-    stroke-miterlimit: 10;
-
-    &--active {
-      stroke: #fff;
-      stroke-width: 1.6671;
-      stroke-miterlimit: 10;
-
-      &.yellow {
-        fill: map-get($accentPalette, "yellow");
-      }
-
-      &.orange {
-        fill: map-get($accentPalette, "orange");
-      }
-
-      &.blue {
-        fill: map-get($accentPalette, "blue");
-      }
-
-      &.lavender {
-        fill: map-get($accentPalette, "lavender");
-      }
-
-      &.green {
-        fill: map-get($accentPalette, "green");
-      }
-
-      &.grey {
-        fill: map-get($accentPalette, "grey");
-      }
-    }
-  }
-
-  &__name {
-    fill: #fff;
-  }
-
-  &__outline {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 1.6671;
-    stroke-miterlimit: 10;
-  }
-}
-
-
 
 
 
@@ -1588,39 +1172,6 @@ $collapsible-padding: 2rem;
 
 
 
-// MicrocircuitSelector
-.microcircuit_svg__st2 {
-  fill: none;
-}
-
-.microcircuit_svg__st3 {
-  enable-background: new;
-}
-
-.microcircuit_svg__st4 {
-  fill: #fff;
-}
-
-.microcircuit_svg__st5 {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.1491;
-  stroke-miterlimit: 10;
-}
-
-#microcircuit_svg__layers.enabled path {
-  cursor: pointer;
-  fill: #303354;
-  transition: fill 0.1s ease-in-out;
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -1869,95 +1420,6 @@ $collapsible-padding: 2rem;
     background-color: map-get($basePalette, "navy-1");
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Selector
-.selector__basis {
-  width: 100%;
-  min-width: 400px;
-  max-width: 420px;
-  transition: all 0.2s;
-  &.column {
-    max-width: 280px;
-    min-height: 530px;
-    @media (max-width: $small) {
-      max-width: 180px;
-    }
-  }
-  p {
-    text-align: center;
-    font-weight: 600;
-    &:not(& .column) {
-      margin-bottom: 0;
-    }
-    letter-spacing: 1px;
-    font-size: 19px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// SynapticPathwaySelector
-.synaptic_pathways_svg__st2 {
-  fill: none;
-}
-
-.synaptic_pathways_svg__st3 {
-  enable-background: new;
-}
-
-.synaptic_pathways_svg__st4 {
-  fill: #fff;
-}
-
-.synaptic_pathways_svg__st5 {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.1629;
-  stroke-miterlimit: 10;
-}
-
-#pre_pathway_svg__layers,
-#post_pathway_svg__layers {
-  path {
-    cursor: pointer;
-    fill: #303354;
-    transition: fill 0.1s ease-in-out;
-  }
-}
-
-
-
-
-
-
 
 
 
@@ -2766,57 +2228,6 @@ $collapsible-padding: 2rem;
     }
   }
 
-  // .section-2 {
-  //   h2 {
-  //     color: map-get($basePalette, "navy-3");
-  //     text-align: center;
-  //   }
-
-  //   .content {
-  //     flex-direction: row-reverse;
-  //   }
-
-  //   .workflow,
-  //   .image {
-  //     flex: 1 1 0;
-  //   }
-
-  //   .image {
-  //     text-align: right;
-  //   }
-
-  //   .workflow {
-  //     padding: 30px 0 60px;
-  //   }
-
-  //   #screenshot {
-  //     margin-left: -30px;
-  //     margin-right: 240px;
-  //     max-width: 100%;
-  //   }
-
-  //   @media (max-width: $small) {
-  //     .content {
-  //       flex-direction: column;
-  //     }
-
-  //     h2 {
-  //       text-align: left;
-  //     }
-
-  //     .image {
-  //       width: 100%;
-  //       text-align: left;
-  //     }
-
-  //     #screenshot {
-  //       // width: 280px;
-  //       display: none;
-  //       // margin-right: initial;
-  //     }
-  //   }
-  // }
-
   .section-3 {
     background-color: map-get($basePalette, "navy-4");
 
@@ -3061,24 +2472,4 @@ $collapsible-padding: 2rem;
 }
 .morpho-legend > ul li.soma::before {
   color: var(--soma);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// common
-
-.text-right {
-  text-align: right;
 }

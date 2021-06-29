@@ -1,9 +1,7 @@
-import React, { ReactChild, ReactFragment } from 'react';
-// import './style.scss';
+import React from 'react';
 import Brand from '../Brand';
 import NavDesktop from '../NavDesktop';
 import NavMobile from '../NavMobile';
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import { accentColors } from '../../config';
 import SvgRegions from '../../components/Icons/Regions';
@@ -11,6 +9,7 @@ import SvgNeuron from '../../components/Icons/Neuron';
 import SvgMicrocircuit from '../../components/Icons/Microcircuit';
 import SvgSynapse from '../../components/Icons/Synapse';
 import { IoIosArrowDropdown } from 'react-icons/io';
+
 
 const classPrefix = 'nav__';
 
