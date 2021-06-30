@@ -65,7 +65,11 @@ const FactsheetSingleMeanStdEntry: React.FC<{
         )}
         {fact.values && (
           <>
-            <NumberFormat value={fact.values[0]} /> ± <NumberFormat value={fact.values[1]} /> <Unit value={fact.unit} />
+            <NumberFormat value={fact.values[0]} />&nbsp;
+            {fact.values[1] && (<>
+              ± <NumberFormat value={fact.values[1]} />&nbsp;
+            </>)}
+            <Unit value={fact.unit} />
           </>
         )}
       </div>

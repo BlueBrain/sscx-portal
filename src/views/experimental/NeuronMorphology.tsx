@@ -84,12 +84,6 @@ const NeuronExperimentalMorphology: React.FC = () => {
       .sort((m1, m2) => (m1.name > m2.name) ? 1 : -1);
   };
 
-  const preprocessPopulationFactesheet = factsheetData => {
-    return factsheetData.values
-      .filter(feature => feature.values && feature.values[0])
-      .map(feature => ({ ...feature, name: feature.name.replace(/\_/g, ' ') }))
-  }
-
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentInstance}>
@@ -226,7 +220,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <h3>Factsheet</h3>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
             {factsheetData => (
-              <Factsheet facts={preprocessPopulationFactesheet(factsheetData)}/>
+              <Factsheet facts={factsheetData.values}/>
             )}
           </HttpData>
 
