@@ -101,10 +101,10 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
         <thead>
           <tr>
             <th>Name</th>
-            <th>Image</th>
+            <th>Preview</th>
             <th>M-Type</th>
             <th>Contribution</th>
-            <th>Actions</th>
+            <th>Download</th>
           </tr>
         </thead>
         <tbody>
