@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col } from 'antd';
@@ -7,9 +7,10 @@ import ESData from '../../components/ESData';
 import HttpData from '../../components/HttpData';
 import DataContainer from '../../components/DataContainer';
 import LayerSelector from '../../components/AnatomyLayerSelector';
-import ImageViewer from '../../components/ImageViewer';
+import ExpMorphDistribution from '../../components/ExpMorphDistribution';
 import { morphologyDataQuery, mtypeExpMorphologyListDataQuery } from '../../queries/es';
 import { expMorphologyFactsheetPath, expMorphMemodelsPath, expMorphPopulationFactesheetPath } from '../../queries/http';
+
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -24,7 +25,7 @@ import Factsheet from '../../components/Factsheet';
 import ExpMorphologyTable from '../../components/ExpMorphologyTable';
 import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
-import { sscx, basePath } from '../../config';
+import { sscx } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
 
@@ -224,15 +225,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             )}
           </HttpData>
 
-          <h3 className="mt-3">Distribution</h3>
-          <div className="row">
-            <div className="col-xs-12 col-sm-6">
-              <ImageViewer src={`${basePath}/assets/images/population-distribution-1.png`} />
-            </div>
-            <div className="col-xs-12 col-sm-6">
-              <ImageViewer src={`${basePath}/assets/images/population-distribution-2.png`} />
-            </div>
-          </div>
+          <ExpMorphDistribution className="mt-3" mtype={currentMtype}/>
 
           <h3 className="mt-3">Reconstructed morphologies</h3>
           <p>
