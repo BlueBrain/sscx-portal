@@ -85,7 +85,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
   };
 
   const preprocessPopulationFactesheet = factsheetData => {
-    return factsheetData.features
+    return factsheetData.values
       .filter(feature => feature.values && feature.values[0])
       .map(feature => ({ ...feature, name: feature.name.replace(/\_/g, ' ') }))
   }
