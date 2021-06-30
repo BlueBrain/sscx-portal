@@ -9,6 +9,9 @@ const SentryWebpackPluginOptions = {
 const basePath = '/sscx-portal';
 
 const nextConfig = withSentryConfig({
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   trailingSlash: true,
   basePath: basePath,
   assetPrefix: `${basePath}/`,
