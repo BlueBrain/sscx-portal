@@ -20,7 +20,7 @@ npm run build-static-data-proxy
 The script will ask credentials for the SSCx Portal's production deployment (HTTP basic auth), once build,
 can be started with:
 ```bash
-start-static-data-proxy
+npm run start-static-data-proxy
 ```
 
 To start the portal in development mode, run:

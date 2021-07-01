@@ -25,7 +25,7 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
   const plots: Record<string, string[]> = {};
   plotList.sort().forEach(plotName => {
     const neuriteType = neuriteTypeByName(plotName);
-    console.log(`${plotName} - has ${neuriteType}`);
+
     if (!plots[neuriteType]) {
       plots[neuriteType] = [plotName];
     } else {
