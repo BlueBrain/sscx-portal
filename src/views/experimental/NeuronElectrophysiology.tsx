@@ -17,6 +17,7 @@ import List from '../../components/List';
 import Collapsible from '../../components/Collapsible';
 import ExpTraceTable from '../../components/ExpTraceTable';
 import ExpTraceFactsheet from '../../components/ExpTraceFactsheet';
+import ExpEphysDistribution from '../../components/ExpEphysDistribution';
 import Metadata from '../../components/Metadata';
 import eTypes from '../../__generated__/experimentalData.json';
 import { basePath } from '../../config';
@@ -190,14 +191,7 @@ const NeuronElectrophysiology: React.FC = () => {
           </HttpData>
 
           <h3 className="mt-3">Distribution</h3>
-          <div className="row">
-            <div className="col-xs-12 col-sm-6">
-              <ImageViewer src={`${basePath}/assets/images/population-distribution-1.png`} />
-            </div>
-            <div className="col-xs-12 col-sm-6">
-              <ImageViewer src={`${basePath}/assets/images/population-distribution-2.png`} />
-            </div>
-          </div>
+          <ExpEphysDistribution etype={currentEtype} />
 
           <h3 className="mt-3">Experimental instances</h3>
 

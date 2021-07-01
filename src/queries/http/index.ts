@@ -107,6 +107,14 @@ export const expMorphPopulationPlotPath = (mtype, plotName: string) => {
   return `${staticDataBaseUrl}/exp-morph-populations/${mtype}/${plotName}`;
 };
 
+export const expEphysPopulationPlotIndexPath = (mtype: string) => {
+  return `${staticDataBaseUrl}/exp-trace-populations/${mtype}/plots.json`;
+};
+
+export const expEphysPopulationPlotPath = (etype: string, protocol: string, plotName: string) => {
+  return `${staticDataBaseUrl}/exp-trace-populations/${etype}/${protocol}/${plotName}`;
+};
+
 export const expTracePopulationFactsheetPath = (etype: string) => {
   return `${staticDataBaseUrl}/exp-trace-populations/${etype}/factsheet.json`;
 };
