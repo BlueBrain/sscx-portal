@@ -28,26 +28,28 @@ const ExpEphysDistribution: React.FC<ExpEphysDistributionProps> = ({ etype, clas
 
   return (
     <div id="distributionPlots" className={className}>
-      <Collapse
-        className="mb-3"
-        bordered={false}
-        defaultActiveKey={protocols[0]}
-      >
-        {protocols.map(protocol => (
-          <Panel key={protocol} header={<strong>{protocol}</strong>}>
-            <div className="row">
-              {plotIndex[protocol].sort().map(plotName => (
-                <div key={plotName} className="col-xs-6 col-md-3">
-                  <ImageViewer
-                    src={expEphysPopulationPlotPath(etype, protocol, plotName)}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </Panel>
-        ))}
-      </Collapse>
+      {protocols.length && (
+        <Collapse
+          className="mb-3"
+          bordered={false}
+          defaultActiveKey={protocols[0]}
+        >
+          {protocols.map(protocol => (
+            <Panel key={protocol} header={<strong>{protocol}</strong>}>
+              <div className="row">
+                {plotIndex[protocol].sort().map(plotName => (
+                  <div key={plotName} className="col-xs-6 col-md-3">
+                    <ImageViewer
+                      src={expEphysPopulationPlotPath(etype, protocol, plotName)}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          ))}
+        </Collapse>
+      )}
     </div>
   );
 };
