@@ -161,8 +161,15 @@ const NeuronExperimentalMorphology: React.FC = () => {
         </Row>
       </Filters>
 
-      <DataContainer visible={!!currentInstance}>
+      <DataContainer
+        visible={!!currentInstance}
+        navItems={[
+          { id: 'morphologySection', label: 'Morphology' },
+          { id: 'mtypeSection', label: 'M-type' },
+        ]}
+      >
         <Collapsible
+          id="morphologySection"
           className="mb-4"
           title={`Neuron Morphology ${currentInstance}`}
         >
@@ -171,7 +178,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           >
             {esDocuments => (
               <>
-                {!!esDocuments && (
+                {!!esDocuments && !!esDocuments.length && (
                   <div>
                     <Metadata nexusDocument={esDocuments[0]._source} />
                     <h3 className="mt-3">3D view</h3>
@@ -217,7 +224,10 @@ const NeuronExperimentalMorphology: React.FC = () => {
           </HttpData>
         </Collapsible>
 
-        <Collapsible title={`Population ${currentMtype}`}>
+        <Collapsible
+          id="mtypeSection"
+          title={`Population ${currentMtype}`}
+        >
           <h3>Factsheet</h3>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
             {factsheetData => (

@@ -17,8 +17,18 @@ const RecMicrocircuitView = () => (
     sectionTitle={sectionTitle}
   >
     {(subregion, layerNums) => (
-      <DataContainer visible={!!layerNums.length}>
-        <Collapsible title={`Layer ${layerNums.join('/')} of ${subregion} Microcircuit`}>
+      <DataContainer
+        visible={!!layerNums.length}
+        navItems={[
+          { id: 'layerSection', label: 'Layer' },
+          { id: 'microcircuitSection', label: 'Microcircuit' },
+          { id: 'simulationSection', label: 'Simulations' },
+        ]}
+      >
+        <Collapsible
+          id="layerSection"
+          title={`Layer ${layerNums.join('/')} of ${subregion} Microcircuit`}
+        >
           {layerNums.map(layerNum => (
             <div key={layerNum}>
               <HttpData path={layerFactsheetPath(subregion, layerNum)}>
@@ -35,7 +45,11 @@ const RecMicrocircuitView = () => (
           ))}
         </Collapsible>
 
-        <Collapsible title={`${subregion} Microcircuit Factsheet`} className="mt-4">
+        <Collapsible
+          id="microcircuitSection"
+          className="mt-4"
+          title={`${subregion} Microcircuit Factsheet`}
+        >
           <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
             {data => (
               <>
@@ -45,7 +59,12 @@ const RecMicrocircuitView = () => (
           </HttpData>
         </Collapsible>
 
-        <Collapsible color="red" title="Simulations" className="mt-4">
+        <Collapsible
+          id="simulationSection"
+          className="mt-4"
+          color="red"
+          title="Simulations"
+        >
           <div className="row">
             <div className="col-xs-4">
               Definition : explain that these are in silico experiments. Explanation of this exact simulation.

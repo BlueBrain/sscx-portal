@@ -265,8 +265,15 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         </Row>
       </Filters>
 
-      <DataContainer visible={!!currentMemodel}>
-        <Collapsible title={`ME-model ${currentMemodel} Factsheet`}>
+      <DataContainer
+        visible={!!currentMemodel}
+        navItems={[
+          { id: 'memodelSection', label: 'ME-model' },
+          { id: 'mtypeSection', label: 'M-type' },
+          { id: 'etypeSection', label: 'E-type' },
+        ]}
+      >
+        <Collapsible id="memodelSection" title={`ME-model ${currentMemodel} Factsheet`}>
           <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (
               <>
@@ -349,7 +356,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           </HttpData>
         </Collapsible>
 
-        <Collapsible title={`M-Type ${currentMtype} Factsheet`} className="mt-4">
+        <Collapsible
+          id="mtypeSection"
+          className="mt-4"
+          title={`M-Type ${currentMtype} Factsheet`}
+        >
           <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
             {data => (
               <>
@@ -368,7 +379,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           </HttpData>
         </Collapsible>
 
-        <Collapsible className="mt-4" title={`E-Type ${currentEtype} Factsheet`}>
+        <Collapsible
+          id="etypeSection"
+          className="mt-4"
+          title={`E-Type ${currentEtype} Factsheet`}
+        >
           <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (
               <>

@@ -25,8 +25,18 @@ const BrainRegionsView = () => (
     sectionTitle={sectionTitle}
   >
     {(subregion) => (
-      <DataContainer visible={!!subregion}>
-        <Collapsible title={`${subregion} (Sub-region) Factsheet`}>
+      <DataContainer
+        visible={!!subregion}
+        navItems={[
+          { id: 'subregionSection', label: 'Subregion' },
+          { id: 'regionSection', label: 'Region' },
+          { id: 'simulationSection', label: 'Simulations' },
+        ]}
+      >
+        <Collapsible
+          id="subregionSection"
+          title={`${subregion} (Sub-region) Factsheet`}
+        >
           <HttpData path={subregionCircuitFactsheetPath(subregion)}>
             {data => (
               <>
@@ -36,10 +46,14 @@ const BrainRegionsView = () => (
           </HttpData>
         </Collapsible>
 
-        <Collapsible title="S1 (Region) Factsheet" className="mt-4">
+        <Collapsible
+          id="regionSection"
+          title="S1 (Region) Factsheet"
+          className="mt-4"
+        >
           <p>The S1 consists of eight sub-regions:</p>
 
-          <Table 
+          <Table
             className="mb-4"
             dataSource={subregionTableDataSource}
             columns={subregionTableColumns}
@@ -67,10 +81,15 @@ const BrainRegionsView = () => (
           </HttpData>
         </Collapsible>
 
-        <Collapsible color="red" title="Simulations" className="mt-4">
+        <Collapsible
+          id="simulationSection"
+          className="mt-4"
+          color="red"
+          title="Simulations"
+        >
           <div className="row">
             <div className="col-xs-4">
-              Definition : explain that these are in silico experiments. Explanation of this exact simulation.
+              Definition: explain that these are in silico experiments. Explanation of this exact simulation.
             </div>
             <div className="col-xs-4">
               <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/1204661/11_maya_christmasTree.jpg" />
