@@ -20,9 +20,9 @@ const Brand: React.FC = () => {
         </a>
       </div>
       <Link href="/">
-        <a  className="project">
-          <h2 className="text-white bbp-name" >Blue Brain Project</h2>
-          <h2 className="text-white name" >SSCx Portal</h2>
+        <a className="project">
+          <h2 className="text-white bbp-name">Blue Brain Project</h2>
+          <h2 className="text-white name">SSCx Portal</h2>
         </a>
       </Link>
     </div>
