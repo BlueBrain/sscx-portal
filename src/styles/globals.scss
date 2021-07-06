@@ -1547,17 +1547,15 @@ $collapsible-padding: 2rem;
 
 // layout / Brand
 .brand__basis {
-  .logo,
-  h1 {
-    display: inline-block;
-  }
+  display: flex;
+  align-items: baseline;
 
   .logo {
     width: 60px;
     padding-right: 12px;
+    margin-right: 10px;
     position: relative;
     @media (max-width: $small) {
-      width: 42px;
       padding-right: 10px;
     }
     img {
@@ -1575,16 +1573,25 @@ $collapsible-padding: 2rem;
     position: absolute;
     top: 0;
     right: -2px;
-    @media (max-width: $small) {
-      height: 1rem;
-    }
   }
 
-  h1 {
-    font-weight: 400;
-    padding-left: 12px;
-    @media (max-width: $small) {
-      padding-left: 10px;
+  .project {
+    display: flex;
+    align-items: baseline;
+
+    .bbp-name {
+      @media (max-width: $x-small) {
+        display: none;
+      }
+    }
+
+    .name {
+      font-weight: bold;
+      padding-left: 12px;
+      font-size: 1.5em;
+      @media (max-width: $small) {
+        padding-left: 10px;
+      }
     }
   }
 }
@@ -1659,6 +1666,8 @@ $collapsible-padding: 2rem;
   @media (max-width: $small) {
     justify-content: center;
     top: 5px;
+    top: 10px;
+    left: 10px;
   }
 
   .home-nav,
@@ -1735,7 +1744,7 @@ $collapsible-padding: 2rem;
 .nav-mobile__basis {
   display: none;
   position: fixed;
-  top: 7px;
+  top: 15px;
   right: 7px;
   font-size: 1.5rem;
   height: calc(2px + 1.5rem);
