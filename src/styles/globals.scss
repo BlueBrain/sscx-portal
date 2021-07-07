@@ -1021,6 +1021,7 @@ $collapsible-padding: 2rem;
     margin: 8px 0;
     height: $height;
     overflow-y: scroll;
+    position: relative;
   }
 
   ::-webkit-scrollbar-track {
