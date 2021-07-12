@@ -23,8 +23,8 @@ const PublicationBlock: React.FC<PublicationBlockProps> = ({
       target="_blank"
       rel="noopener"
     >
-      <p>{description}</p>
-      <p>{authors}</p>
+      <p className={styles.content}>{description}</p>
+      <div className={styles.authors}>{authors}</div>
       <div className={styles.arrow} />
     </a>
   );

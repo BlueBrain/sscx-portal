@@ -8,7 +8,7 @@ import { LayerSvg, MicrocircuitSvg, PathwaySvg, NeuronSvg } from '../Icons';
 import styles from './styles.module.scss';
 
 
-type IconType = 'layer' | 'microcircuit' | 'pathway' | 'neuron';
+export type IconType = 'layer' | 'microcircuit' | 'pathway' | 'neuron';
 
 type ExploreSectionCardProps = {
   title: string | ReactNode;
