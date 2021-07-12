@@ -2144,6 +2144,9 @@ $collapsible-padding: 2rem;
         bottom: 20px;
         left: 16px;
       }
+      @media (orientation: landscape){
+        bottom: 20px;
+      }
     }
 
     .title {
@@ -2169,9 +2172,7 @@ $collapsible-padding: 2rem;
       }
 
       .link-buttons {
-        @media (max-width: $x-small) {
-          margin-bottom: 70px;
-        } 
+        margin-bottom: 70px;
       }
     }
 
