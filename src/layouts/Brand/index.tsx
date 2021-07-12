@@ -3,8 +3,6 @@ import Link from 'next/link';
 
 import { basePath } from '../../config';
 
-// import './style.scss';
-
 
 const classPrefix = 'brand__';
 
