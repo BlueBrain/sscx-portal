@@ -9,6 +9,7 @@ import ESData from '../../components/ESData';
 import LayerThickness from '../../components/LayerThickness';
 import NeuralDensity from '../../components/NeuralDensity';
 import LayerAnatomySummary from '../../components/LayerAnatomySummary';
+import SectionNav from '../../layouts/SectionNav';
 
 
 const LayerAnatomyView = () => (
@@ -17,19 +18,27 @@ const LayerAnatomyView = () => (
     sectionTitle={sectionTitle}
   >
     {(layer) => (
-      <DataContainer visible={!!layer}>
+      <DataContainer
+        visible={!!layer}
+        navItems={[
+          { id: 'layerSection', label: 'Layer' },
+          { id: 'summarySection', label: 'Summary' },
+        ]}
+      >
         <ESData query={layerAnatomyDataQuery}>
           {data => (
-            <>
-              <Collapsible className="mt-4" title={`Layer ${layer}`}>
-                {data && <LayerThickness layer={layer} data={data} />}
-                {data && <NeuralDensity layer={layer} data={data} className="mt-3"/>}
-              </Collapsible>
+            <>{data && (
+              <>
+                <Collapsible id="layerSection" title={`Layer ${layer}`}>
+                  <LayerThickness layer={layer} data={data} />
+                  <NeuralDensity layer={layer} data={data} className="mt-3"/>
+                </Collapsible>
 
-              <Collapsible title="Summary" className="mt-4">
-                <>{data && <LayerAnatomySummary data={data} highlightLayer={layer} />}</>
-              </Collapsible>
-            </>
+                <Collapsible id="summarySection" title="Summary" className="mt-4">
+                  <LayerAnatomySummary data={data} highlightLayer={layer} />
+                </Collapsible>
+              </>
+            )}</>
           )}
         </ESData>
       </DataContainer>

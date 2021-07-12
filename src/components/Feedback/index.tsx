@@ -55,7 +55,7 @@ const Feedback: React.FC = () => {
     setResponseStatus(null)
     setSending(true);
 
-    const pageUrl = `${deploymentUrl}/${router.basePath}/${router.asPath}`;
+    const pageUrl = `${deploymentUrl}${router.basePath}${router.asPath}`;
 
     try {
       const res = await fetch(`${feedbackUrl}/sscx-portal/issues`, {

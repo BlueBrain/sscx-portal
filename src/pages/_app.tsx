@@ -2,16 +2,19 @@ import React from 'react';
 import Head from 'next/head';
 import { createNexusClient } from '@bbp/nexus-sdk';
 import { NexusProvider } from '@bbp/react-nexus';
+import smoothscroll from 'smoothscroll-polyfill';
 
-import { nexus, basePath } from '../config';
+import { nexus, basePath, isServer } from '../config';
 import MainLayout from '../layouts/MainLayout';
 import Feedback from '../components/Feedback';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 
 import '../styles/globals.scss';
 
-if (typeof(window)) {
+if (isServer) {
   require('abort-controller/polyfill');
+} else {
+  smoothscroll.polyfill();
 }
 
 

@@ -34,8 +34,18 @@ const RecSynPathwaysView = () => (
     sectionTitle={sectionTitle}
   >
     {(subregion, pathway) => (
-      <DataContainer visible={!!pathway}>
-        <Collapsible title={`Pathway ${pathway}`}>
+      <DataContainer
+        visible={!!pathway}
+        navItems={[
+          { id: 'pathwaySection', label: 'Pathway' },
+          { id: 'synaptomeSection', label: 'Synaptomes' },
+          { id: 'simulationSection', label: 'Simulations' },
+        ]}
+      >
+        <Collapsible
+          id="pathwaySection"
+          title={`Pathway ${pathway}`}
+        >
           <HttpData path={pathwayFactsheetPath(subregion, pathway)}>
             {data => (
               <>
@@ -120,7 +130,11 @@ const RecSynPathwaysView = () => (
           />
         </Collapsible>
 
-        <Collapsible className="mt-3" title="Synaptomes">
+        <Collapsible
+          id="synaptomeSection"
+          className="mt-3"
+          title="Synaptomes"
+        >
           <p className="mb-3">
             The SSCx reconstruction makes it possible to predict the full complement of synaptic inputs and outputs
             for any given neuron.
@@ -138,7 +152,12 @@ const RecSynPathwaysView = () => (
           />
         </Collapsible>
 
-        <Collapsible className="mt-3" color="red" title="Simulations">
+        <Collapsible
+          id="simulationSection"
+          className="mt-3"
+          color="red"
+          title="Simulations"
+        >
           <div className="row">
             <div className="col-xs-4">
               Definition : explain that these are in silico experiments. Explanation of this exact simulation.

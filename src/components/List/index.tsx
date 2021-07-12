@@ -50,7 +50,7 @@ const List: React.FC<ListProps> = ({
     selectedEl.parentElement.scrollTop = selectedEl.offsetTop;
     // TODO: Find a clever way to scroll element into the view only when props are changed from the parent component
     // and this change isn't triggered by this component itself, fix issue reported by linter in the line below.
-  }, [value, list])
+  }, [value, list]);
 
   return (
     <div

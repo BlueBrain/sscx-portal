@@ -34,6 +34,7 @@
     "react-icons": "^4.1.0",
     "react-image-lightbox": "^5.1.1",
     "sass": "^1.30.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "swcmorphologyparser": "^0.1.11",
     "three": "0.120.1"
   },

@@ -138,8 +138,17 @@ const NeuronElectrophysiology: React.FC = () => {
         </Row>
       </Filters>
 
-      <DataContainer visible={!!currentEtype && !!currentInstance}>
-        <Collapsible title={`Electrophysiological recordings instance ${currentInstance}`}>
+      <DataContainer
+        visible={!!currentEtype && !!currentInstance}
+        navItems={[
+          { id: 'instanceSection', label: 'Instance' },
+          { id: 'etypeSection', label: 'E-type' },
+        ]}
+      >
+        <Collapsible
+          id="instanceSection"
+          title={`Electrophysiological recordings instance ${currentInstance}`}
+        >
           <p className="mb-3">
             This section shows the whole-cell patch clamp recording of the neuron. The stimulus represents
             the current trace that was injected into the cell using the current clamp method.
@@ -174,7 +183,11 @@ const NeuronElectrophysiology: React.FC = () => {
           </HttpData>
         </Collapsible>
 
-        <Collapsible title={`E-type ${currentEtype}`} className="mt-4">
+        <Collapsible
+          id="etypeSection"
+          className="mt-4"
+          title={`E-type ${currentEtype}`}
+        >
           <p className="mb-3">
             The e-type of a neuron is determined by its firing behavior when injected with a step current in the soma.
             The pattern of electrical activity of neurons can be accommodating or non-accommodating (AC and NAC types),

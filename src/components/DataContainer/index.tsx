@@ -1,23 +1,34 @@
 import React from 'react';
 
+import SectionNav from '../../layouts/SectionNav';
 import ScrollTo from '../../components/ScrollTo';
 
 
 const classPrefix = 'data-container__';
 
+type NavItem = {
+  id: string;
+  label: string;
+}
+
 type DataContainerProps = {
   visible?: boolean;
-  children: React.ReactNode
+  children: React.ReactNode;
+  navItems?: NavItem[];
 };
 
 const DataContainer: React.FC<DataContainerProps> = ({
   visible = true,
   children,
+  navItems,
 }) => {
   return (
     <>
       {visible && (
-        <div className={`${classPrefix}basis`}>
+        <div id="data" className={`${classPrefix}basis`}>
+          {navItems && (
+            <SectionNav navItems={navItems} />
+          )}
           <div className="center">{children}</div>
           <div className="scroll-to">
             <ScrollTo anchor="filters" direction="up">
