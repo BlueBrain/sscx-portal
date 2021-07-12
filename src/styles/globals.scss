@@ -1592,20 +1592,16 @@ $collapsible-padding: 2rem;
 
     .bbp-name {
       padding-right: 12px;
+      margin-bottom: 0;
       @media (max-width: $small) {
         padding-right: 8px;
-      }
-      @media (max-width: $x-small) {
-        margin-bottom: 0;
       }
     }
 
     .name {
       font-weight: bold;
       font-size: 1.5em;
-      @media (max-width: $x-small) {
-        margin-bottom: 0;
-      }
+      margin-bottom: 0;
     }
   }
 }
