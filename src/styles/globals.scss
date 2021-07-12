@@ -1523,8 +1523,9 @@ $collapsible-padding: 2rem;
       border-left: 4px solid map-get($accentPalette, "yellow");
       margin: 2rem 1rem 1rem 0;
       padding-left: 12px;
-      @media (max-width: $small) {
-        margin-left: 1rem;
+      @media (max-width: $x-small) {
+        text-align: justify;
+        margin-right: 1.5rem;
       }
     }
   }
@@ -1792,8 +1793,8 @@ $collapsible-padding: 2rem;
 
   .close-icon {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 2px;
+    right: 6px;
     color: map-get($basePalette, "white");
     padding: 10px;
     font-size: 1.5rem;
@@ -2082,6 +2083,9 @@ $collapsible-padding: 2rem;
   section {
     padding: 30px 30px 60px;
     overflow: hidden;
+    @media (max-width: $x-small) {
+      padding: 30px 16px 60px;
+    }
   }
 
   .accent-border {
@@ -2114,6 +2118,7 @@ $collapsible-padding: 2rem;
     background-color: #050a30;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 
     .gradient {
       position: absolute;
@@ -2129,6 +2134,18 @@ $collapsible-padding: 2rem;
       }
     }
 
+    .copyright {
+      position: absolute;
+      bottom: 40px;
+      left: 60px;
+      color: grey;
+
+      @media (max-width: $x-small) {
+        bottom: 20px;
+        left: 16px;
+      }
+    }
+
     .title {
       z-index: 9;
       flex: 1 1 0;
@@ -2138,6 +2155,9 @@ $collapsible-padding: 2rem;
 
       h2 {
         font-size: 3.5rem;
+        @media (max-width: $x-small) {
+          font-size: 2.5rem
+        }
       }
 
       h4 {
@@ -2146,6 +2166,12 @@ $collapsible-padding: 2rem;
 
       p {
         max-width: 520px;
+      }
+
+      .link-buttons {
+        @media (max-width: $x-small) {
+          margin-bottom: 70px;
+        } 
       }
     }
 

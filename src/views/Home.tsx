@@ -9,7 +9,6 @@ import PublicationBlock from '../components/PublicationBlock';
 import ExploreSectionCard from '../components/ExploreSectionCard';
 import { basePath } from '../config';
 
-
 const classPrefix = 'Home__';
 
 
@@ -28,12 +27,7 @@ const Home: React.FC = () => (
       }]}/>
       <div className="gradient"></div>
 
-      <div style={{
-        position: 'absolute',
-        bottom: '40px',
-        left: '60px',
-        color: 'grey',
-      }}>
+      <div className="copyright">
         ©Blue Brain Project/EPFL 2005-2021.
       </div>
 
@@ -54,7 +48,7 @@ const Home: React.FC = () => (
           </>}
           primary
         />
-        <div>
+        <div className="link-buttons">
           <CtaButton href="#explore" color="yellow">Explore now</CtaButton>
           <br/>
           <CtaButton href="#publications" className="mt-2" color="grey">Publications</CtaButton>
