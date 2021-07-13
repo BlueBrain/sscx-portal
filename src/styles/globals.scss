@@ -1548,18 +1548,21 @@ $collapsible-padding: 2rem;
 
 // layout / Brand
 .brand__basis {
-  .logo,
-  h1 {
-    display: inline-block;
-  }
+  $height: 36px;
+  display: flex;
+  align-items: baseline;
 
   .logo {
     width: 60px;
     padding-right: 12px;
+    margin-right: 12px;
     position: relative;
     @media (max-width: $small) {
-      width: 42px;
-      padding-right: 10px;
+      padding-right: 8px;
+    }
+    @media (max-width: $x-small) {
+      width: 40px;
+      margin-right: 8px;
     }
     img {
       vertical-align: initial;
@@ -1576,16 +1579,29 @@ $collapsible-padding: 2rem;
     position: absolute;
     top: 0;
     right: -2px;
-    @media (max-width: $small) {
-      height: 1rem;
-    }
   }
 
-  h1 {
-    font-weight: 400;
-    padding-left: 12px;
-    @media (max-width: $small) {
-      padding-left: 10px;
+  .project {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    line-height: $height;
+    @media (max-width: $x-small) {
+      font-size: 12px;
+    }
+
+    .bbp-name {
+      padding-right: 12px;
+      margin-bottom: 0;
+      @media (max-width: $small) {
+        padding-right: 8px;
+      }
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-bottom: 0;
     }
   }
 }
@@ -1659,7 +1675,14 @@ $collapsible-padding: 2rem;
   z-index: 10;
   @media (max-width: $small) {
     justify-content: center;
+    width:100%;
     top: 5px;
+    top: 10px;
+    left: 10px;
+  }
+
+  @media (max-width: $x-small) {
+    width:unset;
   }
 
   .home-nav,
@@ -1736,7 +1759,7 @@ $collapsible-padding: 2rem;
 .nav-mobile__basis {
   display: none;
   position: fixed;
-  top: 7px;
+  top: 15px;
   right: 7px;
   font-size: 1.5rem;
   height: calc(2px + 1.5rem);
