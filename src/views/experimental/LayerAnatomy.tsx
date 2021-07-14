@@ -17,9 +17,6 @@ const LayerAnatomyView = () => (
     color={color}
     sectionTitle={sectionTitle}
   >
-    {() => (
-    <>
-    <ResponsiveTable />
     {(layer) => (
       <DataContainer
         visible={!!layer}
@@ -45,8 +42,6 @@ const LayerAnatomyView = () => (
           )}
         </ESData>
       </DataContainer>
-    )}
-    </>
     )}
   </LayerAnatomyTemplate>
 );

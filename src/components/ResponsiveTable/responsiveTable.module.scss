@@ -1,0 +1,10 @@
+@import '../../styles/config/_colors';
+
+.responsiveTablOdd {
+    @media (max-width: 575px) {
+        background-color: map-get($basePalette, "grey-1");
+      }   
+}
+.responsiveTablEven {
+    background-color: map-get($basePalette, "white");
+}

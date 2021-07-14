@@ -1,7 +1,9 @@
+import React from "react";
 import { Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { Breakpoint } from "antd/lib/_util/responsiveObserve";
-import React, { ReactNode } from "react";
+
+import classes from './responsiveTable.module.scss';
 
 type ColumnType<Type extends object> = {
     label: string; 
@@ -14,67 +16,47 @@ type ResponsiveTableProps<Type extends object> = {
 }
 
 function ResponsiveTable<Type extends object> ({columns, data}: ResponsiveTableProps<Type>) {
-    const baseColumns: ColumnsType<Type> = [
+    const expandabeColumn = 
         {
             title: null,
-            render: (_value, _record, index) => {
-                const labelIndex = index % columns.length;
-                const label = columns[labelIndex].label;
-                return label;
-            },
-            // responsive
-        },
-        {
-            title: null,
-            render: (_value, _record, index) => {
-                const dataIndex = Math.floor(index/columns.length);
+            dataIndex: null,
+            render: (_value, record, index) => {
+                 const nestedTableData = columns.map((column) => ({
+                     key: column.label,
+                     value: record[column.dataIndex]
+                 }))
+                 const nestedColumns: ColumnType<{key: string; value: string}>[] = [{dataIndex: 'key', label: 'Field'}, {dataIndex: 'value', label: 'Value'}]
 
-                const labelIndex = index % columns.length;
-                const dataKey = columns[labelIndex].dataIndex;
-
-                const value = data[dataIndex][dataKey];
-                return value;
+                return (
+                <Table
+                    rowClassName={index % 2? classes.responsiveTablEven: classes.responsiveTablOdd}
+                    showHeader={false} 
+                    columns={nestedColumns}
+                    dataSource={nestedTableData} 
+                    pagination={false} 
+                />
+                )
             },
-            // responsive
+            responsive: ['xs' as Breakpoint]
         }
-    ]
-    const tableColumns = columns.map(({label, dataIndex}) => (
+    const tableColumns: ColumnsType<Type> = columns.map(({label, dataIndex}) => (
         {
             title: label,
             dataIndex: dataIndex as string,
             responsive: ['sm' as Breakpoint]
           }
-    ));
+    ))
+    .concat(expandabeColumn);
+
     return (
-        <Table<Type> columns={baseColumns} dataSource={data} />
+        <Table<Type> 
+        pagination={false} 
+        className={classes.responsiveTable} columns={tableColumns} dataSource={data} 
+        rowClassName={(_record: Type, index: number,) => index % 2? classes.responsiveTablEven: classes.responsiveTablOdd}
+        />
     )
 }
 
-// export default ResponsiveTable;
+export default ResponsiveTable;
 
 
-type LayerAnatomy = {
-    animal: string; 
-    preview: ReactNode;
-    layer: ReactNode;
-
-}
-const mockData: LayerAnatomy[] = [
-    {animal: 'P14-12', preview: <img src="blob:https://bbp.epfl.ch/6f654518-1381-4c52-88f6-2f6720476cc1" alt="" />, layer: 'Layer 1'},
-    {animal: 'P14-13', preview: <img src="blob:https://bbp.epfl.ch/6f654518-1381-4c52-88f6-2f6720476cc1" alt="" />, layer: 'Layer 2'},
-    {animal: 'P14-14', preview: <img src="blob:https://bbp.epfl.ch/6f654518-1381-4c52-88f6-2f6720476cc1" alt="" />, layer: 'Layer 3'},
-    {animal: 'P14-15', preview: <img src="blob:https://bbp.epfl.ch/6f654518-1381-4c52-88f6-2f6720476cc1" alt="" />, layer: 'Layer 4'},
-    {animal: 'P14-16', preview: <img src="blob:https://bbp.epfl.ch/6f654518-1381-4c52-88f6-2f6720476cc1" alt="" />, layer: 'Layer 5'},
-];
-
-const mockColumn: ColumnType<LayerAnatomy>[] = [
-    {label: 'Animal', dataIndex: 'animal'},
-    {label: 'Preview', dataIndex: 'preview'},
-    {label: 'Layer', dataIndex: 'layer'}, 
-]
-
-const MockTable = () => {
-    return <ResponsiveTable<LayerAnatomy> columns={mockColumn} data={mockData}/>
-}
-
-export default MockTable
