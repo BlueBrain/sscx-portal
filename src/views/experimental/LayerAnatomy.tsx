@@ -10,13 +10,16 @@ import LayerThickness from '../../components/LayerThickness';
 import NeuralDensity from '../../components/NeuralDensity';
 import LayerAnatomySummary from '../../components/LayerAnatomySummary';
 import SectionNav from '../../layouts/SectionNav';
-
+import ResponsiveTable from '../../components/ResponsiveTable';
 
 const LayerAnatomyView = () => (
   <LayerAnatomyTemplate
     color={color}
     sectionTitle={sectionTitle}
   >
+    {() => (
+    <>
+    <ResponsiveTable />
     {(layer) => (
       <DataContainer
         visible={!!layer}
@@ -42,6 +45,8 @@ const LayerAnatomyView = () => (
           )}
         </ESData>
       </DataContainer>
+    )}
+    </>
     )}
   </LayerAnatomyTemplate>
 );
