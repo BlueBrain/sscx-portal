@@ -145,7 +145,7 @@ const TermsOfUse: React.FC = () => {
         </p>
 
         <p>
-          © [[year of first publication]] BBP/EPFL. [Title of Image].[Name of Portal]. Available from: [Resource URL]
+          © [[year of first publication]] BBP/EPFL. [Title of Image].SSCx-portal. Available from: [Resource URL]
         </p>
 
         <p>
