@@ -97,7 +97,7 @@ const RecNeuronsView = () => (
 
 
         <div className={styles.mobile}>
-          <Row gutter={16}>
+          <Row gutter={[0,20]}>
             <Col span={24} className="mt-2">
               <div className={styles.infoM}>
                 <div className={styles.infoHeadM}>
@@ -170,7 +170,7 @@ const RecNeuronsView = () => (
           <p className={styles.title}>Neuron eletrophysiology generalization</p>
         </div>
         <div className={styles.divider} />
-        <Row gutter={16}>
+        <Row gutter={[0,20]}>
           <Col xs={{span: 24}} md={{span: 7}} span={7} className="mt-2">
             <div className={styles.info}>
               <div className={styles.infoHead}>
@@ -226,7 +226,7 @@ const RecNeuronsView = () => (
           <p className={styles.title}>Neuron morpholo-electrophysiological generalization</p>
         </div>
         <div className={styles.divider} />
-        <Row gutter={16}>
+        <Row gutter={[0,20]}>
           <Col xs={{span: 24}} md={{span: 7}} span={7} className="mt-2">
             <div className={styles.info}>
               <div className={styles.infoHead}>

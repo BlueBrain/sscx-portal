@@ -38,7 +38,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
         <Row
           align="bottom"
           className="w-100"
-          gutter={16}
+          gutter={[0,20]}
         >
           <Col
             xs={24}
@@ -84,7 +84,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
             xs={24}
             xl={12}
           >
-            <div className={selectorStyle.row} style={{ maxWidth: '26rem', margin: '0 auto' }}>
+            <div className={selectorStyle.row} style={{ maxWidth: '26rem' }}>
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>Choose a layer</div>
                 <div className={selectorStyle.body} style={{ padding: '2rem 4rem' }}>
