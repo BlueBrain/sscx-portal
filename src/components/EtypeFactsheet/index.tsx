@@ -34,7 +34,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   Object.entries(expFeatures).forEach(([protocol, protocolVal]) => {
     protocols.push(protocol);
     Object.entries(protocolVal).forEach(([measurement, measurementVal]) => {
-      measurementVal.features.sort((f1, f2) => (f1.name > f2.name) ? 1 : -1).forEach(feature => {
+      measurementVal.features.sort((f1, f2) => ((f1.name > f2.name) ? 1 : -1)).forEach(feature => {
         if (!tableData[protocol]) {
           tableData[protocol] = [];
         }
@@ -48,7 +48,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
           mean: feature.values[0].mean,
           std: feature.values[0].std,
           modelFitness: feature['model fitness'],
-        })
+        });
       });
     });
   });
@@ -64,16 +64,20 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Mean ± Std',
       key: 'value',
-      render: function Mean (row) {return (
-        <span>
-          <NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {unitLabel(row.unit)}
-        </span>
-      )},
+      render: function Mean(row) {
+        return (
+          <span>
+            <NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {unitLabel(row.unit)}
+          </span>
+        );
+      },
     },
     {
       title: 'Model fitness',
       dataIndex: 'modelFitness',
-      render: function ModelFitness (modelFitness) {return (<NumberFormat value={modelFitness} />)}
+      render: function ModelFitness(modelFitness) {
+        return (<NumberFormat value={modelFitness} />);
+      },
     },
   ];
 
