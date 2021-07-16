@@ -5,16 +5,16 @@ import { Breakpoint } from "antd/lib/_util/responsiveObserve";
 
 import classes from './responsiveTable.module.scss';
 
-interface ColumnType<Type extends object> extends Omit<AntColumnType<Type>, 'dataIndex'> {
+interface ColumnType<Type extends object & {isHighlight?: boolean}> extends Omit<AntColumnType<Type>, 'dataIndex'> {
     dataIndex: keyof Type;
 }
 
-type ResponsiveTableProps<Type extends object> = {
+type ResponsiveTableProps<Type extends object & {isHighlight?: boolean}> = {
     data: Type[];
     columns: ColumnType<Type>[];
 }
 
-function ResponsiveTable<Type extends object> ({columns, data}: ResponsiveTableProps<Type>) {
+function ResponsiveTable<Type extends object & {isHighlight?: boolean}> ({columns, data}: ResponsiveTableProps<Type>) {
     const expandabeColumn = 
         {
             title: null,
@@ -45,6 +45,15 @@ function ResponsiveTable<Type extends object> ({columns, data}: ResponsiveTableP
             title,
             dataIndex: dataIndex as string,
             responsive: ['sm' as Breakpoint],
+            render: (value: any, record: Type, index: number) => {
+                if(record.isHighlight) {
+                    return (
+                    <div className="text-bold">
+                        {value}
+                    </div>)
+                }
+                return value;
+            },
             ...restProps
           }
     ))

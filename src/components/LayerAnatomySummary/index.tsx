@@ -16,8 +16,8 @@ export type LayerAnatomySummaryProps = {
 };
 
 type SummaryData ={
-  layer: string,
-  thicknessEntityDescription: string;
+  layer: ReactNode,
+  thicknessEntityDescription: ReactNode;
   thickness: ReactNode,
   thicknessN: ReactNode,
   densityMean: ReactNode,
@@ -58,34 +58,24 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
     thicknessUnit = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
     const thicknessN = thicknessEntity?.series.find((s: any) => s.statistic === 'N')?.value;
 
+    const isHighlight=  highlightLayer.includes(layer.replace('layer ', '')) 
+
     return {
-      layer,
+      layer: <span className="text-capitalize">{layer}</span>,
       thicknessEntityDescription: thicknessEntity.description,
       thickness: <NumberFormat value={thicknessMean}/>,
       thicknessN: <NumberFormat value={thicknessN} prefix="n=" />,
       densityMean: <NumberFormat value={densityMean} />,
       densityStd: <NumberFormat value={densityStd} prefix="± " />,
       densityN: <NumberFormat value={densityN} prefix="n=" />,
+      isHighlight 
     };
   });
 
   const columns = [
     { dataIndex: 'layer' as keyof SummaryData, title: 'Layer'},
-    { dataIndex: 'thickness' as keyof SummaryData, title: <>Layer thickness, {thicknessUnit} (mean)*</>, colSpan: 2,     
-    render: (value, row, index) => {
-      return( {
-        children: value,
-        props: {},
-      })
-    }
-  },
-    { dataIndex: 'thickness' as keyof SummaryData, colSpan: 0,
-    render: (value, row, index) => {
-      return( {
-        children: value,
-        props: {},
-      })
-    }},
+    { dataIndex: 'thickness' as keyof SummaryData, title: <>Layer thickness, {thicknessUnit} (mean)*</>, colSpan: 2},
+    { dataIndex: 'thickness' as keyof SummaryData, colSpan: 0},
     { dataIndex: 'densityMean' as keyof SummaryData, title: <>Neuron density, {densityUnit} (mean ± std)</>, colSpan: 3},
     { dataIndex: 'densityStd' as keyof SummaryData, colSpan: 0},
     { dataIndex: 'densityN' as keyof SummaryData, colSpan: 0}
@@ -95,20 +85,6 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
     <ErrorBoundary>
       {!!summary.length && <div id="layerAnatomySummary" className={`${classPrefix}basis`}>
         <ResponsiveTable<SummaryData> columns={columns} data={summary}/>
-        {/* <table className="mb-2">
-          <thead>
-
-          </thead>
-          <tbody>
-            {summary.map(row => (
-              <tr
-                key={row.layer}
-                className={highlightLayer.includes(row.layer.replace('layer ', '')) ? 'text-bold' : null}
-              >
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
         <small className="ant-typography ant-typography-secondary">
           * {summary[0]?.thicknessEntityDescription}
         </small>
