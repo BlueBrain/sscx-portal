@@ -40,7 +40,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
         <Row
           className="w-100"
           align="bottom"
-          gutter={16}
+          gutter={[0,20]}
         >
           <Col
             xs={24}

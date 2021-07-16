@@ -62,7 +62,7 @@ const NeuronElectrophysiology: React.FC = () => {
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentEtype && !!currentInstance}>
-        <Row align="bottom" className="w-100" gutter={16}>
+        <Row align="bottom" className="w-100" gutter={[0,20]}>
           <Col
             xs={24}
             xl={8}

@@ -38,7 +38,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
         <Row
           align="bottom"
           className="w-100"
-          gutter={16}
+          gutter={[0,20]}
         >
           <Col
             xs={24}
