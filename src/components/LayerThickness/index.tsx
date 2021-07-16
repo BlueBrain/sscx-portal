@@ -9,8 +9,6 @@ import NexusImage from '../NexusImage';
 import ResponsiveTable from '../ResponsiveTable';
 import { getData } from './layerThicknessUtils';
 
-// import './style.scss';
-
 
 const classPrefix = 'layer-thickness__';
 
