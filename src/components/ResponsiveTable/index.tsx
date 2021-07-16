@@ -26,7 +26,7 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
       const nestedColumns: ColumnType<{key: string; value: string}>[] = [{ dataIndex: 'key', title: 'Field' }, { dataIndex: 'value', title: 'Value' }];
       return (
         <Table
-          className={classes.expandableTable}
+          className="responsiveTable no-left-margin nested-table xs-column"
           rowClassName={index % 2 ? classes.responsiveTablEven : classes.responsiveTablOdd}
           showHeader={false}
           columns={nestedColumns}
@@ -61,7 +61,6 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
       bordered
       size="small"
       pagination={false}
-      className={classes.responsiveTable}
       columns={tableColumns}
       dataSource={data}
       rowClassName={(_record: Type, index: number) => (index % 2 ? classes.responsiveTablEven : classes.responsiveTablOdd)}
