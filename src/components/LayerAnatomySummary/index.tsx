@@ -4,7 +4,6 @@ import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
 import ResponsiveTable from '../ResponsiveTable';
-import { Table } from 'antd';
 
 // import './style.scss';
 
@@ -28,7 +27,7 @@ type SummaryData ={
 const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], highlightLayer = '' }) => {
   const entities = data.map(document => document._source);
 
-  let densityUnit, thicknessUnit;
+  let densityUnit: string, thicknessUnit: string;
 
   const layers = Array
     .from(new Set(entities.map(e => e.brainLocation?.layer?.label)))
@@ -58,7 +57,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
     thicknessUnit = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
     const thicknessN = thicknessEntity?.series.find((s: any) => s.statistic === 'N')?.value;
 
-    const isHighlight=  highlightLayer.includes(layer.replace('layer ', '')) 
+    const isHighlight = highlightLayer.includes(layer.replace('layer ', '')) 
 
     return {
       layer: <span className="text-capitalize">{layer}</span>,

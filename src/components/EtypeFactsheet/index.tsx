@@ -64,16 +64,16 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Mean ± Std',
       key: 'value',
-      render: (row) => (
+      render: function Mean (row) {return (
         <span>
           <NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {unitLabel(row.unit)}
         </span>
-      ),
+      )},
     },
     {
       title: 'Model fitness',
       dataIndex: 'modelFitness',
-      render: modelFitness => <NumberFormat value={modelFitness} />
+      render: function ModelFitness (modelFitness) {return (<NumberFormat value={modelFitness} />)}
     },
   ];
 
