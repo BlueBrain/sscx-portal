@@ -9,7 +9,6 @@ import ESData from '../../components/ESData';
 import LayerThickness from '../../components/LayerThickness';
 import NeuralDensity from '../../components/NeuralDensity';
 import LayerAnatomySummary from '../../components/LayerAnatomySummary';
-import { mock } from './mock';
 
 const LayerAnatomyView = () => (
   <LayerAnatomyTemplate
@@ -26,15 +25,15 @@ const LayerAnatomyView = () => (
       >
         <ESData query={layerAnatomyDataQuery}>
           {data => (
-            <>{mock && (
+            <>{data && (
               <>
                 <Collapsible id="layerSection" title={`Layer ${layer}`}>
-                  <LayerThickness layer={layer} data={mock.hits.hits} />
-                  <NeuralDensity layer={layer} data={mock.hits.hits} className="mt-3"/>
+                  <LayerThickness layer={layer} data={data} />
+                  <NeuralDensity layer={layer} data={data} className="mt-3"/>
                 </Collapsible>
 
                 <Collapsible id="summarySection" title="Summary" className="mt-4">
-                  <LayerAnatomySummary data={mock.hits.hits} highlightLayer={layer} />
+                  <LayerAnatomySummary data={data} highlightLayer={layer} />
                 </Collapsible>
               </>
             )}</>
