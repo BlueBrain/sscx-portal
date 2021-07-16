@@ -36,8 +36,8 @@ const FactsheetSingleValueEntry: React.FC<{
 }) => {
   return (
     <div className="row mt-1">
-      <div className="col-xs-4 name">{fact.name}</div>
-      <div className="col-xs-4 value">
+      <div className="col-xs-6 col-md-4 name">{fact.name}</div>
+      <div className="col-xs-6 col-md-4 value">
         {isNil(fact.value)
           ? (<span>-</span>)
           : (<span>
@@ -56,8 +56,8 @@ const FactsheetSingleMeanStdEntry: React.FC<{
 }) => {
   return (
     <div className="row mt-1">
-      <div className="col-xs-4 name">{fact.name}</div>
-      <div className="col-xs-4 value">
+      <div className="col-xs-6 col-md-4 name">{fact.name}</div>
+      <div className="col-xs-6 col-md-4 value">
         {fact.value_map && (
           <>
             <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> <Unit value={fact.unit} />

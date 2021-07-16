@@ -28,6 +28,7 @@ import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { sscx } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
+import { last, mock, mockpopulations, morfModel, morgologyJson } from './mock';
 
 
 const NeuronExperimentalMorphology: React.FC = () => {
@@ -91,13 +92,14 @@ const NeuronExperimentalMorphology: React.FC = () => {
         <Row
           className="w-100"
           align="bottom"
-          gutter={16}
+          gutter={[0,20]}
         >
           <Col
             xs={24}
             xl={8}
             xxl={12}
           >
+            <div style={{ maxWidth: '560px', margin: '0 auto' }}>
             <Title
               primaryColor={color}
               title={<span>Neuronal <br/> Morphology</span>}
@@ -113,6 +115,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                 we have identified 57 m-types in the primary rat Somatosensory Cortex.
               </p>
             </InfoBox>
+            </div>
           </Col>
           <Col
             className={`set-accent-color--${color}`}
@@ -134,7 +137,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>2. Select a reconstruction</div>
                 <div className={selectorStyle.body}>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', marginBottom: '1rem' }}>
                     <List
                       block
                       list={mtypes}
@@ -144,7 +147,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                       onSelect={setMtype}
                     />
                   </div>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem 0' }}>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem' }}>
                     <List
                       block
                       list={instances}
@@ -178,20 +181,20 @@ const NeuronExperimentalMorphology: React.FC = () => {
           >
             {esDocuments => (
               <>
-                {!!esDocuments && !!esDocuments.length && (
+                {!!mock && !!mock.length && (
                   <div>
-                    <Metadata nexusDocument={esDocuments[0]._source} />
+                    <Metadata nexusDocument={mock[0]._source} />
                     <h3 className="mt-3">3D view</h3>
                     <NexusPlugin
                       className="mt-2"
                       name="neuron-morphology"
-                      resource={esDocuments[0]._source}
+                      resource={mock[0]._source}
                       nexusClient={nexus}
                     />
                     <div className="text-right mt-2">
                       <NexusFileDownloadButton
-                        filename={getMorphologyDistribution(esDocuments[0]._source).name}
-                        url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
+                        filename={getMorphologyDistribution(mock[0]._source).name}
+                        url={getMorphologyDistribution(mock[0]._source).contentUrl}
                         org={sscx.org}
                         project={sscx.project}
                         id="morphologyDownloadBtn"
@@ -209,7 +212,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {factsheetData => (
               <div className="mt-3">
                 <h3>Morphometrics</h3>
-                <Factsheet id="morphometrics" className="mt-2" facts={factsheetData[0].values} />
+                <Factsheet id="morphometrics" className="mt-2" facts={morgologyJson[0].values} />
               </div>
             )}
           </HttpData>
@@ -218,7 +221,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {memodels => (
               <div className="mt-3">
                 <h3>Morpho-Electrical neuron models using this morphology</h3>
-                <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={memodels} />
+                <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={morfModel} />
               </div>
             )}
           </HttpData>
@@ -231,7 +234,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <h3>Factsheet</h3>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
             {factsheetData => (
-              <Factsheet facts={factsheetData.values}/>
+              <Factsheet facts={mockpopulations.values}/>
             )}
           </HttpData>
 
@@ -242,15 +245,15 @@ const NeuronExperimentalMorphology: React.FC = () => {
             Data are provided as ASCII files containing 3D representations of neuronal morphologies -
             axons and dendrites - whose shapes are traced and reconstructed using Neurolucida
             (neuron tracing, reconstruction, and analysis software).
-          </p>
+          </p> 
           <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
             {esDocuments => (
               <>
-                {!!esDocuments &&
+                {!!last &&
                   <ExpMorphologyTable
                     layer={currentLayer}
                     mtype={currentMtype}
-                    morphologies={getAndSortMorphologies(esDocuments)}
+                    morphologies={getAndSortMorphologies(last.hits.hits)}
                   />
                 }
               </>

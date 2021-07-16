@@ -51,13 +51,13 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
     return <p>Loading {label}...</p>;
   }
 
-  if (state.error) {
-    return (
-      <p>
-        Fetching {label || 'data'} failed. The issue has been reported to developers.
-      </p>
-    );
-  }
+  // if (state.error) {
+  //   return (
+  //     <p>
+  //       Fetching {label || 'data'} failed. The issue has been reported to developers.
+  //     </p>
+  //   );
+  // }
 
   return (
     <>
