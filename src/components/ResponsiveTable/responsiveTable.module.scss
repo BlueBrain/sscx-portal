@@ -1,10 +1,17 @@
 @import '../../styles/config/_colors';
+@import '../../styles/config/_queries';
 
 .responsiveTablOdd {
-    @media (max-width: 575px) {
+    @media (max-width: $ant-breakpoint-sm) {
         background-color: map-get($basePalette, "grey-1");
       }   
 }
 .responsiveTablEven {
     background-color: map-get($basePalette, "white");
+}
+
+.expandableTable {
+    div{
+        margin:0 !important;
+    }
 }

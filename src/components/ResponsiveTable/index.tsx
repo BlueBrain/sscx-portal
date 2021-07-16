@@ -1,12 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Table } from "antd";
-import { ColumnsType } from "antd/lib/table";
+import { ColumnType as AntColumnType, ColumnsType} from "antd/lib/table";
 import { Breakpoint } from "antd/lib/_util/responsiveObserve";
 
 import classes from './responsiveTable.module.scss';
 
-type ColumnType<Type extends object> = {
-    label: string; 
+interface ColumnType<Type extends object> extends Omit<AntColumnType<Type>, 'dataIndex'> {
     dataIndex: keyof Type;
 }
 
@@ -22,16 +21,18 @@ function ResponsiveTable<Type extends object> ({columns, data}: ResponsiveTableP
             dataIndex: null,
             render: (_value, record, index) => {
                  const nestedTableData = columns.map((column) => ({
-                     key: column.label,
+                     key: column.title,
                      value: record[column.dataIndex]
                  }))
-                 const nestedColumns: ColumnType<{key: string; value: string}>[] = [{dataIndex: 'key', label: 'Field'}, {dataIndex: 'value', label: 'Value'}]
+                 const nestedColumns: ColumnType<{key: string; value: string}>[] = [{dataIndex: 'key', title: 'Field'}, {dataIndex: 'value', title: 'Value'}]
 
                 return (
                 <Table
+                    className={classes.expandableTable}
                     rowClassName={index % 2? classes.responsiveTablEven: classes.responsiveTablOdd}
                     showHeader={false} 
                     columns={nestedColumns}
+                    tableLayout="fixed"
                     dataSource={nestedTableData} 
                     pagination={false} 
                 />
@@ -39,20 +40,25 @@ function ResponsiveTable<Type extends object> ({columns, data}: ResponsiveTableP
             },
             responsive: ['xs' as Breakpoint]
         }
-    const tableColumns: ColumnsType<Type> = columns.map(({label, dataIndex}) => (
+    const tableColumns: ColumnsType<Type> = columns.map(({title, dataIndex, ...restProps}) => (
         {
-            title: label,
+            title,
             dataIndex: dataIndex as string,
-            responsive: ['sm' as Breakpoint]
+            responsive: ['sm' as Breakpoint],
+            ...restProps
           }
     ))
     .concat(expandabeColumn);
 
     return (
-        <Table<Type> 
-        pagination={false} 
-        className={classes.responsiveTable} columns={tableColumns} dataSource={data} 
-        rowClassName={(_record: Type, index: number,) => index % 2? classes.responsiveTablEven: classes.responsiveTablOdd}
+        <Table<Type>
+            bordered
+            size="small"
+            pagination={false} 
+            className={classes.responsiveTable} 
+            columns={tableColumns} 
+            dataSource={data} 
+            rowClassName={(_record: Type, index: number,) => index % 2? classes.responsiveTablEven: classes.responsiveTablOdd}
         />
     )
 }
