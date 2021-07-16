@@ -8,8 +8,6 @@ import NexusImage from '../NexusImage';
 import { sscx } from '../../config';
 import ResponsiveTable from '../ResponsiveTable';
 
-// import './style.scss';
-
 
 const classPrefix = 'layer-thickness__';
 
@@ -40,26 +38,26 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
 
   const getLayerThicknesses = (sliceCollection) => (
     rawLayerThicknesses
-  // filter layerThicknesses derived from current sliceCollection
-  .filter(rawLayerThickness => {
-    return rawLayerThickness.derivation?.entity['@id'] === sliceCollection['@id'];
-  })
-  // filter layerThicknesses for current layers
-  .filter(rawLayerThickness => {
-    return layerNums
-      .map(layerNum => `layer ${layerNum}`)
-      .includes(rawLayerThickness.brainLocation?.layer?.label);
-  })
-  // compose simplified layer thickness objects
-  .map(rawLayerThickness => ({
-    layer: rawLayerThickness.brainLocation.layer.label,
-    unit: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.unitCode,
-    mean: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.value,
-    std: rawLayerThickness.series.find((s: any) => s.statistic === 'standard deviation')?.value,
-    n: rawLayerThickness.series.find((s: any) => s.statistic === 'N')?.value,
-  }))
-  // sort by layer
-  .sort((a, b) => a.layer < b.layer ? -1 : 1)
+      // filter layerThicknesses derived from current sliceCollection
+      .filter(rawLayerThickness => {
+        return rawLayerThickness.derivation?.entity['@id'] === sliceCollection['@id'];
+      })
+      // filter layerThicknesses for current layers
+      .filter(rawLayerThickness => {
+        return layerNums
+          .map(layerNum => `layer ${layerNum}`)
+          .includes(rawLayerThickness.brainLocation?.layer?.label);
+      })
+      // compose simplified layer thickness objects
+      .map(rawLayerThickness => ({
+        layer: rawLayerThickness.brainLocation.layer.label,
+        unit: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.unitCode,
+        mean: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.value,
+        std: rawLayerThickness.series.find((s: any) => s.statistic === 'standard deviation')?.value,
+        n: rawLayerThickness.series.find((s: any) => s.statistic === 'N')?.value,
+      }))
+      // sort by layer
+      .sort((a, b) => a.layer < b.layer ? -1 : 1)
   )
 
   const sliceCollections = rawSliceCollections
@@ -77,7 +75,6 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
         </div>
       )),
       layerThicknesses: <SliceRow layerThicknesses={getLayerThicknesses(sliceCollection)} />
-    
     }))
     // sort by species name
     .sort((a, b) => a.name < b.name ? -1 : 1);
@@ -104,9 +101,6 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
 export default LayerThickness;
 
 
-
-
-
 type SliceRowProps = {
   layerThicknesses: Array<{
     layer: string,
@@ -116,8 +110,7 @@ type SliceRowProps = {
   }>
 }
 
-const SliceRow: React.FC<SliceRowProps> = ({layerThicknesses}) => {
-return (
+const SliceRow: React.FC<SliceRowProps> = ({layerThicknesses}) => (
   <>
     <td className="no-border">
       {layerThicknesses.map(layerThickness => (
@@ -160,4 +153,4 @@ return (
       ))}
     </td>
   </>
-)}
+);
