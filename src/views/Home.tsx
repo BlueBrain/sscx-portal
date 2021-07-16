@@ -163,11 +163,11 @@ const Home: React.FC = () => (
                 description={description.map((parahraph, index) => (
                   <p key={index}>
                     {parahraph}
-                    </p>
+                  </p>
                 ))}
                 image={image}
                 bgColor={backgroundColor}
-                  links={links}
+                links={links}
               />
             </Col>
           ))}

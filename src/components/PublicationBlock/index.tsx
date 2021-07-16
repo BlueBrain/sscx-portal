@@ -15,19 +15,17 @@ const PublicationBlock: React.FC<PublicationBlockProps> = ({
   description,
   authors,
   className = '',
-}) => {
-  return (
-    <a
-      className={`${styles.container} ${className}`}
-      href={href}
-      target="_blank"
-      rel="noopener"
-    >
-      <p className={styles.content}>{description}</p>
-      <div className={styles.authors}>{authors}</div>
-      <div className={styles.arrow} />
-    </a>
-  );
-};
+}) => (
+  <a
+    className={`${styles.container} ${className}`}
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <p className={styles.content}>{description}</p>
+    <div className={styles.authors}>{authors}</div>
+    <div className={styles.arrow} />
+  </a>
+);
 
 export default PublicationBlock;

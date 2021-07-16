@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 8000",
-    "lint": "next lint",
+    "lint": "next lint && npx stylelint '**/*.scss'",
     "build-static-data-proxy": "./scripts/build-static-data-proxy.sh",
     "start-static-data-proxy": "docker run -it --rm -p 8000:8000 sscx-static-data-proxy"
   },
@@ -36,13 +36,17 @@
     "sass": "^1.30.0",
     "smoothscroll-polyfill": "^0.4.4",
     "swcmorphologyparser": "^0.1.11",
-    "three": "0.120.1"
+    "three": "^0.130.1"
   },
   "devDependencies": {
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.0",
     "eslint": "^7.29.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "^11.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
     "typescript": "^4.1.3"
   }
 }

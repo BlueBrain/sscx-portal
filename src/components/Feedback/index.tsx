@@ -16,7 +16,7 @@ const storage = typeof (window) !== 'undefined' ? window.sessionStorage : null;
 
 
 const Feedback: React.FC = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [formVisible, setFormVisible] = useState(false);
   const issueSelectRef = useRef<HTMLSelectElement>(null);
@@ -27,7 +27,7 @@ const Feedback: React.FC = () => {
   const [contact, setContact] = useState(storage?.getItem(FEEDBACK_CONTACT_KEY) ?? '');
 
   const [sending, setSending] = useState(false);
-  const [responseStatus, setResponseStatus] = useState<'success' | 'error'>(null)
+  const [responseStatus, setResponseStatus] = useState<'success' | 'error'>(null);
 
   const onContactChange = (value: string) => {
     storage?.setItem(FEEDBACK_CONTACT_KEY, value);
@@ -47,12 +47,12 @@ const Feedback: React.FC = () => {
       setComponent('');
       setDetails('');
 
-      setResponseStatus(null)
+      setResponseStatus(null);
     }, 200);
-  }
+  };
 
   const sendFeedback = async () => {
-    setResponseStatus(null)
+    setResponseStatus(null);
     setSending(true);
 
     const pageUrl = `${deploymentUrl}${router.basePath}${router.asPath}`;
@@ -63,34 +63,34 @@ const Feedback: React.FC = () => {
         body: JSON.stringify({
           title: details.slice(0, 100),
           body: [
-            `Field | Element`,
-            `--- | ---`,
+            'Field | Element',
+            '--- | ---',
             `Issue type | ${type || '--'}`,
             `Page URL | [${router.asPath}](${pageUrl})`,
             `Component | ${component || '--'}`,
             `Contact | ${contact || '--'}`,
-            ``,
+            '',
             `${details.slice(100)}`,
           ].join('\n'),
-          labels: ['triage']
+          labels: ['triage'],
         }),
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-      })
+      });
       if (res.ok) {
         setResponseStatus('success');
         setTimeout(closeForm, 1000);
-      } else setResponseStatus('error')
+      } else setResponseStatus('error');
 
       setSending(false);
     } catch (e) {
-      setResponseStatus('error')
+      setResponseStatus('error');
     } finally {
-      setSending(false)
+      setSending(false);
     }
-  }
+  };
 
 
 

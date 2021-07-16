@@ -11,7 +11,7 @@ import { expMorphologyImgPath, expMorphologyImgThumbnailPath } from '../../queri
 import ImageViewer from '../ImageViewer';
 import NexusFileDownloadButton from '../NexusFileDownloadButton';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 
 type ExpMorphologyTableProps = {
@@ -38,9 +38,7 @@ function getAgentType(agent) {
     : 'person';
 }
 
-const getMorphologyDistribution = (morphologyResource: any) => {
-  return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
-};
+const getMorphologyDistribution = (morphologyResource: any) => morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
 
 const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, morphologies = [] }) => {
   const nexus = useNexusContext();
@@ -64,9 +62,9 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
       query: {
         terms: {
           '_id': agentIds,
-        }
-      }
-    }
+        },
+      },
+    };
 
     nexus.View
       // query ElesticSearch endpoint to get agents by their ids
@@ -92,7 +90,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
       mtype,
       instance: morphologyName,
     });
-    return `/experimental-data/neuron-morphology/?${query}#data`
+    return `/experimental-data/neuron-morphology/?${query}#data`;
   };
 
   return (
@@ -111,7 +109,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
           {morphologies.map(morph => (
             <tr key={morph.name}>
               <td><Link href={morphHref(morph.name)}>{morph.name}</Link></td>
-              <td style={{ textAlign: 'center'}}>
+              <td style={{ textAlign: 'center' }}>
                 <div className={styles.morphImageContainer}>
                   <ImageViewer
                     src={expMorphologyImgPath(morph.name)}
@@ -125,9 +123,8 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
               <td>
                 {agentMap && entryToArray(morph.contribution)
                   .map(contribution => agentMap[contribution.agent['@id']])
-                  .sort((a1, a2) => a1.type > a2.type ? 1 : -1)
-                  .map(agent => <span key={agent.label}>{agent.label} <br/></span>)
-                }
+                  .sort((a1, a2) => (a1.type > a2.type ? 1 : -1))
+                  .map(agent => <span key={agent.label}>{agent.label} <br /></span>)}
               </td>
               <td className="text-center">
                 <NexusFileDownloadButton

@@ -24,7 +24,7 @@ const createOrientationHelper = (): THREE.Object3D => {
     const position = new THREE.Vector3(
       positions[i][0],
       positions[i][1],
-      positions[i][2]
+      positions[i][2],
     );
 
     const geometry = new THREE.Geometry();
@@ -78,7 +78,7 @@ export default class OrientationViewer {
       27,
       div.clientWidth / div.clientHeight,
       1,
-      50000
+      50000,
     );
     const camPos = { x: 0, y: 0, z: 100 };
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -103,7 +103,7 @@ export default class OrientationViewer {
 
   animate() {
     this.requestedAnimationFrameID = requestAnimationFrame(
-      this.animate.bind(this)
+      this.animate.bind(this),
     );
     this.render();
   }

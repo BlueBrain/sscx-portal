@@ -2,7 +2,7 @@
 .container {
   text-align: left;
   border: 1px solid transparent;
-  transition: border-color 0.3s ease 0s, background-color 0.3s ease 0s
+  transition: border-color 0.3s ease 0s, background-color 0.3s ease 0s;
 }
 
 .container svg {
@@ -57,7 +57,7 @@
   padding: 1rem 1.2rem 4rem 0;
   height: 22rem;
   position: relative;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .link {

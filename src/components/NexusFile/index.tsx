@@ -35,11 +35,9 @@ const NexusFile: React.FC<NexusFileProps> = ({
         sscx.org,
         sscx.project,
         contentUrl.split('/').reverse()[0],
-        { as: 'blob' }
+        { as: 'blob' },
       )
-        .then(data =>
-          setState({ ...state, loading: false, data }),
-        )
+        .then(data => setState({ ...state, loading: false, data }))
         .catch(error => setState({ ...state, loading: false, error }));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

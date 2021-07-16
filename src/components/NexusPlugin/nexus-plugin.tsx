@@ -6,15 +6,13 @@ import { Result } from 'antd';
 import { nexusPluginBaseUrl } from '../../config';
 
 
-const PluginError: React.FC = () => {
-  return (
-    <Result
-      status="warning"
-      title="Plugin failed to render"
-      subTitle="This issue has been reported to devolopers"
-    />
-  );
-};
+const PluginError: React.FC = () => (
+  <Result
+    status="warning"
+    title="Plugin failed to render"
+    subTitle="This issue has been reported to devolopers"
+  />
+);
 
 export type NexusPluginProps<T> = {
   name: string;
@@ -72,7 +70,7 @@ export class NexusPlugin extends React.Component<
             nexusClient: this.props.nexusClient,
             resource: this.props.resource,
           });
-        }
+        },
       )
       .catch((error: Error) => {
         captureException(error);
@@ -87,10 +85,10 @@ export class NexusPlugin extends React.Component<
 
   componentDidUpdate(prevProps: NexusPluginClassProps) {
     if (
-      prevProps.resource !== this.props.resource ||
-      prevProps.name !== this.props.name
+      prevProps.resource !== this.props.resource
+      || prevProps.name !== this.props.name
     ) {
-      this.setState({ error: null, loading: true })
+      this.setState({ error: null, loading: true });
       this.loadExternalPlugin();
     }
   }

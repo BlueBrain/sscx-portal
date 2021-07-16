@@ -78,7 +78,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             d={pathDefinition}
             className={`${styles.layer} ${isPreLayerSelected(layer) ? styles.selected : ''}`}
             onClick={() => selectPreLayer(layer)}
-          ></path>
+          />
         ))}
       </g>
 
@@ -89,7 +89,7 @@ const SynapticPathwaySelector: React.FC<SynapticPathwaySelectProps> = ({
             d={pathDefinition}
             className={`${styles.layer} ${isPostLayerSelected(layer) ? styles.selected : ''}`}
             onClick={() => selectPostLayer(layer)}
-          ></path>
+          />
         ))}
       </g>
     </svg>

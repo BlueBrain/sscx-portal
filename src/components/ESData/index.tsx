@@ -38,9 +38,7 @@ const ESData: React.FC<ESDataProps> = ({
         sscx.datasetViewId,
         query,
       )
-        .then(data =>
-          setState({ ...state, loading: false, data: data.hits.hits }),
-        )
+        .then(data => setState({ ...state, loading: false, data: data.hits.hits }))
         .catch(error => setState({ ...state, loading: false, error }));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

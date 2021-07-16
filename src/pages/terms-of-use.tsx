@@ -6,4 +6,4 @@ export default function About() {
   return (
     <TosView />
   );
-};
+}

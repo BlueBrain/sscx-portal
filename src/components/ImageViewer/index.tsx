@@ -6,11 +6,9 @@ import { ImageViewerProps } from './image-viewer';
 
 const ImageViewerLazy = dynamic(() => import('./image-viewer'), { ssr: false });
 
-const ImageViewer: React.FC<ImageViewerProps> = (props) => {
-  return (
-    <ImageViewerLazy {...props} />
-  );
-};
+const ImageViewer: React.FC<ImageViewerProps> = (props) => (
+  <ImageViewerLazy {...props} />
+);
 
 
 export default ImageViewer;

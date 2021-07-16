@@ -11,7 +11,7 @@ const CAMERA_DISTANCE_OFFSET = 1;
 // with a working focus funciton.
 // https://discourse.threejs.org/t/camera-zoom-to-fit-object/936/24
 const withFixedFocusOnMorphology = morphoViewer => {
-  morphoViewer._threeContext.getMorphoFromCollection = function(name = null) {
+  morphoViewer._threeContext.getMorphoFromCollection = function (name = null) {
     let morphoName = name;
     // if no name of morphology is provided, we take the first one
     if (!morphoName) {
@@ -26,31 +26,31 @@ const withFixedFocusOnMorphology = morphoViewer => {
     return morphoMesh;
   };
 
-  morphoViewer.isInterneuron = function(): boolean {
+  morphoViewer.isInterneuron = function (): boolean {
     // Interneurons do not have an apical dendrite, the pinkish colored dendrites
     const morphoMesh = this._threeContext.getMorphoFromCollection();
     return !morphoMesh.children.find(
-      child => child?.userData?.typename === 'apical_dendrite'
+      child => child?.userData?.typename === 'apical_dendrite',
     );
   };
 
-  morphoViewer._threeContext.getSomaChildren = function(): Object3D[] {
+  morphoViewer._threeContext.getSomaChildren = function (): Object3D[] {
     const morphoMesh = this.getMorphoFromCollection();
     return (morphoMesh.children as Object3D[]).filter(
-      object => object.userData.typename === 'soma'
+      object => object.userData.typename === 'soma',
     );
   };
 
-  morphoViewer._threeContext.getOrphanedSomaChildren = function(): Object3D {
+  morphoViewer._threeContext.getOrphanedSomaChildren = function (): Object3D {
     // it looks like the orphaned soma construction doesn't have a name
     // we can use that to reliably get the orphaned soma
     const morphoMesh = this.getMorphoFromCollection();
     return (morphoMesh.children as Object3D[]).filter(
-      object => object.name === ''
+      object => object.name === '',
     )[0];
   };
 
-  morphoViewer._threeContext.removeOrphanedSomaChildren = function(): Object3D {
+  morphoViewer._threeContext.removeOrphanedSomaChildren = function (): Object3D {
     // it looks like the orphaned soma construction doesn't have a name
     // we can use that to reliably get the orphaned soma
     const morphoMesh = this.getMorphoFromCollection();
@@ -58,7 +58,7 @@ const withFixedFocusOnMorphology = morphoViewer => {
     morphoMesh.remove(orphanedSoma);
   };
 
-  morphoViewer._threeContext.getTargetPointFromSoma = function(): THREE.Vecor3 {
+  morphoViewer._threeContext.getTargetPointFromSoma = function (): THREE.Vecor3 {
     const morphoMesh = this.getMorphoFromCollection();
     // Get the coordinates for the center of the soma
     // This will be the point we want the camera to focus on!
@@ -88,7 +88,7 @@ const withFixedFocusOnMorphology = morphoViewer => {
     return targetPoint;
   };
 
-  morphoViewer._threeContext.getCameraHeightAtMorpho = function(): number {
+  morphoViewer._threeContext.getCameraHeightAtMorpho = function (): number {
     const targetPoint = this.getTargetPointFromSoma();
 
     this._camera.updateMatrixWorld();
@@ -106,7 +106,7 @@ const withFixedFocusOnMorphology = morphoViewer => {
     return height;
   };
 
-  morphoViewer._threeContext.focusOnMorphology = function(name = null) {
+  morphoViewer._threeContext.focusOnMorphology = function (name = null) {
     const morphoMesh = this.getMorphoFromCollection(name);
 
     const fitOffset = CAMERA_DISTANCE_OFFSET;
@@ -118,8 +118,7 @@ const withFixedFocusOnMorphology = morphoViewer => {
     const size = box.getSize(new THREE.Vector3());
 
     const maxSize = Math.max(size.x, size.y, size.z);
-    const fitHeightDistance =
-      maxSize / (2 * Math.atan((Math.PI * this._camera.fov) / 360));
+    const fitHeightDistance = maxSize / (2 * Math.atan((Math.PI * this._camera.fov) / 360));
     const fitWidthDistance = fitHeightDistance / this._camera.aspect;
     const distance = fitOffset * Math.max(fitHeightDistance, fitWidthDistance);
 

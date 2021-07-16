@@ -52,9 +52,9 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => 
       query: {
         terms: {
           '_id': agentIds,
-        }
-      }
-    }
+        },
+      },
+    };
 
     nexus.View
       // query ElesticSearch endpoint to get agents by their ids
@@ -100,9 +100,8 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => 
               <td>
                 {agentMap && entryToArray(trace.contribution)
                   .map(contribution => agentMap[contribution.agent['@id']])
-                  .sort((a1, a2) => a1.type > a2.type ? 1 : -1)
-                  .map(agent => <span>{agent.label} <br/></span>)
-                }
+                  .sort((a1, a2) => (a1.type > a2.type ? 1 : -1))
+                  .map((agent, i) => <span key={i}>{agent.label} <br /></span>)}
               </td>
             </tr>
           ))}

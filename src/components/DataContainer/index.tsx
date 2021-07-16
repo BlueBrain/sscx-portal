@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SectionNav from '../../layouts/SectionNav';
-import ScrollTo from '../../components/ScrollTo';
+import ScrollTo from '../ScrollTo';
 
 
 const classPrefix = 'data-container__';
@@ -21,24 +21,22 @@ const DataContainer: React.FC<DataContainerProps> = ({
   visible = true,
   children,
   navItems,
-}) => {
-  return (
-    <>
-      {visible && (
-        <div id="data" className={`${classPrefix}basis`}>
-          {navItems && (
-            <SectionNav navItems={navItems} />
-          )}
-          <div className="center">{children}</div>
-          <div className="scroll-to">
-            <ScrollTo anchor="filters" direction="up">
-              Return to selectors
-            </ScrollTo>
-          </div>
+}) => (
+  <>
+    {visible && (
+      <div id="data" className={`${classPrefix}basis`}>
+        {navItems && (
+          <SectionNav navItems={navItems} />
+        )}
+        <div className="center">{children}</div>
+        <div className="scroll-to">
+          <ScrollTo anchor="filters" direction="up">
+            Return to selectors
+          </ScrollTo>
         </div>
-      )}
-    </>
-  );
-};
+      </div>
+    )}
+  </>
+);
 
 export default DataContainer;

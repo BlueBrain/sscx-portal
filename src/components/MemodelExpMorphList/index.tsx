@@ -15,7 +15,7 @@ const neuriteTypeLabel = {
   axon: 'axon',
   dendrite: 'dendrite',
   'axon+dendrite': 'axon and dendrite',
-}
+};
 
 const tableColumns = [
   {
@@ -37,7 +37,7 @@ const tableColumns = [
     title: 'Morphology',
     dataIndex: 'morphology',
     key: 'morphology',
-    render: (morphologyName, morphology) => <Link href={linkHref(morphology)}>{morphologyName}</Link>
+    render: (morphologyName, morphology) => <Link href={linkHref(morphology)}>{morphologyName}</Link>,
   },
 ];
 

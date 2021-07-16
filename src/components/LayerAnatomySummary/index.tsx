@@ -5,7 +5,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
 import ResponsiveTable from '../ResponsiveTable';
 
-// import './style.scss';
+
 
 const classPrefix = 'layer-anatomy-summary__';
 

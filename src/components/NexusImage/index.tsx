@@ -5,7 +5,7 @@ import { useNexusContext } from '@bbp/react-nexus';
 import { parseUrl } from '../../utils';
 
 import 'react-image-lightbox/style.css';
-// import './style.scss';
+
 
 
 const classPrefix = 'nexus-image__';
@@ -55,8 +55,7 @@ export const NexusImage = (props: NexusImageContainerProps) => {
   const [loading, setLoading] = useState(true);
   const [imageData, setImageData] = useState<string | null>(null);
 
-  const { org: imageOrg, project: imageProject } =
-    org && project ? { org, project } : parseUrl(imageUrl);
+  const { org: imageOrg, project: imageProject } = org && project ? { org, project } : parseUrl(imageUrl);
 
   useEffect(() => {
     // TODO: We can implement a caching layer here based on file revision

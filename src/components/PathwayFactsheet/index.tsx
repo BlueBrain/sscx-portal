@@ -60,7 +60,7 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
     fact.value.map(curr => parseFloat(get(curr, `${valuePath}.value`))),
   );
 
-  const valueColumn = fact.value.map(valueEntry => {
+  const valueColumn = fact.value.map((valueEntry, i) => {
     const value = get(valueEntry, `${valuePath}.value`, '');
     const formattedValue = formatNumber(value);
     const unitCode = get(valueEntry, `${valuePath}.unitCode`, '');
@@ -73,7 +73,7 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
     const barWidthPct = (value / maxVal) * 100 * barMaxFillRatio;
 
     return (
-      <div className="row mb-1">
+      <div key={i} className="row mb-1">
         <div className="col-xs-6 pos-relative">
           {label}
           <div className="bar" style={{ width: `${barWidthPct}%` }} />
@@ -93,13 +93,11 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
   );
 };
 
-const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => {
-  return Array.isArray(fact.value) ? (
-    <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
-  ) : (
-    <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
-  );
-};
+const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => (Array.isArray(fact.value) ? (
+  <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
+) : (
+  <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
+));
 
 const PathwayFactsheet: React.FC<PathwayFactsheetProps> = ({
   data,

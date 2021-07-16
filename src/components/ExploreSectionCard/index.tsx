@@ -31,10 +31,10 @@ const icons = {
 
 const IconSvg: React.FC<{ icon: IconType }> = ({ icon }) => {
   switch (icon) {
-    case 'layer': return <LayerSvg />;
-    case 'microcircuit': return <MicrocircuitSvg />;
-    case 'pathway': return <PathwaySvg />;
-    case 'neuron': return <NeuronSvg />;
+  case 'layer': return <LayerSvg />;
+  case 'microcircuit': return <MicrocircuitSvg />;
+  case 'pathway': return <PathwaySvg />;
+  case 'neuron': return <NeuronSvg />;
   }
 };
 
@@ -66,12 +66,12 @@ const ExploreSectionCard: React.FC<ExploreSectionCardProps> = ({
 
       <div className={styles.body}>
         <div className={styles.title}>
-          <div className={styles.titleBar}></div>
+          <div className={styles.titleBar} />
           <h3 className="text-white text-uppercase">{title}</h3>
         </div>
 
         <div>
-          {links.map(link => link.href ? (
+          {links.map(link => (link.href ? (
             <Link key={link.label} href={link.href}>
               <a className={styles.link}>
                 {link.icon && <IconSvg icon={link.icon} />}
@@ -83,20 +83,20 @@ const ExploreSectionCard: React.FC<ExploreSectionCardProps> = ({
               {link.icon && <IconSvg icon={link.icon} />}
               {link.label}<sup>*</sup>
             </p>
-          ))}
+          )))}
         </div>
 
         <div
           className={styles.infoBtn}
           onClick={() => setInfoOpened(!infoOpened)}
         >
-          {infoOpened ? (<FaMinus size={14}/>) : (<FaPlus size={14}/>)}
+          {infoOpened ? (<FaMinus size={14} />) : (<FaPlus size={14} />)}
         </div>
 
         <div className={styles.info}>
           {description}
         </div>
-        <div className={styles.infoBottomGradient}></div>
+        <div className={styles.infoBottomGradient} />
       </div>
     </div>
   );

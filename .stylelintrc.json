@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "no-descending-specificity": null,
+    "max-empty-lines": null,
+    "rule-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "no-invalid-position-at-import-rule": null,
+    "selector-list-comma-newline-after": null,
+    "function-comma-space-after": null,
+    "selector-pseudo-class-no-unknown": null,
+    "at-rule-no-unknown": null,
+    "color-hex-length": null,
+    "no-duplicate-selectors": [true, { "severity": "warning" }]
+  }
+}

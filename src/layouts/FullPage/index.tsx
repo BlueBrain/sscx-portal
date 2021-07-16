@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
 
-// import './style.scss';
+
 
 const classPrefix = 'full-page__';
 

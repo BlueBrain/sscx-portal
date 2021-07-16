@@ -99,7 +99,7 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
         className="mt-3"
         src={`${synaptomeBaseUrl}/${type === 'pre' ? preMtype : postMtype}.png`}
         thumbnailSrc={imgOpt(`${synaptomeBaseUrl}/${type === 'pre' ? preMtype : postMtype}.png`, { width: 1200 })}
-        aspectRatio='16 / 9'
+        aspectRatio="16 / 9"
       />
     </div>
   );

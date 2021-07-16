@@ -31,7 +31,7 @@ export const MorphologyViewer: React.FC<{
     setOrientationViewer,
   ] = React.useState<OrientationViewer | null>(null);
   const [scaleViewer, setScaleViewer] = React.useState<ScaleViewer | null>(
-    null
+    null,
   );
 
   React.useEffect(() => {
@@ -72,7 +72,7 @@ export const MorphologyViewer: React.FC<{
       const hasSomaData = parsedFile.soma.points.length > 1;
 
       morphoViewer = withFixedFocusOnMorphology(
-        new morphoviewer.MorphoViewer(ref.current)
+        new morphoviewer.MorphoViewer(ref.current),
       );
       morphoViewer.hasSomaData = hasSomaData;
 
@@ -124,7 +124,7 @@ export const MorphologyViewer: React.FC<{
       };
       mv._threeContext._controls.addEventListener(
         'change',
-        controlEventListenerChangedEvent
+        controlEventListenerChangedEvent,
       );
     }
     return () => {
@@ -132,7 +132,7 @@ export const MorphologyViewer: React.FC<{
       setScaleViewer(null);
       mv?._threeContext?._controls?.removeEventListener(
         'change',
-        controlEventListenerChangedEvent
+        controlEventListenerChangedEvent,
       );
     };
   }, [scaleRef, mv, options]);
@@ -150,17 +150,17 @@ export const MorphologyViewer: React.FC<{
         hasApproximatedSoma={!mv?.hasSomaData}
       />
       <div>
-        <div className="morpho-viewer" ref={ref}></div>
+        <div className="morpho-viewer" ref={ref} />
         <div
           className="scale"
           ref={scaleRef}
           onClick={handleOrientationClick}
-        ></div>
+        />
         <div
           className="orientation"
           ref={orientationRef}
           onClick={handleOrientationClick}
-        ></div>
+        />
       </div>
     </>
   );

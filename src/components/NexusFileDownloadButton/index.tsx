@@ -34,7 +34,7 @@ const NexusFileDownloadButton: React.FC<NexusFileDownloadButtonProps> = ({
 
   const download = () => {
     setLoading(true);
-    const { org: fileOrg, project: fileProject } = {...parseUrl(url), ...{ org, project }};
+    const { org: fileOrg, project: fileProject } = { ...parseUrl(url), ...{ org, project } };
     const fileId = url.split('/').reverse()[0];
 
     nexus.File.get(fileOrg as string, fileProject as string, fileId, { as: 'blob' })

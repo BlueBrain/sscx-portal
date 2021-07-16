@@ -40,7 +40,7 @@ const Video: React.FC<VideoProps> = ({ sources = [] }) => {
       if (!!videoPlayer) {
         videoPlayer.destroy();
       }
-    }
+    };
   }, [videoRef]);
 
   return (

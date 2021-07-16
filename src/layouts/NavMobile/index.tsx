@@ -8,7 +8,7 @@ import { IoMdMenu } from 'react-icons/io';
 import { SecondaryNav } from '../Navigation';
 import { basePath } from '../../config';
 
-// import './style.scss';
+
 import Search from '../../components/Search';
 
 const classPrefix = 'nav-mobile__';

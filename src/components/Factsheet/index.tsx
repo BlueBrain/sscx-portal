@@ -1,10 +1,10 @@
 import React from 'react';
-import NumberFormat from '../NumberFormat';
 import isNil from 'lodash/isNil';
+import NumberFormat from '../NumberFormat';
 
 import Unit from '../Unit';
 
-// import './style.scss';
+
 
 
 const classPrefix = 'factsheet__';
@@ -32,50 +32,49 @@ type FactsheetProps = {
 const FactsheetSingleValueEntry: React.FC<{
   fact: FactsheetEntryType;
 }> = ({
-  fact
-}) => {
-  return (
-    <div className="row mt-1">
-      <div className="col-xs-4 name">{fact.name}</div>
-      <div className="col-xs-4 value">
-        {isNil(fact.value)
-          ? (<span>-</span>)
-          : (<span>
-              <NumberFormat value={fact.value} /> <Unit value={fact.unit} />
-            </span>)
-        }
-      </div>
+  fact,
+}) => (
+  <div className="row mt-1">
+    <div className="col-xs-4 name">{fact.name}</div>
+    <div className="col-xs-4 value">
+      {isNil(fact.value)
+        ? (<span>-</span>)
+        : (
+          <span>
+            <NumberFormat value={fact.value} /> <Unit value={fact.unit} />
+          </span>
+        )}
     </div>
-  );
-};
+  </div>
+);
 
 const FactsheetSingleMeanStdEntry: React.FC<{
   fact: FactsheetEntryType;
 }> = ({
   fact,
-}) => {
-  return (
-    <div className="row mt-1">
-      <div className="col-xs-4 name">{fact.name}</div>
-      <div className="col-xs-4 value">
-        {fact.value_map && (
-          <>
-            <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> <Unit value={fact.unit} />
-          </>
-        )}
-        {fact.values && (
-          <>
-            <NumberFormat value={fact.values[0]} />&nbsp;
-            {fact.values[1] && (<>
+}) => (
+  <div className="row mt-1">
+    <div className="col-xs-4 name">{fact.name}</div>
+    <div className="col-xs-4 value">
+      {fact.value_map && (
+        <>
+          <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> <Unit value={fact.unit} />
+        </>
+      )}
+      {fact.values && (
+        <>
+          <NumberFormat value={fact.values[0]} />&nbsp;
+          {fact.values[1] && (
+            <>
               ± <NumberFormat value={fact.values[1]} />&nbsp;
-            </>)}
-            <Unit value={fact.unit} />
-          </>
-        )}
-      </div>
+            </>
+          )}
+          <Unit value={fact.unit} />
+        </>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 const FactsheetMapValueEntry: React.FC<{
   fact: FactsheetEntryType
@@ -98,7 +97,7 @@ const FactsheetMapValueEntry: React.FC<{
           <div className="bar" style={{ width: `${barWidthPct}%` }} />
         </div>
         <div className="col-xs-6">
-          <NumberFormat value={value}/> <Unit value={unitCode} />
+          <NumberFormat value={value} /> <Unit value={unitCode} />
         </div>
       </div>
     );
@@ -115,16 +114,16 @@ const FactsheetMapValueEntry: React.FC<{
 const FactsheetEntry: React.FC<{
   fact: FactsheetEntryType
 }> = ({
-  fact
+  fact,
 }) => {
-  if(
-    (fact.values && fact.values.length) ||
-    (fact.value_map && !isNil(fact.value_map.mean) && !isNil(fact.value_map.std))
+  if (
+    (fact.values && fact.values.length)
+    || (fact.value_map && !isNil(fact.value_map.mean) && !isNil(fact.value_map.std))
   ) {
     return (<FactsheetSingleMeanStdEntry fact={fact} />);
   }
 
-  if(fact.value_map) {
+  if (fact.value_map) {
     return (<FactsheetMapValueEntry fact={fact} />);
   }
 
@@ -135,14 +134,12 @@ const Factsheet: React.FC<FactsheetProps> = ({
   facts,
   className = '',
   id = '',
-}) => {
-  return (
-    <div id={id} className={`${classPrefix}basis ${className}`}>
-      {facts.map(fact => (
-        <FactsheetEntry key={fact.name} fact={fact} />
-      ))}
-    </div>
-  );
-};
+}) => (
+  <div id={id} className={`${classPrefix}basis ${className}`}>
+    {facts.map(fact => (
+      <FactsheetEntry key={fact.name} fact={fact} />
+    ))}
+  </div>
+);
 
 export default Factsheet;

@@ -4,13 +4,12 @@ import { FaCircle, FaCaretDown } from 'react-icons/fa';
 import { Color } from '../../../types';
 import { basePath } from '../../../config';
 
-// import './style.scss';
+
 
 
 const classPrefix = 'info-box-2__';
 
-const getSlug = (name: string): string =>
-  name.toLowerCase().replace(/ |<br\/>/g, '-');
+const getSlug = (name: string): string => name.toLowerCase().replace(/ |<br\/>/g, '-');
 
 type InfoBox2Props = {
   title: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Color } from '../../types';
-// import './style.scss';
+
 
 const classPrefix = 'title__';
 
@@ -19,19 +19,17 @@ const Title: React.FC<TitleProps> = ({
   hint,
   primaryColor = 'yellow' as Color,
   primary,
-}) => {
-  return (
-    <div
-      className={`${classPrefix}basis ${
-        primary ? 'primary' : ''
-      } ${primaryColor}`}
-    >
-      {subtitle && !primary && <h4 className="text-white">{subtitle}</h4>}
-      {title && <h2 role="title" className="text-white">{title}</h2>}
-      {subtitle && primary && <h4 className="text-white">{subtitle}</h4>}
-      {<div className="hint">{hint}</div>}
-    </div>
-  );
-};
+}) => (
+  <div
+    className={`${classPrefix}basis ${
+      primary ? 'primary' : ''
+    } ${primaryColor}`}
+  >
+    {subtitle && !primary && <h4 className="text-white">{subtitle}</h4>}
+    {title && <h2 role="title" className="text-white">{title}</h2>}
+    {subtitle && primary && <h4 className="text-white">{subtitle}</h4>}
+    <div className="hint">{hint}</div>
+  </div>
+);
 
 export default Title;

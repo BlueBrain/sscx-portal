@@ -6,11 +6,9 @@ import { NexusPluginClassProps } from './nexus-plugin';
 
 const NexusPluginLazy = dynamic(() => import('./nexus-plugin'), { ssr: false });
 
-const ImageViewer: React.FC<NexusPluginClassProps<any>> = (props) => {
-  return (
-    <NexusPluginLazy {...props} />
-  );
-};
+const ImageViewer: React.FC<NexusPluginClassProps<any>> = (props) => (
+  <NexusPluginLazy {...props} />
+);
 
 
 export default ImageViewer;

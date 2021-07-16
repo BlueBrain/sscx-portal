@@ -68,14 +68,14 @@ const IonChannelPlot: React.FC<IonChannelPlotProps> = ({ name, equation }) => {
       },
     });
 
-    function getXAxes () {
+    function getXAxes() {
       // generate scale with steps
       return Array.apply(null, {
         length: plotLength,
       }).map(Function.call, x => x * 100);
     }
 
-    function getData (data) {
+    function getData(data) {
       let arrayValues = [];
       switch (data.type) {
       case 'uniform':
@@ -83,8 +83,8 @@ const IonChannelPlot: React.FC<IonChannelPlotProps> = ({ name, equation }) => {
         maxValue = data.latex;
         break;
       case 'exponential':
-        let parser = new Parser();
-        let expr = parser.parse(data.plot);
+        const parser = new Parser();
+        const expr = parser.parse(data.plot);
         arrayValues = getXAxes().map(xVal => expr.evaluate({ x: xVal }));
         maxValue = Math.max.apply(null, arrayValues);
         break;

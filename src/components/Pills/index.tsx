@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import './style.scss';
+
 import { Color } from '../../types';
 
 const classPrefixPills = 'pills__';
@@ -23,22 +23,20 @@ type PillProps = {
   title?: string;
 };
 
-export const Pill: React.FC<PillProps> = ({ element, selected, onSelect, title }) => {
-  return (
-    <div
-      role="radio"
-      aria-checked={selected}
-      tabIndex={0}
-      className={`${classPrefixPill}basis ${
-        selected ? `${classPrefixPill}selected` : ''
-      }`}
-      onClick={() => onSelect && onSelect(element)}
-      title={title}
-    >
-      {element}
-    </div>
-  );
-};
+export const Pill: React.FC<PillProps> = ({ element, selected, onSelect, title }) => (
+  <div
+    role="radio"
+    aria-checked={selected}
+    tabIndex={0}
+    className={`${classPrefixPill}basis ${
+      selected ? `${classPrefixPill}selected` : ''
+    }`}
+    onClick={() => onSelect && onSelect(element)}
+    title={title}
+  >
+    {element}
+  </div>
+);
 
 const Pills: React.FC<PillsProps> = ({
   title,

@@ -8,13 +8,11 @@ const replacement = {
   MOhm: 'MΩ',
 };
 
-const Unit: React.FC<UnitProps> = ({ value = '' }) => {
-  return (
-    <>
-      {replacement[value] ?? value}
-    </>
-  );
-};
+const Unit: React.FC<UnitProps> = ({ value = '' }) => (
+  <>
+    {replacement[value] ?? value}
+  </>
+);
 
 
 export default Unit;

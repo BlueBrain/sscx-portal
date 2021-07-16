@@ -44,9 +44,9 @@ const Metadata: React.FC<MetadataProps> = ({ nexusDocument }) => {
       query: {
         terms: {
           '_id': agentIds,
-        }
-      }
-    }
+        },
+      },
+    };
 
     nexus.View
       // query ElesticSearch endpoint to get agents by their ids
@@ -76,7 +76,6 @@ const Metadata: React.FC<MetadataProps> = ({ nexusDocument }) => {
       </p>
     </>
   );
-
 };
 
 

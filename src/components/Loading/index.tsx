@@ -11,12 +11,10 @@ export enum SIZE {
 
 const Loading: React.FC<{
   size?: string;
-}> = ({ size = SIZE.small, children }) => {
-  return (
-    <div className={`${classPrefix} ${size}`}>
-      <div className="body">{children}</div>
-    </div>
-  );
-};
+}> = ({ size = SIZE.small, children }) => (
+  <div className={`${classPrefix} ${size}`}>
+    <div className="body">{children}</div>
+  </div>
+);
 
 export default Loading;

@@ -5,14 +5,13 @@ import React from 'react';
 const MorphoLegend: React.FC<{
   isInterneuron: boolean;
   hasApproximatedSoma: boolean;
-}> = ({ isInterneuron, hasApproximatedSoma }) => {
-  return (
-    <div className="morpho-legend">
-      <ul>
-        <li className="soma">Soma {hasApproximatedSoma && '(Approximated)'}</li>
-        <li className="axon">Axon</li>
+}> = ({ isInterneuron, hasApproximatedSoma }) => (
+  <div className="morpho-legend">
+    <ul>
+      <li className="soma">Soma {hasApproximatedSoma && '(Approximated)'}</li>
+      <li className="axon">Axon</li>
 
-        {// Interneurons don't have a distinction between Basal / Apical Dendrites
+      {// Interneurons don't have a distinction between Basal / Apical Dendrites
         isInterneuron ? (
           <li className="basal-dendrites">Dendrites</li>
         ) : (
@@ -20,10 +19,10 @@ const MorphoLegend: React.FC<{
             <li className="basal-dendrites">Basal Dendrites</li>
             <li className="apical-dendrites">Apical Dendrites</li>
           </>
-        )}
-      </ul>
-    </div>
-  );
-};
+        )
+      }
+    </ul>
+  </div>
+);
 
 export default MorphoLegend;

@@ -30,7 +30,7 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   const handleClick = (e: React.MouseEvent) => {
     if (!onClick) return;
 
-    e.preventDefault()
+    e.preventDefault();
     onClick();
   };
 
@@ -42,7 +42,7 @@ const CtaButton: React.FC<CtaButtonProps> = ({
       style={{
         width,
         maxWidth,
-        display: block ? 'block' : 'inline-block'
+        display: block ? 'block' : 'inline-block',
       }}
     >
       <span className={styles.text}>

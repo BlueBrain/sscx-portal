@@ -29,10 +29,11 @@ function MyApp({ Component, pageProps }) {
       <MainLayout>
         {/* TODO: move all head elements to a separate component */}
         <Head>
+          {/* eslint-disable-next-line */}
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap" />
-          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js"></script>
-          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/extras/named-exports.js"></script>
-          <script type="systemjs-importmap" src={`${basePath}/systemjs-importmap.json`}></script>
+          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js" />
+          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/extras/named-exports.js" />
+          <script type="systemjs-importmap" src={`${basePath}/systemjs-importmap.json`} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
 

@@ -71,11 +71,12 @@ $borderWidth: 2px;
     border: none;
     line-height: $height + (2 * $borderWidth);
     background: map-get($basePalette, "yellow-2");
-    background: linear-gradient(
-      90deg,
-      map-get($basePalette, "yellow-1"),
-      map-get($basePalette, "yellow-2")
-    );
+    background:
+      linear-gradient(
+        90deg,
+        map-get($basePalette, "yellow-1"),
+        map-get($basePalette, "yellow-2")
+      );
 
     .active &,
     &:active,

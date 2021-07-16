@@ -25,7 +25,7 @@ const getLayerThicknesses = (sliceCollection, rawLayerThicknesses, layer) => (
       n: rawLayerThickness.series.find((s: any) => s.statistic === 'N')?.value,
     }))
   // sort by layer
-    .sort((a, b) => a.layer < b.layer ? -1 : 1)
+    .sort((a, b) => (a.layer < b.layer ? -1 : 1))
 );
 
 
@@ -60,7 +60,7 @@ export const getData = (layer: Layer, data?: ElasticSearchViewQueryResponse<any>
       });
     })
     // sort by species name
-    .sort((a, b) => a.name < b.name ? -1 : 1);
+    .sort((a, b) => (a.name < b.name ? -1 : 1));
 
   const unit = rawLayerThicknesses[0]?.series[0]?.unitCode;
   return ({ unit, sliceCollections });

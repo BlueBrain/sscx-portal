@@ -27,7 +27,7 @@ const NumberFormat: React.FC<NumberFormatProps> = ({
     : fixed;
 
   return `${prefix}${formatted}${suffix}`;
-}
+};
 
 
 export default NumberFormat;

@@ -16,7 +16,7 @@ const neuriteTypeLabel = {
   axon: 'axon',
   dendrite: 'dendrite',
   'axon+dendrite': 'axon and dendrite',
-}
+};
 
 const linkHref = (memodel) => {
   const query = qs.stringify({
@@ -48,7 +48,7 @@ const tableColumns = [
   {
     title: 'ME-model',
     dataIndex: 'memodel_name',
-    render: function ModelName (memodel_name, memodel) {return (<Link href={linkHref(memodel)}>{memodel_name}</Link>)}
+    render: function ModelName(memodel_name, memodel) { return (<Link href={linkHref(memodel)}>{memodel_name}</Link>); },
   },
 ];
 
@@ -57,7 +57,7 @@ const mtypeLayer = (mtype: string) => {
   return ['L23', 'L2', 'L3'].includes(rawLayer)
     ? 'L23'
     : rawLayer;
-}
+};
 
 const ExpMorphMemodelList: React.FC<ExpMorphMemodelListProps> = ({ memodels, className = '', id = '' }) => {
   const memodelsDataSource = memodels

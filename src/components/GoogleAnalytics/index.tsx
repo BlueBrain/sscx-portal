@@ -39,14 +39,14 @@ const CookiePrefsForm: React.FC = () => {
   return (
     <>
       <Head>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtm.id}`}></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtm.id}`} />
         <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}`
-            }}
-          />
+          async
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}`,
+          }}
+        />
       </Head>
 
       {formVisible && (
@@ -57,7 +57,7 @@ const CookiePrefsForm: React.FC = () => {
               <a
                 href="https://www.epfl.ch/about/presidency/presidents-team/legal-affairs/epfl-privacy-policy/cookies-policy/"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 Cookies policy
               </a>

@@ -99,13 +99,11 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
   );
 };
 
-const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => {
-  return Array.isArray(fact.value) ? (
-    <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
-  ) : (
-    <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
-  );
-};
+const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => (Array.isArray(fact.value) ? (
+  <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
+) : (
+  <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
+));
 
 const BrainSubregionFactsheet: React.FC<BrainSubregionFactsheetProps> = ({
   data,
@@ -115,9 +113,10 @@ const BrainSubregionFactsheet: React.FC<BrainSubregionFactsheetProps> = ({
   return (
     <div className={`${classPrefix}basis`}>
       {// @ts-ignore
-      facts.map(fact => (
-        <FactsheetEntry key={fact.name} fact={fact} />
-      ))}
+        facts.map(fact => (
+          <FactsheetEntry key={fact.name} fact={fact} />
+        ))
+      }
     </div>
   );
 };

@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 import { HomeNav, SecondaryNav } from '../Navigation';
 // import { State } from '../../store';
 
-// import './style.scss';
+
 
 const classPrefix = 'nav-desktop__';
 

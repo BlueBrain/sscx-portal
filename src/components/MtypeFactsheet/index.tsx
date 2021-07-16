@@ -98,13 +98,11 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
   );
 };
 
-const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => {
-  return Array.isArray(fact.value) ? (
-    <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
-  ) : (
-    <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
-  );
-};
+const FactsheetEntry: React.FC<{ fact: FactsheetEntryType }> = ({ fact }) => (Array.isArray(fact.value) ? (
+  <FactsheetMapValueEntry fact={fact as FactsheetMapValueType} />
+) : (
+  <FactsheetSingleValueEntry fact={fact as FactsheetSingleValueType} />
+));
 
 const MtypeFactsheet: React.FC<MtypeFactsheetProps> = ({
   data,
