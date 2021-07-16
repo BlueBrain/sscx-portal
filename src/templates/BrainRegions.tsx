@@ -40,7 +40,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
         <Row
           className="w-100"
           align="bottom"
-          gutter={[0,20]}
+          gutter={20}
         >
           <Col
             xs={24}
@@ -69,8 +69,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
             xl={16}
             xxl={12}
           >
-            <div style={{ maxWidth: '32rem', margin: '0 auto' }}>
-              <div className={selectorStyle.row}>
+              <div className={selectorStyle.row} style={{ maxWidth: '32rem' }}>
                   <div className={selectorStyle.column}>
                     <div className={selectorStyle.head}>Choose a subregion</div>
                     <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
@@ -81,7 +80,6 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
                       />
                     </div>
                   </div>
-                </div>
             </div>
           </Col>
         </Row>
