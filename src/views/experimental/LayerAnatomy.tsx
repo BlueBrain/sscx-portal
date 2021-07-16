@@ -9,8 +9,6 @@ import ESData from '../../components/ESData';
 import LayerThickness from '../../components/LayerThickness';
 import NeuralDensity from '../../components/NeuralDensity';
 import LayerAnatomySummary from '../../components/LayerAnatomySummary';
-import SectionNav from '../../layouts/SectionNav';
-
 
 const LayerAnatomyView = () => (
   <LayerAnatomyTemplate
