@@ -62,7 +62,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
         <Row
           className="w-100"
           align="bottom"
-          gutter={16}
+          gutter={[0,20]}
         >
           <Col
             xs={24}
@@ -91,32 +91,30 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
             xl={16}
             xxl={12}
           >
-            <div style={{ maxWidth: '32rem', margin: '0 auto' }}>
-              <div className={selectorStyle.row}>
-                <div className={selectorStyle.column}>
-                  <div className={selectorStyle.head}>1. Choose a subregion</div>
-                  <div className={selectorStyle.body} style={{ padding: '1rem 2rem' }}>
-                    <Pills
-                      list={subregions}
-                      titles={subregions.map(subregion => subregionTitle[subregion])}
-                      defaultValue={currentRegion}
-                      onSelect={setRegion as (s: string) => void}
-                      color={color}
-                    />
-                  </div>
+            <div className={selectorStyle.row} style={{ maxWidth: '32rem' }}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>1. Choose a subregion</div>
+                <div className={selectorStyle.body} style={{ padding: '1rem 2rem' }}>
+                  <Pills
+                    list={subregions}
+                    titles={subregions.map(subregion => subregionTitle[subregion])}
+                    defaultValue={currentRegion}
+                    onSelect={setRegion as (s: string) => void}
+                    color={color}
+                  />
                 </div>
               </div>
-              <div className={selectorStyle.row}>
-                <div className={selectorStyle.column}>
-                  <div className={selectorStyle.head}>2. Choose a layer</div>
-                  <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
-                    <LayerSelector
-                      color={color}
-                      maxWidth="14rem"
-                      value={currentLayer}
-                      onSelect={setLayer}
-                    />
-                  </div>
+            </div>
+            <div className={selectorStyle.row} style={{ maxWidth: '32rem' }}>
+              <div className={selectorStyle.column}>
+                <div className={selectorStyle.head}>2. Choose a layer</div>
+                <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                  <LayerSelector
+                    color={color}
+                    maxWidth="14rem"
+                    value={currentLayer}
+                    onSelect={setLayer}
+                  />
                 </div>
               </div>
             </div>
