@@ -31,3 +31,7 @@ export const subregionTitle: Record<Subregion, string> = {
   S1Tr: 'Trunk',
   S1ULp: 'Upper lip',
 };
+
+export const defaultSelection = {
+  LAYER_ANATOMY: 'L4',
+};
