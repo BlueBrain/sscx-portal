@@ -28,7 +28,6 @@ import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { sscx } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
-import { last, mock, mockpopulations, morfModel, morgologyJson } from './mock';
 
 
 const NeuronExperimentalMorphology: React.FC = () => {
@@ -181,20 +180,20 @@ const NeuronExperimentalMorphology: React.FC = () => {
           >
             {esDocuments => (
               <>
-                {!!mock && !!mock.length && (
+                {!!esDocuments && !!esDocuments.length && (
                   <div>
-                    <Metadata nexusDocument={mock[0]._source} />
+                    <Metadata nexusDocument={esDocuments[0]._source} />
                     <h3 className="mt-3">3D view</h3>
                     <NexusPlugin
                       className="mt-2"
                       name="neuron-morphology"
-                      resource={mock[0]._source}
+                      resource={esDocuments[0]._source}
                       nexusClient={nexus}
                     />
                     <div className="text-right mt-2">
                       <NexusFileDownloadButton
-                        filename={getMorphologyDistribution(mock[0]._source).name}
-                        url={getMorphologyDistribution(mock[0]._source).contentUrl}
+                        filename={getMorphologyDistribution(esDocuments[0]._source).name}
+                        url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
                         org={sscx.org}
                         project={sscx.project}
                         id="morphologyDownloadBtn"
@@ -212,7 +211,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {factsheetData => (
               <div className="mt-3">
                 <h3>Morphometrics</h3>
-                <Factsheet id="morphometrics" className="mt-2" facts={morgologyJson[0].values} />
+                <Factsheet id="morphometrics" className="mt-2" facts={factsheetData[0].values} />
               </div>
             )}
           </HttpData>
@@ -221,7 +220,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {memodels => (
               <div className="mt-3">
                 <h3>Morpho-Electrical neuron models using this morphology</h3>
-                <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={morfModel} />
+                <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={memodels} />
               </div>
             )}
           </HttpData>
@@ -234,7 +233,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <h3>Factsheet</h3>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
             {factsheetData => (
-              <Factsheet facts={mockpopulations.values}/>
+              <Factsheet facts={factsheetData.values}/>
             )}
           </HttpData>
 
@@ -249,11 +248,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
             {esDocuments => (
               <>
-                {!!last &&
+                {!!esDocuments &&
                   <ExpMorphologyTable
                     layer={currentLayer}
                     mtype={currentMtype}
-                    morphologies={getAndSortMorphologies(last.hits.hits)}
+                    morphologies={getAndSortMorphologies(esDocuments)}
                   />
                 }
               </>
