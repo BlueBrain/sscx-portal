@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
+import ResponsiveTable from '../ResponsiveTable';
 
 // import './style.scss';
 
@@ -13,87 +14,85 @@ export type LayerAnatomySummaryProps = {
   highlightLayer?: string;
 };
 
+type SummaryData ={
+  layer: ReactNode,
+  thicknessEntityDescription: ReactNode;
+  thickness: ReactNode,
+  thicknessN: ReactNode,
+  densityMean: ReactNode,
+  densityStd: ReactNode,
+  densityN: ReactNode
+}
+
 const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], highlightLayer = '' }) => {
   const entities = data.map(document => document._source);
+
+  let densityUnit: string;
+  let thicknessUnit: string;
 
   const layers = Array
     .from(new Set(entities.map(e => e.brainLocation?.layer?.label)))
     .filter(Boolean)
     .sort();
 
-  const summary = layers.map((layer: string) => {
-    const densityEntity = entities.find((entity) => {
-      return entity['@type'].toString().includes('NeuronDensity')
+  const summary: SummaryData[] = layers.map((layer: string) => {
+    const densityEntity = entities.find((entity) => (
+      entity['@type'].toString().includes('NeuronDensity')
         && entity.brainLocation?.layer?.label === layer
         && entity.derivation
-    });
+    ));
 
     const densityMean = densityEntity?.series.find((s: any) => s.statistic === 'mean')?.value;
-    const densityUnit = densityEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
+    densityUnit = densityEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
     const densityN = densityEntity?.series.find((s: any) => s.statistic === 'N')?.value;
     const densityStd = densityEntity?.series
       .find((s: any) => s.statistic === 'standard deviation')?.value;
 
-    const thicknessEntity = entities.find((entity) => {
-      return entity['@type'].toString().includes('Thickness')
+    const thicknessEntity = entities.find((entity) => (
+      entity['@type'].toString().includes('Thickness')
         && entity.brainLocation?.layer?.label === layer
         && entity.derivation?.length > 1
-    });
+    ));
 
     const thicknessMean = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.value;
-    const thicknessUnit = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
+    thicknessUnit = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
     const thicknessN = thicknessEntity?.series.find((s: any) => s.statistic === 'N')?.value;
 
+    const isHighlight = highlightLayer.includes(layer.replace('layer ', ''));
+
     return {
-      layer,
+      layer: <span className="text-capitalize">{layer}</span>,
       thicknessEntityDescription: thicknessEntity.description,
-      thickness: {
-        mean: thicknessMean,
-        unit: thicknessUnit,
-        n: thicknessN,
-      },
-      density: {
-        mean: densityMean,
-        std: densityStd,
-        unit: densityUnit,
-        n: densityN,
-      },
+      thickness: <NumberFormat value={thicknessMean} />,
+      thicknessN: <NumberFormat value={thicknessN} prefix="n=" />,
+      densityMean: <NumberFormat value={densityMean} />,
+      densityStd: <NumberFormat value={densityStd} prefix="± " />,
+      densityN: <NumberFormat value={densityN} prefix="n=" />,
+      isHighlight,
     };
   });
 
+  const columns = [
+    { dataIndex: 'layer' as keyof SummaryData, title: 'Layer' },
+    { dataIndex: 'thickness' as keyof SummaryData, title: <>Layer thickness, {thicknessUnit} (mean)*</>, colSpan: 2 },
+    { dataIndex: 'thickness' as keyof SummaryData, colSpan: 0 },
+    { dataIndex: 'densityMean' as keyof SummaryData, title: <>Neuron density, {densityUnit} (mean ± std)</>, colSpan: 3 },
+    { dataIndex: 'densityStd' as keyof SummaryData, colSpan: 0 },
+    { dataIndex: 'densityN' as keyof SummaryData, colSpan: 0 },
+  ];
+
   return (
     <ErrorBoundary>
-      {!!summary.length && <div id="layerAnatomySummary" className={`${classPrefix}basis`}>
-        <table className="mb-2">
-          <thead>
-            <tr>
-              <th>Layer</th>
-              <th colSpan={2} >Layer thickness, {summary[0].thickness.unit} (mean)*</th>
-              <th colSpan={3} >Neuron density, {summary[0].density.unit} (mean ± std)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {summary.map(row => (
-              <tr
-                key={row.layer}
-                className={highlightLayer.includes(row.layer.replace('layer ', '')) ? 'text-bold' : null}
-              >
-                <td className="text-capitalize">{row.layer}</td>
-                <td><NumberFormat value={row.thickness.mean}/></td>
-                <td><NumberFormat value={row.thickness.n} prefix="n=" /></td>
-                <td><NumberFormat value={row.density.mean} /></td>
-                <td><NumberFormat value={row.density.std} prefix="± " /></td>
-                <td><NumberFormat value={row.density.n} prefix="n=" /></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <small className="ant-typography ant-typography-secondary">
-          * {summary[0]?.thicknessEntityDescription}
-        </small>
-      </div>}
+      {!!summary.length && (
+        <div id="layerAnatomySummary" className={`${classPrefix}basis`}>
+          <ResponsiveTable<SummaryData> columns={columns} data={summary} />
+          <small className="ant-typography ant-typography-secondary">
+            * {summary[0]?.thicknessEntityDescription}
+          </small>
+        </div>
+      )}
     </ErrorBoundary>
   );
-}
+};
 
 export default LayerAnatomySummary;

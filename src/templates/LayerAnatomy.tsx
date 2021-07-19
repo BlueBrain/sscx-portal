@@ -42,9 +42,9 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
         >
           <Col
             xs={24}
-            xl={12}
+            lg={12}
           >
-            <div style={{ maxWidth: '560px' }}>
+            <div style={{ maxWidth: '560px', margin: '0 auto' }}>
               <Title
                 primaryColor={color}
                 title="Layer Anatomy"
@@ -82,7 +82,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           <Col
             className={`set-accent-color--${color}`}
             xs={24}
-            xl={12}
+            lg={12}
           >
             <div className={selectorStyle.row} style={{ maxWidth: '26rem' }}>
               <div className={selectorStyle.column}>

@@ -48,7 +48,7 @@ const tableColumns = [
   {
     title: 'ME-model',
     dataIndex: 'memodel_name',
-    render: (memodel_name, memodel) => <Link href={linkHref(memodel)}>{memodel_name}</Link>
+    render: function ModelName (memodel_name, memodel) {return (<Link href={linkHref(memodel)}>{memodel_name}</Link>)}
   },
 ];
 

@@ -4,17 +4,8 @@
     width: 100%;
   }
 
-  table, th, td {
-    border: 1px solid #eee;
-  }
-
   th, td {
     padding: 1rem;
-  }
-
-  td.nowrap {
-    max-width:100%;
-    white-space:nowrap;
   }
 
   .image-cell {
