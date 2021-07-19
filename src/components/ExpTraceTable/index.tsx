@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import qs from 'querystring';
 import { keyBy } from 'lodash';
 import { useNexusContext } from '@bbp/react-nexus';
 
+import { Table } from 'antd';
 import { sscx } from '../../config';
+import { entryToArray, useExperimentalTraceTable } from './expTraceTableUtils';
 
 
 type ExpTraceTableProps = {
   etype: string;
   traces: Record<string, any>[];
 };
-
-function entryToArray(entry) {
-  if (Array.isArray(entry)) return entry;
-
-  return [entry];
-}
 
 function getAgentLabel(agent) {
   return agent.name
@@ -41,7 +35,8 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => 
     return Array.from(new Set([...ids, ...currIds]));
   }, []);
 
-  const [agentMap, setAgentMap] = useState<Record<string, any>>(null);
+  const { agentMap, setAgentMap, columns } = useExperimentalTraceTable(etype);
+
 
   useEffect(() => {
     if (!agentIds.length) return;
@@ -52,9 +47,9 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => 
       query: {
         terms: {
           '_id': agentIds,
-        }
-      }
-    }
+        },
+      },
+    };
 
     nexus.View
       // query ElesticSearch endpoint to get agents by their ids
@@ -74,40 +69,9 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => 
       .then(agentMap => setAgentMap(agentMap));
   }, [traces]);
 
-  const instanceHref = (instanceName: string) => {
-    const query = qs.stringify({
-      etype,
-      etype_instance: instanceName,
-    });
-    return `/experimental-data/neuron-electrophysiology/?${query}#data`;
-  };
-
   return (
     <div id={traces.length && agentMap ? 'expTraceTable' : null} className="layer-anatomy-summary__basis mt-2">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>E-Type</th>
-            <th>Contribution</th>
-          </tr>
-        </thead>
-        <tbody>
-          {traces.map(trace => (
-            <tr key={trace.name}>
-              <td><Link href={instanceHref(trace.name)}>{trace.name}</Link></td>
-              <td>{trace.annotation.hasBody.label}</td>
-              <td>
-                {agentMap && entryToArray(trace.contribution)
-                  .map(contribution => agentMap[contribution.agent['@id']])
-                  .sort((a1, a2) => a1.type > a2.type ? 1 : -1)
-                  .map(agent => <span>{agent.label} <br/></span>)
-                }
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table columns={columns} dataSource={traces} rowKey={({ name }) => name} />
     </div>
   );
 };
