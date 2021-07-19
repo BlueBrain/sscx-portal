@@ -50,7 +50,7 @@ const tableColumns = [
   {
     title: 'ME-model',
     dataIndex: 'memodel_name' as keyof ExpMorphMemodel,
-    key: 'memodel_name'
+    render: function ModelName (memodel_name, memodel) {return (<Link href={linkHref(memodel)}>{memodel_name}</Link>)}
   },
 ];
 

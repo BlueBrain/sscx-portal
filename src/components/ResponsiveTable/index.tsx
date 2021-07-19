@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
-import { Table } from "antd";
-import { ColumnType as AntColumnType, ColumnsType, TableProps} from "antd/lib/table";
-import { Breakpoint } from "antd/lib/_util/responsiveObserve";
+import React from 'react';
+import { Table } from 'antd';
+import { ColumnType as AntColumnType, ColumnsType, TableProps } from 'antd/lib/table';
+import { Breakpoint } from 'antd/lib/_util/responsiveObserve';
 
 import classes from './responsiveTable.module.scss';
 
@@ -74,5 +74,3 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}> ({column
 }
 
 export default ResponsiveTable;
-
-
