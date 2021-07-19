@@ -38,5 +38,5 @@ export const defaultSelection = {
     LAYER: 'L4',
     M_TYPE: 'L4_TPC',
     INSTANCE: 'C060998B-P4',
-  }
+  },
 };
