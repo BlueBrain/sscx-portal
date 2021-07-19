@@ -110,7 +110,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                 diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal
                 and dendritic morphologies. Using a combination of objective classification methods for
                 pyramidal cell types, and subjective classification for interneuron types,
-                we have identified 57 m-types in the primary rat Somatosensory Cortex.
+                we have identified 60 m-types in the primary rat Somatosensory Cortex.
               </p>
             </InfoBox>
           </Col>
