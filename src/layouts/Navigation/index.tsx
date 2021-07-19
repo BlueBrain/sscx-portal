@@ -16,7 +16,7 @@ const classPrefix = 'nav__';
 export const HomeNav: React.FC = () => (
   <ul className="home-nav">
     <li>
-      <Link href="/about">
+      <Link href="/#about">
         About
       </Link>
     </li>
