@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col } from 'antd';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Button, Tabs } from 'antd';
+import { Button, Tabs, Row, Col } from 'antd';
 import { useNexusContext } from '@bbp/react-nexus';
 import range from 'lodash/range';
 import get from 'lodash/get';
@@ -26,8 +25,7 @@ import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import HttpData from '../components/HttpData';
 import DataContainer from '../components/DataContainer';
-import { Layer, Color } from '../types';
-import { Subregion } from '../types';
+import { Subregion, Layer, Color } from '../types';
 import LayerSelector from '../components/MicrocircuitLayerSelector';
 import List from '../components/List';
 import Collapsible from '../components/Collapsible';
@@ -39,8 +37,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import NeuronMorphology from '../components/NeuronMorphology';
 import ESData from '../components/ESData';
 import NexusPlugin from '../components/NexusPlugin';
-import NexusFileDownloadButton from '../components/NexusFileDownloadButton';
-import { morphologyDataQuery, modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
+import { modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -56,15 +53,15 @@ export type NeuronsTemplateProps = {
 };
 
 
-const expEphysPageUrl = (etype: string, instance: string) => {
-  return [
+const expEphysPageUrl = (etype: string, instance: string) => (
+  [
     '/experimental-data/neuron-electrophysiology/?',
     qs.stringify({
       etype,
       etype_instance: instance,
     }),
-  ].join('');
-}
+  ].join('')
+);
 
 const Neurons: React.FC<NeuronsTemplateProps> = ({
   sectionTitle,
@@ -113,23 +110,23 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       mtype: null,
       etype: null,
       memodel: null,
-    })
+    });
   };
   const setMtype = (mtype: string) => {
     setParams({
       mtype,
       etype: null,
       memodel: null,
-    })
+    });
   };
   const setEtype = (etype: string) => {
     setParams({
       etype,
       memodel: null,
-    })
+    });
   };
   const setMemodel = (memodel: string) => {
-    setParams({ memodel })
+    setParams({ memodel });
   };
 
   const mtypes = currentRegion && currentLayer && memodelIndex
@@ -163,7 +160,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         <Row
           className="w-100"
           align="bottom"
-          gutter={[0,20]}
+          gutter={[0, 20]}
         >
           <Col
             xs={24}
@@ -196,7 +193,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             xl={16}
             xxl={12}
           >
-          <div className={selectorStyle.row}>
+            <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>1. Choose a subregion</div>
                 <div className={selectorStyle.body} style={{ padding: '0 0.5rem 1rem 0.5rem' }}>
@@ -283,11 +280,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 </p>
                 <h3>Anatomy</h3>
                 {data && (
-                  <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values}/>
+                  <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values} />
                 )}
                 <h3 className="mt-3">Physiology</h3>
                 {data && (
-                  <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values}/>
+                  <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values} />
                 )}
 
                 <h3 className="mt-3">Model morphology</h3>
@@ -369,9 +366,9 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 </p>
 
                 <h3>Anatomy</h3>
-                {data && <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values}/>}
+                {data && <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values} />}
                 <h3 className="mt-3">Physiology</h3>
-                {data && <Factsheet id="mtypePhysiologyFactsheet" facts={data[1].values}/>}
+                {data && <Factsheet id="mtypePhysiologyFactsheet" facts={data[1].values} />}
 
                 <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
               </>
@@ -410,7 +407,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                         <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
                       )}
                       <Tabs
-                        id={esDocuments && esDocuments.length ? 'modelFittingEphys': null}
+                        id={esDocuments && esDocuments.length ? 'modelFittingEphys' : null}
                         className="mt-3"
                         type="card"
                       >

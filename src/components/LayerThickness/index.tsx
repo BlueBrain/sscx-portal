@@ -1,11 +1,7 @@
 import React, { ReactNode } from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
-
-import NumberFormat from '../NumberFormat';
 import ErrorBoundary from '../ErrorBoundary';
 import { Layer } from '../../types';
-import NexusImage from '../NexusImage';
-import { sscx } from '../../config';
 import ResponsiveTable from '../ResponsiveTable';
 import { getData } from './layerThicknessUtils';
 
@@ -46,61 +42,3 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
 };
 export default LayerThickness;
 
-
-
-
-
-type SliceRowProps = {
-  layerThicknesses: Array<{
-    layer: string,
-    mean: string;
-    std: string;
-    n: string;
-  }>
-}
-
-const SliceRow: React.FC<SliceRowProps> = ({layerThicknesses}) => {
-return (
-  <>
-    <td className="no-border">
-      {layerThicknesses.map(layerThickness => (
-        <div key={layerThickness.layer}>
-          <span className="text-capitalize text-nowrap">
-            {layerThickness.layer}
-          </span>
-          <br/>
-        </div>
-      ))}
-    </td>
-    <td className="no-border">
-      {layerThicknesses.map(layerThickness => (
-        <div key={layerThickness.layer}>
-          <span className="text-nowrap">
-            <NumberFormat value={layerThickness.mean} />
-          </span>
-          <br/>
-        </div>
-      ))}
-    </td>
-    <td className="no-border">
-      {layerThicknesses.map(layerThickness => (
-        <div key={layerThickness.layer}>
-          <span className="text-nowrap">
-            <NumberFormat value={layerThickness.std} prefix="± " />
-          </span>
-          <br/>
-        </div>
-      ))}
-    </td>
-    <td className="no-border">
-      {layerThicknesses.map(layerThickness => (
-        <div key={layerThickness.layer}>
-          <span className="text-nowrap">
-            <NumberFormat value={layerThickness.n} prefix={'n='} />
-          </span>
-          <br/>
-        </div>
-      ))}
-    </td>
-  </>
-)}

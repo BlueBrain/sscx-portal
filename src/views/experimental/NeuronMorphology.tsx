@@ -49,7 +49,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
   };
   const currentLayer: Layer = query.layer as Layer;
 
-  const mtypes =  currentLayer
+  const mtypes = currentLayer
     ? Object.keys(expMorphologyData[currentLayer]).sort() as string[]
     : [];
 
@@ -64,7 +64,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
 
   const instances = currentMtype
     ? (expMorphologyData as any)[currentLayer][currentMtype].sort()
-    : []
+    : [];
 
   const setInstance = (instance: string) => {
     setQuery({
@@ -75,15 +75,15 @@ const NeuronExperimentalMorphology: React.FC = () => {
   };
   const currentInstance: string = query.instance as string;
 
-  const getMorphologyDistribution = (morphologyResource: any) => {
-    return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
-  };
+  const getMorphologyDistribution = (morphologyResource: any) => (
+    morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i))
+  );
 
-  const getAndSortMorphologies = (esDocuments) => {
-    return esDocuments
+  const getAndSortMorphologies = (esDocuments) => (
+    esDocuments
       .map(esDocument => esDocument._source)
-      .sort((m1, m2) => (m1.name > m2.name) ? 1 : -1);
-  };
+      .sort((m1, m2) => ((m1.name > m2.name) ? 1 : -1))
+  );
 
   return (
     <>
@@ -91,7 +91,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
         <Row
           className="w-100"
           align="bottom"
-          gutter={[0,20]}
+          gutter={[0, 20]}
         >
           <Col
             xs={24}
@@ -99,21 +99,21 @@ const NeuronExperimentalMorphology: React.FC = () => {
             xxl={12}
           >
             <div style={{ maxWidth: '560px', margin: '0 auto' }}>
-            <Title
-              primaryColor={color}
-              title={<span>Neuronal <br/> Morphology</span>}
-              subtitle="Experimental Data"
-              hint="Select a layer of interest in the S1 of the rat brain."
-            />
-            <InfoBox>
-              <p>
-                Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into
-                diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal
-                and dendritic morphologies. Using a combination of objective classification methods for
-                pyramidal cell types, and subjective classification for interneuron types,
-                we have identified 57 m-types in the primary rat Somatosensory Cortex.
-              </p>
-            </InfoBox>
+              <Title
+                primaryColor={color}
+                title={<span>Neuronal <br /> Morphology</span>}
+                subtitle="Experimental Data"
+                hint="Select a layer of interest in the S1 of the rat brain."
+              />
+              <InfoBox>
+                <p>
+                  Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into
+                  diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal
+                  and dendritic morphologies. Using a combination of objective classification methods for
+                  pyramidal cell types, and subjective classification for interneuron types,
+                  we have identified 57 m-types in the primary rat Somatosensory Cortex.
+                </p>
+              </InfoBox>
             </div>
           </Col>
           <Col
@@ -233,28 +233,28 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <h3>Factsheet</h3>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
             {factsheetData => (
-              <Factsheet facts={factsheetData.values}/>
+              <Factsheet facts={factsheetData.values} />
             )}
           </HttpData>
 
-          <ExpMorphDistribution className="mt-3" mtype={currentMtype}/>
+          <ExpMorphDistribution className="mt-3" mtype={currentMtype} />
 
           <h3 className="mt-3">Reconstructed morphologies</h3>
           <p>
             Data are provided as ASCII files containing 3D representations of neuronal morphologies -
             axons and dendrites - whose shapes are traced and reconstructed using Neurolucida
             (neuron tracing, reconstruction, and analysis software).
-          </p> 
+          </p>
           <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
             {esDocuments => (
               <>
-                {!!esDocuments &&
+                {!!esDocuments && (
                   <ExpMorphologyTable
                     layer={currentLayer}
                     mtype={currentMtype}
                     morphologies={getAndSortMorphologies(esDocuments)}
                   />
-                }
+                )}
               </>
             )}
           </ESData>
