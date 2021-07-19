@@ -87,7 +87,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
     <ErrorBoundary>
       {!!summary.length && (
         <div id="layerAnatomySummary" className={`${classPrefix}basis`}>
-          <ResponsiveTable<SummaryData> columns={columns} data={summary} rowKey={(record) => `${record.name}`} />
+          <ResponsiveTable<SummaryData> columns={columns} data={summary} rowKey={({ name }) => name} />
           <small className="ant-typography ant-typography-secondary">
             * {summary[0]?.thicknessEntityDescription}
           </small>

@@ -35,7 +35,7 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
         <ResponsiveTable<SliceElement>
           columns={columns}
           data={sliceCollections}
-          rowKey={(record) => `${record.name}`}
+          rowKey={({ name }) => name}
         />
       </div>
     </ErrorBoundary>
