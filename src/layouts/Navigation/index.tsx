@@ -21,7 +21,7 @@ export const HomeNav: React.FC = () => (
       </Link>
     </li>
     <li>
-      <Link href="#">
+      <Link href="/#explore">
         Explore
       </Link>
     </li>
