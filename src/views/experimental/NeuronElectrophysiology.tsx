@@ -33,7 +33,7 @@ const NeuronElectrophysiology: React.FC = () => {
 
   const setQuery = (query: any) => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
-  }
+  };
 
   const setEtype = (etype: string) => {
     setQuery({
@@ -53,16 +53,14 @@ const NeuronElectrophysiology: React.FC = () => {
   const etypeData = eTypes.find(etype => etype.label === currentEtype);
   const instances = etypeData ? etypeData.experiments.map(e => e.label) : [];
 
-  const getAndSortTraces = (esDocuments) => {
-    return esDocuments
-      .map(esDocument => esDocument._source)
-      .sort((m1, m2) => (m1.name > m2.name) ? 1 : -1);
-  };
+  const getAndSortTraces = (esDocuments) => esDocuments
+    .map(esDocument => esDocument._source)
+    .sort((m1, m2) => ((m1.name > m2.name) ? 1 : -1));
 
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentEtype && !!currentInstance}>
-        <Row align="bottom" className="w-100" gutter={[0,20]}>
+        <Row align="bottom" className="w-100" gutter={[0, 20]}>
           <Col
             xs={24}
             xl={8}
@@ -106,8 +104,9 @@ const NeuronElectrophysiology: React.FC = () => {
                   <div style={{
                     backgroundColor: 'rgb(49, 50, 84)',
                     padding: '1rem',
-                    margin: '1rem 1rem 1rem 0'
-                  }}>
+                    marginBottom: '1rem',
+                  }}
+                  >
                     <List
                       title="e-type"
                       block
@@ -120,10 +119,10 @@ const NeuronElectrophysiology: React.FC = () => {
                   <div style={{
                     backgroundColor: 'rgb(49, 50, 84)',
                     padding: '1rem 1rem 1rem 2rem',
-                    margin: '1rem 0 1rem 0'
-                  }}>
+                  }}
+                  >
                     <List
-                      title={`Experiment instance`}
+                      title="Experiment instance"
                       block
                       color={color}
                       list={instances}
@@ -212,7 +211,7 @@ const NeuronElectrophysiology: React.FC = () => {
             {esDocuments => (
               <>
                 {!!esDocuments && (
-                  <ExpTraceTable etype={currentEtype} traces={getAndSortTraces(esDocuments)}/>
+                  <ExpTraceTable etype={currentEtype} traces={getAndSortTraces(esDocuments)} />
                 )}
               </>
             )}
