@@ -30,7 +30,7 @@ import { defaultSelection } from '../../constants';
 
 import selectorStyle from '../../styles/selector.module.scss';
 
-const defaultValues = defaultSelection.NEURON_MORPHOLOGY;
+const defaultMorphologyFilters = defaultSelection.NEURON_MORPHOLOGY;
 
 const NeuronExperimentalMorphology: React.FC = () => {
   const router = useRouter();
@@ -38,10 +38,9 @@ const NeuronExperimentalMorphology: React.FC = () => {
 
   const { query } = router;
   if (!query.layer && !query.mtype && !query.instance) {
-    // use the default values
-    query.layer = defaultValues.LAYER;
-    query.mtype = defaultValues.M_TYPE;
-    query.instance = defaultValues.INSTANCE;
+    query.layer = defaultMorphologyFilters.LAYER;
+    query.mtype = defaultMorphologyFilters.M_TYPE;
+    query.instance = defaultMorphologyFilters.INSTANCE;
   }
 
   const setQuery = (query: any): void => {
