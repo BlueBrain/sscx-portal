@@ -7,6 +7,7 @@ import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
+import { defaultSelection } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -26,6 +27,9 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
 }) => {
   const router = useRouter();
   const { query } = router;
+  if (!query.layer) {
+    query.layer = defaultSelection.LAYER_ANATOMY;
+  }
 
   const setLayerQuery = (layer: Layer) => {
     router.push({ query: { layer }, pathname: router.pathname}, undefined, { shallow: true });
