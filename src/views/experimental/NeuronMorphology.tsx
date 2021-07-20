@@ -26,15 +26,22 @@ import ExpMorphologyTable from '../../components/ExpMorphologyTable';
 import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { sscx } from '../../config';
+import { defaultSelection } from '../../constants';
 
 import selectorStyle from '../../styles/selector.module.scss';
 
+const defaultMorphologyFilters = defaultSelection.NEURON_MORPHOLOGY;
 
 const NeuronExperimentalMorphology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
 
   const { query } = router;
+  if (!query.layer && !query.mtype && !query.instance) {
+    query.layer = defaultMorphologyFilters.LAYER;
+    query.mtype = defaultMorphologyFilters.M_TYPE;
+    query.instance = defaultMorphologyFilters.INSTANCE;
+  }
 
   const setQuery = (query: any): void => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
@@ -49,14 +56,14 @@ const NeuronExperimentalMorphology: React.FC = () => {
   };
   const currentLayer: Layer = query.layer as Layer;
 
-  const mtypes =  currentLayer
+  const mtypes = currentLayer
     ? Object.keys(expMorphologyData[currentLayer]).sort() as string[]
     : [];
 
   const setMtype = (mtype: string) => {
     setQuery({
-      mtype,
       layer: currentLayer,
+      mtype,
       instance: null,
     });
   };
@@ -64,13 +71,13 @@ const NeuronExperimentalMorphology: React.FC = () => {
 
   const instances = currentMtype
     ? (expMorphologyData as any)[currentLayer][currentMtype].sort()
-    : []
+    : [];
 
   const setInstance = (instance: string) => {
     setQuery({
-      instance,
       layer: currentLayer,
       mtype: currentMtype,
+      instance,
     });
   };
   const currentInstance: string = query.instance as string;

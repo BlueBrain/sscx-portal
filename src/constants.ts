@@ -31,3 +31,12 @@ export const subregionTitle: Record<Subregion, string> = {
   S1Tr: 'Trunk',
   S1ULp: 'Upper lip',
 };
+
+export const defaultSelection = {
+  LAYER_ANATOMY: 'L4',
+  NEURON_MORPHOLOGY: {
+    LAYER: 'L4',
+    M_TYPE: 'L4_TPC',
+    INSTANCE: 'C060998B-P4',
+  },
+};
