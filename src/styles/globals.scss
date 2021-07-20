@@ -282,6 +282,13 @@ section {
   }
 }
 
+.responsiveTable {
+  @media (max-width: $ant-breakpoint-sm) {
+    .ant-table-tbody > tr.ant-table-row-level-0:hover > td {
+      background: unset;
+    }
+  }
+}
 
 
 

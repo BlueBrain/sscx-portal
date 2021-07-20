@@ -73,7 +73,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
 
   return (
     <div id="expMorphologyTable" className="layer-anatomy-summary__basis mt-2">
-      <Table columns={columns} dataSource={morphologies} size="small" rowKey={(record) => record.name} />
+      <Table className="responsiveTable" columns={columns} dataSource={morphologies} size="small" rowKey={(record) => record.name} />
     </div>
   );
 };

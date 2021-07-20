@@ -39,6 +39,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
         return <Link href={morphHref(value)}>{value}</Link>;
       },
       ellipsis: true,
+      responsive: ['sm'],
     },
     {
       title: 'Preview',
@@ -56,6 +57,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
           </div>
         );
       },
+      responsive: ['sm'],
     },
     {
       title: 'M-Type',
@@ -64,7 +66,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
       render: function Link(value) {
         return value.hasBody.label;
       },
-      responsive: ['md'],
+      responsive: ['sm'],
     },
     {
       title: 'Contribution',
@@ -98,7 +100,27 @@ export const useExpMorphologyColumns = (layer, mtype) => {
           </NexusFileDownloadButton>
         );
       },
-      responsive: ['md'],
+      responsive: ['sm'],
+    },
+    {
+      title: 'Preview',
+      dataIndex: 'name',
+      render: function Preview(value) {
+        return (
+          <div className={styles.morphImageContainer}>
+            <ImageViewer
+              src={expMorphologyImgPath(value)}
+              thumbnailSrc={expMorphologyImgThumbnailPath(value)}
+              alt={`Morphology ${value} image`}
+              loading="lazy"
+            />
+            <div className={styles.detailsLink}>
+              <Link href={morphHref(value)}>More details</Link>
+            </div>
+          </div>
+        );
+      },
+      responsive: ['xs'],
     },
   ];
 
