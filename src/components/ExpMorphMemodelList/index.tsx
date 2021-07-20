@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import qs from 'querystring';
 import { Table } from 'antd';
+import ResponsiveTable from '../ResponsiveTable';
 
 
 type ExpMorphMemodelListProps = {
-  memodels: Record<string, string>[];
+  memodels: ExpMorphMemodel[];
   className?: string;
   id?: string;
 }
 
-const hrefBase = '/digital-reconstructions/neurons';
-
-const neuriteTypeLabel = {
-  axon: 'axon',
-  dendrite: 'dendrite',
-  'axon+dendrite': 'axon and dendrite',
+type ExpMorphMemodel = {
+  region: string;
+  mtype: string;
+  etype: string;
+  memodel_name: ReactNode;
 }
+
+const hrefBase = '/digital-reconstructions/neurons';
 
 const linkHref = (memodel) => {
   const query = qs.stringify({
@@ -32,22 +34,22 @@ const linkHref = (memodel) => {
 const tableColumns = [
   {
     title: 'Region',
-    dataIndex: 'region',
+    dataIndex: 'region' as keyof ExpMorphMemodel,
     key: 'region',
   },
   {
     title: 'M-type',
-    dataIndex: 'mtype',
+    dataIndex: 'mtype' as keyof ExpMorphMemodel,
     key: 'mtype',
   },
   {
     title: 'E-type',
-    dataIndex: 'etype',
+    dataIndex: 'etype' as keyof ExpMorphMemodel,
     key: 'etype',
   },
   {
     title: 'ME-model',
-    dataIndex: 'memodel_name',
+    dataIndex: 'memodel_name' as keyof ExpMorphMemodel,
     render: function ModelName (memodel_name, memodel) {return (<Link href={linkHref(memodel)}>{memodel_name}</Link>)}
   },
 ];
@@ -60,13 +62,13 @@ const mtypeLayer = (mtype: string) => {
 }
 
 const ExpMorphMemodelList: React.FC<ExpMorphMemodelListProps> = ({ memodels, className = '', id = '' }) => {
-  const memodelsDataSource = memodels
-    .map(memodel => ({ ...memodel, key: `${memodel.region}-${memodel.memodel_name}` }));
+  const memodelsDataSource: ExpMorphMemodel[] = memodels
+    .map(memodel => ({ ...memodel, memodel_name: <Link href={linkHref(memodel)}>{memodel.memodel_name}</Link>, key: `${memodel.region}-${memodel.memodel_name}` }));
 
   return (
     <div id={id} className={className}>
-      <Table
-        dataSource={memodelsDataSource}
+      <ResponsiveTable<ExpMorphMemodel>
+        data={memodelsDataSource}
         columns={tableColumns}
         pagination={memodelsDataSource.length > 10 ? { position: ['bottomRight'] } : false}
         size="small"

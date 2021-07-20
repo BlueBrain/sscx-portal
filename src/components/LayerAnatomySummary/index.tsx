@@ -14,7 +14,8 @@ export type LayerAnatomySummaryProps = {
   highlightLayer?: string;
 };
 
-type SummaryData ={
+type SummaryData = {
+  name: string,
   layer: ReactNode,
   thicknessEntityDescription: ReactNode;
   thickness: ReactNode,
@@ -61,6 +62,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
     const isHighlight = highlightLayer.includes(layer.replace('layer ', ''));
 
     return {
+      name: densityEntity?.name,
       layer: <span className="text-capitalize">{layer}</span>,
       thicknessEntityDescription: thicknessEntity.description,
       thickness: <NumberFormat value={thicknessMean} />,
@@ -85,7 +87,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
     <ErrorBoundary>
       {!!summary.length && (
         <div id="layerAnatomySummary" className={`${classPrefix}basis`}>
-          <ResponsiveTable<SummaryData> columns={columns} data={summary} />
+          <ResponsiveTable<SummaryData> columns={columns} data={summary} rowKey={({ name }) => name} />
           <small className="ant-typography ant-typography-secondary">
             * {summary[0]?.thicknessEntityDescription}
           </small>

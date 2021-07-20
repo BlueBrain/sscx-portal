@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useEffect } from 'react';
 import { keyBy } from 'lodash';
 import { useNexusContext } from '@bbp/react-nexus';
-import { DownloadOutlined } from '@ant-design/icons';
-import qs from 'querystring';
 
+import { Table } from 'antd';
 import { sscx } from '../../config';
 import { Layer } from '../../types';
-import { expMorphologyImgPath, expMorphologyImgThumbnailPath } from '../../queries/http';
-import ImageViewer from '../ImageViewer';
-import NexusFileDownloadButton from '../NexusFileDownloadButton';
-
-import styles from './styles.module.scss'
-
+import { entryToArray, useExpMorphologyColumns } from './expMorphologyTableUtils';
 
 type ExpMorphologyTableProps = {
   layer: Layer;
@@ -20,11 +13,6 @@ type ExpMorphologyTableProps = {
   morphologies: Record<string, any>[];
 };
 
-function entryToArray(entry) {
-  if (Array.isArray(entry)) return entry;
-
-  return [entry];
-}
 
 function getAgentLabel(agent) {
   return agent.name
@@ -38,10 +26,6 @@ function getAgentType(agent) {
     : 'person';
 }
 
-const getMorphologyDistribution = (morphologyResource: any) => {
-  return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
-};
-
 const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, morphologies = [] }) => {
   const nexus = useNexusContext();
 
@@ -53,7 +37,8 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
     return Array.from(new Set([...ids, ...currIds]));
   }, []);
 
-  const [agentMap, setAgentMap] = useState<Record<string, any>>(null);
+
+  const { setAgentMap, columns } = useExpMorphologyColumns(layer, mtype);
 
   useEffect(() => {
     if (!agentIds.length) return;
@@ -64,9 +49,9 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
       query: {
         terms: {
           '_id': agentIds,
-        }
-      }
-    }
+        },
+      },
+    };
 
     nexus.View
       // query ElesticSearch endpoint to get agents by their ids
@@ -86,65 +71,9 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
       .then(agentMap => setAgentMap(agentMap));
   }, [morphologies]);
 
-  const morphHref = (morphologyName: string) => {
-    const query = qs.stringify({
-      layer,
-      mtype,
-      instance: morphologyName,
-    });
-    return `/experimental-data/neuron-morphology/?${query}#data`
-  };
-
   return (
     <div id="expMorphologyTable" className="layer-anatomy-summary__basis mt-2">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Preview</th>
-            <th>M-Type</th>
-            <th>Contribution</th>
-            <th>Download</th>
-          </tr>
-        </thead>
-        <tbody>
-          {morphologies.map(morph => (
-            <tr key={morph.name}>
-              <td><Link href={morphHref(morph.name)}>{morph.name}</Link></td>
-              <td style={{ textAlign: 'center'}}>
-                <div className={styles.morphImageContainer}>
-                  <ImageViewer
-                    src={expMorphologyImgPath(morph.name)}
-                    thumbnailSrc={expMorphologyImgThumbnailPath(morph.name)}
-                    alt={`Morphology ${morph.name} image`}
-                    loading="lazy"
-                  />
-                </div>
-              </td>
-              <td>{morph.annotation.hasBody.label}</td>
-              <td>
-                {agentMap && entryToArray(morph.contribution)
-                  .map(contribution => agentMap[contribution.agent['@id']])
-                  .sort((a1, a2) => a1.type > a2.type ? 1 : -1)
-                  .map(agent => <span key={agent.label}>{agent.label} <br/></span>)
-                }
-              </td>
-              <td className="text-center">
-                <NexusFileDownloadButton
-                  className={styles.downloadBtn}
-                  filename={getMorphologyDistribution(morph).name}
-                  url={getMorphologyDistribution(morph).contentUrl}
-                  org={sscx.org}
-                  project={sscx.project}
-                  animate={false}
-                >
-                  <DownloadOutlined />
-                </NexusFileDownloadButton>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table className="responsiveTable" columns={columns} dataSource={morphologies} size="small" rowKey={(record) => record.name} />
     </div>
   );
 };

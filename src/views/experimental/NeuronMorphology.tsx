@@ -82,15 +82,15 @@ const NeuronExperimentalMorphology: React.FC = () => {
   };
   const currentInstance: string = query.instance as string;
 
-  const getMorphologyDistribution = (morphologyResource: any) => {
-    return morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i));
-  };
+  const getMorphologyDistribution = (morphologyResource: any) => (
+    morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i))
+  );
 
-  const getAndSortMorphologies = (esDocuments) => {
-    return esDocuments
+  const getAndSortMorphologies = (esDocuments) => (
+    esDocuments
       .map(esDocument => esDocument._source)
-      .sort((m1, m2) => (m1.name > m2.name) ? 1 : -1);
-  };
+      .sort((m1, m2) => ((m1.name > m2.name) ? 1 : -1))
+  );
 
   return (
     <>
@@ -98,28 +98,30 @@ const NeuronExperimentalMorphology: React.FC = () => {
         <Row
           className="w-100"
           align="bottom"
-          gutter={[0,20]}
+          gutter={[0, 20]}
         >
           <Col
             xs={24}
             xl={8}
             xxl={12}
           >
-            <Title
-              primaryColor={color}
-              title={<span>Neuronal <br/> Morphology</span>}
-              subtitle="Experimental Data"
-              hint="Select a layer of interest in the S1 of the rat brain."
-            />
-            <InfoBox>
-              <p>
-                Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into
-                diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal
-                and dendritic morphologies. Using a combination of objective classification methods for
-                pyramidal cell types, and subjective classification for interneuron types,
-                we have identified 60 m-types in the primary rat Somatosensory Cortex.
-              </p>
-            </InfoBox>
+            <div style={{ maxWidth: '560px', margin: '0 auto' }}>
+              <Title
+                primaryColor={color}
+                title={<span>Neuronal <br /> Morphology</span>}
+                subtitle="Experimental Data"
+                hint="Select a layer of interest in the S1 of the rat brain."
+              />
+              <InfoBox>
+                <p>
+                  Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into
+                  diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal
+                  and dendritic morphologies. Using a combination of objective classification methods for
+                  pyramidal cell types, and subjective classification for interneuron types,
+                  we have identified 57 m-types in the primary rat Somatosensory Cortex.
+                </p>
+              </InfoBox>
+            </div>
           </Col>
           <Col
             className={`set-accent-color--${color}`}
@@ -141,7 +143,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>2. Select a reconstruction</div>
                 <div className={selectorStyle.body}>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', marginBottom: '1rem' }}>
                     <List
                       block
                       list={mtypes}
@@ -151,7 +153,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                       onSelect={setMtype}
                     />
                   </div>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem 0' }}>
+                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem' }}>
                     <List
                       block
                       list={instances}
@@ -238,11 +240,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <h3>Factsheet</h3>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
             {factsheetData => (
-              <Factsheet facts={factsheetData.values}/>
+              <Factsheet facts={factsheetData.values} />
             )}
           </HttpData>
 
-          <ExpMorphDistribution className="mt-3" mtype={currentMtype}/>
+          <ExpMorphDistribution className="mt-3" mtype={currentMtype} />
 
           <h3 className="mt-3">Reconstructed morphologies</h3>
           <p>
@@ -253,13 +255,13 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
             {esDocuments => (
               <>
-                {!!esDocuments &&
+                {!!esDocuments && (
                   <ExpMorphologyTable
                     layer={currentLayer}
                     mtype={currentMtype}
                     morphologies={getAndSortMorphologies(esDocuments)}
                   />
-                }
+                )}
               </>
             )}
           </ESData>

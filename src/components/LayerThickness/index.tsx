@@ -1,11 +1,7 @@
 import React, { ReactNode } from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
-
-import NumberFormat from '../NumberFormat';
 import ErrorBoundary from '../ErrorBoundary';
 import { Layer } from '../../types';
-import NexusImage from '../NexusImage';
-
 import ResponsiveTable from '../ResponsiveTable';
 import { getData } from './layerThicknessUtils';
 
@@ -39,9 +35,11 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
         <ResponsiveTable<SliceElement>
           columns={columns}
           data={sliceCollections}
+          rowKey={({ name }) => name}
         />
       </div>
     </ErrorBoundary>
   );
 };
 export default LayerThickness;
+

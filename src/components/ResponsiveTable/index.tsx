@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
-import { ColumnType as AntColumnType, ColumnsType } from 'antd/lib/table';
+import { ColumnType as AntColumnType, ColumnsType, TableProps } from 'antd/lib/table';
 import { Breakpoint } from 'antd/lib/_util/responsiveObserve';
 
 import classes from './responsiveTable.module.scss';
@@ -9,12 +9,20 @@ interface ColumnType<Type extends object & {isHighlight?: boolean}> extends Omit
     dataIndex: keyof Type;
 }
 
-type ResponsiveTableProps<Type extends object & {isHighlight?: boolean}> = {
+interface ResponsiveTableProps<Type extends object & {isHighlight?: boolean}> extends Omit<TableProps<Type>, 'columns'> {
     data: Type[];
     columns: ColumnType<Type>[];
 }
 
-function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ columns, data }: ResponsiveTableProps<Type>) {
+
+const renderHighlightValue = (record, highlightedIndex) => (nestedValue, _value, nestedIndex) => (
+  record.isHighlight && nestedIndex === highlightedIndex ? (
+    <div className="text-bold">
+      {nestedValue}
+    </div>
+  ) : nestedValue);
+
+function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ columns, data, ...restProps }: ResponsiveTableProps<Type>) {
   const expandabeColumn = {
     title: null,
     dataIndex: null,
@@ -23,7 +31,19 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
         key: column.title,
         value: record[column.dataIndex],
       }));
-      const nestedColumns: ColumnType<{key: string; value: string}>[] = [{ dataIndex: 'key', title: 'Field' }, { dataIndex: 'value', title: 'Value' }];
+      const nestedColumns: ColumnType<{key: string; value: string}>[] = [
+        {
+          dataIndex: 'key',
+          title: 'Field',
+          render: renderHighlightValue(record, 0),
+        },
+        {
+          dataIndex: 'value',
+          title: 'Value',
+          render: renderHighlightValue(record, 0),
+        },
+      ];
+
       return (
         <Table
           className="responsiveTable no-left-margin nested-table xs-column"
@@ -46,7 +66,9 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
       render: (value: any, record: Type, index: number) => {
         if (record.isHighlight) {
           return (
-            <div className="text-bold"> {value}</div>
+            <div className="text-bold">
+              {value}
+            </div>
           );
         }
         return value;
@@ -63,10 +85,11 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
       pagination={false}
       columns={tableColumns}
       dataSource={data}
+      className="responsiveTable"
       rowClassName={(_record: Type, index: number) => (index % 2 ? classes.responsiveTablEven : classes.responsiveTablOdd)}
+      {...restProps}
     />
   );
 }
 
 export default ResponsiveTable;
-
