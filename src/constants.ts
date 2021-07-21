@@ -44,5 +44,6 @@ export const defaultSelection = {
       LAYER: 'L4',
       BRAIN_REGION: 'S1FL',
     },
+    BRAIN_REGIONS: 'S1FL',
   },
 };

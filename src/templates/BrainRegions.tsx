@@ -8,6 +8,7 @@ import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
+import { defaultSelection } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -25,6 +26,9 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
 }) => {
   const router = useRouter();
   const query = router.query;
+  if (!query.brain_region) {
+    query.brain_region = defaultSelection.digitalReconstruction.BRAIN_REGIONS;
+  }
 
   const setBrainRegionQuery = (brainRegion: Subregion) => {
     const query = {
