@@ -47,5 +47,12 @@ export const defaultSelection = {
       BRAIN_REGION: 'S1FL',
     },
     BRAIN_REGIONS: 'S1FL',
+    neurons: {
+      BRAIN_REGION: 'S1FL',
+      LAYER: 'L4',
+      ETYPE: 'cADpyr',
+      MTYPE: 'L4_TPC',
+      MEMODEL: 'L4_TPC_cADpyr_1',
+    },
   },
 };
