@@ -77,7 +77,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
   const columns = [
     { dataIndex: 'layer' as keyof SummaryData, title: 'Layer' },
     { dataIndex: 'thickness' as keyof SummaryData, title: <>Layer thickness, {thicknessUnit} (mean)*</>, colSpan: 2 },
-    { dataIndex: 'thickness' as keyof SummaryData, colSpan: 0 },
+    { dataIndex: 'thicknessN' as keyof SummaryData, colSpan: 0 },
     { dataIndex: 'densityMean' as keyof SummaryData, title: <>Neuron density, {densityUnit} (mean ± std)</>, colSpan: 3 },
     { dataIndex: 'densityStd' as keyof SummaryData, colSpan: 0 },
     { dataIndex: 'densityN' as keyof SummaryData, colSpan: 0 },
