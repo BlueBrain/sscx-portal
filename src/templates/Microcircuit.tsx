@@ -9,7 +9,7 @@ import LayerSelector from '../components/MicrocircuitLayerSelector';
 import { Layer, Color } from '../types';
 import Pills from '../components/Pills';
 import { Subregion } from '../types';
-import { subregionTitle, subregions } from '../constants';
+import { subregionTitle, subregions, defaultSelection } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -28,6 +28,11 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
   const router = useRouter();
 
   const query = router.query;
+  if (!query.brain_region && !query.layer) {
+    const defaultMicrocircuitFilters = defaultSelection.digitalReconstruction.microcircuit;
+    query.layer = defaultMicrocircuitFilters.LAYER;
+    query.brain_region = defaultMicrocircuitFilters.BRAIN_REGION;
+  }
 
   const setQuery = (query: any) => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });

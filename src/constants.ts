@@ -39,4 +39,10 @@ export const defaultSelection = {
     M_TYPE: 'L4_TPC',
     INSTANCE: 'C060998B-P4',
   },
+  digitalReconstruction: {
+    microcircuit: {
+      LAYER: 'L4',
+      BRAIN_REGION: 'S1FL',
+    },
+  },
 };
