@@ -38,6 +38,7 @@ import NeuronMorphology from '../components/NeuronMorphology';
 import ESData from '../components/ESData';
 import NexusPlugin from '../components/NexusPlugin';
 import { modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
+import { defaultSelection } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -72,6 +73,14 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   const nexus = useNexusContext();
 
   const query = router.query;
+  if (!query.brain_region && !query.layer && !query.etype && !query.mtype && !query.memodel) {
+    const defaultFilter = defaultSelection.digitalReconstruction.neurons;
+    query.brain_region = defaultFilter.BRAIN_REGION;
+    query.layer = defaultFilter.LAYER;
+    query.etype = defaultFilter.ETYPE;
+    query.mtype = defaultFilter.MTYPE;
+    query.memodel = defaultFilter.MEMODEL;
+  }
 
   const [memodelIndex, setMemodelIndex] = useState<any>(null);
   const [memodelNumberExceptions, setMemodelNumberExceptions] = useState<any>(null);

@@ -28,7 +28,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
   const router = useRouter();
   const { query } = router;
   if (!query.layer) {
-    query.layer = defaultSelection.LAYER_ANATOMY;
+    query.layer = defaultSelection.experimentalData.LAYER_ANATOMY;
   }
 
   const setLayerQuery = (layer: Layer) => {
