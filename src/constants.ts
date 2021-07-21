@@ -33,11 +33,13 @@ export const subregionTitle: Record<Subregion, string> = {
 };
 
 export const defaultSelection = {
-  LAYER_ANATOMY: 'L4',
-  NEURON_MORPHOLOGY: {
-    LAYER: 'L4',
-    M_TYPE: 'L4_TPC',
-    INSTANCE: 'C060998B-P4',
+  experimentalData: {
+    LAYER_ANATOMY: 'L4',
+    neuronMorphology: {
+      LAYER: 'L4',
+      M_TYPE: 'L4_TPC',
+      INSTANCE: 'C060998B-P4',
+    },
   },
   digitalReconstruction: {
     microcircuit: {
