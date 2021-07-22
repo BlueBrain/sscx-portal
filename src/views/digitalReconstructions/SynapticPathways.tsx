@@ -14,19 +14,17 @@ import Collapsible from '../../components/Collapsible';
 import Synaptome from '../../components/Synaptome';
 
 import ImageViewer from '../../components/ImageViewer';
-import Button from '../../components/Button';
+import SimulationSection from '../../components/SimulationSection';
 
 
-const Plot: React.FC<{ src: string }> = ({ src }) => {
-  return (
-    <ImageViewer
-      border
-      src={src}
-      thumbnailSrc={src.replace('.png', '__w640.png')}
-      aspectRatio='5 / 4'
-    />
-  );
-};
+const Plot: React.FC<{ src: string }> = ({ src }) => (
+  <ImageViewer
+    border
+    src={src}
+    thumbnailSrc={src.replace('.png', '__w640.png')}
+    aspectRatio="5 / 4"
+  />
+);
 
 const RecSynPathwaysView = () => (
   <SynapticPathwaysTemplates
@@ -152,28 +150,7 @@ const RecSynPathwaysView = () => (
           />
         </Collapsible>
 
-        <Collapsible
-          id="simulationSection"
-          className="mt-3"
-          color="red"
-          title="Simulations"
-        >
-          <div className="row">
-            <div className="col-xs-4">
-              Definition : explain that these are in silico experiments. Explanation of this exact simulation.
-            </div>
-            <div className="col-xs-4">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/assets/documents/10184/1204661/11_maya_christmasTree.jpg" />
-            </div>
-            <div className="col-xs-4">
-              <h3 className="mt-0">Explore data</h3>
-              <ul>
-                <li> <Button>Pair Recording App</Button> </li>
-                <li> <Button>Visualize with Brayns</Button> </li>
-              </ul>
-            </div>
-          </div>
-        </Collapsible>
+        <SimulationSection />
       </DataContainer>
     )}
   </SynapticPathwaysTemplates>

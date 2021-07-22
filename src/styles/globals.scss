@@ -484,6 +484,7 @@ $collapsible-padding-small: 0.5rem;
   .content {
     max-height: 20000px;
     transition: max-height 1s, padding 0.3s;
+    width: 100%;
   }
 }
 
@@ -564,6 +565,8 @@ $collapsible-padding-small: 0.5rem;
 
   .row {
     border-bottom: 1px solid #eaeaea;
+    margin-left: 0;
+    margin-right:0; 
   }
 
   .pos-relative {
