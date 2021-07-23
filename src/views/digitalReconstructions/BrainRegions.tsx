@@ -9,8 +9,7 @@ import { color, sectionTitle } from './config';
 import { subregions, subregionTitle } from '../../constants';
 import { regionCircuitFactsheetPath, subregionCircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
-import ImageViewer from '../../components/ImageViewer';
-import Button from '../../components/Button';
+import SimulationSection from '../../components/SimulationSection';
 
 const subregionTableDataSource = subregions.map(subregion => ({ abbr: subregion, name: subregionTitle[subregion] }));
 const subregionTableColumns = [
@@ -81,28 +80,7 @@ const BrainRegionsView = () => (
           </HttpData>
         </Collapsible>
 
-        <Collapsible
-          id="simulationSection"
-          className="mt-4"
-          color="red"
-          title="Simulations"
-        >
-          <div className="row">
-            <div className="col-xs-4">
-              Definition: explain that these are in silico experiments. Explanation of this exact simulation.
-            </div>
-            <div className="col-xs-4">
-              <ImageViewer border src="https://bbp.epfl.ch/nmc-portal/documents/10184/1204661/11_maya_christmasTree.jpg" />
-            </div>
-            <div className="col-xs-4">
-              <h3 className="mt-0">Explore data</h3>
-              <ul>
-                <li><Button>Pair Recording App</Button></li>
-                <li><Button>Visualize with Brayns</Button></li>
-              </ul>
-            </div>
-          </div>
-        </Collapsible>
+        <SimulationSection />
       </DataContainer>
     )}
   </BrainRegionTemplate>

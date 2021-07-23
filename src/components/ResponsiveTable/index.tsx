@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import { ColumnType as AntColumnType, ColumnsType, TableProps } from 'antd/lib/table';
 import { Breakpoint } from 'antd/lib/_util/responsiveObserve';
 
-import classes from './responsiveTable.module.scss';
+import classes from './styles.module.scss';
 
 interface ColumnType<Type extends object & {isHighlight?: boolean}> extends Omit<AntColumnType<Type>, 'dataIndex'> {
     dataIndex: keyof Type;
