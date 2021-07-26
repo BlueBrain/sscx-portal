@@ -20,7 +20,7 @@ import ExpTraceFactsheet from '../../components/ExpTraceFactsheet';
 import ExpEphysDistribution from '../../components/ExpEphysDistribution';
 import Metadata from '../../components/Metadata';
 import eTypes from '../../__generated__/experimentalData.json';
-import { basePath } from '../../config';
+import { defaultSelection } from '../../constants';
 
 import selectorStyle from '../../styles/selector.module.scss';
 import HttpData from '../../components/HttpData';
@@ -30,6 +30,11 @@ const NeuronElectrophysiology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
   const { query } = router;
+  if (!query.layer && !query.mtype && !query.instance) {
+    const defaultEphysFilters = defaultSelection.experimentalData.neuronElectrophysiology;
+    query.etype = defaultEphysFilters.ETYPE;
+    query.etype_instance = defaultEphysFilters.INSTANCE;
+  }
 
   const setQuery = (query: any) => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });

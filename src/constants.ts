@@ -40,6 +40,10 @@ export const defaultSelection = {
       M_TYPE: 'L4_TPC',
       INSTANCE: 'C060998B-P4',
     },
+    neuronElectrophysiology: {
+      ETYPE: 'bAC',
+      INSTANCE: 'C170101B-MT-C1',
+    },
   },
   digitalReconstruction: {
     microcircuit: {
