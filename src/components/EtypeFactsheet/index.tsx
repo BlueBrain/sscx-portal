@@ -1,6 +1,5 @@
 import React from 'react';
 import get from 'lodash/get';
-import sortBy from 'lodash/sortBy';
 import { Table, Collapse, Popover } from 'antd';
 
 import NumberFormat from '../NumberFormat';
@@ -22,6 +21,14 @@ const unitLabelMap = {
 
 const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
+const sortObj = (obj) => {
+  const sorted = {};
+  Object.keys(obj).sort().reduce((acc, key) => {
+    acc[key] = obj[key];
+    return acc;
+  }, sorted);
+  return sorted;
+};
 
 const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
@@ -83,20 +90,12 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   ];
 
   // Channel mechanisms data preparation
-  const unsortedChannelMechanisms = get(data, '[1].values[0].location_map');
-  const sections = sortBy(Object.keys(unsortedChannelMechanisms));
+  const channelMechanisms = get(data, '[1].values[0].location_map');
+  const sections = Object.keys(channelMechanisms);
 
-  // convert channels to arrays to keep order
-  const sectionObjects = sections.reduce((acc, section) => {
-    const unsorted = unsortedChannelMechanisms[section].channels;
-    const sortedKeys = sortBy(Object.keys(unsorted));
-    const channels = sortedKeys.map((key) => (
-      { name: key, values: unsorted[key] }
-    ));
-    acc.push({ name: section, values: { 'channels': channels } });
-    return acc;
-  }, []);
-
+  const getSortedMechanisms = (section) => (
+    sortObj(channelMechanisms[section].channels)
+  );
 
   return (
     <div id="id" className={styles.container}>
@@ -126,11 +125,11 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
           <div className="col-xs-6 col-md-4"><strong>Sections</strong></div>
           <div className="col-xs-6 col-md-8"><strong>Mechanisms</strong></div>
         </div>
-        {sectionObjects.map(sectionObj => (
-          <div className={`row ${styles.mechanismsRow}`} key={sectionObj.name}>
-            <div className="col-xs-6 col-md-4">{sectionObj.name}</div>
+        {sections.map(section => (
+          <div className={`row ${styles.mechanismsRow}`} key={section}>
+            <div className="col-xs-6 col-md-4">{section}</div>
             <div className="col-xs-6 col-md-8">
-              {sectionObj.values.channels.map(({ name: channelName, values: channelData }) => (
+              {Object.entries(getSortedMechanisms(section)).map(([channelName, channelData]: [string, any]) => (
                 <Popover
                   key={channelName}
                   title={channelName}
