@@ -21,7 +21,6 @@ const unitLabelMap = {
 
 const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
-
 const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
   id = '',
@@ -85,6 +84,12 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   const channelMechanisms = get(data, '[1].values[0].location_map');
   const sections = Object.keys(channelMechanisms);
 
+  const getSortedMechanisms = (section) => {
+    const { channels } = channelMechanisms[section];
+    // simulates the Object.entries but guaranteeing sorted
+    return Object.keys(channels).sort().map((k) => ([k, channels[k]]));
+  };
+
   return (
     <div id="id" className={styles.container}>
       <h3>Factsheet</h3>
@@ -117,7 +122,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
           <div className={`row ${styles.mechanismsRow}`} key={section}>
             <div className="col-xs-6 col-md-4">{section}</div>
             <div className="col-xs-6 col-md-8">
-              {Object.entries(channelMechanisms[section].channels).map(([channelName, channelData]: [string, any]) => (
+              {getSortedMechanisms(section).map(([channelName, channelData]: [string, any]) => (
                 <Popover
                   key={channelName}
                   title={channelName}
