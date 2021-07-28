@@ -75,21 +75,10 @@
     }
   }
 
-  .menu-search {
-    height: 120px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 40px 30px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-  }
-
   .secondary-nav {
     position: absolute;
     top: 120px;
-    bottom: 120px;
+    bottom: 0px;
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
