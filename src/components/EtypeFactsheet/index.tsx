@@ -21,15 +21,6 @@ const unitLabelMap = {
 
 const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
-const sortObj = (obj) => {
-  const sorted = {};
-  Object.keys(obj).sort().reduce((acc, key) => {
-    acc[key] = obj[key];
-    return acc;
-  }, sorted);
-  return sorted;
-};
-
 const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
   id = '',
@@ -94,9 +85,9 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   const sections = Object.keys(channelMechanisms);
 
   const getSortedMechanisms = (section) => {
-    const sorted = sortObj(channelMechanisms[section].channels);
+    const { channels } = channelMechanisms[section];
     // simulates the Object.entries but guaranteeing sorted
-    return Object.keys(sorted).map((k) => ([k, sorted[k]]));
+    return Object.keys(channels).sort().map((k) => ([k, channels[k]]));
   };
 
   return (
