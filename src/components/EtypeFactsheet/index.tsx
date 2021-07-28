@@ -1,5 +1,6 @@
 import React from 'react';
 import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 import { Table, Collapse, Popover } from 'antd';
 
 import NumberFormat from '../NumberFormat';
@@ -82,8 +83,20 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   ];
 
   // Channel mechanisms data preparation
-  const channelMechanisms = get(data, '[1].values[0].location_map');
-  const sections = Object.keys(channelMechanisms);
+  const unsortedChannelMechanisms = get(data, '[1].values[0].location_map');
+  const sections = sortBy(Object.keys(unsortedChannelMechanisms));
+
+  // convert channels to arrays to keep order
+  const sectionObjects = sections.reduce((acc, section) => {
+    const unsorted = unsortedChannelMechanisms[section].channels;
+    const sortedKeys = sortBy(Object.keys(unsorted));
+    const channels = sortedKeys.map((key) => (
+      { name: key, values: unsorted[key] }
+    ));
+    acc.push({ name: section, values: { 'channels': channels } });
+    return acc;
+  }, []);
+
 
   return (
     <div id="id" className={styles.container}>
@@ -113,11 +126,11 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
           <div className="col-xs-6 col-md-4"><strong>Sections</strong></div>
           <div className="col-xs-6 col-md-8"><strong>Mechanisms</strong></div>
         </div>
-        {sections.map(section => (
-          <div className={`row ${styles.mechanismsRow}`} key={section}>
-            <div className="col-xs-6 col-md-4">{section}</div>
+        {sectionObjects.map(sectionObj => (
+          <div className={`row ${styles.mechanismsRow}`} key={sectionObj.name}>
+            <div className="col-xs-6 col-md-4">{sectionObj.name}</div>
             <div className="col-xs-6 col-md-8">
-              {Object.entries(channelMechanisms[section].channels).map(([channelName, channelData]: [string, any]) => (
+              {sectionObj.values.channels.map(({ name: channelName, values: channelData }) => (
                 <Popover
                   key={channelName}
                   title={channelName}
