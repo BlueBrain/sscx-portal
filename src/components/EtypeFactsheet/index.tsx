@@ -93,9 +93,11 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   const channelMechanisms = get(data, '[1].values[0].location_map');
   const sections = Object.keys(channelMechanisms);
 
-  const getSortedMechanisms = (section) => (
-    sortObj(channelMechanisms[section].channels)
-  );
+  const getSortedMechanisms = (section) => {
+    const sorted = sortObj(channelMechanisms[section].channels);
+    // simulates the Object.entries but guaranteeing sorted
+    return Object.keys(sorted).map((k) => ([k, sorted[k]]));
+  };
 
   return (
     <div id="id" className={styles.container}>
@@ -129,7 +131,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
           <div className={`row ${styles.mechanismsRow}`} key={section}>
             <div className="col-xs-6 col-md-4">{section}</div>
             <div className="col-xs-6 col-md-8">
-              {Object.entries(getSortedMechanisms(section)).map(([channelName, channelData]: [string, any]) => (
+              {getSortedMechanisms(section).map(([channelName, channelData]: [string, any]) => (
                 <Popover
                   key={channelName}
                   title={channelName}
