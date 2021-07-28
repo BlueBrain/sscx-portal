@@ -27,7 +27,6 @@ type FactsheetProps = {
   id?: string;
 };
 
-
 const FactsheetSingleValueEntry: React.FC<{
   fact: FactsheetEntryType;
 }> = ({
@@ -40,7 +39,7 @@ const FactsheetSingleValueEntry: React.FC<{
         ? (<span>-</span>)
         : (
           <span>
-            <NumberFormat value={fact.value} /> <Unit value={fact.unit} />
+            <NumberFormat value={fact.value} /> <Unit value={fact} />
           </span>
         )}
     </div>
@@ -57,7 +56,7 @@ const FactsheetSingleMeanStdEntry: React.FC<{
     <div className="col-xs-6 col-md-4 value">
       {fact.value_map && (
         <>
-          <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> <Unit value={fact.unit} />
+          <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> <Unit value={fact} />
         </>
       )}
       {fact.values && (
@@ -68,7 +67,7 @@ const FactsheetSingleMeanStdEntry: React.FC<{
               ± <NumberFormat value={fact.values[1]} />&nbsp;
             </>
           )}
-          <Unit value={fact.unit} />
+          <Unit value={fact} />
         </>
       )}
     </div>
@@ -96,7 +95,7 @@ const FactsheetMapValueEntry: React.FC<{
           <div className="bar" style={{ width: `${barWidthPct}%` }} />
         </div>
         <div className="col-xs-6">
-          <NumberFormat value={value} /> <Unit value={unitCode} />
+          <NumberFormat value={value} />
         </div>
       </div>
     );
@@ -104,7 +103,7 @@ const FactsheetMapValueEntry: React.FC<{
 
   return (
     <div className="row mt-1">
-      <div className="col-sm-4 col-xs-6 name">{fact.name}</div>
+      <div className="col-sm-4 col-xs-6 name">{fact.name}, {unitCode}</div>
       <div className="col-sm-8 col-xs-12">{valueColumn}</div>
     </div>
   );

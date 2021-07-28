@@ -1,17 +1,25 @@
 import React from 'react';
 
+
 type UnitProps = {
-  value?: string;
+  value?: {
+    name?: string;
+    unit?: string;
+  }
 }
 
 const replacement = {
   MOhm: 'MΩ',
 };
 
-const Unit: React.FC<UnitProps> = ({ value = '' }) => {
+const Unit: React.FC<UnitProps> = ({ value }) => {
+  const unit = value?.unit || '';
+  if (value.name.startsWith('No. of')) {
+    return null;
+  }
   return (
     <>
-      {replacement[value] ?? value}
+      {(replacement[unit] || unit)}
     </>
   );
 };
