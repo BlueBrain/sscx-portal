@@ -9,7 +9,6 @@ import { SecondaryNav } from '../Navigation';
 import { basePath } from '../../config';
 
 // import './style.scss';
-import Search from '../../components/Search';
 
 const classPrefix = 'nav-mobile__';
 
@@ -62,9 +61,6 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
       </Link> */}
     </div>
     <SecondaryNav canClose />
-    <div className="menu-search">
-      <Search />
-    </div>
   </div>
 );
 
