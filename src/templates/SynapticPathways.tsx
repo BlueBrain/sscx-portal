@@ -198,7 +198,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>3. Choose pathway M-types</div>
                 <div className={selectorStyle.body}>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
+                  <div className={selectorStyle.topFrameComponent}>
                     <List
                       title="m-type pre-synaptic"
                       block
@@ -208,7 +208,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                       onSelect={setPreTypeQuery as (s: string) => void}
                     />
                   </div>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem 0' }}>
+                  <div className={selectorStyle.bottomFrameComponent}>
                     <List
                       title="m-type post-synaptic"
                       block
