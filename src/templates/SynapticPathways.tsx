@@ -7,8 +7,8 @@ import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
-import { Layer, Color } from '../types';
-import { Subregion } from '../types';
+import { Layer, Color, Subregion } from '../types';
+
 import SynapticPathwaySelector from '../components/SynapticPathwaySelector';
 import List from '../components/List';
 import { pathwayIndexPath } from '../queries/http';
@@ -69,41 +69,41 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     setParams({
       'brain_region': region,
       prelayer: null,
-      pretype: null,
       postlayer: null,
+      pretype: null,
       posttype: null,
     });
-  }
+  };
 
   const setPreLayerQuery = (layer: Layer) => {
     setParams({
       prelayer: layer,
+      postlayer: null,
       pretype: null,
-      postlayer: null,
       posttype: null,
     });
-  }
-
-  const setPreTypeQuery = (layer: Layer) => {
-    setParams({
-      pretype: layer,
-      postlayer: null,
-      posttype: null,
-    });
-  }
+  };
 
   const setPostLayerQuery = (layer: Layer) => {
     setParams({
       postlayer: layer,
       posttype: null,
     });
-  }
+  };
+
+  const setPreTypeQuery = (layer: Layer) => {
+    setParams({
+      pretype: layer,
+      posttype: null,
+    });
+  };
+
 
   const setPostTypeQuery = (layer: Layer) => {
     setParams({
       posttype: layer,
     });
-  }
+  };
 
   const hasData = currentPreType && currentPostType;
 
@@ -117,11 +117,11 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
 
   const postMTypes = pathwayIndex && currentRegion && currentPreType && currentPostLayer
     ? chunk(pathwayIndex.region[currentRegion], 2)
-        .filter(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx] === currentPreType)
-        .map(([,postMtypeIdx]) => pathwayIndex.mtypeIdx[postMtypeIdx])
-        .filter(onlyUnique)
-        .filter(mtype => mtype.match(currentPostLayer === 'L23' ? 'L23|L2|L3' : currentPostLayer))
-        .sort()
+      .filter(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx] === currentPreType)
+      .map(([, postMtypeIdx]) => pathwayIndex.mtypeIdx[postMtypeIdx])
+      .filter(onlyUnique)
+      .filter(mtype => mtype.match(currentPostLayer === 'L23' ? 'L23|L2|L3' : currentPostLayer))
+      .sort()
     : [];
 
   const pathway = currentPreType && currentPostType
@@ -131,7 +131,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   useEffect(() => {
     fetch(pathwayIndexPath)
       .then(res => res.json())
-      .then(pathwayIndex => setPathwayIndex(pathwayIndex))
+      .then(pathwayIndex => setPathwayIndex(pathwayIndex));
   }, []);
 
   return (
@@ -140,7 +140,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
         <Row
           className="w-100"
           align="bottom"
-          gutter={[0,20]}
+          gutter={[0, 20]}
         >
           <Col
             xs={24}
