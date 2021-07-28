@@ -1,9 +1,13 @@
-
+@import '../../styles/config/queries.scss';
 
 .container {
   padding: 40px 60px;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: $ant-breakpoint-sm) {
+    padding: 25px 16px;
+  }
 
   h2, h3, h4, h5 {
     color: white;
