@@ -2428,6 +2428,11 @@ $collapsible-padding-small: 0.5rem;
   .term {
     word-break: break-all;
   }
+
+  img.e-type-img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
 }
 
 

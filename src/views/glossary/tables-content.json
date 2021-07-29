@@ -1,0 +1,71 @@
+{
+  "spike": [
+    {
+      "_": "description",
+      "non-accommodating": "This type is characterized by an absence of accommodation in the spike characteristics during the IDRest stimuli.",
+      "accommodating": "This type is characterized by an accommodation in the spike characteristics during the IDRest stimuli.",
+      "stuttering": "",
+      "irregular-spiking": ""
+    },
+    {
+      "_": "APWaveform",
+      "non-accommodating": "Accommodation is mostly clearly visible in the APWaveform spike. When it is a non-bursting cell, the height and width of the first and second spike should be very similar. When it's a bursting cell, it's important not to confuse the burst spikes with spikes in the more stationary regime.",
+      "accommodating": "Accommodation is mostly clearly visible in the APWaveform spike. When it is a non-bursting cell, the second spike should be wider and less high than the first spike. When it's a bursting cell, it's important not to confuse the burst spikes with spikes in the more stationary regime, and the first and second spike of the stationary regime should be compared (if these are present during the short APWaveform stimulus).",
+      "stuttering": "The stuttering itself can typically not be detected from APWaveform traces. However, the characteristics should be the same as the non-accommodating case.",
+      "irregular-spiking": "The irregular spiking itself can typically not be detected from APWaveform traces. However, the characteristics should be the same as the accommodating case."
+    },
+    {
+      "_": "IDRest",
+      "non-accommodating": "After the transitory behavior after the onset of the stimulus (a burst or a delay), there should be almost no change in the spike width/height, nor should there be any change in the interspike interval.",
+      "accommodating": "After the transitory behavior after the onset of the stimulus (a burst or delay), there should be an increase in the interspike interval, and possibly some accommodation in spike width/height.",
+      "stuttering": "During the different levels of IDRest stimuli, the spike firing is continuous, but is regularly interrupted by short pauses. During these pauses the voltage is around or above the resting membrane potential and shows some lower amplitude noise/oscillations.",
+      "irregular-spiking": "After the transitory behavior after the onset of the stimulus (a burst), the interspike intervals should become very irregular."
+    }
+  ],
+  "firing": [
+    {
+      "_": "description",
+      "classical": "This type is characterized by a classical/continuous/regular firing behavior of the first spikes in the IDRest protocol.",
+      "bursting": "This type is characterized by a short burst of spikes at the onset of the IDRest protocol.",
+      "delayed": "This type is characterized by a delay in the spiking at the onset of the IDRest protocol (mostly the lower levels)."
+    },
+    {
+      "_": "APWaveform",
+      "classical": "In case of a non-accommodating cell, the first two spikes should look very identical, in accommodating cells there can be an increase in spike width.",
+      "bursting": "The first two spikes can look very different, the real confirmation of the burst should come from IDRest though.",
+      "delayed": "The delay is not always present in the APWaveform stimuli (since the current injection can be too high)."
+    },
+    {
+      "_": "IDRest",
+      "classical": "The first few spikes (spike height, spike width, interspike interval) are very similar to the other spikes in the trace. There is virtually no delay in firing at all levels above threshold in IDRest.",
+      "bursting": "The first interspike interval is very important. If this is significantly different from the other intervals in the trace, a burst is present. More than two spikes can be involved in the burst. There should be virtually no delay in the spiking at the onset of the stimulus.",
+      "delayed": "The main characteristic of this type can be seen at the lower levels of current injection of the IDRest stimuli (100-150% of threshold). At these levels a clear delay in firing should be present (50ms+). When there is a long delay, it is allowed to have one spike immediately at stimulus onset (followed by a long pause)."
+    }
+  ],
+  "e-types": [
+    {
+      "_": "non-accommodating",
+      "classical": "cNAC.png",
+      "bursting": "bNAC.png",
+      "delayed": "dNAC.png"
+    },
+    {
+      "_": "accommodating",
+      "classical": "cAC.png",
+      "bursting": "bAC.png",
+      "delayed": "dAC.png"
+    },
+    {
+      "_": "stuttering",
+      "classical": "cSTUT.png",
+      "bursting": "bSTUT.png",
+      "delayed": "dSTUT.png"
+    },
+    {
+      "_": "irregular-spiking",
+      "classical": "cIR.png",
+      "bursting": "bIR.png",
+      "delayed": ""
+    }
+  ]
+}

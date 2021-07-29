@@ -1,5 +1,5 @@
 import React from 'react';
-import GlossaryView from '../views/Glossary';
+import GlossaryView from '../views/glossary/Glossary';
 
 
 export default function About() {
