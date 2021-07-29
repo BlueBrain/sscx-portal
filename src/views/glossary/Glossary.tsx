@@ -20,10 +20,10 @@ type SpikeTable = {
 
 const spikeColumns = [
   { dataIndex: '_' as keyof SpikeTable, title: '' },
-  { dataIndex: 'non-accommodating' as keyof SpikeTable, title: 'non-accommodating' },
-  { dataIndex: 'accommodating' as keyof SpikeTable, title: 'accommodating' },
-  { dataIndex: 'stuttering' as keyof SpikeTable, title: 'stuttering' },
-  { dataIndex: 'irregular-spiking' as keyof SpikeTable, title: 'irregular-spiking' },
+  { dataIndex: 'non-accommodating' as keyof SpikeTable, title: 'Non-accommodating' },
+  { dataIndex: 'accommodating' as keyof SpikeTable, title: 'Accommodating' },
+  { dataIndex: 'stuttering' as keyof SpikeTable, title: 'Stuttering' },
+  { dataIndex: 'irregular-spiking' as keyof SpikeTable, title: 'Irregular-spiking' },
 ];
 
 
@@ -36,24 +36,19 @@ type FiringTable = {
 
 const firingColumns = [
   { dataIndex: '_' as keyof FiringTable, title: '' },
-  { dataIndex: 'classical' as keyof FiringTable, title: 'classical' },
-  { dataIndex: 'bursting' as keyof FiringTable, title: 'bursting' },
-  { dataIndex: 'delayed' as keyof FiringTable, title: 'delayed' },
+  { dataIndex: 'classical' as keyof FiringTable, title: 'Classical' },
+  { dataIndex: 'bursting' as keyof FiringTable, title: 'Bursting' },
+  { dataIndex: 'delayed' as keyof FiringTable, title: 'Delayed' },
 ];
 
 
-const eTypesColumns = [
-  { dataIndex: '_' as keyof FiringTable, title: '' },
-  { dataIndex: 'classical' as keyof FiringTable, title: 'classical' },
-  { dataIndex: 'bursting' as keyof FiringTable, title: 'bursting' },
-  { dataIndex: 'delayed' as keyof FiringTable, title: 'delayed' },
-];
+const eTypesColumns = firingColumns;
 
 const imageBase = `${basePath}/assets/images/glossary`;
 
 const generateImgElem = (imgName) => {
   if (!imgName) return '';
-  console.log(imgName);
+
   const imgElem = React.createElement('img', {
     src: `${imageBase}/${imgName}`,
     className: 'e-type-img',

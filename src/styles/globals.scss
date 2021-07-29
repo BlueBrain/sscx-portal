@@ -2432,6 +2432,24 @@ $collapsible-padding-small: 0.5rem;
   img.e-type-img {
     max-width: 100%;
     margin: 0 auto;
+    background-color: white;
+  }
+
+  h4 {
+    color: white;
+    margin-top: 20px;
+  }
+
+  .responsiveTable {
+    tr > th,
+    tr {
+      background-color: map-get($basePalette, "navy-4");
+      color: white;
+    }
+
+    .ant-table-tbody > tr.ant-table-row-level-0:hover > td {
+      background: unset;
+    }
   }
 }
 

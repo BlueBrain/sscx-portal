@@ -1,7 +1,7 @@
 {
   "spike": [
     {
-      "_": "description",
+      "_": "Description",
       "non-accommodating": "This type is characterized by an absence of accommodation in the spike characteristics during the IDRest stimuli.",
       "accommodating": "This type is characterized by an accommodation in the spike characteristics during the IDRest stimuli.",
       "stuttering": "",
@@ -24,7 +24,7 @@
   ],
   "firing": [
     {
-      "_": "description",
+      "_": "Description",
       "classical": "This type is characterized by a classical/continuous/regular firing behavior of the first spikes in the IDRest protocol.",
       "bursting": "This type is characterized by a short burst of spikes at the onset of the IDRest protocol.",
       "delayed": "This type is characterized by a delay in the spiking at the onset of the IDRest protocol (mostly the lower levels)."
@@ -44,25 +44,25 @@
   ],
   "e-types": [
     {
-      "_": "non-accommodating",
+      "_": "Non-accommodating",
       "classical": "cNAC.png",
       "bursting": "bNAC.png",
       "delayed": "dNAC.png"
     },
     {
-      "_": "accommodating",
+      "_": "Accommodating",
       "classical": "cAC.png",
       "bursting": "bAC.png",
       "delayed": "dAC.png"
     },
     {
-      "_": "stuttering",
+      "_": "Stuttering",
       "classical": "cSTUT.png",
       "bursting": "bSTUT.png",
       "delayed": "dSTUT.png"
     },
     {
-      "_": "irregular-spiking",
+      "_": "Irregular-spiking",
       "classical": "cIR.png",
       "bursting": "bIR.png",
       "delayed": ""
