@@ -106,12 +106,7 @@ const NeuronElectrophysiology: React.FC = () => {
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>Select a cell type</div>
                 <div className={selectorStyle.body}>
-                  <div style={{
-                    backgroundColor: 'rgb(49, 50, 84)',
-                    padding: '1rem',
-                    marginBottom: '1rem',
-                  }}
-                  >
+                  <div className={selectorStyle.topFrameComponent}>
                     <List
                       title="e-type"
                       block
@@ -121,11 +116,7 @@ const NeuronElectrophysiology: React.FC = () => {
                       onSelect={setEtype}
                     />
                   </div>
-                  <div style={{
-                    backgroundColor: 'rgb(49, 50, 84)',
-                    padding: '1rem 1rem 1rem 2rem',
-                  }}
-                  >
+                  <div className={selectorStyle.bottomFrameComponent}>
                     <List
                       title="Experiment instance"
                       block

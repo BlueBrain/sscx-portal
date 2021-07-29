@@ -21,12 +21,13 @@ const Home: React.FC = () => (
         alt: 'SSCx side view',
       }, {
         src: `${basePath}/assets/images/backgrounds/home-page/sscx-top.jpeg`,
-        alt: 'SSCx top view'
+        alt: 'SSCx top view',
       }, {
         src: `${basePath}/assets/images/backgrounds/home-page/sscx-inside.jpeg`,
         alt: 'SSCx inside view',
-      }]}/>
-      <div className="gradient"></div>
+      }]}
+      />
+      <div className="gradient" />
 
       <div className="copyright">
         ©Blue Brain Project/EPFL 2005-2021.
@@ -34,24 +35,26 @@ const Home: React.FC = () => (
 
       <div className="title">
         <Title
-          title={<span>Somatosensory <br/> Cortex Portal</span>}
-          hint={<>
-            <p>
-              The SSCx portal is a freely accessible resource, which provides access to the <b>Blue Brain Project</b>'s
-              experimental data sets on the multi-scale organization of the juvenile rat primary somatosensory cortex -
-              sub-regions, microcircuits, neurons, synapses, and the resulting computational models.
-            </p>
-            <p>
-              The portal describes a workflow for how sparse experimental data are gathered and extrapolated
-              to obtain dense computational models, their validation and
-              resulting predictions across multiple levels of organization.
-            </p>
-          </>}
+          title={<span>Somatosensory <br /> Cortex Portal</span>}
+          hint={(
+            <>
+              <p>
+                The SSCx portal is a freely accessible resource, which provides access to the <b>Blue Brain Project</b>'s
+                experimental data sets on the multi-scale organization of the juvenile rat primary somatosensory cortex -
+                sub-regions, microcircuits, neurons, synapses, and the resulting computational models.
+              </p>
+              <p>
+                The portal describes a workflow for how sparse experimental data are gathered and extrapolated
+                to obtain dense computational models, their validation and
+                resulting predictions across multiple levels of organization.
+              </p>
+            </>
+          )}
           primary
         />
         <div className="link-buttons">
           <CtaButton href="#explore" color="yellow">Explore now</CtaButton>
-          <br/>
+          <br />
           <CtaButton href="#publications" className="mt-2" color="grey">Publications</CtaButton>
         </div>
       </div>
@@ -156,18 +159,18 @@ const Home: React.FC = () => (
 
       <div className="cards">
         <Row gutter={3} justify="center">
-          {cardsData.map(({title, description, image, backgroundColor, links}) => (
+          {cardsData.map(({ title, description, image, backgroundColor, links }) => (
             <Col key={image} xs={24} sm={12} md={8} className="mb-2">
               <ExploreSectionCard
                 title={title}
                 description={description.map((parahraph, index) => (
                   <p key={index}>
                     {parahraph}
-                    </p>
+                  </p>
                 ))}
                 image={image}
                 bgColor={backgroundColor}
-                  links={links}
+                links={links}
               />
             </Col>
           ))}
@@ -179,18 +182,18 @@ const Home: React.FC = () => (
 
     <section id="publications" className="section-4">
       <div className="content">
-        <div className="row w-100">
+        <div className="row no-gutters w-100">
           <div className="col-xs-12 col-md-6">
             <h1 className="text-uppercase m-0">Publications</h1>
             <p className="text-yellow text-subtitle mb-3">Read up on our latest publications !</p>
-                  {publicationData.map(({href, authors, description}, index) => (
-                    <PublicationBlock
-                      key={index}
-                      href={href}
-                      description={description}
-                      authors={authors}
-                    />
-                  ))}
+            {publicationData.map(({ href, authors, description }, index) => (
+              <PublicationBlock
+                key={index}
+                href={href}
+                description={description}
+                authors={authors}
+              />
+            ))}
           </div>
         </div>
       </div>

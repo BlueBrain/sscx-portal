@@ -1545,7 +1545,7 @@ $collapsible-padding-small: 0.5rem;
       border-left: 4px solid map-get($accentPalette, "yellow");
       margin: 2rem 1rem 1rem 0;
       padding-left: 12px;
-      @media (max-width: $x-small) {
+      @media (max-width: $ant-breakpoint-sm) {
         text-align: justify;
         margin-right: 1.5rem;
       }
@@ -1583,7 +1583,7 @@ $collapsible-padding-small: 0.5rem;
     @media (max-width: $small) {
       padding-right: 8px;
     }
-    @media (max-width: $x-small) {
+    @media (max-width: $ant-breakpoint-sm) {
       width: 40px;
       margin-right: 8px;
     }
@@ -1609,7 +1609,7 @@ $collapsible-padding-small: 0.5rem;
     align-items: baseline;
     flex-wrap: wrap;
     line-height: $height;
-    @media (max-width: $x-small) {
+    @media (max-width: $ant-breakpoint-sm) {
       font-size: 12px;
     }
 
@@ -1704,7 +1704,7 @@ $collapsible-padding-small: 0.5rem;
     left: 10px;
   }
 
-  @media (max-width: $x-small) {
+  @media (max-width: $ant-breakpoint-sm) {
     width:unset;
   }
 
@@ -2094,7 +2094,7 @@ $collapsible-padding-small: 0.5rem;
   section {
     padding: 30px 30px 60px;
     overflow: hidden;
-    @media (max-width: $x-small) {
+    @media (max-width: $ant-breakpoint-sm) {
       padding: 30px 16px 60px;
     }
   }
@@ -2151,7 +2151,7 @@ $collapsible-padding-small: 0.5rem;
       left: 60px;
       color: grey;
 
-      @media (max-width: $x-small) {
+      @media (max-width: $ant-breakpoint-sm) {
         bottom: 20px;
         left: 16px;
       }
@@ -2169,7 +2169,7 @@ $collapsible-padding-small: 0.5rem;
 
       h2 {
         font-size: 3.5rem;
-        @media (max-width: $x-small) {
+        @media (max-width: $ant-breakpoint-sm) {
           font-size: 2.5rem
         }
       }
@@ -2288,6 +2288,11 @@ $collapsible-padding-small: 0.5rem;
       max-width: 1200px;
       margin: 0 auto;
     }
+
+    .row {
+      margin-right: 0;
+      margin-left: 0;
+    }
   }
 
   .section-3 {
@@ -2372,6 +2377,16 @@ $collapsible-padding-small: 0.5rem;
     min-height: 100vh;
     display: flex;
     align-items: center;
+
+    .no-gutters {
+      margin-right: 0;
+      margin-left: 0;
+    
+      > [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
 
     h1 {
       color: white;

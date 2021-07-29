@@ -142,7 +142,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>2. Select a reconstruction</div>
                 <div className={selectorStyle.body}>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', marginBottom: '1rem' }}>
+                  <div className={selectorStyle.topFrameComponent}>
                     <List
                       block
                       list={mtypes}
@@ -152,7 +152,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                       onSelect={setMtype}
                     />
                   </div>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem' }}>
+                  <div className={selectorStyle.bottomFrameComponent}>
                     <List
                       block
                       list={instances}

@@ -230,7 +230,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
               <div className={selectorStyle.column}>
                 <div className={selectorStyle.head}>3. Select an ME-model</div>
                 <div className={selectorStyle.body}>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem', margin: '1rem 1rem 1rem 0' }}>
+                  <div className={selectorStyle.topFrameComponent}>
                     <Row className="w-100">
                       <Col xs={24} sm={12}>
                         <List
@@ -254,7 +254,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                       </Col>
                     </Row>
                   </div>
-                  <div style={{ backgroundColor: 'rgb(49, 50, 84)', padding: '1rem 1rem 1rem 2rem', margin: '1rem 0 1rem 0' }}>
+                  <div className={selectorStyle.bottomFrameComponent}>
                     <List
                       title="ME-model"
                       block
