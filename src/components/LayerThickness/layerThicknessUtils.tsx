@@ -4,6 +4,7 @@ import { Layer } from '../../types';
 import NexusImage from '../NexusImage';
 import { sscx } from '../../config';
 import SliceRow from './SliceRow';
+import NumberFormat from '../NumberFormat';
 
 
 const getLayerMatch = (layer) => (layer.match(/(\d+)/)[0].split(''));
@@ -25,7 +26,7 @@ const getLayerThicknesses = (sliceCollection, rawLayerThicknesses, layer) => (
       n: rawLayerThickness.series.find((s: any) => s.statistic === 'N')?.value,
     }))
   // sort by layer
-    .sort((a, b) => a.layer < b.layer ? -1 : 1)
+    .sort((a, b) => (a.layer < b.layer ? -1 : 1))
 );
 
 
@@ -57,10 +58,22 @@ export const getData = (layer: Layer, data?: ElasticSearchViewQueryResponse<any>
           </div>
         )),
         layerThicknesses: <SliceRow layerThicknesses={layerThicknesses} />,
+        n: (
+          <td className="no-border">
+            {layerThicknesses.map(layerThickness => (
+              <div key={layerThickness.layer}>
+                <span className="text-nowrap">
+                  <NumberFormat value={layerThickness.n} />
+                </span>
+                <br />
+              </div>
+            ))}
+          </td>
+        ),
       });
     })
     // sort by species name
-    .sort((a, b) => a.name < b.name ? -1 : 1);
+    .sort((a, b) => (a.name < b.name ? -1 : 1));
 
   const unit = rawLayerThicknesses[0]?.series[0]?.unitCode;
   return ({ unit, sliceCollections });
