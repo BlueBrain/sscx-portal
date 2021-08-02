@@ -12,6 +12,7 @@ import Factsheet from '../../components/Factsheet';
 import { color, sectionTitle } from './config';
 import Collapsible from '../../components/Collapsible';
 import Synaptome from '../../components/Synaptome';
+import MtypeLegend from '../../components/MtypeLegend';
 
 import ImageViewer from '../../components/ImageViewer';
 import SimulationSection from '../../components/SimulationSection';
@@ -148,6 +149,8 @@ const RecSynPathwaysView = () => (
             region={subregion}
             pathway={pathway}
           />
+
+          <MtypeLegend className="mt-3" />
         </Collapsible>
 
         <SimulationSection />
