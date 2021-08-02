@@ -33,6 +33,7 @@ type MicrocircuitLayerSelectorProps = {
   value?: Layer;
   onSelect?: (layer: Layer) => void;
   maxWidth?: string;
+  disabled?: boolean;
 };
 
 const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
@@ -40,8 +41,13 @@ const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
   value: currentLayer,
   onSelect = () => {},
   maxWidth,
+  disabled,
 }) => {
-  const selectLayer = layer => onSelect(layer);
+  const selectLayer = layer => {
+    if (!disabled) {
+      onSelect(layer);
+    }
+  };
 
   const isLayerSelected = (layer: string) => layer === currentLayer;
 
@@ -65,7 +71,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
         {Object.entries(layerSvgContent).map(([layer, svgContent]) => (
           <g
             key={layer}
-            className={`${style.layer} ${isLayerSelected(layer) ? style.selected : ''}`}
+            className={`${style.layer} ${disabled ? style.disabled : ''} ${isLayerSelected(layer) ? style.selected : ''}`}
             onClick={() => selectLayer(layer)}
           >
             {svgContent}

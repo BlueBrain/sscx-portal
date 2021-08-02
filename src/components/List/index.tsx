@@ -13,6 +13,8 @@ type ListProps = {
   onSelect?: (s: string) => void;
   color?: Color;
   block?: boolean;
+  disabled?: boolean;
+  size?: 'small' | 'large';
 };
 
 const List: React.FC<ListProps> = ({
@@ -22,6 +24,8 @@ const List: React.FC<ListProps> = ({
   onSelect = () => {},
   color,
   block = false,
+  disabled = false,
+  size = 'small',
 }) => {
   const [skipScrollIntoView, setSkipScrollIntoView] = useState(false);
   const listContainerRef = useRef<HTMLDivElement>(null);
@@ -29,9 +33,11 @@ const List: React.FC<ListProps> = ({
   const id = title ? title.replace(/\s/g, '') : 'no_title';
 
   const handleSelect = (selectedValue) => {
-    setSkipScrollIntoView(true);
-    onSelect(selectedValue);
-  }
+    if (!disabled) {
+      setSkipScrollIntoView(true);
+      onSelect(selectedValue);
+    }
+  };
 
   useEffect(() => {
     if (!listContainerRef || !listContainerRef.current) return;
@@ -59,21 +65,23 @@ const List: React.FC<ListProps> = ({
       aria-labelledby={`${classPrefixList}${id}`}
     >
       {title && <p>{title} ({list.length})</p>}
-      <div className="elements" ref={listContainerRef}>
+      <div className={`elements ${size}`} ref={listContainerRef}>
         {list.map(element => {
           const selected = value === element;
 
-          return <div
-            key={element}
-            role="radio"
-            aria-checked={selected}
-            tabIndex={0}
-            className={`${classPrefixListElement}basis ${selected ? 'selected' : ''}`}
-            onClick={() => handleSelect(element)}
-            title={element}
-          >
-            {element}
-          </div>
+          return (
+            <div
+              key={element}
+              role="radio"
+              aria-checked={selected}
+              tabIndex={0}
+              className={`${classPrefixListElement}basis ${disabled ? 'disabled' : ''}${selected ? 'selected' : ''}`}
+              onClick={() => handleSelect(element)}
+              title={element}
+            >
+              {element}
+            </div>
+          );
         })}
       </div>
     </div>
