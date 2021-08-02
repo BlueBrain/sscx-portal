@@ -32,7 +32,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Home</span>
         </a>
       </Link>
-      <Link href="#">
+      <Link href="/glossary">
         <a>
           <img
             src={`${basePath}/assets/images/icons/globe.svg`}
@@ -41,7 +41,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Glossary</span>
         </a>
       </Link>
-      <Link href="#">
+      <Link href="/contact">
         <a>
           <img
             src={`${basePath}/assets/images/icons/mail-alt.svg`}
