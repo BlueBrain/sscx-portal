@@ -64,7 +64,7 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
-                  // thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
+                  thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
                   src={expMorphPopulationPlotPath(mtype, plotName)}
                   aspectRatio="4 / 3"
                 />
@@ -86,7 +86,7 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
-                  // thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
+                  thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
                   src={expMorphPopulationPlotPath(mtype, plotName)}
                   aspectRatio="4 / 3"
                 />
@@ -106,7 +106,7 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
-                  // thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
+                  thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
                   src={expMorphPopulationPlotPath(mtype, plotName)}
                   aspectRatio="4 / 3"
                 />
