@@ -145,7 +145,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
           <Col
             xs={24}
             xl={8}
-            xxl={12}
+            xxl={10}
           >
             <Title
               primaryColor={color}
@@ -166,7 +166,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             className={`set-accent-color--${color} mt-2`}
             xs={24}
             xl={16}
-            xxl={12}
+            xxl={14}
           >
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
@@ -181,13 +181,13 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                 </div>
               </div>
             </div>
-            <div className={selectorStyle.head}>2. Select a prelayers and M-types</div>
+            <div className={`${selectorStyle.head} ${selectorStyle.fullHeader}`}>2. Select a prelayers and M-types</div>
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '1rem 4rem' }}>
                   <LayerSelector
                     color={color}
-                    maxWidth="14rem"
+                    maxWidth="11rem"
                     value={currentPreLayer}
                     onSelect={setPreLayerQuery}
                   />
@@ -210,14 +210,14 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
               </div>
 
             </div>
-            <div className={selectorStyle.head}>3. Select a postsynaptic layers and M-types</div>
+            <div className={`${selectorStyle.head} ${selectorStyle.fullHeader}`}>3. Select a postsynaptic layers and M-types</div>
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '1rem 4rem' }}>
                   <LayerSelector
                     color="orange"
                     disabled={!currentPreLayer || !currentPreType}
-                    maxWidth="14rem"
+                    maxWidth="11rem"
                     onSelect={setPostLayerQuery}
                     value={currentPostLayer}
                   />
