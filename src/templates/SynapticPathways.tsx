@@ -189,7 +189,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '1rem 4rem' }}>
                   <LayerSelector
                     color={color}
-                    maxWidth="11rem"
+                    size="small"
                     value={currentPreLayer}
                     onSelect={setPreLayerQuery}
                   />
@@ -203,7 +203,6 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                       color={color}
                       list={preMTypes}
                       onSelect={setPreTypeQuery as (s: string) => void}
-                      size="large"
                       title="m-type pre-synaptic"
                       value={currentPreType}
                     />
@@ -219,9 +218,9 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                   <LayerSelector
                     color="orange"
                     disabled={!currentPreLayer || !currentPreType}
-                    maxWidth="11rem"
                     onSelect={setPostLayerQuery}
                     value={currentPostLayer}
+                    size="small"
                   />
                 </div>
               </div>
@@ -234,7 +233,6 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                       disabled={!currentPreType}
                       list={postMTypes}
                       onSelect={setPostTypeQuery as (s: string) => void}
-                      size="large"
                       title="m-type post-synaptic"
                       value={currentPostType}
                     />

@@ -14,7 +14,6 @@ type ListProps = {
   color?: Color;
   block?: boolean;
   disabled?: boolean;
-  size?: 'small' | 'large';
 };
 
 const List: React.FC<ListProps> = ({
@@ -25,7 +24,6 @@ const List: React.FC<ListProps> = ({
   color,
   block = false,
   disabled = false,
-  size = 'small',
 }) => {
   const [skipScrollIntoView, setSkipScrollIntoView] = useState(false);
   const listContainerRef = useRef<HTMLDivElement>(null);
@@ -65,7 +63,7 @@ const List: React.FC<ListProps> = ({
       aria-labelledby={`${classPrefixList}${id}`}
     >
       {title && <p>{title} ({list.length})</p>}
-      <div className={`elements ${size}`} ref={listContainerRef}>
+      <div className="elements" ref={listContainerRef}>
         {list.map(element => {
           const selected = value === element;
 

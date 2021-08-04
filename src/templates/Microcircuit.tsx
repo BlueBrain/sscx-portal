@@ -6,9 +6,9 @@ import Filters from '../layouts/Filters';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import LayerSelector from '../components/MicrocircuitLayerSelector';
-import { Layer, Color } from '../types';
+import { Layer, Color, Subregion } from '../types';
 import Pills from '../components/Pills';
-import { Subregion } from '../types';
+
 import { subregionTitle, subregions, defaultSelection } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
@@ -46,13 +46,13 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
       layer: currentLayer,
       brain_region: region,
     });
-  }
+  };
   const setLayer = (layer: Layer) => {
     setQuery({
       layer,
       brain_region: currentRegion,
     });
-  }
+  };
 
   const layerNums = currentLayer
     ? currentLayer
@@ -67,7 +67,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
         <Row
           className="w-100"
           align="bottom"
-          gutter={[0,20]}
+          gutter={[0, 20]}
         >
           <Col
             xs={24}
@@ -116,7 +116,6 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}
-                    maxWidth="14rem"
                     value={currentLayer}
                     onSelect={setLayer}
                   />

@@ -32,7 +32,7 @@ type MicrocircuitLayerSelectorProps = {
   color: string;
   value?: Layer;
   onSelect?: (layer: Layer) => void;
-  maxWidth?: string;
+  size?: 'small'|'large';
   disabled?: boolean;
 };
 
@@ -40,7 +40,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
   color,
   value: currentLayer,
   onSelect = () => {},
-  maxWidth,
+  size = 'large',
   disabled,
 }) => {
   const selectLayer = layer => {
@@ -53,8 +53,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
 
   return (
     <svg
-      className={`${style.svg} set-accent-color--${color}`}
-      style={{ maxWidth }}
+      className={`${style.svg} ${style[size]} set-accent-color--${color}`}
       enableBackground="new 0 0 155 245"
       width="100%"
       viewBox="0 0 155 245"

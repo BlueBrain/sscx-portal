@@ -1013,8 +1013,7 @@ $collapsible-padding-small: 0.5rem;
 
 // List
 .list__basis {
-  $small-height: 148px;
-  $large-height: 190px;
+  $height: 148px;
   $width: 250px;
   $padding: 10px 10px 10px 20px;
 
@@ -1042,12 +1041,8 @@ $collapsible-padding-small: 0.5rem;
     overflow-y: scroll;
     position: relative;
 
-    &.small {
-      height: $small-height;
-    }
-    &.large {
-      height: $large-height;
-    }
+    height: $height;
+
   }
 
   ::-webkit-scrollbar-track {

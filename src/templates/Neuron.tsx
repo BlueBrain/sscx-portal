@@ -221,7 +221,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}
-                    maxWidth="14rem"
                     value={currentLayer}
                     onSelect={setLayer}
                   />
