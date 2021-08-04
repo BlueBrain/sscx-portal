@@ -3,7 +3,7 @@ import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
-import { Layer } from '../../types'
+import { Layer } from '../../types';
 
 // import './style.scss';
 
@@ -16,7 +16,7 @@ export type LayerThicknessProps = {
   className?: string;
 };
 
-const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], className='' }) => {
+const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], className = '' }) => {
   const entities = data.map(document => document._source);
 
   // @ts-ignore
@@ -38,7 +38,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
 
   const unit = neuralDensities.length
     ? neuralDensities[0].unit
-    : ''
+    : '';
 
   return (
     <ErrorBoundary>
@@ -48,7 +48,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
             <tr>
               <th>Layer</th>
               <th colSpan={2}>Neuron density, {unit} (mean ± std)</th>
-              <th >N</th>
+              <th className="narrowColumn">No. of measurements</th>
             </tr>
           </thead>
           <tbody>

@@ -22,7 +22,6 @@ const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
 const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
-  id = '',
   className = '',
 }) => {
   const tableData = {};
@@ -67,8 +66,9 @@ const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
       ),
     },
     {
-      title: 'N',
+      title: 'No. of measurements',
       key: 'n',
+      className: 'narrowColumn',
       render: row => <NumberFormat value={row.n} />,
     },
   ];
