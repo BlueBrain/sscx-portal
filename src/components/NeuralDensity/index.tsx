@@ -4,8 +4,8 @@ import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
 import { Layer } from '../../types'
-
-// import './style.scss';
+import { downloadAsJson } from '../../utils';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
 
 const classPrefix = 'neural-density__';
 
@@ -61,6 +61,13 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
             ))}
           </tbody>
         </table>
+        <div className="text-right mt-2">
+          <HttpDownloadButton
+            onClick={() => downloadAsJson(rawNeuralDensities, `${layer}-neuron-density-factsheet.json`)}
+          >
+            factsheet
+          </HttpDownloadButton>
+        </div>
       </div>
     </ErrorBoundary>
   );

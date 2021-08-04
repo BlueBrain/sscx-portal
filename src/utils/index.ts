@@ -1,4 +1,5 @@
 import { staticDataBaseUrl, staticDataClusterBaseUrl, basePath } from '../config';
+import { saveAs } from 'file-saver';
 
 
 interface ParsedNexusUrl {
@@ -89,4 +90,10 @@ export function imgOpt(url: string, params?: OptImgUrlParams) {
     : url;
 
   return `${basePath}/_next/image/?url=${encodeURIComponent(imgUrl)}&w=${width}&q=${quality}`;
+};
+
+
+export function downloadAsJson(data, name) {
+  const dataBlob = new Blob([JSON.stringify(data)]);
+  saveAs(dataBlob, name);
 };
