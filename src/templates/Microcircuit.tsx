@@ -98,7 +98,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
           >
             <div className={selectorStyle.row} style={{ maxWidth: '32rem' }}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>1. Choose a subregion</div>
+                <div className={selectorStyle.head}>1. Select a subregion</div>
                 <div className={selectorStyle.body} style={{ padding: '1rem 2rem' }}>
                   <Pills
                     list={subregions}
@@ -112,7 +112,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
             </div>
             <div className={selectorStyle.row} style={{ maxWidth: '32rem' }}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>2. Choose a layer</div>
+                <div className={selectorStyle.head}>2. Select a layer</div>
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}

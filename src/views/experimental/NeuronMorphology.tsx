@@ -131,7 +131,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           >
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>1. Choose a layer</div>
+                <div className={selectorStyle.head}>1. Select a layer</div>
                 <div className={selectorStyle.body} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}

@@ -211,7 +211,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           >
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>1. Choose a subregion</div>
+                <div className={selectorStyle.head}>1. Select a subregion</div>
                 <div className={selectorStyle.body} style={{ padding: '0 0.5rem 1rem 0.5rem' }}>
                   <Pills
                     list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
@@ -224,7 +224,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             </div>
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>2. Choose a layer</div>
+                <div className={selectorStyle.head}>2. Select a layer</div>
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}

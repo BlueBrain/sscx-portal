@@ -172,7 +172,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
           >
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>1. Choose a subregion</div>
+                <div className={selectorStyle.head}>1. Select a subregion</div>
                 <div className={selectorStyle.body} style={{ padding: '0 0.5rem 0.5rem 0.5rem' }}>
                   <Pills
                     list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
@@ -183,7 +183,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                 </div>
               </div>
             </div>
-            <div className={`${selectorStyle.head} ${selectorStyle.fullHeader}`}>2. Select a prelayers and M-types</div>
+            <div className={`${selectorStyle.head} ${selectorStyle.fullHeader}`}>2. Select a pre-synaptic layer and M-type</div>
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '1rem 4rem' }}>
@@ -203,7 +203,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                       color={color}
                       list={preMTypes}
                       onSelect={setPreTypeQuery as (s: string) => void}
-                      title="m-type pre-synaptic"
+                      title="M-type pre-synaptic"
                       value={currentPreType}
                     />
                   </div>
@@ -211,7 +211,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
               </div>
 
             </div>
-            <div className={`${selectorStyle.head} ${selectorStyle.fullHeader}`}>3. Select a postsynaptic layers and M-types</div>
+            <div className={`${selectorStyle.head} ${selectorStyle.fullHeader}`}>3. Select a post-synaptic layer and M-type</div>
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '1rem 4rem' }}>
@@ -233,7 +233,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                       disabled={!currentPreType}
                       list={postMTypes}
                       onSelect={setPostTypeQuery as (s: string) => void}
-                      title="m-type post-synaptic"
+                      title="M-type post-synaptic"
                       value={currentPostType}
                     />
                   </div>
