@@ -75,14 +75,14 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
 
   const columns = [
     { dataIndex: 'layer' as keyof SummaryData, title: 'Layer' },
-    { title: <>Layer thickness</>,
+    { title: 'Layer thickness',
       children: [
-        { dataIndex: 'thickness' as keyof SummaryData, title: <> mean*, {thicknessUnit} </> },
+        { dataIndex: 'thickness' as keyof SummaryData, title: <> Mean*, {thicknessUnit} </> },
         { dataIndex: 'thicknessN' as keyof SummaryData, title: 'No. of measurements', className: 'narrowColumn' },
       ] },
     { title: 'Neuron density',
       children: [
-        { dataIndex: 'density' as keyof SummaryData, title: <>mean ± std, {densityUnit}</> },
+        { dataIndex: 'density' as keyof SummaryData, title: <>Mean ± std, {densityUnit}</> },
         { dataIndex: 'densityN' as keyof SummaryData, title: 'No. of measurements', className: 'narrowColumn' },
       ] },
 
