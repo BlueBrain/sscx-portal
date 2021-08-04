@@ -14,6 +14,7 @@ import List from '../components/List';
 import { pathwayIndexPath } from '../queries/http';
 
 import selectorStyle from '../styles/selector.module.scss';
+import { StickyContainer } from '../components/StickyContainer';
 
 
 export type SynapticPathwaysTemplateProps = {
@@ -139,7 +140,6 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
       <Filters primaryColor={color} hasData={!!hasData}>
         <Row
           className="w-100"
-          align="bottom"
           gutter={[0, 20]}
         >
           <Col
@@ -147,23 +147,25 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             xl={8}
             xxl={10}
           >
-            <Title
-              primaryColor={color}
-              title="Synaptic Pathways"
-              subtitle={sectionTitle}
-            />
-            <div>
-              <InfoBox>
-                <p>
-                  A synaptic pathway encompasses the set of all possible connections between pairs of neurons
-                  of pre and postsynaptic  morphological types (m-types).
-                </p>
-              </InfoBox>
-            </div>
+            <StickyContainer>
+              <Title
+                primaryColor={color}
+                title="Synaptic Pathways"
+                subtitle={sectionTitle}
+              />
+              <div>
+                <InfoBox>
+                  <p>
+                    A synaptic pathway encompasses the set of all possible connections between pairs of neurons
+                    of pre and postsynaptic  morphological types (m-types).
+                  </p>
+                </InfoBox>
+              </div>
+            </StickyContainer>
           </Col>
 
           <Col
-            className={`set-accent-color--${color} mt-2`}
+            className={`set-accent-color--${color} mt-2 mb-2`}
             xs={24}
             xl={16}
             xxl={14}
