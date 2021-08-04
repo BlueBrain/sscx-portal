@@ -67,8 +67,7 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
       thicknessEntityDescription: thicknessEntity.description,
       thickness: <NumberFormat value={thicknessMean} />,
       thicknessN: <NumberFormat value={thicknessN} />,
-      densityMean: <NumberFormat value={densityMean} />,
-      densityStd: <NumberFormat value={densityStd} prefix="± " />,
+      density: <><NumberFormat value={densityMean} /> &nbsp; <NumberFormat value={densityStd} prefix="± " /></>,
       densityN: <NumberFormat value={densityN} />,
       isHighlight,
     };
@@ -76,11 +75,17 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
 
   const columns = [
     { dataIndex: 'layer' as keyof SummaryData, title: 'Layer' },
-    { dataIndex: 'thickness' as keyof SummaryData, title: <>Layer thickness, {thicknessUnit} (mean)*</> },
-    { dataIndex: 'thicknessN' as keyof SummaryData, title: 'N' },
-    { dataIndex: 'densityMean' as keyof SummaryData, title: <>Neuron density, {densityUnit} (mean ± std)</>, colSpan: 2 },
-    { dataIndex: 'densityStd' as keyof SummaryData, colSpan: 0 },
-    { dataIndex: 'densityN' as keyof SummaryData, title: 'N' },
+    { title: <>Layer thickness</>,
+      children: [
+        { dataIndex: 'thickness' as keyof SummaryData, title: <> mean*, {thicknessUnit} </> },
+        { dataIndex: 'thicknessN' as keyof SummaryData, title: 'No. of measurements', className: 'narrowColumn' },
+      ] },
+    { title: 'Neuron density',
+      children: [
+        { dataIndex: 'density' as keyof SummaryData, title: <>mean ± std, {densityUnit}</> },
+        { dataIndex: 'densityN' as keyof SummaryData, title: 'No. of measurements', className: 'narrowColumn' },
+      ] },
+
   ];
 
   return (
