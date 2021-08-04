@@ -4,9 +4,11 @@ import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col } from 'antd';
 
 import ESData from '../../components/ESData';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
 import DataContainer from '../../components/DataContainer';
 import ImageViewer from '../../components/ImageViewer';
 import NexusPlugin from '../../components/NexusPlugin';
+import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { fullElectroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
 import { expTracePopulationFactsheetPath, expTraceFactsheetPath } from '../../queries/http';
 import Filters from '../../layouts/Filters';
@@ -21,6 +23,7 @@ import ExpEphysDistribution from '../../components/ExpEphysDistribution';
 import Metadata from '../../components/Metadata';
 import eTypes from '../../__generated__/experimentalData.json';
 import { defaultSelection } from '../../constants';
+import { sscx } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
 import HttpData from '../../components/HttpData';
@@ -57,6 +60,10 @@ const NeuronElectrophysiology: React.FC = () => {
   const currentInstance: string = query.etype_instance as string;
   const etypeData = eTypes.find(etype => etype.label === currentEtype);
   const instances = etypeData ? etypeData.experiments.map(e => e.label) : [];
+
+  const getEphysDistribution = (resource: any) => Array.isArray(resource.distribution)
+    ? resource.distribution.find((d: any) => d.name.match(/\.nwb$/i))
+    : resource.distribution;
 
   const getAndSortTraces = (esDocuments) => esDocuments
     .map(esDocument => esDocument._source)
@@ -156,8 +163,18 @@ const NeuronElectrophysiology: React.FC = () => {
                   <>
                     <Metadata nexusDocument={esDocuments[0]._source} />
                     <h3 className="mt-3">Patch clamp recording</h3>
+                    <div className="text-right mt-2">
+                      <NexusFileDownloadButton
+                        filename={getEphysDistribution(esDocuments[0]._source).name}
+                        url={getEphysDistribution(esDocuments[0]._source).contentUrl}
+                        org={sscx.org}
+                        project={sscx.project}
+                        id="ephysDownloadBtn"
+                      >
+                        trace
+                      </NexusFileDownloadButton>
+                    </div>
                     <NexusPlugin
-                      className="mt-2"
                       name="neuron-electrophysiology"
                       resource={esDocuments[0]._source}
                       nexusClient={nexus}
@@ -173,6 +190,14 @@ const NeuronElectrophysiology: React.FC = () => {
               <div className="mt-4">
                 <h3>Electrical features</h3>
                 <ExpTraceFactsheet className="mt-2" data={factsheetData} />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={expTraceFactsheetPath(currentInstance)}
+                    download={`exp-trace-factsheet-${currentInstance}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
               </div>
             )}
           </HttpData>
@@ -194,7 +219,17 @@ const NeuronElectrophysiology: React.FC = () => {
           <h3>Factsheet</h3>
           <HttpData path={expTracePopulationFactsheetPath(currentEtype)}>
             {factsheetData => (
-              <ExpTraceFactsheet data={factsheetData} />
+              <div>
+                <ExpTraceFactsheet data={factsheetData} />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={expTracePopulationFactsheetPath(currentEtype)}
+                    download={`exp-trace-population-factsheet-${currentEtype}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
+              </div>
             )}
           </HttpData>
 

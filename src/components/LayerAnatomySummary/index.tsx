@@ -2,10 +2,11 @@ import React, { ReactNode } from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import ErrorBoundary from '../ErrorBoundary';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
+import { downloadAsJson } from '../../utils';
 import NumberFormat from '../NumberFormat';
 import ResponsiveTable from '../ResponsiveTable';
 
-// import './style.scss';
 
 const classPrefix = 'layer-anatomy-summary__';
 
@@ -22,7 +23,9 @@ type SummaryData = {
   thicknessN: ReactNode,
   densityMean: ReactNode,
   densityStd: ReactNode,
-  densityN: ReactNode
+  densityN: ReactNode,
+  rawThickness: any,
+  rawDensity: any,
 }
 
 const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], highlightLayer = '' }) => {
@@ -70,9 +73,13 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
       densityMean: <NumberFormat value={densityMean} />,
       densityStd: <NumberFormat value={densityStd} prefix="± " />,
       densityN: <NumberFormat value={densityN} prefix="n=" />,
+      rawThickness: thicknessEntity,
+      rawDensity: densityEntity,
       isHighlight,
     };
   });
+
+  const factsheetData = summary.flatMap(summaryData => ([summaryData.rawDensity, summaryData.rawThickness]));
 
   const columns = [
     { dataIndex: 'layer' as keyof SummaryData, title: 'Layer' },
@@ -91,6 +98,14 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
           <small className="ant-typography ant-typography-secondary">
             * {summary[0]?.thicknessEntityDescription}
           </small>
+
+          <div className="text-right mt-2">
+            <HttpDownloadButton
+              onClick={() => downloadAsJson(factsheetData, 'experimental-layer-anatomy-factsheet.json')}
+            >
+              factsheet
+            </HttpDownloadButton>
+          </div>
         </div>
       )}
     </ErrorBoundary>

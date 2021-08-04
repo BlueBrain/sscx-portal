@@ -5,6 +5,7 @@ import { Row, Col } from 'antd';
 
 import ESData from '../../components/ESData';
 import HttpData from '../../components/HttpData';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
 import DataContainer from '../../components/DataContainer';
 import LayerSelector from '../../components/AnatomyLayerSelector';
 import ExpMorphDistribution from '../../components/ExpMorphDistribution';
@@ -204,7 +205,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                         project={sscx.project}
                         id="morphologyDownloadBtn"
                       >
-                        Download morphology
+                        morphology
                       </NexusFileDownloadButton>
                     </div>
                   </div>
@@ -218,6 +219,14 @@ const NeuronExperimentalMorphology: React.FC = () => {
               <div className="mt-3">
                 <h3>Morphometrics</h3>
                 <Factsheet id="morphometrics" className="mt-2" facts={factsheetData[0].values} />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={expMorphologyFactsheetPath(currentInstance)}
+                    download={`exp-morphology-factsheet-${currentInstance}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
               </div>
             )}
           </HttpData>
@@ -236,10 +245,20 @@ const NeuronExperimentalMorphology: React.FC = () => {
           id="mtypeSection"
           title={`Population ${currentMtype}`}
         >
-          <h3>Factsheet</h3>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
             {factsheetData => (
-              <Factsheet facts={factsheetData.values} />
+              <div>
+                <h3>Factsheet</h3>
+                <Factsheet facts={factsheetData.values} />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={expMorphPopulationFactesheetPath(currentMtype)}
+                    download={`exp-morphology-population-factsheet-${currentMtype}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
+              </div>
             )}
           </HttpData>
 

@@ -95,9 +95,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
             org={sscx.org}
             project={sscx.project}
             animate={false}
-          >
-            <DownloadOutlined />
-          </NexusFileDownloadButton>
+          />
         );
       },
       responsive: ['sm'],

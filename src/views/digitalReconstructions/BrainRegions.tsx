@@ -3,6 +3,7 @@ import { Table } from 'antd';
 
 import BrainRegionTemplate from '../../templates/BrainRegions';
 import DataContainer from '../../components/DataContainer';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
 import Factsheet from '../../components/Factsheet';
 import HttpData from '../../components/HttpData';
 import { color, sectionTitle } from './config';
@@ -39,7 +40,15 @@ const BrainRegionsView = () => (
           <HttpData path={subregionCircuitFactsheetPath(subregion)}>
             {data => (
               <>
-                {data && <Factsheet id="subregionCircuitFactsheet" facts={data[0].values} />}
+                <Factsheet id="subregionCircuitFactsheet" facts={data[0].values} />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={subregionCircuitFactsheetPath(subregion)}
+                    download={`subregion-circuit-factsheet-${subregion}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
               </>
             )}
           </HttpData>
@@ -65,16 +74,20 @@ const BrainRegionsView = () => (
           <HttpData path={regionCircuitFactsheetPath()}>
             {data => (
               <>
-                {data && (
-                  <>
-                    <h3>Factsheet</h3>
-                    <Factsheet
-                      id="regionCircuitFactsheet"
-                      className="mt-2"
-                      facts={data[0].values}
-                    />
-                  </>
-                )}
+                <h3>Factsheet</h3>
+                <Factsheet
+                  id="regionCircuitFactsheet"
+                  className="mt-2"
+                  facts={data[0].values}
+                />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={regionCircuitFactsheetPath()}
+                    download={`region-circuit-factsheet.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
               </>
             )}
           </HttpData>

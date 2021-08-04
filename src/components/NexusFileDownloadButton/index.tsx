@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNexusContext } from '@bbp/react-nexus';
 import { saveAs } from 'file-saver';
 import { Button } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
 
 import { parseUrl } from '../../utils';
 
@@ -12,7 +13,8 @@ export type NexusFileDownloadButtonProps = {
   url: string;
   org?: string;
   project?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  icon?: React.ReactNode;
   id?: string;
   className?: string;
   animate?: boolean;
@@ -24,6 +26,7 @@ const NexusFileDownloadButton: React.FC<NexusFileDownloadButtonProps> = ({
   org,
   project,
   children,
+  icon = <DownloadOutlined />,
   className = '',
   id = '',
   animate = true,
@@ -49,6 +52,7 @@ const NexusFileDownloadButton: React.FC<NexusFileDownloadButtonProps> = ({
       className={className}
       type="primary"
       size="small"
+      icon={icon}
       onClick={download}
       loading={animate && loading}
       disabled={loading}
