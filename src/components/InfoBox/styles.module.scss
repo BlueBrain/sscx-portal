@@ -1,7 +1,6 @@
 
 .containerOuter {
-  display: inline-block;
-  position: relative;
+  display: flex;
 }
 
 .containerInner {
@@ -10,6 +9,7 @@
   overflow-y: scroll;
   background-color: #313254;
   padding: 30px;
+  position: relative;
 
   h1,h2,h3 {
     color: white;

@@ -9,6 +9,12 @@ type ExpMorphDistributionProps = {
   className?: string;
 };
 
+type PlotObj = {
+  name: string;
+  src: string;
+  thumbnailSrc?: string;
+};
+
 const neuriteTypeByName = (plot) => {
   if (plot.includes('axon')) return 'axon';
 
@@ -19,17 +25,28 @@ const neuriteTypeByName = (plot) => {
   if (plot.includes('soma')) return 'soma';
 };
 
+const thumbnailSrcSuffix = '__w640';
+
 const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, className = '' }) => {
   const [plotList, setPlotList] = useState<string[]>([]);
 
-  const plots: Record<string, string[]> = {};
+  const plots: Record<string, PlotObj[]> = {};
   plotList.sort().forEach(plotName => {
     const neuriteType = neuriteTypeByName(plotName);
 
+    const src = expMorphPopulationPlotPath(mtype, plotName);
+    const thumbnailSrc = src.replace('.png', `${thumbnailSrcSuffix}.png`);
+
+    const plotObj = {
+      name: plotName,
+      src,
+      thumbnailSrc,
+    };
+
     if (!plots[neuriteType]) {
-      plots[neuriteType] = [plotName];
+      plots[neuriteType] = [plotObj];
     } else {
-      plots[neuriteType].push(plotName);
+      plots[neuriteType].push(plotObj);
     }
   });
 
@@ -58,14 +75,14 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
         <>
           <h4>Axonal distributions</h4>
           <div className="row">
-            {plots.axon.map(plotName => (
+            {plots.axon.map(plotObj => (
               <div
-                key={plotName}
+                key={plotObj.name}
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
-                  // thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
-                  src={expMorphPopulationPlotPath(mtype, plotName)}
+                  thumbnailSrc={plotObj.thumbnailSrc}
+                  src={plotObj.src}
                   aspectRatio="4 / 3"
                 />
               </div>
@@ -80,14 +97,14 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
             {dendriteDistributionLabel(dendriteType)} distributions
           </h4>
           <div className="row mb-3">
-            {plots[dendriteType].map(plotName => (
+            {plots[dendriteType].map(plotObj => (
               <div
-                key={plotName}
+                key={plotObj.name}
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
-                  // thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
-                  src={expMorphPopulationPlotPath(mtype, plotName)}
+                  thumbnailSrc={plotObj.thumbnailSrc}
+                  src={plotObj.src}
                   aspectRatio="4 / 3"
                 />
               </div>
@@ -100,14 +117,14 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
         <>
           <h4>Somatic distributions</h4>
           <div className="row">
-            {plots.soma.map(plotName => (
+            {plots.soma.map(plotObj => (
               <div
-                key={plotName}
+                key={plotObj.name}
                 className="col-xs-12 col-sm-6 col-md-3"
               >
                 <ImageViewer
-                  // thumbnailSrc={expMorphPopulationPlotPath(mtype, plotName).replace('.png', '__w640.png')}
-                  src={expMorphPopulationPlotPath(mtype, plotName)}
+                  thumbnailSrc={plotObj.thumbnailSrc}
+                  src={plotObj.src}
                   aspectRatio="4 / 3"
                 />
               </div>

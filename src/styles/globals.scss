@@ -1041,9 +1041,12 @@ $collapsible-padding-small: 0.5rem;
 
   .elements {
     margin: 8px 0;
-    height: $height;
+    
     overflow-y: scroll;
     position: relative;
+
+    height: $height;
+
   }
 
   ::-webkit-scrollbar-track {
@@ -1071,7 +1074,9 @@ $collapsible-padding-small: 0.5rem;
     }
 
     .list-element__basis:hover {
-      background-color: rgba(map-get($accentPalette, "yellow"), 50%);
+      &:not(.disabled) {
+        background-color: rgba(map-get($accentPalette, "yellow"), 50%);
+      }
     }
   }
 
@@ -1080,11 +1085,13 @@ $collapsible-padding-small: 0.5rem;
       background: map-get($accentPalette, "blue");
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: lighten(map-get($accentPalette, "yellow"), 10%);
+      background: lighten(map-get($accentPalette, "blue"), 10%);
     }
 
     .list-element__basis:hover {
-      background-color: rgba(map-get($accentPalette, "blue"), 50%);
+      &:not(.disabled) {
+        background-color: rgba(map-get($accentPalette, "blue"), 50%);
+      }
     }
   }
 
@@ -1093,11 +1100,13 @@ $collapsible-padding-small: 0.5rem;
       background: map-get($accentPalette, "lavender");
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: lighten(map-get($accentPalette, "yellow"), 10%);
+      background: lighten(map-get($accentPalette, "lavender"), 10%);
     }
 
     .list-element__basis:hover {
-      background-color: rgba(map-get($accentPalette, "lavender"), 50%);
+      &:not(.disabled) {
+        background-color: rgba(map-get($accentPalette, "lavender"), 50%);
+      }
     }
   }
 
@@ -1106,11 +1115,13 @@ $collapsible-padding-small: 0.5rem;
       background: map-get($accentPalette, "green");
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: lighten(map-get($accentPalette, "yellow"), 10%);
+      background: lighten(map-get($accentPalette, "green"), 10%);
     }
 
     .list-element__basis:hover {
-      background-color: rgba(map-get($accentPalette, "green"), 50%);
+      &:not(.disabled) {
+        background-color: rgba(map-get($accentPalette, "green"), 50%);
+      }
     }
   }
 
@@ -1123,7 +1134,9 @@ $collapsible-padding-small: 0.5rem;
     }
 
     .list-element__basis:hover {
-      background-color: rgba(map-get($accentPalette, "orange"), 50%);
+      &:not(.disabled) {
+        background-color: rgba(map-get($accentPalette, "orange"), 50%);
+      }
     }
   }
 
@@ -1132,11 +1145,13 @@ $collapsible-padding-small: 0.5rem;
       background: map-get($accentPalette, "grey");
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: lighten(map-get($accentPalette, "yellow"), 10%);
+      background: lighten(map-get($accentPalette, "grey"), 10%);
     }
 
     .list-element__basis:hover {
-      background-color: rgba(map-get($accentPalette, "grey"), 50%);
+      &:not(.disabled) {
+        background-color: rgba(map-get($accentPalette, "grey"), 50%);
+      }
     }
   }
 }
@@ -1160,6 +1175,10 @@ $collapsible-padding-small: 0.5rem;
   }
   &:last-child {
     margin-bottom: 0;
+  }
+  &.disabled {
+    cursor: default;
+    background-color: #666767;
   }
   &.selected {
     color: map-get($basePalette, "white");

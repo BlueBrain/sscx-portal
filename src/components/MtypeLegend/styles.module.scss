@@ -1,0 +1,34 @@
+
+.containerMobile {
+  @media (min-width: 30em) {
+    display: none;
+  }
+}
+
+.containerDesktop {
+  display: none;
+
+  @media (min-width: 30em) {
+    display: block;
+  }
+}
+
+.row {
+  padding: 0 0.5rem;
+
+  @media (min-width: 30em) {
+    padding: 0 1rem;
+  }
+
+  &:nth-child(odd) {
+    background-color: #f8f8f8;
+  }
+}
+
+.colorBlock {
+  height: 10px;
+}
+
+.label {
+  font-size: 0.7rem;
+}

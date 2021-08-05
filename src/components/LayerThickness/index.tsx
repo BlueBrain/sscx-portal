@@ -1,6 +1,9 @@
 import React, { ReactNode } from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
+
 import ErrorBoundary from '../ErrorBoundary';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
+import { downloadAsJson } from '../../utils';
 import { Layer } from '../../types';
 import ResponsiveTable from '../ResponsiveTable';
 import { getData } from './layerThicknessUtils';
@@ -22,7 +25,7 @@ type SliceElement = {
 }
 
 const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], className = '' }) => {
-  const { sliceCollections, unit } = getData(layer, data);
+  const { sliceCollections, unit, factsheetData } = getData(layer, data);
 
   const columns = [
     { dataIndex: 'name' as keyof SliceElement, title: 'Animal' },
@@ -39,6 +42,14 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
           data={sliceCollections}
           rowKey={({ name }) => name}
         />
+
+        <div className="text-right mt-2">
+          <HttpDownloadButton
+            onClick={() => downloadAsJson(factsheetData, `${layer}-thickness-factsheet.json`)}
+          >
+            factsheet
+          </HttpDownloadButton>
+        </div>
       </div>
     </ErrorBoundary>
   );

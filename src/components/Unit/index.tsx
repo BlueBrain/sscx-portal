@@ -11,6 +11,7 @@ type UnitProps = {
 
 const replacement = {
   MOhm: 'MΩ',
+  'neurons/mm³': '/mm³',
 };
 
 const Unit: React.FC<UnitProps> = ({ value, addComma }) => {
