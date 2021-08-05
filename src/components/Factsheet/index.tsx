@@ -95,8 +95,7 @@ const FactsheetMapValueEntry: React.FC<{
           <div className="bar" style={{ width: `${barWidthPct}%` }} />
         </div>
         <div className="col-xs-6">
-          <NumberFormat value={value} />
-          <Unit value={{ unit: unitCode, name: fact.name }} addComma />
+          <NumberFormat value={value} /> <Unit value={{ unit: unitCode, name: fact.name }} />
         </div>
       </div>
     );
