@@ -406,7 +406,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <div className="text-right mt-3">
                   <HttpDownloadButton
                     href={mtypeFactsheetPath(currentRegion, currentMtype)}
-                    download={`mtype-factsheet-${currentRegion}-${currentMtype}`}
+                    download={`mtype-factsheet-${currentRegion}-${currentMtype}.json`}
                   >
                     factsheet
                   </HttpDownloadButton>
@@ -434,7 +434,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <div className="text-right mt-3 mb-3">
                   <HttpDownloadButton
                     href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
-                    download={`etype-factsheet-${currentRegion}-${currentMemodel}`}
+                    download={`etype-factsheet-${currentRegion}-${currentMemodel}.json`}
                   >
                     factsheet
                   </HttpDownloadButton>
