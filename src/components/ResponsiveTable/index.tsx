@@ -1,17 +1,20 @@
 import React from 'react';
 import { Table } from 'antd';
-import { ColumnType as AntColumnType, ColumnsType, TableProps } from 'antd/lib/table';
+import { ColumnType as AntColumnType, ColumnGroupType as AntColumnGroupType, ColumnsType, TableProps } from 'antd/lib/table';
 import { Breakpoint } from 'antd/lib/_util/responsiveObserve';
 
 import classes from './styles.module.scss';
 
 interface ColumnType<Type extends object & {isHighlight?: boolean}> extends Omit<AntColumnType<Type>, 'dataIndex'> {
-    dataIndex: keyof Type;
+    dataIndex?: keyof Type;
+}
+interface GroupColumnType<Type extends object & {isHighlight?: boolean}> extends Omit<AntColumnGroupType<Type>, 'dataIndex'> {
+  dataIndex?: keyof Type;
 }
 
 interface ResponsiveTableProps<Type extends object & {isHighlight?: boolean}> extends Omit<TableProps<Type>, 'columns'> {
     data: Type[];
-    columns: ColumnType<Type>[];
+    columns: (ColumnType<Type> | GroupColumnType<Type>)[];
 }
 
 
@@ -27,10 +30,27 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
     title: null,
     dataIndex: null,
     render: (_value, record, index) => {
-      const nestedTableData = columns.map((column) => ({
-        key: column.title,
-        value: record[column.dataIndex],
-      }));
+      const nestedTableData = columns.map((column) => {
+        if (column.dataIndex) {
+          return ({
+            key: column.title,
+            value: record[column.dataIndex],
+          });
+        }
+        const children = (column as GroupColumnType<Type>).children;
+        if (children) {
+          const childrenValue = children.map((child) => (
+            <div>
+              {child.title}: {record[(child as ColumnType<Type>).dataIndex]}
+            </div>
+          ));
+          return ({
+            key: column.title,
+            value: childrenValue,
+          });
+        }
+        return null;
+      });
       const nestedColumns: ColumnType<{key: string; value: string}>[] = [
         {
           dataIndex: 'key',

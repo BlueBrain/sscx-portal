@@ -16,7 +16,7 @@ export type LayerThicknessProps = {
   className?: string;
 };
 
-const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], className='' }) => {
+const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], className = '' }) => {
   const entities = data.map(document => document._source);
 
   // @ts-ignore
@@ -38,7 +38,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
 
   const unit = neuralDensities.length
     ? neuralDensities[0].unit
-    : ''
+    : '';
 
   return (
     <ErrorBoundary>
@@ -47,7 +47,8 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
           <thead>
             <tr>
               <th>Layer</th>
-              <th colSpan={3}>Neuron density, {unit} (mean ± std)</th>
+              <th colSpan={2}>Neuron density, {unit} (mean ± std)</th>
+              <th className="narrowColumn">No. of measurements</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +57,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
                 <td className="text-capitalize">{neuralDensity.layer}</td>
                 <td><NumberFormat value={neuralDensity.mean} /></td>
                 <td><NumberFormat value={neuralDensity.std} prefix="± " /></td>
-                <td><NumberFormat value={neuralDensity.n} prefix="n=" /></td>
+                <td><NumberFormat value={neuralDensity.n} /></td>
               </tr>
             ))}
           </tbody>

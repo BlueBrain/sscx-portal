@@ -21,6 +21,7 @@ type SliceElement = {
   name: string;
   images: ReactNode;
   layerThicknesses: ReactNode;
+  n: ReactNode;
 }
 
 const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], className = '' }) => {
@@ -30,6 +31,7 @@ const LayerThickness: React.FC<LayerThicknessProps> = ({ layer, data = [], class
     { dataIndex: 'name' as keyof SliceElement, title: 'Animal' },
     { dataIndex: 'images' as keyof SliceElement, title: 'Preview' },
     { dataIndex: 'layerThicknesses' as keyof SliceElement, title: <>Layer thickness, {unit} (mean ± std)</> },
+    { dataIndex: 'n' as keyof SliceElement, title: 'No. of measurements', className: 'narrowColumn' },
   ];
 
   return (
