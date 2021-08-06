@@ -4,9 +4,15 @@
 .responsiveTablOdd {
     @media (max-width: $ant-breakpoint-sm) {
         background-color: map-get($basePalette, "grey-1");
-      }   
+    }   
 }
 .responsiveTablEven {
     background-color: map-get($basePalette, "white");
+}
+
+.highlightBackground {
+    @media (min-width: $ant-breakpoint-sm) {
+        background-color: #f3f1f1;
+    } 
 }
 
