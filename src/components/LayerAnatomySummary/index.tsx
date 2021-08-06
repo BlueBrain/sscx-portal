@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import ErrorBoundary from '../ErrorBoundary';
-import HttpDownloadButton from '../../components/HttpDownloadButton';
+import HttpDownloadButton from '../HttpDownloadButton';
 import { downloadAsJson } from '../../utils';
 import NumberFormat from '../NumberFormat';
 import ResponsiveTable from '../ResponsiveTable';
@@ -21,8 +21,7 @@ type SummaryData = {
   thicknessEntityDescription: ReactNode;
   thickness: ReactNode,
   thicknessN: ReactNode,
-  densityMean: ReactNode,
-  densityStd: ReactNode,
+  density: ReactNode,
   densityN: ReactNode,
   rawThickness: any,
   rawDensity: any,
