@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
 import ErrorBoundary from '../ErrorBoundary';
 import NumberFormat from '../NumberFormat';
-import { Layer } from '../../types'
+import { Layer } from '../../types';
 import { downloadAsJson } from '../../utils';
-import HttpDownloadButton from '../../components/HttpDownloadButton';
-
-const classPrefix = 'neural-density__';
+import HttpDownloadButton from '../HttpDownloadButton';
+import ResponsiveTable from '../ResponsiveTable';
 
 
 export type LayerThicknessProps = {
   layer?: Layer;
   data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
-  className?: string;
 };
 
-const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], className = '' }) => {
+interface NeuralDensityData {
+  layer: string,
+  densityN: ReactNode;
+  density: ReactNode;
+}
+
+const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [] }) => {
   const entities = data.map(document => document._source);
+  let densityUnit = '';
 
   // @ts-ignore
   const layerNums = layer.match(/(\d+)/)[0].split('');
@@ -28,26 +33,40 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
     .filter(entity => entity.derivation)
     .filter(entity => layerLabels.includes(entity.brainLocation?.layer?.label));
 
-  const neuralDensities = rawNeuralDensities.map(neuralDensity => ({
-    layer: neuralDensity.brainLocation.layer.label,
-    mean: neuralDensity.series.find((s: any) => s.statistic === 'mean')?.value,
-    unit: neuralDensity.series.find((s: any) => s.statistic === 'mean')?.unitCode,
-    std: neuralDensity.series.find((s: any) => s.statistic === 'standard deviation')?.value,
-    n: neuralDensity.series.find((s: any) => s.statistic === 'N')?.value,
-  }));
+  const neuralDensities = rawNeuralDensities.map(neuralDensity => {
+    densityUnit = neuralDensity.series.find((s: any) => s.statistic === 'mean')?.unitCode;
+    const mean = neuralDensity.series.find((s: any) => s.statistic === 'mean')?.value;
+    const std = neuralDensity.series.find((s: any) => s.statistic === 'standard deviation')?.value;
+    return ({
+      layer: neuralDensity.brainLocation.layer.label,
+      density: <>
+        <NumberFormat value={mean} />
+        &emsp;
+        <NumberFormat value={std} prefix="± " />
+      </>,
+      densityN: neuralDensity.series.find((s: any) => s.statistic === 'N')?.value,
+    });
+  });
 
-  const unit = neuralDensities.length
-    ? neuralDensities[0].unit
-    : '';
+  const columns = [
+    { dataIndex: 'layer' as keyof NeuralDensityData, title: 'Layer' },
+    { title: 'Neuron density',
+      children: [
+        { dataIndex: 'density' as keyof NeuralDensityData, title: <>Mean ± std, {densityUnit}</> },
+        { dataIndex: 'densityN' as keyof NeuralDensityData, title: 'No. of measurements', className: 'narrowColumn' },
+      ],
+    },
+  ];
 
   return (
     <ErrorBoundary>
-      <div id="neuronDensity" className={`${classPrefix}basis ${className}`}>
-        <table>
+      <div id="neuronDensity" className="mt-3">
+        <ResponsiveTable columns={columns} data={neuralDensities} />
+        {/* <table>
           <thead>
             <tr>
               <th>Layer</th>
-              <th colSpan={2}>Neuron density, {unit} (mean ± std)</th>
+              <th colSpan={2}>Neuron density, {densityUnit} (mean ± std)</th>
               <th className="narrowColumn">No. of measurements</th>
             </tr>
           </thead>
@@ -61,7 +80,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [], classN
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
         <div className="text-right mt-2">
           <HttpDownloadButton
             onClick={() => downloadAsJson(rawNeuralDensities, `${layer}-neuron-density-factsheet.json`)}

@@ -29,7 +29,7 @@ const LayerAnatomyView = () => (
               <>
                 <Collapsible id="layerSection" title={`Layer ${layer}`}>
                   <LayerThickness layer={layer} data={data} />
-                  <NeuralDensity layer={layer} data={data} className="mt-3"/>
+                  <NeuralDensity layer={layer} data={data} />
                 </Collapsible>
 
                 <Collapsible id="summarySection" title="Summary" className="mt-4">
