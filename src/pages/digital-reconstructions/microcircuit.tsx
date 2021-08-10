@@ -9,6 +9,10 @@ export default function MicrocircuitPage() {
     <>
       <Head>
         <title>Microcircuit / Digital reconstructions / SSCx Portal</title>
+        <meta
+          name="description"
+          content="A neuronal microcircuit is the smallest functional ecosystem in any brain region that encompasses a diverse morphological and electrical assortment of neurons, and their synaptic interactions."
+        />
       </Head>
 
       <MainLayout>

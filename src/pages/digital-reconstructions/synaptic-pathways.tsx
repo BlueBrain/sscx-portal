@@ -9,6 +9,10 @@ export default function SynapticPathwaysPage() {
     <>
       <Head>
         <title>Synaptic pathways / Digital reconstructions / SSCx Portal</title>
+        <meta
+          name="description"
+          content="A synaptic pathway encompasses the set of all possible connections between pairs of neurons of pre and postsynaptic  morphological types (m-types)."
+        />
       </Head>
 
       <MainLayout>
