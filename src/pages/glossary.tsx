@@ -10,6 +10,10 @@ export default function Glossary() {
     <>
       <Head>
         <title>Glossary / SSCx Portal</title>
+        <meta
+          name="description"
+          content="Terms used in the SSCx portal."
+        />
       </Head>
 
       <MainLayout>

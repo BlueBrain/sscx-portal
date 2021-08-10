@@ -10,6 +10,10 @@ export default function Contact() {
     <>
       <Head>
         <title>Contact / SSCx Portal</title>
+        <meta
+          name="description"
+          content="Let’s stay in touch! For all inquiries, support and collaborations, please email us."
+        />
       </Head>
 
       <MainLayout>
