@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-import GlossaryView from '../views/Glossary';
+import GlossaryView from '../views/glossary/Glossary';
 import MainLayout from '../layouts/MainLayout';
 
 
