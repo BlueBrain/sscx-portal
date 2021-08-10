@@ -1858,6 +1858,10 @@ $collapsible-padding-small: 0.5rem;
     text-decoration: none;
   }
 
+  a, a:hover {
+    color: white;
+  }
+
   .top-links {
     height: 120px;
     display: flex;
