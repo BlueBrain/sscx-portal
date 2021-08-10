@@ -15,6 +15,7 @@ import { pathwayIndexPath } from '../queries/http';
 
 import selectorStyle from '../styles/selector.module.scss';
 import { StickyContainer } from '../components/StickyContainer';
+import { defaultSelection } from '../constants';
 
 
 export type SynapticPathwaysTemplateProps = {
@@ -30,11 +31,9 @@ type PathwayIndex = {
   mtypeIdx: string[],
 }
 
-
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
-
 
 const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   sectionTitle,
@@ -42,37 +41,47 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const query = router.query;
 
   const setParams = (params: Record<string, string>): void => {
-    const query = {
-      ...{
-        brain_region: currentRegion,
-        prelayer: currentPreLayer,
-        postlayer: currentPostLayer,
-        pretype: currentPreType,
-        posttype: currentPostType,
-      },
+    const newQuery = {
+      ...router.query,
       ...params,
     };
-    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
+    router.push({ query: newQuery, pathname: router.pathname }, undefined, { shallow: true });
   };
 
   const [pathwayIndex, setPathwayIndex] = useState<PathwayIndex>(null);
 
-  const currentRegion: Subregion = query.brain_region as Subregion;
-  const currentPreLayer: Layer = query.prelayer as Layer;
-  const currentPostLayer: Layer = query.postlayer as Layer;
-  const currentPreType: string = query.pretype as string;
-  const currentPostType: string = query.posttype as string;
+  useEffect(() => {
+    if (!router.query.brain_region) {
+      const {
+        REGION,
+        PRELAYER,
+        POSTLAYER,
+        PRETYPE,
+        POSTTYPE,
+      } = defaultSelection.digitalReconstruction.synapticPathways;
+      setParams({
+        brain_region: REGION,
+        prelayer: PRELAYER,
+        postlayer: POSTLAYER,
+        pretype: PRETYPE,
+        posttype: POSTTYPE,
+      });
+    }
+  }, []);
+
+  const { brain_region, prelayer, postlayer, pretype, posttype } = router.query;
+
+  const currentRegion: Subregion = brain_region as Subregion;
+  const currentPreLayer: Layer = prelayer as Layer;
+  const currentPostLayer: Layer = postlayer as Layer;
+  const currentPreType: string = pretype as string;
+  const currentPostType: string = posttype as string;
 
   const setRegion = (region: Subregion) => {
     setParams({
       'brain_region': region,
-      prelayer: null,
-      postlayer: null,
-      pretype: null,
-      posttype: null,
     });
   };
 
