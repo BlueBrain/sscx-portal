@@ -58,5 +58,12 @@ export const defaultSelection = {
       MTYPE: 'L4_TPC',
       MEMODEL: 'L4_TPC_cADpyr_1',
     },
+    synapticPathways: {
+      REGION: 'S1FL',
+      PRELAYER: 'L4',
+      POSTLAYER: 'L5',
+      PRETYPE: 'L4_TPC',
+      POSTTYPE: 'L5_TPC:B',
+    },
   },
 };
