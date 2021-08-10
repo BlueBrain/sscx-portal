@@ -92,21 +92,21 @@ const Glossary: React.FC = () => {
           </section>
         ))}
 
-        <h4>E-Types</h4>
+        <h4 className="mt-3 mb-2">E-Types</h4>
         <ResponsiveTable
           columns={eTypesColumns}
           data={getETypeData()}
           rowKey={({ name }) => name}
         />
 
-        <h4>Spike Characteristics</h4>
+        <h4 className="mt-4 mb-2">Spike Characteristics</h4>
         <ResponsiveTable
           columns={spikeColumns}
           data={glossaryTablesContent.spike}
           rowKey={({ name }) => name}
         />
 
-        <h4>Firing Behavior</h4>
+        <h4 className="mt-4 mb-2">Firing Behavior</h4>
         <ResponsiveTable
           columns={firingColumns}
           data={glossaryTablesContent.firing}

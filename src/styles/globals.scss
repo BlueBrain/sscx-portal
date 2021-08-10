@@ -39,6 +39,10 @@
   --color-blue-darker: #5f75c9;
   --color-green-darker: #329b70;
   --color-grey-darker: #a0a0a0;
+
+  --color-text-high-white: #ffffffdd;
+  --color-text-medium-white: #ffffffa8;
+  --color-text-disabled-white: #ffffff61;
 }
 
 .set-accent-color--yellow {
@@ -2471,8 +2475,10 @@ $collapsible-padding-small: 0.5rem;
   max-width: 1080px;
   margin: 0 auto;
 
+  color: var(--color-text-medium-white);
+
   a, a:hover {
-    color: white;
+    color: var(--color-text-medium-white);
     text-decoration: underline;
   }
 
@@ -2483,19 +2489,18 @@ $collapsible-padding-small: 0.5rem;
   img.e-type-img {
     max-width: 100%;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--color-text-high-white);
   }
 
   h4 {
-    color: white;
-    margin-top: 20px;
+    color: var(--color-text-high-white);
   }
 
   .responsiveTable {
     tr > th,
     tr {
       background-color: map-get($basePalette, "navy-4");
-      color: white;
+      color: var(--color-text-medium-white);
     }
 
     .ant-table-tbody > tr.ant-table-row-level-0:hover > td {
