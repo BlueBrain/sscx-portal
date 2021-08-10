@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MicrocircuitsTemplates from '../../templates/Microcircuit';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
 import { color, sectionTitle } from './config';
 import { layerFactsheetPath, subregionMicrocircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
@@ -34,9 +35,19 @@ const RecMicrocircuitView = () => (
                 {data => (
                   <>
                     <h3 className="mb-2">L{layerNum} Anatomy</h3>
-                    {data && <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />}
+                    <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />
+
                     <h3 className="mt-3 mb-2">L{layerNum} Physiology</h3>
-                    {data && <Factsheet id="layerPhysiologyFactsheet" className="mb-3" facts={data[1].values} />}
+                    <Factsheet id="layerPhysiologyFactsheet" facts={data[1].values} />
+
+                    <div className="text-right mt-2 mb-3">
+                      <HttpDownloadButton
+                        href={layerFactsheetPath(subregion, layerNum)}
+                        download={`layer-microcircuit-factsheet-${subregion}-L${layerNum}.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
                   </>
                 )}
               </HttpData>
@@ -52,7 +63,15 @@ const RecMicrocircuitView = () => (
           <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
             {data => (
               <>
-                {data && <Factsheet id="subregionMicrocircuitFactsheet" facts={data[0].values}/>}
+                <Factsheet id="subregionMicrocircuitFactsheet" facts={data[0].values}/>
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={subregionMicrocircuitFactsheetPath(subregion)}
+                    download={`microcircuit-factsheet-${subregion}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
               </>
             )}
           </HttpData>

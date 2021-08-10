@@ -19,8 +19,11 @@ import {
   memodelMorphologyPath,
   memodelArchivePath,
 } from '../queries/http';
+import { sscx } from '../config';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
+import HttpDownloadButton from '../components/HttpDownloadButton';
+import NexusFileDownloadButton from '../components/NexusFileDownloadButton';
 import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
 import HttpData from '../components/HttpData';
@@ -163,6 +166,10 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       .then(memodelIndex => setMemodelIndex(memodelIndex));
   }, []);
 
+  const getEphysDistribution = (resource: any) => Array.isArray(resource.distribution)
+    ? resource.distribution.find((d: any) => d.name.match(/\.nwb$/i))
+    : resource.distribution;
+
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentMemodel}>
@@ -204,7 +211,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           >
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>1. Choose a subregion</div>
+                <div className={selectorStyle.head}>1. Select a subregion</div>
                 <div className={selectorStyle.body} style={{ padding: '0 0.5rem 1rem 0.5rem' }}>
                   <Pills
                     list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
@@ -217,11 +224,10 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             </div>
             <div className={selectorStyle.row}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>2. Choose a layer</div>
+                <div className={selectorStyle.head}>2. Select a layer</div>
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}
-                    maxWidth="14rem"
                     value={currentLayer}
                     onSelect={setLayer}
                   />
@@ -287,26 +293,32 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                   Each m-type expresses a certain proportion of various e-types,
                   giving rise to a diversity of morpho-electrical subtypes (me-types).
                 </p>
+
                 <h3>Anatomy</h3>
-                {data && (
-                  <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values} />
-                )}
+                <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values} />
+
                 <h3 className="mt-3">Physiology</h3>
-                {data && (
-                  <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values} />
-                )}
+                <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values} />
+
+                <div className="text-right mt-2 mb-3">
+                  <HttpDownloadButton
+                    href={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
+                    download={`memodel-factsheet-${currentRegion}-${currentMemodel}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
 
                 <h3 className="mt-3">Model morphology</h3>
                 <NeuronMorphology path={memodelMorphologyPath(data[2].value)} />
 
-                <div className="text-right mt-3">
-                  <Button
-                    type="primary"
-                    download
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
                     href={memodelArchivePath(currentRegion, currentMtype, currentEtype, currentMemodel)}
+                    download
                   >
-                    Download model
-                  </Button>
+                    model
+                  </HttpDownloadButton>
                 </div>
 
                 <ESData query={modelSimTraceByNameDataQuery(`${currentRegion}_${currentMemodel}`)}>
@@ -320,6 +332,17 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                             resource={esDocuments[0]._source}
                             nexusClient={nexus}
                           />
+                          <div className="text-right mt-2">
+                            <NexusFileDownloadButton
+                              filename={getEphysDistribution(esDocuments[0]._source).name}
+                              url={getEphysDistribution(esDocuments[0]._source).contentUrl}
+                              org={sscx.org}
+                              project={sscx.project}
+                              id="ephysDownloadBtn"
+                            >
+                              trace
+                            </NexusFileDownloadButton>
+                          </div>
                         </div>
                       )}
                     </>
@@ -375,9 +398,19 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 </p>
 
                 <h3>Anatomy</h3>
-                {data && <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values} />}
+                <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values} />
+
                 <h3 className="mt-3">Physiology</h3>
-                {data && <Factsheet id="mtypePhysiologyFactsheet" facts={data[1].values} />}
+                <Factsheet id="mtypePhysiologyFactsheet" facts={data[1].values} />
+
+                <div className="text-right mt-3">
+                  <HttpDownloadButton
+                    href={mtypeFactsheetPath(currentRegion, currentMtype)}
+                    download={`mtype-factsheet-${currentRegion}-${currentMtype}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
 
                 <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
               </>
@@ -399,13 +432,12 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 </p>
                 <EtypeFactsheet id="etypeFactsheet" data={data} />
                 <div className="text-right mt-3 mb-3">
-                  <Button
-                    type="primary"
+                  <HttpDownloadButton
                     href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
-                    download
+                    download={`etype-factsheet-${currentRegion}-${currentMemodel}.json`}
                   >
-                    Download factsheet
-                  </Button>
+                    factsheet
+                  </HttpDownloadButton>
                 </div>
 
                 <h3>Experimental traces used for model fitting</h3>
@@ -429,6 +461,18 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                   {esDocument._source.name}
                                 </Link>
                               </p>
+
+                              <div className="text-right">
+                                <NexusFileDownloadButton
+                                  filename={getEphysDistribution(esDocument._source).name}
+                                  url={getEphysDistribution(esDocument._source).contentUrl}
+                                  org={sscx.org}
+                                  project={sscx.project}
+                                >
+                                  trace
+                                </NexusFileDownloadButton>
+                              </div>
+
                               <NexusPlugin
                                 name="neuron-electrophysiology"
                                 resource={esDocument._source}

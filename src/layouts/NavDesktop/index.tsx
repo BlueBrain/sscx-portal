@@ -1,14 +1,10 @@
 import React from 'react';
-// import { NavLink, withRouter } from 'react-router-dom';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-// import { useSelector } from 'react-redux';
 
 import Button from '../../components/Button';
 import { HomeNav, SecondaryNav } from '../Navigation';
-// import { State } from '../../store';
 
-// import './style.scss';
 
 const classPrefix = 'nav-desktop__';
 
@@ -19,6 +15,7 @@ type NavButtonProps = {
   home?: boolean;
   highlight?: boolean;
   onClick?: () => void;
+  className?: string;
 };
 
 const NavButton: React.FC<NavButtonProps> = ({
@@ -28,10 +25,11 @@ const NavButton: React.FC<NavButtonProps> = ({
   home,
   highlight,
   onClick,
+  className = '',
 }) => {
   return (
     <Link href={path}>
-      <a>
+      <a className={className}>
         <Button
           width={highlight || home ? 140 : undefined}
           discrete={!highlight && !home}
@@ -51,41 +49,25 @@ const NavDesktop = () => {
 
   const [secondaryNav, setSecondaryNav] = React.useState(false);
   React.useEffect(() => setSecondaryNav(false), [router]);
-  // const downloadItems = useSelector<State, number>(
-  //   state => state.download.items.length,
-  // )
 
   return (
     <ul className={`${classPrefix}basis`}>
-      <li style={{ position: 'relative' }}>
-        {secondaryNav ? (
-          <NavButton path="/" name="Home" home />
-        ) : (
-          <Button
-            width={140}
-            active={router.pathname === '/'}
-            onClick={() => setSecondaryNav(true)}
-            uppercase
-          >
-            Home
-          </Button>
-        )}
-        {secondaryNav && (
+      <li className="menu-element">
+        <NavButton className="menu-element-link" path="/" name="Home" home />
+        <Button
+          className="menu-element-button"
+          width={140}
+          uppercase
+        >
+          Home
+        </Button>
+        <div className="menu-container">
           <div className="flyout">
             <HomeNav />
-            <SecondaryNav initActive="exp" />
+            <SecondaryNav />
           </div>
-        )}
+        </div>
       </li>
-      {/* <li>
-        <NavButton
-          path="/downloads"
-          name="Download"
-          // notifications={downloadItems > 0 ? downloadItems : undefined}
-          notifications={undefined}
-          highlight
-        />
-      </li> */}
       <li>
         <NavButton path="/glossary" name="Glossary" />
       </li>

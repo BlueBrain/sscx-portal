@@ -75,8 +75,11 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
           >
               <div className={selectorStyle.row} style={{ maxWidth: '32rem' }}>
                   <div className={selectorStyle.column}>
-                    <div className={selectorStyle.head}>Choose a subregion</div>
-                    <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
+                    <div className={selectorStyle.head}>Select a subregion</div>
+                    <div
+                      className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`}
+                      style={{ padding: '2rem 4rem' }}
+                    >
                       <BrainRegionSelector
                         color={color}
                         value={currentRegion}

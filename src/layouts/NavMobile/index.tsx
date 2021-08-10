@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link, withRouter } from 'react-router-dom';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MdClose } from 'react-icons/md';
@@ -8,7 +7,6 @@ import { IoMdMenu } from 'react-icons/io';
 import { SecondaryNav } from '../Navigation';
 import { basePath } from '../../config';
 
-// import './style.scss';
 
 const classPrefix = 'nav-mobile__';
 
@@ -32,7 +30,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Home</span>
         </a>
       </Link>
-      <Link href="#">
+      <Link href="/glossary">
         <a>
           <img
             src={`${basePath}/assets/images/icons/globe.svg`}
@@ -41,7 +39,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Glossary</span>
         </a>
       </Link>
-      <Link href="#">
+      <Link href="/contact">
         <a>
           <img
             src={`${basePath}/assets/images/icons/mail-alt.svg`}
@@ -50,17 +48,8 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Contact</span>
         </a>
       </Link>
-      {/* <Link href="/downloads">
-        <a>
-          <img
-            src={`${basePath}/assets/images/icons/download-alt.svg`}
-            alt="download"
-          />
-          <span>Download</span>
-        </a>
-      </Link> */}
     </div>
-    <SecondaryNav canClose />
+    <SecondaryNav mobile />
   </div>
 );
 

@@ -41,6 +41,7 @@ const ExpEphysDistribution: React.FC<ExpEphysDistributionProps> = ({ etype, clas
                   <div key={plotName} className="col-xs-6 col-md-3">
                     <ImageViewer
                       src={expEphysPopulationPlotPath(etype, protocol, plotName)}
+                      thumbnailSrc={expEphysPopulationPlotPath(etype, protocol, plotName).replace('.png', '__w640.png')}
                       loading="lazy"
                     />
                   </div>

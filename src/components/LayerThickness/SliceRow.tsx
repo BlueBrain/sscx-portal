@@ -15,7 +15,7 @@ const SliceRow: React.FC<SliceRowProps> = ({ layerThicknesses }) => (
     <td className="no-border">
       {layerThicknesses.map(layerThickness => (
         <div key={layerThickness.layer}>
-          <span className="text-capitalize text-nowrap">
+          <span className="text-capitalize text-nowrap mr-2">
             {layerThickness.layer}
           </span>
           <br />
@@ -25,7 +25,7 @@ const SliceRow: React.FC<SliceRowProps> = ({ layerThicknesses }) => (
     <td className="no-border">
       {layerThicknesses.map(layerThickness => (
         <div key={layerThickness.layer}>
-          <span className="text-nowrap">
+          <span className="text-nowrap mr-2">
             <NumberFormat value={layerThickness.mean} />
           </span>
           <br />
@@ -36,17 +36,7 @@ const SliceRow: React.FC<SliceRowProps> = ({ layerThicknesses }) => (
       {layerThicknesses.map(layerThickness => (
         <div key={layerThickness.layer}>
           <span className="text-nowrap">
-            <NumberFormat value={layerThickness.std} prefix="± " />
-          </span>
-          <br />
-        </div>
-      ))}
-    </td>
-    <td className="no-border">
-      {layerThicknesses.map(layerThickness => (
-        <div key={layerThickness.layer}>
-          <span className="text-nowrap">
-            <NumberFormat value={layerThickness.n} prefix="n=" />
+            <NumberFormat value={layerThickness.std} prefix="± " />&nbsp;&nbsp;
           </span>
           <br />
         </div>

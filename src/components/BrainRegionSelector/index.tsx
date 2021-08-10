@@ -89,7 +89,6 @@ const BrainRegionSelector: React.FC<SubregionSelectProps> = ({
             key={subregion}
             className={`${styles.subregion} ${isSubregionSelected(subregion as Subregion) ? styles.selected : ''}`}
             onClick={() => selectSubregion(subregion)}
-            xlinkTitle="This is somehow long text"
           >
             {svgContent}
           </g>

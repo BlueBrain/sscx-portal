@@ -22,7 +22,6 @@ const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
 const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
-  id = '',
   className = '',
 }) => {
   const tableData = {};
@@ -30,7 +29,7 @@ const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
   Object.entries(data).forEach(([protocol, protocolVal]) => {
     protocols.push(protocol);
     Object.entries(protocolVal).forEach(([measurement, measurementVal]) => {
-      measurementVal.sort((f1, f2) => (f1.feature > f2.feature) ? 1 : -1).forEach(feature => {
+      measurementVal.sort((f1, f2) => ((f1.feature > f2.feature) ? 1 : -1)).forEach(feature => {
         if (!tableData[protocol]) {
           tableData[protocol] = [];
         }
@@ -44,7 +43,7 @@ const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
           unit: feature.unit,
           mean: feature.val[0],
           std: feature.val[1],
-        })
+        });
       });
     });
   });
@@ -60,7 +59,6 @@ const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Mean ± Std',
       key: 'value',
-      colSpan: 2,
       render: (row) => (
         <span>
           <NumberFormat value={row.mean} /> ± <NumberFormat value={row.std} /> {unitLabel(row.unit)}
@@ -68,11 +66,11 @@ const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
       ),
     },
     {
-      title: 'N',
+      title: 'No. of measurements',
       key: 'n',
-      colSpan: 0,
-      render: row => <span>n={row.n}</span>
-    }
+      className: 'narrowColumn',
+      render: row => <NumberFormat value={row.n} />,
+    },
   ];
 
   return (

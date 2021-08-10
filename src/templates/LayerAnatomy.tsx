@@ -90,7 +90,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           >
             <div className={selectorStyle.row} style={{ maxWidth: '26rem' }}>
               <div className={selectorStyle.column}>
-                <div className={selectorStyle.head}>Choose a layer</div>
+                <div className={selectorStyle.head}>Select a layer</div>
                 <div className={selectorStyle.body} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}

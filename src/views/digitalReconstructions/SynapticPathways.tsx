@@ -9,9 +9,11 @@ import {
 import DataContainer from '../../components/DataContainer';
 import HttpData from '../../components/HttpData';
 import Factsheet from '../../components/Factsheet';
+import HttpDownloadButton from '../../components/HttpDownloadButton';
 import { color, sectionTitle } from './config';
 import Collapsible from '../../components/Collapsible';
 import Synaptome from '../../components/Synaptome';
+import MtypeLegend from '../../components/MtypeLegend';
 
 import ImageViewer from '../../components/ImageViewer';
 import SimulationSection from '../../components/SimulationSection';
@@ -48,9 +50,19 @@ const RecSynPathwaysView = () => (
             {data => (
               <>
                 <h3 className="mb-2">Anatomy</h3>
-                {data && <Factsheet id="pathwayAnatomyFactsheet" facts={data[0].values} />}
+                <Factsheet id="pathwayAnatomyFactsheet" facts={data[0].values} />
+
                 <h3 className="mt-3 mb-2">Physiology</h3>
-                {data && <Factsheet id="pathwayPhysiologyFactsheet" className="mb-3" facts={data[1].values} />}
+                <Factsheet id="pathwayPhysiologyFactsheet" className="mb-3" facts={data[1].values} />
+
+                <div className="text-right mt-2 mb-3">
+                  <HttpDownloadButton
+                    href={pathwayFactsheetPath(subregion, pathway)}
+                    download={`pathway-factsheet-${subregion}-${pathway}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
               </>
             )}
           </HttpData>
@@ -148,6 +160,8 @@ const RecSynPathwaysView = () => (
             region={subregion}
             pathway={pathway}
           />
+
+          <MtypeLegend className="mt-3" />
         </Collapsible>
 
         <SimulationSection />
