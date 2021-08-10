@@ -1754,6 +1754,10 @@ $collapsible-padding-small: 0.5rem;
         color: map-get($basePalette, "navy-3");
       }
     }
+    a.disabled {
+      color: map-get($basePalette, "grey");;
+      cursor: default;
+    }
   }
 
   .secondary-nav {
@@ -2003,7 +2007,7 @@ $collapsible-padding-small: 0.5rem;
   .flyout {
     position: absolute;
     left: 0;
-    top: 60px;
+    top: 30px;
     background: map-get($basePalette, "white");
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -2017,6 +2021,51 @@ $collapsible-padding-small: 0.5rem;
       flex-grow: 1;
       text-align: left;
     }
+  }
+
+  .menu-container {
+    display: none;
+    position: absolute;
+    height: 30px;
+    width: 180px;
+  }
+
+  .menu-element {
+    position: relative;
+  }
+
+  .menu-element-link {
+    display: none;
+  }
+
+  .menu-element-button {
+    display: inline-block;
+  }
+
+  .menu-element:hover {
+    .menu-container {
+      display: block;
+    }
+
+    .menu-element-link {
+      display: inline-block;
+    }
+
+    .menu-element-button {
+      display: none;
+    }
+  }
+
+  ul:hover li.active:not(:hover) button {
+    color: map-get($basePalette, "grey-2");
+  }
+
+  ul:hover li.active:not(:hover) ul {
+    display: none;
+  }
+
+  ul li:hover button {
+    color: map-get($basePalette, "navy-2");
   }
 
   .home-nav {
@@ -2041,6 +2090,7 @@ $collapsible-padding-small: 0.5rem;
       text-transform: none;
       padding-left: 20px;
       margin: 0 10px 0 20px;
+      cursor: default;
     }
 
     li {
@@ -2063,13 +2113,14 @@ $collapsible-padding-small: 0.5rem;
       color: map-get($basePalette, "navy-2");
     }
 
-    li.active > ul {
+    li.active > ul, li:hover > ul {
       display: flex;
       position: absolute;
       left: 300px;
       width: 200px;
       top: 0;
       bottom: 0;
+      z-index: 1;
       background: map-get($basePalette, "white");
       border-left-width: 10px;
       border-left-style: solid;

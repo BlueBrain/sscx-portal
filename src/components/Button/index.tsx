@@ -14,6 +14,7 @@ type ButtonProps = {
   onClick?: (e: any) => void;
   children: ReactChild | ReactFragment;
   uppercase?: boolean;
+  className?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,12 +27,13 @@ const Button: React.FC<ButtonProps> = ({
   children,
   large,
   uppercase,
+  className = '',
 }) => {
   return (
     <button
       style={{ width: width }}
       onClick={onClick}
-      className={`${classPrefix}basis ${primary ? 'primary' : ''} ${
+      className={`${classPrefix}basis ${className} ${primary ? 'primary' : ''} ${
         discrete ? 'discrete' : ''
       } ${active ? 'active' : ''} ${large ? 'large' : ''} ${
         uppercase ? 'uppercase' : ''

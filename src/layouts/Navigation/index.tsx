@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Brand from '../Brand';
 import NavDesktop from '../NavDesktop';
 import NavMobile from '../NavMobile';
 import Link from 'next/link';
-import { accentColors } from '../../config';
+import { useRouter } from 'next/router';
+import { accentColors, basePath } from '../../config';
 import SvgRegions from '../../components/Icons/Regions';
 import SvgNeuron from '../../components/Icons/Neuron';
 import SvgMicrocircuit from '../../components/Icons/Microcircuit';
@@ -29,26 +30,43 @@ export const HomeNav: React.FC = () => (
 );
 
 type NavProps = {
-  initActive?: string;
-  canClose?: boolean;
+  mobile?: boolean;
 };
 
-export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
-  const [active, setActive] = React.useState(initActive);
+const secondaryMenuSubPaths = [
+  'experimetal-data',
+  'reconstruction-datan',
+  'digital-reconstructions',
+  'validations',
+  'predictions',
+];
+
+export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
+  const router = useRouter();
+  const menuContainerRef = useRef<HTMLUListElement>(null);
+
+  const subPath = router.asPath.replace(basePath, '').split('/').filter(Boolean)[0];
+  const activeNavGroup = secondaryMenuSubPaths.includes(subPath)
+    ? subPath
+    : 'experimental-data';
+
+  const [active, setActive] = React.useState(activeNavGroup);
+
+  const current  = mobile ? active : activeNavGroup;
 
   const toggleSubmenu = (name: string) => {
-    if (active !== name) {
-      setActive(name);
-    } else if (canClose) {
-      setActive(undefined);
-    }
+    if (!mobile) return;
+
+    setActive(active !== name ? name : null);
   };
 
+  // TODO: find better way to hide the menu when user clicks on a link (than full page rerender)
+
   return (
-    <ul className="secondary-nav">
-      <li className={active === 'exp' ? 'active' : ''}>
+    <ul className="secondary-nav" ref={menuContainerRef}>
+      <li className={current === 'experimental-data' ? 'active' : ''}>
         <span style={{ backgroundColor: accentColors.yellow }} />
-        <button onClick={() => toggleSubmenu('exp')}>
+        <button onClick={() => toggleSubmenu('experimental-data')}>
           Experimental Data{' '}
           <span className="show-mobile">
             <IoIosArrowDropdown />
@@ -81,9 +99,9 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
           </li>
         </ul>
       </li>
-      <li className={active === 'rec' ? 'active' : undefined}>
+      <li className={current === 'reconstruction-data' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.blue }} />
-        <button onClick={() => toggleSubmenu('rec')}>
+        <button onClick={() => toggleSubmenu('reconstruction-data')}>
           Reconstruction Data{' '}
           <span className="show-mobile">
             <IoIosArrowDropdown />
@@ -91,42 +109,42 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.blue }}>
           <li>
-            <Link href="/reconstruction-data/brain-regions">
-              <a>
+            {/* <Link> */}
+              <a className="disabled">
                 <SvgRegions fill={accentColors.blue} />
-                Brain Regions
+                Brain Regions <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/reconstruction-data/microcircuit">
-              <a>
+            {/* <Link href="/reconstruction-data/microcircuit"> */}
+              <a className="disabled">
                 <SvgMicrocircuit fill={accentColors.blue} />
-                Microcircuit
+                Microcircuit <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/reconstruction-data/synaptic-pathways">
-              <a>
+            {/* <Link href="/reconstruction-data/synaptic-pathways"> */}
+              <a className="disabled">
                 <SvgSynapse fill={accentColors.blue} />
-                Synaptic Pathways
+                <span>Synaptic Pathways<sup>*</sup></span>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/reconstruction-data/neurons">
-              <a>
+            {/* <Link href="/reconstruction-data/neurons"> */}
+              <a className="disabled">
                 <SvgNeuron fill={accentColors.blue} />
-                Neurons
+                Neurons <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
         </ul>
       </li>
-      <li className={active === 'dig' ? 'active' : undefined}>
+      <li className={current === 'digital-reconstructions' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.lavender }} />
-        <button onClick={() => toggleSubmenu('dig')}>
+        <button onClick={() => toggleSubmenu('digital-reconstructions')}>
           Digital Reconstructions{' '}
           <span className="show-mobile">
             <IoIosArrowDropdown />
@@ -167,9 +185,9 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
           </li>
         </ul>
       </li>
-      <li className={active === 'val' ? 'active' : undefined}>
+      <li className={current === 'validations' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.green }} />
-        <button onClick={() => toggleSubmenu('val')}>
+        <button onClick={() => toggleSubmenu('validations')}>
           Validations{' '}
           <span className="show-mobile">
             <IoIosArrowDropdown />
@@ -177,42 +195,42 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.green }}>
           <li>
-            <Link href="/validations/brain-regions">
-              <a>
+            {/* <Link href="/validations/brain-regions"> */}
+              <a className="disabled">
                 <SvgRegions fill={accentColors.green} />
-                Brain Regions
+                Brain Regions <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/validations/microcircuit">
-              <a>
+            {/* <Link href="/validations/microcircuit"> */}
+              <a className="disabled">
                 <SvgMicrocircuit fill={accentColors.green} />
-                Microcircuit
+                Microcircuit <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/validations/synaptic-pathways">
-              <a>
+            {/* <Link href="/validations/synaptic-pathways"> */}
+              <a className="disabled">
                 <SvgSynapse fill={accentColors.green} />
-                Synaptic Pathways
+                <span>Synaptic Pathways<sup>*</sup></span>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/validations/neurons">
-              <a>
+            {/* <Link href="/validations/neurons"> */}
+              <a className="disabled">
                 <SvgNeuron fill={accentColors.green} />
-                Neurons
+                Neurons <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
         </ul>
       </li>
-      <li className={active === 'pre' ? 'active' : undefined}>
+      <li className={current === 'predictions' ? 'active' : undefined}>
         <span style={{ backgroundColor: accentColors.grey }} />
-        <button onClick={() => toggleSubmenu('pre')}>
+        <button onClick={() => toggleSubmenu('predictions')}>
           Predictions{' '}
           <span className="show-mobile">
             <IoIosArrowDropdown />
@@ -220,36 +238,36 @@ export const SecondaryNav: React.FC<NavProps> = ({ initActive, canClose }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.grey }}>
           <li>
-            <Link href="/predictions/brain-regions">
-              <a>
+            {/* <Link href="/predictions/brain-regions"> */}
+              <a className="disabled">
                 <SvgRegions fill={accentColors.grey} />
-                Brain Regions
+                Brain Regions <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/predictions/microcircuit">
-              <a>
+            {/* <Link href="/predictions/microcircuit"> */}
+              <a className="disabled">
                 <SvgMicrocircuit fill={accentColors.grey} />
-                Microcircuit
+                Microcircuit <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/predictions/synaptic-pathways">
-              <a>
+            {/* <Link href="/predictions/synaptic-pathways"> */}
+              <a className="disabled">
                 <SvgSynapse fill={accentColors.grey} />
-                Synaptic Pathways
+                <span>Synaptic Pathways<sup>*</sup></span>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
           <li>
-            <Link href="/predictions/neurons">
-              <a>
+            {/* <Link href="/predictions/neurons"> */}
+              <a className="disabled">
                 <SvgNeuron fill={accentColors.grey} />
-                Neurons
+                Neurons <sup>*</sup>
               </a>
-            </Link>
+            {/* </Link> */}
           </li>
         </ul>
       </li>
