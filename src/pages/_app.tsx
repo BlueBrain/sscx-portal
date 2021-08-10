@@ -4,8 +4,7 @@ import { createNexusClient } from '@bbp/nexus-sdk';
 import { NexusProvider } from '@bbp/react-nexus';
 import smoothscroll from 'smoothscroll-polyfill';
 
-import { nexus, basePath, isServer } from '../config';
-import MainLayout from '../layouts/MainLayout';
+import { nexus, isServer } from '../config';
 import Feedback from '../components/Feedback';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 
@@ -23,16 +22,11 @@ const nexusClient = createNexusClient({
   token: nexus.token,
 });
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <NexusProvider nexusClient={nexusClient}>
-      <MainLayout>
-        {/* TODO: move all head elements to a separate component */}
+      <>
         <Head>
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap" />
-          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/system.js"></script>
-          <script src="https://www.unpkg.com/systemjs@6.1.7/dist/extras/named-exports.js"></script>
-          <script type="systemjs-importmap" src={`${basePath}/systemjs-importmap.json`}></script>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
 
@@ -40,9 +34,9 @@ function MyApp({ Component, pageProps }) {
         <GoogleAnalytics />
 
         <Component {...pageProps} />
-      </MainLayout>
+      </>
     </NexusProvider>
   );
 }
 
-export default MyApp;
+export default App;
