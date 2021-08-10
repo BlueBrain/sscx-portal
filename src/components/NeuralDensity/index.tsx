@@ -41,7 +41,7 @@ const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [] }) => {
       layer: neuralDensity.brainLocation.layer.label,
       density: <>
         <NumberFormat value={mean} />
-        &emsp;
+        &nbsp;
         <NumberFormat value={std} prefix="± " />
       </>,
       densityN: neuralDensity.series.find((s: any) => s.statistic === 'N')?.value,
