@@ -112,7 +112,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link> */}
               <a className="disabled">
                 <SvgRegions fill={accentColors.blue} />
-                Brain Regions <sup>*</sup>
+                Brain Regions
               </a>
             {/* </Link> */}
           </li>
@@ -120,7 +120,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/reconstruction-data/microcircuit"> */}
               <a className="disabled">
                 <SvgMicrocircuit fill={accentColors.blue} />
-                Microcircuit <sup>*</sup>
+                Microcircuit
               </a>
             {/* </Link> */}
           </li>
@@ -128,7 +128,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/reconstruction-data/synaptic-pathways"> */}
               <a className="disabled">
                 <SvgSynapse fill={accentColors.blue} />
-                <span>Synaptic Pathways<sup>*</sup></span>
+                Synaptic Pathways
               </a>
             {/* </Link> */}
           </li>
@@ -136,7 +136,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/reconstruction-data/neurons"> */}
               <a className="disabled">
                 <SvgNeuron fill={accentColors.blue} />
-                Neurons <sup>*</sup>
+                Neurons
               </a>
             {/* </Link> */}
           </li>
@@ -198,7 +198,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/validations/brain-regions"> */}
               <a className="disabled">
                 <SvgRegions fill={accentColors.green} />
-                Brain Regions <sup>*</sup>
+                Brain Regions
               </a>
             {/* </Link> */}
           </li>
@@ -206,7 +206,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/validations/microcircuit"> */}
               <a className="disabled">
                 <SvgMicrocircuit fill={accentColors.green} />
-                Microcircuit <sup>*</sup>
+                Microcircuit
               </a>
             {/* </Link> */}
           </li>
@@ -214,7 +214,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/validations/synaptic-pathways"> */}
               <a className="disabled">
                 <SvgSynapse fill={accentColors.green} />
-                <span>Synaptic Pathways<sup>*</sup></span>
+                Synaptic Pathways
               </a>
             {/* </Link> */}
           </li>
@@ -222,7 +222,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/validations/neurons"> */}
               <a className="disabled">
                 <SvgNeuron fill={accentColors.green} />
-                Neurons <sup>*</sup>
+                Neurons
               </a>
             {/* </Link> */}
           </li>
@@ -241,7 +241,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/predictions/brain-regions"> */}
               <a className="disabled">
                 <SvgRegions fill={accentColors.grey} />
-                Brain Regions <sup>*</sup>
+                Brain Regions
               </a>
             {/* </Link> */}
           </li>
@@ -249,7 +249,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/predictions/microcircuit"> */}
               <a className="disabled">
                 <SvgMicrocircuit fill={accentColors.grey} />
-                Microcircuit <sup>*</sup>
+                Microcircuit
               </a>
             {/* </Link> */}
           </li>
@@ -257,7 +257,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/predictions/synaptic-pathways"> */}
               <a className="disabled">
                 <SvgSynapse fill={accentColors.grey} />
-                <span>Synaptic Pathways<sup>*</sup></span>
+                Synaptic Pathways
               </a>
             {/* </Link> */}
           </li>
@@ -265,7 +265,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* <Link href="/predictions/neurons"> */}
               <a className="disabled">
                 <SvgNeuron fill={accentColors.grey} />
-                Neurons <sup>*</sup>
+                Neurons
               </a>
             {/* </Link> */}
           </li>
