@@ -90,8 +90,8 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
       children: [
         { dataIndex: 'density' as keyof SummaryData, title: <>Mean ± std, {densityUnit}</> },
         { dataIndex: 'densityN' as keyof SummaryData, title: 'No. of measurements', className: 'narrowColumn' },
-      ] },
-
+      ],
+    },
   ];
 
   return (

@@ -71,6 +71,7 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
         <Table
           className="responsiveTable no-left-margin nested-table xs-column"
           rowClassName={index % 2 ? classes.responsiveTablEven : classes.responsiveTablOdd}
+          rowKey={(record: any, index) => `${record.dataIndex}__${index}`}
           showHeader={false}
           columns={nestedColumns}
           tableLayout="fixed"
@@ -97,6 +98,7 @@ function ResponsiveTable<Type extends object & {isHighlight?: boolean}>({ column
     <Table<Type>
       bordered
       size="small"
+      rowKey={(record: any) => record.key || `${record.dataIndex}__`}
       pagination={false}
       columns={tableColumns}
       dataSource={data}
