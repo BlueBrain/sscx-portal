@@ -1,8 +1,11 @@
 import NeuronsView from '../../views/reconstructionData/Neurons';
+import MainLayout from '../../layouts/MainLayout';
 
 
 export default function NeuronsPage() {
   return (
-    <NeuronsView />
+    <MainLayout>
+      <NeuronsView />
+    </MainLayout>
   );
 }

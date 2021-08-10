@@ -1,14 +1,21 @@
-
 import React from 'react';
+import Head from 'next/head';
+
+import MainLayout from '../layouts/MainLayout';
 
 
-const NotFoundPage = () => {
+export default function NotFound() {
   return (
-    <div className="text-center" style={{ marginTop: '32vh' }}>
-      <h3 className="text-white">404 | Page Not Found</h3>
-    </div>
+    <>
+      <Head>
+        <title>Page not found / SSCx Portal</title>
+      </Head>
+
+      <MainLayout>
+        <div className="text-center" style={{ marginTop: '32vh', marginBottom: '12vh' }}>
+          <h3 className="text-white">404 | Page Not Found</h3>
+        </div>
+      </MainLayout>
+    </>
   );
 };
-
-
-export default NotFoundPage;
