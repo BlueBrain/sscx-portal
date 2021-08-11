@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import Chart from 'chart.js';
 import { Parser } from 'expr-eval';
+import { isNumber } from 'lodash';
 
 import { formatNumber } from '../NumberFormat';
 import styles from './styles.module.scss';
@@ -15,6 +16,14 @@ export type Equation = {
 type IonChannelPlotProps = {
   name: string;
   equation: Equation;
+}
+
+function formatPlotTitle(title) {
+  if (isNumber(title)) return formatNumber(title);
+
+  return Array.from(title.matchAll(/\d+\.?\d*/g))
+    .map(match => match[0])
+    .reduce((formattedTitle, num) => formattedTitle.replace(num, formatNumber(parseFloat(num))), title);
 }
 
 const IonChannelPlot: React.FC<IonChannelPlotProps> = ({ name, equation }) => {
@@ -90,7 +99,7 @@ const IonChannelPlot: React.FC<IonChannelPlotProps> = ({ name, equation }) => {
         maxValue = Math.max.apply(null, arrayValues);
         break;
       }
-      textBottom = formatNumber(data.plot);
+      textBottom = formatPlotTitle(data.plot);
       return arrayValues;
     }
   };
