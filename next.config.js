@@ -53,7 +53,7 @@ const nextConfig = withSentryConfig({
   },
   async headers() {
     return [{
-      source: '/(.*).(jpeg|png|webp)',
+      source: '/(.*).(jpg|png|webp)',
       headers: [{
         key: 'Cache-Control',
         value: 'public, max-age=259200, s-maxage=259200, stale-while-revalidate=259200',

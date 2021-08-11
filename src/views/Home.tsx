@@ -17,13 +17,13 @@ const Home: React.FC = () => (
   <div className={`${classPrefix}basis`}>
     <section className="content section-1">
       <ImageSlider images={[{
-        src: `${basePath}/assets/images/backgrounds/home-page/sscx-side.jpeg`,
+        src: `${basePath}/assets/images/backgrounds/home-page/sscx-side.jpg`,
         alt: 'SSCx side view',
       }, {
-        src: `${basePath}/assets/images/backgrounds/home-page/sscx-top.jpeg`,
+        src: `${basePath}/assets/images/backgrounds/home-page/sscx-top.jpg`,
         alt: 'SSCx top view',
       }, {
-        src: `${basePath}/assets/images/backgrounds/home-page/sscx-inside.jpeg`,
+        src: `${basePath}/assets/images/backgrounds/home-page/sscx-inside.jpg`,
         alt: 'SSCx inside view',
       }]}
       />
