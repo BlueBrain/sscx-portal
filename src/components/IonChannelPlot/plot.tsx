@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import Chart from 'chart.js';
 import { Parser } from 'expr-eval';
 
+import { formatNumber } from '../NumberFormat';
 import styles from './styles.module.scss';
 
 
@@ -89,7 +90,7 @@ const IonChannelPlot: React.FC<IonChannelPlotProps> = ({ name, equation }) => {
         maxValue = Math.max.apply(null, arrayValues);
         break;
       }
-      textBottom = data.plot;
+      textBottom = formatNumber(data.plot);
       return arrayValues;
     }
   };
