@@ -1162,6 +1162,7 @@ $collapsible-padding-small: 0.5rem;
 
 .list-element__basis {
   border: 1px solid white;
+  user-select: none;
   color: white;
   margin: 8px 20px 8px 10px;
   text-align: center;
@@ -1187,7 +1188,7 @@ $collapsible-padding-small: 0.5rem;
   &.selected {
     color: map-get($basePalette, "white");
     background-color: map-get($basePalette, "navy-3");
-    cursor: initial;
+    cursor: default;
     outline-style: none;
     font-weight: bold;
 
@@ -1279,6 +1280,7 @@ $collapsible-padding-small: 0.5rem;
 
 .pill__basis {
   display: inline-block;
+  user-select: none;
   color: map-get($basePalette, "white");
   border: 1px solid map-get($basePalette, "white");
   background-color: map-get($basePalette, "navy-4");
@@ -1326,7 +1328,7 @@ $collapsible-padding-small: 0.5rem;
   font-weight: 700;
   background-color: map-get($basePalette, "white");
   color: map-get($basePalette, "navy-4");
-  cursor: initial;
+  cursor: default;
 }
 
 
