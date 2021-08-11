@@ -33,7 +33,7 @@ const NeuronElectrophysiology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
   const { query } = router;
-  if (!query.layer && !query.mtype && !query.instance) {
+  if (!query.etype && !query.etype_instance) {
     const defaultEphysFilters = defaultSelection.experimentalData.neuronElectrophysiology;
     query.etype = defaultEphysFilters.ETYPE;
     query.etype_instance = defaultEphysFilters.INSTANCE;
