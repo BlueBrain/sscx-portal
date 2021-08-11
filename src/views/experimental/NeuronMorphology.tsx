@@ -235,7 +235,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {memodels => (
               <div className="mt-3">
                 <h3>Morpho-Electrical neuron models using this morphology</h3>
-                <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={memodels} />
+                {memodels.length ? (
+                  <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={memodels} />
+                ) : (
+                  <p>No models were built using this morphology</p>
+                )}
               </div>
             )}
           </HttpData>
