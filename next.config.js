@@ -15,12 +15,10 @@ const nextConfig = withSentryConfig({
   trailingSlash: true,
   basePath: basePath,
   assetPrefix: `${basePath}/`,
-  images: {
-    path: `${basePath}/_next/image`,
-  },
   webpack5: true,
   images: {
     domains: ['localhost', 'sscx-portal-static-data'],
+    path: `${basePath}/_next/image/`,
   },
   async redirects() {
     return [
