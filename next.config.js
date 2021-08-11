@@ -19,6 +19,7 @@ const nextConfig = withSentryConfig({
   images: {
     domains: ['localhost', 'sscx-portal-static-data'],
     path: `${basePath}/_next/image/`,
+    minimumCacheTTL: 259200,
   },
   async redirects() {
     return [
