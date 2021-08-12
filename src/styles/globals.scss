@@ -2489,6 +2489,29 @@ $collapsible-padding-small: 0.5rem;
       color: var(--color-text-medium-white);
     }
 
+    @media (max-width: $ant-breakpoint-sm) {
+      tr:first-child > td {
+        color: var(--color-text-high-white);
+      }
+
+      // only nested table (the case for mobile layout)
+      .responsiveTable tr > td {
+        border-color: #666666;
+      }
+    }
+
+    tr > th {
+      color: var(--color-text-high-white);
+    }
+
+    tr > td:first-child {
+      color: var(--color-text-high-white);
+
+      @media (min-width: $ant-breakpoint-sm) {
+        font-weight: bold;
+      }
+    }
+
     .ant-table-tbody > tr.ant-table-row-level-0:hover > td {
       background: unset;
     }
