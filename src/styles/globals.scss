@@ -1170,7 +1170,6 @@ $collapsible-padding-small: 0.5rem;
   overflow-x: hidden;
   text-overflow: ellipsis;
   padding: 2px 0.5rem;
-  // font-weight: 700;
   cursor: pointer;
   &:hover {
     color: map-get($basePalette, "white");
@@ -1265,12 +1264,10 @@ $collapsible-padding-small: 0.5rem;
 // Pills
 .pills__basis {
   p {
-    // font-weight: 700;
     margin: 0;
   }
   .elements {
     margin-top: 8px;
-    // max-width: 600px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -1978,15 +1975,6 @@ $collapsible-padding-small: 0.5rem;
     }
   }
 
-  @media (max-width: 1280px) {
-    li {
-      margin-right: 18px;
-      button {
-        width: auto !important;
-      }
-    }
-  }
-
   .flyout {
     position: absolute;
     left: 0;
@@ -2065,7 +2053,7 @@ $collapsible-padding-small: 0.5rem;
   }
 
   .secondary-nav {
-    width: 300px;
+    width: 260px;
 
     button {
       border-bottom: 1px solid map-get($basePalette, "grey-2");
@@ -2099,7 +2087,7 @@ $collapsible-padding-small: 0.5rem;
     li.active > ul, li:hover > ul {
       display: flex;
       position: absolute;
-      left: 300px;
+      left: 260px;
       width: 200px;
       top: 0;
       bottom: 0;
@@ -2113,10 +2101,6 @@ $collapsible-padding-small: 0.5rem;
       justify-content: center;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
-
-      @media (min-width: $large) {
-        width: 300px;
-      }
     }
 
     li > ul > li {
