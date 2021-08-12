@@ -61,11 +61,11 @@ const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], hi
     thicknessUnit = thicknessEntity?.series.find((s: any) => s.statistic === 'mean')?.unitCode;
     const thicknessN = thicknessEntity?.series.find((s: any) => s.statistic === 'N')?.value;
 
-    const isHighlight = highlightLayer.includes(layer.replace('layer ', ''));
+    const isHighlight = highlightLayer.includes(layer.replace(/layer /i, ''));
 
     return {
       name: densityEntity?.name,
-      layer: <span className="text-capitalize">{layer}</span>,
+      layer: layer.replace(/layer /i, 'L'),
       thicknessEntityDescription: thicknessEntity.description,
       thickness: <NumberFormat value={thicknessMean} />,
       thicknessN: <NumberFormat value={thicknessN} />,

@@ -19,7 +19,7 @@ const getLayerThicknesses = (sliceCollection, rawLayerThicknesses, layer) => (
       .includes(rawLayerThickness.brainLocation?.layer?.label))
     // compose simplified layer thickness objects
     .map(rawLayerThickness => ({
-      layer: rawLayerThickness.brainLocation.layer.label,
+      layer: rawLayerThickness.brainLocation.layer.label.replace(/layer /i, 'L'),
       unit: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.unitCode,
       mean: rawLayerThickness.series.find((s: any) => s.statistic === 'mean')?.value,
       std: rawLayerThickness.series.find((s: any) => s.statistic === 'standard deviation')?.value,
