@@ -2498,6 +2498,10 @@ $collapsible-padding-small: 0.5rem;
       .responsiveTable tr > td {
         border-color: #666666;
       }
+
+      th {
+        display: none;
+      }
     }
 
     tr > th {
