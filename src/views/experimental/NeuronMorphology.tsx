@@ -114,9 +114,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
               />
               <InfoBox>
                 <p>
-                  Biocytin-filled neurons are 3D-reconstructed using Neurolucida and classified into
-                  diverse morphological types (m-types). Each m-type has several instances of reconstructed axonal
-                  and dendritic morphologies. Using a combination of objective classification methods for
+                  Neurons comprise complex and highly-branched morphologies of axons and dendrites.
+                  Axo-dendritic morphological structure determines the connectivity and biophysical properties of neurons.
+                  The 3D geometry of axons and dendrites is reconstructed using specific experimental procedures to
+                  classify neurons into diverse morphological types (m-types). Each m-type has several instances of
+                  reconstructed axonal and dendritic morphologies. Using a combination of objective classification methods for
                   pyramidal cell types, and subjective classification for interneuron types,
                   we have identified 60 m-types in the primary rat Somatosensory Cortex.
                 </p>
@@ -182,6 +184,11 @@ const NeuronExperimentalMorphology: React.FC = () => {
           className="mb-4"
           title={`Neuron Morphology ${currentInstance}`}
         >
+          <p className="mb-3">
+            Neuron morphologies were obtained from digital 3D reconstructions of biocytin-stained neurons from juvenile
+            rat hind-limb somatosensory cortex, following whole-cell patch-clamp recordings in 300-μm-thick brain slices.
+            This procedure enabled the reconstruction of shapes of axons, which were classified into 60 morphological types (m-types).
+          </p>
           <ESData
             query={morphologyDataQuery(currentMtype, currentInstance)}
           >
@@ -243,50 +250,6 @@ const NeuronExperimentalMorphology: React.FC = () => {
               </div>
             )}
           </HttpData>
-        </Collapsible>
-
-        <Collapsible
-          id="mtypeSection"
-          title={`Population ${currentMtype}`}
-        >
-          <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
-            {factsheetData => (
-              <div>
-                <h3>Factsheet</h3>
-                <Factsheet facts={factsheetData.values} />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={expMorphPopulationFactesheetPath(currentMtype)}
-                    download={`exp-morphology-population-factsheet-${currentMtype}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </div>
-            )}
-          </HttpData>
-
-          <ExpMorphDistribution className="mt-3" mtype={currentMtype} />
-
-          <h3 className="mt-3">Reconstructed morphologies</h3>
-          <p>
-            Data are provided as ASCII files containing 3D representations of neuronal morphologies -
-            axons and dendrites - whose shapes are traced and reconstructed using Neurolucida
-            (neuron tracing, reconstruction, and analysis software).
-          </p>
-          <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
-            {esDocuments => (
-              <>
-                {!!esDocuments && (
-                  <ExpMorphologyTable
-                    layer={currentLayer}
-                    mtype={currentMtype}
-                    morphologies={getAndSortMorphologies(esDocuments)}
-                  />
-                )}
-              </>
-            )}
-          </ESData>
         </Collapsible>
       </DataContainer>
     </>
