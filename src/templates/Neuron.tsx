@@ -193,7 +193,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <p>
                   We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
                   to enable their 3D reconstruction and their objective classification
-                  into morphological types (m-types). In addition, we also characterized the electrical firing patterns
+                  into morphological types (m-types). In addition, we also characterised the electrical firing patterns
                   of these neurons to different intensities of step currents injected in the soma
                   to group their response into electrical types (e-types).
                   We then mapped the e-types expressed in each m-type
@@ -280,12 +280,120 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       <DataContainer
         visible={!!currentMemodel}
         navItems={[
-          { id: 'memodelSection', label: 'ME-model' },
           { id: 'mtypeSection', label: 'M-type' },
           { id: 'etypeSection', label: 'E-type' },
+          { id: 'memodelSection', label: 'ME-model' },
         ]}
       >
-        <Collapsible id="memodelSection" title={`ME-model ${currentMemodel} Factsheet`}>
+        <Collapsible
+          id="mtypeSection"
+          title={`M-Type ${currentMtype}`}
+        >
+          <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
+            {data => (
+              <>
+                <p className="mb-3">
+                  Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.
+                </p>
+
+                <h3>Anatomy</h3>
+                <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values} />
+
+                <h3 className="mt-3">Physiology</h3>
+                <Factsheet id="mtypePhysiologyFactsheet" facts={data[1].values} />
+
+                <div className="text-right mt-3">
+                  <HttpDownloadButton
+                    href={mtypeFactsheetPath(currentRegion, currentMtype)}
+                    download={`mtype-factsheet-${currentRegion}-${currentMtype}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
+
+                <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
+              </>
+            )}
+          </HttpData>
+        </Collapsible>
+
+        <Collapsible
+          id="etypeSection"
+          className="mt-4"
+          title={`E-Type ${currentEtype}`}
+        >
+          <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
+            {data => (
+              <>
+                <p className="mb-3">
+                  Neurons are classified into e-types based on their electrical response properties
+                  to step current injections at the soma.
+                </p>
+                <EtypeFactsheet id="etypeFactsheet" data={data} />
+                <div className="text-right mt-3 mb-3">
+                  <HttpDownloadButton
+                    href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
+                    download={`etype-factsheet-${currentRegion}-${currentMemodel}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
+
+                <h3>Experimental traces used for model fitting</h3>
+                <ESData query={modelEphysByNamesDataQuery(data[4].value)}>
+                  {esDocuments => (
+                    <>
+                      {esDocuments && (
+                        <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
+                      )}
+                      <Tabs
+                        id={esDocuments && esDocuments.length ? 'modelFittingEphys' : null}
+                        className="mt-3"
+                        type="card"
+                      >
+                        {esDocuments && esDocuments.map(esDocument => (
+                          <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
+                            <div style={{ minHeight: '600px' }}>
+                              <p className="mt-2 mb-3">
+                                Full experimental instance (with all traces): &nbsp;
+                                <Link href={expEphysPageUrl(currentEtype, esDocument._source.name)}>
+                                  {esDocument._source.name}
+                                </Link>
+                              </p>
+
+                              <div className="text-right">
+                                <NexusFileDownloadButton
+                                  filename={getEphysDistribution(esDocument._source).name}
+                                  url={getEphysDistribution(esDocument._source).contentUrl}
+                                  org={sscx.org}
+                                  project={sscx.project}
+                                >
+                                  trace
+                                </NexusFileDownloadButton>
+                              </div>
+
+                              <NexusPlugin
+                                name="neuron-electrophysiology"
+                                resource={esDocument._source}
+                                nexusClient={nexus}
+                              />
+                            </div>
+                          </TabPane>
+                        ))}
+                      </Tabs>
+                    </>
+                  )}
+                </ESData>
+              </>
+            )}
+          </HttpData>
+        </Collapsible>
+
+        <Collapsible
+          id="memodelSection"
+          className="mt-4"
+          title={`ME-model ${currentMemodel} Instance`}
+        >
           <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (
               <>
@@ -380,111 +488,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     />
                   </div>
                 </div>
-              </>
-            )}
-          </HttpData>
-        </Collapsible>
-
-        <Collapsible
-          id="mtypeSection"
-          className="mt-4"
-          title={`M-Type ${currentMtype} Factsheet`}
-        >
-          <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
-            {data => (
-              <>
-                <p className="mb-3">
-                  Neurons are objectively classified into m-types based on the shapes of their axons and dendrites.
-                </p>
-
-                <h3>Anatomy</h3>
-                <Factsheet id="mtypeAnatomyFactsheet" facts={data[0].values} />
-
-                <h3 className="mt-3">Physiology</h3>
-                <Factsheet id="mtypePhysiologyFactsheet" facts={data[1].values} />
-
-                <div className="text-right mt-3">
-                  <HttpDownloadButton
-                    href={mtypeFactsheetPath(currentRegion, currentMtype)}
-                    download={`mtype-factsheet-${currentRegion}-${currentMtype}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-
-                <MorphHistogram className="mt-4" region={currentRegion} mtype={currentMtype} />
-              </>
-            )}
-          </HttpData>
-        </Collapsible>
-
-        <Collapsible
-          id="etypeSection"
-          className="mt-4"
-          title={`E-Type ${currentEtype} Factsheet`}
-        >
-          <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
-            {data => (
-              <>
-                <p className="mb-3">
-                  Neurons are classified into e-types based on their electrical response properties
-                  to step current injections at the soma.
-                </p>
-                <EtypeFactsheet id="etypeFactsheet" data={data} />
-                <div className="text-right mt-3 mb-3">
-                  <HttpDownloadButton
-                    href={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
-                    download={`etype-factsheet-${currentRegion}-${currentMemodel}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-
-                <h3>Experimental traces used for model fitting</h3>
-                <ESData query={modelEphysByNamesDataQuery(data[4].value)}>
-                  {esDocuments => (
-                    <>
-                      {esDocuments && (
-                        <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
-                      )}
-                      <Tabs
-                        id={esDocuments && esDocuments.length ? 'modelFittingEphys' : null}
-                        className="mt-3"
-                        type="card"
-                      >
-                        {esDocuments && esDocuments.map(esDocument => (
-                          <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
-                            <div style={{ minHeight: '600px' }}>
-                              <p className="mt-2 mb-3">
-                                Full experimental instance (with all traces): &nbsp;
-                                <Link href={expEphysPageUrl(currentEtype, esDocument._source.name)}>
-                                  {esDocument._source.name}
-                                </Link>
-                              </p>
-
-                              <div className="text-right">
-                                <NexusFileDownloadButton
-                                  filename={getEphysDistribution(esDocument._source).name}
-                                  url={getEphysDistribution(esDocument._source).contentUrl}
-                                  org={sscx.org}
-                                  project={sscx.project}
-                                >
-                                  trace
-                                </NexusFileDownloadButton>
-                              </div>
-
-                              <NexusPlugin
-                                name="neuron-electrophysiology"
-                                resource={esDocument._source}
-                                nexusClient={nexus}
-                              />
-                            </div>
-                          </TabPane>
-                        ))}
-                      </Tabs>
-                    </>
-                  )}
-                </ESData>
               </>
             )}
           </HttpData>
