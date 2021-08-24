@@ -2438,6 +2438,31 @@ $collapsible-padding-small: 0.5rem;
       margin: 0 auto;
     }
   }
+
+  .section-5 {
+    background-color: map-get($basePalette, "grey");
+    text-align: center;
+
+    h2 {
+      text-transform: uppercase;
+      color: map-get($basePalette, "navy-4");
+    }
+
+    p {
+      color: map-get($basePalette, "navy-0");
+    }
+
+    a {
+      margin: 0 5px;
+      color: map-get($basePalette, "navy-3");
+    }
+
+    @media (max-width: $small) {
+      .contact-us-container {
+        font-size: 1.5rem;
+      }
+    }
+  }
 }
 
 

@@ -198,6 +198,20 @@ const Home: React.FC = () => (
         </div>
       </div>
     </section>
+
+    <section id="contact" className="section-5">
+      <h2 className="contact-us-container">
+        <span>CONTACT US</span>
+        <span className="accent-border" />
+      </h2>
+      <p>
+        Let’s stay in touch!
+      </p>
+      <p>
+        For all inquiries, support and collaborations, please email:
+        <a href="mailto:sscx.portal@groupes.epfl.ch">sscx.portal@groupes.epfl.ch</a>
+      </p>
+    </section>
   </div>
 );
 
