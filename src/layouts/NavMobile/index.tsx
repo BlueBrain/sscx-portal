@@ -39,7 +39,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Glossary</span>
         </a>
       </Link>
-      <Link href="/contact">
+      <Link href="/#contact">
         <a>
           <img
             src={`${basePath}/assets/images/icons/mail-alt.svg`}
