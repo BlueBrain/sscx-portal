@@ -280,13 +280,117 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       <DataContainer
         visible={!!currentMemodel}
         navItems={[
+          { id: 'memodelSection', label: 'ME-model' },
           { id: 'mtypeSection', label: 'M-type' },
           { id: 'etypeSection', label: 'E-type' },
-          { id: 'memodelSection', label: 'ME-model' },
         ]}
       >
         <Collapsible
+          id="memodelSection"
+          title={`ME-model ${currentMemodel} Instance`}
+        >
+          <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
+            {data => (
+              <>
+                <p className="mb-3">
+                  Each m-type expresses a certain proportion of various e-types,
+                  giving rise to a diversity of morpho-electrical subtypes (me-types).
+                </p>
+
+                <h3>Anatomy</h3>
+                <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values} />
+
+                <h3 className="mt-3">Physiology</h3>
+                <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values} />
+
+                <div className="text-right mt-2 mb-3">
+                  <HttpDownloadButton
+                    href={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
+                    download={`memodel-factsheet-${currentRegion}-${currentMemodel}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
+
+                <h3 className="mt-3">Model morphology</h3>
+                <NeuronMorphology path={memodelMorphologyPath(data[2].value)} />
+
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={memodelArchivePath(currentRegion, currentMtype, currentEtype, currentMemodel)}
+                    download
+                  >
+                    model
+                  </HttpDownloadButton>
+                </div>
+
+                <ESData query={modelSimTraceByNameDataQuery(`${currentRegion}_${currentMemodel}`)}>
+                  {esDocuments => (
+                    <>
+                      {esDocuments && esDocuments.length && (
+                        <div className="mt-3">
+                          <h3>ME-model simulation traces</h3>
+                          <NexusPlugin
+                            name="neuron-electrophysiology"
+                            resource={esDocuments[0]._source}
+                            nexusClient={nexus}
+                          />
+                          <div className="text-right mt-2">
+                            <NexusFileDownloadButton
+                              filename={getEphysDistribution(esDocuments[0]._source).name}
+                              url={getEphysDistribution(esDocuments[0]._source).contentUrl}
+                              org={sscx.org}
+                              project={sscx.project}
+                              id="ephysDownloadBtn"
+                            >
+                              trace
+                            </NexusFileDownloadButton>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </ESData>
+
+                <HttpData path={modelExpMorphologiesPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
+                  {expMorphologies => (
+                    <div className="mt-3">
+                      <h3>Experimental morphologies used for this model</h3>
+                      <MemodelExpMorphList morphologies={expMorphologies} />
+                    </div>
+                  )}
+                </HttpData>
+
+                <div className="row mt-3">
+                  <div className="col-xs-12 col-sm-6 mt-1">
+                    <h3>EPSP Attenuation</h3>
+                    <VideoPlayer
+                      sources={[{
+                        src: epspMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
+                        type: 'video/mp4',
+                        size: 1080,
+                      }]}
+                    />
+                  </div>
+                  <div className="col-xs-12 col-sm-6 mt-1">
+                    <h3>bAP Attenuation</h3>
+                    <VideoPlayer
+                      sources={[{
+                        src: bapMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
+                        type: 'video/mp4',
+                        size: 1080,
+                      }]}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+          </HttpData>
+        </Collapsible>
+
+        <Collapsible
           id="mtypeSection"
+          className="mt-4"
           title={`M-Type ${currentMtype}`}
         >
           <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
@@ -384,110 +488,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     </>
                   )}
                 </ESData>
-              </>
-            )}
-          </HttpData>
-        </Collapsible>
-
-        <Collapsible
-          id="memodelSection"
-          className="mt-4"
-          title={`ME-model ${currentMemodel} Instance`}
-        >
-          <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
-            {data => (
-              <>
-                <p className="mb-3">
-                  Each m-type expresses a certain proportion of various e-types,
-                  giving rise to a diversity of morpho-electrical subtypes (me-types).
-                </p>
-
-                <h3>Anatomy</h3>
-                <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values} />
-
-                <h3 className="mt-3">Physiology</h3>
-                <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values} />
-
-                <div className="text-right mt-2 mb-3">
-                  <HttpDownloadButton
-                    href={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}
-                    download={`memodel-factsheet-${currentRegion}-${currentMemodel}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-
-                <h3 className="mt-3">Model morphology</h3>
-                <NeuronMorphology path={memodelMorphologyPath(data[2].value)} />
-
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={memodelArchivePath(currentRegion, currentMtype, currentEtype, currentMemodel)}
-                    download
-                  >
-                    model
-                  </HttpDownloadButton>
-                </div>
-
-                <ESData query={modelSimTraceByNameDataQuery(`${currentRegion}_${currentMemodel}`)}>
-                  {esDocuments => (
-                    <>
-                      {esDocuments && esDocuments.length && (
-                        <div className="mt-3">
-                          <h3>ME-model simulation traces</h3>
-                          <NexusPlugin
-                            name="neuron-electrophysiology"
-                            resource={esDocuments[0]._source}
-                            nexusClient={nexus}
-                          />
-                          <div className="text-right mt-2">
-                            <NexusFileDownloadButton
-                              filename={getEphysDistribution(esDocuments[0]._source).name}
-                              url={getEphysDistribution(esDocuments[0]._source).contentUrl}
-                              org={sscx.org}
-                              project={sscx.project}
-                              id="ephysDownloadBtn"
-                            >
-                              trace
-                            </NexusFileDownloadButton>
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </ESData>
-
-                <HttpData path={modelExpMorphologiesPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
-                  {expMorphologies => (
-                    <div className="mt-3">
-                      <h3>Experimental morphologies used for this model</h3>
-                      <MemodelExpMorphList morphologies={expMorphologies} />
-                    </div>
-                  )}
-                </HttpData>
-
-                <div className="row mt-3">
-                  <div className="col-xs-12 col-sm-6 mt-1">
-                    <h3>EPSP Attenuation</h3>
-                    <VideoPlayer
-                      sources={[{
-                        src: epspMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
-                        type: 'video/mp4',
-                        size: 1080,
-                      }]}
-                    />
-                  </div>
-                  <div className="col-xs-12 col-sm-6 mt-1">
-                    <h3>bAP Attenuation</h3>
-                    <VideoPlayer
-                      sources={[{
-                        src: bapMoviePath(currentRegion, currentMtype, currentEtype, data[2].value),
-                        type: 'video/mp4',
-                        size: 1080,
-                      }]}
-                    />
-                  </div>
-                </div>
               </>
             )}
           </HttpData>
