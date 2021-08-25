@@ -184,10 +184,10 @@ const NeuronExperimentalMorphology: React.FC = () => {
           className="mb-4"
           title={`Neuron Morphology ${currentInstance}`}
         >
-          <p className="mb-3">
-            Neuron morphologies were obtained from digital 3D reconstructions of biocytin-stained neurons from juvenile
-            rat hind-limb somatosensory cortex, following whole-cell patch-clamp recordings in 300-μm-thick brain slices.
-            This procedure enabled the reconstruction of shapes of axons, which were classified into 60 morphological types (m-types).
+          <p>
+            The 3D representations of neuronal morphologies - axons and dendrites - are traced
+            and reconstructed using Neurolucida (neuron tracing, reconstruction, and analysis software).
+            Data for neuronal morphologies are provided as ASCII files.
           </p>
           <ESData
             query={morphologyDataQuery(currentMtype, currentInstance)}
@@ -250,6 +250,50 @@ const NeuronExperimentalMorphology: React.FC = () => {
               </div>
             )}
           </HttpData>
+        </Collapsible>
+
+        <Collapsible
+          id="mtypeSection"
+          title={`M-Type ${currentMtype}`}
+        >
+          <p>
+            Neuron morphologies were obtained from digital 3D reconstructions of biocytin-stained neurons from juvenile
+            rat hind-limb somatosensory cortex, following whole-cell patch-clamp recordings in 300-μm-thick brain slices.
+            This procedure enabled the reconstruction of shapes of axons, which were classified into 60 morphological types (m-types).
+          </p>
+          <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
+            {factsheetData => (
+              <div>
+                <h3>Factsheet</h3>
+                <Factsheet facts={factsheetData.values} />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={expMorphPopulationFactesheetPath(currentMtype)}
+                    download={`exp-morphology-population-factsheet-${currentMtype}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
+              </div>
+            )}
+          </HttpData>
+
+          <ExpMorphDistribution className="mt-3" mtype={currentMtype} />
+
+          <h3 className="mt-3">Reconstructed morphologies</h3>
+          <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
+            {esDocuments => (
+              <>
+                {!!esDocuments && (
+                  <ExpMorphologyTable
+                    layer={currentLayer}
+                    mtype={currentMtype}
+                    morphologies={getAndSortMorphologies(esDocuments)}
+                  />
+                )}
+              </>
+            )}
+          </ESData>
         </Collapsible>
       </DataContainer>
     </>
