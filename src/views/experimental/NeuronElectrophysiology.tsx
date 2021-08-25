@@ -142,59 +142,12 @@ const NeuronElectrophysiology: React.FC = () => {
       <DataContainer
         visible={!!currentEtype && !!currentInstance}
         navItems={[
-          { id: 'etypeSection', label: 'E-type' },
           { id: 'instanceSection', label: 'Instance' },
+          { id: 'etypeSection', label: 'E-type' },
         ]}
       >
         <Collapsible
-          id="etypeSection"
-          title={`E-type ${currentEtype}`}
-        >
-          <p className="mb-3">
-            The e-type of a neuron is determined by its firing behavior when injected with a step
-            current in the soma. The pattern of electrical activity of neurons can be accommodating
-            or non-accommodating (AC and NAC types), it can be very regular or show some stuttering
-            or irregular firing (STUT or IR types). The response of the cell at the start of the
-            stimulus is also important, there can be a delay at the beginning ('d' types) or a
-            burst of activity ('b' types).
-          </p>
-
-          <h3>Factsheet</h3>
-          <HttpData path={expTracePopulationFactsheetPath(currentEtype)}>
-            {factsheetData => (
-              <div>
-                <ExpTraceFactsheet data={factsheetData} />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={expTracePopulationFactsheetPath(currentEtype)}
-                    download={`exp-trace-population-factsheet-${currentEtype}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </div>
-            )}
-          </HttpData>
-
-          <h3 className="mt-3">Distribution</h3>
-          <ExpEphysDistribution etype={currentEtype} />
-
-          <h3 className="mt-3">Experimental instances</h3>
-
-          <ESData query={etypeTracesDataQuery(currentEtype)}>
-            {esDocuments => (
-              <>
-                {!!esDocuments && (
-                  <ExpTraceTable etype={currentEtype} traces={getAndSortTraces(esDocuments)} />
-                )}
-              </>
-            )}
-          </ESData>
-        </Collapsible>
-
-        <Collapsible
           id="instanceSection"
-          className="mt-4"
           title={`Electrophysiological recordings instance ${currentInstance}`}
         >
           <p className="mb-3">
@@ -248,6 +201,53 @@ const NeuronElectrophysiology: React.FC = () => {
               </div>
             )}
           </HttpData>
+        </Collapsible>
+
+        <Collapsible
+          id="etypeSection"
+          className="mt-4"
+          title={`E-type ${currentEtype}`}
+        >
+          <p className="mb-3">
+            The e-type of a neuron is determined by its firing behavior when injected with a step
+            current in the soma. The pattern of electrical activity of neurons can be accommodating
+            or non-accommodating (AC and NAC types), it can be very regular or show some stuttering
+            or irregular firing (STUT or IR types). The response of the cell at the start of the
+            stimulus is also important, there can be a delay at the beginning ('d' types) or a
+            burst of activity ('b' types).
+          </p>
+
+          <h3>Factsheet</h3>
+          <HttpData path={expTracePopulationFactsheetPath(currentEtype)}>
+            {factsheetData => (
+              <div>
+                <ExpTraceFactsheet data={factsheetData} />
+                <div className="text-right mt-2">
+                  <HttpDownloadButton
+                    href={expTracePopulationFactsheetPath(currentEtype)}
+                    download={`exp-trace-population-factsheet-${currentEtype}.json`}
+                  >
+                    factsheet
+                  </HttpDownloadButton>
+                </div>
+              </div>
+            )}
+          </HttpData>
+
+          <h3 className="mt-3">Distribution</h3>
+          <ExpEphysDistribution etype={currentEtype} />
+
+          <h3 className="mt-3">Experimental instances</h3>
+
+          <ESData query={etypeTracesDataQuery(currentEtype)}>
+            {esDocuments => (
+              <>
+                {!!esDocuments && (
+                  <ExpTraceTable etype={currentEtype} traces={getAndSortTraces(esDocuments)} />
+                )}
+              </>
+            )}
+          </ESData>
         </Collapsible>
       </DataContainer>
     </>
