@@ -30,7 +30,7 @@ const Home: React.FC = () => (
       <div className="gradient" />
 
       <div className="copyright">
-        ©Blue Brain Project/EPFL 2005-2021.
+        ©Blue Brain Project/EPFL 2005-{`${(new Date()).getFullYear()}`}.
       </div>
 
       <div className="title">
@@ -65,7 +65,6 @@ const Home: React.FC = () => (
 
         <div className="row">
           <div className="col-xs-12 col-sm-6 bg-white p-2">
-            <h4>Welcome to the SSCx Portal</h4>
             <p>
               The rat brain is made up of hundreds of different regions including the
               Somatosensory Cortex (SSCx). This area of the cortex, which is the region of the brain
