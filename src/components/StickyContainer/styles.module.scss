@@ -1,3 +1,6 @@
+
+@import '../../styles/config/_queries';
+
 .container {
     position: sticky;
     bottom: 100px;
@@ -8,4 +11,10 @@
 .flexWrapper {
     display: flex;
     height: 100%;
+}
+
+@media (max-width: $ant-breakpoint-md) {
+    .container {
+        margin: 0 auto;
+    }
 }

@@ -6,6 +6,7 @@ import BrainRegionSelector from '../components/BrainRegionSelector';
 import { Subregion } from '../types';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
+import { StickyContainer } from '../components/StickyContainer';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
 import { defaultSelection } from '../constants';
@@ -43,33 +44,32 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
       <Filters primaryColor={color} hasData={!!currentRegion}>
         <Row
           className="w-100"
-          align="bottom"
           gutter={[0,20]}
         >
           <Col
             xs={24}
-            md={10}
             xl={8}
             xxl={12}
           >
-            <Title
-              primaryColor={color}
-              title="Brain Regions"
-              subtitle={sectionTitle}
-              hint="Select a subregion of interest in the S1 of the rat brain."
-            />
-            <InfoBox>
-              <p>
-                We digitally reconstructed the non-barrel hind limb primary rat Somatosensory Cortex
-                consisting of eight sub-regions, four million neurons mediated by four billion synapses.
-              </p>
-            </InfoBox>
+            <StickyContainer>
+              <Title
+                primaryColor={color}
+                title="Brain Regions"
+                subtitle={sectionTitle}
+                hint="Select a subregion of interest in the S1 of the rat brain."
+              />
+              <InfoBox>
+                <p>
+                  We digitally reconstructed the non-barrel hind limb primary rat Somatosensory Cortex
+                  consisting of eight sub-regions, four million neurons mediated by four billion synapses.
+                </p>
+              </InfoBox>
+            </StickyContainer>
           </Col>
 
           <Col
             className={`mt-2 set-accent-color--${color}`}
             xs={24}
-            md={14}
             xl={16}
             xxl={12}
           >

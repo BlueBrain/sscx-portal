@@ -40,6 +40,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import NeuronMorphology from '../components/NeuronMorphology';
 import ESData from '../components/ESData';
 import NexusPlugin from '../components/NexusPlugin';
+import { StickyContainer } from '../components/StickyContainer';
 import { modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
 import { defaultSelection } from '../constants';
 
@@ -175,7 +176,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
       <Filters primaryColor={color} hasData={!!currentMemodel}>
         <Row
           className="w-100"
-          align="bottom"
           gutter={[0, 20]}
         >
           <Col
@@ -183,24 +183,26 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
             xl={8}
             xxl={12}
           >
-            <Title
-              primaryColor={color}
-              title="Neurons"
-              subtitle={sectionTitle}
-            />
-            <div>
-              <InfoBox>
-                <p>
-                  We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
-                  to enable their 3D reconstruction and their objective classification
-                  into morphological types (m-types). In addition, we also characterised the electrical firing patterns
-                  of these neurons to different intensities of step currents injected in the soma
-                  to group their response into electrical types (e-types).
-                  We then mapped the e-types expressed in each m-type
-                  to account for the observed diversity of morpho-electrical subtypes (me-types).
-                </p>
-              </InfoBox>
-            </div>
+            <StickyContainer>
+              <Title
+                primaryColor={color}
+                title="Neurons"
+                subtitle={sectionTitle}
+              />
+              <div>
+                <InfoBox>
+                  <p>
+                    We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
+                    to enable their 3D reconstruction and their objective classification
+                    into morphological types (m-types). In addition, we also characterised the electrical firing patterns
+                    of these neurons to different intensities of step currents injected in the soma
+                    to group their response into electrical types (e-types).
+                    We then mapped the e-types expressed in each m-type
+                    to account for the observed diversity of morpho-electrical subtypes (me-types).
+                  </p>
+                </InfoBox>
+              </div>
+            </StickyContainer>
           </Col>
 
           <Col

@@ -5,6 +5,7 @@ import { Row, Col } from 'antd';
 import LayerSelector from '../components/AnatomyLayerSelector';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
+import { StickyContainer } from '../components/StickyContainer';
 import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
 import { defaultSelection } from '../constants';
@@ -40,7 +41,6 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
     <>
       <Filters primaryColor={color} hasData={!!currentLayer}>
         <Row
-          align="bottom"
           className="w-100"
           gutter={[0,20]}
         >
@@ -48,7 +48,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
             xs={24}
             lg={12}
           >
-            <div style={{ maxWidth: '560px', margin: '0 auto' }}>
+            <StickyContainer>
               <Title
                 primaryColor={color}
                 title="Layer Anatomy"
@@ -69,7 +69,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
                   </p>
                 </InfoBox>
               </div>
-            </div>
+            </StickyContainer>
           </Col>
 
           <Col
