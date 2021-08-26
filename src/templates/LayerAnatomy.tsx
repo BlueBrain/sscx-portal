@@ -67,17 +67,6 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
                     This section showcases the data we have acquired and organized on the anatomy of SSCx
                     from cortical slices in developing rats.
                   </p>
-                  <h3>Layer thickness: S1</h3>
-                  <p>
-                    Data are provided in the form of raw microscopy images of NeuN
-                    (neuron-specific nuclear protein) stained coronal slices with annotations of individual layer extents,
-                    and spreadsheets summarizing measurements of layer thicknesses.
-                  </p>
-                  <h3>Neuronal density</h3>
-                  <p>Data are given as raw microscopy images of NeuN stained slices with annotations of
-                    individual layer extents, and spreadsheets summarizing measurements of neuron counts
-                    across different layers.
-                  </p>
                 </InfoBox>
               </div>
             </div>

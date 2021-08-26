@@ -12,13 +12,16 @@ export const cardsData: Cards[] = [
     {
         title: (<>Experimental <br/> data</>),
         description: [
-            `The first step in the reconstruction of the SSCx involves the acquisition and organization of data from anatomical 
-            and electrophysiological cortical slices from rodent brains.`,
-            `Sparse data has been collected both from our own laboratory and from published sources worldwide,
-            which describes the structural and functional organization of the SSCx at various anatomical levels.
-            This ranges from individual neurons to synaptic connections and network activity in microcircuits.
-            The data provides constraints, rules, and the principles to build computational models
-            at specific levels of detail.`],
+            `The reconstruction of the SSCx involves the acquisition and organization of
+            data from anatomical and electrophysiological cortical slices from rodent brains.
+            Sparse data has been collected from our own laboratory and from
+            published sources worldwide, both of which describes the structural and functional
+            organization of the SSCx at various anatomical levels.`,
+
+            `This ranges from individual neurons to synaptic connections and network activity
+            in microcircuits. The data provides constraints, rules, and the principles to
+            build computational models at specific levels of detail.`,
+        ],
         image: 'experimental-data',
         backgroundColor: "yellow",
         links: [
@@ -30,12 +33,12 @@ export const cardsData: Cards[] = [
     {
         title: (<>Reconstruction <br/> data</>),
         description: [
-            `Step two in the SSCx workflow is the extraction of as much information as possible
-            from the previously collected sparse data and the exploitation of interdependencies
-            to build detailed and dense models of individual cells and cell-circuits.
-            From sparse experimental data sets, rules and principles of organization are identified
-            and missing information is extrapolated to fill knowledge gaps,
-            which enable a dense data-driven digital reconstruction of the entire SSCx region.`
+            `The SSCx workflow extracts all relevant information from sparse data and
+            exploits interdependencies to build detailed and dense models of individual cells,
+            synaptic connections and microcircuits. Rules and principles of organization are
+            identified from sparse biological data sets and missing information is extrapolated to
+            fill knowledge gaps, which enable a dense data-driven digital reconstruction of the
+            entire SSCx region.`,
         ],
         image: 'reconstruction-data',
         backgroundColor: "light-blue",
@@ -49,19 +52,17 @@ export const cardsData: Cards[] = [
     {
         title: (<>Digital <br/> reconstructions</>),
         description: [
-            `In the third step of our reconstruction workflow, digital reconstructions are built and based on
-            experimental datasets taken from specimens at a specific stage of development.
-            They are therefore, digital snapshots of the structure and physiology of the brain
-            at a specific age range. These digital reconstructions integrate data and knowledge of molecular,
-            cellular and circuit anatomy, as well as their physiology.`,
-            `Starting from individually reconstructed cell morphologies and
-            corresponding electrophysiological behaviors, they can be assembled into
-            specific brain region circuits along with their individual synaptic and connectivity models.
-            Circuit reconstructions are based on a standardized workflow enabled by
-            Blue Brain Project software tools and supercomputing infrastructure.
-            The parameterization of the tissue model is strictly based on biological data:
-            directly, where available, generalized from data obtained in other similar systems;
-            or, where unavailable, predicted from multi-constraints imposed by sparse data.`
+            `Digital reconstructions are built based on experimental datasets obtained from
+            the developing SSCx in two-week old rats and integrate knowledge on the molecular
+            and cellular composition of neurons, and the anatomy and physiology of synapses
+            and microcircuits. Individually reconstructed neuron morphologies and their
+            corresponding electrophysiological properties are assembled into atlas-based geometries of
+            neocortical tissue to derive their synaptic connectivity.`,
+
+            `Circuit reconstructions are based on a standardized workflow enabled by software tools
+            and supercomputing infrastructure. The parameterization of the tissue model is based on biological data:
+            directly, where available, generalized from data obtained in other similar systems; or,
+            where unavailable, predicted from multi-constraints imposed by sparse data.`,
         ],
         image: 'digital-reconstructions',
         backgroundColor: "blue",
@@ -75,18 +76,23 @@ export const cardsData: Cards[] = [
     {
         title: `Validations`,
         description: [
-            `Validations are a crucial part of the data-driven modeling workflows that reduce the risk
-            that errors may lead to major inaccuracies in the reconstruction or
-            in simulations of emergent behavior. Successful validations not only enable
-            the systematic exploration of the emergent properties of the model,
-            but also establish predictions for future in vitro experiments,
-            or may call into question existing experimental data. Failure in validation may also indicate
-            errors in experimental data, permitting the identification of future refinements.
-            Rigorous validation of a metric at one level of detail therefore also prevents error amplification
-            to the next level, and triggers specific experimental refinements.`,
-            `The Blue Brain Project Validation step provides a scaffold that enables the integration of
-            available experimental data, identifies missing experimental data,
-            and facilitates the iterative refinement of constituent models.`
+            `Validations are a crucial part of the data-driven modeling workflow. Through
+            validation, we reduce the risk that errors may lead to major inaccuracies in the
+            reconstruction or in simulations of emergent behavior.`,
+
+            `Successful validations not only enable the systematic exploration of the emergent
+            properties of the model, but also establish predictions for future in vitro experiments,
+            or may call into question existing experimental data.`,
+
+            `Failure in the validation process may indicate errors in experimental data, which
+            enables us to identify future refinements.`,
+
+            `Rigorous validation of a metric at one level of detail therefore also prevents error amplification to
+            the next level, and triggers specific experimental refinements.`,
+
+            `The Blue Brain Project Validation step in our workflow provides a scaffold that enables the
+            integration of available experimental data, identifies missing experimental data, and
+            facilitates the iterative refinement of constituent models.`,
         ],
         image: 'validations',
         backgroundColor: "green",
@@ -100,13 +106,14 @@ export const cardsData: Cards[] = [
     {
         title: `Predictions`,
         description: [
-            `The digital reconstruction of the SSCx provides an array of predictions
-            across its many levels of organization. These predictions provide insights
-            to link underlying structure with function. In addition, predictions are also a means
-            to validate the component models of the SSCx model and identify missing data
-            that could guide targeted experiments.
-            In particular, we provide predictions on the propagation of activity
-            across the different sub-regions of the SSCx.`
+            `The digital reconstruction of the SSCx provides an array of predictions across
+            the many levels of organization in this brain region.`,
+
+            `These predictions provide insights to link underlying structure with function.
+            In addition, predictions are also a means to validate the component models of the SSCx
+            model and identify missing data that could guide targeted experiments.
+            In particular, we provide predictions on the propagation of activity across the
+            different sub-regions of the SSCx.`,
         ],
         image: 'predictions',
         backgroundColor: "grey",

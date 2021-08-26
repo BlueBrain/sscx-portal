@@ -193,7 +193,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <p>
                   We labeled single neurons with biocytin to stain their axonal and dendritic morphologies
                   to enable their 3D reconstruction and their objective classification
-                  into morphological types (m-types). In addition, we also characterized the electrical firing patterns
+                  into morphological types (m-types). In addition, we also characterised the electrical firing patterns
                   of these neurons to different intensities of step currents injected in the soma
                   to group their response into electrical types (e-types).
                   We then mapped the e-types expressed in each m-type
@@ -285,7 +285,10 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           { id: 'etypeSection', label: 'E-type' },
         ]}
       >
-        <Collapsible id="memodelSection" title={`ME-model ${currentMemodel} Factsheet`}>
+        <Collapsible
+          id="memodelSection"
+          title={`ME-model ${currentMemodel} Instance`}
+        >
           <HttpData path={metypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (
               <>
@@ -388,7 +391,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         <Collapsible
           id="mtypeSection"
           className="mt-4"
-          title={`M-Type ${currentMtype} Factsheet`}
+          title={`M-Type ${currentMtype}`}
         >
           <HttpData path={mtypeFactsheetPath(currentRegion, currentMtype)}>
             {data => (
@@ -421,7 +424,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
         <Collapsible
           id="etypeSection"
           className="mt-4"
-          title={`E-Type ${currentEtype} Factsheet`}
+          title={`E-Type ${currentEtype}`}
         >
           <HttpData path={etypeFactsheetPath(currentRegion, currentMtype, currentEtype, currentMemodel)}>
             {data => (

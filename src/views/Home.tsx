@@ -30,7 +30,7 @@ const Home: React.FC = () => (
       <div className="gradient" />
 
       <div className="copyright">
-        ©Blue Brain Project/EPFL 2005-2021.
+        ©Blue Brain Project/EPFL 2005-{`${(new Date()).getFullYear()}`}.
       </div>
 
       <div className="title">
@@ -39,14 +39,10 @@ const Home: React.FC = () => (
           hint={(
             <>
               <p>
-                The SSCx portal is a freely accessible resource, which provides access to the <b>Blue Brain Project</b>'s
-                experimental data sets on the multi-scale organization of the juvenile rat primary somatosensory cortex -
-                sub-regions, microcircuits, neurons, synapses, and the resulting computational models.
+                Welcome to the SSCx Portal from the EPFL <b>Blue Brain Project</b>.
               </p>
               <p>
-                The portal describes a workflow for how sparse experimental data are gathered and extrapolated
-                to obtain dense computational models, their validation and
-                resulting predictions across multiple levels of organization.
+                Discover a tissue-level model of the rodent somatosensory cortex 'in silico'.
               </p>
             </>
           )}
@@ -69,39 +65,26 @@ const Home: React.FC = () => (
 
         <div className="row">
           <div className="col-xs-12 col-sm-6 bg-white p-2">
-            <h4>Welcome to the SSCx Portal</h4>
             <p>
-              The SSCx portal is a freely accessible resource which provides experimental data
-              on the juvenile rat primary somatosensory cortex, and an explanation of the extrapolation process
-              for translating this data into a structural and behavioral digital reconstruction.
-              The portal explores new avenues for filling the gaps in existing data, as well as presenting data
-              which has been validated against literature and the inferred hypotheses which still need validation.
+              The rat brain is made up of hundreds of different regions including the
+              Somatosensory Cortex (SSCx). This area of the cortex, which is the region of the brain
+              associated with specific cognitive processes, receives and processes sensory information
+              including touch, pain and temperature. It is referred to as the 'touch map' of the body.
             </p>
             <p>
-              The rat brain is made up of hundreds of different regions including the Somatosensory Cortex (SSCx).
-              This area of the cortex, which is the region of the brain associated with specific cognitive processes,
-              receives and processes sensory information including touch, pain and temperature.
-              It is referred to as the ‘touch map’ of the body.
+              The SSCx portal is a freely accessible resource, which provides multi-scale
+              experimental data on the cellular, synaptic and microcircuit organization of juvenile rat
+              primary somatosensory cortex. The portal provides a description of the extrapolation
+              process for translating sparse experimental data into a dense tissue-level model. The
+              portal also explores new avenues for filling the gaps in existing knowledge, as well
+              as presenting data which has been validated against literature and the inferred
+              hypotheses which still need validation.
             </p>
             <p>
-              The portal presents the Blue Brain reconstruction of a rodent’s Somatosensory Cortex “in silico”,
-              which is a process or experiment performed on a computer as opposed to in vivo experiments
-              conducted in live organisms, and in vitro experiments made of organic tissue under the microscope.
-              Our digital reconstruction of a rat Somatosensory Cortex allows us a better vision and understanding
-              of the anatomy, to see behavior recorded in experimental data which is then translated
-              into our in silico model, the validation of these translations against all accessible literature,
-              and the testing of new hypotheses under various conditions.
-            </p>
-            <p>
-              The SSCx portal gives a clear view of the process used to reconstruct a brain region,
-              taking you through the various Data Sections and levels of magnitude, and offering a unique opportunity
-              to observe the various results in 3D data visualizations.
-            </p>
-            <p>
-              The aim of the EPFL Blue Brain Project, a Swiss brain research initiative is to establish
-              in silico neuroscience as a complementary approach alongside experimental, theoretical
-              and clinical neuroscience to understanding the brain, by building the world’s first
-              biologically detailed digital reconstructions and simulations of the mouse brain.
+              The SSCx portal enables a data-driven view to
+              build a computational model of an entire brain region, taking you through the
+              various experimental data, resulting component models and 3D visualisations of the
+              activity of the tissue level model.
             </p>
           </div>
         </div>

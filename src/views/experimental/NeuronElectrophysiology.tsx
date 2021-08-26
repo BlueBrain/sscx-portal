@@ -85,10 +85,9 @@ const NeuronElectrophysiology: React.FC = () => {
             />
             <InfoBox>
               <p>
-                Electrical traces were recorded from neurons using whole-cell patch clamp experiments in brain slices.
-                A standardized stimulus protocol, called the e-code, is injected in each cell.
-                Our scientists then classify the cells based on their firing type in different
-                electrical types (e-types).
+                The electrophysiological properties of neurons are characterized using whole-cell patch clamp
+                experiments in brain slices. A standardized battery of stimuli, called the e-code, is applied
+                to each neuron and their response is classified into different electrical types (e-types).
               </p>
             </InfoBox>
           </Col>
@@ -152,9 +151,10 @@ const NeuronElectrophysiology: React.FC = () => {
           title={`Electrophysiological recordings instance ${currentInstance}`}
         >
           <p className="mb-3">
-            This section shows the whole-cell patch clamp recording of the neuron. The stimulus represents
-            the current trace that was injected into the cell using the current clamp method.
-            The response shows the membrane voltage of the neuron.
+            When a stimulus type is selected, this page shows the whole-cell patch
+            clamp recording of the neuron. The stimulus represents the current trace
+            that was injected into the cell using the current clamp method.
+            The response shows the membrane voltage of the neuron.  
           </p>
           <ESData query={fullElectroPhysiologyDataQuery(currentEtype, currentInstance)}>
             {esDocuments => (
@@ -209,11 +209,12 @@ const NeuronElectrophysiology: React.FC = () => {
           title={`E-type ${currentEtype}`}
         >
           <p className="mb-3">
-            The e-type of a neuron is determined by its firing behavior when injected with a step current in the soma.
-            The pattern of electrical activity of neurons can be accommodating or non-accommodating (AC and NAC types),
-            it can be very regular or show some stuttering or irregular firing (STUT or IR types).
-            The reaction of the cell at the start of the stimulus is also important,
-            there can be a delay at the beginning (‘d’ types) or a little burst (‘b’ types).
+            The e-type of a neuron is determined by its firing behavior when injected with a step
+            current in the soma. The pattern of electrical activity of neurons can be accommodating
+            or non-accommodating (AC and NAC types), it can be very regular or show some stuttering
+            or irregular firing (STUT or IR types). The response of the cell at the start of the
+            stimulus is also important, there can be a delay at the beginning ('d' types) or a
+            burst of activity ('b' types).
           </p>
 
           <h3>Factsheet</h3>

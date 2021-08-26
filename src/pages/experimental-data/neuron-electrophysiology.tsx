@@ -11,7 +11,7 @@ export default function NeuronElectrophysiologyPage() {
         <title>Neuron electrophysiology / Experimental data / SSCx Portal</title>
         <meta
           name="description"
-          content="Electrical traces were recorded from neurons using whole-cell patch clamp experiments in brain slices. A standardized stimulus protocol, called the e-code, is injected in each cell. Our scientists then classify the cells based on their firing type in different electrical types (e-types)."
+          content="The electrophysiological properties of neurons are characterized using whole-cell patch clamp experiments in brain slices. A standardized battery of stimuli, called the e-code, is applied to each neuron and their response is classified into different electrical types (e-types)."
         />
       </Head>
 

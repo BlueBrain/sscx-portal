@@ -165,8 +165,14 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
               <div>
                 <InfoBox>
                   <p>
-                    A synaptic pathway encompasses the set of all possible connections between pairs of neurons
-                    of pre and postsynaptic  morphological types (m-types).
+                    A synaptic pathway encompasses the set of all possible connections between pairs of
+                    neurons of pre and postsynaptic  morphological types (m-types). <br/>
+                    We generate synaptic connectivity on an anatomically detailed level, i.e. we are
+                    modelling the exact locations of individual synapses along the axon of the presynaptic
+                    and on the dendritic tree of the postsynaptic neuron. Each individual synapse is
+                    equipped with its own set of physiological parameters. Parameterization of these models
+                    is done on a per-pathway basis, that means for pairs of a given combination of pre- and
+                    postsynaptic neuron type.
                   </p>
                 </InfoBox>
               </div>
