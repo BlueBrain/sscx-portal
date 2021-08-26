@@ -17,9 +17,9 @@ const InfoBox: React.FC<InfoBoxProps> = ({
     <div className={`${styles.containerOuter} bg-${bgImage} ${className}`}>
       <div className={styles.containerInner}>
         {children}
-        <div className={styles.topGradient}></div>
-        <div className={styles.bottomGradient}></div>
       </div>
+      <div className={styles.topGradient}></div>
+      <div className={styles.bottomGradient}></div>
     </div>
   );
 };
