@@ -15,6 +15,11 @@ const link = {
   youtube: 'https://www.google.com/url?q=https://www.youtube.com/user/Bluebrainpjt/featured&sa=D&source=editors&ust=1621257818134000&usg=AOvVaw36Av7NQPlVH1juztZbzxCh',
 };
 
+const openNewTab = {
+  target: '_blank',
+  rel: 'noreferrer',
+};
+
 
 const Footer: React.FC<{}> = () => {
   const minYear = 2021;
@@ -29,7 +34,7 @@ const Footer: React.FC<{}> = () => {
       <h2 className="mb-2">The Somatosensory Cortex Portal</h2>
       <div className={styles.row}>
         <div className="mt-2">
-          <p><a href={link.bbpPortal}>Blue Brain Project</a></p>
+          <p><a href={link.bbpPortal} {...openNewTab}>Blue Brain Project</a></p>
           <p className={styles.address}>
             EPFL/Campus Biotech <br/>
             Chemin des Mines 9 <br/>
@@ -40,9 +45,9 @@ const Footer: React.FC<{}> = () => {
 
         <div className="mt-2">
           <p><Link href="/terms-of-use/">Terms of Use</Link></p>
-          <p><a href={link.privacyPolicy}>Privacy Policy</a></p>
-          <p><a href={link.disclaimer}>Disclaimer</a></p>
-          <p><a href={link.cookies}>Cookies</a></p>
+          <p><a href={link.privacyPolicy} {...openNewTab}>Privacy Policy</a></p>
+          <p><a href={link.disclaimer} {...openNewTab}>Disclaimer</a></p>
+          <p><a href={link.cookies} {...openNewTab}>Cookies</a></p>
         </div>
 
         <div className="mt-2">
@@ -56,9 +61,9 @@ const Footer: React.FC<{}> = () => {
             <span>Follow the Blue Brain</span>
 
             <div className={styles.socialLinks}>
-              <a href={link.twitter}><FaTwitterSquare /></a>
-              <a href={link.linkedin}><FaLinkedin /></a>
-              <a href={link.youtube}><FaYoutubeSquare /></a>
+              <a href={link.twitter} {...openNewTab}><FaTwitterSquare /></a>
+              <a href={link.linkedin} {...openNewTab}><FaLinkedin /></a>
+              <a href={link.youtube} {...openNewTab}><FaYoutubeSquare /></a>
             </div>
           </div>
         </div>
