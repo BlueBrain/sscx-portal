@@ -1541,6 +1541,7 @@ $collapsible-padding-small: 0.5rem;
     }
 
     .hint {
+      max-width: 560px;
       border-left: 4px solid map-get($accentPalette, "yellow");
       margin: 2rem 1rem 1rem 0;
       padding-left: 12px;

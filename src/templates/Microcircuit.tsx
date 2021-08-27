@@ -8,6 +8,7 @@ import InfoBox from '../components/InfoBox';
 import LayerSelector from '../components/MicrocircuitLayerSelector';
 import { Layer, Color, Subregion } from '../types';
 import Pills from '../components/Pills';
+import { StickyContainer } from '../components/StickyContainer';
 
 import { subregionTitle, subregions, defaultSelection } from '../constants';
 
@@ -66,7 +67,6 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
       <Filters primaryColor={color} hasData={!!currentLayer && !!currentRegion}>
         <Row
           className="w-100"
-          align="bottom"
           gutter={[0, 20]}
         >
           <Col
@@ -74,23 +74,25 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
             xl={8}
             xxl={12}
           >
-            <Title
-              primaryColor={color}
-              title="Microcircuit"
-              subtitle={sectionTitle}
-            />
-            <div>
-              <InfoBox>
-                <p>
-                  A neuronal microcircuit is the smallest functional ecosystem in any brain region that
-                  encompasses a diverse morphological and electrical assortment of neurons,
-                  and their synaptic interactions. Blue Brain has pioneered data-driven digital
-                  reconstructions and simulations of microcircuits to investigate how local neuronal
-                  structure gives rise to global network dynamics. These methods could be extended to
-                  digitally reconstruct microcircuits in any brain region. Here we focus on the SSCx.
-                </p>
-              </InfoBox>
-            </div>
+            <StickyContainer>
+              <Title
+                primaryColor={color}
+                title="Microcircuit"
+                subtitle={sectionTitle}
+              />
+              <div>
+                <InfoBox>
+                  <p>
+                    A neuronal microcircuit is the smallest functional ecosystem in any brain region that
+                    encompasses a diverse morphological and electrical assortment of neurons,
+                    and their synaptic interactions. Blue Brain has pioneered data-driven digital
+                    reconstructions and simulations of microcircuits to investigate how local neuronal
+                    structure gives rise to global network dynamics. These methods could be extended to
+                    digitally reconstruct microcircuits in any brain region. Here we focus on the SSCx.
+                  </p>
+                </InfoBox>
+              </div>
+            </StickyContainer>
           </Col>
 
           <Col

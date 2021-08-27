@@ -26,6 +26,7 @@ import Factsheet from '../../components/Factsheet';
 import ExpMorphologyTable from '../../components/ExpMorphologyTable';
 import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
+import { StickyContainer } from '../../components/StickyContainer';
 import { sscx } from '../../config';
 import { defaultSelection } from '../../constants';
 
@@ -97,7 +98,6 @@ const NeuronExperimentalMorphology: React.FC = () => {
       <Filters primaryColor={color} hasData={!!currentInstance}>
         <Row
           className="w-100"
-          align="bottom"
           gutter={[0, 20]}
         >
           <Col
@@ -105,7 +105,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             xl={8}
             xxl={12}
           >
-            <div style={{ maxWidth: '560px', margin: '0 auto' }}>
+            <StickyContainer>
               <Title
                 primaryColor={color}
                 title={<span>Neuronal <br /> Morphology</span>}
@@ -123,7 +123,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                   we have identified 60 m-types in the primary rat Somatosensory Cortex.
                 </p>
               </InfoBox>
-            </div>
+            </StickyContainer>
           </Col>
           <Col
             className={`set-accent-color--${color}`}

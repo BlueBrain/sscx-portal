@@ -21,6 +21,7 @@ import ExpTraceTable from '../../components/ExpTraceTable';
 import ExpTraceFactsheet from '../../components/ExpTraceFactsheet';
 import ExpEphysDistribution from '../../components/ExpEphysDistribution';
 import Metadata from '../../components/Metadata';
+import { StickyContainer } from '../../components/StickyContainer';
 import eTypes from '../../__generated__/experimentalData.json';
 import { defaultSelection } from '../../constants';
 import { sscx } from '../../config';
@@ -72,24 +73,26 @@ const NeuronElectrophysiology: React.FC = () => {
   return (
     <>
       <Filters primaryColor={color} hasData={!!currentEtype && !!currentInstance}>
-        <Row align="bottom" className="w-100" gutter={[0, 20]}>
+        <Row className="w-100" gutter={[0, 20]}>
           <Col
             xs={24}
             xl={8}
             xxl={12}
           >
-            <Title
-              primaryColor={color}
-              title="Neuron Electrophysiology"
-              subtitle="Experimental Data"
-            />
-            <InfoBox>
-              <p>
-                The electrophysiological properties of neurons are characterized using whole-cell patch clamp
-                experiments in brain slices. A standardized battery of stimuli, called the e-code, is applied
-                to each neuron and their response is classified into different electrical types (e-types).
-              </p>
-            </InfoBox>
+            <StickyContainer>
+              <Title
+                primaryColor={color}
+                title="Neuron Electrophysiology"
+                subtitle="Experimental Data"
+              />
+              <InfoBox>
+                <p>
+                  The electrophysiological properties of neurons are characterized using whole-cell patch clamp
+                  experiments in brain slices. A standardized battery of stimuli, called the e-code, is applied
+                  to each neuron and their response is classified into different electrical types (e-types).
+                </p>
+              </InfoBox>
+            </StickyContainer>
           </Col>
 
           <Col
