@@ -145,10 +145,11 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   const mtypes = currentRegion && currentLayer && memodelIndex
     ? Object.keys(memodelIndex[currentRegion])
       .filter(mtype => currentLayer.match(/\d+/)[0].includes(mtype.match(/\d+/)[0]))
+      .sort()
     : [];
 
   const etypes = currentMtype && memodelIndex
-    ? memodelIndex[currentRegion][currentMtype]
+    ? memodelIndex[currentRegion][currentMtype].sort()
     : [];
 
   const memodels = currentEtype && memodelIndex
