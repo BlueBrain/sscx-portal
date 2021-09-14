@@ -91,49 +91,6 @@ const Home: React.FC = () => (
       </div>
     </section>
 
-    {/* <section className="section-2">
-      <h2 className="text-uppercase">
-        Select and Explore. Download. Contribute
-        <span className="accent-border" />
-      </h2>
-      <div className="content">
-        <div className="workflow">
-          <InfoBox1
-            icon="checkmark"
-            title="Select and Explore"
-          >
-            <p>
-              Discover how the Blue Brain Project collects and organizes sparse multi-scale datasets, and extrapolates principles of organization for dense digital reconstructions of brain regions such as the SSCx.
-            </p>
-          </InfoBox1>
-          <InfoBox1
-            icon="checkmark"
-            title="Download"
-          >
-            <p>
-              The Blue Brain Project has made various models and data available for you to download.
-            </p>
-          </InfoBox1>
-          <InfoBox1
-            icon="checkmark"
-            title="Contribute"
-          >
-            <p>
-              Please get in touch if you wish to collaborate with us on experimental datasets or computational models presented here.
-            </p>
-          </InfoBox1>
-        </div>
-        <div className="image">
-          <img
-            id="screenshot"
-            src={`${basePath}/assets/images/screenshot.png`}
-            alt="screenshot"
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </section> */}
-
     <section id="explore" className="section-3">
       <div className="intro">
         <h2 className="text-white mb-2 text-uppercase">Explore</h2>

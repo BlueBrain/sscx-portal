@@ -1,11 +1,11 @@
 
-.desktop {
+.desktopOnly {
   @media (max-width: 992px) {
     display: none;
   }
 }
 
-.mobile {
+.mobileOnly {
   @media (min-width: 992px) {
     display: none;
   }
@@ -58,13 +58,12 @@
 }
 
 .infoContentM {
-  font-size: 0.8em;
-  padding: 0.8rem;
+  padding: 1rem;
   color: #7ab7fa;
 }
 
 .infoImgM {
-  background-color: #2f3554;
+  background-color: #323e68;
 }
 
 .infoImgM > img {
@@ -96,6 +95,7 @@
 
 .infoCellD {
   display: table-cell;
+  padding-bottom: 0;
 }
 
 .infoHeadD {
@@ -112,18 +112,18 @@
 
 .infoContentD {
   height: 100%;
-  font-size: 0.8em;
-  padding: 0.8rem;
+  padding: 1.5rem;
   color: #7ab7fa;
-  border-left: 1px solid #7ab7fa;
-  border-right: 1px solid #7ab7fa;
+  border-left: 1px solid #6993c9;
+  border-right: 1px solid #6993c9;
 }
 
 .infoImgD {
-  border-left: 1px solid #7ab7fa;
-  border-right: 1px solid #7ab7fa;
-  border-bottom: 1px solid #7ab7fa;
-  background-color: #2f3554;
+  border-left: 1px solid #6993c9;
+  border-right: 1px solid #6993c9;
+  border-bottom: 1px solid #6993c9;
+  background-color: #323e68;
+  padding: 0.8rem;
 }
 
 .infoHeadD {

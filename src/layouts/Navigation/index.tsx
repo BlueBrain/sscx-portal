@@ -133,12 +133,12 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             {/* </Link> */}
           </li>
           <li>
-            {/* <Link href="/reconstruction-data/neurons"> */}
-              <a className="disabled">
+            <Link href="/reconstruction-data/neurons">
+              <a>
                 <SvgNeuron fill={accentColors.blue} />
                 Neurons
               </a>
-            {/* </Link> */}
+            </Link>
           </li>
         </ul>
       </li>
