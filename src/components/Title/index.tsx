@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Color } from '../../types';
-// import './style.scss';
+
 
 const classPrefix = 'title__';
 
@@ -29,7 +29,7 @@ const Title: React.FC<TitleProps> = ({
       {subtitle && !primary && <h4 className="text-white">{subtitle}</h4>}
       {title && <h2 role="title" className="text-white">{title}</h2>}
       {subtitle && primary && <h4 className="text-white">{subtitle}</h4>}
-      {<div className="hint">{hint}</div>}
+      {<div className="hint text-high-white">{hint}</div>}
     </div>
   );
 };

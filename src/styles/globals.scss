@@ -45,6 +45,14 @@
   --color-text-disabled-white: #ffffff61;
 }
 
+.text-medium-white {
+  color: var(--color-text-medium-white);
+}
+
+.text-high-white {
+  color: var(--color-text-high-white);
+}
+
 .set-accent-color--yellow {
   --accent-color: var(--color-yellow);
 }
