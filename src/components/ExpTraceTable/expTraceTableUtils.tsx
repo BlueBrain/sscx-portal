@@ -32,7 +32,7 @@ export const useExperimentalTraceTable = (etype) => {
     {
       title: 'E-Type',
       dataIndex: 'annotation',
-      render: (value) => (value.hasBody.label),
+      render: (value) => (value?.hasBody?.label),
     },
     {
       title: 'Contribution',
@@ -40,6 +40,7 @@ export const useExperimentalTraceTable = (etype) => {
       render: (value) => (
         agentMap && entryToArray(value)
           .map(contribution => agentMap[contribution.agent['@id']])
+          .filter(Boolean)
           .sort((a1, a2) => (a1.type > a2.type ? 1 : -1))
           .map(agent => <span key={agent.label}>{agent.label} <br /></span>)
       ),
