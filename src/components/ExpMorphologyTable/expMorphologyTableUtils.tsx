@@ -64,7 +64,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
       dataIndex: 'annotation',
       align: 'center',
       render: function Link(value) {
-        return value.hasBody.label;
+        return value?.hasBody?.label;
       },
       responsive: ['sm'],
     },
