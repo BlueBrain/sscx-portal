@@ -21,6 +21,9 @@ const nextConfig = {
     path: `${basePath}/_next/image/`,
     minimumCacheTTL: 259200,
   },
+  experimental: {
+    staticPageGenerationTimeout: 120,
+  },
   async redirects() {
     return [
       {
