@@ -75,6 +75,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
         return (
           agentMap && entryToArray(value)
             .map(contribution => agentMap[contribution.agent['@id']])
+            .filter(Boolean)
             .sort((a1, a2) => (a1.type > a2.type ? 1 : -1))
             .map(agent => <span key={agent.label}>{agent.label} <br /></span>)
         );
