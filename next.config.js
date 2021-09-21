@@ -8,7 +8,7 @@ const SentryWebpackPluginOptions = {
 
 const basePath = '/sscx-portal';
 
-const nextConfig = withSentryConfig({
+const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -59,7 +59,7 @@ const nextConfig = withSentryConfig({
       }],
     },];
   },
-});
+};
 
 
 module.exports = withSentryConfig(nextConfig, SentryWebpackPluginOptions);
