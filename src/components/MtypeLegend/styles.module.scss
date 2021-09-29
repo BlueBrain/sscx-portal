@@ -1,32 +1,12 @@
 
-.containerMobile {
-  @media (min-width: 30em) {
-    display: none;
-  }
-}
-
-.containerDesktop {
-  display: none;
-
-  @media (min-width: 30em) {
-    display: block;
-  }
-}
-
-.row {
-  padding: 0 0.5rem;
-
-  @media (min-width: 30em) {
-    padding: 0 1rem;
-  }
-
-  &:nth-child(odd) {
-    background-color: #f8f8f8;
-  }
+.container {
+  background-color: #f8f8f8;
+  padding: 1rem 0;
 }
 
 .colorBlock {
   height: 10px;
+  margin-bottom: 0.2rem;
 }
 
 .label {
