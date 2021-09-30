@@ -78,7 +78,7 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
             {plots.axon.map(plotObj => (
               <div
                 key={plotObj.name}
-                className="col-xs-12 col-sm-6 col-md-3"
+                className="col-xs-6 col-sm-4 col-md-3"
               >
                 <ImageViewer
                   thumbnailSrc={plotObj.thumbnailSrc}
@@ -100,7 +100,7 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
             {plots[dendriteType].map(plotObj => (
               <div
                 key={plotObj.name}
-                className="col-xs-12 col-sm-6 col-md-3"
+                className="col-xs-6 col-sm-4 col-md-3"
               >
                 <ImageViewer
                   thumbnailSrc={plotObj.thumbnailSrc}
@@ -120,7 +120,7 @@ const ExpMorphDistribution: React.FC<ExpMorphDistributionProps> = ({ mtype, clas
             {plots.soma.map(plotObj => (
               <div
                 key={plotObj.name}
-                className="col-xs-12 col-sm-6 col-md-3"
+                className="col-xs-6 col-sm-4 col-md-3"
               >
                 <ImageViewer
                   thumbnailSrc={plotObj.thumbnailSrc}
