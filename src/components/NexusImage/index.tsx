@@ -5,7 +5,6 @@ import { useNexusContext } from '@bbp/react-nexus';
 import { parseUrl } from '../../utils';
 
 import 'react-image-lightbox/style.css';
-// import './style.scss';
 
 
 const classPrefix = 'nexus-image__';
@@ -14,10 +13,15 @@ export interface NexusImageContainerProps {
   imageUrl: string; // nexus selfUrl, if org ond project will be treated as nexus id
   org?: string;
   project?: string;
+  aspectRatio?: string;
+  border?: boolean;
+  alt?: string;
 }
 
 interface NexusImageProps {
   imageData: any;
+  alt?: string;
+  border?: boolean;
 }
 
 export const NexusImageComponent = (props: NexusImageProps) => {
@@ -40,15 +44,18 @@ export const NexusImageComponent = (props: NexusImageProps) => {
       {isOpen && (
         <Lightbox mainSrc={data} onCloseRequest={() => setIsOpen(false)} />
       )}
-      <div className="nexus-image-container" onClick={handleClick}>
-        <img src={data} alt="" />
+      <div
+        className={`nexus-image-container ${props.border ? 'border' : ''}`}
+        onClick={handleClick}
+      >
+        <img src={data} alt={props.alt} />
       </div>
     </>
   ) : null;
 };
 
 export const NexusImage = (props: NexusImageContainerProps) => {
-  const { imageUrl, org, project } = props;
+  const { imageUrl, org, project, aspectRatio, border, alt } = props;
 
   const nexus = useNexusContext();
 
@@ -69,7 +76,7 @@ export const NexusImage = (props: NexusImageContainerProps) => {
   }, []);
 
   return (
-    <div className={`${classPrefix}basis`}>
+    <div className={`${classPrefix}basis`} style={{ aspectRatio }}>
       {/* {loading && (
         <Spin spinning={loading}>
           <div className="nexus-image-container">
@@ -77,7 +84,7 @@ export const NexusImage = (props: NexusImageContainerProps) => {
           </div>
         </Spin>
       )} */}
-      {imageData && <NexusImageComponent imageData={imageData} />}
+      {imageData && <NexusImageComponent imageData={imageData} alt={alt} />}
     </div>
   );
 };
