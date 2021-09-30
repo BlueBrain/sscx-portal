@@ -1,5 +1,5 @@
 .svg {
-  max-width: 14rem;
+  max-width: 13rem;
   overflow: hidden;
   margin: 0 auto;
 
@@ -13,7 +13,7 @@
     transition: opacity .2s ease;
     fill: var(--accent-color);
   }
-  
+
   &.small {
     max-width: 9rem;
     @media (max-width: 42rem) {
