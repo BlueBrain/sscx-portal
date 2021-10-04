@@ -191,7 +191,7 @@ const NeuronElectrophysiology: React.FC = () => {
           <HttpData path={expTraceFactsheetPath(currentInstance)}>
             {factsheetData => (
               <div className="mt-4">
-                <h3>Electrical features</h3>
+                <h3>Electrical features used in single cell model optimisation</h3>
                 <ExpTraceFactsheet className="mt-2" data={factsheetData} />
                 <div className="text-right mt-2">
                   <HttpDownloadButton
@@ -220,7 +220,7 @@ const NeuronElectrophysiology: React.FC = () => {
             burst of activity ('b' types).
           </p>
 
-          <h3>Factsheet</h3>
+          <h3>Electrical features used in single cell model optimisation</h3>
           <HttpData path={expTracePopulationFactsheetPath(currentEtype)}>
             {factsheetData => (
               <div>

@@ -92,7 +92,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
 
   return (
     <div id="id" className={styles.container}>
-      <h3>Factsheet</h3>
+      <h3>Electrical features</h3>
       <Collapse
         className="mb-3"
         bordered={false}
