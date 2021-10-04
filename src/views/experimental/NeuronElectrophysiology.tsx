@@ -60,7 +60,7 @@ const NeuronElectrophysiology: React.FC = () => {
   const currentEtype: string = query.etype as string;
   const currentInstance: string = query.etype_instance as string;
   const etypeData = eTypes.find(etype => etype.label === currentEtype);
-  const instances = etypeData ? etypeData.experiments.map(e => e.label) : [];
+  const instances = etypeData ? etypeData.experiments.map(e => e.label).sort() : [];
 
   const getEphysDistribution = (resource: any) => Array.isArray(resource.distribution)
     ? resource.distribution.find((d: any) => d.name.match(/\.nwb$/i))
