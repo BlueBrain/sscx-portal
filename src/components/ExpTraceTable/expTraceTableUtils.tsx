@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import Link from 'next/link';
+import { Button, Popover } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import querystring from 'querystring';
 import { orderBy } from 'lodash';
 
-import { sscx } from '../../config';
+import { sscx, basePath } from '../../config';
 import NexusImage from '../NexusImage';
 import NexusFileDownloadButton from '../NexusFileDownloadButton';
 
@@ -88,9 +90,28 @@ export const useExperimentalTraceTable = (etype) => {
       responsive: ['md'],
     },
     {
-      title: 'Download',
+      title: (
+        <span>
+          Download
+          &nbsp;
+          <Popover
+            title="How to read NWB files"
+            content={(
+              <a
+                href={`${basePath}/tutorials/nwb`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open the tutorial
+              </a>
+            )}
+          >
+            <QuestionCircleOutlined />
+          </Popover>
+        </span>
+      ),
       dataIndex: 'name',
-      width: 100,
+      width: 120,
       align: 'center',
       render: function Link(name, trace) {
         return (

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
-import { Row, Col } from 'antd';
+import { Row, Col, Popover, Button } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import ESData from '../../components/ESData';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
 import DataContainer from '../../components/DataContainer';
-import ImageViewer from '../../components/ImageViewer';
 import NexusPlugin from '../../components/NexusPlugin';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import { fullElectroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
@@ -24,7 +24,7 @@ import Metadata from '../../components/Metadata';
 import { StickyContainer } from '../../components/StickyContainer';
 import eTypes from '../../__generated__/experimentalData.json';
 import { defaultSelection } from '../../constants';
-import { sscx } from '../../config';
+import { sscx, basePath } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
 import HttpData from '../../components/HttpData';
@@ -168,6 +168,7 @@ const NeuronElectrophysiology: React.FC = () => {
                     <h3 className="mt-3">Patch clamp recording</h3>
                     <div className="text-right mt-2">
                       <NexusFileDownloadButton
+                        className="v-align-middle"
                         filename={getEphysDistribution(esDocuments[0]._source).name}
                         url={getEphysDistribution(esDocuments[0]._source).contentUrl}
                         org={sscx.org}
@@ -176,6 +177,25 @@ const NeuronElectrophysiology: React.FC = () => {
                       >
                         trace
                       </NexusFileDownloadButton>
+                      <Popover
+                        title="How to read NWB files"
+                        content={(
+                          <a
+                            href={`${basePath}/tutorials/nwb`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Open the tutorial
+                          </a>
+                        )}
+                      >
+                        <Button
+                          type="dashed"
+                          icon={<QuestionCircleOutlined />}
+                          size="small"
+                          style={{ marginLeft: '0.4rem' }}
+                        />
+                      </Popover>
                     </div>
                     <NexusPlugin
                       name="neuron-electrophysiology"

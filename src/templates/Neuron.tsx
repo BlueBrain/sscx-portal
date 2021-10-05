@@ -1,12 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Button, Tabs, Row, Col } from 'antd';
-import { useNexusContext } from '@bbp/react-nexus';
-import range from 'lodash/range';
-import get from 'lodash/get';
 import qs from 'querystring';
 
+import { useRouter } from 'next/router';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Button, Tabs, Row, Col, Popover } from 'antd';
+import { useNexusContext } from '@bbp/react-nexus';
+import { range, get } from 'lodash';
+
+import Title from '../components/Title';
+import InfoBox from '../components/InfoBox';
+import HttpDownloadButton from '../components/HttpDownloadButton';
+import NexusFileDownloadButton from '../components/NexusFileDownloadButton';
+import Filters from '../layouts/Filters';
+import Pills from '../components/Pills';
+import HttpData from '../components/HttpData';
+import DataContainer from '../components/DataContainer';
+import LayerSelector from '../components/MicrocircuitLayerSelector';
+import List from '../components/List';
+import Collapsible from '../components/Collapsible';
+import MemodelExpMorphList from '../components/MemodelExpMorphList';
+import EtypeFactsheet from '../components/EtypeFactsheet';
+import Factsheet from '../components/Factsheet';
+import MorphHistogram from '../components/MorphHistogram';
+import VideoPlayer from '../components/VideoPlayer';
+import NeuronMorphology from '../components/NeuronMorphology';
+import ESData from '../components/ESData';
+import NexusPlugin from '../components/NexusPlugin';
+import { Subregion, Layer, Color } from '../types';
 import {
   mtypeFactsheetPath,
   etypeFactsheetPath,
@@ -19,27 +40,7 @@ import {
   memodelMorphologyPath,
   memodelArchivePath,
 } from '../queries/http';
-import { sscx } from '../config';
-import Title from '../components/Title';
-import InfoBox from '../components/InfoBox';
-import HttpDownloadButton from '../components/HttpDownloadButton';
-import NexusFileDownloadButton from '../components/NexusFileDownloadButton';
-import Filters from '../layouts/Filters';
-import Pills from '../components/Pills';
-import HttpData from '../components/HttpData';
-import DataContainer from '../components/DataContainer';
-import { Subregion, Layer, Color } from '../types';
-import LayerSelector from '../components/MicrocircuitLayerSelector';
-import List from '../components/List';
-import Collapsible from '../components/Collapsible';
-import MemodelExpMorphList from '../components/MemodelExpMorphList';
-import EtypeFactsheet from '../components/EtypeFactsheet';
-import Factsheet from '../components/Factsheet';
-import MorphHistogram from '../components/MorphHistogram';
-import VideoPlayer from '../components/VideoPlayer';
-import NeuronMorphology from '../components/NeuronMorphology';
-import ESData from '../components/ESData';
-import NexusPlugin from '../components/NexusPlugin';
+import { sscx, basePath } from '../config';
 import { StickyContainer } from '../components/StickyContainer';
 import { modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
 import { defaultSelection } from '../constants';
@@ -348,6 +349,25 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                             >
                               trace
                             </NexusFileDownloadButton>
+                            <Popover
+                              title="How to read NWB files"
+                              content={(
+                                <a
+                                  href={`${basePath}/tutorials/nwb`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  Open the tutorial
+                                </a>
+                              )}
+                            >
+                              <Button
+                                type="dashed"
+                                icon={<QuestionCircleOutlined />}
+                                size="small"
+                                style={{ marginLeft: '0.4rem' }}
+                              />
+                            </Popover>
                           </div>
                         </div>
                       )}
