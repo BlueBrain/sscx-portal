@@ -353,7 +353,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                               title="How to read NWB files"
                               content={(
                                 <a
-                                  href={`${basePath}/tutorials/nwb`}
+                                  href={`${basePath}/tutorials/nwb/`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >
