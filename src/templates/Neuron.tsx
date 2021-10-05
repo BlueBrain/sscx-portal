@@ -497,6 +497,25 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                 >
                                   trace
                                 </NexusFileDownloadButton>
+                                <Popover
+                                  title="How to read NWB files"
+                                  content={(
+                                    <a
+                                      href={`${basePath}/tutorials/nwb/`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      Open the tutorial
+                                    </a>
+                                  )}
+                                >
+                                  <Button
+                                    type="dashed"
+                                    icon={<QuestionCircleOutlined />}
+                                    size="small"
+                                    style={{ marginLeft: '0.4rem' }}
+                                  />
+                                </Popover>
                               </div>
 
                               <NexusPlugin
