@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import Image from 'next/image';
 
 import Title from '../components/Title';
 import ImageSlider from '../components/ImageSlider';
@@ -7,7 +8,7 @@ import InfoBox1 from '../components/Home/InfoBox1';
 import CtaButton from '../components/CtaButton';
 import PublicationBlock from '../components/PublicationBlock';
 import ExploreSectionCard from '../components/ExploreSectionCard';
-import { basePath } from '../config';
+import { basePath, antBreakpoint } from '../config';
 import { cardsData, publicationData } from './home-constans';
 
 const classPrefix = 'Home__';
@@ -57,14 +58,24 @@ const Home: React.FC = () => (
     </section>
 
     <section id="about" className="section-about p-4">
-      <div className="container">
+      <div className="section-container">
         <h2 className="text-uppercase mt-2 mb-2">
           About
           <span className="accent-border" />
         </h2>
 
-        <div className="row">
-          <div className="col-xs-12 col-sm-6 bg-white p-2">
+        <Row gutter={48}>
+          <Col xs={24} lg={{ span: 12, push: 12 }}>
+            <Image
+              src={`${basePath}/assets/images/backgrounds/home-page/about-section-illustration.png`}
+              layout="responsive"
+              width="1280"
+              height="1037"
+              sizes={`(min-width: ${antBreakpoint.lg}) 640px, 100vw`}
+              alt="SSCx Portal illustration"
+            />
+          </Col>
+          <Col xs={24} lg={{ span:12, pull: 12 }}>
             <p>
               The rat brain is made up of hundreds of different regions including the
               Somatosensory Cortex (SSCx). This area of the cortex, which is the region of the brain
@@ -86,8 +97,8 @@ const Home: React.FC = () => (
               various experimental data, resulting component models and 3D visualisations of the
               activity of the tissue level model.
             </p>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     </section>
 

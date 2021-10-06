@@ -2367,12 +2367,12 @@ $collapsible-padding-small: 0.5rem;
   }
 
   .section-about {
-    background-color: #dbdbdb;
     color: black;
 
-    .container {
-      max-width: 1200px;
+    .section-container {
+      max-width: 1280px;
       margin: 0 auto;
+      position: relative;
     }
 
     .row {
@@ -2400,10 +2400,10 @@ $collapsible-padding-small: 0.5rem;
     }
 
     .cards {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
 
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1280px) {
         .ant-col {
           flex: 20% !important;
         }
@@ -2479,7 +2479,7 @@ $collapsible-padding-small: 0.5rem;
     }
 
     .content {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
     }
   }
