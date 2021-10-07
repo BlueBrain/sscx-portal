@@ -26,8 +26,8 @@ export const cardsData: Cards[] = [
         backgroundColor: "yellow",
         links: [
             { label: 'Layer Anatomy', href: '/experimental-data/layer-anatomy/', icon: 'layer' },
-            { label: 'Neuron Morphology', href: '/experimental-data/neuron-morphology', icon: 'neuron' },
-            { label: 'Neuron Electrophysiology', href: '/experimental-data/neuron-electrophysiology', icon: 'neuron' },
+            { label: 'Neuron Morphology', href: '/experimental-data/neuron-morphology/', icon: 'neuron' },
+            { label: 'Neuron Electrophysiology', href: '/experimental-data/neuron-electrophysiology/', icon: 'neuron' },
         ]
     },
     {
@@ -43,9 +43,8 @@ export const cardsData: Cards[] = [
         image: 'reconstruction-data',
         backgroundColor: "light-blue",
         links: [
-            { label: 'Brain Regions', href: '', icon: 'layer' },
-            { label: 'Microcircuit', href: '', icon: 'microcircuit' },
-            { label: 'Synaptic Pathways', href: '', icon: 'pathway' },
+            { label: 'Brain Regions', href: '/reconstruction-data/brain-regions/', icon: 'layer' },
+            { label: 'Synaptic Pathways', href: '/reconstruction-data/synaptic-pathways/', icon: 'pathway' },
             { label: 'Neurons', href: '/reconstruction-data/neurons/', icon: 'neuron' },
         ]
     },
@@ -70,7 +69,7 @@ export const cardsData: Cards[] = [
             { label: 'Brain Regions', href: '/digital-reconstructions/brain-regions/', icon: 'layer' },
             { label: 'Microcircuit', href: '/digital-reconstructions/microcircuit/', icon: 'microcircuit' },
             { label: 'Synaptic Pathways', href: '/digital-reconstructions/synaptic-pathways/', icon: 'pathway' },
-            { label: 'Neurons', href: '/digital-reconstructions/neurons', icon: 'neuron' },
+            { label: 'Neurons', href: '/digital-reconstructions/neurons/', icon: 'neuron' },
         ]
     },
     {
