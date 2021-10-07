@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import Button from '../../components/Button';
@@ -45,11 +44,6 @@ const NavButton: React.FC<NavButtonProps> = ({
 };
 
 const NavDesktop = () => {
-  const router = useRouter();
-
-  const [secondaryNav, setSecondaryNav] = React.useState(false);
-  React.useEffect(() => setSecondaryNav(false), [router]);
-
   return (
     <ul className={`${classPrefix}basis`}>
       <li className="menu-element">
