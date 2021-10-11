@@ -235,6 +235,12 @@ const NwbTutorialView: React.FC = () => {
           <p>In Matlab, add the matnwb folder and its subfolders to Path and generate the core classes:</p>
           <MatlabCode code={code.matlabInstall3} />
 
+          <p>
+            Please note, the code examples below reference logic defined in the <a
+              href="#matlab-other"
+            >Convenience functions</a> section. You might want to load it first.
+          </p>
+
           <p>Then you can run this script.</p>
 
           <p>
