@@ -157,7 +157,7 @@ const NeuronElectrophysiology: React.FC = () => {
             When a stimulus type is selected, this page shows the whole-cell patch
             clamp recording of the neuron. The stimulus represents the current trace
             that was injected into the cell using the current clamp method.
-            The response shows the membrane voltage of the neuron.  
+            The response shows the membrane voltage of the neuron.
           </p>
           <ESData query={fullElectroPhysiologyDataQuery(currentEtype, currentInstance)}>
             {esDocuments => (
@@ -166,9 +166,20 @@ const NeuronElectrophysiology: React.FC = () => {
                   <>
                     <Metadata nexusDocument={esDocuments[0]._source} />
                     <h3 className="mt-3">Patch clamp recording</h3>
-                    <div className="text-right mt-2">
+                    <div className="text-right mt-2 mb-2">
+                      <Button
+                        className="mr-1"
+                        type="dashed"
+                        icon={<QuestionCircleOutlined />}
+                        href={`${basePath}/tutorials/nwb/`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        size="small"
+                      >
+                        How to read NWB files
+                      </Button>
+
                       <NexusFileDownloadButton
-                        className="v-align-middle"
                         filename={getEphysDistribution(esDocuments[0]._source).name}
                         url={getEphysDistribution(esDocuments[0]._source).contentUrl}
                         org={sscx.org}
@@ -177,25 +188,6 @@ const NeuronElectrophysiology: React.FC = () => {
                       >
                         trace
                       </NexusFileDownloadButton>
-                      <Popover
-                        title="How to read NWB files"
-                        content={(
-                          <a
-                            href={`${basePath}/tutorials/nwb/`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Open the tutorial
-                          </a>
-                        )}
-                      >
-                        <Button
-                          type="dashed"
-                          icon={<QuestionCircleOutlined />}
-                          size="small"
-                          style={{ marginLeft: '0.4rem' }}
-                        />
-                      </Popover>
                     </div>
                     <NexusPlugin
                       name="neuron-electrophysiology"
