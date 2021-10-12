@@ -300,7 +300,7 @@ if iscell(colnames)
         else
             if szN(1)~=szT(1)
                 % TODO. This has to be fixed
-                fprintf('Column %s skipped.\n', newcolname)
+                fprintf('Column %s skipped.\\n', newcolname)
             end
         end
     end
