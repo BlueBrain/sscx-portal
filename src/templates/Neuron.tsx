@@ -340,6 +340,17 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                             nexusClient={nexus}
                           />
                           <div className="text-right mt-2">
+                            <Button
+                              className="mr-1"
+                              type="dashed"
+                              icon={<QuestionCircleOutlined />}
+                              href={`${basePath}/tutorials/nwb/`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              size="small"
+                            >
+                              How to read NWB files
+                            </Button>
                             <NexusFileDownloadButton
                               filename={getEphysDistribution(esDocuments[0]._source).name}
                               url={getEphysDistribution(esDocuments[0]._source).contentUrl}
@@ -349,25 +360,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                             >
                               trace
                             </NexusFileDownloadButton>
-                            <Popover
-                              title="How to read NWB files"
-                              content={(
-                                <a
-                                  href={`${basePath}/tutorials/nwb/`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  Open the tutorial
-                                </a>
-                              )}
-                            >
-                              <Button
-                                type="dashed"
-                                icon={<QuestionCircleOutlined />}
-                                size="small"
-                                style={{ marginLeft: '0.4rem' }}
-                              />
-                            </Popover>
                           </div>
                         </div>
                       )}
@@ -488,7 +480,18 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                 </Link>
                               </p>
 
-                              <div className="text-right">
+                              <div className="text-right mb-2">
+                                <Button
+                                  className="mr-1"
+                                  type="dashed"
+                                  icon={<QuestionCircleOutlined />}
+                                  href={`${basePath}/tutorials/nwb/`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  size="small"
+                                >
+                                  How to read NWB files
+                                </Button>
                                 <NexusFileDownloadButton
                                   filename={getEphysDistribution(esDocument._source).name}
                                   url={getEphysDistribution(esDocument._source).contentUrl}
@@ -497,25 +500,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                 >
                                   trace
                                 </NexusFileDownloadButton>
-                                <Popover
-                                  title="How to read NWB files"
-                                  content={(
-                                    <a
-                                      href={`${basePath}/tutorials/nwb/`}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      Open the tutorial
-                                    </a>
-                                  )}
-                                >
-                                  <Button
-                                    type="dashed"
-                                    icon={<QuestionCircleOutlined />}
-                                    size="small"
-                                    style={{ marginLeft: '0.4rem' }}
-                                  />
-                                </Popover>
                               </div>
 
                               <NexusPlugin
