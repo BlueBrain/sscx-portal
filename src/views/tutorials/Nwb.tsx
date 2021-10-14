@@ -22,10 +22,17 @@ SyntaxHighlighter.registerLanguage('plaintext', plaintext);
 
 const colorName: Color = 'lavender';
 
-const Code = ({ code, language }) => (
+type CodeProps = {
+  code: string;
+  language: string;
+  wrapLongLines?: Boolean;
+};
+
+const Code: React.FC<CodeProps> = ({ code, language, wrapLongLines })=> (
   <SyntaxHighlighter
     language={language}
     style={solarizedDark}
+    wrapLongLines={wrapLongLines}
     customStyle={{ fontSize: '14px' }}
   >
     {code}
@@ -35,7 +42,13 @@ const Code = ({ code, language }) => (
 const PythonCode = ({ code }) => (<Code language="python" code={code} />);
 const BashCode = ({ code }) => (<Code language="bash" code={code} />);
 const MatlabCode = ({ code }) => (<Code language="matlab" code={code} />);
-const PlaintextCode = ({ code }) => (<Code language="plaintext" code={code} />);
+const PlaintextCode:React.FC<{ code: string, wrapLongLines?: Boolean }> = ({ code, wrapLongLines }) => (
+  <Code
+    language="plaintext"
+    code={code}
+    wrapLongLines={wrapLongLines}
+  />
+);
 
 const NwbTutorialView: React.FC = () => {
   return (
@@ -95,14 +108,6 @@ const NwbTutorialView: React.FC = () => {
 
         <h2 id="pynwb-api">Method 1: Read NWB files with PyNWB API</h2>
 
-        <p>
-          This tutorial can also be downloaded from the <a
-            href="https://c4science.ch/source/tutorial_nwb_api/browse/master/python/icephys_tables_version/example_icephys.ipynb"
-            target="_blank"
-            rel="noopener noreferrer"
-          >tutorial_nwb_api</a> repository.
-        </p>
-
         <div className={styles.section}>
           <small>In [1]:</small>
           <PythonCode code={code.nwbApi1} />
@@ -152,7 +157,7 @@ const NwbTutorialView: React.FC = () => {
           <small>In [7]:</small>
 
           <PythonCode code={code.nwbApi7_1} />
-          <PlaintextCode code={code.nwbApi7_2} />
+          <PlaintextCode wrapLongLines={true} code={code.nwbApi7_2} />
 
           <h3>Plot one stimulus-response pair</h3>
 
@@ -235,12 +240,6 @@ const NwbTutorialView: React.FC = () => {
           <p>In Matlab, add the matnwb folder and its subfolders to Path and generate the core classes:</p>
           <MatlabCode code={code.matlabInstall3} />
 
-          <p>
-            Please note, the code examples below reference logic defined in the <a
-              href="#matlab-other"
-            >Convenience functions</a> section. You might want to load it first.
-          </p>
-
           <p>Then you can run this script.</p>
 
           <p>
@@ -252,48 +251,10 @@ const NwbTutorialView: React.FC = () => {
             >https://github.com/NeurodataWithoutBorders/matnwb#matnwb</a>.
           </p>
 
-          <h3>Contents</h3>
-
-          <ul>
-            <li><Link href="#matlab-read-file">Read NWB file</Link></li>
-            <li><Link href="#matlab-load-table">Load the hierarchical tables into a matlab Table</Link></li>
-            <li><Link href="#matlab-list-stimulus-types">List stimulus types</Link></li>
-            <li><Link href="#matlab-filter">Filter data for a given stimulus type and repetition</Link></li>
-            <li><Link href="#matlab-get-data">Get data and timestamps</Link></li>
-            <li><Link href="#matlab-plot">Plot stimulus and response</Link></li>
-            <li><Link href="#matlab-other">Convenience functions</Link></li>
-          </ul>
+          <h3>Read NWB file</h3>
 
           <h3 id="matlab-read-file">Read NWB file</h3>
           <MatlabCode code={code.matlab1} />
-
-          <h3 id="matlab-load-table">Load the hierarchical tables into a matlab Table</h3>
-          <MatlabCode code={code.matlab2} />
-
-          <h3 id="matlab-list-stimulus-types">List stimulus types</h3>
-          <MatlabCode code={code.matlab3} />
-          <PlaintextCode code={code.matlab4} />
-
-          <h3 id="matlab-filter">Filter data for a given stimulus type and repetition</h3>
-          <MatlabCode code={code.matlab5} />
-
-          <h3 id="matlab-get-data">Get data and timestamps</h3>
-          <MatlabCode code={code.matlab6} />
-
-          <h3 id="matlab-plot">Plot stimulus and response</h3>
-          <MatlabCode code={code.matlab7} />
-
-          <Image
-            src={`${basePath}/assets/images/tutorials/nwb/matlab-trace.png`}
-            width="560"
-            height="420"
-            alt="Matlab trace plot"
-            className="bg-almost-white"
-          />
-
-          <h3 id="matlab-other">Convenience functions</h3>
-          <MatlabCode code={code.matlab8} />
-          <PlaintextCode code={code.matlab9} />
         </div>
       </div>
     </FullPage>
