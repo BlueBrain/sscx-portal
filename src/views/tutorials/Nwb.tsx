@@ -232,8 +232,8 @@ const NwbTutorialView: React.FC = () => {
           <BashCode code={code.matlabInstall1} />
 
           <p>
-            This script has been tested on the commit <code>276e462</code>
-            implementing NWB schema v2.4.0, so you might want to check out to it:
+            This script has been tested on the commit <code>276e462</code> implementing
+            NWB schema v2.4.0, so you might want to check out to it:
           </p>
           <BashCode code={code.matlabInstall2} />
 
