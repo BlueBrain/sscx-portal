@@ -2,6 +2,10 @@ import React from 'react';
 import { Table, Collapse } from 'antd';
 
 import NumberFormat from '../NumberFormat';
+import { termFactory } from '../Term';
+import { electricalFeatures } from '../../terms';
+
+const Term = termFactory(electricalFeatures);
 
 
 const { Panel } = Collapse;
@@ -16,6 +20,8 @@ const unitLabelMap = {
   constant: '',
   'mV/nA': 'MΩ',
 };
+
+
 
 const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
 
@@ -54,7 +60,7 @@ const ExpTraceFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Feature',
       dataIndex: 'feature',
-      render: feature => feature.replace(/\_/g, ' '),
+      render: feature => <Term term={feature} />,
     },
     {
       title: 'Mean ± Std',

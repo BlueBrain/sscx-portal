@@ -1,0 +1,8 @@
+.container {
+  border-bottom: 1px solid transparent;
+  cursor: help;
+}
+
+.hasDescription:hover {
+  border-bottom: 1px dashed #ccc;
+}

@@ -4,8 +4,13 @@ import { Table, Collapse, Popover } from 'antd';
 
 import NumberFormat from '../NumberFormat';
 import IonChannelPlot, { Equation } from '../IonChannelPlot';
+import { termFactory } from '../Term';
+import { electricalFeatures } from '../../terms';
+
 import styles from './index.module.scss';
 
+
+const Term = termFactory(electricalFeatures);
 
 const { Panel } = Collapse;
 
@@ -58,7 +63,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Feature',
       dataIndex: 'feature',
-      render: feature => feature.replace(/\_/g, ' '),
+      render: feature => <Term term={feature}/>,
     },
     {
       title: 'Mean ± Std',
