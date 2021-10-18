@@ -24,7 +24,13 @@ const unitLabelMap = {
   'mV/nA': 'MΩ',
 };
 
+const featureNameMap = {
+  bpo_threshold_current: 'threshold_current',
+  bpo_holding_current: 'holding_current',
+};
+
 const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;
+const featureName = (feature: string) => featureNameMap[feature] ?? feature;
 
 const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
   data,
@@ -63,7 +69,7 @@ const EtypeFactsheet: React.FC<EtypeFactsheetProps> = ({
     {
       title: 'Feature',
       dataIndex: 'feature',
-      render: feature => <Term term={feature}/>,
+      render: feature => <Term term={featureName(feature)}/>,
     },
     {
       title: 'Mean ± Std',

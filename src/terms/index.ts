@@ -26,5 +26,7 @@ export const electricalFeatures = {
   voltage_after_stim: "The mean voltage after the stimulus in",
   voltage_base: "The average voltage during the last 10% of time before the stimulus",
   voltage_deflection: "The voltage deflection between voltage base and steady-state voltage at stimend",
-  voltage_deflection_begin: "The voltage deflection between voltage base and steady-state voltage soon after stimulation start"
+  voltage_deflection_begin: "The voltage deflection between voltage base and steady-state voltage soon after stimulation start",
+  threshold_current: "The minimal amplitude (in nA) of a step current clamp injection that triggers an action potential",
+  holding_current: "The current clamp amplitude (in nA) necessary to hold the cell at a predefined holding voltage",
 };
