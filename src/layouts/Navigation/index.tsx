@@ -9,6 +9,7 @@ import SvgRegions from '../../components/Icons/Regions';
 import SvgNeuron from '../../components/Icons/Neuron';
 import SvgMicrocircuit from '../../components/Icons/Microcircuit';
 import SvgSynapse from '../../components/Icons/Synapse';
+import SvgEphys from '../../components/Icons/Ephys';
 import { IoIosArrowDropdown } from 'react-icons/io';
 
 
@@ -92,7 +93,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
           <li>
             <Link href="/experimental-data/neuron-electrophysiology/">
               <a>
-                <SvgNeuron fill={accentColors.yellow} />
+                <SvgEphys fill={accentColors.yellow} />
                 Neuron Electrophysiology
               </a>
             </Link>
