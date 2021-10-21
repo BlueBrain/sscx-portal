@@ -21,7 +21,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
       <MdClose />
     </div>
     <div className="top-links">
-      <Link href="/">
+      <Link href="/" prefetch={false}>
         <a>
           <img
             src={`${basePath}/assets/images/icons/home.svg`}
@@ -30,7 +30,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Home</span>
         </a>
       </Link>
-      <Link href="/glossary">
+      <Link href="/glossary" prefetch={false}>
         <a>
           <img
             src={`${basePath}/assets/images/icons/globe.svg`}
@@ -39,7 +39,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => (
           <span>Glossary</span>
         </a>
       </Link>
-      <Link href="/#contact">
+      <Link href="/#contact" prefetch={false}>
         <a>
           <img
             src={`${basePath}/assets/images/icons/mail-alt.svg`}

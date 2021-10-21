@@ -27,7 +27,7 @@ const NavButton: React.FC<NavButtonProps> = ({
   className = '',
 }) => {
   return (
-    <Link href={path}>
+    <Link href={path} prefetch={false}>
       <a className={className}>
         <Button
           width={highlight || home ? 140 : undefined}

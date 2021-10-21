@@ -18,12 +18,12 @@ const classPrefix = 'nav__';
 export const HomeNav: React.FC = () => (
   <ul className="home-nav">
     <li>
-      <Link href="/#about">
+      <Link href="/#about" prefetch={false}>
         About
       </Link>
     </li>
     <li>
-      <Link href="/#explore">
+      <Link href="/#explore" prefetch={false}>
         Explore
       </Link>
     </li>
@@ -75,7 +75,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.yellow }}>
           <li>
-            <Link href="/experimental-data/layer-anatomy/">
+            <Link href="/experimental-data/layer-anatomy/" prefetch={false}>
               <a>
                 <SvgRegions fill={accentColors.yellow} />
                 Layer Anatomy
@@ -83,7 +83,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             </Link>
           </li>
           <li>
-            <Link href="/experimental-data/neuron-morphology/">
+            <Link href="/experimental-data/neuron-morphology/" prefetch={false}>
               <a>
                 <SvgNeuron fill={accentColors.yellow} />
                 Neuron Morphology
@@ -91,7 +91,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             </Link>
           </li>
           <li>
-            <Link href="/experimental-data/neuron-electrophysiology/">
+            <Link href="/experimental-data/neuron-electrophysiology/" prefetch={false}>
               <a>
                 <SvgEphys fill={accentColors.yellow} />
                 Neuron Electrophysiology
@@ -110,7 +110,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.blue }}>
           <li>
-            <Link  href="/reconstruction-data/brain-regions/">
+            <Link  href="/reconstruction-data/brain-regions/" prefetch={false}>
               <a>
                 <SvgRegions fill={accentColors.blue} />
                 Brain Regions
@@ -118,7 +118,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             </Link>
           </li>
           <li>
-            <Link href="/reconstruction-data/synaptic-pathways/">
+            <Link href="/reconstruction-data/synaptic-pathways/" prefetch={false}>
               <a>
                 <SvgSynapse fill={accentColors.blue} />
                 Synaptic Pathways
@@ -126,7 +126,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             </Link>
           </li>
           <li>
-            <Link href="/reconstruction-data/neurons/">
+            <Link href="/reconstruction-data/neurons/" prefetch={false}>
               <a>
                 <SvgNeuron fill={accentColors.blue} />
                 Neurons
@@ -145,7 +145,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.lavender }}>
           <li>
-            <Link href="/digital-reconstructions/brain-regions/">
+            <Link href="/digital-reconstructions/brain-regions/" prefetch={false}>
               <a>
                 <SvgRegions fill={accentColors.lavender} />
                 Brain Regions
@@ -153,7 +153,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             </Link>
           </li>
           <li>
-            <Link href="/digital-reconstructions/microcircuit/">
+            <Link href="/digital-reconstructions/microcircuit/" prefetch={false}>
               <a>
                 <SvgMicrocircuit fill={accentColors.lavender} />
                 Microcircuit
@@ -161,7 +161,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             </Link>
           </li>
           <li>
-            <Link href="/digital-reconstructions/synaptic-pathways/">
+            <Link href="/digital-reconstructions/synaptic-pathways/" prefetch={false}>
               <a>
                 <SvgSynapse fill={accentColors.lavender} />
                 Synaptic Pathways
@@ -169,7 +169,7 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
             </Link>
           </li>
           <li>
-            <Link href="/digital-reconstructions/neurons/">
+            <Link href="/digital-reconstructions/neurons/" prefetch={false}>
               <a>
                 <SvgNeuron fill={accentColors.lavender} />
                 Neurons
