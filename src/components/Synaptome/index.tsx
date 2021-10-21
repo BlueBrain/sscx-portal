@@ -47,7 +47,7 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
   const synaptomeMtype = type === 'pre' ? preMtype : postMtype;
 
   const label = `${type === 'pre' ? 'Pre' : 'Post'}-synaptic Synaptome ${synaptomeMtype}`;
-  const synaptomeBaseUrl = `${staticDataBaseUrl}/synaptomes/${region}_Column/${preMtype}___${postMtype}`;
+  const synaptomeBaseUrl = `${staticDataBaseUrl}/synaptomes/${region}_Column/${preMtype}__${postMtype}`;
 
   const mtypeSynaptomeBaseUrl = `${staticDataBaseUrl}/model-data/REGION/${region}/Central/MTypes/${synaptomeMtype}/Synaptome`;
 
