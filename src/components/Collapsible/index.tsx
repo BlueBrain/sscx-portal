@@ -1,5 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
-import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp';
+
 
 
 const classPrefix = 'collapsible__';

@@ -1,10 +1,9 @@
 import React, { ReactChild, ReactFragment } from 'react';
-import { FaCircle, FaCaretDown } from 'react-icons/fa';
+import { FaCircle } from '@react-icons/all-files/fa/FaCircle';
+import { FaCaretDown } from '@react-icons/all-files/fa/FaCaretDown';
 
 import { Color } from '../../../types';
 import { basePath } from '../../../config';
-
-// import './style.scss';
 
 
 const classPrefix = 'info-box-2__';

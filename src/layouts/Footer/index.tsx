@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { FaTwitterSquare, FaLinkedin, FaYoutubeSquare } from 'react-icons/fa';
+import { FaTwitterSquare } from '@react-icons/all-files/fa/FaTwitterSquare';
+import { FaLinkedin } from '@react-icons/all-files/fa/FaLinkedin';
+import { FaYoutubeSquare } from '@react-icons/all-files/fa/FaYoutubeSquare';
 
 import styles from './styles.module.scss';
 

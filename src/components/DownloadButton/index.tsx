@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { IoMdDownload } from 'react-icons/io';
+import { IoMdDownload } from '@react-icons/all-files/io/IoMdDownload';
 // import { useDispatch } from 'react-redux';
 
 // import { DownloadItem, addItem } from '../../store/download';

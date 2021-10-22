@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { MdClose } from 'react-icons/md';
-import { IoMdMenu } from 'react-icons/io';
+import { MdClose } from '@react-icons/all-files/md/MdClose';
+import { IoMdMenu } from '@react-icons/all-files/io/IoMdMenu';
 
 import { SecondaryNav } from '../Navigation';
 import { basePath } from '../../config';

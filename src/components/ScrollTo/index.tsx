@@ -1,5 +1,6 @@
 import React, { ReactChild, ReactFragment } from 'react';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown } from '@react-icons/all-files/io/IoIosArrowDown';
+import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp';
 
 import { Direction, Color } from '../../types';
 

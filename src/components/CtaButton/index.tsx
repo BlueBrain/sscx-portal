@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { MdKeyboardArrowRight } from '@react-icons/all-files/md/MdKeyboardArrowRight';
 
 import styles from './index.module.scss';
 

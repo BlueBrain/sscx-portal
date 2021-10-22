@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import Link from 'next/link';
-import { FaMinus, FaPlus } from 'react-icons/fa';
+import { FaMinus } from '@react-icons/all-files/fa/FaMinus';
+import { FaPlus } from '@react-icons/all-files/fa/FaPlus';
 
 import { basePath } from '../../config';
 import { LayerSvg, MicrocircuitSvg, PathwaySvg, NeuronSvg } from '../Icons';

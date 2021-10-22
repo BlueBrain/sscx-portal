@@ -10,7 +10,7 @@ import SvgNeuron from '../../components/Icons/Neuron';
 import SvgMicrocircuit from '../../components/Icons/Microcircuit';
 import SvgSynapse from '../../components/Icons/Synapse';
 import SvgEphys from '../../components/Icons/Ephys';
-import { IoIosArrowDropdown } from 'react-icons/io';
+import { IoIosArrowDropdown } from '@react-icons/all-files/io/IoIosArrowDropdown';
 
 
 const classPrefix = 'nav__';
