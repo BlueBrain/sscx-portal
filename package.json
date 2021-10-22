@@ -8,7 +8,8 @@
     "start": "next start -p 8000",
     "lint": "next lint",
     "build-static-data-proxy": "./scripts/build-static-data-proxy.sh",
-    "start-static-data-proxy": "docker run -it --rm -p 8000:8000 sscx-static-data-proxy"
+    "start-static-data-proxy": "docker run -it --rm -p 8000:8000 sscx-static-data-proxy",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -41,6 +42,7 @@
     "three": "0.120.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^11.1.2",
     "@types/node": "^16.10.1",
     "@types/react": "^17.0.0",
     "eslint": "^7.29.0",
