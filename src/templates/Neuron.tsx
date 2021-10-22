@@ -475,7 +475,10 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                             <div style={{ minHeight: '600px' }}>
                               <p className="mt-2 mb-3">
                                 Full experimental instance (with all traces): &nbsp;
-                                <Link href={expEphysPageUrl(currentEtype, esDocument._source.name)}>
+                                <Link
+                                  href={expEphysPageUrl(currentEtype, esDocument._source.name)}
+                                  prefetch={false}
+                                >
                                   {esDocument._source.name}
                                 </Link>
                               </p>

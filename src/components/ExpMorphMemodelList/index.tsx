@@ -50,7 +50,16 @@ const tableColumns = [
   {
     title: 'ME-model',
     dataIndex: 'memodel_name' as keyof ExpMorphMemodel,
-    render: function ModelName (memodel_name, memodel) {return (<Link href={linkHref(memodel)}>{memodel_name}</Link>)}
+    render: function ModelName (memodel_name, memodel) {
+      return (
+        <Link
+          href={linkHref(memodel)}
+          prefetch={false}
+        >
+          {memodel_name}
+        </Link>
+      );
+    }
   },
 ];
 
@@ -63,7 +72,7 @@ const mtypeLayer = (mtype: string) => {
 
 const ExpMorphMemodelList: React.FC<ExpMorphMemodelListProps> = ({ memodels, className = '', id = '' }) => {
   const memodelsDataSource: ExpMorphMemodel[] = memodels
-    .map(memodel => ({ ...memodel, memodel_name: <Link href={linkHref(memodel)}>{memodel.memodel_name}</Link>, key: `${memodel.region}-${memodel.memodel_name}` }));
+    .map(memodel => ({ ...memodel, memodel_name: <Link href={linkHref(memodel)} prefetch={false}>{memodel.memodel_name}</Link>, key: `${memodel.region}-${memodel.memodel_name}` }));
 
   return (
     <div id={id} className={className}>

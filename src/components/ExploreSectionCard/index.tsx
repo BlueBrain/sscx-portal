@@ -72,7 +72,11 @@ const ExploreSectionCard: React.FC<ExploreSectionCardProps> = ({
 
         <div>
           {links.map(link => link.href ? (
-            <Link key={link.label} href={link.href}>
+            <Link
+              key={link.label}
+              href={link.href}
+              prefetch={false}
+            >
               <a className={styles.link}>
                 {link.icon && <IconSvg icon={link.icon} />}
                 {link.label}

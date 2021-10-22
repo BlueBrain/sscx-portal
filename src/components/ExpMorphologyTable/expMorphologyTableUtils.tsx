@@ -36,7 +36,14 @@ export const useExpMorphologyColumns = (layer, mtype) => {
       title: 'Name',
       dataIndex: 'name',
       render: function NameLink(value) {
-        return <Link href={morphHref(value)}>{value}</Link>;
+        return (
+          <Link
+            href={morphHref(value)}
+            prefetch={false}
+          >
+            {value}
+          </Link>
+        );
       },
       ellipsis: true,
       responsive: ['sm'],
@@ -114,7 +121,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
               loading="lazy"
             />
             <div className={styles.detailsLink}>
-              <Link href={morphHref(value)}>More details</Link>
+              <Link href={morphHref(value)} prefetch={false}>More details</Link>
             </div>
           </div>
         );

@@ -48,7 +48,12 @@ export const useExperimentalTraceTable = (etype) => {
       dataIndex: 'name',
       render: function NameLink(value) {
         return (
-          <Link href={instanceHref(value)}>{value}</Link>
+          <Link
+            href={instanceHref(value)}
+            prefetch={false}
+          >
+            {value}
+          </Link>
         );
       },
       responsive: ['sm'],
@@ -141,7 +146,12 @@ export const useExperimentalTraceTable = (etype) => {
               aspectRatio="4 / 3"
             />
             <div className={styles.detailsLink}>
-              <Link href={instanceHref(name)}>More details</Link>
+              <Link
+                href={instanceHref(name)}
+                prefetch={false}
+              >
+                More details
+              </Link>
             </div>
           </div>
         );

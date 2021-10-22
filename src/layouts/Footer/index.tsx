@@ -44,19 +44,19 @@ const Footer: React.FC<{}> = () => {
         </div>
 
         <div className="mt-2">
-          <p><Link href="/terms-of-use/">Terms of Use</Link></p>
+          <p><Link href="/terms-of-use/" prefetch={false}>Terms of Use</Link></p>
           <p><a href={link.privacyPolicy} {...openNewTab}>Privacy Policy</a></p>
           <p><a href={link.disclaimer} {...openNewTab}>Disclaimer</a></p>
           <p><a href={link.cookies} {...openNewTab}>Cookies</a></p>
         </div>
 
         <div className="mt-2">
-          <p><Link href="/">Home</Link></p>
-          <p><Link href="/#about">About</Link></p>
-          <p><Link href="/#explore">Explore</Link></p>
-          <p><Link href="/#publications">Publications</Link></p>
-          <p><Link href="/glossary">Glossary</Link></p>
-          <p><Link href="/#contact">Contact us</Link></p>
+          <p><Link href="/" prefetch={false}>Home</Link></p>
+          <p><Link href="/#about" prefetch={false}>About</Link></p>
+          <p><Link href="/#explore" prefetch={false}>Explore</Link></p>
+          <p><Link href="/#publications" prefetch={false}>Publications</Link></p>
+          <p><Link href="/glossary" prefetch={false}>Glossary</Link></p>
+          <p><Link href="/#contact" prefetch={false}>Contact us</Link></p>
           <div className="mt-3">
             <span>Follow the Blue Brain</span>
 

@@ -37,7 +37,14 @@ const tableColumns = [
     title: 'Morphology',
     dataIndex: 'morphology',
     key: 'morphology',
-    render: (morphologyName, morphology) => <Link href={linkHref(morphology)}>{morphologyName}</Link>
+    render: (morphologyName, morphology) => (
+      <Link
+        href={linkHref(morphology)}
+        prefetch={false}
+      >
+        {morphologyName}
+      </Link>
+    ),
   },
 ];
 
