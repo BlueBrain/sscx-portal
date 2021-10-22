@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { bash, python, matlab, plaintext } from 'react-syntax-highlighter/dist/cjs/languages/hljs';
 import solarizedDark from 'react-syntax-highlighter/dist/cjs/styles/hljs/solarized-dark';
 
 import { basePath } from '../../config';
@@ -14,11 +13,6 @@ import code from './nwb-code';
 
 import styles from './nwb.module.scss';
 
-
-SyntaxHighlighter.registerLanguage('bash', bash);
-SyntaxHighlighter.registerLanguage('python', python);
-SyntaxHighlighter.registerLanguage('matlab', matlab);
-SyntaxHighlighter.registerLanguage('plaintext', plaintext);
 
 const colorName: Color = 'lavender';
 
