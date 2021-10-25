@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import qs from 'querystring';
 
 import { useRouter } from 'next/router';
 import { QuestionCircleOutlined } from '@ant-design/icons';
@@ -62,10 +61,10 @@ export type NeuronsTemplateProps = {
 const expEphysPageUrl = (etype: string, instance: string) => (
   [
     '/experimental-data/neuron-electrophysiology/?',
-    qs.stringify({
+    new URLSearchParams({
       etype,
       etype_instance: instance,
-    }),
+    }).toString(),
   ].join('')
 );
 

@@ -3,7 +3,6 @@ import { ColumnsType } from 'antd/lib/table';
 import Link from 'next/link';
 import { Button, Popover } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import querystring from 'querystring';
 import { orderBy } from 'lodash';
 
 import { sscx, basePath } from '../../config';
@@ -35,11 +34,11 @@ export const useExperimentalTraceTable = (etype) => {
   const [agentMap, setAgentMap] = useState<Record<string, any>>(null);
 
   const instanceHref = (instanceName: string) => {
-    const query = querystring.stringify({
+    const searchParams = new URLSearchParams({
       etype,
       etype_instance: instanceName,
     });
-    return `/experimental-data/neuron-electrophysiology/?${query}#data`;
+    return `/experimental-data/neuron-electrophysiology/?${searchParams.toString()}#data`;
   };
 
   const columns: ColumnsType = [

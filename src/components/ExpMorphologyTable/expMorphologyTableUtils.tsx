@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import queryString from 'querystring';
 import { DownloadOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { ColumnsType } from 'antd/lib/table';
@@ -23,12 +22,12 @@ export const useExpMorphologyColumns = (layer, mtype) => {
   const [agentMap, setAgentMap] = useState<Record<string, any>>(null);
 
   const morphHref = (morphologyName: string) => {
-    const query = queryString.stringify({
+    const searchParams = new URLSearchParams({
       layer,
       mtype,
       instance: morphologyName,
     });
-    return `/experimental-data/neuron-morphology/?${query}#data`;
+    return `/experimental-data/neuron-morphology/?${searchParams.toString()}#data`;
   };
 
   const columns: ColumnsType = [

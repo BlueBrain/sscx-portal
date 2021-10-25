@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
-import qs from 'querystring';
-import { Table } from 'antd';
 import ResponsiveTable from '../ResponsiveTable';
 
 
@@ -21,14 +19,14 @@ type ExpMorphMemodel = {
 const hrefBase = '/digital-reconstructions/neurons';
 
 const linkHref = (memodel) => {
-  const query = qs.stringify({
+  const searchParams = new URLSearchParams({
     brain_region: memodel.region,
     layer: mtypeLayer(memodel.mtype),
     mtype: memodel.mtype,
     etype: memodel.etype,
     memodel: memodel.memodel_name,
   });
-  return `${hrefBase}?${query}`;
+  return `${hrefBase}?${searchParams.toString()}`;
 };
 
 const tableColumns = [

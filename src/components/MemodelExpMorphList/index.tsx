@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import qs from 'querystring';
 import { Table } from 'antd';
 
 
@@ -49,12 +48,12 @@ const tableColumns = [
 ];
 
 const linkHref = (morphology) => {
-  const query = qs.stringify({
+  const searchParams = new URLSearchParams({
     layer: morphology.layer,
     mtype: morphology.mtype,
     instance: morphology.morphology,
   });
-  return `${hrefBase}?${query}`;
+  return `${hrefBase}?${searchParams.toString()}`;
 };
 
 const rowKey = morphology => `${morphology.morphology}_${morphology.source_neurite_type}`;
