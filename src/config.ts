@@ -25,7 +25,6 @@ export const sscx = {
 export const deploymentUrl = 'https://bbp.epfl.ch';
 export const basePath = '/sscx-portal';
 
-export const isServer = typeof window === 'undefined';
 export const isProduction = process.env.NODE_ENV === 'production';
 
 export const nexus = {
