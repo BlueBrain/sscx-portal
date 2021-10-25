@@ -12,7 +12,12 @@ import { regionCircuitFactsheetPath, subregionCircuitFactsheetPath } from '../..
 import Collapsible from '../../components/Collapsible';
 import SimulationSection from '../../components/SimulationSection';
 
-const subregionTableDataSource = subregions.map(subregion => ({ abbr: subregion, name: subregionTitle[subregion] }));
+const subregionTableDataSource = subregions.map(subregion => ({
+  abbr: subregion,
+  key: subregion,
+  name: subregionTitle[subregion],
+}));
+
 const subregionTableColumns = [
   { title: 'Abbreviation', dataIndex: 'abbr', key: 'abbr' },
   { title: 'Full name', dataIndex: 'name', key: 'name' },
@@ -23,7 +28,7 @@ function getSubregionDescription(subregion: string, data): string {
   const extrSynapses = data.find(d => d.name === 'No. of extrinsic synapses')?.value;
   const intrSynapses = data.find(d => d.name === 'No. of intrinsic synapses')?.value;
   const synapses = (extrSynapses && extrSynapses) ? extrSynapses + intrSynapses : '';
-  
+
   return `The ${subregion} sub-region consists of ${neurons?.toLocaleString()} neurons
     mediated by ${synapses?.toLocaleString()} synapses.`;
 }
