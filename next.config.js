@@ -27,6 +27,7 @@ const nextConfig = {
   },
   experimental: {
     staticPageGenerationTimeout: 120,
+    esmExternals: true,
   },
   async redirects() {
     return [
