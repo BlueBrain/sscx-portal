@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 import Title from '../components/Title';
 import ImageSlider from '../components/ImageSlider';
-import InfoBox1 from '../components/Home/InfoBox1';
 import CtaButton from '../components/CtaButton';
 import PublicationBlock from '../components/PublicationBlock';
 import ExploreSectionCard from '../components/ExploreSectionCard';
