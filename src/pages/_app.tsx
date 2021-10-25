@@ -4,7 +4,7 @@ import { createNexusClient } from '@bbp/nexus-sdk';
 import { NexusProvider } from '@bbp/react-nexus';
 import smoothscroll from 'smoothscroll-polyfill';
 
-import { nexus } from '../config';
+import { nexus, gtm } from '../config';
 import Feedback from '../components/Feedback';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 
@@ -33,7 +33,10 @@ function App({ Component, pageProps }) {
         <Component {...pageProps} />
 
         <Feedback />
-        <GoogleAnalytics />
+
+        {gtm.id && (
+          <GoogleAnalytics />
+        )}
       </>
     </NexusProvider>
   );
