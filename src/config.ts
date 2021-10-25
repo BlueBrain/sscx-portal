@@ -17,8 +17,8 @@ export const antBreakpoint = {
 }
 
 export const sscx = {
-  org: 'public',
-  project: 'sscx',
+  org: process.env.NEXT_PUBLIC_NEXUS_ORG ?? 'public',
+  project: process.env.NEXT_PUBLIC_NEXUS_PROJECT ?? 'sscx',
   datasetViewId: encodeURIComponent('https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset'),
 };
 
