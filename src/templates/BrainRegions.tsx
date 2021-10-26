@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Row, Col } from 'antd';
 
@@ -26,18 +26,21 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const query = router.query;
-  if (!query.brain_region) {
-    query.brain_region = defaultSelection.digitalReconstruction.BRAIN_REGIONS;
-  }
+
+  const { brain_region } = router.query;
 
   const setBrainRegionQuery = (brainRegion: Subregion) => {
-    const query = {
-      brain_region: brainRegion,
-    };
-    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
+    const query = { brain_region: brainRegion };
+    router.push({ query }, undefined, { shallow: true });
   };
-  const currentRegion = query.brain_region as Subregion;
+  const currentRegion = brain_region as Subregion;
+
+  useEffect(() => {
+    if (!router.query.brain_region && router.isReady) {
+      const query = defaultSelection.digitalReconstruction.brainRegions;
+      router.replace({ query }, undefined, { shallow: true });
+    }
+  }, [router.query]);
 
   return (
     <>

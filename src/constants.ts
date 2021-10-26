@@ -34,36 +34,40 @@ export const subregionTitle: Record<Subregion, string> = {
 
 export const defaultSelection = {
   experimentalData: {
-    LAYER_ANATOMY: 'L4',
+    layerAnatomy: {
+      layer: 'L4',
+    },
     neuronMorphology: {
-      LAYER: 'L4',
-      M_TYPE: 'L4_TPC',
-      INSTANCE: 'C060998B-P4',
+      layer: 'L4',
+      mtype: 'L4_TPC',
+      instance: 'C060998B-P4',
     },
     neuronElectrophysiology: {
-      ETYPE: 'bAC',
-      INSTANCE: 'C170101B-MT-C1',
+      etype: 'bAC',
+      etype_instance: 'C170101B-MT-C1',
     },
   },
   digitalReconstruction: {
     microcircuit: {
-      LAYER: 'L4',
-      BRAIN_REGION: 'S1FL',
+      layer: 'L4',
+      brain_region: 'S1FL',
     },
-    BRAIN_REGIONS: 'S1FL',
+    brainRegions: {
+      brain_region: 'S1FL',
+    },
     neurons: {
-      BRAIN_REGION: 'S1FL',
-      LAYER: 'L4',
-      ETYPE: 'cADpyr',
-      MTYPE: 'L4_TPC',
-      MEMODEL: 'L4_TPC_cADpyr_1',
+      brain_region: 'S1FL',
+      layer: 'L4',
+      etype: 'cADpyr',
+      mtype: 'L4_TPC',
+      memodel: 'L4_TPC_cADpyr_1',
     },
     synapticPathways: {
-      REGION: 'S1FL',
-      PRELAYER: 'L4',
-      POSTLAYER: 'L5',
-      PRETYPE: 'L4_TPC',
-      POSTTYPE: 'L5_TPC:B',
+      brain_region: 'S1FL',
+      prelayer: 'L4',
+      postlayer: 'L5',
+      pretype: 'L4_TPC',
+      posttype: 'L5_TPC:B',
     },
   },
 };

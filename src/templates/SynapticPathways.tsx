@@ -42,34 +42,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
 }) => {
   const router = useRouter();
 
-  const setParams = (params: Record<string, string>): void => {
-    const newQuery = {
-      ...router.query,
-      ...params,
-    };
-    router.push({ query: newQuery, pathname: router.pathname }, undefined, { shallow: true });
-  };
-
   const [pathwayIndex, setPathwayIndex] = useState<PathwayIndex>(null);
-
-  useEffect(() => {
-    if (!router.query.brain_region) {
-      const {
-        REGION,
-        PRELAYER,
-        POSTLAYER,
-        PRETYPE,
-        POSTTYPE,
-      } = defaultSelection.digitalReconstruction.synapticPathways;
-      setParams({
-        brain_region: REGION,
-        prelayer: PRELAYER,
-        postlayer: POSTLAYER,
-        pretype: PRETYPE,
-        posttype: POSTTYPE,
-      });
-    }
-  }, []);
 
   const { brain_region, prelayer, postlayer, pretype, posttype } = router.query;
 
@@ -78,6 +51,18 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   const currentPostLayer: Layer = postlayer as Layer;
   const currentPreType: string = pretype as string;
   const currentPostType: string = posttype as string;
+
+  const setParams = (params: Record<string, string>): void => {
+    const query = { ...router.query, ...params };
+    router.push({ query }, undefined, { shallow: true });
+  };
+
+  useEffect(() => {
+    if (!router.query.brain_region && router.isReady) {
+      const query = defaultSelection.digitalReconstruction.synapticPathways;
+      router.replace({ query }, undefined, { shallow: true });
+    }
+  }, [router.query]);
 
   const setRegion = (region: Subregion) => {
     setParams({
@@ -191,7 +176,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                 <div className={selectorStyle.body} style={{ padding: '0 0.5rem 0.5rem 0.5rem' }}>
                   <Pills
                     list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
-                    defaultValue={currentRegion}
+                    value={currentRegion}
                     onSelect={setRegion as (s: Subregion) => void}
                     color={color}
                   />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Row, Col } from 'antd';
 
@@ -27,15 +27,21 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const { query } = router;
-  if (!query.layer) {
-    query.layer = defaultSelection.experimentalData.LAYER_ANATOMY;
-  }
+
+  const { layer } = router.query;
+  const currentLayer: Layer = layer as Layer;
 
   const setLayerQuery = (layer: Layer) => {
-    router.push({ query: { layer }, pathname: router.pathname}, undefined, { shallow: true });
+    const query = { layer };
+    router.push({ query }, undefined, { shallow: true });
   };
-  const currentLayer: Layer = query.layer as Layer;
+
+  useEffect(() => {
+    if (!router.query.layer && router.isReady) {
+      const query = defaultSelection.experimentalData.layerAnatomy;
+      router.replace({ query }, undefined, { shallow: true });
+    }
+  }, [router.query]);
 
   return (
     <>

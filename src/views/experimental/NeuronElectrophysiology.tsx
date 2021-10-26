@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col, Popover, Button } from 'antd';
@@ -33,15 +33,11 @@ import HttpData from '../../components/HttpData';
 const NeuronElectrophysiology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
-  const { query } = router;
-  if (!query.etype && !query.etype_instance) {
-    const defaultEphysFilters = defaultSelection.experimentalData.neuronElectrophysiology;
-    query.etype = defaultEphysFilters.ETYPE;
-    query.etype_instance = defaultEphysFilters.INSTANCE;
-  }
+
+  const { etype, etype_instance } = router.query;
 
   const setQuery = (query: any) => {
-    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
+    router.push({ query }, undefined, { shallow: true });
   };
 
   const setEtype = (etype: string) => {
@@ -57,8 +53,16 @@ const NeuronElectrophysiology: React.FC = () => {
     });
   };
 
-  const currentEtype: string = query.etype as string;
-  const currentInstance: string = query.etype_instance as string;
+  const currentEtype: string = etype as string;
+  const currentInstance: string = etype_instance as string;
+
+  useEffect(() => {
+    if (!router.query.etype && router.isReady) {
+      const query = defaultSelection.experimentalData.neuronElectrophysiology;
+      router.replace({ query }, undefined, { shallow: true });
+    }
+  }, [router.query]);
+
   const etypeData = eTypes.find(etype => etype.label === currentEtype);
   const instances = etypeData ? etypeData.experiments.map(e => e.label).sort() : [];
 

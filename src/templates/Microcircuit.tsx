@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Row, Col } from 'antd';
 
@@ -28,19 +28,21 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
 }) => {
   const router = useRouter();
 
-  const query = router.query;
-  if (!query.brain_region && !query.layer) {
-    const defaultMicrocircuitFilters = defaultSelection.digitalReconstruction.microcircuit;
-    query.layer = defaultMicrocircuitFilters.LAYER;
-    query.brain_region = defaultMicrocircuitFilters.BRAIN_REGION;
-  }
+  const { brain_region, layer } = router.query;
 
   const setQuery = (query: any) => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
 
-  const currentRegion: Subregion = query.brain_region as Subregion;
-  const currentLayer: Layer = query.layer as Layer;
+  const currentRegion: Subregion = brain_region as Subregion;
+  const currentLayer: Layer = layer as Layer;
+
+  useEffect(() => {
+    if (!router.query.brain_region && router.isReady) {
+      const query = defaultSelection.digitalReconstruction.microcircuit;
+      router.replace({ query }, undefined, { shallow: true });
+    }
+  }, [router.query]);
 
   const setRegion = (region: Subregion) => {
     setQuery({
@@ -108,7 +110,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
                   <Pills
                     list={subregions}
                     titles={subregions.map(subregion => subregionTitle[subregion])}
-                    defaultValue={currentRegion}
+                    value={currentRegion}
                     onSelect={setRegion as (s: string) => void}
                     color={color}
                   />

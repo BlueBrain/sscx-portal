@@ -10,7 +10,7 @@ type PillsProps = {
   title?: string;
   list: string[];
   titles?: string[];
-  defaultValue?: string;
+  value?: string;
   onSelect?: (s: string) => void;
   color?: Color;
   className?: string;
@@ -44,15 +44,12 @@ const Pills: React.FC<PillsProps> = ({
   title,
   list,
   titles,
-  defaultValue,
+  value,
   onSelect,
   color = '',
   className = '',
 }) => {
-  const [activePill, setActivePill] = React.useState<string>(defaultValue as string);
-
   const handleSelectedPill = (element: string) => {
-    setActivePill(element);
     onSelect && onSelect(element);
   };
 
@@ -66,12 +63,12 @@ const Pills: React.FC<PillsProps> = ({
         role="radiogroup"
         aria-labelledby={`${classPrefixPill}${id}`}
       >
-        {list.map((el, index) => (
+        {list.map((pillValue, index) => (
           <Pill
-            key={el}
-            element={el}
+            key={pillValue}
+            element={pillValue}
             title={titles ? titles[index] : undefined}
-            selected={(activePill || defaultValue) === el}
+            selected={value === pillValue}
             onSelect={handleSelectedPill}
           />
         ))}

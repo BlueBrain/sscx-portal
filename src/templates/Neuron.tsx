@@ -76,38 +76,28 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   const router = useRouter();
   const nexus = useNexusContext();
 
-  const query = router.query;
-  if (!query.brain_region && !query.layer && !query.etype && !query.mtype && !query.memodel) {
-    const defaultFilter = defaultSelection.digitalReconstruction.neurons;
-    query.brain_region = defaultFilter.BRAIN_REGION;
-    query.layer = defaultFilter.LAYER;
-    query.etype = defaultFilter.ETYPE;
-    query.mtype = defaultFilter.MTYPE;
-    query.memodel = defaultFilter.MEMODEL;
-  }
-
   const [memodelIndex, setMemodelIndex] = useState<any>(null);
   const [memodelNumberExceptions, setMemodelNumberExceptions] = useState<any>(null);
 
-  const currentRegion: Subregion = query.brain_region as Subregion;
-  const currentLayer: Layer = query.layer as Layer;
-  const currentEtype: string = query.etype as string;
-  const currentMtype: string = query.mtype as string;
-  const currentMemodel: string = query.memodel as string;
+  const { brain_region, layer, etype, mtype, memodel } = router.query;
+
+  const currentRegion: Subregion = brain_region as Subregion;
+  const currentLayer: Layer = layer as Layer;
+  const currentEtype: string = etype as string;
+  const currentMtype: string = mtype as string;
+  const currentMemodel: string = memodel as string;
 
   const setParams = (params: Record<string, string>): void => {
-    const query = {
-      ...{
-        brain_region: currentRegion,
-        layer: currentLayer,
-        etype: currentEtype,
-        mtype: currentMtype,
-        memodel: currentMemodel,
-      },
-      ...params,
-    };
-    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
+    const query = { ...router.query, ...params };
+    router.push({ query }, undefined, { shallow: true });
   };
+
+  useEffect(() => {
+    if (!router.query.brain_region && router.isReady) {
+      const query = defaultSelection.digitalReconstruction.neurons;
+      router.replace({ query }, undefined, { shallow: true });
+    }
+  }, [router.query]);
 
   const setRegion = (region: Subregion) => {
     setParams({
@@ -218,7 +208,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                 <div className={selectorStyle.body} style={{ padding: '0 0.5rem 1rem 0.5rem' }}>
                   <Pills
                     list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
-                    defaultValue={currentRegion}
+                    value={currentRegion}
                     onSelect={setRegion as (s: string) => void}
                     color={color}
                   />

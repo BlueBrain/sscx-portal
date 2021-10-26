@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col } from 'antd';
@@ -36,16 +36,12 @@ const NeuronExperimentalMorphology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
 
-  const { query } = router;
-  if (!query.layer && !query.mtype && !query.instance) {
-    const defaultMorphologyFilters = defaultSelection.experimentalData.neuronMorphology;
-    query.layer = defaultMorphologyFilters.LAYER;
-    query.mtype = defaultMorphologyFilters.M_TYPE;
-    query.instance = defaultMorphologyFilters.INSTANCE;
-  }
+  const { layer, mtype, instance } = router.query;
+
+  const currentLayer: Layer = layer as Layer;
 
   const setQuery = (query: any): void => {
-    router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
+    router.push({ query }, undefined, { shallow: true });
   };
 
   const setLayer = (layer: Layer) => {
@@ -55,7 +51,13 @@ const NeuronExperimentalMorphology: React.FC = () => {
       instance: null,
     });
   };
-  const currentLayer: Layer = query.layer as Layer;
+
+  useEffect(() => {
+    if (!router.query.layer && router.isReady) {
+      const query = defaultSelection.experimentalData.neuronMorphology;
+      router.replace({ query }, undefined, { shallow: true });
+    }
+  }, [router.query]);
 
   const mtypes = currentLayer
     ? Object.keys(expMorphologyData[currentLayer]).sort() as string[]
@@ -68,7 +70,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
       instance: null,
     });
   };
-  const currentMtype: string = query.mtype as string;
+  const currentMtype: string = mtype as string;
 
   const instances = currentMtype
     ? (expMorphologyData as any)[currentLayer][currentMtype].sort()
@@ -81,7 +83,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
       instance,
     });
   };
-  const currentInstance: string = query.instance as string;
+  const currentInstance: string = instance as string;
 
   const getMorphologyDistribution = (morphologyResource: any) => (
     morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i))
