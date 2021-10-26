@@ -14,6 +14,7 @@ if (typeof window === 'undefined') {
   require('abort-controller/polyfill');
 } else {
   smoothscroll.polyfill();
+  require('systemjs');
 }
 
 

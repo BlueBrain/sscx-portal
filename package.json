@@ -39,6 +39,7 @@
     "sharp": "^0.29.1",
     "smoothscroll-polyfill": "^0.4.4",
     "swcmorphologyparser": "^0.1.11",
+    "systemjs": "^6.11.0",
     "three": "0.120.1"
   },
   "devDependencies": {
