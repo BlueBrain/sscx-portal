@@ -13,16 +13,17 @@ const SentryWebpackPluginOptions = {
 const basePath = '/sscx-portal';
 
 const nextConfig = {
+  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   trailingSlash: true,
   basePath: basePath,
   assetPrefix: `${basePath}/`,
-  webpack5: true,
   images: {
     domains: ['localhost', 'sscx-portal-static-data'],
     path: `${basePath}/_next/image/`,
+    formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 259200,
   },
   experimental: {
