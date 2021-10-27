@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 import style from './styles.module.scss';
 

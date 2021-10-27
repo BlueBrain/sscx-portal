@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { keyBy } from 'lodash';
+import keyBy from 'lodash/keyBy';
 import { useNexusContext } from '@bbp/react-nexus';
 
 import { Table } from 'antd';

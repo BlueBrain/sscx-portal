@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import range from 'lodash/range';
+import get from 'lodash/get';
 
 import { useRouter } from 'next/router';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Button, Tabs, Row, Col, Popover } from 'antd';
+import { Button, Tabs, Row, Col } from 'antd';
 import { useNexusContext } from '@bbp/react-nexus';
-import { range, get } from 'lodash';
 
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
