@@ -29,7 +29,7 @@ const LayerAnatomyView = () => (
               <>
                 <Collapsible id="layerSection" title={`Layer ${layer}`}>
                   <div>
-                    <h3>Layer thickness: S1</h3>
+                    <h3>Layer thickness for S1</h3>
                     <p>
                       Data are provided in the form of raw microscopy images of NeuN
                       (neuron-specific nuclear protein) stained coronal slices with annotations of individual layer extents,
