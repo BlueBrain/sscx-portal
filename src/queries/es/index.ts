@@ -379,13 +379,11 @@ export const etypeTracesDataQuery = (
             },
           },
           {
-            bool: {
-              must_not: {
-                exists: {
-                  "field": "note",
-                },
-              },
-            },
+            "bool": {
+              "must": [
+                { "match": { "note": "All traces" } }
+              ]
+            }
           },
           {
             nested: {
