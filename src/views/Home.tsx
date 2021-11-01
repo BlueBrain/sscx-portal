@@ -30,7 +30,7 @@ const Home: React.FC = () => (
       <div className="gradient" />
 
       <div className="copyright">
-        ©Blue Brain Project/EPFL 2005-{`${(new Date()).getFullYear()}`}.
+        ©Blue Brain Project/EPFL 2005-{`${(new Date()).getFullYear()}`}
       </div>
 
       <div className="title">
