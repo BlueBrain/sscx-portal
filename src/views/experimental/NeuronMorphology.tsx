@@ -111,9 +111,8 @@ const NeuronExperimentalMorphology: React.FC = () => {
             <StickyContainer>
               <Title
                 primaryColor={color}
-                title={<span>Neuronal <br /> Morphology</span>}
+                title="Neuronal Morphology"
                 subtitle="Experimental Data"
-                hint="Select a layer of interest in the S1 of the rat brain."
               />
               <InfoBox>
                 <p>
