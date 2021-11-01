@@ -5,7 +5,7 @@ import { Row, Col } from 'antd';
 import LayerSelector from '../components/AnatomyLayerSelector';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import { StickyContainer } from '../components/StickyContainer';
+import StickyContainer from '../components/StickyContainer';
 import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
 import { defaultSelection } from '../constants';
@@ -51,6 +51,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           gutter={[0,20]}
         >
           <Col
+            className="mb-2"
             xs={24}
             lg={12}
           >
@@ -79,7 +80,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
           </Col>
 
           <Col
-            className={`set-accent-color--${color}`}
+            className={`set-accent-color--${color} mb-2`}
             xs={24}
             lg={12}
           >

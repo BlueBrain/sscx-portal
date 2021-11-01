@@ -26,7 +26,7 @@ import Factsheet from '../../components/Factsheet';
 import ExpMorphologyTable from '../../components/ExpMorphologyTable';
 import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
-import { StickyContainer } from '../../components/StickyContainer';
+import StickyContainer from '../../components/StickyContainer';
 import { sscx } from '../../config';
 import { defaultSelection } from '../../constants';
 
@@ -103,6 +103,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
           gutter={[0, 20]}
         >
           <Col
+            className="mb-2"
             xs={24}
             xl={8}
             xxl={12}
@@ -128,7 +129,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
             </StickyContainer>
           </Col>
           <Col
-            className={`set-accent-color--${color}`}
+            className={`set-accent-color--${color} mb-2`}
             xs={24}
             xl={16}
             xxl={12}

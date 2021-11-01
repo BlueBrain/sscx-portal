@@ -6,7 +6,7 @@ import BrainRegionSelector from '../components/BrainRegionSelector';
 import { Subregion } from '../types';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import { StickyContainer } from '../components/StickyContainer';
+import StickyContainer from '../components/StickyContainer';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
 import { defaultSelection } from '../constants';
@@ -50,6 +50,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
           gutter={[0,20]}
         >
           <Col
+            className="mb-2"
             xs={24}
             xl={8}
             xxl={12}
@@ -59,7 +60,6 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
                 primaryColor={color}
                 title="Brain Regions"
                 subtitle={sectionTitle}
-                hint="Select a subregion of interest in the S1 of the rat brain."
               />
               <InfoBox>
                 <p>
@@ -71,7 +71,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
           </Col>
 
           <Col
-            className={`mt-2 set-accent-color--${color}`}
+            className={`set-accent-color--${color} mb-2`}
             xs={24}
             xl={16}
             xxl={12}

@@ -41,7 +41,7 @@ import {
   memodelArchivePath,
 } from '../queries/http';
 import { sscx, basePath } from '../config';
-import { StickyContainer } from '../components/StickyContainer';
+import StickyContainer from '../components/StickyContainer';
 import { modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
 import { defaultSelection } from '../constants';
 
@@ -171,6 +171,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           gutter={[0, 20]}
         >
           <Col
+            className="mb-2"
             xs={24}
             xl={8}
             xxl={12}
@@ -198,7 +199,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
           </Col>
 
           <Col
-            className={`set-accent-color--${color}`}
+            className={`set-accent-color--${color} mb-2`}
             xs={24}
             xl={16}
             xxl={12}

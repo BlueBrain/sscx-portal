@@ -1,11 +1,8 @@
-import { FC } from 'react';
+import React from 'react';
 import styles from './styles.module.scss';
 
-interface StickyContainerProps {
 
-}
-
-const StickyContainer: FC<StickyContainerProps> = ({ children }) => (
+const StickyContainer: React.FC = ({ children }) => (
   <div className={styles.flexWrapper}>
     <div className={styles.container}>
       {children}
@@ -13,4 +10,5 @@ const StickyContainer: FC<StickyContainerProps> = ({ children }) => (
   </div>
 );
 
-export { StickyContainer };
+
+export default StickyContainer;

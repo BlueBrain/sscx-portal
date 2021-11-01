@@ -14,7 +14,7 @@ import List from '../components/List';
 import { pathwayIndexPath } from '../queries/http';
 
 import selectorStyle from '../styles/selector.module.scss';
-import { StickyContainer } from '../components/StickyContainer';
+import StickyContainer from '../components/StickyContainer';
 import { defaultSelection } from '../constants';
 
 
@@ -137,6 +137,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
           gutter={[0, 20]}
         >
           <Col
+            className="mb-2"
             xs={24}
             xl={8}
             xxl={10}
@@ -165,7 +166,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
           </Col>
 
           <Col
-            className={`set-accent-color--${color} mt-2 mb-2`}
+            className={`set-accent-color--${color} mb-2`}
             xs={24}
             xl={16}
             xxl={14}

@@ -8,7 +8,7 @@ import InfoBox from '../components/InfoBox';
 import LayerSelector from '../components/MicrocircuitLayerSelector';
 import { Layer, Color, Subregion } from '../types';
 import Pills from '../components/Pills';
-import { StickyContainer } from '../components/StickyContainer';
+import StickyContainer from '../components/StickyContainer';
 
 import { subregionTitle, subregions, defaultSelection } from '../constants';
 
@@ -72,6 +72,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
           gutter={[0, 20]}
         >
           <Col
+            className="mb-2"
             xs={24}
             xl={8}
             xxl={12}
@@ -98,7 +99,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
           </Col>
 
           <Col
-            className={`mt-2 set-accent-color--${color}`}
+            className={`mb-2 set-accent-color--${color}`}
             xs={24}
             xl={16}
             xxl={12}

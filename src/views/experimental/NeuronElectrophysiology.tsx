@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
-import { Row, Col, Popover, Button } from 'antd';
+import { Row, Col, Button } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import ESData from '../../components/ESData';
@@ -21,7 +21,7 @@ import ExpTraceTable from '../../components/ExpTraceTable';
 import ExpTraceFactsheet from '../../components/ExpTraceFactsheet';
 import ExpEphysDistribution from '../../components/ExpEphysDistribution';
 import Metadata from '../../components/Metadata';
-import { StickyContainer } from '../../components/StickyContainer';
+import StickyContainer from '../../components/StickyContainer';
 import eTypes from '../../__generated__/experimentalData.json';
 import { defaultSelection } from '../../constants';
 import { sscx, basePath } from '../../config';
@@ -79,6 +79,7 @@ const NeuronElectrophysiology: React.FC = () => {
       <Filters primaryColor={color} hasData={!!currentEtype && !!currentInstance}>
         <Row className="w-100" gutter={[0, 20]}>
           <Col
+            className="mb-2"
             xs={24}
             xl={8}
             xxl={12}
@@ -100,7 +101,7 @@ const NeuronElectrophysiology: React.FC = () => {
           </Col>
 
           <Col
-            className={`set-accent-color--${color}`}
+            className={`set-accent-color--${color} mb-2`}
             xs={24}
             xl={16}
             xxl={12}
