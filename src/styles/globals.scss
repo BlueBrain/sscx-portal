@@ -1066,6 +1066,7 @@ $collapsible-padding-small: 0.5rem;
   font-size: map-get($fontSize, "large");
   background-color: map-get($basePalette, "navy-2");
   color: map-get($basePalette, "white");
+  box-shadow: 0 -8px 12px 0px rgba(0,0,0,0.3);
   text-decoration: none;
   text-align: center;
   padding: 15px;
