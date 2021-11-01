@@ -23,7 +23,6 @@ const nextConfig = {
   images: {
     domains: ['localhost', 'sscx-portal-static-data'],
     path: `${basePath}/_next/image`,
-    formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 259200,
   },
   experimental: {
