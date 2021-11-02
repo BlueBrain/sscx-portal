@@ -2,6 +2,7 @@ import React from 'react';
 
 import SectionNav from '../../layouts/SectionNav';
 import ScrollTo from '../../components/ScrollTo';
+import ScrollTop from '../../components/ScrollTop';
 
 
 const classPrefix = 'data-container__';
@@ -29,6 +30,9 @@ const DataContainer: React.FC<DataContainerProps> = ({
           {navItems && (
             <SectionNav navItems={navItems} />
           )}
+          <div className="scroll-top">
+            <ScrollTop />
+          </div>
           <div className="center">{children}</div>
           <div className="scroll-to">
             <ScrollTo anchor="filters" direction="up">

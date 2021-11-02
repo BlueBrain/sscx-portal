@@ -6,14 +6,15 @@ import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp';
 const classPrefix = 'scroll-top__';
 
 type ScrollTopProps = {
-  anchor: string;
 };
 
-const ScrollTop: React.FC<ScrollTopProps> = ({ anchor }) => {
+const ScrollTop: React.FC<ScrollTopProps> = () => {
+  const scrollTop = () => document.getElementById('filters').scrollIntoView({ behavior: 'smooth' });
+
   return (
-    <a href={`#${anchor}`} className={`${classPrefix}base`}>
+    <div className={`${classPrefix}base`} onClick={scrollTop}>
       <IoIosArrowUp />
-    </a>
+    </div>
   );
 };
 

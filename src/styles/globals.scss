@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @import 'antd/lib/style/index.css';
 @import 'flexboxgrid';
 
@@ -566,6 +568,20 @@ $collapsible-padding-small: 0.5rem;
     width: 100%;
     bottom: 0;
   }
+
+  .scroll-top {
+    position: sticky;
+    float: right;
+    margin: 4rem 0;
+    color: #313254;
+    top: 85vh;
+    transform: translate3d(50%, 0, 0);
+    right: calc((100vw - 1080px) / 4);
+
+    @media (max-width: 1260px) {
+      display: none;
+    }
+  }
 }
 
 
@@ -1121,17 +1137,16 @@ $collapsible-padding-small: 0.5rem;
 
 // ScrollTop
 .scroll-top__base {
-  $size: 6rem;
+  $size: 5rem;
 
-  display: inline-block;
+  cursor: pointer;
   background-color: map-get($basePalette, "navy-2");
   color: map-get($basePalette, "white");
-  text-decoration: none;
   text-align: center;
   border-radius: $size;
   width: $size;
   height: $size;
-  font-size: (2 / 3) * $size;
+  font-size: math.div(2, 3) * $size;
   & svg {
     padding-top: 0.75rem;
   }
