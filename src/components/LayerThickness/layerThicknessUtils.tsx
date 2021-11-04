@@ -52,6 +52,7 @@ export const getData = (layer: Layer, data?: ElasticSearchViewQueryResponse<any>
         images: sliceCollection.image.map(imageEntity => imageEntity['@id']).map((image: string) => (
           <div key={image} className="image-container">
             <NexusImage
+              aspectRatio="5 / 4"
               org={sscx.org}
               project={sscx.project}
               imageUrl={image}

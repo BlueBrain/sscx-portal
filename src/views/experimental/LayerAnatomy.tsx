@@ -36,7 +36,9 @@ const LayerAnatomyView = () => (
                       and spreadsheets summarizing measurements of layer thicknesses.
                     </p>
                   </div>
+
                   <LayerThickness layer={layer} data={data} />
+
                   <div>
                     <h3>Neuronal density</h3>
                     <p>Data are given as raw microscopy images of NeuN stained slices with annotations of
@@ -44,6 +46,7 @@ const LayerAnatomyView = () => (
                       across different layers.
                     </p>
                   </div>
+
                   <NeuralDensity layer={layer} data={data} />
                 </Collapsible>
 
