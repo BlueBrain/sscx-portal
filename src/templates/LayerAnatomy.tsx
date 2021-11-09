@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
 
 import LayerSelector from '../components/AnatomyLayerSelector';
+import QuickSelector from '../components/QuickSelector';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import StickyContainer from '../components/StickyContainer';
 import Filters from '../layouts/Filters';
 import { Layer, Color } from '../types';
-import { defaultSelection } from '../constants';
+import { defaultSelection, layers } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -29,7 +30,6 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
   const router = useRouter();
 
   const { layer } = router.query;
-  const currentLayer: Layer = layer as Layer;
 
   const setLayerQuery = (layer: Layer) => {
     const query = { layer };
@@ -45,7 +45,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
 
   return (
     <>
-      <Filters primaryColor={color} hasData={!!currentLayer}>
+      <Filters primaryColor={color} hasData={!!layer}>
         <Row
           className="w-100"
           gutter={[0,20]}
@@ -87,7 +87,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
                 <div className={selectorStyle.body} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}
-                    value={currentLayer}
+                    value={layer as Layer}
                     onSelect={setLayerQuery}
                   />
                 </div>
@@ -97,7 +97,19 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
         </Row>
       </Filters>
 
-      {children(currentLayer)}
+      <QuickSelector
+        color={color}
+        entries={[
+          {
+            title: 'Brain region',
+            currentValue: layer as Layer,
+            values: layers,
+            onChange: setLayerQuery,
+          },
+        ]}
+      />
+
+      {children(layer as Layer)}
     </>
   );
 };
