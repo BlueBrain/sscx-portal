@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Spin } from 'antd';
 
 import BrainRegionTemplate from '../../templates/BrainRegions';
 import DataContainer from '../../components/DataContainer';
@@ -52,19 +52,23 @@ const BrainRegionsView = () => (
           title={`${subregion} (Sub-region) Factsheet`}
         >
           <HttpData path={subregionCircuitFactsheetPath(subregion)}>
-            {data => (
-              <>
-                <p>{getSubregionDescription(subregion, data[0].values)}</p>
-                <Factsheet id="subregionCircuitFactsheet" facts={data[0].values} />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={subregionCircuitFactsheetPath(subregion)}
-                    download={`subregion-circuit-factsheet-${subregion}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </>
+            {(data, loading) => (
+              <Spin spinning={loading}>
+                {data && (
+                  <>
+                    <p>{getSubregionDescription(subregion, data[0].values)}</p>
+                    <Factsheet id="subregionCircuitFactsheet" facts={data[0].values} />
+                    <div className="text-right mt-2">
+                      <HttpDownloadButton
+                        href={subregionCircuitFactsheetPath(subregion)}
+                        download={`subregion-circuit-factsheet-${subregion}.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
+                  </>
+                )}
+              </Spin>
             )}
           </HttpData>
         </Collapsible>
@@ -87,23 +91,27 @@ const BrainRegionsView = () => (
           />
 
           <HttpData path={regionCircuitFactsheetPath()}>
-            {data => (
-              <>
-                <h3>Factsheet</h3>
-                <Factsheet
-                  id="regionCircuitFactsheet"
-                  className="mt-2"
-                  facts={data[0].values}
-                />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={regionCircuitFactsheetPath()}
-                    download={`region-circuit-factsheet.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </>
+            {(data, loading) => (
+              <Spin spinning={loading}>
+                {data && (
+                  <>
+                    <h3>Factsheet</h3>
+                    <Factsheet
+                      id="regionCircuitFactsheet"
+                      className="mt-2"
+                      facts={data[0].values}
+                    />
+                    <div className="text-right mt-2">
+                      <HttpDownloadButton
+                        href={regionCircuitFactsheetPath()}
+                        download={`region-circuit-factsheet.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
+                  </>
+                )}
+              </Spin>
             )}
           </HttpData>
         </Collapsible>

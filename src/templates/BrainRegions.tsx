@@ -3,13 +3,14 @@ import { useRouter } from 'next/router';
 import { Row, Col } from 'antd';
 
 import BrainRegionSelector from '../components/BrainRegionSelector';
+import QuickSelector from '../components/QuickSelector';
 import { Subregion } from '../types';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import StickyContainer from '../components/StickyContainer';
 import Filters from '../layouts/Filters';
 import { Color } from '../types';
-import { defaultSelection } from '../constants';
+import { defaultSelection, subregions } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -27,13 +28,12 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
 }) => {
   const router = useRouter();
 
-  const { brain_region } = router.query;
+  const { brain_region: region } = router.query as Record<string, string>;
 
   const setBrainRegionQuery = (brainRegion: Subregion) => {
     const query = { brain_region: brainRegion };
     router.push({ query }, undefined, { shallow: true });
   };
-  const currentRegion = brain_region as Subregion;
 
   useEffect(() => {
     if (!router.query.brain_region && router.isReady) {
@@ -44,7 +44,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
 
   return (
     <>
-      <Filters primaryColor={color} hasData={!!currentRegion}>
+      <Filters primaryColor={color} hasData={!!region}>
         <Row
           className="w-100"
           gutter={[0,20]}
@@ -85,7 +85,7 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
                     >
                       <BrainRegionSelector
                         color={color}
-                        value={currentRegion}
+                        value={region as Subregion}
                         onSelect={setBrainRegionQuery}
                       />
                     </div>
@@ -95,7 +95,19 @@ const BrainRegions: React.FC<BrainRegionTemplateProps> = ({
         </Row>
       </Filters>
 
-      {!!children && children(currentRegion)}
+      <QuickSelector
+        color={color}
+        entries={[
+          {
+            title: 'Brain region',
+            currentValue: region,
+            values: subregions,
+            onChange: setBrainRegionQuery,
+          },
+        ]}
+      />
+
+      {!!children && children(region)}
     </>
   );
 };
