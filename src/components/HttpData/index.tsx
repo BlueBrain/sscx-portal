@@ -26,7 +26,7 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
   React.useEffect(() => {
     if (!path) return;
 
-    setState({ ...state, loading: true, data: null });
+    setState({ ...state, loading: true });
     fetch(path)
       .then(async res => {
         // TODO: remove when factesheets don't longer contain NaN values
@@ -45,10 +45,6 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
 
   if (!path) {
     return null;
-  }
-
-  if (state.loading) {
-    return <p>Loading {label}...</p>;
   }
 
   if (state.error) {

@@ -31,7 +31,7 @@ const ESData: React.FC<ESDataProps> = ({
 
   React.useEffect(() => {
     if (query) {
-      setState({ ...state, loading: true, data: null });
+      setState({ ...state, loading: true });
       nexus.View.elasticSearchQuery(
         sscx.org,
         sscx.project,
