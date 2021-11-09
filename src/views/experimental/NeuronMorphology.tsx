@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
 
 import ESData from '../../components/ESData';
 import HttpData from '../../components/HttpData';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
 import DataContainer from '../../components/DataContainer';
+import QuickSelector from '../../components/QuickSelector';
 import LayerSelector from '../../components/AnatomyLayerSelector';
 import ExpMorphDistribution from '../../components/ExpMorphDistribution';
 import { morphologyDataQuery, mtypeExpMorphologyListDataQuery } from '../../queries/es';
@@ -28,7 +29,7 @@ import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import StickyContainer from '../../components/StickyContainer';
 import { sscx } from '../../config';
-import { defaultSelection } from '../../constants';
+import { defaultSelection, layers } from '../../constants';
 
 import selectorStyle from '../../styles/selector.module.scss';
 
@@ -36,13 +37,25 @@ const NeuronExperimentalMorphology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
 
-  const { layer, mtype, instance } = router.query;
+  const { layer, mtype, instance } = router.query as Record<string, string>;
+
+  const [quickSelection, setQuickSelection] = useState<Record<string, string>>({ layer, mtype, instance });
+
+  const getMtypes = (layer): string[] => {
+    return layer
+      ? Object.keys(expMorphologyData[layer]).sort()
+      : [];
+  }
+
+  const getInstances = (layer, mtype): string[] => {
+    return layer && mtype
+      ? expMorphologyData[layer][mtype].sort()
+      : [];
+  }
+
+  const setQuery = (query: Record<string, string>) => router.push({ query }, undefined, { shallow: true });
 
   const currentLayer: Layer = layer as Layer;
-
-  const setQuery = (query: any): void => {
-    router.push({ query }, undefined, { shallow: true });
-  };
 
   const setLayer = (layer: Layer) => {
     setQuery({
@@ -52,16 +65,12 @@ const NeuronExperimentalMorphology: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    if (!router.query.layer && router.isReady) {
-      const query = defaultSelection.experimentalData.neuronMorphology;
-      router.replace({ query }, undefined, { shallow: true });
-    }
-  }, [router.query]);
+  const setQsLayer = (layer: Layer) => {
+    setQuickSelection({ layer });
+  };
 
-  const mtypes = currentLayer
-    ? Object.keys(expMorphologyData[currentLayer]).sort() as string[]
-    : [];
+  const mtypes = getMtypes(currentLayer);
+  const qsMtypes = getMtypes(quickSelection.layer);
 
   const setMtype = (mtype: string) => {
     setQuery({
@@ -70,11 +79,16 @@ const NeuronExperimentalMorphology: React.FC = () => {
       instance: null,
     });
   };
+  const setQsMtype = (mtype: string) => {
+    setQuickSelection({
+      layer: quickSelection.layer,
+      mtype,
+    });
+  };
   const currentMtype: string = mtype as string;
 
-  const instances = currentMtype
-    ? (expMorphologyData as any)[currentLayer][currentMtype].sort()
-    : [];
+  const instances = getInstances(currentLayer, currentMtype);
+  const qsInstances = getInstances(quickSelection.layer, quickSelection.mtype);
 
   const setInstance = (instance: string) => {
     setQuery({
@@ -83,7 +97,38 @@ const NeuronExperimentalMorphology: React.FC = () => {
       instance,
     });
   };
+  const setQsInstance = (instance: string) => {
+    const { layer, mtype } = quickSelection;
+
+    setQuickSelection({
+      layer,
+      mtype,
+      instance,
+    });
+
+    setQuery({ layer, mtype, instance });
+  };
   const currentInstance: string = instance as string;
+
+  const morphologyDataQueryObj = useMemo(() => {
+    return morphologyDataQuery(currentMtype, currentInstance);
+  }, [currentMtype, currentInstance]);
+
+  const mtypeExpMorphologyListDataQueryObj = useMemo(() => {
+    return mtypeExpMorphologyListDataQuery(currentMtype);
+  }, [currentMtype])
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    if (!router.query.layer) {
+      const query = defaultSelection.experimentalData.neuronMorphology;
+      setQuickSelection(query);
+      router.replace({ query }, undefined, { shallow: true });
+    } else {
+      setQuickSelection({ layer, mtype, instance});
+    }
+  }, [router.query]);
 
   const getMorphologyDistribution = (morphologyResource: any) => (
     morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i))
@@ -174,6 +219,30 @@ const NeuronExperimentalMorphology: React.FC = () => {
         </Row>
       </Filters>
 
+      <QuickSelector
+        color={color}
+        entries={[
+          {
+            title: 'Layer',
+            currentValue: quickSelection.layer,
+            values: layers,
+            onChange: setQsLayer,
+          },
+          {
+            title: 'M-type',
+            currentValue: quickSelection.mtype,
+            values: qsMtypes,
+            onChange: setQsMtype,
+          },
+          {
+            title: 'Morphology',
+            currentValue: quickSelection.instance,
+            values: qsInstances,
+            onChange: setQsInstance,
+          },
+        ]}
+      />
+
       <DataContainer
         visible={!!currentInstance}
         navItems={[
@@ -192,20 +261,23 @@ const NeuronExperimentalMorphology: React.FC = () => {
             Data for neuronal morphologies are provided as ASCII files.
           </p>
           <ESData
-            query={morphologyDataQuery(currentMtype, currentInstance)}
+            query={morphologyDataQueryObj}
           >
-            {esDocuments => (
+            {(esDocuments, loading) => (
               <>
                 {!!esDocuments && !!esDocuments.length && (
                   <div>
                     <Metadata nexusDocument={esDocuments[0]._source} />
                     <h3 className="mt-3">3D view</h3>
-                    <NexusPlugin
-                      className="mt-2"
-                      name="neuron-morphology"
-                      resource={esDocuments[0]._source}
-                      nexusClient={nexus}
-                    />
+                    <Spin spinning={loading} className="mt-2">
+                      <div style={{ minHeight: '400px'}}>
+                        <NexusPlugin
+                          name="neuron-morphology"
+                          resource={esDocuments[0]._source}
+                          nexusClient={nexus}
+                        />
+                      </div>
+                    </Spin>
                     <div className="text-right mt-2">
                       <NexusFileDownloadButton
                         filename={getMorphologyDistribution(esDocuments[0]._source).name}
@@ -224,19 +296,25 @@ const NeuronExperimentalMorphology: React.FC = () => {
           </ESData>
 
           <HttpData path={expMorphologyFactsheetPath(currentInstance)} label="morphometrics">
-            {factsheetData => (
-              <div className="mt-3">
-                <h3>Morphometrics</h3>
-                <Factsheet id="morphometrics" className="mt-2" facts={factsheetData[0].values} />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={expMorphologyFactsheetPath(currentInstance)}
-                    download={`exp-morphology-factsheet-${currentInstance}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
+            {(factsheetData, loading) => (
+              <Spin spinning={loading}>
+                <div className="mt-3">
+                  <h3>Morphometrics</h3>
+                  {factsheetData && (
+                    <>
+                      <Factsheet id="morphometrics" className="mt-2" facts={factsheetData[0].values} />
+                      <div className="text-right mt-2">
+                        <HttpDownloadButton
+                          href={expMorphologyFactsheetPath(currentInstance)}
+                          download={`exp-morphology-factsheet-${currentInstance}.json`}
+                        >
+                          factsheet
+                        </HttpDownloadButton>
+                      </div>
+                    </>
+                  )}
                 </div>
-              </div>
+              </Spin>
             )}
           </HttpData>
 
@@ -244,10 +322,14 @@ const NeuronExperimentalMorphology: React.FC = () => {
             {memodels => (
               <div className="mt-3">
                 <h3>Morpho-Electrical neuron models using this morphology</h3>
-                {memodels.length ? (
-                  <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={memodels} />
-                ) : (
-                  <p>No models were built using this morphology</p>
+                {memodels && (
+                  <>
+                    {memodels.length ? (
+                      <ExpMorphMemodelList id="expMorphMemodelList" className="mt-2" memodels={memodels} />
+                    ) : (
+                      <p>No models were built using this morphology</p>
+                    )}
+                  </>
                 )}
               </div>
             )}
@@ -264,18 +346,22 @@ const NeuronExperimentalMorphology: React.FC = () => {
             This procedure enabled the reconstruction of shapes of axons, which were classified into 60 morphological types (m-types).
           </p>
           <HttpData path={expMorphPopulationFactesheetPath(currentMtype)}>
-            {factsheetData => (
+            {(factsheetData, loading) => (
               <div>
                 <h3>Factsheet</h3>
-                <Factsheet facts={factsheetData.values} />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={expMorphPopulationFactesheetPath(currentMtype)}
-                    download={`exp-morphology-population-factsheet-${currentMtype}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
+                {factsheetData && (
+                  <Spin spinning={loading}>
+                    <Factsheet facts={factsheetData.values} />
+                    <div className="text-right mt-2">
+                      <HttpDownloadButton
+                        href={expMorphPopulationFactesheetPath(currentMtype)}
+                        download={`exp-morphology-population-factsheet-${currentMtype}.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
+                  </Spin>
+                )}
               </div>
             )}
           </HttpData>
@@ -283,9 +369,9 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <ExpMorphDistribution className="mt-3" mtype={currentMtype} />
 
           <h3 className="mt-3">Reconstructed morphologies</h3>
-          <ESData query={mtypeExpMorphologyListDataQuery(currentMtype)}>
-            {esDocuments => (
-              <>
+          <ESData query={mtypeExpMorphologyListDataQueryObj}>
+            {(esDocuments, loading) => (
+              <Spin spinning={loading}>
                 {!!esDocuments && (
                   <ExpMorphologyTable
                     layer={currentLayer}
@@ -293,7 +379,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                     morphologies={getAndSortMorphologies(esDocuments)}
                   />
                 )}
-              </>
+              </Spin>
             )}
           </ESData>
         </Collapsible>

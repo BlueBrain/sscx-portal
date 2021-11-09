@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Spin } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import ESData from '../../components/ESData';
@@ -14,6 +14,7 @@ import { expTracePopulationFactsheetPath, expTraceFactsheetPath } from '../../qu
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
+import QuickSelector from '../../components/QuickSelector';
 import { color } from './config';
 import List from '../../components/List';
 import Collapsible from '../../components/Collapsible';
@@ -22,7 +23,7 @@ import ExpTraceFactsheet from '../../components/ExpTraceFactsheet';
 import ExpEphysDistribution from '../../components/ExpEphysDistribution';
 import Metadata from '../../components/Metadata';
 import StickyContainer from '../../components/StickyContainer';
-import eTypes from '../../__generated__/experimentalData.json';
+import ephysData from '../../__generated__/experimentalData.json';
 import { defaultSelection } from '../../constants';
 import { sscx, basePath } from '../../config';
 
@@ -30,11 +31,15 @@ import selectorStyle from '../../styles/selector.module.scss';
 import HttpData from '../../components/HttpData';
 
 
+const etypes = ephysData.map(etype => etype.label).sort();
+
 const NeuronElectrophysiology: React.FC = () => {
   const router = useRouter();
   const nexus = useNexusContext();
 
-  const { etype, etype_instance } = router.query;
+  const { etype, etype_instance: instance } = router.query as Record<string, string>;
+
+  const [quickSelection, setQuickSelection] = useState<Record<string, string>>({ etype, instance });
 
   const setQuery = (query: any) => {
     router.push({ query }, undefined, { shallow: true });
@@ -43,28 +48,58 @@ const NeuronElectrophysiology: React.FC = () => {
   const setEtype = (etype: string) => {
     setQuery({
       etype,
-      etype_instance: currentInstance,
-    });
-  };
-  const setInstance = (instance: string) => {
-    setQuery({
-      etype: currentEtype,
       etype_instance: instance,
     });
   };
+  const setQsEtype = (etype: string) => {
+    setQuickSelection({ etype });
+  };
 
-  const currentEtype: string = etype as string;
-  const currentInstance: string = etype_instance as string;
+  const setInstance = (instance: string) => {
+    setQuery({
+      etype,
+      etype_instance: instance,
+    });
+  };
+  const setQsInstance = (instance: string) => {
+    const { etype } = quickSelection;
+
+    setQuickSelection({ etype, instance });
+
+    setQuery({ etype, etype_instance: instance });
+  };
 
   useEffect(() => {
-    if (!router.query.etype && router.isReady) {
+    if (!router.isReady) return;
+
+    if (!router.query.etype) {
       const query = defaultSelection.experimentalData.neuronElectrophysiology;
+      const { etype, etype_instance: instance } = query;
+      setQuickSelection({ etype, instance });
       router.replace({ query }, undefined, { shallow: true });
+    } else {
+      setQuickSelection({ etype, instance });
     }
   }, [router.query]);
 
-  const etypeData = eTypes.find(etype => etype.label === currentEtype);
-  const instances = etypeData ? etypeData.experiments.map(e => e.label).sort() : [];
+  const getInstances = etype => {
+    const etypeData = ephysData.find(etypeEntry => etypeEntry.label === etype);
+
+    return etypeData
+      ? etypeData.experiments.map(e => e.label).sort()
+      : [];
+  };
+
+  const instances = getInstances(etype);
+  const qsInstances = getInstances(quickSelection.etype);
+
+  const fullElectroPhysiologyDataQueryObj = useMemo(() => {
+    return fullElectroPhysiologyDataQuery(etype, instance);
+  }, [etype, instance]);
+
+  const etypeTracesDataQueryObj = useMemo(() => {
+    return etypeTracesDataQuery(etype);
+  }, [etype]);
 
   const getEphysDistribution = (resource: any) => Array.isArray(resource.distribution)
     ? resource.distribution.find((d: any) => d.name.match(/\.nwb$/i))
@@ -76,7 +111,7 @@ const NeuronElectrophysiology: React.FC = () => {
 
   return (
     <>
-      <Filters primaryColor={color} hasData={!!currentEtype && !!currentInstance}>
+      <Filters primaryColor={color} hasData={!!etype && !!instance}>
         <Row className="w-100" gutter={[0, 20]}>
           <Col
             className="mb-2"
@@ -125,8 +160,8 @@ const NeuronElectrophysiology: React.FC = () => {
                       title="e-type"
                       block
                       color={color}
-                      list={eTypes.map(etype => etype.label)}
-                      value={currentEtype}
+                      list={etypes}
+                      value={etype}
                       onSelect={setEtype}
                     />
                   </div>
@@ -136,7 +171,7 @@ const NeuronElectrophysiology: React.FC = () => {
                       block
                       color={color}
                       list={instances}
-                      value={currentInstance}
+                      value={instance}
                       onSelect={setInstance}
                     />
                   </div>
@@ -147,8 +182,26 @@ const NeuronElectrophysiology: React.FC = () => {
         </Row>
       </Filters>
 
+      <QuickSelector
+        color={color}
+        entries={[
+          {
+            title: 'E-type',
+            currentValue: quickSelection.etype,
+            values: etypes,
+            onChange: setQsEtype,
+          },
+          {
+            title: 'Instance',
+            currentValue: quickSelection.instance,
+            values: qsInstances,
+            onChange: setQsInstance,
+          },
+        ]}
+      />
+
       <DataContainer
-        visible={!!currentEtype && !!currentInstance}
+        visible={!!etype && !!instance}
         navItems={[
           { id: 'instanceSection', label: 'Instance' },
           { id: 'etypeSection', label: 'E-type' },
@@ -156,7 +209,7 @@ const NeuronElectrophysiology: React.FC = () => {
       >
         <Collapsible
           id="instanceSection"
-          title={`Electrophysiological recordings instance ${currentInstance}`}
+          title={`Electrophysiological recordings instance ${instance}`}
         >
           <p className="mb-3">
             When a stimulus type is selected, this page shows the whole-cell patch
@@ -164,9 +217,9 @@ const NeuronElectrophysiology: React.FC = () => {
             that was injected into the cell using the current clamp method.
             The response shows the membrane voltage of the neuron.
           </p>
-          <ESData query={fullElectroPhysiologyDataQuery(currentEtype, currentInstance)}>
-            {esDocuments => (
-              <>
+          <ESData query={fullElectroPhysiologyDataQueryObj}>
+            {(esDocuments, loading) => (
+              <Spin spinning={loading}>
                 {!!esDocuments && (
                   <>
                     <Metadata nexusDocument={esDocuments[0]._source} />
@@ -201,24 +254,28 @@ const NeuronElectrophysiology: React.FC = () => {
                     />
                   </>
                 )}
-              </>
+              </Spin>
             )}
           </ESData>
 
-          <HttpData path={expTraceFactsheetPath(currentInstance)}>
-            {factsheetData => (
-              <div className="mt-4">
-                <h3>Electrical features used in single cell model optimization</h3>
-                <ExpTraceFactsheet className="mt-2" data={factsheetData} />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={expTraceFactsheetPath(currentInstance)}
-                    download={`exp-trace-factsheet-${currentInstance}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </div>
+          <HttpData path={expTraceFactsheetPath(instance)}>
+            {(factsheetData, loading) => (
+              <Spin spinning={loading}>
+                {factsheetData && (
+                  <div className="mt-4">
+                    <h3>Electrical features used in single cell model optimization</h3>
+                    <ExpTraceFactsheet className="mt-2" data={factsheetData} />
+                    <div className="text-right mt-2">
+                      <HttpDownloadButton
+                        href={expTraceFactsheetPath(instance)}
+                        download={`exp-trace-factsheet-${instance}.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
+                  </div>
+                )}
+              </Spin>
             )}
           </HttpData>
         </Collapsible>
@@ -226,7 +283,7 @@ const NeuronElectrophysiology: React.FC = () => {
         <Collapsible
           id="etypeSection"
           className="mt-4"
-          title={`E-type ${currentEtype}`}
+          title={`E-type ${etype}`}
         >
           <p className="mb-3">
             The e-type of a neuron is determined by its firing behavior when injected with a step
@@ -238,34 +295,38 @@ const NeuronElectrophysiology: React.FC = () => {
           </p>
 
           <h3>Electrical features used in single cell model optimization</h3>
-          <HttpData path={expTracePopulationFactsheetPath(currentEtype)}>
-            {factsheetData => (
-              <div>
-                <ExpTraceFactsheet data={factsheetData} />
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={expTracePopulationFactsheetPath(currentEtype)}
-                    download={`exp-trace-population-factsheet-${currentEtype}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </div>
+          <HttpData path={expTracePopulationFactsheetPath(etype)}>
+            {(factsheetData, loading) => (
+              <Spin spinning={loading}>
+                {factsheetData && (
+                  <>
+                    <ExpTraceFactsheet data={factsheetData} />
+                    <div className="text-right mt-2">
+                      <HttpDownloadButton
+                        href={expTracePopulationFactsheetPath(etype)}
+                        download={`exp-trace-population-factsheet-${etype}.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
+                  </>
+                )}
+              </Spin>
             )}
           </HttpData>
 
           <h3 className="mt-3">Distribution</h3>
-          <ExpEphysDistribution etype={currentEtype} />
+          <ExpEphysDistribution etype={etype} />
 
           <h3 className="mt-3">Experimental instances</h3>
 
-          <ESData query={etypeTracesDataQuery(currentEtype)}>
-            {esDocuments => (
-              <>
+          <ESData query={etypeTracesDataQueryObj}>
+            {(esDocuments, loading) => (
+              <Spin spinning={loading}>
                 {!!esDocuments && (
-                  <ExpTraceTable etype={currentEtype} traces={getAndSortTraces(esDocuments)} />
+                  <ExpTraceTable etype={etype} traces={getAndSortTraces(esDocuments)} />
                 )}
-              </>
+              </Spin>
             )}
           </ESData>
         </Collapsible>
