@@ -16,6 +16,7 @@ type QuickSelectorProps = {
     currentValue: string;
     values: string[];
     onChange: Function;
+    width?: string;
   }>
 };
 
@@ -37,8 +38,11 @@ const QuickSelector: React.FC<QuickSelectorProps> = ({ entries, color = '' }) =>
   }, []);
 
   return (
-    <div className={`${style.quickSelectorContainer} set-accent-color--${color} ${visible ? style.show : ''}`}>
-      {entries.map(({ title, currentValue, values, onChange }) => {
+    <div
+      id="quickSelector"
+      className={`${style.quickSelectorContainer} set-accent-color--${color} ${visible ? style.show : ''}`}
+    >
+      {entries.map(({ title, currentValue, values, onChange, width = '200px' }) => {
 
         return (
           <div className={style.quickSelectorItem} key={title}>
@@ -46,10 +50,11 @@ const QuickSelector: React.FC<QuickSelectorProps> = ({ entries, color = '' }) =>
             <Select
               size="small"
               showSearch
-              style={{ width: 200 }}
+              style={{ width }}
               placeholder={title}
               onChange={(value) => onChange(value)}
               value={currentValue}
+              getPopupContainer={() => document.getElementById('quickSelector')}
             >
               {values.map(value => (
                 <Option value={value} key={value}>{value}</Option>
