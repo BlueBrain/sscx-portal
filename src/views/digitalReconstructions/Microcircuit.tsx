@@ -1,4 +1,5 @@
 import React from 'react';
+import { Spin } from 'antd';
 
 import MicrocircuitsTemplates from '../../templates/Microcircuit';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
@@ -32,23 +33,27 @@ const RecMicrocircuitView = () => (
           {layerNums.map(layerNum => (
             <div key={layerNum}>
               <HttpData path={layerFactsheetPath(subregion, layerNum)}>
-                {data => (
-                  <>
-                    <h3 className="mb-2">L{layerNum} Anatomy</h3>
-                    <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />
+                {(data, loading) => (
+                  <Spin spinning={loading}>
+                    {data && (
+                      <>
+                        <h3 className="mb-2">L{layerNum} Anatomy</h3>
+                        <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />
 
-                    <h3 className="mt-3 mb-2">L{layerNum} Physiology</h3>
-                    <Factsheet id="layerPhysiologyFactsheet" facts={data[1].values} />
+                        <h3 className="mt-3 mb-2">L{layerNum} Physiology</h3>
+                        <Factsheet id="layerPhysiologyFactsheet" facts={data[1].values} />
 
-                    <div className="text-right mt-2 mb-3">
-                      <HttpDownloadButton
-                        href={layerFactsheetPath(subregion, layerNum)}
-                        download={`layer-microcircuit-factsheet-${subregion}-L${layerNum}.json`}
-                      >
-                        factsheet
-                      </HttpDownloadButton>
-                    </div>
-                  </>
+                        <div className="text-right mt-2 mb-3">
+                          <HttpDownloadButton
+                            href={layerFactsheetPath(subregion, layerNum)}
+                            download={`layer-microcircuit-factsheet-${subregion}-L${layerNum}.json`}
+                          >
+                            factsheet
+                          </HttpDownloadButton>
+                        </div>
+                      </>
+                    )}
+                  </Spin>
                 )}
               </HttpData>
             </div>
@@ -61,18 +66,22 @@ const RecMicrocircuitView = () => (
           title={`${subregion} Microcircuit Factsheet`}
         >
           <HttpData path={subregionMicrocircuitFactsheetPath(subregion)}>
-            {data => (
-              <>
-                <Factsheet id="subregionMicrocircuitFactsheet" facts={data[0].values}/>
-                <div className="text-right mt-2">
-                  <HttpDownloadButton
-                    href={subregionMicrocircuitFactsheetPath(subregion)}
-                    download={`microcircuit-factsheet-${subregion}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </>
+            {(data, loading) => (
+              <Spin spinning={loading}>
+                {data && (
+                  <>
+                    <Factsheet id="subregionMicrocircuitFactsheet" facts={data[0].values}/>
+                    <div className="text-right mt-2">
+                      <HttpDownloadButton
+                        href={subregionMicrocircuitFactsheetPath(subregion)}
+                        download={`microcircuit-factsheet-${subregion}.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
+                  </>
+                )}
+              </Spin>
             )}
           </HttpData>
         </Collapsible>

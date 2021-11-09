@@ -6,11 +6,12 @@ import Filters from '../layouts/Filters';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
 import LayerSelector from '../components/MicrocircuitLayerSelector';
+import QuickSelector from '../components/QuickSelector';
 import { Layer, Color, Subregion } from '../types';
 import Pills from '../components/Pills';
 import StickyContainer from '../components/StickyContainer';
 
-import { subregionTitle, subregions, defaultSelection } from '../constants';
+import { subregionTitle, subregions, layers, defaultSelection } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
 
@@ -28,14 +29,11 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
 }) => {
   const router = useRouter();
 
-  const { brain_region, layer } = router.query;
+  const { brain_region: region, layer } = router.query as Record<string, string>;
 
   const setQuery = (query: any) => {
     router.push({ query, pathname: router.pathname }, undefined, { shallow: true });
   };
-
-  const currentRegion: Subregion = brain_region as Subregion;
-  const currentLayer: Layer = layer as Layer;
 
   useEffect(() => {
     if (!router.query.brain_region && router.isReady) {
@@ -44,21 +42,21 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
     }
   }, [router.query]);
 
-  const setRegion = (region: Subregion) => {
+  const setRegion = (newRegion: Subregion) => {
     setQuery({
-      layer: currentLayer,
-      brain_region: region,
+      layer: layer,
+      brain_region: newRegion,
     });
   };
   const setLayer = (layer: Layer) => {
     setQuery({
       layer,
-      brain_region: currentRegion,
+      brain_region: region,
     });
   };
 
-  const layerNums = currentLayer
-    ? currentLayer
+  const layerNums = layer
+    ? layer
       .replace('L', '')
       .split('')
       .map(numStr => parseInt(numStr))
@@ -66,7 +64,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
 
   return (
     <>
-      <Filters primaryColor={color} hasData={!!currentLayer && !!currentRegion}>
+      <Filters primaryColor={color} hasData={!!layer && !!region}>
         <Row
           className="w-100"
           gutter={[0, 20]}
@@ -111,7 +109,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
                   <Pills
                     list={subregions}
                     titles={subregions.map(subregion => subregionTitle[subregion])}
-                    value={currentRegion}
+                    value={region}
                     onSelect={setRegion as (s: string) => void}
                     color={color}
                   />
@@ -124,7 +122,7 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '2rem 4rem' }}>
                   <LayerSelector
                     color={color}
-                    value={currentLayer}
+                    value={layer as Layer}
                     onSelect={setLayer}
                   />
                 </div>
@@ -134,7 +132,25 @@ const Microcircuit: React.FC<MicrocircuitTemplateProps> = ({
         </Row>
       </Filters>
 
-      {!!children && children(currentRegion, layerNums)}
+      <QuickSelector
+        color={color}
+        entries={[
+          {
+            title: 'Brain region',
+            currentValue: region,
+            values: subregions,
+            onChange: setRegion,
+          },
+          {
+            title: 'Layer',
+            currentValue: layer,
+            values: layers,
+            onChange: setLayer,
+          },
+        ]}
+      />
+
+      {!!children && children(region, layerNums)}
     </>
   );
 };
