@@ -77,7 +77,10 @@ const ExpMorphMemodelList: React.FC<ExpMorphMemodelListProps> = ({ memodels, cla
       <ResponsiveTable<ExpMorphMemodel>
         data={memodelsDataSource}
         columns={tableColumns}
-        pagination={memodelsDataSource.length > 10 ? { position: ['bottomRight'] } : false}
+        pagination={{
+          pageSize: 5,
+          simple: true,
+        }}
         size="small"
         tableLayout="fixed"
         bordered
