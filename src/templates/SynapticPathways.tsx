@@ -52,8 +52,6 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     router.push({ query }, undefined, { shallow: true });
   };
 
-  console.log(`${region}:${prelayer} - ${pretype} --- ${postlayer} - ${posttype}`);
-
   useEffect(() => {
     if (!router.isReady) return;
 
