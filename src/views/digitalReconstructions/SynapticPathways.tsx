@@ -1,4 +1,5 @@
 import React from 'react';
+import { Spin } from 'antd';
 
 import SynapticPathwaysTemplates from '../../templates/SynapticPathways';
 import {
@@ -47,23 +48,27 @@ const RecSynPathwaysView = () => (
           title={`Pathway ${pathway}`}
         >
           <HttpData path={pathwayFactsheetPath(subregion, pathway)}>
-            {data => (
-              <>
-                <h3 className="mb-2">Anatomy</h3>
-                <Factsheet id="pathwayAnatomyFactsheet" facts={data[0].values} />
+            {(data, loading) => (
+              <Spin spinning={loading}>
+                {data && (
+                  <>
+                    <h3 className="mb-2">Anatomy</h3>
+                    <Factsheet id="pathwayAnatomyFactsheet" facts={data[0].values} />
 
-                <h3 className="mt-3 mb-2">Physiology</h3>
-                <Factsheet id="pathwayPhysiologyFactsheet" className="mb-3" facts={data[1].values} />
+                    <h3 className="mt-3 mb-2">Physiology</h3>
+                    <Factsheet id="pathwayPhysiologyFactsheet" className="mb-3" facts={data[1].values} />
 
-                <div className="text-right mt-2 mb-3">
-                  <HttpDownloadButton
-                    href={pathwayFactsheetPath(subregion, pathway)}
-                    download={`pathway-factsheet-${subregion}-${pathway}.json`}
-                  >
-                    factsheet
-                  </HttpDownloadButton>
-                </div>
-              </>
+                    <div className="text-right mt-2 mb-3">
+                      <HttpDownloadButton
+                        href={pathwayFactsheetPath(subregion, pathway)}
+                        download={`pathway-factsheet-${subregion}-${pathway}.json`}
+                      >
+                        factsheet
+                      </HttpDownloadButton>
+                    </div>
+                  </>
+                )}
+              </Spin>
             )}
           </HttpData>
 

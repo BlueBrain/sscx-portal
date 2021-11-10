@@ -3,19 +3,19 @@ import { useRouter } from 'next/router';
 import chunk from 'lodash/chunk';
 import { Row, Col } from 'antd';
 
+import { defaultSelection, subregions, layers } from '../constants';
+import { Layer, Color, Subregion } from '../types';
+import { pathwayIndexPath } from '../queries/http';
+import Filters from '../layouts/Filters';
 import Title from '../components/Title';
 import InfoBox from '../components/InfoBox';
-import Filters from '../layouts/Filters';
 import Pills from '../components/Pills';
-import { Layer, Color, Subregion } from '../types';
-
+import QuickSelector from '../components/QuickSelector';
 import LayerSelector from '../components/MicrocircuitLayerSelector';
 import List from '../components/List';
-import { pathwayIndexPath } from '../queries/http';
+import StickyContainer from '../components/StickyContainer';
 
 import selectorStyle from '../styles/selector.module.scss';
-import StickyContainer from '../components/StickyContainer';
-import { defaultSelection } from '../constants';
 
 
 export type SynapticPathwaysTemplateProps = {
@@ -42,25 +42,28 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
 }) => {
   const router = useRouter();
 
+  const { brain_region: region, prelayer, postlayer, pretype, posttype } = router.query as Record<string, string>;
+
   const [pathwayIndex, setPathwayIndex] = useState<PathwayIndex>(null);
-
-  const { brain_region, prelayer, postlayer, pretype, posttype } = router.query;
-
-  const currentRegion: Subregion = brain_region as Subregion;
-  const currentPreLayer: Layer = prelayer as Layer;
-  const currentPostLayer: Layer = postlayer as Layer;
-  const currentPreType: string = pretype as string;
-  const currentPostType: string = posttype as string;
+  const [quickSelection, setQuickSelection] = useState<Record<string, string>>({ region, prelayer, postlayer, pretype, posttype });
 
   const setParams = (params: Record<string, string>): void => {
     const query = { ...router.query, ...params };
     router.push({ query }, undefined, { shallow: true });
   };
 
+  console.log(`${region}:${prelayer} - ${pretype} --- ${postlayer} - ${posttype}`);
+
   useEffect(() => {
-    if (!router.query.brain_region && router.isReady) {
+    if (!router.isReady) return;
+
+    if (!router.query.brain_region) {
       const query = defaultSelection.digitalReconstruction.synapticPathways;
+      const { brain_region: region, prelayer, pretype, postlayer, posttype } = query;
+      setQuickSelection({ region, prelayer, pretype, postlayer , posttype });
       router.replace({ query }, undefined, { shallow: true });
+    } else {
+      setQuickSelection({ region, prelayer, postlayer, pretype, posttype });
     }
   }, [router.query]);
 
@@ -68,6 +71,10 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     setParams({
       'brain_region': region,
     });
+  };
+  const setQsRegion = (region: Subregion) => {
+    setQuickSelection({ ...quickSelection, region });
+    setRegion(region);
   };
 
   const setPreLayerQuery = (layer: Layer) => {
@@ -78,6 +85,10 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
       posttype: null,
     });
   };
+  const setQsPreLayer = (prelayer) => {
+    const { region } = quickSelection;
+    setQuickSelection({ region, prelayer });
+  };
 
   const setPostLayerQuery = (layer: Layer) => {
     setParams({
@@ -85,42 +96,68 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
       posttype: null,
     });
   };
+  const setQsPostLayer = (postlayer) => {
+    const { region, prelayer, pretype } = quickSelection;
+    setQuickSelection({ region, prelayer, pretype, postlayer });
+  };
 
-  const setPreTypeQuery = (layer: Layer) => {
+  const setPreTypeQuery = (pretype: string) => {
     setParams({
-      pretype: layer,
+      pretype,
       posttype: null,
     });
   };
+  const setQsPreType = (pretype) => {
+    const { region, prelayer } = quickSelection;
+    setQuickSelection({ region, prelayer, pretype });
+  };
 
-
-  const setPostTypeQuery = (layer: Layer) => {
+  const setPostTypeQuery = (posttype: string) => {
     setParams({
-      posttype: layer,
+      posttype,
+    });
+  };
+  const setQsPostType = (posttype) => {
+    const { region, prelayer, pretype, postlayer } = quickSelection;
+    setQuickSelection({ region, prelayer, pretype, postlayer, posttype });
+    setParams({
+      brain_region: region,
+      prelayer,
+      pretype,
+      postlayer,
+      posttype,
     });
   };
 
-  const hasData = currentPreType && currentPostType;
+  const getPreMtypes = (region, prelayer) => {
+    if (!pathwayIndex || !region || !prelayer) return [];
 
-  const preMTypes = pathwayIndex && currentRegion && currentPreLayer
-    ? chunk(pathwayIndex.region[currentRegion], 2)
+    return chunk(pathwayIndex.region[region], 2)
       .map(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx])
       .filter(onlyUnique)
-      .filter(mtype => mtype.match(currentPreLayer === 'L23' ? 'L23|L2|L3' : currentPreLayer))
-      .sort()
-    : [];
+      .filter(mtype => mtype.match(prelayer === 'L23' ? 'L23|L2|L3' : prelayer))
+      .sort();
+  };
 
-  const postMTypes = pathwayIndex && currentRegion && currentPreType && currentPostLayer
-    ? chunk(pathwayIndex.region[currentRegion], 2)
-      .filter(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx] === currentPreType)
+  const preMtypes = getPreMtypes(region, prelayer);
+  const qsPreMtypes = getPreMtypes(quickSelection.region, quickSelection.prelayer);
+
+  const getPostMtypes = (region, pretype, postlayer) => {
+    if (!pathwayIndex || !region || !pretype || !postlayer) return [];
+
+    return chunk(pathwayIndex.region[region], 2)
+      .filter(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx] === pretype)
       .map(([, postMtypeIdx]) => pathwayIndex.mtypeIdx[postMtypeIdx])
       .filter(onlyUnique)
-      .filter(mtype => mtype.match(currentPostLayer === 'L23' ? 'L23|L2|L3' : currentPostLayer))
+      .filter(mtype => mtype.match(postlayer === 'L23' ? 'L23|L2|L3' : postlayer))
       .sort()
-    : [];
+  };
 
-  const pathway = currentPreType && currentPostType
-    ? `${currentPreType}-${currentPostType}`
+  const postMtypes = getPostMtypes(region, pretype, postlayer);
+  const qsPostMtypes = getPostMtypes(quickSelection.region, quickSelection.pretype, quickSelection.postlayer);
+
+  const pathway = pretype && posttype
+    ? `${pretype}-${posttype}`
     : null;
 
   useEffect(() => {
@@ -131,7 +168,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
 
   return (
     <>
-      <Filters primaryColor={color} hasData={!!hasData}>
+      <Filters primaryColor={color} hasData={!!pretype && !!posttype}>
         <Row
           className="w-100"
           gutter={[0, 20]}
@@ -177,7 +214,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                 <div className={selectorStyle.body} style={{ padding: '0 0.5rem 0.5rem 0.5rem' }}>
                   <Pills
                     list={['S1DZ', 'S1DZO', 'S1FL', 'S1HL', 'S1J', 'S1Sh', 'S1Tr', 'S1ULp']}
-                    value={currentRegion}
+                    value={region}
                     onSelect={setRegion as (s: Subregion) => void}
                     color={color}
                   />
@@ -191,7 +228,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                   <LayerSelector
                     color={color}
                     size="small"
-                    value={currentPreLayer}
+                    value={prelayer as Layer}
                     onSelect={setPreLayerQuery}
                   />
                 </div>
@@ -202,10 +239,10 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                     <List
                       block
                       color={color}
-                      list={preMTypes}
+                      list={preMtypes}
                       onSelect={setPreTypeQuery as (s: string) => void}
                       title="M-type pre-synaptic"
-                      value={currentPreType}
+                      value={pretype}
                     />
                   </div>
                 </div>
@@ -218,9 +255,9 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                 <div className={`${selectorStyle.body} ${selectorStyle.centeredBodyContent}`} style={{ padding: '1rem 4rem' }}>
                   <LayerSelector
                     color="orange"
-                    disabled={!currentPreLayer || !currentPreType}
+                    disabled={!prelayer || !pretype}
                     onSelect={setPostLayerQuery}
-                    value={currentPostLayer}
+                    value={postlayer as Layer}
                     size="small"
                   />
                 </div>
@@ -231,11 +268,11 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
                     <List
                       block
                       color="orange"
-                      disabled={!currentPreType}
-                      list={postMTypes}
+                      disabled={!postlayer}
+                      list={postMtypes}
                       onSelect={setPostTypeQuery as (s: string) => void}
                       title="M-type post-synaptic"
-                      value={currentPostType}
+                      value={posttype}
                     />
                   </div>
                 </div>
@@ -245,7 +282,48 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
         </Row>
       </Filters>
 
-      {!!children && children(currentRegion, pathway as string)}
+      <QuickSelector
+        color={color}
+        entries={[
+          {
+            title: 'Subregion',
+            currentValue: quickSelection.region,
+            values: subregions,
+            onChange: setQsRegion,
+            width: '100px',
+          },
+          {
+            title: 'Pre-syn layer',
+            currentValue: quickSelection.prelayer,
+            values: layers,
+            onChange: setQsPreLayer,
+            width: '100px',
+          },
+          {
+            title: 'Pre-syn M-type',
+            currentValue: quickSelection.pretype,
+            values: qsPreMtypes,
+            onChange: setQsPreType,
+            width: '100px',
+          },
+          {
+            title: 'Post-syn layer',
+            currentValue: quickSelection.postlayer,
+            values: layers,
+            onChange: setQsPostLayer,
+            width: '100px',
+          },
+          {
+            title: 'Post-syn M-type',
+            currentValue: quickSelection.posttype,
+            values: qsPostMtypes,
+            onChange: setQsPostType,
+            width: '180px',
+          },
+        ]}
+      />
+
+      {!!children && children(region as Subregion, pathway as string)}
     </>
   );
 };
