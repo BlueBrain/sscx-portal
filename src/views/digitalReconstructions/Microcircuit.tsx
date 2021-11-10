@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spin } from 'antd';
+import { Spin, Tabs } from 'antd';
 
 import MicrocircuitsTemplates from '../../templates/Microcircuit';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
@@ -11,6 +11,8 @@ import DataContainer from '../../components/DataContainer';
 import Factsheet from '../../components/Factsheet';
 import SimulationSection from '../../components/SimulationSection';
 
+
+const { TabPane } = Tabs;
 
 const RecMicrocircuitView = () => (
   <MicrocircuitsTemplates
@@ -30,34 +32,36 @@ const RecMicrocircuitView = () => (
           id="layerSection"
           title={`Layer ${layerNums.join('/')} of ${subregion} Microcircuit`}
         >
-          {layerNums.map(layerNum => (
-            <div key={layerNum}>
-              <HttpData path={layerFactsheetPath(subregion, layerNum)}>
-                {(data, loading) => (
-                  <Spin spinning={loading}>
-                    {data && (
-                      <>
-                        <h3 className="mb-2">L{layerNum} Anatomy</h3>
-                        <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />
+          <Tabs type="card">
+            {layerNums.map((layerNum, idx) => (
+              <TabPane tab={`L${layerNum}`} key={idx} forceRender>
+                <HttpData path={layerFactsheetPath(subregion, layerNum)}>
+                  {(data, loading) => (
+                    <Spin spinning={loading}>
+                      {data && (
+                        <>
+                          <h3 className="mb-2">Anatomy</h3>
+                          <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />
 
-                        <h3 className="mt-3 mb-2">L{layerNum} Physiology</h3>
-                        <Factsheet id="layerPhysiologyFactsheet" facts={data[1].values} />
+                          <h3 className="mt-3 mb-2"> Physiology</h3>
+                          <Factsheet id="layerPhysiologyFactsheet" facts={data[1].values} />
 
-                        <div className="text-right mt-2 mb-3">
-                          <HttpDownloadButton
-                            href={layerFactsheetPath(subregion, layerNum)}
-                            download={`layer-microcircuit-factsheet-${subregion}-L${layerNum}.json`}
-                          >
-                            factsheet
-                          </HttpDownloadButton>
-                        </div>
-                      </>
-                    )}
-                  </Spin>
-                )}
-              </HttpData>
-            </div>
-          ))}
+                          <div className="text-right mt-2 mb-3">
+                            <HttpDownloadButton
+                              href={layerFactsheetPath(subregion, layerNum)}
+                              download={`layer-microcircuit-factsheet-${subregion}-L${layerNum}.json`}
+                            >
+                              factsheet
+                            </HttpDownloadButton>
+                          </div>
+                        </>
+                      )}
+                    </Spin>
+                  )}
+                </HttpData>
+              </TabPane>
+            ))}
+          </Tabs>
         </Collapsible>
 
         <Collapsible
