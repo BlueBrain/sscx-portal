@@ -55,7 +55,10 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
 
   if (type === 'pathway') {
     return (
-      <ImageViewer src={`${synaptomeBaseUrl}/${preMtype}_${postMtype}.png`} />
+      <ImageViewer
+        src={`${synaptomeBaseUrl}/${preMtype}_${postMtype}.png`}
+        aspectRatio="16 / 9"
+      />
     );
   }
 
