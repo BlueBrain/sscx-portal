@@ -26,6 +26,12 @@
   }
 }
 
+.quickSelectorItem:first-child {
+  > label {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: $ant-breakpoint-sm) {
   .quick-selector-container {
     display: none;

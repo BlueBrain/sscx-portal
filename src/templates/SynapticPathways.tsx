@@ -288,14 +288,14 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             currentValue: quickSelection.region,
             values: subregions,
             onChange: setQsRegion,
-            width: '100px',
+            width: '80px',
           },
           {
             title: 'Pre-syn layer',
             currentValue: quickSelection.prelayer,
             values: layers,
             onChange: setQsPreLayer,
-            width: '100px',
+            width: '70px',
           },
           {
             title: 'Pre-syn M-type',
@@ -309,14 +309,14 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
             currentValue: quickSelection.postlayer,
             values: layers,
             onChange: setQsPostLayer,
-            width: '100px',
+            width: '70px',
           },
           {
             title: 'Post-syn M-type',
             currentValue: quickSelection.posttype,
             values: qsPostMtypes,
             onChange: setQsPostType,
-            width: '180px',
+            width: '100px',
           },
         ]}
       />
