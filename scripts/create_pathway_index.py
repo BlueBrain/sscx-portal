@@ -1,4 +1,6 @@
+from genericpath import isfile
 import sys
+import csv
 import re
 import json
 from os import listdir, makedirs
@@ -17,6 +19,7 @@ def main():
   Script arguments:
   * model factsheets base path
   * output path
+  * csv file with pathways to ignore (not to add to the index)
 
   Expected memodel directory structure:
   <REGION>/<region>/Central/Pathways/<pre_mtype>-<post_mtype>/
@@ -29,12 +32,17 @@ def main():
     mtypeIdx: string[],
   }
 
+  Expected structure of the CSV file with ignored pathways:
+  region,pre,post,pathway
   """
   input_path = abspath(sys.argv[1])
   output_path = abspath(sys.argv[2])
+  ignore_list_path = sys.argv[3]
 
   log.info(f'model factsheets path: {input_path}')
   log.info(f'output path:  {output_path}')
+  if ignore_list_path:
+    log.info(f'ignoring entries from the file: ${ignore_list_path}')
 
   if not isdir(input_path):
     log.critical(f'model factsheets base path doesn\'t seem to be directory: {input_path}')
@@ -47,15 +55,29 @@ def main():
       log.critical(f'Can\'t create an output directory ({output_path})')
       sys.exit(1)
 
+  if ignore_list_path and not isfile(ignore_list_path):
+    log.critical(f'Ignore list doesn\'t seem to be a file')
+    sys.exit(1)
+
+  ignored_pathways = []
+  if ignore_list_path:
+    with open(ignore_list_path) as ignore_file:
+      reader = csv.reader(ignore_file)
+      ignored_pathways = [(row[0], row[3]) for row in reader]
+
+
   regions = listdirsonly(join(input_path, 'REGION'))
   mtypes = set()
 
   mts = []
 
   for region in regions:
-    log.info(f'reading index for {region} region')
+    log.info(f'Reading index for {region} region')
     pathways = listdirsonly(join(input_path, 'REGION', region, 'Central/Pathways'))
     for pathway in pathways:
+      if (region, pathway) in ignored_pathways:
+        continue
+
       pathway_match = re.match(r'^(L\d+\_.*)\-(L\d+\_.*)$', pathway)
 
       pre_mtype = pathway_match[1]
@@ -77,12 +99,19 @@ def main():
     'mtypeIdx': mtype_list
   }
 
+  log.info('Generating pathway index')
   for region in regions:
+    pathway_num = 0
+
     if region not in pathway_index['region']:
       pathway_index['region'][region] = []
 
     pathways = listdirsonly(join(input_path, 'REGION', region, 'Central/Pathways'))
     for pathway in pathways:
+      if (region, pathway) in ignored_pathways:
+        log.info(f'Skipping pathway: {region} {pathway}')
+        continue
+
       pathway_match = re.match(r'^(L\d+\_.*)\-(L\d+\_.*)$', pathway)
 
       pre_mtype = pathway_match[1]
@@ -90,6 +119,10 @@ def main():
 
       pathway_index['region'][region].append(mtype_list.index(pre_mtype))
       pathway_index['region'][region].append(mtype_list.index(post_mtype))
+
+      pathway_num += 1
+
+    log.info(f'Pathways for {region:<5}: {pathway_num}')
 
   with open(join(output_path, 'pathway-index.json'), 'w') as pathway_index_file:
     json.dump(pathway_index, pathway_index_file)
