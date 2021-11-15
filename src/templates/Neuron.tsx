@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import range from 'lodash/range';
 import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 
 import { useRouter } from 'next/router';
 import { QuestionCircleOutlined } from '@ant-design/icons';
@@ -571,7 +572,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                             className="mt-3"
                             type="card"
                           >
-                            {esDocuments && esDocuments.map(esDocument => (
+                            {esDocuments && sortBy(esDocuments, '_source.name').map(esDocument => (
                               <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
                                 <div style={{ minHeight: '600px' }}>
                                   <p className="mt-2 mb-3">
