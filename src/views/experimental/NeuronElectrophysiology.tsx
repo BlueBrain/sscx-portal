@@ -224,28 +224,29 @@ const NeuronElectrophysiology: React.FC = () => {
                   <>
                     <Metadata nexusDocument={esDocuments[0]._source} />
                     <h3 className="mt-3">Patch clamp recording</h3>
-                    <div className="text-right mt-2 mb-2">
-                      <Button
-                        className="mr-1"
-                        type="dashed"
-                        icon={<QuestionCircleOutlined />}
-                        href={`${basePath}/tutorials/nwb/`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        size="small"
-                      >
-                        How to read NWB files
-                      </Button>
-
-                      <NexusFileDownloadButton
-                        filename={getEphysDistribution(esDocuments[0]._source).name}
-                        url={getEphysDistribution(esDocuments[0]._source).contentUrl}
-                        org={sscx.org}
-                        project={sscx.project}
-                        id="ephysDownloadBtn"
-                      >
-                        trace
-                      </NexusFileDownloadButton>
+                    <div className="row start-xs end-sm mt-2 mb-2">
+                      <div className="col-xs">
+                        <Button
+                          className="mr-1"
+                          type="dashed"
+                          icon={<QuestionCircleOutlined />}
+                          href={`${basePath}/tutorials/nwb/`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          size="small"
+                        >
+                          How to read NWB files
+                        </Button>
+                        <NexusFileDownloadButton
+                          filename={getEphysDistribution(esDocuments[0]._source).name}
+                          url={getEphysDistribution(esDocuments[0]._source).contentUrl}
+                          org={sscx.org}
+                          project={sscx.project}
+                          id="ephysDownloadBtn"
+                        >
+                          trace
+                        </NexusFileDownloadButton>
+                      </div>
                     </div>
                     <NexusPlugin
                       name="neuron-electrophysiology"

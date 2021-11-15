@@ -426,27 +426,29 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                 resource={esDocuments[0]._source}
                                 nexusClient={nexus}
                               />
-                              <div className="text-right mt-2">
-                                <Button
-                                  className="mr-1"
-                                  type="dashed"
-                                  icon={<QuestionCircleOutlined />}
-                                  href={`${basePath}/tutorials/nwb/`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  size="small"
-                                >
-                                  How to read NWB files
-                                </Button>
-                                <NexusFileDownloadButton
-                                  filename={getEphysDistribution(esDocuments[0]._source).name}
-                                  url={getEphysDistribution(esDocuments[0]._source).contentUrl}
-                                  org={sscx.org}
-                                  project={sscx.project}
-                                  id="ephysDownloadBtn"
-                                >
-                                  trace
-                                </NexusFileDownloadButton>
+                              <div className="row start-xs end-sm mt-2 mb-2">
+                                <div className="col-xs">
+                                  <Button
+                                    className="mr-1"
+                                    type="dashed"
+                                    icon={<QuestionCircleOutlined />}
+                                    href={`${basePath}/tutorials/nwb/`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    size="small"
+                                  >
+                                    How to read NWB files
+                                  </Button>
+                                  <NexusFileDownloadButton
+                                    filename={getEphysDistribution(esDocuments[0]._source).name}
+                                    url={getEphysDistribution(esDocuments[0]._source).contentUrl}
+                                    org={sscx.org}
+                                    project={sscx.project}
+                                    id="ephysDownloadBtn"
+                                  >
+                                    trace
+                                  </NexusFileDownloadButton>
+                                </div>
                               </div>
                             </div>
                           )}
@@ -582,26 +584,28 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                     </Link>
                                   </p>
 
-                                  <div className="text-right mb-2">
-                                    <Button
-                                      className="mr-1"
-                                      type="dashed"
-                                      icon={<QuestionCircleOutlined />}
-                                      href={`${basePath}/tutorials/nwb/`}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      size="small"
-                                    >
-                                      How to read NWB files
-                                    </Button>
-                                    <NexusFileDownloadButton
-                                      filename={getEphysDistribution(esDocument._source).name}
-                                      url={getEphysDistribution(esDocument._source).contentUrl}
-                                      org={sscx.org}
-                                      project={sscx.project}
-                                    >
-                                      trace
-                                    </NexusFileDownloadButton>
+                                  <div className="row start-xs end-sm mt-2 mb-2">
+                                    <div className="col-xs">
+                                      <Button
+                                        className="mr-1"
+                                        type="dashed"
+                                        icon={<QuestionCircleOutlined />}
+                                        href={`${basePath}/tutorials/nwb/`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        size="small"
+                                      >
+                                        How to read NWB files
+                                      </Button>
+                                      <NexusFileDownloadButton
+                                        filename={getEphysDistribution(esDocument._source).name}
+                                        url={getEphysDistribution(esDocument._source).contentUrl}
+                                        org={sscx.org}
+                                        project={sscx.project}
+                                      >
+                                        trace
+                                      </NexusFileDownloadButton>
+                                    </div>
                                   </div>
 
                                   <NexusPlugin
