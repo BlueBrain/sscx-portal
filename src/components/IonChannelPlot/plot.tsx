@@ -20,7 +20,7 @@ import styles from './styles.module.scss';
 export type Equation = {
   latex: string;
   plot: string;
-  type: 'exponential' | 'uniform';
+  type: 'decay' | 'exponential' | 'uniform';
 }
 
 type IonChannelPlotProps = {
@@ -118,6 +118,7 @@ const IonChannelPlot: React.FC<IonChannelPlotProps> = ({ name, equation }) => {
         maxValue = data.latex;
         break;
       case 'exponential':
+      case 'decay':
         let parser = new Parser();
         let expr = parser.parse(data.plot);
         arrayValues = getXAxes().map(xVal => expr.evaluate({ x: xVal }));
