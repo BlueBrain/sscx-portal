@@ -72,30 +72,25 @@
 
 .infoContainerD {
   display: table;
+  border-collapse: separate;
+  border-spacing: 0.8rem 0;
   height: 100%;
   table-layout: fixed;
   width: 100%;
   position: relative;
-}
 
-.infoContainerD .infoCellD {
-  padding-left: 0.4rem;
-  padding-right: 0.4rem;
-}
-
-.infoContainerD .infoCellD:first-child {
-  padding-left: 0;
-  padding-right: 0.8rem;
-}
-
-.infoContainerD .infoCellD:last-child {
-  padding-left: 0.8rem;
-  padding-right: 0;
+  @media (max-width: 992px) {
+    border-spacing: 0;
+  }
 }
 
 .infoCellD {
   display: table-cell;
-  padding-bottom: 0;
+}
+
+.hBorder {
+  border-left: 1px solid #6993c9;
+  border-right: 1px solid #6993c9;
 }
 
 .infoHeadD {
@@ -104,8 +99,6 @@
   height: 2rem;
   line-height: 2rem;
   background-color: #7ab7fa;
-  border-left: 1px solid #7ab7fa;
-  border-right: 1px solid #7ab7fa;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -114,13 +107,9 @@
   height: 100%;
   padding: 1.5rem;
   color: #7ab7fa;
-  border-left: 1px solid #6993c9;
-  border-right: 1px solid #6993c9;
 }
 
 .infoImgD {
-  border-left: 1px solid #6993c9;
-  border-right: 1px solid #6993c9;
   border-bottom: 1px solid #6993c9;
   background-color: #323e68;
   padding: 0.8rem;

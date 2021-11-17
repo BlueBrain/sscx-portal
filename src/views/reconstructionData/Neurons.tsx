@@ -41,17 +41,17 @@ const RecNeuronsView = () => (
           </div>
 
           <div className={styles.infoContainerD}>
-            <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
               <div className={styles.infoContentD}>
                 Due to lack of variety in neuron morphologies collected from extrapolated data, morphology reconstruction variants/clones are obtained by programmatically jittering branch angles and/or slightly modifying the length of segments.
               </div>
             </div>
-            <div className={styles.infoCellD}>
+            <div className={`${styles.infoCellD} ${styles.hBorder}`}>
               <div className={styles.infoContentD}>
                 Reconstructions are mainly performed on dendrites, there are only a few axons. To address this challenge, axons from one m-type are combined to the soma and dendrites of cells with the same morphology, as we assume they are compatible. This in turn generates new complete m-type models, increasing the diversity of neuron reconstructions.
               </div>
             </div>
-            <div className={styles.infoCellD}>
+            <div className={`${styles.infoCellD} ${styles.hBorder}`}>
               <div className={styles.infoContentD}>
                 Certain known m-types lack an extrapolated reconstruction morphology. In order to favour variability of cell types (as observed in vivo), the lacking m-type morphologies are substituted with other reconstructed models.
               </div>
@@ -59,7 +59,7 @@ const RecNeuronsView = () => (
           </div>
 
           <div className={styles.infoContainerD}>
-            <div className={styles.infoCellD}>
+            <div className={`${styles.infoCellD} ${styles.hBorder}`}>
               <div className={styles.infoImgD}>
                 <Image
                   width="200"
@@ -71,7 +71,7 @@ const RecNeuronsView = () => (
               </div>
             </div>
 
-            <div className={styles.infoCellD}>
+            <div className={`${styles.infoCellD} ${styles.hBorder}`}>
               <div className={styles.infoImgD}>
                 <Image
                   width="200"
@@ -83,7 +83,7 @@ const RecNeuronsView = () => (
               </div>
             </div>
 
-            <div className={styles.infoCellD}>
+            <div className={`${styles.infoCellD} ${styles.hBorder}`}>
               <div className={styles.infoImgD}>
                 <Image
                   width="200"
@@ -112,9 +112,9 @@ const RecNeuronsView = () => (
                 </div>
                 <div className={styles.infoImgM}>
                   <Image
-                    width="220"
-                    height="150"
-                    src={`${basePath}/assets/images/morph-generalization/1.png`}
+                    width="200"
+                    height="80"
+                    src={`${basePath}/assets/images/reconstruction-data/neurons/morphology-generalization-1.svg`}
                     layout="responsive"
                   />
                 </div>
@@ -133,9 +133,9 @@ const RecNeuronsView = () => (
                 </div>
                 <div className={styles.infoImgM}>
                   <Image
-                    width="220"
-                    height="150"
-                    src={`${basePath}/assets/images/morph-generalization/2.png`}
+                    width="200"
+                    height="80"
+                    src={`${basePath}/assets/images/reconstruction-data/neurons/morphology-generalization-2.svg`}
                     layout="responsive"
                   />
                 </div>
@@ -154,9 +154,9 @@ const RecNeuronsView = () => (
                 </div>
                 <div className={styles.infoImgM}>
                   <Image
-                    width="220"
-                    height="150"
-                    src={`${basePath}/assets/images/morph-generalization/3.png`}
+                    width="200"
+                    height="80"
+                    src={`${basePath}/assets/images/reconstruction-data/neurons/morphology-generalization-3.svg`}
                     layout="responsive"
                   />
                 </div>
@@ -181,7 +181,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoContentD}>
               Although we have a large data set of experimental cell recordings, it is not feasible to record from every single neuron present in a circuit. Therefore, we pool the cells together in electrical types, and build a limited amount of models for each type. The constraints for each model are based on distributions of electrical features for each electrical type.
             </div>
@@ -189,7 +189,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoImgD}>
               <Image
                 width="300"
@@ -210,7 +210,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoContentD}>
               Each neuron has a very diverse set of ion channels. There is no precise experimental data available showing which channels are present in each cell type, nor how the channels are distributed along the morphology. Therefore, we have selected channels based on literature, and let an optimization algorithm decide which channels are necessary for each firing type.
             </div>
@@ -218,7 +218,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoImgD}>
               <Image
                 width="300"
@@ -239,7 +239,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoContentD}>
               Even for the same firing and morphology type of neuron there are still significant differences between cells, for example in the size of the neurons. Since we don’t record from all of these differently sized cells, we normalize our protocols based on the firing threshold of the cells (rheobase). This way our neuronal model will generalize to morphologies of different sizes.
             </div>
@@ -247,7 +247,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoImgD}>
               <Image
                 width="300"
@@ -275,7 +275,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoContentD}>
               Each of our models is built for one particular morphology. To make sure these models generalize to all morphologies in the circuit, we have a step called model management. During this step the protocols used for the parameter optimization are executed for each model using all the relevant morphologies. Each of these instances is scored based on how well they are still within range of the original experimental data. Morpho-electrical combinations that score badly are discarded and not used in the circuit.
             </div>
@@ -283,7 +283,7 @@ const RecNeuronsView = () => (
         </div>
 
         <div className={styles.infoContainerD}>
-          <div className={styles.infoCellD}>
+          <div className={`${styles.infoCellD} ${styles.hBorder}`}>
             <div className={styles.infoImgD}>
               <Image
                 width="300"
