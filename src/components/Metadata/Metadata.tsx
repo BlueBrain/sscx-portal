@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNexusContext } from '@bbp/react-nexus';
+import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 
 import { sscx } from '../../config';
 
@@ -10,7 +12,15 @@ function entryToArray(entry) {
   return [entry];
 }
 
-function getAgentLabel(agent) {
+function getAgentRoleLabel(agent) {
+  if (!agent.role) return '';
+
+  return ': ' + agent.role
+    .replace(/^neuron\s/, '')
+    .replace(/\srole$/, '');
+}
+
+function getAgentName(agent) {
   return agent.name
     ? agent.name
     : `${agent.givenName} ${agent.familyName}`;
@@ -31,7 +41,14 @@ const Metadata: React.FC<MetadataProps> = ({ nexusDocument }) => {
 
   const [agents, setAgents] = useState<Record<string, any>[]>(null);
 
-  const agentIds = entryToArray(nexusDocument.contribution)
+  const contributions = entryToArray(nexusDocument.contribution).filter(Boolean);
+  const roleByAgentId = contributions.reduce((acc, contribution) => ({
+    ...acc,
+    [contribution.agent['@id']]: get(contribution, 'hadRole.label'),
+  }), {});
+
+
+  const agentIds = contributions
     .map(contribution => contribution.agent?.['@id'])
     .filter(Boolean);
 
@@ -58,21 +75,25 @@ const Metadata: React.FC<MetadataProps> = ({ nexusDocument }) => {
       // pick only agent ids and labels
       .then(agents => agents.map(agent => ({
         id: agent['@id'],
-        label: getAgentLabel(agent),
+        name: getAgentName(agent),
         type: getAgentType(agent),
+        role: roleByAgentId[agent['@id']],
       })))
+      .then(agents => agents.filter(agent => !agent?.role || !agent?.role.match(/transformation/i))) // filter out data transformation
+      .then(agents => sortBy(agents, 'type')) // brings institutions first
       .then(agents => setAgents(agents));
   }, [nexusDocument]);
 
   const contributionStr = agents
-    ? agents.map(agent => agent.label).join(', ')
+    ? agents.map(agent => `${agent.name}${getAgentRoleLabel(agent)}`)
+      .join(', ')
     : '...';
 
   return (
     <>
       <h3>Contribution</h3>
       <p id={agents ? 'metadata' : undefined}>
-        {contributionStr}
+        {contributionStr}.
       </p>
     </>
   );
