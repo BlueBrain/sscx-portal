@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import keyBy from 'lodash/keyBy';
+import get from 'lodash/get';
 import { useNexusContext } from '@bbp/react-nexus';
 
 import { Table } from 'antd';
@@ -31,6 +32,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
 
   const agentIds = morphologies.reduce((ids: string[], morphology) => {
     const currIds = entryToArray(morphology.contribution)
+      .filter(contribution => !get(contribution, 'hadRole.label')?.match(/transformation/i))
       .map(contribution => contribution.agent?.['@id'])
       .filter(Boolean);
 
