@@ -435,6 +435,7 @@
       "rat_20140212_RH4_cell2",
       "rat_20150217_LH3_cell1",
       "rat_20160908_E3_LH2_cell2",
+      "rat_20141016_LH3_cell2",
       "mtC221001A_idA",
       "vd100726A_idB",
       "sm110120c1-2_INT_idD"
@@ -448,8 +449,7 @@
       "rat_20082013",
       "rat_20140212_RH4_cell1",
       "rat_20150217_LH3_cell2",
-      "rat_20150323_E1_LH4_cell1",
-      "rat_20141016_LH3_cell2"
+      "rat_20150323_E1_LH4_cell1"
     ],
     "L23_MC": [
       "sm110128b1-2_INT_left_hemi_idC",
