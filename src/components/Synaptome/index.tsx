@@ -5,6 +5,8 @@ import { imgOpt } from '../../utils';
 import ImageViewer from '../ImageViewer';
 import { staticDataBaseUrl } from '../../config';
 
+import style from './styles.module.scss';
+
 
 const classPrefix = 'synaptome__';
 
@@ -18,28 +20,40 @@ type SynaptomeProps = {
 const pathwayRe = /^(L\d+.*)\-(L\d+.*)$/;
 
 
-const MtypeSynaptomeLayerImage = ({ src, layer }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+type MtypeSynaptomeLayerImageProps = {
+  src: string;
+  layer: string;
+  layerPlotNotAvailable?: boolean;
+};
 
-  useEffect(() => {
-    setImageLoaded(false);
-  }, [src]);
-
+const MtypeSynaptomeLayerPlot: React.FC<MtypeSynaptomeLayerImageProps> = ({ src, layer, layerPlotNotAvailable = false }) => {
   return (
     <>
-      <ImageViewer
-        src={src}
-        thumbnailSrc={src.replace('.png', '__w640.png')}
-        aspectRatio="5 / 4"
-        onThumbnailLoad={() => setImageLoaded(true)}
-      />
-      <div className="text-center">{imageLoaded ? layer : ''} &nbsp;</div>
+      <div
+        style={{ aspectRatio: '5 / 4' }}
+        className={layerPlotNotAvailable ? style.layerNotAvailable : undefined}
+      >
+        {src && !layerPlotNotAvailable && (
+          <ImageViewer
+            src={src}
+            thumbnailSrc={src.replace('.png', '__w640.png')}
+            aspectRatio="5 / 4"
+          />
+        )}
+
+        {layerPlotNotAvailable && (
+          <span>No connections</span>
+        )}
+      </div>
+      <div className="text-center">{layer}</div>
     </>
   );
 };
 
 
 const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className = '' }) => {
+  const [mtypeSynaptomeLayers, setMtypeSynaptomeLayers] = useState<string[]>(null);
+
   const pathwayMatched = pathway.match(pathwayRe);
 
   const [, preMtype, postMtype] = pathwayMatched;
@@ -52,6 +66,18 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
   const mtypeSynaptomeBaseUrl = `${staticDataBaseUrl}/model-data/REGION/${region}/Central/MTypes/${synaptomeMtype}/Synaptome`;
 
   const layers = range(1, 7).map(layerNum => `L${layerNum}`);
+
+  useEffect(() => {
+    if (type === 'pathway') return;
+
+    const subpath = type === 'post' ? 'input' : 'output';
+    const mtypeSynaptomeLayersUrl = `${mtypeSynaptomeBaseUrl}/${subpath}_synaptome/io_synaptome_plot_layers.json`;
+
+    fetch(mtypeSynaptomeLayersUrl)
+      .then(res => res.json())
+      .then(layers => setMtypeSynaptomeLayers(layers))
+      .catch(console.error);
+  }, [type, region, pathway, mtypeSynaptomeBaseUrl]);
 
   if (type === 'pathway') {
     return (
@@ -72,9 +98,10 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
           <div className="row middle-sm">
             {layers.map(layer => (
               <div className="col-xs-6 col-sm-2 mt-1" key={layer}>
-                <MtypeSynaptomeLayerImage
-                  src={`${mtypeSynaptomeBaseUrl}/input_synaptome/${layer}.png`}
+                <MtypeSynaptomeLayerPlot
+                  src={mtypeSynaptomeLayers ? `${mtypeSynaptomeBaseUrl}/input_synaptome/${layer}.png` : null}
                   layer={layer}
+                  layerPlotNotAvailable={mtypeSynaptomeLayers && !mtypeSynaptomeLayers.includes(layer)}
                 />
               </div>
             ))}
@@ -88,7 +115,7 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
           <div className="row middle-sm">
             {layers.map(layer => (
               <div className="col-xs-6 col-sm-2 mt-1" key={layer}>
-                <MtypeSynaptomeLayerImage
+                <MtypeSynaptomeLayerPlot
                   src={`${mtypeSynaptomeBaseUrl}/output_synaptome/${layer}.png`}
                   layer={layer}
                 />
