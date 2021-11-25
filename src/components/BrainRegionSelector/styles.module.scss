@@ -29,3 +29,8 @@
 .subregion.selected path {
   opacity: 1;
 }
+
+path.disabled {
+  fill: #595959;
+  opacity: 0.2;
+}
