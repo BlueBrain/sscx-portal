@@ -377,6 +377,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                     layer={currentLayer}
                     mtype={currentMtype}
                     morphologies={getAndSortMorphologies(esDocuments)}
+                    currentMorphology={currentInstance}
                   />
                 )}
               </Spin>

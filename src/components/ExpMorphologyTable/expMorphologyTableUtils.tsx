@@ -18,7 +18,7 @@ export function entryToArray(entry) {
   return [entry];
 }
 
-export const useExpMorphologyColumns = (layer, mtype) => {
+export const useExpMorphologyColumns = (layer, mtype, currentMorphology) => {
   const [agentMap, setAgentMap] = useState<Record<string, any>>(null);
 
   const morphHref = (morphologyName: string) => {
@@ -40,7 +40,7 @@ export const useExpMorphologyColumns = (layer, mtype) => {
             href={morphHref(value)}
             prefetch={false}
           >
-            {value}
+            <a className={value === currentMorphology ? 'text-bold' : undefined}>{value}</a>
           </Link>
         );
       },
@@ -69,8 +69,12 @@ export const useExpMorphologyColumns = (layer, mtype) => {
       title: 'M-Type',
       dataIndex: 'annotation',
       align: 'center',
-      render: function Link(value) {
-        return value?.hasBody?.label;
+      render: function Link(annotation, morphology: any) {
+        return (
+          <span className={morphology.name === currentMorphology ? 'text-bold' : undefined}>
+            {annotation?.hasBody?.label}
+          </span>
+        );
       },
       responsive: ['sm'],
     },

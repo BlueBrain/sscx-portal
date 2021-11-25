@@ -325,7 +325,11 @@ const NeuronElectrophysiology: React.FC = () => {
             {(esDocuments, loading) => (
               <Spin spinning={loading}>
                 {!!esDocuments && (
-                  <ExpTraceTable etype={etype} traces={getAndSortTraces(esDocuments)} />
+                  <ExpTraceTable
+                    etype={etype}
+                    traces={getAndSortTraces(esDocuments)}
+                    currentTrace={instance}
+                  />
                 )}
               </Spin>
             )}

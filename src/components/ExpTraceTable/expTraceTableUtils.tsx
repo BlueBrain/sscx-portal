@@ -31,7 +31,7 @@ const getTraceDistribution = (trace) => {
   return entryToArray(trace.distribution).find((d: any) => d.name.match(/\.nwb$/i));
 };
 
-export const useExperimentalTraceTable = (etype) => {
+export const useExperimentalTraceTable = (etype, currentTrace) => {
   const [agentMap, setAgentMap] = useState<Record<string, any>>(null);
 
   const instanceHref = (instanceName: string) => {
@@ -52,7 +52,7 @@ export const useExperimentalTraceTable = (etype) => {
             href={instanceHref(value)}
             prefetch={false}
           >
-            {value}
+            <a className={value === currentTrace ? 'text-bold' : undefined}>{value}</a>
           </Link>
         );
       },
@@ -79,7 +79,11 @@ export const useExperimentalTraceTable = (etype) => {
     {
       title: 'E-Type',
       dataIndex: 'annotation',
-      render: (value) => (value?.hasBody?.label),
+      render: (annotation, trace: any) => (
+        <span className={trace.name === currentTrace ? 'text-bold' : undefined}>
+          {annotation?.hasBody?.label}
+        </span>
+      ),
       responsive: ['sm'],
     },
     {

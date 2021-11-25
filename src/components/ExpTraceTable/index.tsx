@@ -6,10 +6,13 @@ import { Table } from 'antd';
 import { sscx } from '../../config';
 import { entryToArray, useExperimentalTraceTable } from './expTraceTableUtils';
 
+import styles from './styles.module.scss';
+
 
 type ExpTraceTableProps = {
   etype: string;
   traces: Record<string, any>[];
+  currentTrace?: string;
 };
 
 function getAgentLabel(agent) {
@@ -24,7 +27,7 @@ function getAgentType(agent) {
     : 'person';
 }
 
-const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => {
+const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, currentTrace, traces = [] }) => {
   const nexus = useNexusContext();
 
   const agentIds = traces.reduce((ids: string[], trace) => {
@@ -35,7 +38,7 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => 
     return Array.from(new Set([...ids, ...currIds]));
   }, []);
 
-  const { agentMap, setAgentMap, columns } = useExperimentalTraceTable(etype);
+  const { agentMap, setAgentMap, columns } = useExperimentalTraceTable(etype, currentTrace);
 
 
   useEffect(() => {
@@ -78,6 +81,7 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, traces = [] }) => 
         columns={columns}
         dataSource={traces}
         rowKey={({ name }) => name}
+        rowClassName={trace => trace.name === currentTrace ? styles.highlightedRowBg : undefined}
       />
     </div>
   );

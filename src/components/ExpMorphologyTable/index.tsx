@@ -8,10 +8,14 @@ import { sscx } from '../../config';
 import { Layer } from '../../types';
 import { entryToArray, useExpMorphologyColumns } from './expMorphologyTableUtils';
 
+import styles from './styles.module.scss';
+
+
 type ExpMorphologyTableProps = {
   layer: Layer;
   mtype: string;
   morphologies: Record<string, any>[];
+  currentMorphology?: string;
 };
 
 
@@ -27,7 +31,12 @@ function getAgentType(agent) {
     : 'person';
 }
 
-const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, morphologies = [] }) => {
+const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({
+  layer,
+  mtype,
+  currentMorphology,
+  morphologies = []
+}) => {
   const nexus = useNexusContext();
 
   const agentIds = morphologies.reduce((ids: string[], morphology) => {
@@ -40,7 +49,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
   }, []);
 
 
-  const { setAgentMap, columns } = useExpMorphologyColumns(layer, mtype);
+  const { setAgentMap, columns } = useExpMorphologyColumns(layer, mtype, currentMorphology);
 
   useEffect(() => {
     if (!agentIds.length) return;
@@ -84,6 +93,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({ layer, mtype, m
         dataSource={morphologies}
         size="small"
         rowKey={(record) => record.name}
+        rowClassName={morphology => morphology.name === currentMorphology ? styles.highlightedRowBg : undefined}
       />
     </div>
   );
