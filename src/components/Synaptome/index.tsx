@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import range from 'lodash/range';
+import { captureException } from '@sentry/nextjs';
 
 import { imgOpt } from '../../utils';
 import ImageViewer from '../ImageViewer';
@@ -76,7 +77,7 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
     fetch(mtypeSynaptomeLayersUrl)
       .then(res => res.json())
       .then(layers => setMtypeSynaptomeLayers(layers))
-      .catch(console.error);
+      .catch(captureException);
   }, [type, region, pathway, mtypeSynaptomeBaseUrl]);
 
   if (type === 'pathway') {
@@ -116,8 +117,9 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
             {layers.map(layer => (
               <div className="col-xs-6 col-sm-2 mt-1" key={layer}>
                 <MtypeSynaptomeLayerPlot
-                  src={`${mtypeSynaptomeBaseUrl}/output_synaptome/${layer}.png`}
+                  src={mtypeSynaptomeLayers ? `${mtypeSynaptomeBaseUrl}/output_synaptome/${layer}.png` : null}
                   layer={layer}
+                  layerPlotNotAvailable={mtypeSynaptomeLayers && !mtypeSynaptomeLayers.includes(layer)}
                 />
               </div>
             ))}
