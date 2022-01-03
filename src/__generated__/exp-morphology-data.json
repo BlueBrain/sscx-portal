@@ -433,18 +433,16 @@
       "rat_20141016_LH3_cell2",
       "mtC221001A_idA",
       "vd100726A_idB",
-      "sm110120c1-2_INT_idD"
-    ],
-    "L3_TPC:B": [
-      "rat_20140703_RH2",
-      "rat_20141104_LH2_cell2",
-      "rat_20151211_E2_LH3_cell1",
-      "rat_20141016_LH3_cell1",
-      "rat_20150120_LH1_cell3",
+      "sm110120c1-2_INT_idD",
       "rat_20082013",
       "rat_20140212_RH4_cell1",
+      "rat_20140703_RH2",
+      "rat_20141016_LH3_cell1",
+      "rat_20141104_LH2_cell2",
+      "rat_20150120_LH1_cell3",
       "rat_20150217_LH3_cell2",
-      "rat_20150323_E1_LH4_cell1"
+      "rat_20150323_E1_LH4_cell1",
+      "rat_20151211_E2_LH3_cell1"
     ],
     "L23_MC": [
       "sm110128b1-2_INT_left_hemi_idC",
@@ -676,7 +674,6 @@
     "L5_TPC:C": [
       "vd111209_idB",
       "rp110722_C1_idA",
-      "rp110715_C1_idA",
       "rp100428-3_idD",
       "rp110127_L5-2_idH",
       "vd110315_idE",
@@ -734,12 +731,9 @@
       "C060114A6",
       "vd111219_idF",
       "C060109A3",
-      "rp111215_C1-C2_idB",
-      "rp111215_C1-C2_idC",
       "rp110419_C1_idC",
       "vd110506_idA",
       "vd110530_idC",
-      "rp111215_C1-C2_idD",
       "C030796A-P3",
       "mtC130301A_idB",
       "ch160801B",
@@ -773,9 +767,7 @@
       "rat_20160319_E1_LH2_cell1",
       "rat_20140925_RH1_Exp1_cell1",
       "rat_20151118_E2_LH3_cell1",
-      "C060114A4",
-      "C060116A4",
-      "C040896A-P3"
+      "C060114A4"
     ],
     "L5_LBC": [
       "og060828b1-5_idD",
@@ -843,7 +835,6 @@
       "vd110530_idD",
       "vd110329_idB",
       "vd110530_idF",
-      "rp111215_C1-C2_idA",
       "C070109A4",
       "vd110506_idE",
       "rp100125_C1_idA",
@@ -892,8 +883,7 @@
       "GTS070208-P3",
       "Fluo2_right",
       "rat_20160314_E1_LH2_cell1",
-      "rat_20150120_LH1_cell1",
-      "vd111211_idD"
+      "rat_20150120_LH1_cell1"
     ],
     "L5_ChC": [
       "mtC070301B_idC",
@@ -940,7 +930,6 @@
       "tkb060924a2_ch7_ct_n_ab_100x_1",
       "tkb061122a2_ch1_ct_n_rm_100x_1",
       "rat_20160905_LH2_cell1",
-      "tkb061126a4_ch0_cc2_h_zk_60x_1",
       "tkb060223b3_ch1_cc2_o_ps_60x_1",
       "tkb061126a3_ch0_cc2_h_zk_60x_1",
       "tkb050507_b1-b4_idD",
@@ -964,8 +953,6 @@
       "rat_20160315_E2_LH3_cell1",
       "rat_20160316_E1_LH1_cell1",
       "Fluo41_right",
-      "tkb071119a1_ch8_cc2_n_db_100x_1",
-      "tkb061009a2_ch6_ct_n_db_100x_1",
       "Fluo41_lowright"
     ],
     "L6_NGC": [
@@ -1063,9 +1050,6 @@
       "rat_20140925_RH2_cell2",
       "tkb061126a1_ch0_ct_h_zk_60x_1",
       "tkb061123a1_ch1_ct_h_zk_60x_h",
-      "tkb061101a1_ch4_cc2_h_zk_60x_1",
-      "tkb060523a3_ch1_ct_n_nb_60x_2",
-      "tkb060112a1_ch2_ct_o_db_60x_2",
       "tkb060123a2_ch2_ct_x_db_60x_2"
     ],
     "L6_HPC": [
