@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sscx-portal
+  name: sscx-portal
+  namespace: bbp-ou-nse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sscx-portal
+  template:
+    metadata:
+      labels:
+        app: sscx-portal
+    spec:
+      containers:
+      - image: bbpgitlab.epfl.ch:5050/nse/sscx-portal:latest
+        name: sscx-portal
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8000
+        resources:
+          requests:
+            memory: 2Gi
+            cpu: 250m
+          limits:
+            memory: 4Gi
+            cpu: 4
+      imagePullSecrets:
+      - name: gitlab-nse-image-pull
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  namespace: bbp-ou-nse
+  name: sscx-portal
+spec:
+  podSelector:
+    matchLabels:
+      app: sscx-portal
+  policyTypes:
+    - Egress
+  egress:
+    - {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sscx-portal
+  namespace: bbp-ou-nse
+  labels:
+    app: sscx-portal
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: sscx-portal
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sscx-portal
+  namespace: bbp-ou-nse
+spec:
+  rules:
+  - host: sscx-portal.kcp.bbp.epfl.ch
+    http:
+      paths:
+      - pathType: Prefix
+        path: /sscx-portal
+        backend:
+          service:
+            name: sscx-portal
+            port:
+              number: 8000
+  tls:
+  - hosts:
+    - sscx-portal.kcp.bbp.epfl.ch
+    secretName: sscx-portal-cert

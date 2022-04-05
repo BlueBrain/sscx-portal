@@ -1,0 +1,125 @@
+# NGV Portal NGINX for serving static data content.
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sscx-portal-static-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 80Gi
+  storageClassName: netapp-ephemeral
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sscx-portal-static-data
+  name: sscx-portal-static-data
+  namespace: bbp-ou-nse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sscx-portal-static-data
+  template:
+    metadata:
+      labels:
+        app: sscx-portal-static-data
+    spec:
+      volumes:
+      - name: static-data
+        persistentVolumeClaim:
+          claimName: sscx-portal-static-data
+      containers:
+      - image: bbpgitlab.epfl.ch:5050/nse/sscx-portal:static-data-server
+        name: sscx-portal-static-data
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html/data
+          name: static-data
+        ports:
+          - containerPort: 8000
+      imagePullSecrets:
+      - name: gitlab-nse-image-pull
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sscx-portal-static-data
+  namespace: bbp-ou-nse
+  labels:
+    app: sscx-portal-static-data
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: sscx-portal-static-data
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  namespace: bbp-ou-nse
+  name: sscx-portal-static-data
+spec:
+  podSelector:
+    matchLabels:
+      app: sscx-portal-static-data
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: sscx-portal
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sscx-portal
+  namespace: bbp-ou-nse
+spec:
+  secretName: sscx-portal-cert
+  issuerRef:
+    name: bbp-acme-issuer
+  dnsNames:
+  - sscx-portal.kcp.bbp.epfl.ch
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sscx-portal-static-data
+  namespace: bbp-ou-nse
+spec:
+  rules:
+  - host: sscx-portal.kcp.bbp.epfl.ch
+    http:
+      paths:
+      - pathType: Prefix
+        path: /sscx-portal/data
+        backend:
+          service:
+            name: sscx-portal-static-data
+            port:
+              number: 8000
+      - pathType: Prefix
+        path: /sscx-portal-dev/data
+        backend:
+          service:
+            name: sscx-portal-static-data
+            port:
+              number: 8000
+  tls:
+  - hosts:
+    - sscx-portal.kcp.bbp.epfl.ch
+    secretName: sscx-portal-cert
