@@ -92,7 +92,7 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({
         columns={columns}
         dataSource={morphologies}
         size="small"
-        rowKey={(record) => record.name}
+        rowKey={(morphology: any) => morphology.name}
         rowClassName={morphology => morphology.name === currentMorphology ? styles.highlightedRowBg : undefined}
       />
     </div>

@@ -80,7 +80,7 @@ const ExpTraceTable: React.FC<ExpTraceTableProps> = ({ etype, currentTrace, trac
       <Table
         columns={columns}
         dataSource={traces}
-        rowKey={({ name }) => name}
+        rowKey={(trace: any) => trace.name}
         rowClassName={trace => trace.name === currentTrace ? styles.highlightedRowBg : undefined}
       />
     </div>
