@@ -13,15 +13,8 @@ npm install
 Add a NEXT_PUBLIC_NEXUS_TOKEN environment variable containing Nexus access token for the public/sscx project
 or create a file `.env.local` with it's definition and a token.
 
-Build a proxy docker image which is used to serve SSCx related static content locally from the production deployment:
-```bash
-npm run build-static-data-proxy
-```
-The script will ask credentials for the SSCx Portal's production deployment (HTTP basic auth), once build,
-can be started with:
-```bash
-npm run start-static-data-proxy
-```
+Please note, for local (dev) environment SSCx related static content is served from the Kubernetes cluster directly
+and available only from EPFL network (onsite or using VPN).
 
 To start the portal in development mode, run:
 
