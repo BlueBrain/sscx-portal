@@ -41,7 +41,7 @@ const LayerAnatomy: React.FC<LayerAnatomyTemplateProps> = ({
       const query = defaultSelection.experimentalData.layerAnatomy;
       router.replace({ query }, undefined, { shallow: true });
     }
-  }, [router.query]);
+  }, [router, router.query]);
 
   return (
     <>
