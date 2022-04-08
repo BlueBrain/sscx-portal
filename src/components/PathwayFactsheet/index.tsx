@@ -73,7 +73,7 @@ const FactsheetMapValueEntry: React.FC<{ fact: FactsheetMapValueType }> = ({
     const barWidthPct = (value / maxVal) * 100 * barMaxFillRatio;
 
     return (
-      <div className="row mb-1">
+      <div key={label} className="row mb-1">
         <div className="col-xs-6 pos-relative">
           {label}
           <div className="bar" style={{ width: `${barWidthPct}%` }} />
