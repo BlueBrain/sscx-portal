@@ -21,7 +21,7 @@ spec:
         name: sscx-portal
         imagePullPolicy: Always
         ports:
-          - containerPort: 8000
+        - containerPort: 8000
         resources:
           requests:
             memory: 2Gi
@@ -42,9 +42,9 @@ spec:
     matchLabels:
       app: sscx-portal
   policyTypes:
-    - Egress
+  - Egress
   egress:
-    - {}
+  - {}
 ---
 apiVersion: v1
 kind: Service

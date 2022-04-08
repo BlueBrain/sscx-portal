@@ -1,4 +1,4 @@
-# NGV Portal NGINX for serving static data content.
+# SSCx Portal NGINX for serving static data content.
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -69,19 +69,19 @@ spec:
     matchLabels:
       app: sscx-portal-static-data
   policyTypes:
-    - Ingress
-    - Egress
+  - Ingress
+  - Egress
   ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app: sscx-portal
+  - from:
+    - podSelector:
+        matchLabels:
+          app: sscx-portal
   egress:
-    - ports:
-        - protocol: TCP
-          port: 53
-        - protocol: UDP
-          port: 53
+  - ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
