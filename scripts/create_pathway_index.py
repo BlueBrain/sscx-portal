@@ -37,7 +37,7 @@ def main():
   """
   input_path = abspath(sys.argv[1])
   output_path = abspath(sys.argv[2])
-  ignore_list_path = sys.argv[3]
+  ignore_list_path = sys.argv[3] if 3 in sys.argv else None
 
   log.info(f'model factsheets path: {input_path}')
   log.info(f'output path:  {output_path}')
