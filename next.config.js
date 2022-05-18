@@ -21,7 +21,11 @@ const nextConfig = {
   assetPrefix: `${basePath}/`,
   webpack5: true,
   images: {
-    domains: ['localhost', 'sscx-portal-static-data'],
+    domains: [
+      'localhost',
+      'sscx-portal-static-data',
+      'sscx-portal.kcp.bbp.epfl.ch'
+    ],
     path: `${basePath}/_next/image/`,
     minimumCacheTTL: 259200,
   },
