@@ -1,5 +1,6 @@
 import React from 'react';
 import isNil from 'lodash/isNil';
+import isUndefined from 'lodash/isUndefined';
 import NumberFormat from '../NumberFormat';
 
 import Unit from '../Unit';
@@ -56,7 +57,7 @@ const FactsheetSingleMeanStdEntry: React.FC<{
     <div className="col-xs-6 col-md-4 value">
       {fact.value_map && (
         <>
-          <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std} /> <Unit value={fact} />
+          <NumberFormat value={fact.value_map.mean} /> ± <NumberFormat value={fact.value_map.std || 'NaN'} /> <Unit value={fact} />
         </>
       )}
       {fact.values && (
@@ -116,7 +117,7 @@ const FactsheetEntry: React.FC<{
 }) => {
   if (
     (fact.values && fact.values.length)
-    || (fact.value_map && !isNil(fact.value_map.mean) && !isNil(fact.value_map.std))
+    || (fact.value_map && !isUndefined(fact.value_map.mean) && !isUndefined(fact.value_map.std))
   ) {
     return (<FactsheetSingleMeanStdEntry fact={fact} />);
   }
