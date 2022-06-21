@@ -86,7 +86,7 @@ const Glossary: React.FC = () => {
                 </div>
                 <div className="col-xs-7 col-lg-8">
                   {Array.isArray(description)
-                    ? description.map((paragraph, idx) => (<p key={idx}>{paragraph}</p>))
+                    ? description.map((paragraph, idx) => (<p key={idx} dangerouslySetInnerHTML={{ __html: paragraph }} />))
                     : (<span dangerouslySetInnerHTML={{ __html: description }} />)
                   }
                 </div>
