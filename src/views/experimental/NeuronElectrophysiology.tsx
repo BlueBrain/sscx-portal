@@ -220,7 +220,7 @@ const NeuronElectrophysiology: React.FC = () => {
           <ESData query={fullElectroPhysiologyDataQueryObj}>
             {(esDocuments, loading) => (
               <Spin spinning={loading}>
-                {!!esDocuments && (
+                {!!esDocuments?.length && (
                   <>
                     <Metadata nexusDocument={esDocuments[0]._source} />
                     <h3 className="mt-3">Patch clamp recording</h3>
