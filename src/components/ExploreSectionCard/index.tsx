@@ -1,10 +1,11 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useRef } from 'react';
 import Link from 'next/link';
 import { FaMinus } from '@react-icons/all-files/fa/FaMinus';
 import { FaPlus } from '@react-icons/all-files/fa/FaPlus';
 
 import { basePath } from '../../config';
 import { LayerSvg, MicrocircuitSvg, PathwaySvg, NeuronSvg } from '../Icons';
+import useOutsideClick from '@/hooks/outside-click';
 
 import styles from './styles.module.scss';
 
@@ -48,6 +49,14 @@ const ExploreSectionCard: React.FC<ExploreSectionCardProps> = ({
 }) => {
   const [infoOpened, setInfoOpened] = useState(false);
 
+  const cardBodyRef = useRef();
+
+  useOutsideClick(cardBodyRef, () => {
+    if (!infoOpened) return;
+
+    setInfoOpened(false);
+  });
+
   return (
     <div
       className={`${styles.container} ${infoOpened ? 'show' : ''}`}
@@ -65,7 +74,7 @@ const ExploreSectionCard: React.FC<ExploreSectionCardProps> = ({
         </div>
       </div>
 
-      <div className={styles.body}>
+      <div className={styles.body} ref={cardBodyRef}>
         <div className={styles.title}>
           <div className={styles.titleBar}></div>
           <h3 className="text-white text-uppercase">{title}</h3>
