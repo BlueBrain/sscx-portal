@@ -29,10 +29,9 @@ const nextConfig = {
     path: `${basePath}/_next/image/`,
     minimumCacheTTL: 259200,
   },
+  output: 'standalone',
   experimental: {
     esmExternals: true,
-    staticPageGenerationTimeout: 240,
-    outputStandalone: true,
   },
   async redirects() {
     return [
