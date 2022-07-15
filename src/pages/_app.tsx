@@ -10,6 +10,7 @@ import GoogleAnalytics from '../components/GoogleAnalytics';
 
 import '../styles/globals.scss';
 
+
 if (typeof window === 'undefined') {
   require('abort-controller/polyfill');
 } else {
@@ -17,7 +18,6 @@ if (typeof window === 'undefined') {
   require('systemjs/dist/s');
   require('systemjs/dist/extras/amd');
 }
-
 
 const nexusClient = createNexusClient({
   uri: nexus.url,
@@ -43,5 +43,6 @@ function App({ Component, pageProps }) {
     </NexusProvider>
   );
 }
+
 
 export default App;
