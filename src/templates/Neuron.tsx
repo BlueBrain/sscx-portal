@@ -43,6 +43,7 @@ import {
   memodelArchivePath,
 } from '../queries/http';
 import { sscx, basePath } from '../config';
+import { downloadAsJson } from '@/utils';
 import StickyContainer from '../components/StickyContainer';
 import { modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
 import { defaultSelection, layers, subregions } from '../constants';
@@ -392,13 +393,16 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     <h3>Anatomy</h3>
                     <Factsheet id="memodelAnatomyFactsheet" facts={data[0].values} />
 
-                    <h3 className="mt-3">Physiology</h3>
-                    <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values} />
+                    {/* <h3 className="mt-3">Physiology</h3> */}
+                    {/* <Factsheet id="memodelPhysiologyFactsheet" facts={data[1].values} /> */}
 
                     <div className="text-right mt-2 mb-3">
                       <HttpDownloadButton
-                        href={metypeFactsheetPath(region, mtype, etype, memodel)}
-                        download={`memodel-factsheet-${region}-${memodel}.json`}
+                        // href={metypeFactsheetPath(region, mtype, etype, memodel)}
+                        // download={`memodel-factsheet-${region}-${memodel}.json`}
+                        onClick={() => {
+                          downloadAsJson(data[0], `memodel-anatomy-factsheet-${region}-${memodel}.json`)
+                        }}
                       >
                         factsheet
                       </HttpDownloadButton>

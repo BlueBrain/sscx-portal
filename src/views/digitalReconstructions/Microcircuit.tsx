@@ -5,11 +5,12 @@ import MicrocircuitsTemplates from '../../templates/Microcircuit';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
 import { color, sectionTitle } from './config';
 import { layerFactsheetPath, subregionMicrocircuitFactsheetPath } from '../../queries/http';
+import { downloadAsJson } from '@/utils';
 import Collapsible from '../../components/Collapsible';
 import HttpData from '../../components/HttpData';
 import DataContainer from '../../components/DataContainer';
 import Factsheet from '../../components/Factsheet';
-import SimulationSection from '../../components/SimulationSection';
+// import SimulationSection from '../../components/SimulationSection';
 
 
 const { TabPane } = Tabs;
@@ -25,7 +26,7 @@ const RecMicrocircuitView = () => (
         navItems={[
           { id: 'layerSection', label: 'Layer' },
           { id: 'microcircuitSection', label: 'Microcircuit' },
-          { id: 'simulationSection', label: 'Simulations' },
+          // { id: 'simulationSection', label: 'Simulations' },
         ]}
       >
         <Collapsible
@@ -43,13 +44,16 @@ const RecMicrocircuitView = () => (
                           <h3 className="mb-2">Anatomy</h3>
                           <Factsheet id="layerAnatomyFactsheet" facts={data[0].values} />
 
-                          <h3 className="mt-3 mb-2"> Physiology</h3>
-                          <Factsheet id="layerPhysiologyFactsheet" facts={data[1].values} />
+                          {/* <h3 className="mt-3 mb-2"> Physiology</h3> */}
+                          {/* <Factsheet id="layerPhysiologyFactsheet" facts={data[1].values} /> */}
 
                           <div className="text-right mt-2 mb-3">
                             <HttpDownloadButton
-                              href={layerFactsheetPath(subregion, layerNum)}
-                              download={`layer-microcircuit-factsheet-${subregion}-L${layerNum}.json`}
+                              // href={layerFactsheetPath(subregion, layerNum)}
+                              // download={`microcircuit-layer-factsheet-${subregion}-L${layerNum}.json`}
+                              onClick={() => {
+                                downloadAsJson(data[0], `microcircuit-layer-anatomy-factsheet-${subregion}-L${layerNum}.json`);
+                              }}
                             >
                               factsheet
                             </HttpDownloadButton>
@@ -90,7 +94,7 @@ const RecMicrocircuitView = () => (
           </HttpData>
         </Collapsible>
 
-        <SimulationSection />
+        {/* <SimulationSection /> */}
       </DataContainer>
     )}
   </MicrocircuitsTemplates>

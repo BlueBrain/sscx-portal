@@ -10,7 +10,7 @@ import { color, sectionTitle } from './config';
 import { subregions, subregionTitle } from '../../constants';
 import { regionCircuitFactsheetPath, subregionCircuitFactsheetPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
-import SimulationSection from '../../components/SimulationSection';
+// import SimulationSection from '../../components/SimulationSection';
 
 const subregionTableDataSource = subregions.map(subregion => ({
   abbr: subregion,
@@ -44,7 +44,7 @@ const BrainRegionsView = () => (
         navItems={[
           { id: 'subregionSection', label: 'Subregion' },
           { id: 'regionSection', label: 'Region' },
-          { id: 'simulationSection', label: 'Simulations' },
+          // { id: 'simulationSection', label: 'Simulations' },
         ]}
       >
         <Collapsible
@@ -116,7 +116,7 @@ const BrainRegionsView = () => (
           </HttpData>
         </Collapsible>
 
-        <SimulationSection />
+        {/* <SimulationSection /> */}
       </DataContainer>
     )}
   </BrainRegionTemplate>

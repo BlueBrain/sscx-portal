@@ -12,12 +12,13 @@ import HttpData from '../../components/HttpData';
 import Factsheet from '../../components/Factsheet';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
 import { color, sectionTitle } from './config';
+import { downloadAsJson } from '@/utils';
 import Collapsible from '../../components/Collapsible';
 import Synaptome from '../../components/Synaptome';
 import MtypeLegend from '../../components/MtypeLegend';
 
 import ImageViewer from '../../components/ImageViewer';
-import SimulationSection from '../../components/SimulationSection';
+// import SimulationSection from '../../components/SimulationSection';
 
 
 const Plot: React.FC<{ src: string }> = ({ src }) => (
@@ -40,7 +41,7 @@ const RecSynPathwaysView = () => (
         navItems={[
           { id: 'pathwaySection', label: 'Pathway' },
           { id: 'synaptomeSection', label: 'Synaptomes' },
-          { id: 'simulationSection', label: 'Simulations' },
+          // { id: 'simulationSection', label: 'Simulations' },
         ]}
       >
         <Collapsible
@@ -55,13 +56,16 @@ const RecSynPathwaysView = () => (
                     <h3 className="mb-2">Anatomy</h3>
                     <Factsheet id="pathwayAnatomyFactsheet" facts={data[0].values} />
 
-                    <h3 className="mt-3 mb-2">Physiology</h3>
-                    <Factsheet id="pathwayPhysiologyFactsheet" className="mb-3" facts={data[1].values} />
+                    {/* <h3 className="mt-3 mb-2">Physiology</h3>
+                    <Factsheet id="pathwayPhysiologyFactsheet" className="mb-3" facts={data[1].values} /> */}
 
                     <div className="text-right mt-2 mb-3">
                       <HttpDownloadButton
-                        href={pathwayFactsheetPath(subregion, pathway)}
-                        download={`pathway-factsheet-${subregion}-${pathway}.json`}
+                        // href={pathwayFactsheetPath(subregion, pathway)}
+                        // download={`pathway-factsheet-${subregion}-${pathway}.json`}
+                        onClick={() => {
+                          downloadAsJson(data[0], `pathway-anatomy-factsheet-${subregion}-${pathway}.json`)
+                        }}
                       >
                         factsheet
                       </HttpDownloadButton>
@@ -169,7 +173,7 @@ const RecSynPathwaysView = () => (
           <MtypeLegend className="mt-3" />
         </Collapsible>
 
-        <SimulationSection />
+        {/* <SimulationSection /> */}
       </DataContainer>
     )}
   </SynapticPathwaysTemplates>
