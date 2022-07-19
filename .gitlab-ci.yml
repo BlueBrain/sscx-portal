@@ -22,20 +22,22 @@ build-img-prod:
   extends: .build-image-using-kaniko
   stage: build
   variables:
-    NEXT_PUBLIC_GTM_ID: $GTM_ID
-    NEXT_PUBLIC_SENTRY_DSN: $SENTRY_DSN
-    SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-    NEXT_PUBLIC_ENVIRONMENT: prod
-    NEXT_PUBLIC_NEXUS_TOKEN: $NEXUS_TOKEN
-    CI_REGISTRY_IMAGE: $CI_REGISTRY/nse/sscx-portal
-    REGISTRY_IMAGE_TAG: latest
     CI_PROJECT_DIR: /builds/nse/sscx-portal
+    CI_REGISTRY_IMAGE: $CI_REGISTRY/nse/sscx-portal
+    NEXT_PUBLIC_ENVIRONMENT: prod
+    NEXT_PUBLIC_GTM_ID: $GTM_ID
+    NEXT_PUBLIC_NEXUS_TOKEN: $NEXUS_TOKEN
+    NEXT_PUBLIC_SENTRY_DSN: $SENTRY_DSN
+    REGISTRY_IMAGE_TAG: latest
+    SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
+    SITE_URL: https://bbp.epfl.ch/sscx-portal/
     KANIKO_EXTRA_ARGS: >
-      --build-arg=NEXT_PUBLIC_GTM_ID
-      --build-arg=NEXT_PUBLIC_SENTRY_DSN
       --build-arg=NEXT_PUBLIC_ENVIRONMENT
-      --build-arg=SENTRY_AUTH_TOKEN
+      --build-arg=NEXT_PUBLIC_GTM_ID
       --build-arg=NEXT_PUBLIC_NEXUS_TOKEN
+      --build-arg=NEXT_PUBLIC_SENTRY_DSN
+      --build-arg=SENTRY_AUTH_TOKEN
+      --build-arg=SITE_URL
     KUBERNETES_MEMORY_REQUEST: 4Gi
     KUBERNETES_MEMORY_LIMIT: 8Gi
     KUBERNETES_CPU_REQUEST: 2
