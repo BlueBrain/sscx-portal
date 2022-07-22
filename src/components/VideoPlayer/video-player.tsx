@@ -35,7 +35,7 @@ const Video: React.FC<VideoProps> = ({
   const [videoPlayer, setVideoPlayer] = useState<Plyr | null>(null);
 
   useEffect(() => {
-    if (!videoRef?.current) return;
+    if (!videoRef?.current || videoPlayer) return;
 
     const player = new Plyr(videoRef?.current, {
       settings: ['quality', 'loop'],
@@ -55,20 +55,24 @@ const Video: React.FC<VideoProps> = ({
       },
     });
 
-    player.source = {
+    setVideoPlayer(player);
+
+    return () => {
+      if (videoPlayer) {
+        videoPlayer.destroy();
+      }
+    }
+  }, [videoRef, autoplay, ratio, defaultSize, muted, loop, sources, poster, videoPlayer]);
+
+  useEffect(() => {
+    if (!videoPlayer) return;
+
+    videoPlayer.source = {
       type: 'video',
       sources,
       poster,
     };
-
-    setVideoPlayer(player);
-
-    return () => {
-      if (!!videoPlayer) {
-        videoPlayer.destroy();
-      }
-    }
-  }, [videoRef, autoplay, ratio, defaultSize, muted, loop, sources, poster]);
+  }, [sources, poster, videoPlayer]);
 
   return (
     <div>

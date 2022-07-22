@@ -18,7 +18,6 @@ const BrainRegionsView = () => (
       >
         <Collapsible id="subregionSection" title={`${subregion} Subregion`} >
           <Video
-            key={subregion}
             sources={composeSources(`/predictions/brain-regions/region_${subregion}_explosion`)}
             muted
             defaultSize={720}
