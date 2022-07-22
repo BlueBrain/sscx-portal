@@ -1,16 +1,17 @@
 import React, { useRef } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { IoIosArrowDropdown } from '@react-icons/all-files/io/IoIosArrowDropdown';
+
+import { accentColors, basePath } from '../../config';
 import Brand from '../Brand';
 import NavDesktop from '../NavDesktop';
 import NavMobile from '../NavMobile';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { accentColors, basePath } from '../../config';
-import SvgRegions from '../../components/Icons/Regions';
-import SvgNeuron from '../../components/Icons/Neuron';
-import SvgMicrocircuit from '../../components/Icons/Microcircuit';
-import SvgSynapse from '../../components/Icons/Synapse';
-import SvgEphys from '../../components/Icons/Ephys';
-import { IoIosArrowDropdown } from '@react-icons/all-files/io/IoIosArrowDropdown';
+import SvgRegions from '@/components/Icons/Regions';
+import SvgNeuron from '@/components/Icons/Neuron';
+import SvgMicrocircuit from '@/components/Icons/Microcircuit';
+import SvgSynapse from '@/components/Icons/Synapse';
+import SvgEphys from '@/components/Icons/Ephys';
 
 
 const classPrefix = 'nav__';
@@ -231,20 +232,20 @@ export const SecondaryNav: React.FC<NavProps> = ({ mobile }) => {
         </button>
         <ul style={{ borderLeftColor: accentColors.grey }}>
           <li>
-            {/* <Link href="/predictions/brain-regions"> */}
-              <a className="disabled">
+            <Link href="/predictions/brain-regions/" prefetch={false}>
+              <a>
                 <SvgRegions fill={accentColors.grey} />
                 Brain Regions
               </a>
-            {/* </Link> */}
+            </Link>
           </li>
           <li>
-            {/* <Link href="/predictions/microcircuit"> */}
-              <a className="disabled">
+            <Link href="/predictions/microcircuit/" prefetch={false}>
+              <a>
                 <SvgMicrocircuit fill={accentColors.grey} />
                 Microcircuit
               </a>
-            {/* </Link> */}
+            </Link>
           </li>
           <li>
             {/* <Link href="/predictions/synaptic-pathways"> */}
