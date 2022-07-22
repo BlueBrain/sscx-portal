@@ -9,39 +9,68 @@ type VideoSource = {
   size?: number;
 };
 
-type VideoProps = {
+export type VideoProps = {
   sources: VideoSource[];
+  loop?: boolean;
+  autoplay?: boolean;
+  muted?: boolean;
+  defaultSize?: number;
+  ratio?: string;
+  poster?: string;
 };
 
+export const defaultVideoSizes = [360, 480, 720, 1080, 2160];
 
-const Video: React.FC<VideoProps> = ({ sources = [] }) => {
+
+const Video: React.FC<VideoProps> = ({
+  sources = [],
+  loop = false,
+  autoplay = false,
+  muted = false,
+  defaultSize = 480,
+  ratio = '16:9',
+  poster,
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoPlayer, setVideoPlayer] = useState<Plyr | null>(null);
 
   useEffect(() => {
     if (!videoRef?.current) return;
 
+    console.log('Creating a video player');
     const player = new Plyr(videoRef?.current, {
       settings: ['quality', 'loop'],
+      storage: {
+        enabled: false,
+      },
+      ratio,
       controls: ['play', 'progress', 'settings', 'pip', 'airplay', 'fullscreen'],
-      autoplay: true,
-      muted: true,
+      quality: {
+        default: defaultSize,
+        options: defaultVideoSizes,
+      },
+      autoplay,
+      muted,
       loop: {
-        active: true,
+        active: loop,
       },
     });
+
     player.source = {
       type: 'video',
       sources,
+      poster,
     };
+
     setVideoPlayer(player);
 
     return () => {
       if (!!videoPlayer) {
+        console.log('Destroying video player');
         videoPlayer.destroy();
       }
     }
-  }, [videoRef]);
+  }, [videoRef, autoplay, ratio, defaultSize, muted, loop, sources, poster]);
 
   return (
     <video className="js-plyr plyr" ref={videoRef} />
