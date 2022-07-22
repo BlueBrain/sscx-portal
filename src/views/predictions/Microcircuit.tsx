@@ -18,6 +18,7 @@ const PredictionsMicrocircuitView = () => (
       >
         <Collapsible id="microcircuitSection" title={`${subregion} Microcircuit Factsheet`}>
           <Video
+            key={subregion}
             sources={composeSources(`/predictions/microcircuit/${subregion}_microcircuit_activity`)}
             muted
             defaultSize={720}
