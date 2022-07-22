@@ -138,7 +138,7 @@ def main():
     exp_morph_collection = [
       {
         'morphology': exp_morph,
-        'mtype': exp_morph_mtype[exp_morph],
+        'mtype': exp_morph_mtype[exp_morph], # ! some cells were re-classified, mtype might be outdated here
         'layer': 'L23' if (re.match('(L\d+)_.*', exp_morph_mtype[exp_morph])[1] in ['L23', 'L2', 'L3']) else re.match('(L\d+)_.*', exp_morph_mtype[exp_morph])[1],
         'source_neurite_type': 'axon+dendrite' if len(exp_morphologies) == 1 else ['axon', 'dendrite'][idx]
       }
