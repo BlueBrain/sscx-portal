@@ -1,20 +1,14 @@
-import React from 'react';
-import Head from 'next/head';
+import GlossaryView from '@/views/glossary/Glossary';
+import MainLayout from '@/layouts/MainLayout';
 
-import GlossaryView from '../views/glossary/Glossary';
-import MainLayout from '../layouts/MainLayout';
+import PageMeta from '@/components/PageMeta';
+import textContent from '@/text-content/glossary';
 
 
 export default function Glossary() {
   return (
     <>
-      <Head>
-        <title>Glossary / SSCx Portal</title>
-        <meta
-          name="description"
-          content="Terms used in the SSCx portal."
-        />
-      </Head>
+      <PageMeta textContent={textContent} />
 
       <MainLayout>
         <GlossaryView />

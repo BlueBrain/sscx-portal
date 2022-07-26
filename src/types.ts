@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type Palette = 'warm' | 'cool';
 
 export type Direction = 'up' | 'down';
@@ -13,3 +15,12 @@ export type Color =
   | 'green'
   | 'grey'
   | 'orange';
+
+export type TextContent = {
+  head: {
+    title: string;
+    description: string;
+  },
+
+  [key: string]: string | React.ReactNode;
+};

@@ -1,19 +1,13 @@
-import Head from 'next/head';
+import LayerAnatomyView from '@/views/experimental/LayerAnatomy';
+import MainLayout from '@/layouts/MainLayout';
+import PageMeta from '@/components/PageMeta';
+import textContent from '@/text-content/experimental-data/layer-anatomy';
 
-import LayerAnatomyView from '../../views/experimental/LayerAnatomy';
-import MainLayout from '../../layouts/MainLayout';
 
-
-export default function About() {
+export default function LayerAnatomy() {
   return (
     <>
-      <Head>
-        <title>Layer anatomy / Experimental data / SSCx Portal</title>
-        <meta
-          name="description"
-          content="The Somatosensory Cortex has a laminar structure where neurons are organized across six distinct layers."
-        />
-      </Head>
+      <PageMeta textContent={textContent} />
 
       <MainLayout>
         <LayerAnatomyView />

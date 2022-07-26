@@ -1,19 +1,13 @@
-import Head from 'next/head';
-
-import MicrocircuitView from '../../views/predictions/Microcircuit';
-import MainLayout from '../../layouts/MainLayout';
+import MainLayout from '@/layouts/MainLayout';
+import MicrocircuitView from '@/views/predictions/Microcircuit';
+import PageMeta from '@/components/PageMeta';
+import textContent from '@/text-content/predictions/microcircuit';
 
 
 export default function MicrocircuitPage() {
   return (
     <>
-      <Head>
-        <title>Microcircuit / Predictions / SSCx Portal</title>
-        <meta
-          name="description"
-          content="" // ! todo
-        />
-      </Head>
+      <PageMeta textContent={textContent} />
 
       <MainLayout>
         <MicrocircuitView />

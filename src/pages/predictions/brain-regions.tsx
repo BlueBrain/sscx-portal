@@ -1,19 +1,13 @@
-import Head from 'next/head';
-
-import BrainRegionsView from '@/views/predictions/BrainRegions';
 import MainLayout from '@/layouts/MainLayout';
+import BrainRegionsView from '@/views/predictions/BrainRegions';
+import PageMeta from '@/components/PageMeta';
+import textContent from '@/text-content/predictions/brain-regions';
 
 
 export default function BrainRegionsPage() {
   return (
     <>
-      <Head>
-        <title>Brain regions / Predictions / SSCx Portal</title>
-        <meta
-          name="description"
-          content="" // ! todo
-        />
-      </Head>
+      <PageMeta textContent={textContent} />
 
       <MainLayout>
         <BrainRegionsView />

@@ -1,20 +1,13 @@
-import React from 'react';
-import Head from 'next/head';
+import NwbTutorialView from '@/views/tutorials/Nwb';
+import MainLayout from '@/layouts/MainLayout';
+import PageMeta from '@/components/PageMeta';
+import textContent from '@/text-content/tutorials/nwb';
 
-import NwbTutorialView from '../../views/tutorials/Nwb';
-import MainLayout from '../../layouts/MainLayout';
 
-
-export default function Glossary() {
+export default function NwbTutorialPage() {
   return (
     <>
-      <Head>
-        <title>Tutorials - How to read NWB files / SSCx Portal</title>
-        <meta
-          name="description"
-          content="How to read NWB files tutorial."
-        />
-      </Head>
+      <PageMeta textContent={textContent} />
 
       <MainLayout>
         <NwbTutorialView />

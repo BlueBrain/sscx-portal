@@ -1,19 +1,13 @@
-import Head from 'next/head';
-
-import SynapticPathwaysView from '../../views/digitalReconstructions/SynapticPathways';
-import MainLayout from '../../layouts/MainLayout';
+import SynapticPathwaysView from '@/views/digitalReconstructions/SynapticPathways';
+import MainLayout from '@/layouts/MainLayout';
+import PageMeta from '@/components/PageMeta';
+import textContent from '@/text-content/digital-reconstructions/synaptic-pathways'
 
 
 export default function SynapticPathwaysPage() {
   return (
     <>
-      <Head>
-        <title>Synaptic pathways / Digital reconstructions / SSCx Portal</title>
-        <meta
-          name="description"
-          content="A synaptic pathway encompasses the set of all possible connections between pairs of neurons of pre and postsynaptic  morphological types (m-types)."
-        />
-      </Head>
+      <PageMeta textContent={textContent} />
 
       <MainLayout>
         <SynapticPathwaysView />
