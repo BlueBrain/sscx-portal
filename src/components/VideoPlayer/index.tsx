@@ -11,9 +11,20 @@ const codecVideoType = {
   av1: 'video/mp4; codecs="av01.0.05M.08"; profiles="isom,av01,iso2,mp41"',
 };
 
+const isEdge = () => {
+  return typeof (window) !== 'undefined'
+    && !!(navigator as any)?.userAgentData?.brands.find(brand => brand.brand === 'Microsoft Edge');
+};
+
 // h264 should come last as the most supported and less efficient codec so it will be used only if
-// no other options are supported
-const defaultCodecs = ['av1', 'hevc', 'h264'];
+// no other options are supported.
+//
+// Edge source detection is broken, it picks av1 however can't play it (without separately installed av1 plugin)
+const defaultCodecs = [
+  isEdge() ? null : 'av1',
+  'hevc',
+  'h264'
+].filter(Boolean);
 
 export function composeSources(videoBasePath, sizes = defaultVideoSizes, codecs = defaultCodecs) {
   return sizes
