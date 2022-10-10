@@ -30,7 +30,6 @@ function simplify(pts) {
 
     if (distance < SIMPLIFICATION_DISTANCE_THRESHOLD && sd < SIMPLIFICATION_DIAMETER_STD_THRESHOLD) {
       pts.splice(i + 1, 1);
-      console.log('Morph simplification: removing one segment')
     } else {
       i++;
     }
