@@ -162,8 +162,7 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     : null;
 
   useEffect(() => {
-    // fetch(pathwayIndexPath)
-    fetch('/sscx-portal/pathway-index.json')
+    fetch(pathwayIndexPath)
       .then(res => res.json())
       .then(pathwayIndex => setPathwayIndex(pathwayIndex));
   }, []);
