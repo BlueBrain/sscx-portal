@@ -1,4 +1,4 @@
-from genericpath import isfile
+import itertools
 import sys
 import csv
 import re
@@ -11,25 +11,41 @@ import coloredlogs, logging
 log = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG')
 
+regions = [
+  'S1DZ',
+  'S1DZO',
+  'S1FL',
+  'S1HL',
+  'S1J',
+  'S1Sh',
+  'S1Tr',
+  'S1ULp',
+]
+
 
 def main():
   """
   Create pathway index.
 
   Script arguments:
-  * model factsheets base path
+  * viable pathways path
   * output path
-  * csv file with pathways to ignore (not to add to the index)
 
-  Expected memodel directory structure:
-  <REGION>/<region>/Central/Pathways/<pre_mtype>-<post_mtype>/
+  Expected directory structure for the list of viable pathways:
+  - <REGION>_Column.csv
+
+  Each CSV should have source_mtype and target_mtype columns
+
 
   Output: pathway-index.json with the following structure:
   {
-    region: {
-      <region>: [pre_mtype_idx, post_mtype_idx][]
-    },
-    mtypeIdx: string[],
+    pathways: {
+      common: [pre_mtype_idx, post_mtype_idx][],
+      region: {
+        <region>: [pre_mtype_idx, post_mtype_idx][]
+      },
+    }
+    mtypes: string[],
   }
 
   Expected structure of the CSV file with ignored pathways:
@@ -37,15 +53,12 @@ def main():
   """
   input_path = abspath(sys.argv[1])
   output_path = abspath(sys.argv[2])
-  ignore_list_path = sys.argv[3] if 3 in sys.argv else None
 
-  log.info(f'model factsheets path: {input_path}')
+  log.info(f'viable pathways path: {input_path}')
   log.info(f'output path:  {output_path}')
-  if ignore_list_path:
-    log.info(f'ignoring entries from the file: ${ignore_list_path}')
 
   if not isdir(input_path):
-    log.critical(f'model factsheets base path doesn\'t seem to be directory: {input_path}')
+    log.critical(f'viable pathways base path doesn\'t seem to be directory: {input_path}')
     sys.exit(1)
 
   if not isdir(output_path):
@@ -55,74 +68,63 @@ def main():
       log.critical(f'Can\'t create an output directory ({output_path})')
       sys.exit(1)
 
-  if ignore_list_path and not isfile(ignore_list_path):
-    log.critical(f'Ignore list doesn\'t seem to be a file')
-    sys.exit(1)
-
-  ignored_pathways = []
-  if ignore_list_path:
-    with open(ignore_list_path) as ignore_file:
-      reader = csv.reader(ignore_file)
-      ignored_pathways = [(row[0], row[3]) for row in reader]
-
-
-  regions = listdirsonly(join(input_path, 'REGION'))
   mtypes = set()
+  raw_pathways = {}
+  indexed_pathways = {}
 
-  mts = []
-
+  log.info('Reading pathways and building mtype index')
   for region in regions:
-    log.info(f'Reading index for {region} region')
-    pathways = listdirsonly(join(input_path, 'REGION', region, 'Central/Pathways'))
-    for pathway in pathways:
-      if (region, pathway) in ignored_pathways:
-        continue
-
-      pathway_match = re.match(r'^(L\d+\_.*)\-(L\d+\_.*)$', pathway)
-
-      pre_mtype = pathway_match[1]
-      post_mtype = pathway_match[2]
-
-      mtypes.add(pre_mtype)
-      mtypes.add(post_mtype)
-
-      mts.append(pre_mtype)
-      mts.append(post_mtype)
-
-  print(len(set(mts)))
+    with open(join(input_path, f'{region}_Column.csv'), 'r') as csv_file:
+      raw_pathways[region] = []
+      pathway_collection = csv.DictReader(csv_file)
+      for pathway_dict in pathway_collection:
+        pre_mtype = pathway_dict['source_mtype']
+        post_mtype = pathway_dict['target_mtype']
+        mtypes.add(pre_mtype)
+        mtypes.add(post_mtype)
+        raw_pathways[region].append(f'{pre_mtype}---{post_mtype}')
 
   mtype_list = list(mtypes)
   mtype_list.sort()
 
-  pathway_index = {
-    'region': {},
-    'mtypeIdx': mtype_list
-  }
+  log.info('Building common pathway index')
+  common_pathways = list(set.intersection(*[
+    set(raw_pathways[region])
+    for region
+    in regions
+  ]))
+  common_pathways.sort()
+  log.info(f'Common pathways: {len(common_pathways)}')
 
-  log.info('Generating pathway index')
+  indexed_common_pathways = list(itertools.chain(*[
+    [
+      mtype_list.index(re.match(r'^(L\d+\_.*)\-\-\-(L\d+\_.*)$', pathway)[1]),
+      mtype_list.index(re.match(r'^(L\d+\_.*)\-\-\-(L\d+\_.*)$', pathway)[2])
+    ]
+    for pathway
+    in list(common_pathways)
+  ]))
+
+  log.info('Building region pathway index')
   for region in regions:
-    pathway_num = 0
+    pathways = set(raw_pathways[region]) - set(common_pathways)
+    log.info(f'Region {region} pathways: {len(pathways)}')
+    indexed_pathways[region] = list(itertools.chain(*[
+      [
+        mtype_list.index(re.match(r'^(L\d+\_.*)\-\-\-(L\d+\_.*)$', pathway)[1]),
+        mtype_list.index(re.match(r'^(L\d+\_.*)\-\-\-(L\d+\_.*)$', pathway)[2])
+      ]
+      for pathway
+      in pathways
+    ]))
 
-    if region not in pathway_index['region']:
-      pathway_index['region'][region] = []
-
-    pathways = listdirsonly(join(input_path, 'REGION', region, 'Central/Pathways'))
-    for pathway in pathways:
-      if (region, pathway) in ignored_pathways:
-        log.info(f'Skipping pathway: {region} {pathway}')
-        continue
-
-      pathway_match = re.match(r'^(L\d+\_.*)\-(L\d+\_.*)$', pathway)
-
-      pre_mtype = pathway_match[1]
-      post_mtype = pathway_match[2]
-
-      pathway_index['region'][region].append(mtype_list.index(pre_mtype))
-      pathway_index['region'][region].append(mtype_list.index(post_mtype))
-
-      pathway_num += 1
-
-    log.info(f'Pathways for {region:<5}: {pathway_num}')
+  pathway_index = {
+    'pathways': {
+      'common': indexed_common_pathways,
+      'region': indexed_pathways
+    },
+    'mtypes': mtype_list
+  }
 
   with open(join(output_path, 'pathway-index.json'), 'w') as pathway_index_file:
     json.dump(pathway_index, pathway_index_file)

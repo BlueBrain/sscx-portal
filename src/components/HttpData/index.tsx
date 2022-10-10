@@ -1,5 +1,6 @@
 import React from 'react';
 import { captureException } from '@sentry/nextjs';
+import { decodeAsync } from '@msgpack/msgpack';
 
 
 type HttpDataProps = {
@@ -13,6 +14,8 @@ type HttpDataProps = {
 };
 
 const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
+  const msgpackEncoded = path.match(/\.msgpack/);
+  
   const [state, setState] = React.useState<{
     data: any;
     loading: boolean;
@@ -31,6 +34,10 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
       .then(async res => {
         // TODO: remove when factesheets don't longer contain NaN values
         if (res.ok) {
+          if (msgpackEncoded) {
+            return decodeAsync(res.body);
+          }
+
           const resBody = await res.text();
           return JSON.parse(resBody.replace(/NaN/g, 'null'));
         }

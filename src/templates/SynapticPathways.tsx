@@ -25,10 +25,13 @@ export type SynapticPathwaysTemplateProps = {
 };
 
 type PathwayIndex = {
-  region: {
-    [brainRegion: string]: number[],
+  pathways: {
+    common: number[],
+    region: {
+      [brainRegion: string]: number[],
+    }
   },
-  mtypeIdx: string[],
+  mtypes: string[],
 }
 
 function onlyUnique(value, index, self) {
@@ -130,8 +133,8 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   const getPreMtypes = (region, prelayer) => {
     if (!pathwayIndex || !region || !prelayer) return [];
 
-    return chunk(pathwayIndex.region[region], 2)
-      .map(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx])
+    return chunk(pathwayIndex.pathways.common.concat(pathwayIndex.pathways.region[region]), 2)
+      .map(([preMtypeIdx]) => pathwayIndex.mtypes[preMtypeIdx])
       .filter(onlyUnique)
       .filter(mtype => mtype.match(prelayer === 'L23' ? 'L23|L2|L3' : prelayer))
       .sort();
@@ -143,9 +146,9 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
   const getPostMtypes = (region, pretype, postlayer) => {
     if (!pathwayIndex || !region || !pretype || !postlayer) return [];
 
-    return chunk(pathwayIndex.region[region], 2)
-      .filter(([preMtypeIdx]) => pathwayIndex.mtypeIdx[preMtypeIdx] === pretype)
-      .map(([, postMtypeIdx]) => pathwayIndex.mtypeIdx[postMtypeIdx])
+    return chunk(pathwayIndex.pathways.common.concat(pathwayIndex.pathways.region[region]), 2)
+      .filter(([preMtypeIdx]) => pathwayIndex.mtypes[preMtypeIdx] === pretype)
+      .map(([, postMtypeIdx]) => pathwayIndex.mtypes[postMtypeIdx])
       .filter(onlyUnique)
       .filter(mtype => mtype.match(postlayer === 'L23' ? 'L23|L2|L3' : postlayer))
       .sort()
@@ -159,7 +162,8 @@ const SynapticPathways: React.FC<SynapticPathwaysTemplateProps> = ({
     : null;
 
   useEffect(() => {
-    fetch(pathwayIndexPath)
+    // fetch(pathwayIndexPath)
+    fetch('/sscx-portal/pathway-index.json')
       .then(res => res.json())
       .then(pathwayIndex => setPathwayIndex(pathwayIndex));
   }, []);

@@ -18,9 +18,9 @@ export type EtypeFactsheetProps = {
 
 const unitLabelMap = {
   constant: '',
+  none: '',
   'mV/nA': 'MΩ',
 };
-
 
 
 const unitLabel = (unit: string) => unitLabelMap[unit] ?? unit;

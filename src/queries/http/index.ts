@@ -42,6 +42,10 @@ export const layerFactsheetPath = (subregion: string, layerNum: number): string 
 
 export const pathwayIndexPath = `${staticDataBaseUrl}/pathway-index.json`;
 
+export const connectionViewerDataPath = (region: string, pathway: string) => {
+  return `${staticDataBaseUrl}/dig-rec/pathways/connection-viewer/${region}/${region}-${pathway}.msgpack`;
+};
+
 export const pathwayFactsheetPath = (subregion: string, pathway: string): string => {
   return `${staticDataBaseUrl}/model-data/REGION/${subregion}/Central/Pathways/${pathway}/factsheet.json`;
 };

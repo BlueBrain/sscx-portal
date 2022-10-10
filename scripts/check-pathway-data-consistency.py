@@ -8,10 +8,10 @@ import coloredlogs, logging
 
 
 log = logging.getLogger(__name__)
-coloredlogs.install(level='DEBUG')
+coloredlogs.install(level='DEBUG', fmt='%(levelname)-8s :: %(message)s')
 
 fh = logging.FileHandler('pathway-check.log')
-fh.setLevel(logging.DEBUG)
+fh.setLevel(logging.ERROR)
 
 log.addHandler(fh)
 
@@ -39,6 +39,15 @@ syn_physiology_imgs = [
   'transmission_failures.png',
 ]
 
+def pairs(items):
+  pair_list = []
+  while(items):
+    el1 = items.pop(0)
+    el2 = items.pop(0)
+    pair_list.append((el1, el2))
+
+  return pair_list
+
 
 def listdirsonly(path):
   """
@@ -53,6 +62,7 @@ def main():
   and synaptome renders, also checks if all synaptome renders are present.
 
   Script arguments:
+  * pathway-index file
   * model-data folder
   * synaptome renders folder
 
@@ -65,47 +75,69 @@ def main():
     * pre_<pre-mtype>.png
     * post_<post-mtype>.png
   """
-  model_data_path = abspath(sys.argv[1])
-  synaptome_renders_path = abspath(sys.argv[2])
+  pathway_index_path = abspath(sys.argv[1])
+  pathway_data_path = abspath(sys.argv[2])
+  synaptome_renders_path = abspath(sys.argv[3])
 
-  log.info(f'model factsheets path:  {model_data_path}')
+  log.info(f'pathway index path:  {pathway_index_path}')
+  log.info(f'model factsheets path:  {pathway_data_path}')
   log.info(f'synaptome renders path: {synaptome_renders_path}')
 
   missing_synaptomes = []
 
-  if not isdir(model_data_path):
-    log.critical(f'model-data base path doesn\'t seem to be directory: {model_data_path}')
+  if not isdir(pathway_data_path):
+    log.critical(f'model-data base path doesn\'t seem to be directory: {pathway_data_path}')
     sys.exit(1)
 
   if not isdir(synaptome_renders_path):
-    log.critical(f'synaptome renders base path doesn\'t seem to be directory: {model_data_path}')
+    log.critical(f'synaptome renders base path doesn\'t seem to be directory: {pathway_data_path}')
     sys.exit(1)
 
-  regions = listdirsonly(join(model_data_path, 'REGION'))
+  with open(pathway_index_path, 'r') as pathway_index_fp:
+    pathways = json.load(pathway_index_fp)
+
+  regions = [
+    'S1DZ',
+    # 'S1DZO', too small, if included - limits viable pathways for other regions
+    'S1FL',
+    'S1HL',
+    'S1J',
+    'S1Sh',
+    'S1Tr',
+    'S1ULp',
+  ]
 
   for region in regions:
-    log.info(f'reading index for {region} region')
-    model_data_region_pathways_path = join(model_data_path, 'REGION', region, 'Central/Pathways')
-    pathways = listdirsonly(model_data_region_pathways_path)
+    # log.info(f'reading index for {region} region')
+    pathway_data_region_pathways_path = join(pathway_data_path, 'REGION', region, 'Central/Pathways')
+    # pathways = listdirsonly(pathway_data_region_pathways_path)
     for pathway in pathways:
-      pathway_match = re.match(r'^(L\d+\_.*)\-(L\d+\_.*)$', pathway)
+      # pathway_match = re.match(r'^(L\d+\_.*)\-(L\d+\_.*)$', pathway)
 
-      pre_mtype = pathway_match[1]
-      post_mtype = pathway_match[2]
+      pre_mtype = pathway[0]
+      post_mtype = pathway[1]
 
-      # checking model data: pathway factsheet
-      if not isfile(join(model_data_region_pathways_path, pathway, 'factsheet.json')):
-        log.error(f'model_factsheet: missing factsheet for {region}, {pathway}')
+      pathway_name = f'{pre_mtype}-{post_mtype}'
 
-      # checking model data: synaptic anatomy images
+      # checking data: pathway factsheet
+      if not isfile(join(pathway_data_region_pathways_path, pathway_name, 'factsheet.json')):
+        log.error(f'pathway_factsheet: missing factsheet for {region}, {pathway_name}')
+      else:
+        log.debug(f'pathway_factsheet: found for {region}, {pathway_name}')
+
+      # checking data: synaptic anatomy images
       for syn_anatomy_img in syn_anatomy_imgs:
-        if not isfile(join(model_data_region_pathways_path, pathway, 'SynapticAnatomy', syn_anatomy_img)):
-          log.error(f'model_syn_anatomy: missing {syn_anatomy_img} image for {region}, {pathway}')
+        if not isfile(join(pathway_data_region_pathways_path, pathway_name, 'SynapticAnatomy', syn_anatomy_img)):
+          log.error(f'pathway_syn_anatomy: missing {syn_anatomy_img} image for {region}, {pathway_name}')
+        else:
+          log.debug(f'pathway_syn_anatomy: found {syn_anatomy_img} image for {region}, {pathway_name}')
 
-      # checking model data: synaptic physiology images
+      # checking data: synaptic physiology images
       for syn_physiology_img in syn_physiology_imgs:
-        if not isfile(join(model_data_region_pathways_path, pathway, 'SynapticPhysiology', syn_physiology_img)):
-          log.error(f'model_syn_physiology: missing {syn_physiology_img} image for {region}, {pathway}')
+        if not isfile(join(pathway_data_region_pathways_path, pathway_name, 'SynapticPhysiology', syn_physiology_img)):
+          log.error(f'pathway_syn_physiology: missing {syn_physiology_img} image for {region}, {pathway_name}')
+        else:
+          log.debug(f'pathway_syn_physiology: found {syn_physiology_img} image for {region}, {pathway_name}')
 
       synaptome_path = join(synaptome_renders_path, f'{region}_Column', f'{pre_mtype}__{post_mtype}')
 
@@ -114,16 +146,24 @@ def main():
         log.error(f'syn_dir: missing pathway folder for {region}, {pre_mtype}_{post_mtype}')
         missing_synaptomes.append([region, pre_mtype, post_mtype])
         continue
+      else:
+        log.debug(f'syn_dir: found pathway folder for {region}, {pre_mtype}_{post_mtype}')
 
       # checking synaptome 3 renders exist
       if not isfile(join(synaptome_path, f'{pre_mtype}_{post_mtype}.png')):
         log.error(f'syn_pair: missing pair render for {region}, {pre_mtype}_{post_mtype}')
+      else:
+        log.debug(f'syn_pair: found pair render for {region}, {pre_mtype}_{post_mtype}')
 
       if not isfile(join(synaptome_path, f'pre_{pre_mtype}.png')):
         log.error(f'syn_pre: missing synaptome render for {region}, pre-mtype {pre_mtype}')
+      else:
+        log.debug(f'syn_pre: found synaptome render for {region}, pre-mtype {pre_mtype}')
 
       if not isfile(join(synaptome_path, f'post_{post_mtype}.png')):
         log.error(f'syn_post: missing synaptome render for {region}, post-mtype {post_mtype}')
+      else:
+        log.debug(f'syn_post: found synaptome render for {region}, post-mtype {post_mtype}')
 
   log.info(json.dumps(missing_synaptomes))
 
