@@ -52,12 +52,12 @@ function _createSecGeometryFromPoints(pts) {
     const distance = vstart.distanceTo(vend);
     const position = vend.clone().add(vstart).divideScalar(2);
 
-    const dStart = pts[i][3] / 2;
-    const dEnd = pts[i + 1][3] / 2;
+    const rStart = pts[i][3] / 2;
+    const rEnd = pts[i + 1][3] / 2;
 
     const geometry = new CylinderGeometry(
-      dStart,
-      dEnd,
+      Math.max(0.5, rStart),
+      Math.max(0.5, rEnd),
       distance,
       12,
       1,

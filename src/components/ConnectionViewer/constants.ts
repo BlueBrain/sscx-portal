@@ -1,13 +1,19 @@
 export const color = {
-  SOMA:  '#000000',
+  SOMA:  '#AAAAAA',
 
-  PRE_DEND:  '#007FE0',
-  PRE_AXON:  '#85CAFF',
+  // used for legend only
+  PRE_DEND: '#191E53',
+  PRE_AXON: '#606CFF',
+  // used for 3D view only (with additional opacity for dendrite)
+  PRE: '#606CFF',
 
-  POST_DEND:  '#F21B18',
-  POST_AXON:  '#F9A09F',
+  // used for legend only
+  POST_DEND: '#FF9D4F',
+  POST_AXON: '#412A28',
+  // used for 3D view only (with additional opacity for axon)
+  POST: '#FF9D4F',
 
-  SYNAPSE:  '#F5F749',
+  SYNAPSE: '#FFFF00',
 };
 
 export const NeuriteType = {

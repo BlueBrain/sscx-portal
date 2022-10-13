@@ -15,7 +15,7 @@ type HttpDataProps = {
 
 const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
   const msgpackEncoded = path.match(/\.msgpack/);
-  
+
   const [state, setState] = React.useState<{
     data: any;
     loading: boolean;

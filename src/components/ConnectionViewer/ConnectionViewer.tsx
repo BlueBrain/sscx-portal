@@ -29,7 +29,7 @@ const isFullscreenAvailable = document.fullscreenEnabled || document['webkitFull
 const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onReadyStateChange }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [connectionViewer, setConnectionViewer] = useState<ConnectionViewer>(null);
-  const [settingDrawerVisible, setSettingDrawerVisible] = useState(false);
+  const [settingDrawerOpen, setSettingDrawerOpen] = useState(false);
   const fullscreenHandle = useFullScreenHandle();
 
   const [preAxonType, setPreAxonType] = useState<VisibilityType>('full');
@@ -51,7 +51,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
   };
 
   const downloadRender = () => {
-    const imageName = `exemplar_connection_render_${data.pre.mtype}-${data.post.mtype}`;
+    const imageName = `exemplar_connection_render_${data.pre.region}-${data.pre.mtype}-${data.post.mtype}`;
     connectionViewer.downloadRender(imageName);
   };
 
@@ -90,7 +90,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
             <Button
               className={styles.settingBtn}
               size="small"
-              onClick={() => setSettingDrawerVisible(true)}
+              onClick={() => setSettingDrawerOpen(true)}
               icon={<SettingOutlined />}
             />
           </Tooltip>
@@ -122,14 +122,14 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
             placement="left"
             closable={true}
             width={240}
-            onClose={() => setSettingDrawerVisible(false)}
-            visible={settingDrawerVisible}
+            onClose={() => setSettingDrawerOpen(false)}
+            open={settingDrawerOpen}
             getContainer={false}
             style={{ position: 'absolute' }}
           >
             <h3>Neurite visibility</h3>
 
-            <h4>PRE</h4>
+            <h4>Pre-synaptic</h4>
             <div>
               <Checkbox
                 className={styles.coloredCheckbox}
@@ -179,7 +179,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
               />
             </div>
 
-            <h4 className="mt-2">POST</h4>
+            <h4 className="mt-2">Post-synaptic</h4>
             <div>
               <Checkbox
                 className={styles.coloredCheckbox}

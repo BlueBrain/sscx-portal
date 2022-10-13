@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spin } from 'antd';
+import { Spin, Tabs } from 'antd';
 
 import SynapticPathwaysTemplates from '@/templates/SynapticPathways';
 import {
@@ -20,6 +20,7 @@ import MtypeLegend from '@/components/MtypeLegend';
 import ConnectionViewer from '@/components/ConnectionViewer';
 
 import ImageViewer from '@/components/ImageViewer';
+import styles from './synaptic-pathways.module.scss';
 // import SimulationSection from '../../components/SimulationSection';
 
 
@@ -33,8 +34,7 @@ const Plot: React.FC<{ src: string }> = ({ src }) => (
 );
 
 const RecSynPathwaysView = () => {
-  const [connViewerReady, setConnViewerReady] = useState<boolean>(true);
-  // TODO: remove type: 'pathway' support from the Synaptome comp., remove exemplar conn renders
+  const [connViewerReady, setConnViewerReady] = useState<boolean>(false);
 
   return (
     <SynapticPathwaysTemplates
@@ -147,25 +147,37 @@ const RecSynPathwaysView = () => {
             </div>
 
             <h3>Exemplar connection {pathway}</h3>
-            <HttpData path={connectionViewerDataPath(subregion, pathway)}>
-              {(data) => (
-                <div className="mt-3">
-                  <h3>Exemplar connection 3D viewer</h3>
-                  <Spin spinning={!connViewerReady}>
-                    <ConnectionViewer
-                      data={data}
-                      onReadyStateChange={setConnViewerReady}
-                    />
-                  </Spin>
-                </div>
-              )}
-            </HttpData>
-            {/* <Synaptome
-              className="mt-3"
-              type="pathway"
-              region={subregion}
-              pathway={pathway}
-            /> */}
+            <Tabs items={[
+              {
+                label: 'Static render',
+                key: 'staticRender',
+                className: styles.exemplarConnectionContainer,
+                children: (
+                  <Synaptome
+                    type="pathway"
+                    region={subregion}
+                    pathway={pathway}
+                  />
+                ),
+                },
+                {
+                  label: '3D view',
+                  key: '3DView',
+                  className: styles.exemplarConnectionContainer,
+                  children: (
+                    <HttpData path={connectionViewerDataPath(subregion, pathway)}>
+                      {(data, loading) => (
+                        <Spin spinning={loading || !connViewerReady}>
+                          <ConnectionViewer
+                            data={data}
+                            onReadyStateChange={setConnViewerReady}
+                          />
+                        </Spin>
+                      )}
+                    </HttpData>
+                  ),
+                }]}>
+            </Tabs>
           </Collapsible>
 
           <Collapsible

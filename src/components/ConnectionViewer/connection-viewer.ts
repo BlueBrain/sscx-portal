@@ -29,6 +29,7 @@ import {
 import { saveAs } from 'file-saver';
 import { Pool } from '@/services/threads';
 import { color, NeuriteType } from './constants';
+import { ConnectionViewerData } from './types';
 
 
 const FOG_COLOR = 0xffffff;
@@ -36,9 +37,9 @@ const FOG_NEAR = 1;
 const FOG_FAR = 50000;
 
 const AMBIENT_LIGHT_COLOR = 0x555555;
-const CAMERA_LIGHT_COLOR = 0xcacaca;
+const CAMERA_LIGHT_COLOR = 0x888888;
 
-const BACKGROUND_COLOR = 0xfefdfb;
+const BACKGROUND_COLOR = 0x02041b;
 
 const secTypeMap = [
   'soma',
@@ -63,7 +64,7 @@ type MorphologySecData = {
 };
 
 export default class ConnectionViewer {
-  private data: any = null;
+  private data: ConnectionViewerData = null;
 
   private container: HTMLDivElement = null;
   private resizeObserver: ResizeObserver = null;
@@ -235,13 +236,13 @@ export default class ConnectionViewer {
     this.material = {
       SOMA: new MeshLambertMaterial({ color: parseCssColor(color.SOMA) }),
 
-      PRE_DEND: new MeshLambertMaterial({ color: parseCssColor(color.PRE_DEND), side: DoubleSide }),
-      PRE_B_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE_AXON), side: DoubleSide }),
-      PRE_NB_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE_AXON), side: DoubleSide }),
+      PRE_DEND: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide, transparent: true, opacity: 0.25 }),
+      PRE_B_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
+      PRE_NB_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
 
-      POST_B_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST_DEND), side: DoubleSide }),
-      POST_NB_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST_DEND), side: DoubleSide }),
-      POST_AXON: new MeshLambertMaterial({ color: parseCssColor(color.POST_AXON), side: DoubleSide }),
+      POST_B_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
+      POST_NB_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
+      POST_AXON: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide, transparent: true, opacity: 0.25 }),
 
       SYNAPSE: new MeshLambertMaterial({ color: parseCssColor(color.SYNAPSE) }),
     }
@@ -363,7 +364,7 @@ export default class ConnectionViewer {
 
   private createSynMesh() {
     const geometries = this.data.synapses.map(synapse => {
-      const geometry = new SphereGeometry(3.2, 32, 16);
+      const geometry = new SphereGeometry(3.4, 32, 16);
       geometry.translate(...synapse.slice(0, 3));
 
       return geometry;
