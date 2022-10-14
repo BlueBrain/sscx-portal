@@ -54,7 +54,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   }, [src]);
 
   return (
-    <div className={`${classPrefix}basis ${className}`} style={{ aspectRatio }}>
+    <div className={`${classPrefix}basis ${className}`}>
       <img
         key={src}
         src={thumbnailSrc || src}
