@@ -21,11 +21,11 @@ export const color = {
 export const NeuriteType = {
   SOMA: 'soma',
 
-  PRE_NB_DEND: 'pre_nb_dend',
-  PRE_B_AXON: 'pre_b_axon',
-  PRE_NB_AXON: 'pre_nb_axon',
+  PRE_NSP_DEND: 'pre_nsp_dend',
+  PRE_SP_AXON: 'pre_sp_axon',
+  PRE_NSP_AXON: 'pre_nsp_axon',
 
-  POST_B_DEND: 'post_b_dend',
-  POST_NB_DEND: 'post_nb_dend',
-  POST_NB_AXON: 'post_nb_axon',
+  POST_SP_DEND: 'post_sp_dend',
+  POST_NSP_DEND: 'post_nsp_dend',
+  POST_NSP_AXON: 'post_nsp_axon',
 };

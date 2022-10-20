@@ -67,7 +67,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
     }
 
     connectionViewer.init(data).then(() => {
-      connectionViewer.setNeuriteVisibility({ [NeuriteType.POST_NB_AXON]: false });
+      connectionViewer.setNeuriteVisibility({ [NeuriteType.POST_NSP_AXON]: false });
 
       if (onReadyStateChange) {
         onReadyStateChange(true);
@@ -141,7 +141,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
                     ...visibilityCtrlState,
                     preDend: visible,
                   });
-                  updateVisibility({ [NeuriteType.PRE_NB_DEND]: visible });
+                  updateVisibility({ [NeuriteType.PRE_NSP_DEND]: visible });
                 }}
               >
                 Dendrite
@@ -160,8 +160,8 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
                   });
 
                   updateVisibility({
-                    [NeuriteType.PRE_B_AXON]: visible,
-                    [NeuriteType.PRE_NB_AXON]: preAxonType === 'complete' ? visible : false,
+                    [NeuriteType.PRE_SP_AXON]: visible,
+                    [NeuriteType.PRE_NSP_AXON]: preAxonType === 'complete' ? visible : false,
                   });
                 }}
               >
@@ -174,7 +174,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
                 defaultValue={preAxonType}
                 onChange={(preAxonType) => {
                   setPreAxonType(preAxonType as VisibilityType);
-                  updateVisibility({ [NeuriteType.PRE_NB_AXON]: preAxonType === 'complete' });
+                  updateVisibility({ [NeuriteType.PRE_NSP_AXON]: preAxonType === 'complete' });
                 }}
               />
             </div>
@@ -193,8 +193,8 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
                   });
 
                   updateVisibility({
-                    [NeuriteType.POST_B_DEND]: visible,
-                    [NeuriteType.POST_NB_DEND]: postDendType === 'complete' ? visible : false,
+                    [NeuriteType.POST_SP_DEND]: visible,
+                    [NeuriteType.POST_NSP_DEND]: postDendType === 'complete' ? visible : false,
                   });
                 }}
               >
@@ -207,7 +207,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
                 defaultValue={postDendType}
                 onChange={(postDendType) => {
                   setPostDendType(postDendType as VisibilityType);
-                  updateVisibility({ [NeuriteType.POST_NB_DEND]: postDendType === 'complete' });
+                  updateVisibility({ [NeuriteType.POST_NSP_DEND]: postDendType === 'complete' });
                 }}
               />
             </div>
@@ -222,7 +222,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
                     ...visibilityCtrlState,
                     postAxon: visible,
                   });
-                  updateVisibility({ [NeuriteType.POST_NB_AXON]: visible });
+                  updateVisibility({ [NeuriteType.POST_NSP_AXON]: visible });
                 }}
               >
                 Axon

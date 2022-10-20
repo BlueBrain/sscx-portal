@@ -164,7 +164,8 @@ export default class ConnectionViewer {
     Object.values(this.material).forEach(material => material.dispose());
 
     this.synMesh?.geometry.dispose();
-    this.somaMesh?.geometry.dispose();
+    this.preSomaMesh?.geometry.dispose();
+    this.postSomaMesh?.geometry.dispose();
 
     this.renderer.domElement.removeEventListener('wheel', this.onUserInteract);
     this.renderer.domElement.removeEventListener('mousemove', this.onUserInteract);
@@ -237,15 +238,27 @@ export default class ConnectionViewer {
     this.material = {
       PRE_SOMA: new MeshLambertMaterial({ color: parseCssColor(color.PRE_SOMA) }),
 
-      PRE_DEND: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide, transparent: true, opacity: 0.25 }),
-      PRE_B_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
-      PRE_NB_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
+      PRE_DEND: new MeshLambertMaterial({
+        color: parseCssColor(color.PRE),
+        side: DoubleSide,
+        transparent: true,
+        opacity: 0.25
+      }),
+
+      PRE_SP_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
+      PRE_NSP_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
 
       POST_SOMA: new MeshLambertMaterial({ color: parseCssColor(color.POST_SOMA) }),
 
-      POST_B_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
-      POST_NB_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
-      POST_AXON: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide, transparent: true, opacity: 0.25 }),
+      POST_SP_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
+      POST_NSP_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
+
+      POST_AXON: new MeshLambertMaterial({
+        color: parseCssColor(color.POST),
+        side: DoubleSide,
+        transparent: true,
+        opacity: 0.25
+      }),
 
       SYNAPSE: new MeshLambertMaterial({ color: parseCssColor(color.SYNAPSE) }),
     }
@@ -271,11 +284,11 @@ export default class ConnectionViewer {
     const morphSecData = this.morphologySecData;
     sections.forEach((section) => {
       const secTypeStr = secTypeMap[section[0]];
-      const isBaseSec = Boolean(section[1]);
+      const isSynPathSec = Boolean(section[1]);
 
       const ptsFlat = section.slice(-(section.length - 2));
 
-      const secDataKey = `${cellType === CellType.PRE ? 'pre' : 'post'}_${isBaseSec ? 'b' : 'nb'}_${secTypeStr}`;
+      const secDataKey = `${cellType === CellType.PRE ? 'pre' : 'post'}_${isSynPathSec ? 'sp' : 'nsp'}_${secTypeStr}`;
 
       if (!morphSecData[secDataKey]) {
         morphSecData[secDataKey] = [ptsFlat];
@@ -286,10 +299,10 @@ export default class ConnectionViewer {
   }
 
   private createSomaMesh() {
-    const preSomaGeometry = createSomaGeometryFromPoints(chunk(this.morphologySecData.pre_nb_soma[0], 4));
+    const preSomaGeometry = createSomaGeometryFromPoints(chunk(this.morphologySecData.pre_nsp_soma[0], 4));
     this.preSomaMesh = new Mesh(preSomaGeometry, this.material.PRE_SOMA);
 
-    const postSomaGeometry = createSomaGeometryFromPoints(chunk(this.morphologySecData.post_nb_soma[0], 4));
+    const postSomaGeometry = createSomaGeometryFromPoints(chunk(this.morphologySecData.post_nsp_soma[0], 4));
     this.postSomaMesh = new Mesh(postSomaGeometry, this.material.POST_SOMA);
     this.scene.add(this.preSomaMesh);
     this.scene.add(this.postSomaMesh);
@@ -297,70 +310,70 @@ export default class ConnectionViewer {
 
   private createSecMeshes() {
     const preDendGeometryPromise = this.geometryWorkerPool
-      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.pre_nb_dend))
+      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.pre_nsp_dend))
       .then(deserializeBufferGeometry);
 
-    const preBaseAxonGeometryPromise = this.geometryWorkerPool
-      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.pre_b_axon))
+    const preSynPathAxonGeometryPromise = this.geometryWorkerPool
+      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.pre_sp_axon))
       .then(deserializeBufferGeometry);
 
-    const preNonBaseAxonGeometryPromise = this.geometryWorkerPool
-      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.pre_nb_axon))
+    const preNonSynPathAxonGeometryPromise = this.geometryWorkerPool
+      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.pre_nsp_axon))
       .then(deserializeBufferGeometry);
 
-    const postBaseDendGeometryPromise = this.geometryWorkerPool
-      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.post_b_dend))
+    const postSynPathDendGeometryPromise = this.geometryWorkerPool
+      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.post_sp_dend))
       .then(deserializeBufferGeometry);
 
-    const postNonBaseDendGeometryPromise = this.geometryWorkerPool
-      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.post_nb_dend))
+    const postNonSynPathDendGeometryPromise = this.geometryWorkerPool
+      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.post_nsp_dend))
       .then(deserializeBufferGeometry);
 
     const postAxonGeometryPromise = this.geometryWorkerPool
-      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.post_nb_axon))
+      .queue(thread => thread.createNeuriteGeometry(this.morphologySecData.post_nsp_axon))
       .then(deserializeBufferGeometry);
 
     console.time('genMesh');
 
     return Promise.all([
       preDendGeometryPromise,
-      preBaseAxonGeometryPromise,
-      preNonBaseAxonGeometryPromise,
-      postBaseDendGeometryPromise,
-      postNonBaseDendGeometryPromise,
+      preSynPathAxonGeometryPromise,
+      preNonSynPathAxonGeometryPromise,
+      postSynPathDendGeometryPromise,
+      postNonSynPathDendGeometryPromise,
       postAxonGeometryPromise
     ]).then(([
       preDendGeometry,
-      preBaseAxonGeometry,
-      preNonBaseAxonGeometry,
-      postBaseDendGeometry,
-      postNonBaseDendGeometry,
+      preSynPathAxonGeometry,
+      preNonSynPathAxonGeometry,
+      postSynPathDendGeometry,
+      postNonSynPathDendGeometry,
       postAxonGeometry
     ]) => {
       console.timeEnd('genMesh');
 
       const preDendMesh = new Mesh(preDendGeometry, this.material.PRE_DEND);
-      this.secMesh[NeuriteType.PRE_NB_DEND] = preDendMesh;
+      this.secMesh[NeuriteType.PRE_NSP_DEND] = preDendMesh;
       this.scene.add(preDendMesh);
 
-      const preBaseAxonMesh = new Mesh(preBaseAxonGeometry, this.material.PRE_B_AXON);
-      this.secMesh[NeuriteType.PRE_B_AXON] = preBaseAxonMesh;
-      this.scene.add(preBaseAxonMesh);
+      const preSynPathAxonMesh = new Mesh(preSynPathAxonGeometry, this.material.PRE_SP_AXON);
+      this.secMesh[NeuriteType.PRE_SP_AXON] = preSynPathAxonMesh;
+      this.scene.add(preSynPathAxonMesh);
 
-      const preNonBaseAxonMesh = new Mesh(preNonBaseAxonGeometry, this.material.PRE_NB_AXON);
-      this.secMesh[NeuriteType.PRE_NB_AXON] = preNonBaseAxonMesh;
-      this.scene.add(preNonBaseAxonMesh);
+      const preNonSynPathAxonMesh = new Mesh(preNonSynPathAxonGeometry, this.material.PRE_NSP_AXON);
+      this.secMesh[NeuriteType.PRE_NSP_AXON] = preNonSynPathAxonMesh;
+      this.scene.add(preNonSynPathAxonMesh);
 
-      const postBaseDendMesh = new Mesh(postBaseDendGeometry, this.material.POST_B_DEND);
-      this.secMesh[NeuriteType.POST_B_DEND] = postBaseDendMesh;
-      this.scene.add(postBaseDendMesh);
+      const postSynPathDendMesh = new Mesh(postSynPathDendGeometry, this.material.POST_SP_DEND);
+      this.secMesh[NeuriteType.POST_SP_DEND] = postSynPathDendMesh;
+      this.scene.add(postSynPathDendMesh);
 
-      const postNonBaseDendMesh = new Mesh(postNonBaseDendGeometry, this.material.POST_NB_DEND);
-      this.secMesh[NeuriteType.POST_NB_DEND] = postNonBaseDendMesh;
-      this.scene.add(postNonBaseDendMesh);
+      const postNonSynPathDendMesh = new Mesh(postNonSynPathDendGeometry, this.material.POST_NSP_DEND);
+      this.secMesh[NeuriteType.POST_NSP_DEND] = postNonSynPathDendMesh;
+      this.scene.add(postNonSynPathDendMesh);
 
       const postAxonMesh = new Mesh(postAxonGeometry, this.material.POST_AXON);
-      this.secMesh[NeuriteType.POST_NB_AXON] = postAxonMesh;
+      this.secMesh[NeuriteType.POST_NSP_AXON] = postAxonMesh;
       this.scene.add(postAxonMesh);
     });
   }
@@ -412,9 +425,9 @@ export default class ConnectionViewer {
     const camVector = new Vector3().crossVectors(orientationMeanVec, prePostVec);
 
     const dendriteObj3D = new Object3D();
-    dendriteObj3D.add(this.secMesh[NeuriteType.PRE_NB_DEND]);
-    dendriteObj3D.add(this.secMesh[NeuriteType.POST_B_DEND]);
-    dendriteObj3D.add(this.secMesh[NeuriteType.POST_NB_DEND]);
+    dendriteObj3D.add(this.secMesh[NeuriteType.PRE_NSP_DEND]);
+    dendriteObj3D.add(this.secMesh[NeuriteType.POST_SP_DEND]);
+    dendriteObj3D.add(this.secMesh[NeuriteType.POST_NSP_DEND]);
     this.scene.add(dendriteObj3D);
 
     const dendriteBBox = new Box3();
