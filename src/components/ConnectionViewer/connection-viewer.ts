@@ -79,7 +79,8 @@ export default class ConnectionViewer {
   private material: Record<string, Material>;
 
   private secMesh: { [neuriteType: string]: Mesh } = {};
-  private somaMesh: Mesh = null;
+  private preSomaMesh: Mesh = null;
+  private postSomaMesh: Mesh = null;
   private synMesh: Mesh = null;
 
   private geometryWorkerPool: Pool = null;
@@ -234,11 +235,13 @@ export default class ConnectionViewer {
 
   private initMaterials() {
     this.material = {
-      SOMA: new MeshLambertMaterial({ color: parseCssColor(color.SOMA) }),
+      PRE_SOMA: new MeshLambertMaterial({ color: parseCssColor(color.PRE_SOMA) }),
 
       PRE_DEND: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide, transparent: true, opacity: 0.25 }),
       PRE_B_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
       PRE_NB_AXON: new MeshLambertMaterial({ color: parseCssColor(color.PRE), side: DoubleSide }),
+
+      POST_SOMA: new MeshLambertMaterial({ color: parseCssColor(color.POST_SOMA) }),
 
       POST_B_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
       POST_NB_DEND: new MeshLambertMaterial({ color: parseCssColor(color.POST), side: DoubleSide }),
@@ -283,13 +286,13 @@ export default class ConnectionViewer {
   }
 
   private createSomaMesh() {
-    const somaGeometries = this.morphologySecData.pre_nb_soma.concat(this.morphologySecData.post_nb_soma)
-      .map(pts => createSomaGeometryFromPoints(chunk(pts, 4)));
+    const preSomaGeometry = createSomaGeometryFromPoints(chunk(this.morphologySecData.pre_nb_soma[0], 4));
+    this.preSomaMesh = new Mesh(preSomaGeometry, this.material.PRE_SOMA);
 
-    const somaGeometry = mergeBufferGeometries(somaGeometries);
-
-    this.somaMesh = new Mesh(somaGeometry, this.material.SOMA);
-    this.scene.add(this.somaMesh);
+    const postSomaGeometry = createSomaGeometryFromPoints(chunk(this.morphologySecData.post_nb_soma[0], 4));
+    this.postSomaMesh = new Mesh(postSomaGeometry, this.material.POST_SOMA);
+    this.scene.add(this.preSomaMesh);
+    this.scene.add(this.postSomaMesh);
   }
 
   private createSecMeshes() {

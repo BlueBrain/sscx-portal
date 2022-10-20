@@ -18,17 +18,16 @@ const Legend: React.FC = () => {
   return (
     <div className={styles.legend}>
       <div><ColoredBox cssColor={color.PRE_DEND } /> Pre-synaptic dendrite</div>
-      <div><ColoredBox cssColor={color.PRE_AXON} /> Pre-synaptic axon</div>
+      <div><ColoredBox cssColor={color.PRE_AXON} /> Pre-synaptic axon, soma</div>
 
       <div className={styles.legendDivider}></div>
 
-      <div><ColoredBox cssColor={color.POST_DEND} /> Post-synaptic dendrite</div>
+      <div><ColoredBox cssColor={color.POST_DEND} /> Post-synaptic dendrite, soma</div>
       <div><ColoredBox cssColor={color.POST_AXON} /> Post-synaptic axon</div>
 
       <div className={styles.legendDivider}></div>
 
       <div><ColoredBox cssColor={color.SYNAPSE} /> Synapse</div>
-      <div><ColoredBox cssColor={color.SOMA} /> Soma</div>
     </div>
   );
 };

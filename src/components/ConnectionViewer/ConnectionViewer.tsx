@@ -14,7 +14,7 @@ export type ConnectionViewerProps = {
   onReadyStateChange?: (boolean) => void;
 };
 
-type VisibilityType = 'full' | 'synPath';
+type VisibilityType = 'complete' | 'synaptic path';
 
 const defaultVisibilityCtrlState = {
   preDend: true,
@@ -32,8 +32,8 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
   const [settingDrawerOpen, setSettingDrawerOpen] = useState(false);
   const fullscreenHandle = useFullScreenHandle();
 
-  const [preAxonType, setPreAxonType] = useState<VisibilityType>('full');
-  const [postDendType, setPostDendType] = useState<VisibilityType>('full');
+  const [preAxonType, setPreAxonType] = useState<VisibilityType>('complete');
+  const [postDendType, setPostDendType] = useState<VisibilityType>('complete');
 
   const [visibilityCtrlState, setVisibilityCtrlState] = useState(defaultVisibilityCtrlState);
 
@@ -121,7 +121,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
             title="Viewer settings"
             placement="left"
             closable={true}
-            width={240}
+            width={320}
             onClose={() => setSettingDrawerOpen(false)}
             open={settingDrawerOpen}
             getContainer={false}
@@ -144,13 +144,13 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
                   updateVisibility({ [NeuriteType.PRE_NB_DEND]: visible });
                 }}
               >
-                Dend
+                Dendrite
               </Checkbox>
             </div>
             <div className="mt-1">
               <Checkbox
                 className={styles.coloredCheckbox}
-                style={{ '--checkbox-color': color.PRE_AXON } as React.CSSProperties}
+                style={{ '--checkbox-color': color.PRE_AXON, minWidth: '86px' } as React.CSSProperties}
                 defaultChecked={visibilityCtrlState.preAxon}
                 onChange={(e) => {
                   const { checked: visible } = e.target;
@@ -161,7 +161,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
 
                   updateVisibility({
                     [NeuriteType.PRE_B_AXON]: visible,
-                    [NeuriteType.PRE_NB_AXON]: preAxonType === 'full' ? visible : false,
+                    [NeuriteType.PRE_NB_AXON]: preAxonType === 'complete' ? visible : false,
                   });
                 }}
               >
@@ -170,11 +170,11 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
               <Segmented
                 className="ml-1"
                 size="small"
-                options={['full', 'synPath']}
+                options={['complete', 'synaptic path']}
                 defaultValue={preAxonType}
                 onChange={(preAxonType) => {
                   setPreAxonType(preAxonType as VisibilityType);
-                  updateVisibility({ [NeuriteType.PRE_NB_AXON]: preAxonType === 'full' });
+                  updateVisibility({ [NeuriteType.PRE_NB_AXON]: preAxonType === 'complete' });
                 }}
               />
             </div>
@@ -183,7 +183,7 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
             <div>
               <Checkbox
                 className={styles.coloredCheckbox}
-                style={{ '--checkbox-color': color.POST_DEND } as React.CSSProperties}
+                style={{ '--checkbox-color': color.POST_DEND, minWidth: '86px' } as React.CSSProperties}
                 defaultChecked={visibilityCtrlState.postDend}
                 onChange={(e) => {
                   const { checked: visible } = e.target;
@@ -194,20 +194,20 @@ const ConnectionViewerComponent: React.FC<ConnectionViewerProps> = ({ data, onRe
 
                   updateVisibility({
                     [NeuriteType.POST_B_DEND]: visible,
-                    [NeuriteType.POST_NB_DEND]: postDendType === 'full' ? visible : false,
+                    [NeuriteType.POST_NB_DEND]: postDendType === 'complete' ? visible : false,
                   });
                 }}
               >
-                Dend
+                Dendrite
               </Checkbox>
               <Segmented
                 className="ml-1"
                 size="small"
-                options={['full', 'synPath']}
+                options={['complete', 'synaptic path']}
                 defaultValue={postDendType}
                 onChange={(postDendType) => {
                   setPostDendType(postDendType as VisibilityType);
-                  updateVisibility({ [NeuriteType.POST_NB_DEND]: postDendType === 'full' });
+                  updateVisibility({ [NeuriteType.POST_NB_DEND]: postDendType === 'complete' });
                 }}
               />
             </div>

@@ -1,11 +1,13 @@
 export const color = {
-  SOMA:  '#AAAAAA',
+  PRE_SOMA:  '#606CFF',
 
   // used for legend only
   PRE_DEND: '#191E53',
   PRE_AXON: '#606CFF',
   // used for 3D view only (with additional opacity for dendrite)
   PRE: '#606CFF',
+
+  POST_SOMA:  '#FF9D4F',
 
   // used for legend only
   POST_DEND: '#FF9D4F',
