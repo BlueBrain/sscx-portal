@@ -2,13 +2,28 @@ include:
   - project: cs/gitlabci-templates
     file: /build-image-using-kaniko.yml
 
+variables:
+  FF_USE_FASTZIP: 'true'
+  ARTIFACT_COMPRESSION_LEVEL: 'fast'
+  CACHE_COMPRESSION_LEVEL: 'fast'
+  KUBERNETES_MEMORY_REQUEST: 4Gi
+  KUBERNETES_MEMORY_LIMIT: 8Gi
+  KUBERNETES_CPU_REQUEST: 1
+  KUBERNETES_CPU_LIMIT: 4
+
+default:
+  interruptible: true
+
 stages:
   - lint
   - build
 
 cache:
+  key:
+    files:
+      - package-lock.json
   paths:
-  - node_modules/
+    - .npm/
 
 eslint:
   image: node:16-alpine
@@ -38,10 +53,6 @@ build-img-prod:
       --build-arg=NEXT_PUBLIC_SENTRY_DSN
       --build-arg=SENTRY_AUTH_TOKEN
       --build-arg=SITE_URL
-    KUBERNETES_MEMORY_REQUEST: 4Gi
-    KUBERNETES_MEMORY_LIMIT: 8Gi
-    KUBERNETES_CPU_REQUEST: 2
-    KUBERNETES_CPU_LIMIT: 2
   only:
     - develop
 
@@ -69,9 +80,5 @@ build-img-prod:
 #       --build-arg=NEXT_PUBLIC_ENVIRONMENT
 #       --build-arg=NEXT_PUBLIC_NEXUS_TOKEN
 #       --build-arg=SENTRY_AUTH_TOKEN
-#     KUBERNETES_MEMORY_REQUEST: 4Gi
-#     KUBERNETES_MEMORY_LIMIT: 8Gi
-#     KUBERNETES_CPU_REQUEST: 2
-#     KUBERNETES_CPU_LIMIT: 2
 #   only:
 #     - develop
