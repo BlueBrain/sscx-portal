@@ -29,6 +29,9 @@ const nextConfig = {
     path: `${basePath}/_next/image/`,
     minimumCacheTTL: 259200,
   },
+  sentry: {
+    hideSourceMaps: true,
+  },
   output: 'standalone',
   experimental: {
     esmExternals: true,

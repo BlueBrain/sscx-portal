@@ -39,6 +39,7 @@
     "react-full-screen": "^1.1.1",
     "react-image-lightbox": "^5.1.1",
     "react-syntax-highlighter": "^15.4.4",
+    "react-tridi": "^2.1.1",
     "sass": "^1.30.0",
     "sharp": "^0.31.1",
     "smoothscroll-polyfill": "^0.4.4",
