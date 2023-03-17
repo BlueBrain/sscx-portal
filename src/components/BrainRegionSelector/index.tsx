@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Subregion } from '../../types';
-import { subregionTitle } from '../../constants';
+import { basePath } from '@/config';
+import { Subregion } from '@/types';
+import { subregionTitle } from '@/constants';
 
 import styles from './styles.module.scss';
 
@@ -80,7 +81,7 @@ const BrainRegionSelector: React.FC<SubregionSelectProps> = ({
         height="1181"
         width="1181"
         transform="matrix(.3357 0 0 .3357 -93.68 -86.0367)"
-        href="/sscx-portal/assets/images/selectors/subregion-selector-bg.png"
+        href={`${basePath}/assets/images/selectors/subregion-selector-bg.png`}
       />
 
       <g fontSize="7">

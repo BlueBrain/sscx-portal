@@ -147,7 +147,7 @@ const NeuronElectrophysiology: React.FC = () => {
                 <div className={selectorStyle.body} style={{ padding: '0 4rem' }}>
                   <img
                     style={{ width: '100%' }}
-                    src="/sscx-portal/assets/images/selectors/ephys-bg.png"
+                    src={`${basePath}/assets/images/selectors/ephys-bg.png`}
                     alt="Background with neuron morphology example"
                   />
                 </div>

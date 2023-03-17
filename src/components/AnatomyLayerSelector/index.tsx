@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { basePath } from '@/config';
 import { Layer } from '../../types';
 
 import styles from './styles.module.scss';
@@ -55,7 +57,7 @@ const AnatomyLayerSelector: React.FC<AnatomyLayerSelectorProps> = ({
         height="1282"
         width="1207"
         transform="matrix(.24 0 0 .24 -50.0485 -39.622)"
-        href="/sscx-portal/assets/images/selectors/layer-selector-bg.png"
+        href={`${basePath}/assets/images/selectors/layer-selector-bg.png`}
       />
       <g fontSize="12.9532">
         {Object.entries(layerSvgContent).map(([layer, svgContent]) => (

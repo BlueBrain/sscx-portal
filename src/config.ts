@@ -22,8 +22,8 @@ export const sscx = {
   datasetViewId: encodeURIComponent('https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset'),
 };
 
-export const deploymentUrl = 'https://bbp.epfl.ch';
-export const basePath = '/sscx-portal';
+export const deploymentUrl = process.env.NEXT_PUBLIC_DEPLOYMENT_URL || 'https://bbp.epfl.ch';
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/sscx-portal';
 
 export const isProduction = process.env.NODE_ENV === 'production';
 

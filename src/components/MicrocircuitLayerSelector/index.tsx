@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Layer } from '../../types';
+import { basePath } from '@/config';
+import { Layer } from '@/types';
 
 import style from './styles.module.scss';
 
@@ -63,7 +64,7 @@ const MicrocircuitSelector: React.FC<MicrocircuitLayerSelectorProps> = ({
         width="1000"
         height="1639"
         transform="scale(0.155)"
-        href="/sscx-portal/assets/images/selectors/microcircuit-layer-selector-bg.png"
+        href={`${basePath}/assets/images/selectors/microcircuit-layer-selector-bg.png`}
       />
       <g fontSize="11.8561">
         {Object.entries(layerSvgContent).map(([layer, svgContent]) => (
