@@ -10,7 +10,7 @@ const SentryWebpackPluginOptions = {
   silent: true,
 };
 
-const basePath = '/sscx-portal';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/sscx-portal';
 
 const nextConfig = {
   eslint: {
@@ -25,7 +25,6 @@ const nextConfig = {
       'localhost',
       'sscx-portal-static-data',
       'sscx-portal.kcp.bbp.epfl.ch',
-      'sscx-portal-dev.kcp.bbp.epfl.ch'
     ],
     path: `${basePath}/_next/image/`,
     minimumCacheTTL: 259200,
