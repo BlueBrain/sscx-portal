@@ -6,7 +6,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { Popover } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
-import { sscx, basePath } from '../../config';
+import { nexus as nexusConfig, basePath } from '../../config';
 import NexusImage from '../NexusImage';
 import NexusFileDownloadButton from '../NexusFileDownloadButton';
 
@@ -67,8 +67,8 @@ export const useExperimentalTraceTable = (etype, currentTrace) => {
           <div className={styles.traceImageContainer}>
             <NexusImage
               imageUrl={getIdrestImageNexusUrl(trace)}
-              org={sscx.org}
-              project={sscx.project}
+              org={nexusConfig.org}
+              project={nexusConfig.project}
               aspectRatio="4 / 3"
             />
           </div>
@@ -128,8 +128,8 @@ export const useExperimentalTraceTable = (etype, currentTrace) => {
             className={styles.downloadBtn}
             filename={getTraceDistribution(trace).name}
             url={getTraceDistribution(trace).contentUrl}
-            org={sscx.org}
-            project={sscx.project}
+            org={nexusConfig.org}
+            project={nexusConfig.project}
             animate={false}
           />
         );
@@ -145,8 +145,8 @@ export const useExperimentalTraceTable = (etype, currentTrace) => {
             <div className="text-center mb-1">{name}</div>
             <NexusImage
               imageUrl={getIdrestImageNexusUrl(trace)}
-              org={sscx.org}
-              project={sscx.project}
+              org={nexusConfig.org}
+              project={nexusConfig.project}
               aspectRatio="4 / 3"
             />
             <div className={styles.detailsLink}>

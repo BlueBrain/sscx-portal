@@ -2,7 +2,7 @@ import React from 'react';
 import { useNexusContext } from '@bbp/react-nexus';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 
-import { sscx } from '../../config';
+import { nexus as nexusConfig } from '../../config';
 
 
 type ESDataProps = {
@@ -33,9 +33,9 @@ const ESData: React.FC<ESDataProps> = ({
     if (query) {
       setState({ ...state, loading: true });
       nexus.View.elasticSearchQuery(
-        sscx.org,
-        sscx.project,
-        sscx.datasetViewId,
+        nexusConfig.org,
+        nexusConfig.project,
+        nexusConfig.defaultESViewId,
         query,
       )
         .then(data =>

@@ -39,8 +39,6 @@ npm run build
 
 **NEXT_PUBLIC_NEXUS_TOKEN**: The Service Account Token the portal will use to query the data from Nexus. No token by default. SSCx project data will become publicly accessible once the corresponding scientific paper is published, you can generate a token using your account with access to the `public/sscx` Nexus project.
 
-**NEXT_PUBLIC_NEXUS_PLUGIN_BASE_URL**: Base URL where the Nexus plugins are located, defaults to https://bbp.epfl.ch/nexus/plugins
-
 **NEXT_PUBLIC_STATIC_DATA_BASE_URL**: Base URL for SSCx related static data, due to large size of the data we recommend to use proxy, see in [Getting started](#getting-started)
 
 

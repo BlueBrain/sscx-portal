@@ -2,13 +2,13 @@ import React from 'react';
 
 import LayerAnatomyTemplate from '../../templates/LayerAnatomy';
 import { color, sectionTitle } from './config';
-import { layerAnatomyDataQuery } from '../../queries/es';
+import { expDataLayerAnatomyDataPath } from '../../queries/http';
 import Collapsible from '../../components/Collapsible';
 import DataContainer from '../../components/DataContainer';
-import ESData from '../../components/ESData';
 import LayerThickness from '../../components/LayerThickness';
 import NeuralDensity from '../../components/NeuralDensity';
 import LayerAnatomySummary from '../../components/LayerAnatomySummary';
+import HttpData from '@/components/HttpData';
 
 const LayerAnatomyView = () => (
   <LayerAnatomyTemplate
@@ -23,7 +23,7 @@ const LayerAnatomyView = () => (
           { id: 'summarySection', label: 'Summary' },
         ]}
       >
-        <ESData query={layerAnatomyDataQuery}>
+        <HttpData path={expDataLayerAnatomyDataPath()}>
           {data => (
             <>{data && (
               <>
@@ -56,7 +56,7 @@ const LayerAnatomyView = () => (
               </>
             )}</>
           )}
-        </ESData>
+        </HttpData>
       </DataContainer>
     )}
   </LayerAnatomyTemplate>

@@ -4,16 +4,17 @@ import { createNexusClient } from '@bbp/nexus-sdk';
 import { NexusProvider } from '@bbp/react-nexus';
 import smoothscroll from 'smoothscroll-polyfill';
 
+import { registerNexusFetchInterceptor } from '@/services/nexus';
 import { nexus, gtm } from '../config';
-import Feedback from '../components/Feedback';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 
 import '../styles/globals.scss';
 
 
-if (typeof window === 'undefined') {
+if (typeof(window) === 'undefined') {
   require('abort-controller/polyfill');
 } else {
+  registerNexusFetchInterceptor();
   smoothscroll.polyfill();
   require('systemjs/dist/s');
   require('systemjs/dist/extras/amd');
@@ -33,8 +34,6 @@ function App({ Component, pageProps }) {
         </Head>
 
         <Component {...pageProps} />
-
-        <Feedback />
 
         {gtm.id && (
           <GoogleAnalytics />

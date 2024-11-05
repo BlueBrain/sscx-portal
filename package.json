@@ -10,8 +10,7 @@
     "lint": "next lint",
     "build-static-data-proxy": "./scripts/build-static-data-proxy.sh",
     "start-static-data-proxy": "docker run -it --rm -p 8000:8000 sscx-static-data-proxy",
-    "analyze": "ANALYZE=true next build",
-    "postinstall": "patch-package"
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -33,6 +32,7 @@
     "morphoviewer": "^0.1.20",
     "next": "^12.0.10",
     "next-sitemap": "^3.1.11",
+    "node-color-log": "^12.0.1",
     "plyr": "^3.6.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -55,7 +55,6 @@
     "@types/react": "^17.0.0",
     "eslint": "^8.25.0",
     "eslint-config-next": "^12.0.10",
-    "patch-package": "^6.4.7",
     "typescript": "^4.1.3"
   }
 }

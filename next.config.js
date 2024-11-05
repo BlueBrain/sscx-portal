@@ -16,7 +16,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  trailingSlash: true,
   basePath: basePath,
   assetPrefix: `${basePath}/`,
   webpack5: true,

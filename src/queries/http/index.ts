@@ -1,6 +1,29 @@
 
-import { staticDataBaseUrl } from '../../config';
+import { basePath, staticDataBaseUrl } from '../../config';
 
+export const expDataLayerAnatomyDataPath = () => {
+  return `${basePath}/static-nexus-data/views/experimental-data/layer-anatomy/combined-layer-anatomy-data.json`;
+};
+
+export const expDataNeuronMorphologyDataPath = (morphologyName) => {
+  return `${basePath}/static-nexus-data/views/experimental-data/neuron-morphology/by-name/${morphologyName}.json`;
+};
+
+export const expDataNeuronMorphologyListDataPath = (mtype) => {
+  return `${basePath}/static-nexus-data/views/experimental-data/neuron-morphology/by-mtype/${mtype}.json`;
+};
+
+export const expDataAgentsPath = () => {
+  return `${basePath}/static-nexus-data/views/experimental-data/common/agents.json`;
+}
+
+export const fullElectroPhysiologyDataPath = (instance: string) => {
+  return `${basePath}/static-nexus-data/views/experimental-data/neuron-electrophysiology/by-name/${instance}.json`;
+}
+
+export const etypeTracesDataQuery = (etype: string) => {
+  return `${basePath}/static-nexus-data/views/experimental-data/neuron-electrophysiology/by-etype/${etype}.json`;
+}
 
 export const subregionCircuitFactsheetPath = (subregion: string): string => {
   return `${staticDataBaseUrl}/model-data/REGION/${subregion}/Circuit/factsheet.json`;

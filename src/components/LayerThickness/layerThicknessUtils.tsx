@@ -2,7 +2,7 @@ import React from 'react';
 import { ElasticSearchViewQueryResponse } from '@bbp/nexus-sdk';
 import { Layer } from '../../types';
 import NexusImage from '../NexusImage';
-import { sscx } from '../../config';
+import { nexus } from '../../config';
 import SliceRow from './SliceRow';
 import NumberFormat from '../NumberFormat';
 
@@ -53,8 +53,8 @@ export const getData = (layer: Layer, data?: ElasticSearchViewQueryResponse<any>
           <div key={image} className="image-container">
             <NexusImage
               aspectRatio="5 / 4"
-              org={sscx.org}
-              project={sscx.project}
+              org={nexus.org}
+              project={nexus.project}
               imageUrl={image}
             />
           </div>

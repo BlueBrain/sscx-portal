@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNexusContext } from '@bbp/react-nexus';
 import get from 'lodash/get';
 import sortBy from 'lodash/sortBy';
 
-import { sscx } from '../../config';
+import { expDataAgentsPath } from '@/queries/http';
 
 
 function entryToArray(entry) {
@@ -37,8 +36,6 @@ export type MetadataProps = {
 };
 
 const Metadata: React.FC<MetadataProps> = ({ nexusDocument }) => {
-  const nexus = useNexusContext();
-
   const [agents, setAgents] = useState<Record<string, any>[]>(null);
 
   const contributions = entryToArray(nexusDocument.contribution).filter(Boolean);
@@ -55,24 +52,9 @@ const Metadata: React.FC<MetadataProps> = ({ nexusDocument }) => {
   useEffect(() => {
     if (!agentIds.length) return;
 
-    const contributionEsQuery = {
-      from: 0,
-      size: 100,
-      query: {
-        terms: {
-          '_id': agentIds,
-        }
-      }
-    }
-
-    nexus.View
-      // query ElesticSearch endpoint to get agents by their ids
-      .elasticSearchQuery(sscx.org, sscx.project, sscx.datasetViewId, contributionEsQuery)
-      // extract ES documents
-      .then(data => data.hits.hits)
-      // extract Nexus original documents
-      .then(esDocuments => esDocuments.map(esDocument => esDocument._source))
-      // pick only agent ids and labels
+    fetch(expDataAgentsPath())
+      .then(res => res.json())
+      .then(allAgentResources => allAgentResources.filter(agentResource => agentIds.includes(agentResource['@id'])))
       .then(agents => agents.map(agent => ({
         id: agent['@id'],
         name: getAgentName(agent),
