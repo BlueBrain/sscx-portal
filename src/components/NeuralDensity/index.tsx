@@ -11,7 +11,7 @@ import ResponsiveTable from '../ResponsiveTable';
 
 export type LayerThicknessProps = {
   layer?: Layer;
-  data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+  data?: any[];
 };
 
 interface NeuralDensityData {
@@ -21,7 +21,7 @@ interface NeuralDensityData {
 }
 
 const NeuralDensity: React.FC<LayerThicknessProps> = ({ layer, data = [] }) => {
-  const entities = data.map(document => document._source);
+  const entities = data;
   let densityUnit = '';
 
   // @ts-ignore

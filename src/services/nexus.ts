@@ -37,7 +37,7 @@ export function registerNexusFetchInterceptor() {
         ? 'file-meta'
         : 'files';
 
-      const fileUrl = `${basePath}/static-nexus-data/${subDir}/${fileUUID}`;
+      const fileUrl = `${basePath}/static-nexus-data/${subDir}/${fileUUID[0]}/${fileUUID[1]}/${fileUUID}`;
 
       // const nexusBuffer = Buffer.from(await (await originalFetch(url, options)).arrayBuffer());
       // const fileBuffer = Buffer.from(await (await originalFetch(fileUrl)).arrayBuffer());
@@ -64,7 +64,7 @@ export function registerNexusFetchInterceptor() {
 
       const subDir = isIncomingResource ? 'incoming' : 'resources';
 
-      const resourceUrl = `${basePath}/static-nexus-data/${subDir}/${resourceUUID}`;
+      const resourceUrl = `${basePath}/static-nexus-data/${subDir}/${resourceUUID[0]}/${resourceUUID[1]}/${resourceUUID}`;
 
       // const nexusResourceBuffer = Buffer.from(await (await originalFetch(url, options)).arrayBuffer());
       // const localResourceBuffer = Buffer.from(await (await originalFetch(resourceUrl)).arrayBuffer());

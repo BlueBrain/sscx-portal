@@ -154,6 +154,19 @@ export const memodelNumberExceptionsPath = `${staticDataBaseUrl}/memodel-number-
 
 export const memodelIndexPath = `${staticDataBaseUrl}/memodel-index.json`;
 
+export const modelSimTraceByNameDataQuery = (region, memodel) => {
+  return `${basePath}/static-nexus-data/views/digital-reconstructions/neurons/by-name/${region}_${memodel}.json`;
+};
+
+export const modelEphysByNamesDataQuery = async (expTraceNames: string[]) => {
+  const digest = await crypto.subtle.digest('SHA-256', Buffer.from(expTraceNames.join('')));
+  const hexHash = Array.from(new Uint8Array(digest))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+
+  return `${basePath}/static-nexus-data/views/digital-reconstructions/neurons/model-fitting-exp-traces/${hexHash}.json`;
+};
+
 export const memodelMorphologyPath = (morphology: string) => {
   return `${staticDataBaseUrl}/memodel-morphologies-swc/${morphology}.swc`;
 };

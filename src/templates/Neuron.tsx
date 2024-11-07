@@ -42,10 +42,10 @@ import {
   memodelMorphologyPath,
   memodelArchivePath,
 } from '../queries/http';
-import { sscx, basePath } from '../config';
+import { nexus as nexusConfig, basePath } from '../config';
 import { downloadAsJson } from '@/utils';
 import StickyContainer from '../components/StickyContainer';
-import { modelEphysByNamesDataQuery, modelSimTraceByNameDataQuery } from '../queries/es';
+import { modelSimTraceByNameDataQuery, modelEphysByNamesDataQuery } from '../queries/http';
 import { defaultSelection, layers, subregions } from '../constants';
 
 import selectorStyle from '../styles/selector.module.scss';
@@ -213,10 +213,6 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
   const getEphysDistribution = (resource: any) => Array.isArray(resource.distribution)
     ? resource.distribution.find((d: any) => d.name.match(/\.nwb$/i))
     : resource.distribution;
-
-  const modelSimTraceByNameDataQueryObj = useMemo(() => {
-    return modelSimTraceByNameDataQuery(`${region}_${memodel}`);
-  }, [region, memodel]);
 
   return (
     <>
@@ -420,15 +416,15 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                       </HttpDownloadButton>
                     </div>
 
-                    <ESData query={modelSimTraceByNameDataQueryObj}>
-                      {(esDocuments, loading) => (
+                    <HttpData path={modelSimTraceByNameDataQuery(region, memodel)}>
+                      {(simTrace, loading) => (
                         <Spin spinning={loading}>
-                          {esDocuments && esDocuments.length && (
+                          {simTrace && (
                             <div className="mt-3">
                               <h3>ME-model simulation traces</h3>
                               <NexusPlugin
                                 name="neuron-electrophysiology"
-                                resource={esDocuments[0]._source}
+                                resource={simTrace}
                                 nexusClient={nexus}
                               />
                               <div className="row start-xs end-sm mt-2 mb-2">
@@ -445,10 +441,10 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                     How to read NWB files
                                   </Button>
                                   <NexusFileDownloadButton
-                                    filename={getEphysDistribution(esDocuments[0]._source).name}
-                                    url={getEphysDistribution(esDocuments[0]._source).contentUrl}
-                                    org={sscx.org}
-                                    project={sscx.project}
+                                    filename={getEphysDistribution(simTrace).name}
+                                    url={getEphysDistribution(simTrace).contentUrl}
+                                    org={nexusConfig.org}
+                                    project={nexusConfig.project}
                                     id="ephysDownloadBtn"
                                   >
                                     trace
@@ -459,7 +455,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                           )}
                         </Spin>
                       )}
-                    </ESData>
+                    </HttpData>
 
                     <HttpData path={modelExpMorphologiesPath(region, mtype, etype, memodel)}>
                       {(expMorphologies, loading) => (
@@ -565,27 +561,27 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                     </div>
 
                     <h3>Experimental traces used for model fitting</h3>
-                    <ESData query={modelEphysByNamesDataQuery(data[4].value)}>
-                      {(esDocuments, loading) => (
+                    <HttpData path={modelEphysByNamesDataQuery(data[4].value)}>
+                      {(expTraces, loading) => (
                         <Spin spinning={loading}>
-                          {esDocuments && (
-                            <h4 className="mt-1">This model is based on data from {esDocuments.length} cells.</h4>
+                          {expTraces && (
+                            <h4 className="mt-1">This model is based on data from {expTraces.length} cells.</h4>
                           )}
                           <Tabs
-                            id={esDocuments && esDocuments.length ? 'modelFittingEphys' : null}
+                            id={expTraces && expTraces.length ? 'modelFittingEphys' : null}
                             className="mt-3"
                             type="card"
                           >
-                            {esDocuments && sortBy(esDocuments, '_source.name').map(esDocument => (
-                              <TabPane key={esDocument._source.name} tab={esDocument._source.name}>
+                            {expTraces && sortBy(expTraces, '.name').map(expTraces => (
+                              <TabPane key={expTraces.name} tab={expTraces.name}>
                                 <div style={{ minHeight: '600px' }}>
                                   <p className="mt-2 mb-3">
                                     Full experimental instance (with all traces): &nbsp;
                                     <Link
-                                      href={expEphysPageUrl(etype, esDocument._source.name)}
+                                      href={expEphysPageUrl(etype, expTraces.name)}
                                       prefetch={false}
                                     >
-                                      {esDocument._source.name}
+                                      {expTraces.name}
                                     </Link>
                                   </p>
 
@@ -603,10 +599,10 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                                         How to read NWB files
                                       </Button>
                                       <NexusFileDownloadButton
-                                        filename={getEphysDistribution(esDocument._source).name}
-                                        url={getEphysDistribution(esDocument._source).contentUrl}
-                                        org={sscx.org}
-                                        project={sscx.project}
+                                        filename={getEphysDistribution(expTraces).name}
+                                        url={getEphysDistribution(expTraces).contentUrl}
+                                        org={nexusConfig.org}
+                                        project={nexusConfig.project}
                                       >
                                         trace
                                       </NexusFileDownloadButton>
@@ -615,7 +611,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
 
                                   <NexusPlugin
                                     name="neuron-electrophysiology"
-                                    resource={esDocument._source}
+                                    resource={expTraces}
                                     nexusClient={nexus}
                                   />
                                 </div>
@@ -624,7 +620,7 @@ const Neurons: React.FC<NeuronsTemplateProps> = ({
                           </Tabs>
                         </Spin>
                       )}
-                    </ESData>
+                    </HttpData>
                   </>
                 )}
               </Spin>

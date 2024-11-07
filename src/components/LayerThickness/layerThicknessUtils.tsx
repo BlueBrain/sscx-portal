@@ -31,9 +31,7 @@ const getLayerThicknesses = (sliceCollection, rawLayerThicknesses, layer) => (
 );
 
 
-export const getData = (layer: Layer, data?: ElasticSearchViewQueryResponse<any>['hits']['hits']) => {
-  const entities = data.map(document => document._source);
-
+export const getData = (layer: Layer, entities?: any[]) => {
   const rawSliceCollections = entities
     .filter(entity => entity['@type'].toString().includes('SliceCollection'));
 

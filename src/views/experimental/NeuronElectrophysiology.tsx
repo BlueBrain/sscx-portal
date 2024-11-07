@@ -4,7 +4,6 @@ import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col, Button, Spin } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
-import ESData from '../../components/ESData';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
 import DataContainer from '../../components/DataContainer';
 import NexusPlugin from '../../components/NexusPlugin';
