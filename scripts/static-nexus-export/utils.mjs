@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
 
 import logger from 'node-color-log';
 
@@ -39,7 +39,11 @@ export async function save(url, basePath, accept = 'application/json' ) {
   const fileArrayBuffer = await res.arrayBuffer();
 
   const uuid = getUUID(url);
-  const filePath = `${basePath}/${uuid}`;
+
+  const dirPath = `${basePath}/${uuid[0]}/${uuid[1]}`;
+  mkdirSync(dirPath, { recursive: true });
+
+  const filePath = `${dirPath}/${uuid}`;
 
   const buffer = Buffer.from(fileArrayBuffer);
 

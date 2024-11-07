@@ -1,8 +1,7 @@
-
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import logger from 'node-color-log';
 
-import { nexus } from './config.mjs'
+import { nexus, targetBaseDir } from './config.mjs';
 import { ensureArray, save } from './utils.mjs';
 
 export function fullElectroPhysiologyDataQuery(etype, experiment) {
@@ -18,24 +17,22 @@ export function fullElectroPhysiologyDataQuery(etype, experiment) {
         filter: [
           {
             bool: {
-              must: [
-                { term: { '@type': 'Trace' } },
-              ],
+              must: [{ term: { '@type': 'Trace' } }],
             },
           },
           {
             bool: {
               must: {
-                term: { 'name.raw': experiment }
-              }
-            }
+                term: { 'name.raw': experiment },
+              },
+            },
           },
           {
             bool: {
               must_not: {
-                term: { 'note': 'subset' }
-              }
-            }
+                term: { note: 'subset' },
+              },
+            },
           },
           {
             nested: {
@@ -53,8 +50,7 @@ export function fullElectroPhysiologyDataQuery(etype, experiment) {
       },
     },
   };
-};
-
+}
 
 export function etypeTracesDataQuery(cellNames) {
   if (!cellNames) {
@@ -69,24 +65,20 @@ export function etypeTracesDataQuery(cellNames) {
         filter: [
           {
             bool: {
-              must: [
-                { term: { '@type': 'ExperimentalTrace' } },
-              ],
+              must: [{ term: { '@type': 'ExperimentalTrace' } }],
             },
           },
           {
-            "bool": {
-              "must": [
-                { "match": { "note": "All traces" } }
-              ]
-            }
+            bool: {
+              must: [{ match: { note: 'All traces' } }],
+            },
           },
           {
             bool: {
               must: {
-                terms: { 'name.raw': cellNames }
-              }
-            }
+                terms: { 'name.raw': cellNames },
+              },
+            },
           },
           {
             nested: {
@@ -114,23 +106,24 @@ export function etypeTracesDataQuery(cellNames) {
       },
     },
   };
-};
+}
 
-const esEndpointUrl =  `${nexus.url}/views/${nexus.org}/${nexus.project}/${nexus.defaultESViewId}/_search`;
+const esEndpointUrl = `${nexus.url}/views/${nexus.org}/${nexus.project}/${nexus.defaultESViewId}/_search`;
 
-const expEphysData = JSON.parse(readFileSync('../../src/__generated__/experimentalData.json', 'utf-8'));
+const expEphysData = JSON.parse(
+  readFileSync('../../src/__generated__/experimentalData.json', 'utf-8')
+);
 
 const ephysTuples = expEphysData.reduce((acc, etypeEntry) => {
   const etype = etypeEntry.label;
-  const etypeTuples = etypeEntry.experiments.map(experiment => ([etype, experiment.label]));
+  const etypeTuples = etypeEntry.experiments.map((experiment) => [etype, experiment.label]);
 
   return [...acc, ...etypeTuples];
 }, []);
 
 logger.debug(`Found ${ephysTuples.length} ephys`);
 
-
-logger.debug('Fetching ephys resources')
+logger.debug('Fetching ephys resources');
 
 let ephysToProcess = ephysTuples.length + 1;
 
@@ -138,7 +131,10 @@ for (const tuple of ephysTuples) {
   const [etype, cellName] = tuple;
 
   ephysToProcess -= 1;
-  logger.debug(`Fetching ${etype} ${cellName} (${ephysTuples.length - ephysToProcess + 1} out of ${ephysTuples.length})`);
+
+  logger.debug(
+    `Fetching ${etype} ${cellName} (${ephysTuples.length - ephysToProcess + 1} out of ${ephysTuples.length})`
+  );
 
   const query = fullElectroPhysiologyDataQuery(etype, cellName);
 
@@ -173,7 +169,10 @@ for (const tuple of ephysTuples) {
 
   const ephysResource = esRes.hits.hits[0]._source;
 
-  const filePath = `../../public/static-nexus-data/views/experimental-data/neuron-electrophysiology/by-name/${cellName}.json`;
+  const ephysByNameTargetDir = `${targetBaseDir}/views/experimental-data/neuron-electrophysiology/by-name`;
+  mkdirSync(ephysByNameTargetDir, { recursive: true });
+
+  const filePath = `${ephysByNameTargetDir}/${cellName}.json`;
 
   writeFileSync(filePath, JSON.stringify(ephysResource), { encoding: 'utf-8' });
 
@@ -181,60 +180,71 @@ for (const tuple of ephysTuples) {
 
   const resourceIncomingUrl = `${ephysResource._self}/incoming`;
 
-  const incomingBuffer = await save(resourceIncomingUrl, '../../public/static-nexus-data/incoming', 'application/json');
+  const incomingBuffer = await save(
+    resourceIncomingUrl,
+    `${targetBaseDir}/incoming`,
+    'application/json'
+  );
 
   logger.success('  + Saved incoming links');
 
   const incoming = JSON.parse(incomingBuffer.toString('utf-8'));
 
-  const traceWebDataContainerLink = incoming._results
-    .find(link => ensureArray(link['@type']).some(type => type.includes('TraceWebDataContainer')));
+  const traceWebDataContainerLink = incoming._results.find((link) =>
+    ensureArray(link['@type']).some((type) => type.includes('TraceWebDataContainer'))
+  );
 
   if (!traceWebDataContainerLink) {
     logger.error(`  - No TraceWebDataContainer found for ${cellName}`);
   } else {
-    const traceWebDataContainerResourceBuffer = await save(traceWebDataContainerLink._self, '../../public/static-nexus-data/resources', 'application/ld+json');
+    const traceWebDataContainerResourceBuffer = await save(
+      traceWebDataContainerLink._self,
+      `${targetBaseDir}/resources`,
+      'application/ld+json'
+    );
     logger.success('  + Saved TraceWebDataContainer resource');
 
-    const traceWebDataContainerResource = JSON.parse(traceWebDataContainerResourceBuffer.toString('utf-8'));
-    const traceWebDataContainerFileUrl = ensureArray(traceWebDataContainerResource.distribution)[0].contentUrl;
+    const traceWebDataContainerResource = JSON.parse(
+      traceWebDataContainerResourceBuffer.toString('utf-8')
+    );
+    const traceWebDataContainerFileUrl = ensureArray(traceWebDataContainerResource.distribution)[0]
+      .contentUrl;
 
-    await save(traceWebDataContainerFileUrl, '../../public/static-nexus-data/files', '*/*');
+    await save(traceWebDataContainerFileUrl, `${targetBaseDir}/files`, '*/*');
     logger.success('  + Saved TraceWebDataContainer RAB file');
   }
 
   // downloading the ephys files in nwb format
 
-  const distributions = ensureArray(ephysResource.distribution)
-    .filter(d => ['nwb'].includes(d.encodingFormat.toLowerCase().replace('application/', '')));
+  const distributions = ensureArray(ephysResource.distribution).filter((d) =>
+    ['nwb'].includes(d.encodingFormat.toLowerCase().replace('application/', ''))
+  );
 
   for (const distribution of distributions) {
     const fileUrl = distribution.contentUrl;
 
-    await save(fileUrl, '../../public/static-nexus-data/files', '*/*');
+    await save(fileUrl, `${targetBaseDir}/files`, '*/*');
   }
 
   for (const image of ensureArray(ephysResource.image)) {
     const id = image['@id'];
 
-    const fileUrl =  `${nexus.url}/files/${nexus.org}/${nexus.project}/${encodeURIComponent(id)}`;
-    await save(fileUrl, '../../public/static-nexus-data/files', '*/*');
+    const fileUrl = `${nexus.url}/files/${nexus.org}/${nexus.project}/${encodeURIComponent(id)}`;
+    await save(fileUrl, `${targetBaseDir}/files`, '*/*');
 
-    const fileMetaUrl =  `${nexus.url}/files/${nexus.org}/${nexus.project}/${encodeURIComponent(id)}`;
-    await save(fileMetaUrl, '../../public/static-nexus-data/file-meta', 'application/ld+json');
+    const fileMetaUrl = `${nexus.url}/files/${nexus.org}/${nexus.project}/${encodeURIComponent(id)}`;
+    await save(fileMetaUrl, `${targetBaseDir}/file-meta`, 'application/ld+json');
 
-    const fileResourceUrl =  `${nexus.url}/resources/${nexus.org}/${nexus.project}/_/${encodeURIComponent(id)}`;
-    await save(fileResourceUrl, '../../public/static-nexus-data/resources', 'application/ld+json');
+    const fileResourceUrl = `${nexus.url}/resources/${nexus.org}/${nexus.project}/_/${encodeURIComponent(id)}`;
+    await save(fileResourceUrl, `${targetBaseDir}/resources`, 'application/ld+json');
 
     logger.success(`  + Saved trace image ${id}`);
   }
 
   logger.success(`Saved metadata, ephys files and trace images for ${etype} ${cellName}`);
-};
+}
 
-
-
-logger.debug('Fetching ephys resources per etype')
+logger.debug('Fetching ephys resources per etype');
 
 const etypes = Array.from(new Set(ephysTuples.map(([etype]) => etype))).sort();
 
@@ -243,7 +253,9 @@ logger.debug(`Found ${etypes.length} etypes`);
 logger.debug(etypes);
 
 for (const etype of etypes) {
-  const cellNames = ephysTuples.filter(([tupleEtype]) => tupleEtype === etype).map(([_, cellName]) => cellName);
+  const cellNames = ephysTuples
+    .filter(([tupleEtype]) => tupleEtype === etype)
+    .map(([_, cellName]) => cellName);
 
   const query = etypeTracesDataQuery(cellNames);
 
@@ -274,21 +286,30 @@ for (const etype of etypes) {
   const indexFileEphysCount = ephysTuples.filter(([tupleEtype]) => tupleEtype === etype).length;
 
   if (esRes.hits.total.value !== indexFileEphysCount) {
-    logger.warn(`Number of ephys in Nexus does not match number of ephys in index file for ${etype}: ${esRes.hits.total.value} vs ${indexFileEphysCount}`);
+    logger.warn(
+      `Number of ephys in Nexus does not match number of ephys in index file for ${etype}: ${esRes.hits.total.value} vs ${indexFileEphysCount}`
+    );
 
-    const indexedCellNames = new Set(ephysTuples.filter(([tupleEtype]) => tupleEtype === etype).map(([_, cellName]) => cellName));
-    const nexusCellNames = new Set(esRes.hits.hits.map(hit => hit._source.name));
+    const indexedCellNames = new Set(
+      ephysTuples.filter(([tupleEtype]) => tupleEtype === etype).map(([_, cellName]) => cellName)
+    );
+    const nexusCellNames = new Set(esRes.hits.hits.map((hit) => hit._source.name));
 
     // missing ephys in nexus
-    const missingCellNames = Array.from(indexedCellNames).filter(cellName => !nexusCellNames.has(cellName)).sort();
+    const missingCellNames = Array.from(indexedCellNames)
+      .filter((cellName) => !nexusCellNames.has(cellName))
+      .sort();
     logger.error(`Missing ephys in Nexus: ${missingCellNames.join(', ')}`);
 
     continue;
   }
 
-  const ephys = esRes.hits.hits.map(hit => hit._source);
+  const ephys = esRes.hits.hits.map((hit) => hit._source);
 
-  const filePath = `../../public/static-nexus-data/views/experimental-data/neuron-electrophysiology/by-etype/${etype}.json`;
+  const ephysByEtypeTargetDir = `${targetBaseDir}/views/experimental-data/neuron-electrophysiology/by-etype`;
+  mkdirSync(ephysByEtypeTargetDir, { recursive: true });
+
+  const filePath = `${ephysByEtypeTargetDir}/${etype}.json`;
 
   writeFileSync(filePath, JSON.stringify(ephys), { encoding: 'utf-8' });
 

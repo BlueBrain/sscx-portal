@@ -1,9 +1,8 @@
-
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import logger from 'node-color-log';
 
-import { nexus } from './config.mjs'
-import { ensureArray } from './utils.mjs';
+import { nexus, targetBaseDir } from './config.mjs';
+import { ensureArray, save } from './utils.mjs';
 
 function agentsDataQuery() {
   return {
@@ -12,8 +11,8 @@ function agentsDataQuery() {
     query: {
       term: {
         '@type': 'Agent',
-      }
-    }
+      },
+    },
   };
 }
 
@@ -33,7 +32,7 @@ function mtypeMorphologyListDataQuery(mtype) {
               should: [
                 {
                   term: {
-                    '_deprecated': false,
+                    _deprecated: false,
                   },
                 },
               ],
@@ -70,10 +69,10 @@ function mtypeMorphologyListDataQuery(mtype) {
       },
     },
   };
-};
+}
 
-function morphologyDataQuery (mtype, instance) {
-  if(!mtype || !instance) {
+function morphologyDataQuery(mtype, instance) {
+  if (!mtype || !instance) {
     throw new Error('mtype and instance are required');
   }
 
@@ -88,7 +87,7 @@ function morphologyDataQuery (mtype, instance) {
               should: [
                 {
                   term: {
-                    '_deprecated': false,
+                    _deprecated: false,
                   },
                 },
               ],
@@ -120,11 +119,13 @@ function morphologyDataQuery (mtype, instance) {
       },
     },
   };
-};
+}
 
-const esEndpointUrl =  `${nexus.url}/views/${nexus.org}/${nexus.project}/${nexus.defaultESViewId}/_search`;
+const esEndpointUrl = `${nexus.url}/views/${nexus.org}/${nexus.project}/${nexus.defaultESViewId}/_search`;
 
-const expMorphologyData = JSON.parse(readFileSync('../../src/__generated__/exp-morphology-data.json', 'utf-8'));
+const expMorphologyData = JSON.parse(
+  readFileSync('../../src/__generated__/exp-morphology-data.json', 'utf-8')
+);
 
 const morphologyTriples = Object.entries(expMorphologyData).reduce((layerAcc, layerEntry) => {
   const [layer, layerObj] = layerEntry;
@@ -132,7 +133,7 @@ const morphologyTriples = Object.entries(expMorphologyData).reduce((layerAcc, la
   const layerTriples = Object.entries(layerObj).reduce((layerAcc, mtypeEntry) => {
     const [mtype, morphNames] = mtypeEntry;
 
-    return [...layerAcc, ...morphNames.map(morphName => ([layer, mtype, morphName]))]
+    return [...layerAcc, ...morphNames.map((morphName) => [layer, mtype, morphName])];
   }, []);
 
   return [...layerAcc, ...layerTriples];
@@ -140,9 +141,7 @@ const morphologyTriples = Object.entries(expMorphologyData).reduce((layerAcc, la
 
 logger.debug(`Found ${morphologyTriples.length} morphologies`);
 
-
-
-logger.debug('Fetching agent resources')
+logger.debug('Fetching agent resources');
 
 const agentsQuery = agentsDataQuery();
 const agentsRes = await fetch(esEndpointUrl, {
@@ -163,14 +162,16 @@ if (!agentsRes.ok || agentsRes.status !== 200) {
 }
 
 const agentsEsRes = await agentsRes.json();
-const agents = agentsEsRes.hits.hits.map(hit => hit._source);
-const agentsFilePath = `../../public/static-nexus-data/views/experimental-data/common/agents.json`;
+const agents = agentsEsRes.hits.hits.map((hit) => hit._source);
+
+const agentsTargetDir = `${targetBaseDir}/views/experimental-data/common`;
+mkdirSync(agentsTargetDir, { recursive: true });
+
+const agentsFilePath = `${agentsTargetDir}/agents.json`;
 writeFileSync(agentsFilePath, JSON.stringify(agents));
 logger.success(`Saved agents.json with ${agents.length} entries`);
 
-
-
-logger.debug('Fetching morphology resources')
+logger.debug('Fetching morphology resources');
 
 for (const triple of morphologyTriples) {
   const [layer, mtype, morphologyName] = triple;
@@ -208,49 +209,29 @@ for (const triple of morphologyTriples) {
 
   const morphologyResource = esRes.hits.hits[0]._source;
 
-  const filePath = `../../public/static-nexus-data/views/experimental-data/neuron-morphology/by-name/${morphologyName}.json`;
+  const morphByNameTargetDir = `${targetBaseDir}/views/experimental-data/neuron-morphology/by-name`;
+  mkdirSync(morphByNameTargetDir, { recursive: true });
+
+  const filePath = `${morphByNameTargetDir}/${morphologyName}.json`;
 
   writeFileSync(filePath, JSON.stringify(morphologyResource), { encoding: 'utf-8' });
 
   // downloading the morphology files in SWC and ASC formats
 
-  const distributions = ensureArray(morphologyResource.distribution)
-    .filter(d => ['asc', 'swc'].includes(d.encodingFormat.toLowerCase().replace('application/', '')));
+  const distributions = ensureArray(morphologyResource.distribution).filter((d) =>
+    ['asc', 'swc'].includes(d.encodingFormat.toLowerCase().replace('application/', ''))
+  );
 
   for (const distribution of distributions) {
     const fileUrl = distribution.contentUrl;
 
-    const fileRes = await fetch(fileUrl, {
-      headers: {
-        Authorization: `Bearer ${nexus.accessToken}`,
-      },
-    });
-
-    if (!fileRes.ok || fileRes.status !== 200) {
-      const resBody = await fileRes.text();
-
-      logger.error(`Failed to fetch ${distribution} morphology file for ${mtype} ${morphologyName}`);
-      logger.error(resBody);
-      continue;
-    }
-
-    const fileArrayBuffer = await fileRes.arrayBuffer();
-
-    const fileUrlObj = new URL(fileUrl);
-    const fileId = fileUrlObj.pathname.split('/').at(-1);
-    const fileUUID = decodeURIComponent(fileId).split('/').at(-1);
-
-    const filePath = `../../public/static-nexus-data/files/${fileUUID}`;
-
-    writeFileSync(filePath, Buffer.from(fileArrayBuffer));
+    await save(fileUrl, `${targetBaseDir}/files`, '*/*');
   }
 
   logger.success(`Saved metadata and morphology files for ${mtype} ${morphologyName}`);
-};
+}
 
-
-
-logger.debug('Fetching morphology resources per mtype')
+logger.debug('Fetching morphology resources per mtype');
 
 const mtypes = Array.from(new Set(morphologyTriples.map(([layer, mtype]) => mtype))).sort();
 
@@ -283,16 +264,23 @@ for (const mtype of mtypes) {
     continue;
   }
 
-  const indexFileMorphCount = morphologyTriples.filter(([layer, tripleMtype]) => tripleMtype === mtype).length;
+  const indexFileMorphCount = morphologyTriples.filter(
+    ([layer, tripleMtype]) => tripleMtype === mtype
+  ).length;
 
   if (esRes.hits.total.value !== indexFileMorphCount) {
-    logger.warn(`Number of morphologies in Nexus does not match number of morphologies in index file: ${esRes.hits.total.value} vs ${indexFileMorphCount}`);
+    logger.warn(
+      `Number of morphologies in Nexus does not match number of morphologies in index file: ${esRes.hits.total.value} vs ${indexFileMorphCount}`
+    );
     continue;
   }
 
-  const morphologies = esRes.hits.hits.map(hit => hit._source);
+  const morphologies = esRes.hits.hits.map((hit) => hit._source);
 
-  const filePath = `../../public/static-nexus-data/views/experimental-data/neuron-morphology/by-mtype/${mtype}.json`;
+  const morphsByMtypeTargetDir = `${targetBaseDir}/views/experimental-data/neuron-morphology/by-mtype`;
+  mkdirSync(morphsByMtypeTargetDir, { recursive: true });
+
+  const filePath = `${morphsByMtypeTargetDir}/${mtype}.json`;
 
   writeFileSync(filePath, JSON.stringify(morphologies), { encoding: 'utf-8' });
 
