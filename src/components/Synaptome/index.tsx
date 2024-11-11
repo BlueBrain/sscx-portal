@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import range from 'lodash/range';
-import { captureException } from '@sentry/nextjs';
 
-import { imgOpt } from '../../utils';
 import ImageViewer from '../ImageViewer';
 import { staticDataBaseUrl } from '../../config';
 
@@ -77,7 +75,6 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
     fetch(mtypeSynaptomeLayersUrl)
       .then(res => res.json())
       .then(layers => setMtypeSynaptomeLayers(layers))
-      .catch(captureException);
   }, [type, region, pathway, mtypeSynaptomeBaseUrl]);
 
   if (type === 'pathway') {

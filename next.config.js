@@ -1,14 +1,6 @@
-const { withSentryConfig } = require('@sentry/nextjs');
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/
-
 const withBundleAnalyzer = require('@next/bundle-analyzer') ({
   enabled: process.env.ANALYZE === 'true',
 })
-
-
-const SentryWebpackPluginOptions = {
-  silent: true,
-};
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/sscx-portal';
 
@@ -27,9 +19,6 @@ const nextConfig = {
     ],
     path: `${basePath}/_next/image/`,
     minimumCacheTTL: 259200,
-  },
-  sentry: {
-    hideSourceMaps: true,
   },
   output: 'standalone',
   experimental: {
@@ -76,4 +65,4 @@ const nextConfig = {
 };
 
 
-module.exports = withBundleAnalyzer(withSentryConfig(nextConfig, SentryWebpackPluginOptions));
+module.exports = withBundleAnalyzer(nextConfig);

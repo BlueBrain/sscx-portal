@@ -1,5 +1,4 @@
 import React from 'react';
-import { captureException } from '@sentry/nextjs';
 import { decodeAsync } from '@msgpack/msgpack';
 
 
@@ -44,7 +43,6 @@ const HttpData: React.FC<HttpDataProps> = ({ path, children, label = '' }) => {
         }
 
         const err = new Error(`Can't fetch ${path}`);
-        captureException(err);
         return Promise.reject(err);
       })
       .then(data => setState({ ...state, data, error: null, loading: false }))

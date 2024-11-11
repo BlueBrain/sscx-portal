@@ -1,6 +1,5 @@
 import React from 'react';
 import { NexusClient, Resource } from '@bbp/nexus-sdk';
-import { captureException } from '@sentry/nextjs';
 import { Result } from 'antd';
 
 import { basePath } from '../../config';
@@ -73,13 +72,11 @@ export class NexusPlugin extends React.Component<
         },
       )
       .catch((error: Error) => {
-        captureException(error);
         this.setState({ error, loading: false });
       });
   }
 
   componentDidCatch(error: Error) {
-    captureException(error);
     this.setState({ error, loading: false });
   }
 
