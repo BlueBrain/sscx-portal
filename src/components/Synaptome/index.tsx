@@ -130,7 +130,7 @@ const Synaptome: React.FC<SynaptomeProps> = ({ type, region, pathway, className 
       <ImageViewer
         className="mt-3"
         src={`${synaptomeBaseUrl}/${type === 'pre' ? preMtype : postMtype}.png`}
-        thumbnailSrc={imgOpt(`${synaptomeBaseUrl}/${type === 'pre' ? preMtype : postMtype}.png`, { width: 1200 })}
+        thumbnailSrc={`${synaptomeBaseUrl}/${type === 'pre' ? preMtype : postMtype}.png`}
         aspectRatio='16 / 9'
       />
       <small>* For m-type color-coding see the <a href="#mtypeLegend">M-type legend</a></small>
