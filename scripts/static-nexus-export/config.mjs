@@ -7,4 +7,4 @@ export const nexus = {
   defaultESViewId: encodeURIComponent('https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset'),
 };
 
-export const targetBaseDir = '../../public/static-nexus-data';
+export const targetBaseDir = '../../public/nexus';

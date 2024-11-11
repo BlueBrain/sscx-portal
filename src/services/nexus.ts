@@ -1,4 +1,4 @@
-import { nexus, basePath } from '@/config';
+import { nexus, basePath, staticDataBaseUrl } from '@/config';
 
 const originalFetch = typeof window !== 'undefined' ? window.fetch : undefined;
 
@@ -37,7 +37,7 @@ export function registerNexusFetchInterceptor() {
         ? 'file-meta'
         : 'files';
 
-      const fileUrl = `${basePath}/static-nexus-data/${subDir}/${fileUUID[0]}/${fileUUID[1]}/${fileUUID}`;
+      const fileUrl = `${staticDataBaseUrl}/nexus/${subDir}/${fileUUID[0]}/${fileUUID[1]}/${fileUUID}`;
 
       // const nexusBuffer = Buffer.from(await (await originalFetch(url, options)).arrayBuffer());
       // const fileBuffer = Buffer.from(await (await originalFetch(fileUrl)).arrayBuffer());
@@ -64,7 +64,7 @@ export function registerNexusFetchInterceptor() {
 
       const subDir = isIncomingResource ? 'incoming' : 'resources';
 
-      const resourceUrl = `${basePath}/static-nexus-data/${subDir}/${resourceUUID[0]}/${resourceUUID[1]}/${resourceUUID}`;
+      const resourceUrl = `${staticDataBaseUrl}/nexus/${subDir}/${resourceUUID[0]}/${resourceUUID[1]}/${resourceUUID}`;
 
       // const nexusResourceBuffer = Buffer.from(await (await originalFetch(url, options)).arrayBuffer());
       // const localResourceBuffer = Buffer.from(await (await originalFetch(resourceUrl)).arrayBuffer());

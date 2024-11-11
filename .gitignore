@@ -36,5 +36,5 @@ yarn-error.log*
 /tmp
 
 public/sitemap.xml
-public/static-nexus-data
+public/nexus
 
