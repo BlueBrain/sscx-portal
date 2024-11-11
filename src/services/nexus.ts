@@ -1,4 +1,4 @@
-import { nexus, basePath, staticDataBaseUrl } from '@/config';
+import { nexus, staticDataBaseUrl } from '@/config';
 
 const originalFetch = typeof window !== 'undefined' ? window.fetch : undefined;
 
@@ -39,18 +39,6 @@ export function registerNexusFetchInterceptor() {
 
       const fileUrl = `${staticDataBaseUrl}/nexus/${subDir}/${fileUUID[0]}/${fileUUID[1]}/${fileUUID}`;
 
-      // const nexusBuffer = Buffer.from(await (await originalFetch(url, options)).arrayBuffer());
-      // const fileBuffer = Buffer.from(await (await originalFetch(fileUrl)).arrayBuffer());
-
-      // if (Buffer.compare(nexusBuffer, fileBuffer) !== 0) {
-      //   console.log('Nexus buffer is not equal to file buffer');
-      //   console.log(options?.headers);
-      //   console.log('Nexus url:', url);
-      //   console.log('File url:', fileUrl);
-
-      //   return originalFetch(url, options);
-      // }
-
       return originalFetch(fileUrl);
     }
 
@@ -65,18 +53,6 @@ export function registerNexusFetchInterceptor() {
       const subDir = isIncomingResource ? 'incoming' : 'resources';
 
       const resourceUrl = `${staticDataBaseUrl}/nexus/${subDir}/${resourceUUID[0]}/${resourceUUID[1]}/${resourceUUID}`;
-
-      // const nexusResourceBuffer = Buffer.from(await (await originalFetch(url, options)).arrayBuffer());
-      // const localResourceBuffer = Buffer.from(await (await originalFetch(resourceUrl)).arrayBuffer());
-
-      // if (Buffer.compare(nexusResourceBuffer, localResourceBuffer) !== 0) {
-      //   console.log('Nexus buffer is not equal to resource buffer');
-      //   console.log(options?.headers);
-      //   console.log('Nexus url:', url);
-      //   console.log('Resource url:', resourceUrl);
-
-      //   return originalFetch(url, options);
-      // }
 
       return originalFetch(resourceUrl, options);
     }
