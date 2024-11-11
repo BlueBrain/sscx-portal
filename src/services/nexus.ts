@@ -15,14 +15,9 @@ export function registerNexusFetchInterceptor() {
     // POST requests (ES queries).
 
     if (options?.method === 'POST') {
-      const urlObj = new URL(url);
-
-      // TODO: implementation of the following is not complete
-
-      // const query = JSON.parse(options.body);
+      // There should not be any ES queries left.
 
       return originalFetch(url, options);
-
     }
 
     // The rest are GET requests
