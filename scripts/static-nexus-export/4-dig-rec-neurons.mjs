@@ -195,9 +195,9 @@ for (const modelTriple of modelTriples) {
 
   modelSetsToProcess -= 1;
 
-  if ((modelTriples.length - modelSetsToProcess + 1) < 260) {
-    continue
-  }
+  // if ((modelTriples.length - modelSetsToProcess + 1) < 1206) {
+  //   continue
+  // }
 
   logger.debug(
     `Fetching ${region} ${mtype} ${etype} (${modelTriples.length - modelSetsToProcess + 1} out of ${modelTriples.length})`
