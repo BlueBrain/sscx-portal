@@ -37,4 +37,4 @@ yarn-error.log*
 
 public/sitemap.xml
 public/nexus
-
+/static-build
