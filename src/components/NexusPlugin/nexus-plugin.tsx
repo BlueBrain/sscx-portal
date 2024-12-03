@@ -9,7 +9,6 @@ const PluginError: React.FC = () => (
   <Result
     status="warning"
     title="Plugin failed to render"
-    subTitle="This issue has been reported to devolopers"
   />
 );
 
