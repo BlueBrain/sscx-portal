@@ -35,8 +35,6 @@ export const nexus = {
 export const staticDataBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_BASE_URL;
 export const staticDataClusterBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_CLUSTER_BASE_URL || staticDataBaseUrl;
 
-export const feedbackUrl = process.env.NEXT_PUBLIC_FEEDBACK_URL;
-
 export const gtm = {
   id: process.env.NEXT_PUBLIC_GTM_ID,
 };
