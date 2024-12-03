@@ -1,16 +1,14 @@
 import React from 'react';
 import { NexusClient, Resource } from '@bbp/nexus-sdk';
-import { captureException } from '@sentry/nextjs';
 import { Result } from 'antd';
 
-import { nexusPluginBaseUrl } from '../../config';
+import { basePath } from '../../config';
 
 
 const PluginError: React.FC = () => (
   <Result
     status="warning"
     title="Plugin failed to render"
-    subTitle="This issue has been reported to devolopers"
   />
 );
 
@@ -41,11 +39,11 @@ export class NexusPlugin extends React.Component<
   async loadExternalPlugin() {
     if (!this.container.current) return;
 
-    const pluginManifest = await fetch(`${nexusPluginBaseUrl}/manifest.json`)
+    const pluginManifest = await fetch(`${basePath}/plugins/manifest.json`)
       .then(res => res.json());
 
     const { modulePath } = pluginManifest[this.props.name];
-    const moduleUrl = `${nexusPluginBaseUrl}/${modulePath}`;
+    const moduleUrl = `${basePath}/plugins/${modulePath}`;
 
     // @ts-ignore
     window.System.import(moduleUrl)
@@ -73,13 +71,11 @@ export class NexusPlugin extends React.Component<
         },
       )
       .catch((error: Error) => {
-        captureException(error);
         this.setState({ error, loading: false });
       });
   }
 
   componentDidCatch(error: Error) {
-    captureException(error);
     this.setState({ error, loading: false });
   }
 

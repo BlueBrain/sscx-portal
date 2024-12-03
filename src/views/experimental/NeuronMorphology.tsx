@@ -1,17 +1,15 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col, Spin } from 'antd';
 
-import ESData from '../../components/ESData';
 import HttpData from '../../components/HttpData';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
 import DataContainer from '../../components/DataContainer';
 import QuickSelector from '../../components/QuickSelector';
 import LayerSelector from '../../components/AnatomyLayerSelector';
 import ExpMorphDistribution from '../../components/ExpMorphDistribution';
-import { morphologyDataQuery, mtypeExpMorphologyListDataQuery } from '../../queries/es';
-import { expMorphologyFactsheetPath, expMorphMemodelsPath, expMorphPopulationFactesheetPath } from '../../queries/http';
+import { expMorphologyFactsheetPath, expMorphMemodelsPath, expMorphPopulationFactesheetPath, expDataNeuronMorphologyDataPath, expDataNeuronMorphologyListDataPath } from '../../queries/http';
 
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
@@ -28,7 +26,7 @@ import ExpMorphologyTable from '../../components/ExpMorphologyTable';
 import Metadata from '../../components/Metadata';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
 import StickyContainer from '../../components/StickyContainer';
-import { sscx } from '../../config';
+import { nexus as nexusConfig } from '../../config';
 import { defaultSelection, layers } from '../../constants';
 
 import selectorStyle from '../../styles/selector.module.scss';
@@ -110,14 +108,6 @@ const NeuronExperimentalMorphology: React.FC = () => {
   };
   const currentInstance: string = instance as string;
 
-  const morphologyDataQueryObj = useMemo(() => {
-    return morphologyDataQuery(currentMtype, currentInstance);
-  }, [currentMtype, currentInstance]);
-
-  const mtypeExpMorphologyListDataQueryObj = useMemo(() => {
-    return mtypeExpMorphologyListDataQuery(currentMtype);
-  }, [currentMtype])
-
   useEffect(() => {
     if (!router.isReady) return;
 
@@ -134,9 +124,8 @@ const NeuronExperimentalMorphology: React.FC = () => {
     morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i))
   );
 
-  const getAndSortMorphologies = (esDocuments) => (
-    esDocuments
-      .map(esDocument => esDocument._source)
+  const sortMorphologyResources = (morphResource) => (
+    morphResource
       .sort((m1, m2) => ((m1.name > m2.name) ? 1 : -1))
   );
 
@@ -260,30 +249,28 @@ const NeuronExperimentalMorphology: React.FC = () => {
             and reconstructed using Neurolucida (neuron tracing, reconstruction, and analysis software).
             Data for neuronal morphologies are provided as ASCII files.
           </p>
-          <ESData
-            query={morphologyDataQueryObj}
-          >
-            {(esDocuments, loading) => (
+          <HttpData path={expDataNeuronMorphologyDataPath(currentInstance)}>
+            {(morphologyResource, loading) => (
               <>
-                {!!esDocuments && !!esDocuments.length && (
+                {!!morphologyResource && (
                   <div>
-                    <Metadata nexusDocument={esDocuments[0]._source} />
+                    <Metadata nexusDocument={morphologyResource} />
                     <h3 className="mt-3">3D view</h3>
                     <Spin spinning={loading} className="mt-2">
                       <div style={{ minHeight: '400px'}}>
                         <NexusPlugin
                           name="neuron-morphology"
-                          resource={esDocuments[0]._source}
+                          resource={morphologyResource}
                           nexusClient={nexus}
                         />
                       </div>
                     </Spin>
                     <div className="text-right mt-2">
                       <NexusFileDownloadButton
-                        filename={getMorphologyDistribution(esDocuments[0]._source).name}
-                        url={getMorphologyDistribution(esDocuments[0]._source).contentUrl}
-                        org={sscx.org}
-                        project={sscx.project}
+                        filename={getMorphologyDistribution(morphologyResource).name}
+                        url={getMorphologyDistribution(morphologyResource).contentUrl}
+                        org={nexusConfig.org}
+                        project={nexusConfig.project}
                         id="morphologyDownloadBtn"
                       >
                         morphology
@@ -293,7 +280,7 @@ const NeuronExperimentalMorphology: React.FC = () => {
                 )}
               </>
             )}
-          </ESData>
+          </HttpData>
 
           <HttpData path={expMorphologyFactsheetPath(currentInstance)} label="morphometrics">
             {(factsheetData, loading) => (
@@ -369,20 +356,20 @@ const NeuronExperimentalMorphology: React.FC = () => {
           <ExpMorphDistribution className="mt-3" mtype={currentMtype} />
 
           <h3 className="mt-3">Reconstructed morphologies</h3>
-          <ESData query={mtypeExpMorphologyListDataQueryObj}>
-            {(esDocuments, loading) => (
+          <HttpData path={expDataNeuronMorphologyListDataPath(currentMtype)}>
+            {(morphologyResources, loading) => (
               <Spin spinning={loading}>
-                {!!esDocuments && (
+                {!!morphologyResources && (
                   <ExpMorphologyTable
                     layer={currentLayer}
                     mtype={currentMtype}
-                    morphologies={getAndSortMorphologies(esDocuments)}
+                    morphologies={sortMorphologyResources(morphologyResources)}
                     currentMorphology={currentInstance}
                   />
                 )}
               </Spin>
             )}
-          </ESData>
+          </HttpData>
         </Collapsible>
       </DataContainer>
     </>

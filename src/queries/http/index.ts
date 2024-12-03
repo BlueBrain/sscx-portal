@@ -1,6 +1,29 @@
 
-import { staticDataBaseUrl } from '../../config';
+import { basePath, staticDataBaseUrl } from '../../config';
 
+export const expDataLayerAnatomyDataPath = () => {
+  return `${staticDataBaseUrl}/nexus/views/experimental-data/layer-anatomy/combined-layer-anatomy-data.json`;
+};
+
+export const expDataNeuronMorphologyDataPath = (morphologyName) => {
+  return `${staticDataBaseUrl}/nexus/views/experimental-data/neuron-morphology/by-name/${morphologyName}.json`;
+};
+
+export const expDataNeuronMorphologyListDataPath = (mtype) => {
+  return `${staticDataBaseUrl}/nexus/views/experimental-data/neuron-morphology/by-mtype/${mtype}.json`;
+};
+
+export const expDataAgentsPath = () => {
+  return `${staticDataBaseUrl}/nexus/views/experimental-data/common/agents.json`;
+}
+
+export const fullElectroPhysiologyDataPath = (instance: string) => {
+  return `${staticDataBaseUrl}/nexus/views/experimental-data/neuron-electrophysiology/by-name/${instance}.json`;
+}
+
+export const etypeTracesDataQuery = (etype: string) => {
+  return `${staticDataBaseUrl}/nexus/views/experimental-data/neuron-electrophysiology/by-etype/${etype}.json`;
+}
 
 export const subregionCircuitFactsheetPath = (subregion: string): string => {
   return `${staticDataBaseUrl}/model-data/REGION/${subregion}/Circuit/factsheet.json`;
@@ -130,6 +153,19 @@ export const expTraceFactsheetPath = (instance: string) => {
 export const memodelNumberExceptionsPath = `${staticDataBaseUrl}/memodel-number-exceptions.json`;
 
 export const memodelIndexPath = `${staticDataBaseUrl}/memodel-index.json`;
+
+export const modelSimTraceByNameDataQuery = (region, memodel) => {
+  return `${staticDataBaseUrl}/nexus/views/digital-reconstructions/neurons/by-name/${region}_${memodel}.json`;
+};
+
+export const modelEphysByNamesDataQuery = async (expTraceNames: string[]) => {
+  const digest = await crypto.subtle.digest('SHA-256', Buffer.from(expTraceNames.join('')));
+  const hexHash = Array.from(new Uint8Array(digest))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+
+  return `${staticDataBaseUrl}/nexus/views/digital-reconstructions/neurons/model-fitting-exp-traces/${hexHash}.json`;
+};
 
 export const memodelMorphologyPath = (morphology: string) => {
   return `${staticDataBaseUrl}/memodel-morphologies-swc/${morphology}.swc`;

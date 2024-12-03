@@ -1,41 +1,6 @@
 
 type ESQuery = Record<string, unknown>;
 
-/**
- * Lists get specific experiment of specific e-type
- *
- */
-export const layerAnatomyDataQuery = {
-  from: 0,
-  size: 1000,
-  query: {
-    bool: {
-      filter: [
-        {
-          bool: {
-            should: [
-              {
-                term: {
-                  '@type': 'LayerThickness',
-                },
-              },
-              {
-                term: {
-                  '@type': 'NeuronDensity',
-                },
-              },
-              {
-                term: {
-                  '@type': 'SliceCollection',
-                }
-              }
-            ],
-          },
-        },
-      ],
-    },
-  },
-};
 
 export const fullElectroPhysiologyDataQuery = (
   etype: string,

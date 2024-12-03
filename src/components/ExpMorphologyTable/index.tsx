@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import keyBy from 'lodash/keyBy';
 import get from 'lodash/get';
-import { useNexusContext } from '@bbp/react-nexus';
 
 import { Table } from 'antd';
-import { sscx } from '../../config';
 import { Layer } from '../../types';
 import { entryToArray, useExpMorphologyColumns } from './expMorphologyTableUtils';
 
 import styles from './styles.module.scss';
+import { expDataAgentsPath } from '@/queries/http';
 
 
 type ExpMorphologyTableProps = {
@@ -37,8 +36,6 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({
   currentMorphology,
   morphologies = []
 }) => {
-  const nexus = useNexusContext();
-
   const agentIds = morphologies.reduce((ids: string[], morphology) => {
     const currIds = entryToArray(morphology.contribution)
       .filter(contribution => !get(contribution, 'hadRole.label')?.match(/transformation/i))
@@ -54,23 +51,9 @@ const ExpMorphologyTable: React.FC<ExpMorphologyTableProps> = ({
   useEffect(() => {
     if (!agentIds.length) return;
 
-    const contributionEsQuery = {
-      from: 0,
-      size: 100,
-      query: {
-        terms: {
-          '_id': agentIds,
-        },
-      },
-    };
-
-    nexus.View
-      // query ElesticSearch endpoint to get agents by their ids
-      .elasticSearchQuery(sscx.org, sscx.project, sscx.datasetViewId, contributionEsQuery)
-      // extract ES documents
-      .then(data => data.hits.hits)
-      // extract Nexus original documents
-      .then(esDocuments => esDocuments.map(esDocument => esDocument._source))
+    fetch(expDataAgentsPath())
+      .then(res => res.json())
+      .then(allAgentResources => allAgentResources.filter(agentResource => agentIds.includes(agentResource['@id'])))
       // pick only agent ids and labels
       .then(agents => agents.map(agent => ({
         id: agent['@id'],

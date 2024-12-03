@@ -11,7 +11,7 @@ import ResponsiveTable from '../ResponsiveTable';
 const classPrefix = 'layer-anatomy-summary__';
 
 export type LayerAnatomySummaryProps = {
-  data?: ElasticSearchViewQueryResponse<any>['hits']['hits'];
+  data?: any[];
   highlightLayer?: string;
 };
 
@@ -28,7 +28,7 @@ type SummaryData = {
 }
 
 const LayerAnatomySummary: React.FC<LayerAnatomySummaryProps> = ({ data = [], highlightLayer = '' }) => {
-  const entities = data.map(document => document._source);
+  const entities = data;
 
   let densityUnit: string;
   let thicknessUnit: string;

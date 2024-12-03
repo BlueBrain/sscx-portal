@@ -4,13 +4,11 @@ import { useNexusContext } from '@bbp/react-nexus';
 import { Row, Col, Button, Spin } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
-import ESData from '../../components/ESData';
 import HttpDownloadButton from '../../components/HttpDownloadButton';
 import DataContainer from '../../components/DataContainer';
 import NexusPlugin from '../../components/NexusPlugin';
 import NexusFileDownloadButton from '../../components/NexusFileDownloadButton';
-import { fullElectroPhysiologyDataQuery, etypeTracesDataQuery } from '../../queries/es';
-import { expTracePopulationFactsheetPath, expTraceFactsheetPath } from '../../queries/http';
+import { expTracePopulationFactsheetPath, expTraceFactsheetPath, fullElectroPhysiologyDataPath, etypeTracesDataQuery } from '../../queries/http';
 import Filters from '../../layouts/Filters';
 import Title from '../../components/Title';
 import InfoBox from '../../components/InfoBox';
@@ -25,7 +23,7 @@ import Metadata from '../../components/Metadata';
 import StickyContainer from '../../components/StickyContainer';
 import ephysData from '../../__generated__/experimentalData.json';
 import { defaultSelection } from '../../constants';
-import { sscx, basePath } from '../../config';
+import { nexus as nexusConfig, basePath } from '../../config';
 
 import selectorStyle from '../../styles/selector.module.scss';
 import HttpData from '../../components/HttpData';
@@ -93,20 +91,11 @@ const NeuronElectrophysiology: React.FC = () => {
   const instances = getInstances(etype);
   const qsInstances = getInstances(quickSelection.etype);
 
-  const fullElectroPhysiologyDataQueryObj = useMemo(() => {
-    return fullElectroPhysiologyDataQuery(etype, instance);
-  }, [etype, instance]);
-
-  const etypeTracesDataQueryObj = useMemo(() => {
-    return etypeTracesDataQuery(etype);
-  }, [etype]);
-
   const getEphysDistribution = (resource: any) => Array.isArray(resource.distribution)
     ? resource.distribution.find((d: any) => d.name.match(/\.nwb$/i))
     : resource.distribution;
 
   const getAndSortTraces = (esDocuments) => esDocuments
-    .map(esDocument => esDocument._source)
     .sort((m1, m2) => ((m1.name > m2.name) ? 1 : -1));
 
   return (
@@ -217,12 +206,12 @@ const NeuronElectrophysiology: React.FC = () => {
             that was injected into the cell using the current clamp method.
             The response shows the membrane voltage of the neuron.
           </p>
-          <ESData query={fullElectroPhysiologyDataQueryObj}>
-            {(esDocuments, loading) => (
+          <HttpData path={fullElectroPhysiologyDataPath(instance)}>
+            {(ephysResource, loading) => (
               <Spin spinning={loading}>
-                {!!esDocuments?.length && (
+                {!!ephysResource && (
                   <>
-                    <Metadata nexusDocument={esDocuments[0]._source} />
+                    <Metadata nexusDocument={ephysResource} />
                     <h3 className="mt-3">Patch clamp recording</h3>
                     <div className="row start-xs end-sm mt-2 mb-2">
                       <div className="col-xs">
@@ -238,10 +227,10 @@ const NeuronElectrophysiology: React.FC = () => {
                           How to read NWB files
                         </Button>
                         <NexusFileDownloadButton
-                          filename={getEphysDistribution(esDocuments[0]._source).name}
-                          url={getEphysDistribution(esDocuments[0]._source).contentUrl}
-                          org={sscx.org}
-                          project={sscx.project}
+                          filename={getEphysDistribution(ephysResource).name}
+                          url={getEphysDistribution(ephysResource).contentUrl}
+                          org={nexusConfig.org}
+                          project={nexusConfig.project}
                           id="ephysDownloadBtn"
                         >
                           trace
@@ -250,14 +239,14 @@ const NeuronElectrophysiology: React.FC = () => {
                     </div>
                     <NexusPlugin
                       name="neuron-electrophysiology"
-                      resource={esDocuments[0]._source}
+                      resource={ephysResource}
                       nexusClient={nexus}
                     />
                   </>
                 )}
               </Spin>
             )}
-          </ESData>
+          </HttpData>
 
           <HttpData path={expTraceFactsheetPath(instance)}>
             {(factsheetData, loading) => (
@@ -321,19 +310,19 @@ const NeuronElectrophysiology: React.FC = () => {
 
           <h3 className="mt-3">Experimental instances</h3>
 
-          <ESData query={etypeTracesDataQueryObj}>
-            {(esDocuments, loading) => (
+          <HttpData path={etypeTracesDataQuery(etype)}>
+            {(ephysResources, loading) => (
               <Spin spinning={loading}>
-                {!!esDocuments && (
+                {!!ephysResources && (
                   <ExpTraceTable
                     etype={etype}
-                    traces={getAndSortTraces(esDocuments)}
+                    traces={getAndSortTraces(ephysResources)}
                     currentTrace={instance}
                   />
                 )}
               </Spin>
             )}
-          </ESData>
+          </HttpData>
         </Collapsible>
       </DataContainer>
     </>

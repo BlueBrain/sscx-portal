@@ -16,12 +16,6 @@ export const antBreakpoint = {
   xxl: '1600px',
 }
 
-export const sscx = {
-  org: process.env.NEXT_PUBLIC_NEXUS_ORG ?? 'public',
-  project: process.env.NEXT_PUBLIC_NEXUS_PROJECT ?? 'sscx',
-  datasetViewId: encodeURIComponent('https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset'),
-};
-
 export const deploymentUrl = process.env.NEXT_PUBLIC_DEPLOYMENT_URL || 'https://bbp.epfl.ch';
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/sscx-portal';
 
@@ -29,15 +23,17 @@ export const isProduction = process.env.NODE_ENV === 'production';
 
 export const nexus = {
   url: process.env.NEXT_PUBLIC_NEXUS_URL,
-  token: process.env.NEXT_PUBLIC_NEXUS_TOKEN,
-};
 
-export const nexusPluginBaseUrl = process.env.NEXT_PUBLIC_NEXUS_PLUGIN_BASE_URL;
+  org: process.env.NEXT_PUBLIC_NEXUS_ORG,
+  project: process.env.NEXT_PUBLIC_NEXUS_PROJECT,
+
+  token: process.env.NEXT_PUBLIC_NEXUS_TOKEN,
+
+  defaultESViewId: encodeURIComponent('https://bbp.epfl.ch/neurosciencegraph/data/views/es/dataset'),
+};
 
 export const staticDataBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_BASE_URL;
 export const staticDataClusterBaseUrl = process.env.NEXT_PUBLIC_STATIC_DATA_CLUSTER_BASE_URL || staticDataBaseUrl;
-
-export const feedbackUrl = process.env.NEXT_PUBLIC_FEEDBACK_URL;
 
 export const gtm = {
   id: process.env.NEXT_PUBLIC_GTM_ID,

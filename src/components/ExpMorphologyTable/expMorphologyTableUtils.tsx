@@ -7,7 +7,7 @@ import ImageViewer from '../ImageViewer';
 import NexusFileDownloadButton from '../NexusFileDownloadButton';
 
 import styles from './styles.module.scss';
-import { sscx } from '../../config';
+import { nexus as nexusConfig } from '../../config';
 
 const getMorphologyDistribution = (morphologyResource: any) => (
   morphologyResource.distribution.find((d: any) => d.name.match(/\.asc$/i))
@@ -103,8 +103,8 @@ export const useExpMorphologyColumns = (layer, mtype, currentMorphology) => {
             className={styles.downloadBtn}
             filename={getMorphologyDistribution(record).name}
             url={getMorphologyDistribution(record).contentUrl}
-            org={sscx.org}
-            project={sscx.project}
+            org={nexusConfig.org}
+            project={nexusConfig.project}
             animate={false}
           />
         );

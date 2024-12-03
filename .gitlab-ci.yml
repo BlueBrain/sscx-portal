@@ -42,16 +42,12 @@ build-img-prod:
     NEXT_PUBLIC_ENVIRONMENT: prod
     NEXT_PUBLIC_GTM_ID: $GTM_ID
     NEXT_PUBLIC_NEXUS_TOKEN: $NEXUS_TOKEN
-    NEXT_PUBLIC_SENTRY_DSN: $SENTRY_DSN
     REGISTRY_IMAGE_TAG: latest
-    SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
     SITE_URL: https://bbp.epfl.ch/sscx-portal/
     KANIKO_EXTRA_ARGS: >
       --build-arg=NEXT_PUBLIC_ENVIRONMENT
       --build-arg=NEXT_PUBLIC_GTM_ID
       --build-arg=NEXT_PUBLIC_NEXUS_TOKEN
-      --build-arg=NEXT_PUBLIC_SENTRY_DSN
-      --build-arg=SENTRY_AUTH_TOKEN
       --build-arg=SITE_URL
   only:
     - develop
@@ -66,10 +62,8 @@ build-img-dev:
     NEXT_PUBLIC_NEXUS_URL: https://staging.nise.bbp.epfl.ch/nexus/v1
     NEXT_PUBLIC_NEXUS_ORG: tests
     NEXT_PUBLIC_NEXUS_PROJECT: integration
-    NEXT_PUBLIC_SENTRY_DSN: $SENTRY_DSN
     NEXT_PUBLIC_ENVIRONMENT: dev
     NEXT_PUBLIC_NEXUS_TOKEN: $STAGING_NEXUS_TOKEN
-    SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
     CI_REGISTRY_IMAGE: $CI_REGISTRY/nse/sscx-portal
     REGISTRY_IMAGE_TAG: dev
     CI_PROJECT_DIR: /builds/nse/sscx-portal
@@ -80,9 +74,7 @@ build-img-dev:
       --build-arg=NEXT_PUBLIC_NEXUS_URL
       --build-arg=NEXT_PUBLIC_NEXUS_ORG
       --build-arg=NEXT_PUBLIC_NEXUS_PROJECT
-      --build-arg=NEXT_PUBLIC_SENTRY_DSN
       --build-arg=NEXT_PUBLIC_ENVIRONMENT
       --build-arg=NEXT_PUBLIC_NEXUS_TOKEN
-      --build-arg=SENTRY_AUTH_TOKEN
   only:
     - develop
